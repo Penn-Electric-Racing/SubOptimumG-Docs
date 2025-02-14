@@ -47,6 +47,8 @@
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'compsim/track';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -403,6 +405,207 @@
                   
   <section id="track">
 <h1>track<a class="headerlink" href="#track" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="Track">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Track</span></span><a class="headerlink" href="#Track" title="Link to this definition">#</a></dt>
+<dd><p>Competition tracks are represented as lists of corners. Each corner is a 2-element array
+<code class="docutils literal notranslate"><span class="pre">[radius</span> <span class="pre">(meters),</span> <span class="pre">length</span> <span class="pre">(decimeters)]</span></code>. Both measurements are relative to the centerline.
+(e.g. a corner that has a radius of <span class="math notranslate nohighlight">\(9.125~\text{m}\)</span> and a centerline length of <span class="math notranslate nohighlight">\(57.3~\text{m}\)</span>
+will be <code class="docutils literal notranslate"><span class="pre">[9.125,</span> <span class="pre">573]</span></code>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A corner radius larger than <span class="math notranslate nohighlight">\(10000~\text{m}\)</span> will be interpreted by the code as a straight.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<blockquote>
+<div><p>Internally, the representation for corner length gets converted from decimeters to number of simulation steps,
+where each step moves <code class="docutils literal notranslate"><span class="pre">DISTANCE_STEP</span></code> along the centerline. The conversion is done by applying a scaling <span class="math notranslate nohighlight">\(\frac{0.1}{DISTANCE\_STEP}\)</span>
+to the corner length, then rounding.</p>
+</div></blockquote>
+<p>competition.yaml also stores a minimum time for each track, which helps quantify how well our car is doing compared to other cars (for now, the only available numbers are from Michigan 2023)</p>
+<blockquote>
+<div><p>The Track class provides functionality to:</p>
+</div></blockquote>
+</div>
+<ul class="simple">
+<li><p>Create tracks from configuration dictionaries</p></li>
+<li><p>Clean up corner definitions</p></li>
+<li><p>Scale track dimensions</p></li>
+<li><p>Compute event points based on lap times</p></li>
+</ul>
+<p class="rubric">Parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>corners</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em><em>]</em>) – Ordered list of corner definitions, where each corner is <code class="docutils literal notranslate"><span class="pre">[radius,</span> <span class="pre">length]</span></code></p></li>
+<li><p><strong>track_best_time</strong> (<em>float</em>) – Best achievable time for the track in seconds</p></li>
+<li><p><strong>worst_time_ratio</strong> (<em>float</em>) – Ratio defining the worst acceptable time relative to best time</p></li>
+<li><p><strong>min_points</strong> (<em>float</em>) – Minimum points that can be earned on the track</p></li>
+<li><p><strong>max_point_gain</strong> (<em>float</em>) – Maximum additional points that can be earned above min_points</p></li>
+<li><p><strong>scale_time_ratio</strong> (<em>float</em>) – Exponent used in points calculation to scale time differences</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="Track.from_config">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Track.</span></span><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Track.from_config" title="Link to this definition">#</a></dt>
+<dd><p>Creates a Track instance from a configuration dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) – Configuration dictionary containing track parameters</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new Track instance</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#Track" title="Track">Track</a></p>
+</dd>
+</dl>
+<p>The configuration dictionary must contain all parameters required by the Track constructor,
+plus:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">distance_step</span></code>: Used to convert corner lengths to step counts</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shorten</span></code>: Additional scaling factor applied to corner lengths</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method applies two scaling operations to the corner definitions:</p>
+<ol class="arabic simple">
+<li><p>Converts corner lengths from decimeters to simulation steps</p></li>
+<li><p>Applies an additional scaling factor (currently used for Mich 2023 tracks)</p></li>
+</ol>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Track.get_corner_list">
+<span class="sig-prename descclassname"><span class="pre">Track.</span></span><span class="sig-name descname"><span class="pre">get_corner_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Track.get_corner_list" title="Link to this definition">#</a></dt>
+<dd><p>Returns a deep copy of the original corner list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of [radius, length] corner definitions</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[list[float, float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Track.get_cleaned_corner_list">
+<span class="sig-prename descclassname"><span class="pre">Track.</span></span><span class="sig-name descname"><span class="pre">get_cleaned_corner_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Track.get_cleaned_corner_list" title="Link to this definition">#</a></dt>
+<dd><p>Returns a deep copy of the cleaned corner list with adjusted radii.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of [radius, length] corner definitions with modified radii</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[list[float, float]]</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The cleaned list has small corner radii increased to improve simulation behavior.
+This adjustment is currently used for Mich 2023 AutoX and Endurance tracks.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Track.compute_event_points">
+<span class="sig-prename descclassname"><span class="pre">Track.</span></span><span class="sig-name descname"><span class="pre">compute_event_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tyour</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Track.compute_event_points" title="Link to this definition">#</a></dt>
+<dd><p>Computes points earned for a given lap time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tyour</strong> (<em>float</em>) – Your lap time in seconds</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Points earned for the lap time</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p>Points are calculated using the formula:</p>
+<div class="math notranslate nohighlight">
+\[points = min\_points + max\_point\_gain * \frac{(worst\_time/tyour)^{scale} - 1}{(worst\_time/best\_time)^{scale} - 1}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p>worst_time = best_time * worst_time_ratio</p></li>
+<li><p>scale = scale_time_ratio</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="private-methods">
+<h2>Private Methods<a class="headerlink" href="#private-methods" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="Track.__track_cleanup">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Track.</span></span><span class="sig-name descname"><span class="pre">__track_cleanup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corners</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Track.__track_cleanup" title="Link to this definition">#</a></dt>
+<dd><p>Internal method that increases the radius of small corners.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>corners</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em><em>]</em>) – List of corner definitions</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Modified list of corner definitions</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[list[float, float]]</p>
+</dd>
+</dl>
+<p>For corners with radius ≤ 10m, the radius is scaled up using:</p>
+<div class="math notranslate nohighlight">
+\[new\_radius = radius * ((20 - radius)/10)^{1.2}\]</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Track.__scale_track">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Track.</span></span><span class="sig-name descname"><span class="pre">__scale_track</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corners</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Track.__scale_track" title="Link to this definition">#</a></dt>
+<dd><p>Internal method that scales corner lengths by a given percentage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>corners</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em><em>]</em>) – List of corner definitions</p></li>
+<li><p><strong>percent</strong> (<em>float</em>) – Scale factor to apply to corner lengths</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Modified list of corner definitions with scaled lengths</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[list[float, float]]</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Corner lengths are rounded to the nearest integer after scaling.</p>
+</div>
+</dd></dl>
+
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create accel track (a single corner with 100,000m radius)</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;corners&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mf">100000.0</span><span class="p">,</span> <span class="mf">750.0</span><span class="p">]],</span>
+    <span class="s2">&quot;track_best_time&quot;</span><span class="p">:</span> <span class="mf">3.642</span> <span class="c1"># (Georgia Tech 2024)</span>
+    <span class="s2">&quot;worst_time_ratio&quot;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span>
+    <span class="s2">&quot;min_points&quot;</span><span class="p">:</span> <span class="mf">4.5</span><span class="p">,</span>
+    <span class="s2">&quot;max_point_gain&quot;</span><span class="p">:</span> <span class="mf">95.5</span><span class="p">,</span>
+    <span class="s2">&quot;scale_time_ratio&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># (no effect)</span>
+    <span class="s2">&quot;distance_step&quot;</span><span class="p">:</span> <span class="mf">0.065</span><span class="p">,</span> <span class="c1"># (meters)</span>
+    <span class="s2">&quot;shorten&quot;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="c1"># (unchanged)</span>
+<span class="p">}</span>
+
+<span class="n">track</span> <span class="o">=</span> <span class="n">Track</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -443,6 +646,31 @@
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Track"><code class="docutils literal notranslate"><span class="pre">Track</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Track.from_config"><code class="docutils literal notranslate"><span class="pre">Track.from_config()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Track.get_corner_list"><code class="docutils literal notranslate"><span class="pre">Track.get_corner_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Track.get_cleaned_corner_list"><code class="docutils literal notranslate"><span class="pre">Track.get_cleaned_corner_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Track.compute_event_points"><code class="docutils literal notranslate"><span class="pre">Track.compute_event_points()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#private-methods">Private Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Track.__track_cleanup"><code class="docutils literal notranslate"><span class="pre">Track.__track_cleanup()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Track.__scale_track"><code class="docutils literal notranslate"><span class="pre">Track.__scale_track()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div role="note" aria-label="source link">
