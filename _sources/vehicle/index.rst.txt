@@ -1,0 +1,53 @@
+Vehicle Model
+=================
+
+This file integrates the various subsystems. It provides a state machine representing the car, that tracks the current velocity
+and acceleration of the car. It provides the logic to incrementally simulate accelerating, braking, and coasting, assuming ideal
+driver behavior. The state machine is updated accordingly after each incremental action.
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Integrated Model
+
+   vehicle
+
+
+These files contain Vehicle Dynamics logic and parameters specific to each subsystem.
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Subsystems
+
+   accumulator/index
+   aerodynamics/index
+   chassis/index
+   driver_interface/index
+   powertrain/index
+   suspension/index
+
+
+.. raw:: html
+
+   <h4>Coordinate Systems</h4>
+
+In CAD, for REV 10, the chassis/car coordinate system follows these axes:
+
+* **Longitudinal Axis** (*+z*):
+  Points from the rear to the front of the car
+
+* **Lateral Axis** (*+x*):
+  Points from the right to the left of the car
+
+* **Vertical Axis** (*+y*):
+  Points from the bottom to the top of the car
+
+.. note::
+   The coordinate system follows a right-handed convention. When referencing directions, the driver's perspective is assumed as the default reference point.
+
+.. math::
+
+   \begin{align*}
+   +z &\rightarrow \text{longitudinal} \\
+   +x &\rightarrow \text{lateral} \\
+   +y &\rightarrow \text{vertical}
+   \end{align*}

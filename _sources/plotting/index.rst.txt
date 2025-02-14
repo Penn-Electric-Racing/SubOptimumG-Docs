@@ -1,0 +1,11 @@
+Plotting & Visualization
+===============================
+
+Additional useful functions that simplify visualization of simulation results
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Components:
+
+   plot_lapsim
+   utils

@@ -1,0 +1,25 @@
+Contributing
+====================
+
+Follow the development set-up instructions under :doc:`installation <installation>`.
+
+
+Workflow
+***********
+
+    1. Create a new branch for your features.
+    2. Make your changes, commit, then open a Pull Request on Github. Please make sure your Pull Requests have sufficiently detailed descriptions, and include any critical changes/issues to take note of.
+    3. Request a review from Software/Vehicle Dynamics leads. Follow up after reviews
+    4. Before you merge, preferably rebase your branch on main and resolve conflicts locally for a clean commit history.
+
+Style
+***********
+
+    * `black` for code formatting
+    * `pytest` for unit testing
+    * `update-dependencies.yml` & `dependabot` for automatically updating dependencies
+
+.. note::
+
+   If you change any files **outside** of the notebooks (.py files), you need to **restart** the runtime
+   of the notebook.

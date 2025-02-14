@@ -1,0 +1,12 @@
+Tutorial
+================================
+
+.. note::
+
+   This tutorial is also available as a Jupyter notebook in the project repository.
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   notebook

@@ -1,0 +1,10 @@
+Misc.
+================
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Utilities
+
+   constants
+   sheet_to_yaml
+   valid_plausible_check

@@ -1,0 +1,78 @@
+Installation
+================================
+
+Follow Developement Setup if you plan on contributing or implementing some custom behavior. Treat the instructions
+as recommendations - the current development team uses roughly the setup outlined there.
+Follow User Installation if you don't plan on editing the codebase itself, and just want to run notebooks.
+
+User Installation
+----------------------
+
+**TODO: Figure out a simpler installation**
+
+
+Developer Installation
+-------------------------------
+
+Pre-Requisites
+^^^^^^^^^^^^^^^^^^^
+
+Before you begin, ensure you have the following tools installed:
+
+* `Git <https://git-scm.com/downloads>`_ (preferably command line version)
+* `Python 3.12 or higher <https://www.python.org/downloads/>`_
+* `Visual Studio Code <https://code.visualstudio.com/download>`_
+
+Required VSCode Extensions
+**********************************
+
+Install these extensions in Visual Studio Code:
+
+* Jupyter (Microsoft)
+* Python (Microsoft)
+
+Development Setup
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. Clone the Repository
+******************************
+
+.. code-block:: bash
+
+   git clone https://github.com/Penn-Electric-Racing/SuboptimumG.git
+
+2. Setup Development Environment
+**************************************
+
+Run the setup script from the VSCode terminal:
+
+.. code-block:: bash
+
+   python scripts/setup_env.py setup
+
+This script will:
+
+* Create a virtual Python environment (.venv)
+* Install all required dependencies
+* Set up pre-commit hooks and linting tools
+* Configure code style consistency checks for commits
+
+3. Configure VSCode Environment
+*************************************
+
+1. Select the Virtual Environment:
+
+   * Press ``Ctrl + Shift + P``
+   * Type "Python: Select Interpreter"
+   * Choose the ``.venv`` Python interpreter
+
+2. Configure Jupyter Notebooks:
+
+   * Open your notebook
+   * Click the "Kernel" icon (Computer Symbol) in the top right corner
+   * Select the ``.venv`` Python environment
+
+.. note::
+
+   The pre-commit hooks will automatically run on all files when you commit changes,
+   ensuring consistent code style across the project.
