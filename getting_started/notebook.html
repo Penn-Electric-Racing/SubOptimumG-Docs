@@ -417,7 +417,7 @@
 <p>We start by simulating the results of a single competition with the default car (REV 9). We load in competition-wide parameters (tracks, competitor statistics, simulation hyperparameters, etc.) from competition.yaml. We load in car-specific parameters from car.yaml. Check these yaml files to see what SuboptimumG currently takes into account and to edit the defaults.</p>
 <p>Observe that there are soft plausibility warnings when a parameter is outside of an expected range.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import suboptimumg
@@ -638,13 +638,13 @@ print(
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Total points @ mass=264.5: 440.4905217486637
-Change in points for every 1kg increase in mass @ mass=264.5: -0.7736681232290721
+Total points @ mass=264.5: 447.20425687900314
+Change in points for every 1kg increase in mass @ mass=264.5: -0.6778369912535709
 </pre></div></div>
 </div>
 <p>The Sweeper class object also supports 2-parameter sweeps.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sweep_var_1 = {
@@ -678,7 +678,7 @@ WARNING: Max regen is non-zero but regen percent is zero. This will result in no
 </div>
 <p>For 2-parameter sweep results, we can likewise compute interpolated points/times (z_var) and partial derivatives at any given pair of parameters within the sweep range.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># x refers to var_1 (aero.cl in this case) and y refers to var_2 (aero.cd in this case)
@@ -697,14 +697,14 @@ print(
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Total points @ cl=1.205, cd=2.675: 357.5781327477088
-Additional point gain for every 1.0 increase in cd @ cl=1.205, cd=2.675: 10.95015164992219
-Additional point gain for every 1.0 increase in cl @ cl=1.205, cd=2.675: -23.800812405170323
+Total points @ cl=1.205, cd=2.675: 352.4761310274109
+Additional point gain for every 1.0 increase in cd @ cl=1.205, cd=2.675: 20.653800423815483
+Additional point gain for every 1.0 increase in cl @ cl=1.205, cd=2.675: -23.19324573818452
 </pre></div></div>
 </div>
 <p>For 2-parameter sweep results, we have a choice between two types of graphs to represent the data. Call either .plot_contour() or .plot_surface(). Again, the target variable is by default total points, but can be controlled by passing an argument like z_var=”endurance_pts”.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>aero_results.plot_contour()
@@ -719,7 +719,7 @@ Additional point gain for every 1.0 increase in cl @ cl=1.205, cd=2.675: -23.800
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>aero_results.plot_surface(view_angle=120)
@@ -735,7 +735,7 @@ Additional point gain for every 1.0 increase in cl @ cl=1.205, cd=2.675: -23.800
 </div>
 <p>We can also do a special sweep to analyze battery pack capacity. Here, we provide the min, max, and step count of battery pack capacity limit (units of kWh). We can optionally provide a second parameter to sweep across.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.sweep import CapacityLimitSweeper
@@ -761,7 +761,7 @@ WARNING: capacity limit=2.5 does not complete Endurance event
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>cap_limit_results.plot()

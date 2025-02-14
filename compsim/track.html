@@ -418,22 +418,10 @@ will be <code class="docutils literal notranslate"><span class="pre">[9.125,</sp
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<blockquote>
-<div><p>Internally, the representation for corner length gets converted from decimeters to number of simulation steps,
+<p>Internally, the representation for corner length gets converted from decimeters to number of simulation steps,
 where each step moves <code class="docutils literal notranslate"><span class="pre">DISTANCE_STEP</span></code> along the centerline. The conversion is done by applying a scaling <span class="math notranslate nohighlight">\(\frac{0.1}{DISTANCE\_STEP}\)</span>
 to the corner length, then rounding.</p>
-</div></blockquote>
-<p>competition.yaml also stores a minimum time for each track, which helps quantify how well our car is doing compared to other cars (for now, the only available numbers are from Michigan 2023)</p>
-<blockquote>
-<div><p>The Track class provides functionality to:</p>
-</div></blockquote>
 </div>
-<ul class="simple">
-<li><p>Create tracks from configuration dictionaries</p></li>
-<li><p>Clean up corner definitions</p></li>
-<li><p>Scale track dimensions</p></li>
-<li><p>Compute event points based on lap times</p></li>
-</ul>
 <p class="rubric">Parameters</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

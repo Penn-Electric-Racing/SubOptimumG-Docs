@@ -16,16 +16,6 @@ track
       where each step moves ``DISTANCE_STEP`` along the centerline. The conversion is done by applying a scaling :math:`\frac{0.1}{DISTANCE\_STEP}`
       to the corner length, then rounding.
 
-
-    competition.yaml also stores a minimum time for each track, which helps quantify how well our car is doing compared to other cars (for now, the only available numbers are from Michigan 2023)
-
-      The Track class provides functionality to:
-
-   * Create tracks from configuration dictionaries
-   * Clean up corner definitions
-   * Scale track dimensions
-   * Compute event points based on lap times
-
    .. rubric:: Parameters
 
    :param corners: Ordered list of corner definitions, where each corner is ``[radius, length]``
