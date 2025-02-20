@@ -8,7 +8,7 @@ Follow User Installation if you don't plan on editing the codebase itself, and j
 User Installation
 ----------------------
 
-Everyone is a developer, so we recommend following the Developer Installation instructions.
+**TODO: Figure out a simpler installation**
 
 
 Developer Installation
@@ -20,7 +20,7 @@ Pre-Requisites
 Before you begin, ensure you have the following tools installed:
 
 * `Git <https://git-scm.com/downloads>`_ (preferably command line version)
-* `Python **3.12 or higher** <https://www.python.org/downloads/>`_
+* `Python 3.12 or higher <https://www.python.org/downloads/>`_
 * `Visual Studio Code <https://code.visualstudio.com/download>`_
 
 Required VSCode Extensions
@@ -56,19 +56,6 @@ This script will:
 * Install all required dependencies
 * Set up pre-commit hooks and linting tools
 * Configure code style consistency checks for commits
-
-If this script fails or is stuck, you can manually install using the following commands:
-
-Make sure to Control-C out of the script if it's stuck. Remove any existing .venv folder.
-
-.. code-block:: bash
-
-   python -m venv .venv
-   source .venv/bin/activate
-   python -m pip install --upgrade pip
-   pip install -r requirements.txt
-   python -m pip install -e .
-   python -m pre_commit install
 
 3. Configure VSCode Environment
 *************************************
