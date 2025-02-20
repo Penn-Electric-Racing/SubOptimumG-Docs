@@ -417,7 +417,7 @@
 <p>We start by simulating the results of a single competition with the default car (REV 9). We load in competition-wide parameters (tracks, competitor statistics, simulation hyperparameters, etc.) from competition.yaml. We load in car-specific parameters from car.yaml. Check these yaml files to see what SuboptimumG currently takes into account and to edit the defaults.</p>
 <p>Observe that there are soft plausibility warnings when a parameter is outside of an expected range.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import suboptimumg
@@ -425,6 +425,8 @@ import yaml
 
 # Uncomment this function to update sheets.yaml with the latest values on Google Drive.
 suboptimumg.sheet_to_yaml.grab_sheet_data()
+with open(&quot;../parameters/sheet.yaml&quot;, &quot;r&quot;) as file:
+    sheets_config = yaml.safe_load(file)
 
 # Create sample competition
 with open(&quot;../parameters/competition.yaml&quot;, &quot;r&quot;) as file:
