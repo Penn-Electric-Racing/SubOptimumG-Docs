@@ -432,6 +432,64 @@
 of the notebook.</p>
 </div>
 </section>
+<section id="how-to-use-git">
+<h2>How to Use Git<a class="headerlink" href="#how-to-use-git" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Create a new branch for your features.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>branch_name
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Run <cite>git status</cite> to see the changes you have made and the status of your branch. This is a safe and useful command to run before committing.</p></li>
+<li><p>If you need to pull the latest changes from the main branch, you can do so with:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>pull
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>If you want to reset a file to the last commit (remove all changes), you can do so with:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>restore<span class="w"> </span>&lt;file&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Add your changes (stage them) and commit them with a message.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;commit message&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>If you need to unstage change (you don’t want to commit it yet), you can do so with:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>restore<span class="w"> </span>--staged<span class="w"> </span>&lt;file<span class="w"> </span>or<span class="w"> </span>.<span class="w"> </span><span class="k">for</span><span class="w"> </span>all<span class="w"> </span>files&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Once you’ve commited your changes and have verified you are <strong>NOT on main</strong>, you can push your branch to the remote repository with:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Next go to the repository on github and open a pull request. Add a description of the changes you made and request a review from the Software/Vehicle Dynamics leads.</p></li>
+<li><p>If there has been a lot of changes to main while you were working on your branch, you can rebase your branch on main. Note this may cause conflicts.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>pull
+git<span class="w"> </span>checkout<span class="w"> </span>branch_name
+git<span class="w"> </span>rebase<span class="w"> </span>main
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>This “rewrites” this history, git doesn’t like this so you will need to “force push” your branch to the remote repository with:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>--force-with-lease
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -483,6 +541,7 @@ of the notebook.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">Workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#style">Style</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-git">How to Use Git</a></li>
 </ul>
   </nav></div>
 
