@@ -439,7 +439,7 @@ def run_pip_command(cmd, show_lines=2, show_start=False):
 
 
 # Install requirements (showing last 2 lines)
-run_pip_command([sys.executable, &quot;-m&quot;, &quot;pip&quot;, &quot;install&quot;, &quot;-r&quot;, &quot;../requirements.in&quot;])
+run_pip_command([sys.executable, &quot;-m&quot;, &quot;pip&quot;, &quot;install&quot;, &quot;-r&quot;, &quot;../requirements.txt&quot;])
 
 # Install package in editable mode (showing first 2 and last 2 lines)
 run_pip_command([sys.executable, &quot;-m&quot;, &quot;pip&quot;, &quot;install&quot;, &quot;-e&quot;, &quot;..&quot;], show_start=True)
