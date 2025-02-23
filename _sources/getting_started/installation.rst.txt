@@ -1,19 +1,6 @@
 Installation
 ================================
 
-Follow Developement Setup if you plan on contributing or implementing some custom behavior. Treat the instructions
-as recommendations - the current development team uses roughly the setup outlined there.
-Follow User Installation if you don't plan on editing the codebase itself, and just want to run notebooks.
-
-User Installation
-----------------------
-
-Everyone is a developer, so we recommend following the Developer Installation instructions.
-
-
-Developer Installation
--------------------------------
-
 Pre-Requisites
 ^^^^^^^^^^^^^^^^^^^
 
@@ -34,8 +21,8 @@ Install these extensions in Visual Studio Code:
 Development Setup
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Clone the Repository
-******************************
+1. Clone the Repository - Make sure to do this in your documents folder or wherever you keep your projects.
+******************************************************************************************************************
 
 .. code-block:: bash
 
@@ -44,46 +31,47 @@ Development Setup
 2. Setup Development Environment
 **************************************
 
-Run the setup script from the VSCode terminal:
+Run the following commands to setup the development environment:
 
-.. code-block:: bash
-
-   python scripts/setup_env.py setup
-
-This script will:
-
-* Create a virtual Python environment (.venv)
-* Install all required dependencies
-* Set up pre-commit hooks and linting tools
-* Configure code style consistency checks for commits
-
-If this script fails or is stuck, you can manually install using the following commands:
-
-Make sure to Control-C out of the script if it's stuck. Remove any existing .venv folder.
+Note: If you get an error about the python version, you can change the ``python`` to ``python3`` in the commands below.
 
 .. code-block:: bash
 
    python -m venv .venv
+
+On Mac/Linux:
+
+.. code-block:: bash
+
    source .venv/bin/activate
+
+On Windows:
+
+.. code-block:: bash
+
+   .venv\Scripts\activate
+
+.. code-block:: bash
+
    python -m pip install --upgrade pip
    pip install -r requirements.txt
    python -m pip install -e .
    python -m pre_commit install
 
-3. Configure VSCode Environment
+1. Configure VSCode Environment
 *************************************
 
 1. Select the Virtual Environment:
 
    * Press ``Ctrl + Shift + P``
    * Type "Python: Select Interpreter"
-   * Choose the ``.venv`` Python interpreter
+   * Choose the ``.venv`` Python interpreter - make sure that this is Python 3.12 or higher.
 
 2. Configure Jupyter Notebooks:
 
    * Open your notebook
    * Click the "Kernel" icon (Computer Symbol) in the top right corner
-   * Select the ``.venv`` Python environment
+   * Select the ``.venv`` Python environment - make sure that this is Python 3.12 or higher.
 
 .. note::
 

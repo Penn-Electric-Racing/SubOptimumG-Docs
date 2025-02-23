@@ -405,17 +405,8 @@
                   
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h1>
-<p>Follow Developement Setup if you plan on contributing or implementing some custom behavior. Treat the instructions
-as recommendations - the current development team uses roughly the setup outlined there.
-Follow User Installation if you don’t plan on editing the codebase itself, and just want to run notebooks.</p>
-<section id="user-installation">
-<h2>User Installation<a class="headerlink" href="#user-installation" title="Link to this heading">#</a></h2>
-<p>Everyone is a developer, so we recommend following the Developer Installation instructions.</p>
-</section>
-<section id="developer-installation">
-<h2>Developer Installation<a class="headerlink" href="#developer-installation" title="Link to this heading">#</a></h2>
 <section id="pre-requisites">
-<h3>Pre-Requisites<a class="headerlink" href="#pre-requisites" title="Link to this heading">#</a></h3>
+<h2>Pre-Requisites<a class="headerlink" href="#pre-requisites" title="Link to this heading">#</a></h2>
 <p>Before you begin, ensure you have the following tools installed:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://git-scm.com/downloads">Git</a> (preferably command line version)</p></li>
@@ -423,7 +414,7 @@ Follow User Installation if you don’t plan on editing the codebase itself, and
 <li><p><a class="reference external" href="https://code.visualstudio.com/download">Visual Studio Code</a></p></li>
 </ul>
 <section id="required-vscode-extensions">
-<h4>Required VSCode Extensions<a class="headerlink" href="#required-vscode-extensions" title="Link to this heading">#</a></h4>
+<h3>Required VSCode Extensions<a class="headerlink" href="#required-vscode-extensions" title="Link to this heading">#</a></h3>
 <p>Install these extensions in Visual Studio Code:</p>
 <ul class="simple">
 <li><p>Jupyter (Microsoft)</p></li>
@@ -432,31 +423,29 @@ Follow User Installation if you don’t plan on editing the codebase itself, and
 </section>
 </section>
 <section id="development-setup">
-<h3>Development Setup<a class="headerlink" href="#development-setup" title="Link to this heading">#</a></h3>
-<section id="clone-the-repository">
-<h4>1. Clone the Repository<a class="headerlink" href="#clone-the-repository" title="Link to this heading">#</a></h4>
+<h2>Development Setup<a class="headerlink" href="#development-setup" title="Link to this heading">#</a></h2>
+<section id="clone-the-repository-make-sure-to-do-this-in-your-documents-folder-or-wherever-you-keep-your-projects">
+<h3>1. Clone the Repository - Make sure to do this in your documents folder or wherever you keep your projects.<a class="headerlink" href="#clone-the-repository-make-sure-to-do-this-in-your-documents-folder-or-wherever-you-keep-your-projects" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Penn-Electric-Racing/SuboptimumG.git
 </pre></div>
 </div>
 </section>
 <section id="setup-development-environment">
-<h4>2. Setup Development Environment<a class="headerlink" href="#setup-development-environment" title="Link to this heading">#</a></h4>
-<p>Run the setup script from the VSCode terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>scripts/setup_env.py<span class="w"> </span>setup
+<h3>2. Setup Development Environment<a class="headerlink" href="#setup-development-environment" title="Link to this heading">#</a></h3>
+<p>Run the following commands to setup the development environment:</p>
+<p>Note: If you get an error about the python version, you can change the <code class="docutils literal notranslate"><span class="pre">python</span></code> to <code class="docutils literal notranslate"><span class="pre">python3</span></code> in the commands below.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
 </pre></div>
 </div>
-<p>This script will:</p>
-<ul class="simple">
-<li><p>Create a virtual Python environment (.venv)</p></li>
-<li><p>Install all required dependencies</p></li>
-<li><p>Set up pre-commit hooks and linting tools</p></li>
-<li><p>Configure code style consistency checks for commits</p></li>
-</ul>
-<p>If this script fails or is stuck, you can manually install using the following commands:</p>
-<p>Make sure to Control-C out of the script if it’s stuck. Remove any existing .venv folder.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
-<span class="nb">source</span><span class="w"> </span>.venv/bin/activate
-python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+<p>On Mac/Linux:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+</pre></div>
+</div>
+<p>On Windows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
 pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
 python<span class="w"> </span>-m<span class="w"> </span>pre_commit<span class="w"> </span>install
@@ -464,20 +453,20 @@ python<span class="w"> </span>-m<span class="w"> </span>pre_commit<span class="w
 </div>
 </section>
 <section id="configure-vscode-environment">
-<h4>3. Configure VSCode Environment<a class="headerlink" href="#configure-vscode-environment" title="Link to this heading">#</a></h4>
+<h3>1. Configure VSCode Environment<a class="headerlink" href="#configure-vscode-environment" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Select the Virtual Environment:</p>
 <ul class="simple">
 <li><p>Press <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">P</span></code></p></li>
 <li><p>Type “Python: Select Interpreter”</p></li>
-<li><p>Choose the <code class="docutils literal notranslate"><span class="pre">.venv</span></code> Python interpreter</p></li>
+<li><p>Choose the <code class="docutils literal notranslate"><span class="pre">.venv</span></code> Python interpreter - make sure that this is Python 3.12 or higher.</p></li>
 </ul>
 </li>
 <li><p>Configure Jupyter Notebooks:</p>
 <ul class="simple">
 <li><p>Open your notebook</p></li>
 <li><p>Click the “Kernel” icon (Computer Symbol) in the top right corner</p></li>
-<li><p>Select the <code class="docutils literal notranslate"><span class="pre">.venv</span></code> Python environment</p></li>
+<li><p>Select the <code class="docutils literal notranslate"><span class="pre">.venv</span></code> Python environment - make sure that this is Python 3.12 or higher.</p></li>
 </ul>
 </li>
 </ol>
@@ -486,7 +475,6 @@ python<span class="w"> </span>-m<span class="w"> </span>pre_commit<span class="w
 <p>The pre-commit hooks will automatically run on all files when you commit changes,
 ensuring consistent code style across the project.</p>
 </div>
-</section>
 </section>
 </section>
 </section>
@@ -538,18 +526,14 @@ ensuring consistent code style across the project.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-installation">User Installation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developer-installation">Developer Installation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-requisites">Pre-Requisites</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#required-vscode-extensions">Required VSCode Extensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-requisites">Pre-Requisites</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-vscode-extensions">Required VSCode Extensions</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#development-setup">Development Setup</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-the-repository">1. Clone the Repository</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-development-environment">2. Setup Development Environment</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-vscode-environment">3. Configure VSCode Environment</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development-setup">Development Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-the-repository-make-sure-to-do-this-in-your-documents-folder-or-wherever-you-keep-your-projects">1. Clone the Repository - Make sure to do this in your documents folder or wherever you keep your projects.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-development-environment">2. Setup Development Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-vscode-environment">1. Configure VSCode Environment</a></li>
 </ul>
 </li>
 </ul>
