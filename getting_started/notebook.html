@@ -411,55 +411,41 @@
                   
   <section id="SuboptimumG-Tutorial">
 <h1>SuboptimumG Tutorial<a class="headerlink" href="#SuboptimumG-Tutorial" title="Link to this heading">#</a></h1>
-<p>This notebook will showcase how to use the key features of SuboptimumG.</p>
+<p>This notebook will showcase how to use the key features of SuboptimumG. Note that if you ever modify the source code of the package. You have to <strong>restart the kernel</strong> so that your changes are detected! (Hit the “Restart” button on VSCode). Alternatively, you can also try to uncomment the cell below and run it.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Make sure to run this cell first
+# import subprocess
+# import sys
+
+
+# def run_pip_command(cmd, show_lines=2, show_start=False):
+#     &quot;&quot;&quot;Run pip command and show limited output lines&quot;&quot;&quot;
+#     result = subprocess.run(cmd, capture_output=True, text=True)
+#     output_lines = result.stdout.strip().split(&quot;\n&quot;)
+#     if show_start:
+#         output = &quot;\n&quot;.join(
+#             output_lines[:show_lines] + [&quot;...&quot;] + output_lines[-show_lines:]
+#         )
+#     else:
+#         output = &quot;\n&quot;.join(output_lines[-show_lines:])
+#     print(output)
+
+
+# # Install requirements (showing last 2 lines)
+# run_pip_command([sys.executable, &quot;-m&quot;, &quot;pip&quot;, &quot;install&quot;, &quot;-r&quot;, &quot;../requirements.txt&quot;])
+
+# # Install package in editable mode (showing first 2 and last 2 lines)
+# run_pip_command([sys.executable, &quot;-m&quot;, &quot;pip&quot;, &quot;install&quot;, &quot;-e&quot;, &quot;..&quot;], show_start=True)
+</pre></div>
+</div>
+</div>
 <section id="Simulating-a-Single-Competition">
 <h2>Simulating a Single Competition<a class="headerlink" href="#Simulating-a-Single-Competition" title="Link to this heading">#</a></h2>
 <p>We start by simulating the results of a single competition with the default car (REV 9). We load in competition-wide parameters (tracks, competitor statistics, simulation hyperparameters, etc.) from competition.yaml. We load in car-specific parameters from car.yaml. Check these yaml files to see what SuboptimumG currently takes into account and to edit the defaults.</p>
 <p>Observe that there are soft plausibility warnings when a parameter is outside of an expected range.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Make sure to run this cell first
-import subprocess
-import sys
-
-
-def run_pip_command(cmd, show_lines=2, show_start=False):
-    &quot;&quot;&quot;Run pip command and show limited output lines&quot;&quot;&quot;
-    result = subprocess.run(cmd, capture_output=True, text=True)
-    output_lines = result.stdout.strip().split(&quot;\n&quot;)
-    if show_start:
-        output = &quot;\n&quot;.join(
-            output_lines[:show_lines] + [&quot;...&quot;] + output_lines[-show_lines:]
-        )
-    else:
-        output = &quot;\n&quot;.join(output_lines[-show_lines:])
-    print(output)
-
-
-# Install requirements (showing last 2 lines)
-run_pip_command([sys.executable, &quot;-m&quot;, &quot;pip&quot;, &quot;install&quot;, &quot;-r&quot;, &quot;../requirements.txt&quot;])
-
-# Install package in editable mode (showing first 2 and last 2 lines)
-run_pip_command([sys.executable, &quot;-m&quot;, &quot;pip&quot;, &quot;install&quot;, &quot;-e&quot;, &quot;..&quot;], show_start=True)
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Requirement already satisfied: asttokens&gt;=2.1.0 in /Users/vedanshgoenka/Documents/Development/SuboptimumG/.venv/lib/python3.13/site-packages (from stack_data-&gt;ipython&gt;=7.23.1-&gt;ipykernel-&gt;-r ../requirements.in (line 10)) (3.0.0)
-Requirement already satisfied: pure-eval in /Users/vedanshgoenka/Documents/Development/SuboptimumG/.venv/lib/python3.13/site-packages (from stack_data-&gt;ipython&gt;=7.23.1-&gt;ipykernel-&gt;-r ../requirements.in (line 10)) (0.2.3)
-Obtaining file:///Users/vedanshgoenka/Documents/Development/SuboptimumG
-  Installing build dependencies: started
-...
-      Successfully uninstalled suboptimumg-0.1.3
-Successfully installed mistune-3.1.2 suboptimumg-0.1.3
-</pre></div></div>
-</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -547,7 +533,7 @@ Endur time: 1495.2    Endur points: 229.5     Effcy points: 42.2
 Power Statistics:
 Max Power: 80.00000000000001 kW
 Min Power: -0.0 kW
-Avg Power: 23.157785094399514 kW
+Avg Power: 23.157785094396672 kW
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -626,7 +612,7 @@ sweep_var_1 = {
     &quot;max&quot;: 300,
     &quot;steps&quot;: 50,
 }
-mass_sweep = Sweeper(
+mass_sweep = create_sweeper(
     comp_config=comp_config, default_car_config=car_config, var_1=sweep_var_1
 )
 mass_results = mass_sweep.sweep()
@@ -638,7 +624,7 @@ mass_results = mass_sweep.sweep()
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Running Array Sweeper for 51 competition simulations using 8 processes.
+Running Array Sweeper for 51 competition simulations using 16 processes.
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -646,7 +632,7 @@ Running Array Sweeper for 51 competition simulations using 8 processes.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Running simulations: 100%|██████████| 51/51 [00:11&lt;00:00,  4.48sim/s]
+Running simulations: 100%|██████████| 51/51 [00:48&lt;00:00,  1.04sim/s]
 </pre></div></div>
 </div>
 <p>Calling .sweep() on the Sweeper class object returns a SweepResults object. We can produce graphs with this SweepResults object. By default, the y-variable in the graph is the total number of points earned in a competition. Optionally, we can also choose to graph other y-variables such as event times and event points by passing arguments like y_var=”accel_pts” (indicating Accel event points) or y_var=”endurance_t” (indicating time taken to complete Endurance event).</p>
@@ -682,7 +668,7 @@ print(
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Total points @ mass=264.5: 485.4174682981251
+Total points @ mass=264.5: 485.4174682981252
 Change in points for every 1kg increase in mass @ mass=264.5: -1.0353487409702213
 </pre></div></div>
 </div>
@@ -691,21 +677,23 @@ Change in points for every 1kg increase in mass @ mass=264.5: -1.035348740970221
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sweep_var_1 = {
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.sweep import *
+
+sweep_var_1 = {
     &quot;variable&quot;: &quot;aero.cl&quot;,
-    &quot;min&quot;: 0.9,
-    &quot;max&quot;: 1.3,
-    &quot;steps&quot;: 50,
+    &quot;min&quot;: 2.8,
+    &quot;max&quot;: 3.8,
+    &quot;steps&quot;: 25,
 }
 
 sweep_var_2 = {
     &quot;variable&quot;: &quot;aero.cd&quot;,
-    &quot;min&quot;: 2.6,
-    &quot;max&quot;: 2.8,
-    &quot;steps&quot;: 50,
+    &quot;min&quot;: 1.0,
+    &quot;max&quot;: 2.0,
+    &quot;steps&quot;: 25,
 }
 
-aero_sweep = Sweeper(
+aero_sweep = create_sweeper(
     comp_config=comp_config,
     default_car_config=car_config,
     var_1=sweep_var_1,
@@ -720,7 +708,7 @@ aero_results = aero_sweep.sweep()
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Running Grid Sweep for 2601 competition simulations using 8 processes.
+Running Grid Sweep for 676 competition simulations using 16 processes.
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -728,7 +716,7 @@ Running Grid Sweep for 2601 competition simulations using 8 processes.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Running simulations: 100%|██████████| 2601/2601 [07:25&lt;00:00,  5.83sim/s]
+Running simulations: 100%|██████████| 676/676 [12:03&lt;00:00,  1.07s/sim]
 </pre></div></div>
 </div>
 <p>For 2-parameter sweep results, we can likewise compute interpolated points/times (z_var) and partial derivatives at any given pair of parameters within the sweep range.</p>
@@ -737,12 +725,12 @@ Running simulations: 100%|██████████| 2601/2601 [07:25&lt;00
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># x refers to var_1 (aero.cl in this case) and y refers to var_2 (aero.cd in this case)
-print(f&quot;Total points @ cl=1.205, cd=2.675: {aero_results.z_at_xy(x=1.205, y=2.675)}&quot;)
+print(f&quot;Total points @ cl=1.205, cd=2.675: {aero_results.z_at_xy(x=3.55, y=1.65)}&quot;)
 print(
-    f&quot;Additional point gain for every 1.0 increase in cl @ cl=1.205, cd=2.675: {aero_results.dzdx_at_xy(x=1.208, y=2.676)}&quot;
+    f&quot;Additional point gain for every 1.0 increase in cl @ cl=3.55, cd=1.65: {aero_results.dzdx_at_xy(x=3.55, y=1.65)}&quot;
 )
 print(
-    f&quot;Additional point gain for every 1.0 increase in cd @ cl=1.205, cd=2.675: {aero_results.dzdy_at_xy(x=1.205, y=2.675)}&quot;
+    f&quot;Additional point gain for every 1.0 increase in cd @ cl=3.55, cd=1.65: {aero_results.dzdy_at_xy(x=3.55, y=1.65)}&quot;
 )
 </pre></div>
 </div>
@@ -752,9 +740,9 @@ print(
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Total points @ cl=1.205, cd=2.675: 352.41701116780075
-Additional point gain for every 1.0 increase in cl @ cl=1.205, cd=2.675: 45.089887962603825
-Additional point gain for every 1.0 increase in cd @ cl=1.205, cd=2.675: -29.26168562225943
+Total points @ cl=1.205, cd=2.675: 452.55334570932223
+Additional point gain for every 1.0 increase in cl @ cl=3.55, cd=1.65: 23.06769243659801
+Additional point gain for every 1.0 increase in cd @ cl=3.55, cd=1.65: -19.237022296692885
 </pre></div></div>
 </div>
 <p>For 2-parameter sweep results, we have a choice between two types of graphs to represent the data. Call either .plot_contour() or .plot_surface(). Again, the target variable is by default total points, but can be controlled by passing an argument like z_var=”endurance_pts”.</p>
@@ -789,13 +777,13 @@ Additional point gain for every 1.0 increase in cd @ cl=1.205, cd=2.675: -29.261
 </div>
 </div>
 <p>We can also do a special sweep to analyze battery pack capacity. Here, we provide the min, max, and step count of battery pack capacity limit (units of kWh). We can optionally provide a second parameter to sweep across.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.sweep import CapacityLimitSweeper
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.sweep import CapacityLimitSweeper1D
 
-cap_limit_sweep = CapacityLimitSweeper(
+cap_limit_sweep = CapacityLimitSweeper1D(
     comp_config=comp_config,
     default_car_config=car_config,
     min_energy=2.5,
@@ -805,6 +793,23 @@ cap_limit_sweep = CapacityLimitSweeper(
 cap_limit_results = cap_limit_sweep.sweep()
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+WARNING: Capacity limit of 2.5 does not complete Endurance event
+Running Capacity Sweep for 25 competition simulations using 16 processes.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Running simulations: 100%|██████████| 25/25 [01:18&lt;00:00,  3.14s/sim]
+</pre></div></div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
@@ -821,6 +826,64 @@ cap_limit_results = cap_limit_sweep.sweep()
 <img alt="../_images/getting_started_notebook_26_0.png" src="../_images/getting_started_notebook_26_0.png" />
 </div>
 </div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.sweep import CapacityLimitSweeper2D
+
+sweep_var = {
+    &quot;variable&quot;: &quot;mass&quot;,
+    &quot;min&quot;: 250,
+    &quot;max&quot;: 300,
+    &quot;steps&quot;: 10,
+}
+
+cap_limit_sweep = CapacityLimitSweeper2D(
+    comp_config=comp_config,
+    default_car_config=car_config,
+    min_energy=2.5,
+    max_energy=8.5,
+    energy_steps=12,
+    var=sweep_var,
+)
+cap_limit_results = cap_limit_sweep.sweep()
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+WARNING: Capacity Limit=2.5 and mass=250 does not complete Endurance event.
+WARNING: Capacity Limit=2.5 and mass=300 does not complete Endurance event.
+Running Capacity Grid Sweep for 143 competition simulations using 16 processes.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Running simulations: 100%|██████████| 143/143 [08:05&lt;00:00,  3.40s/sim]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>cap_limit_results.plot_surface(view_angle=105)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/getting_started_notebook_28_0.png" src="../_images/getting_started_notebook_28_0.png" />
+</div>
+</div>
 <p>We can do a full vehicle parameter sweep by using the ArraySweeper class</p>
 <p>This takes in the following parameters:</p>
 <ul class="simple">
@@ -831,7 +894,7 @@ cap_limit_results = cap_limit_sweep.sweep()
 </ul>
 <p>This is currently a WIP and will not work as expected.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.sweep import ArraySweeper
@@ -864,7 +927,7 @@ arr_sweep_results = arr_sweep.sweep(verbose=True)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Running Array Sweeper for 154 competition simulations using 8 processes.
+Running Array Sweeper for 154 competition simulations using 16 processes.
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -872,11 +935,11 @@ Running Array Sweeper for 154 competition simulations using 8 processes.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Running simulations: 100%|██████████| 154/154 [00:30&lt;00:00,  5.09sim/s]
+Running simulations: 100%|██████████| 154/154 [02:39&lt;00:00,  1.04s/sim]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>arr_sweep_results.plot()
@@ -887,7 +950,7 @@ Running simulations: 100%|██████████| 154/154 [00:30&lt;00:0
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/getting_started_notebook_29_0.png" src="../_images/getting_started_notebook_29_0.png" />
+<img alt="../_images/getting_started_notebook_31_0.png" src="../_images/getting_started_notebook_31_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
