@@ -416,7 +416,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Make sure to run this cell first
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># # Make sure to run this cell first
 # import subprocess
 # import sys
 
@@ -453,22 +453,23 @@
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import suboptimumg
 import yaml
 
-# Uncomment this function to update sheets.yaml with the latest values on Google Drive.
-# suboptimumg.sheet_to_yaml.grab_sheet_data()
-# with open(&quot;../parameters/sheet.yaml&quot;, &quot;r&quot;) as file:
-#     sheets_config = yaml.safe_load(file)
+# Update sheets.yaml with the latest values on Google Drive.
+suboptimumg.sheet_to_yaml.grab_sheet_data()
+with open(&quot;../parameters/sheet.yaml&quot;, &quot;r&quot;) as file:
+    sheets_config = yaml.safe_load(file)
 
 # Create sample competition
 with open(&quot;../parameters/competition.yaml&quot;, &quot;r&quot;) as file:
     comp_config = yaml.safe_load(file)
 
-# Change this value to sheets.yaml if you would like to use Google Drive values
-# NOTE: Those numbers are less verified, could cause unexpected crashes!
-with open(&quot;../parameters/car.yaml&quot;, &quot;r&quot;) as file:
-    car_config = yaml.safe_load(file)
 
-michigan2023_rev9 = suboptimumg.compsim.Competition.from_config(
-    comp_config=comp_config, car_config=car_config
+# NOTE: Those numbers are less verified, could cause unexpected crashes!
+# with open(&quot;../parameters/car.yaml&quot;, &quot;r&quot;) as file:
+#     car_config = yaml.safe_load(file)
+
+# This is based off the sheet.yaml file
+michigan2023_revX = suboptimumg.compsim.Competition.from_config(
+    comp_config=comp_config, car_config=sheets_config
 )
 </pre></div>
 </div>
@@ -483,7 +484,7 @@ from suboptimumg.plotting.utils import pretty_print_results
 
 # Run sample competition
 accel_results, skidpad_results, autoX_results, endurance_results, efficiency_points = (
-    michigan2023_rev9.run()
+    michigan2023_revX.run()
 )
 pretty_print_results(
     accel_results, skidpad_results, autoX_results, endurance_results, efficiency_points
@@ -511,11 +512,11 @@ plt.show()
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Accel time: 3.921     Accel points: 79.6
-SkidP time: 5.187     SkidP points: 48.1
-AutoX time: 50.604    AutoX points: 92.7
-Endur time: 1416.4    Endur points: 271.8     Effcy points: 42.9
-                      Total points: 535.0
+Accel time: 3.888     Accel points: 81.9
+SkidP time: 5.186     SkidP points: 48.2
+AutoX time: 50.551    AutoX points: 93.0
+Endur time: 1416.2    Endur points: 271.9     Effcy points: 42.7
+                      Total points: 537.7
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -533,7 +534,7 @@ Endur time: 1416.4    Endur points: 271.8     Effcy points: 42.9
 Power Statistics:
 Max Power: 80.00000000000001 kW
 Min Power: -0.0 kW
-Avg Power: 24.885821744239312 kW
+Avg Power: 25.054457177072507 kW
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -549,7 +550,7 @@ Avg Power: 24.885821744239312 kW
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>track_vertices = suboptimumg.plotting.track_vis(
-    michigan2023_rev9.get_endurance_track(), michigan2023_rev9.get_distance_step(), 80
+    michigan2023_revX.get_endurance_track(), michigan2023_revX.get_distance_step(), 80
 )
 
 suboptimumg.plotting.map_color(
@@ -613,7 +614,7 @@ sweep_var_1 = {
     &quot;steps&quot;: 50,
 }
 mass_sweep = create_sweeper(
-    comp_config=comp_config, default_car_config=car_config, var_1=sweep_var_1
+    comp_config=comp_config, default_car_config=sheets_config, var_1=sweep_var_1
 )
 mass_results = mass_sweep.sweep()
 </pre></div>
@@ -624,7 +625,7 @@ mass_results = mass_sweep.sweep()
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Running Array Sweeper for 51 competition simulations using 16 processes.
+Running Array Sweeper for 51 competition simulations using 8 processes.
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -632,12 +633,12 @@ Running Array Sweeper for 51 competition simulations using 16 processes.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Running simulations: 100%|██████████| 51/51 [04:22&lt;00:00,  5.15s/sim]
+Running simulations: 100%|██████████| 51/51 [00:18&lt;00:00,  2.78sim/s]
 </pre></div></div>
 </div>
 <p>Calling .sweep() on the Sweeper class object returns a SweepResults object. We can produce graphs with this SweepResults object. By default, the y-variable in the graph is the total number of points earned in a competition. Optionally, we can also choose to graph other y-variables such as event times and event points by passing arguments like y_var=”accel_pts” (indicating Accel event points) or y_var=”endurance_t” (indicating time taken to complete Endurance event).</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mass_results.plot()
@@ -670,8 +671,8 @@ print(
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Total points @ mass=264.5: 526.258343676008
-Change in points for every 1kg increase in mass @ mass=264.5: -1.0609532176295033
+Total points @ mass=264.5: 529.876682444723
+Change in points for every 1kg increase in mass @ mass=264.5: -1.151270358968759
 </pre></div></div>
 </div>
 <p>The Sweeper class object also supports 2-parameter sweeps.</p>
@@ -697,7 +698,7 @@ sweep_var_2 = {
 
 aero_sweep = create_sweeper(
     comp_config=comp_config,
-    default_car_config=car_config,
+    default_car_config=sheets_config,
     var_1=sweep_var_1,
     var_2=sweep_var_2,
 )
@@ -710,7 +711,7 @@ aero_results = aero_sweep.sweep()
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Running Grid Sweep for 676 competition simulations using 16 processes.
+Running Grid Sweep for 676 competition simulations using 8 processes.
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -718,7 +719,7 @@ Running Grid Sweep for 676 competition simulations using 16 processes.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Running simulations: 100%|██████████| 676/676 [21:08&lt;00:00,  1.88s/sim]
+Running simulations: 100%|██████████| 676/676 [03:30&lt;00:00,  3.21sim/s]
 </pre></div></div>
 </div>
 <p>For 2-parameter sweep results, we can likewise compute interpolated points/times (z_var) and partial derivatives at any given pair of parameters within the sweep range.</p>
@@ -742,9 +743,9 @@ print(
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Total points @ cl=1.205, cd=2.675: 533.1680169040659
-Additional point gain for every 1.0 increase in cl @ cl=3.55, cd=1.65: 19.679183563312108
-Additional point gain for every 1.0 increase in cd @ cl=3.55, cd=1.65: -30.530093847119133
+Total points @ cl=1.205, cd=2.675: 536.5800747260761
+Additional point gain for every 1.0 increase in cl @ cl=3.55, cd=1.65: 37.14308047437953
+Additional point gain for every 1.0 increase in cd @ cl=3.55, cd=1.65: -23.61314680911164
 </pre></div></div>
 </div>
 <p>For 2-parameter sweep results, we have a choice between two types of graphs to represent the data. Call either .plot_contour() or .plot_surface(). Again, the target variable is by default total points, but can be controlled by passing an argument like z_var=”endurance_pts”.</p>
@@ -791,7 +792,7 @@ Additional point gain for every 1.0 increase in cd @ cl=3.55, cd=1.65: -30.53009
 
 cap_limit_sweep = CapacityLimitSweeper1D(
     comp_config=comp_config,
-    default_car_config=car_config,
+    default_car_config=sheets_config,
     min_energy=2.5,
     max_energy=8.5,
     energy_steps=24,
@@ -806,7 +807,7 @@ cap_limit_results = cap_limit_sweep.sweep()
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 WARNING: Capacity limit of 2.5 does not complete Endurance event
-Running Capacity Sweep for 25 competition simulations using 16 processes.
+Running Capacity Sweep for 25 competition simulations using 8 processes.
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -814,7 +815,7 @@ Running Capacity Sweep for 25 competition simulations using 16 processes.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Running simulations: 100%|██████████| 25/25 [03:49&lt;00:00,  9.16s/sim]
+Running simulations: 100%|██████████| 25/25 [00:34&lt;00:00,  1.39s/sim]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -849,7 +850,7 @@ sweep_var = {
 
 cap_limit_sweep_2D = CapacityLimitSweeper2D(
     comp_config=comp_config,
-    default_car_config=car_config,
+    default_car_config=sheets_config,
     min_energy=2.5,
     max_energy=8.5,
     energy_steps=12,
@@ -866,7 +867,7 @@ cap_limit_results_2D = cap_limit_sweep_2D.sweep()
 <div class="highlight"><pre>
 WARNING: Capacity Limit=2.5 and mass=250 does not complete Endurance event.
 WARNING: Capacity Limit=2.5 and mass=300 does not complete Endurance event.
-Running Capacity Grid Sweep for 143 competition simulations using 16 processes.
+Running Capacity Grid Sweep for 143 competition simulations using 8 processes.
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -874,11 +875,11 @@ Running Capacity Grid Sweep for 143 competition simulations using 16 processes.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Running simulations: 100%|██████████| 143/143 [13:24&lt;00:00,  5.63s/sim]
+Running simulations: 100%|██████████| 143/143 [03:16&lt;00:00,  1.37s/sim]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>cap_limit_results_2D.plot_surface(view_angle=135)
@@ -919,7 +920,6 @@ Running simulations: 100%|██████████| 143/143 [13:24&lt;00:0
 <li><p>var_list: list of variables to sweep e.g. [“mass”, “pwrtn.motor.moc_efficiency”]</p></li>
 <li><p>var_percent_step_list: list of percent steps to sweep default is: [-0.1, -0.08, -0.06, -0.04, -0.02, 0, 0.02, 0.04, 0.06, 0.08, 0.1]</p></li>
 </ul>
-<p>This is currently a WIP and will not work as expected.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
@@ -943,7 +943,7 @@ arr_sweep_params = [
     &quot;rolling_coeff&quot;,
 ]
 arr_sweep = ArraySweeper(
-    comp_config=comp_config, default_car_config=car_config, var_list=arr_sweep_params
+    comp_config=comp_config, default_car_config=sheets_config, var_list=arr_sweep_params
 )
 arr_sweep_results = arr_sweep.sweep(verbose=True)
 </pre></div>
@@ -954,7 +954,7 @@ arr_sweep_results = arr_sweep.sweep(verbose=True)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Running Array Sweeper for 154 competition simulations using 16 processes.
+Running Array Sweeper for 154 competition simulations using 8 processes.
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -962,7 +962,7 @@ Running Array Sweeper for 154 competition simulations using 16 processes.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Running simulations: 100%|██████████| 154/154 [01:19&lt;00:00,  1.93sim/s]
+Running simulations: 100%|██████████| 154/154 [00:56&lt;00:00,  2.72sim/s]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -980,6 +980,14 @@ Running simulations: 100%|██████████| 154/154 [01:19&lt;00:0
 <div class="admonition warning">
 <p>Data type cannot be displayed: application/vnd.plotly.v1+json</p>
 </div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
 </div>
 </div>
 </section>
