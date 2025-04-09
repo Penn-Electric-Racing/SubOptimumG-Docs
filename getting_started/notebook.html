@@ -514,11 +514,11 @@ print(
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Accel time: 4.1       Accel points: 68.0
-SkidP time: 5.234     SkidP points: 45.0
-AutoX time: 51.371    AutoX points: 87.5
-Endur time: 1437.7    Endur points: 259.9     Effcy points: 44.5
-                      Total points: 504.9
+Accel time: 4.099     Accel points: 68.0
+SkidP time: 5.276     SkidP points: 42.4
+AutoX time: 51.788    AutoX points: 84.7
+Endur time: 1447.3    Endur points: 254.6     Effcy points: 44.6
+                      Total points: 494.3
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -536,13 +536,13 @@ Endur time: 1437.7    Endur points: 259.9     Effcy points: 44.5
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Power Statistics:
-Max Power: 80.0 kW
+Max Power: 80.00000000000001 kW
 Min Power: -0.0 kW
-Avg Power: 23.355286001027203 kW
+Avg Power: 23.130725465701893 kW
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plot2D(
@@ -654,12 +654,12 @@ Running 1D Sweep for 51 competition simulations using 16 processes.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Running simulations: 100%|██████████| 51/51 [00:46&lt;00:00,  1.09sim/s]
+Running simulations: 100%|██████████| 51/51 [00:28&lt;00:00,  1.82sim/s]
 </pre></div></div>
 </div>
 <p>Calling .sweep() on the Sweeper class object returns a SweepResults object. We can produce graphs with this SweepResults object. By default, the y-variable in the graph is the total number of points earned in a competition. Optionally, we can also choose to graph other y-variables such as event times and event points by passing arguments like y_var=”accel_pts” (indicating Accel event points) or y_var=”endurance_t” (indicating time taken to complete Endurance event).</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mass_results.plot()
@@ -677,7 +677,7 @@ Running simulations: 100%|██████████| 51/51 [00:46&lt;00:00,
 </div>
 <p>We can also compute interpolated points/times (y_var) and first derivatives for any given x-value within range of the sweep.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(f&quot;Total points @ mass=257kg: {mass_results.y_at_x(x=257)}&quot;)
@@ -692,13 +692,13 @@ print(
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Total points @ mass=257kg: 504.50647334880216
-Change in points for every 1kg increase in mass @ mass=257kg: -2.2470234045704274
+Total points @ mass=257kg: 494.3633165902008
+Change in points for every 1kg increase in mass @ mass=257kg: -1.1921493844329234
 </pre></div></div>
 </div>
 <p>The Sweeper class object also supports 2-parameter sweeps.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.sweep import *
@@ -707,14 +707,14 @@ sweep_var_1 = {
     &quot;variable&quot;: &quot;aero.cl&quot;,
     &quot;min&quot;: 2.8,
     &quot;max&quot;: 3.8,
-    &quot;steps&quot;: 25,
+    &quot;steps&quot;: 15,
 }
 
 sweep_var_2 = {
     &quot;variable&quot;: &quot;aero.cd&quot;,
     &quot;min&quot;: 1.0,
     &quot;max&quot;: 2.0,
-    &quot;steps&quot;: 25,
+    &quot;steps&quot;: 15,
 }
 
 aero_sweep = create_sweeper(
@@ -732,7 +732,7 @@ aero_results = aero_sweep.sweep()
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Running Grid Sweep for 676 competition simulations using 16 processes.
+Running Grid Sweep for 256 competition simulations using 16 processes.
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -740,12 +740,12 @@ Running Grid Sweep for 676 competition simulations using 16 processes.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Running simulations: 100%|██████████| 676/676 [06:43&lt;00:00,  1.68sim/s]
+Running simulations: 100%|██████████| 256/256 [01:59&lt;00:00,  2.14sim/s]
 </pre></div></div>
 </div>
 <p>For 2-parameter sweep results, we can likewise compute interpolated points/times (z_var) and partial derivatives at any given pair of parameters within the sweep range.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># x refers to var_1 (aero.cl in this case) and y refers to var_2 (aero.cd in this case)
@@ -764,14 +764,14 @@ print(
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Total points @ cl=3.55, cd=1.65: 503.3681209784459
-Additional point gain for every 1.0 increase in cl @ cl=3.55, cd=1.65: 19.20760950361
-Additional point gain for every 1.0 increase in cd @ cl=3.55, cd=1.65: -30.91043826407258
+Total points @ cl=3.55, cd=1.65: 492.47770757520397
+Additional point gain for every 1.0 increase in cl @ cl=3.55, cd=1.65: 8.927680659326143
+Additional point gain for every 1.0 increase in cd @ cl=3.55, cd=1.65: -30.80464871800359
 </pre></div></div>
 </div>
 <p>For 2-parameter sweep results, we have a choice between two types of graphs to represent the data. Call either .plot_contour() or .plot_surface(). Again, the target variable is by default total points, but can be controlled by passing an argument like z_var=”endurance_pts”.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>aero_results.plot_contour()
@@ -788,7 +788,7 @@ Additional point gain for every 1.0 increase in cd @ cl=3.55, cd=1.65: -30.91043
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>aero_results.plot_surface(view_angle=120)
@@ -813,7 +813,7 @@ Additional point gain for every 1.0 increase in cd @ cl=3.55, cd=1.65: -30.91043
 <li><p>var_percent_step_list: list of percent steps to sweep default is: [-0.1, -0.08, -0.06, -0.04, -0.02, 0, 0.02, 0.04, 0.06, 0.08, 0.1]</p></li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.sweep import ArraySweeper
@@ -854,11 +854,11 @@ Running Array Sweeper for 154 competition simulations using 16 processes.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Running simulations: 100%|██████████| 154/154 [01:22&lt;00:00,  1.86sim/s]
+Running simulations: 100%|██████████| 154/154 [01:15&lt;00:00,  2.03sim/s]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>arr_sweep_results.plot()
