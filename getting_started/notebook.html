@@ -483,11 +483,11 @@ print(
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Accel time: 4.159     Accel points: 64.4
-SkidP time: 5.214     SkidP points: 46.3
+Accel time: 4.186     Accel points: 62.8
+SkidP time: 5.234     SkidP points: 45.0
 AutoX time: 51.561    AutoX points: 86.2
 Endur time: 1437.6    Endur points: 259.9     Effcy points: 50.0
-                      Total points: 506.9
+                      Total points: 503.9
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -591,7 +591,7 @@ mass_results = mass_sweep.sweep()
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Running 1D Sweep for 51 competition simulations using 8 processes.
+Running 1D Sweep for 51 competition simulations using 16 processes.
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -599,7 +599,7 @@ Running 1D Sweep for 51 competition simulations using 8 processes.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Running simulations: 100%|██████████| 51/51 [00:18&lt;00:00,  2.74sim/s]
+Running simulations: 100%|██████████| 51/51 [00:33&lt;00:00,  1.54sim/s]
 </pre></div></div>
 </div>
 <p>Calling .sweep() on the Sweeper class object returns a SweepResults object. We can produce graphs with this SweepResults object. By default, the y-variable in the graph is the total number of points earned in a competition. Optionally, we can also choose to graph other y-variables such as event times and event points by passing arguments like y_var=”accel_pts” (indicating Accel event points) or y_var=”endurance_t” (indicating time taken to complete Endurance event).</p>
@@ -641,8 +641,8 @@ print(
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Total points @ mass=257kg: 507.03759060338336
-Change in points for every 1kg increase in mass @ mass=257kg: -1.6081765160015493
+Total points @ mass=257kg: 505.4716718216673
+Change in points for every 1kg increase in mass @ mass=257kg: -2.9732669765326136
 </pre></div></div>
 </div>
 <p>The Sweeper class object also supports 2-parameter sweeps.</p>
@@ -681,7 +681,7 @@ aero_results = aero_sweep.sweep()
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Running Grid Sweep for 256 competition simulations using 8 processes.
+Running Grid Sweep for 256 competition simulations using 16 processes.
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -689,7 +689,7 @@ Running Grid Sweep for 256 competition simulations using 8 processes.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Running simulations: 100%|██████████| 256/256 [01:26&lt;00:00,  2.95sim/s]
+Running simulations: 100%|██████████| 256/256 [02:16&lt;00:00,  1.87sim/s]
 </pre></div></div>
 </div>
 <p>For 2-parameter sweep results, we can likewise compute interpolated points/times (z_var) and partial derivatives at any given pair of parameters within the sweep range.</p>
@@ -713,9 +713,9 @@ print(
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Total points @ cl=3.55, cd=1.65: 506.32427862825097
-Additional point gain for every 1.0 increase in cl @ cl=3.55, cd=1.65: 22.6612584610848
-Additional point gain for every 1.0 increase in cd @ cl=3.55, cd=1.65: -11.548643318747054
+Total points @ cl=3.55, cd=1.65: 503.44536290740933
+Additional point gain for every 1.0 increase in cl @ cl=3.55, cd=1.65: 60.21354571930715
+Additional point gain for every 1.0 increase in cd @ cl=3.55, cd=1.65: -13.935466957263998
 </pre></div></div>
 </div>
 <p>For 2-parameter sweep results, we have a choice between two types of graphs to represent the data. Call either .plot_contour() or .plot_surface(). Again, the target variable is by default total points, but can be controlled by passing an argument like z_var=”endurance_pts”.</p>
@@ -786,10 +786,7 @@ arr_sweep_params = [
     &quot;aero.cd&quot;,
     &quot;aero.front_area&quot;,
     &quot;aero.cop&quot;,
-    &quot;pwrtn.motor.pow_lim&quot;,
     &quot;pwrtn.ratio&quot;,
-    &quot;pwrtn.regen_percent&quot;,
-    &quot;rolling_coeff&quot;,
 ]
 arr_sweep = ArraySweeper(
     comp_config=comp_config, default_car_config=sheets_config, var_list=arr_sweep_params
@@ -803,7 +800,7 @@ arr_sweep_results = arr_sweep.sweep(verbose=True)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Running Array Sweeper for 154 competition simulations using 8 processes.
+Running Array Sweeper for 121 competition simulations using 16 processes.
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -811,7 +808,7 @@ Running Array Sweeper for 154 competition simulations using 8 processes.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Running simulations: 100%|██████████| 154/154 [00:54&lt;00:00,  2.82sim/s]
+Running simulations: 100%|██████████| 121/121 [01:08&lt;00:00,  1.78sim/s]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
