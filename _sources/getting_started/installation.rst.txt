@@ -57,6 +57,7 @@ On Windows:
    pip install -r requirements.txt
    python -m pip install -e .
    python -m pre_commit install
+   nbstripout --install
 
 1. Configure VSCode Environment
 *************************************
