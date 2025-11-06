@@ -599,9 +599,13 @@ print(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>aero_results.plot_contour(
-    x_label=&quot;CL&quot;, y_label=&quot;CD&quot;, z_label=&quot;Total Points&quot;, title=&quot;CL vs CD Sweep&quot;
-)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># aero_results.plot_contour(
+#     x_label=&quot;CL&quot;, y_label=&quot;CD&quot;, z_label=&quot;Total Points&quot;, title=&quot;CL vs CD Sweep&quot;
+# )
+
+from suboptimumg.plotting import PlotType
+
+aero_results.grid_plot(plot_type=PlotType.CONTOUR)
 </pre></div>
 </div>
 </div>
@@ -609,12 +613,14 @@ print(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>aero_results.plot_surface(
-    view_angle=120,
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting import SceneConfig
+
+aero_results.plot_surface(
     x_label=&quot;CL&quot;,
     y_label=&quot;CD&quot;,
     z_label=&quot;Total Points&quot;,
     title=&quot;CL vs CD Sweep&quot;,
+    scene_config=SceneConfig(default_view_angle=120),
 )
 </pre></div>
 </div>
