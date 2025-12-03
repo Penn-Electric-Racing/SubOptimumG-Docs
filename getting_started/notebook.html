@@ -420,7 +420,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import suboptimumg
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.compsim import Competition
 import yaml
 
 # Update sheets.yaml with the latest values on Google Drive.
@@ -437,7 +437,7 @@ with open(&quot;../parameters/competition.yaml&quot;, &quot;r&quot;) as file:
 #     car_config = yaml.safe_load(file)
 
 # This is based off the sheet.yaml file
-michigan2023_revX = suboptimumg.compsim.Competition.from_config(
+michigan2023_revX = Competition.from_config(
     comp_config=comp_config, car_config=sheets_config
 )
 </pre></div>
@@ -449,7 +449,7 @@ michigan2023_revX = suboptimumg.compsim.Competition.from_config(
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-from suboptimumg.plotting.utils import pretty_print_results
+from suboptimumg.compsim import pretty_print_results
 from suboptimumg.plotting.generic_plot import plot2D
 
 # Run sample competition
@@ -483,17 +483,33 @@ print(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>track_vertices = suboptimumg.plotting.track_vis(
-    michigan2023_revX.get_endurance_track(), magic_scale=0.064, start_angle_deg=80
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig, ax = michigan2023_revX.endurance.plot_arcs()
+fig
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = michigan2023_revX.endurance.plot_with_overlay(
+    variable=endurance_results.vel_list, label=&quot;Speed (m/s)&quot;, theme=&quot;thermal&quot;
 )
-
-suboptimumg.plotting.map_color(
-    track_verts=track_vertices,
+fig.show()
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = michigan2023_revX.endurance.plot_3d(
     variable=endurance_results.vel_list,
-    label=&quot;Speed (m/s)&quot;,
-    norm_min=0,
-    norm_max=31,
+    title=&quot;Speed over Endurance Lap&quot;,
+    z_label=&quot;Speed (m/s)&quot;,
+    theme=&quot;thermal&quot;,
 )
+fig.show()
 </pre></div>
 </div>
 </div>
@@ -599,11 +615,17 @@ print(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># aero_results.plot_contour(
-#     x_label=&quot;CL&quot;, y_label=&quot;CD&quot;, z_label=&quot;Total Points&quot;, title=&quot;CL vs CD Sweep&quot;
-# )
-
-from suboptimumg.plotting import PlotType
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>aero_results.plot_contour(
+    x_label=&quot;CL&quot;, y_label=&quot;CD&quot;, z_label=&quot;Total Points&quot;, title=&quot;CL vs CD Sweep&quot;
+)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting import PlotType
 
 aero_results.grid_plot(plot_type=PlotType.CONTOUR)
 </pre></div>
@@ -667,14 +689,6 @@ arr_sweep_results = arr_sweep.sweep(verbose=True)
     y_label=&quot;Total Points&quot;,
     title=&quot;Array Sweep - Total Points&quot;,
 )
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
