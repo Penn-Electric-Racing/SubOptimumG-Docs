@@ -493,7 +493,9 @@ fig
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = michigan2023_revX.endurance.plot_with_overlay(
-    variable=endurance_results.vel_list, label=&quot;Speed (m/s)&quot;, theme=&quot;thermal&quot;
+    variable=endurance_results.lapsim_results.lap_vels,
+    label=&quot;Speed (m/s)&quot;,
+    theme=&quot;thermal&quot;,
 )
 fig.show()
 </pre></div>
@@ -504,7 +506,7 @@ fig.show()
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = michigan2023_revX.endurance.plot_3d(
-    variable=endurance_results.vel_list,
+    variable=endurance_results.lapsim_results.lap_vels,
     title=&quot;Speed over Endurance Lap&quot;,
     z_label=&quot;Speed (m/s)&quot;,
     theme=&quot;thermal&quot;,
