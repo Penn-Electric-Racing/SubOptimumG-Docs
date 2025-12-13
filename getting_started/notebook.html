@@ -443,26 +443,78 @@ michigan2023_revX = Competition.from_config(
 </pre></div>
 </div>
 </div>
-<p>We run the competition by calling .run() on the competition object. Then, we can print out our point totals and graph some more detailed information, in this case power v.s. time during the Accel event.</p>
+<p>We run the competition by calling .run() on the competition object. Then, we can print out our point totals.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.compsim import pretty_print_results
+
+# Run sample competition
+comp_results = michigan2023_revX.run(extract_internal_data=True)
+
+pretty_print_results(comp_results)
+</pre></div>
+</div>
+</div>
+<p>We have tools to graph more detailed information about the behavior of the car across different events. Here’s an example for the Endurance event. We plot what is simulated for a single “seed”, which is a radii minima on the Endurance track. Seeds are used as starting points in our simulation.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting.internal_data_plots import plot_per_seed, Axis
+
+endu_res = comp_results.endurance
+
+plot_per_seed(
+    results=endu_res.lapsim_results,
+    x_axis=Axis.DISTANCE,
+    include_indices=[1],
+    include_power=True,
+)
+</pre></div>
+</div>
+</div>
+<p>We can also display detailed simulation results for an event, plotting velocity, acceleration, and power at every step across a lap.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting.internal_data_plots import plot_event_traces, Metric
+
+plot_event_traces(
+    results=endu_res.lapsim_results,
+    x_axis=Axis.DISTANCE,
+    metrics=[Metric.VELOCITY, Metric.ACCEL, Metric.POWER],
+)
+</pre></div>
+</div>
+</div>
+<p>For a more compact but comprehensive view, we can plot these traces across all events in a competition.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting.internal_data_plots import plot_competition_traces
+
+plot_competition_traces(
+    competitions=comp_results,
+    x_axis=Axis.DISTANCE,
+)
+</pre></div>
+</div>
+</div>
+<p>If needed, it is also fairly simple to do custom analysis on the data. We store our data in numpy datatypes, which should be compatible with most external libraries.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-from suboptimumg.compsim import pretty_print_results
 from suboptimumg.plotting.generic_plot import plot2D
 
-# Run sample competition
-accel_results, skidpad_results, autoX_results, endurance_results, efficiency_points = (
-    michigan2023_revX.run()
-)
-pretty_print_results(
-    accel_results, skidpad_results, autoX_results, endurance_results, efficiency_points
-)
-
 plot2D(
-    x_list=np.array(endurance_results.lapsim_results.lap_t),
-    y_list=np.array(endurance_results.lapsim_results.lap_powers) / 1000,
+    x_list=np.array(endu_res.lapsim_results.lap_t),
+    y_list=np.array(endu_res.lapsim_results.lap_powers) / 1000,
     title=&quot;Power Usage over a Single Endurance Lap&quot;,
     x_axis=&quot;Time since Lap Start (s)&quot;,
     y_axis=&quot;Power (kW)&quot;,
@@ -470,11 +522,9 @@ plot2D(
 )
 
 print(&quot;Power Statistics:&quot;)
-print(f&quot;Max Power: {max(endurance_results.lapsim_results.lap_powers) / 1000} kW&quot;)
-print(f&quot;Min Power: {min(endurance_results.lapsim_results.lap_powers) / 1000} kW&quot;)
-print(
-    f&quot;Avg Power: {sum(endurance_results.lapsim_results.lap_powers) / len(endurance_results.lapsim_results.lap_powers) / 1000} kW&quot;
-)
+print(f&quot;Max Power: {np.max(endu_res.lapsim_results.lap_powers) / 1000} kW&quot;)
+print(f&quot;Min Power: {np.min(endu_res.lapsim_results.lap_powers) / 1000} kW&quot;)
+print(f&quot;Avg Power: {np.mean(endu_res.lapsim_results.lap_powers) / 1000} kW&quot;)
 </pre></div>
 </div>
 </div>
@@ -493,7 +543,7 @@ fig
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = michigan2023_revX.endurance.plot_with_overlay(
-    variable=endurance_results.lapsim_results.lap_vels,
+    variable=endu_res.lapsim_results.lap_vels,
     label=&quot;Speed (m/s)&quot;,
     theme=&quot;thermal&quot;,
 )
@@ -506,7 +556,7 @@ fig.show()
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = michigan2023_revX.endurance.plot_3d(
-    variable=endurance_results.lapsim_results.lap_vels,
+    variable=endu_res.lapsim_results.lap_vels,
     title=&quot;Speed over Endurance Lap&quot;,
     z_label=&quot;Speed (m/s)&quot;,
     theme=&quot;thermal&quot;,
