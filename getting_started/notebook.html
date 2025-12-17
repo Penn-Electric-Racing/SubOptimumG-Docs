@@ -622,19 +622,19 @@ print(
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.sweep import *
 
-sweep_var_1 = {
-    &quot;variable&quot;: &quot;aero.cl&quot;,
-    &quot;min&quot;: 2.8,
-    &quot;max&quot;: 3.8,
-    &quot;steps&quot;: 15,
-}
+sweep_var_1 = SweepParamConfig(
+    name=&quot;aero.cl&quot;,
+    min=2.8,
+    max=3.8,
+    steps=15,
+)
 
-sweep_var_2 = {
-    &quot;variable&quot;: &quot;aero.cd&quot;,
-    &quot;min&quot;: 1.0,
-    &quot;max&quot;: 2.0,
-    &quot;steps&quot;: 15,
-}
+sweep_var_2 = SweepParamConfig(
+    name=&quot;aero.cd&quot;,
+    min=1.0,
+    max=2.0,
+    steps=15,
+)
 
 aero_sweep = create_sweeper(
     comp_config=comp_config,
