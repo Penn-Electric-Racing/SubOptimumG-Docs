@@ -548,6 +548,7 @@ fig
     theme=&quot;thermal&quot;,
 )
 fig.show()
+fig.write_html(&quot;endurance_speed_overlay.html&quot;)
 </pre></div>
 </div>
 </div>
@@ -577,12 +578,12 @@ fig.show()
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.sweep import *
 
-sweep_var_1 = {
-    &quot;variable&quot;: &quot;mass&quot;,
-    &quot;min&quot;: 200,
-    &quot;max&quot;: 300,
-    &quot;steps&quot;: 50,
-}
+sweep_var_1 = SweepParamConfig(
+    name=&quot;mass&quot;,
+    min=200,
+    max=300,
+    steps=50,
+)
 mass_sweep = create_sweeper(
     comp_config=comp_config, default_car_config=sheets_config, var_1=sweep_var_1
 )
@@ -595,11 +596,13 @@ mass_results = mass_sweep.sweep()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mass_results.plot(
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = mass_results.plot(
     x_label=&quot;Mass (kg)&quot;,
     y_label=&quot;Total Points&quot;,
     title=&quot;Mass Sweep - Total Points&quot;,
 )
+fig.write_html(&quot;mass_sweep_total_points.html&quot;)
+fig.show()
 </pre></div>
 </div>
 </div>
@@ -667,9 +670,11 @@ print(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>aero_results.plot_contour(
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = aero_results.plot_contour(
     x_label=&quot;CL&quot;, y_label=&quot;CD&quot;, z_label=&quot;Total Points&quot;, title=&quot;CL vs CD Sweep&quot;
 )
+fig.write_html(&quot;aero_sweep_contour.html&quot;)
+fig.show()
 </pre></div>
 </div>
 </div>
@@ -689,13 +694,15 @@ aero_results.grid_plot(plot_type=PlotType.CONTOUR)
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting import SceneConfig
 
-aero_results.plot_surface(
+fig = aero_results.plot_surface(
     x_label=&quot;CL&quot;,
     y_label=&quot;CD&quot;,
     z_label=&quot;Total Points&quot;,
     title=&quot;CL vs CD Sweep&quot;,
     scene_config=SceneConfig(default_view_angle=120),
 )
+fig.write_html(&quot;aero_sweep_surface.html&quot;)
+fig.show()
 </pre></div>
 </div>
 </div>
@@ -737,10 +744,12 @@ arr_sweep_results = arr_sweep.sweep(verbose=True)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>arr_sweep_results.plot(
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = arr_sweep_results.plot(
     y_label=&quot;Total Points&quot;,
     title=&quot;Array Sweep - Total Points&quot;,
 )
+fig.write_html(&quot;array_sweep_total_points.html&quot;)
+fig.show()
 </pre></div>
 </div>
 </div>
