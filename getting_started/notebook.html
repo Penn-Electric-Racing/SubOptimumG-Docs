@@ -426,6 +426,8 @@ import yaml
 
 with open(&quot;../parameters/car.yaml&quot;, &quot;r&quot;) as file:
     car_config = yaml.safe_load(file)
+with open(&quot;../parameters/awd_car.yaml&quot;, &quot;r&quot;) as file:
+    awd_config = yaml.safe_load(file)
 
 # Create sample competition
 with open(&quot;../parameters/competition.yaml&quot;, &quot;r&quot;) as file:
@@ -433,6 +435,9 @@ with open(&quot;../parameters/competition.yaml&quot;, &quot;r&quot;) as file:
 
 michigan2023_revX = Competition.from_config(
     comp_config=comp_config, car_config=car_config
+)
+michigan2023_awd = Competition.from_config(
+    comp_config=comp_config, car_config=awd_config
 )
 
 # We can also optionally load parameters from published Google Sheets
@@ -452,8 +457,10 @@ michigan2023_revX_alt = suboptimumg.sheet_to_yaml.load_competition_from_gdrive(
 
 # Run sample competition
 comp_results = michigan2023_revX.run(extract_internal_data=True)
+awd_results = michigan2023_awd.run(extract_internal_data=True)
 
 pretty_print_results(comp_results)
+pretty_print_results(awd_results)
 </pre></div>
 </div>
 </div>
@@ -462,14 +469,25 @@ pretty_print_results(comp_results)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>endu_res = comp_results.endurance
+endu_awd = awd_results.endurance
+autoX_res = comp_results.autoX
+autoX_awd = awd_results.autoX
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting.internal_data_plots import plot_per_seed, Axis
 
-endu_res = comp_results.endurance
+# endu_res = comp_results.endurance
 
 plot_per_seed(
     results=endu_res.lapsim_results,
     x_axis=Axis.DISTANCE,
-    include_indices=[1],
+    include_indices=range(4),
     include_power=True,
 )
 </pre></div>
@@ -490,6 +508,21 @@ plot_event_traces(
 </pre></div>
 </div>
 </div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting.internal_data_plots import plot_event_traces, Metric
+
+plot_event_traces(
+    # results=[endu_res.lapsim_results, endu_awd.lapsim_results],
+    results=[autoX_res.lapsim_results, autoX_awd.lapsim_results],
+    x_axis=Axis.DISTANCE,
+    metrics=[Metric.VELOCITY, Metric.ACCEL, Metric.POWER],
+)
+</pre></div>
+</div>
+</div>
 <p>For a more compact but comprehensive view, we can plot these traces across all events in a competition.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -498,7 +531,8 @@ plot_event_traces(
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting.internal_data_plots import plot_competition_traces
 
 plot_competition_traces(
-    competitions=comp_results,
+    # competitions=comp_results,
+    competitions=[comp_results, awd_results],
     x_axis=Axis.DISTANCE,
 )
 </pre></div>
