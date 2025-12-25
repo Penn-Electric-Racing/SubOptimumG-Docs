@@ -420,28 +420,24 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import suboptimumg
-from suboptimumg.compsim import Competition
-import yaml
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.yaml import load_competition_from_yaml
+from suboptimumg.gdrive import load_competition_from_gdrive
 
-with open(&quot;../parameters/car.yaml&quot;, &quot;r&quot;) as file:
-    car_config = yaml.safe_load(file)
-with open(&quot;../parameters/awd_car.yaml&quot;, &quot;r&quot;) as file:
-    awd_config = yaml.safe_load(file)
-
-# Create sample competition
-with open(&quot;../parameters/competition.yaml&quot;, &quot;r&quot;) as file:
-    comp_config = yaml.safe_load(file)
-
-michigan2023_revX = Competition.from_config(
-    comp_config=comp_config, car_config=car_config
+# Create sample competitions
+michigan2023_revX = load_competition_from_yaml(
+    car_yaml_path=&quot;../parameters/car.yaml&quot;,
+    comp_yaml_path=&quot;../parameters/competition.yaml&quot;,
 )
-michigan2023_awd = Competition.from_config(
-    comp_config=comp_config, car_config=awd_config
+michigan2023_awd = load_competition_from_yaml(
+    car_yaml_path=&quot;../parameters/awd_car.yaml&quot;,
+    comp_yaml_path=&quot;../parameters/competition.yaml&quot;,
 )
+
+revx_comp_data = michigan2023_revX.to_data()
+awd_comp_data = michigan2023_awd.to_data()
 
 # We can also optionally load parameters from published Google Sheets
-michigan2023_revX_alt = suboptimumg.sheet_to_yaml.load_competition_from_gdrive(
+michigan2023_revX_alt = load_competition_from_gdrive(
     car_config_url=&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vQRPeSToFhhcMYo4J12FvPuIoCv0xAVCvcOlb-SlRxRleQQJNwq7Jiw1H0Hwr6oYOFBcCD_422CosnJ/pub?output=csv&quot;,
     comp_config_url=&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vSPaKIHa64Buiqw_2yk4P3iP3PlsNjuE-GjYSHQDenn6dFYG_EelNSg7oqwH5mEvXzSNfB7j1p42H12/pub?output=csv&quot;,
 )
@@ -619,9 +615,7 @@ sweep_var_1 = SweepParamConfig(
     max=300,
     steps=50,
 )
-mass_sweep = create_sweeper(
-    comp_config=comp_config, default_car_config=car_config, var_1=sweep_var_1
-)
+mass_sweep = create_sweeper(comp_data=revx_comp_data, var_1=sweep_var_1)
 mass_results = mass_sweep.sweep()
 </pre></div>
 </div>
@@ -675,8 +669,7 @@ sweep_var_2 = SweepParamConfig(
 )
 
 aero_sweep = create_sweeper(
-    comp_config=comp_config,
-    default_car_config=car_config,
+    comp_data=revx_comp_data,
     var_1=sweep_var_1,
     var_2=sweep_var_2,
 )
@@ -768,9 +761,7 @@ arr_sweep_params = [
     &quot;aero.cop&quot;,
     &quot;pwrtn.ratio&quot;,
 ]
-arr_sweep = ArraySweeper(
-    comp_config=comp_config, default_car_config=car_config, var_list=arr_sweep_params
-)
+arr_sweep = ArraySweeper(comp_data=revx_comp_data, var_list=arr_sweep_params)
 arr_sweep_results = arr_sweep.sweep(verbose=True)
 </pre></div>
 </div>
