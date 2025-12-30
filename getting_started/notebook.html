@@ -712,7 +712,10 @@ fig.show()
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting import PlotType
 
-aero_results.grid_plot(plot_type=PlotType.CONTOUR)
+aero_results.grid_plot(
+    # show_event_times=True,
+    plot_type=PlotType.CONTOUR,
+)
 </pre></div>
 </div>
 </div>
