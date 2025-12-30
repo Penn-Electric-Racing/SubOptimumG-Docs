@@ -317,7 +317,10 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.compsim.competition</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Full FSAE competition with scoring logic.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -325,7 +328,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..track</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">Car</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.lapsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">lapsim</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.lap</span><span class="w"> </span><span class="kn">import</span> <span class="n">lapsim</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>suboptimumg.compsim.lapsim &#8212; SubOptimumG</title>
+    <title>suboptimumg.compsim.lap &#8212; SubOptimumG</title>
   
   
   
@@ -48,7 +48,7 @@
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.compsim.lapsim';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.compsim.lap';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="suboptimumg.compsim.models" href="suboptimumg.compsim.models.html" />
@@ -276,7 +276,7 @@
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.compsim.html">suboptimumg.compsim</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.competition.html">suboptimumg.compsim.competition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.competition_factory.html">suboptimumg.compsim.competition_factory</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">suboptimumg.compsim.lapsim</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">suboptimumg.compsim.lap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.models.html">suboptimumg.compsim.models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.utils.html">suboptimumg.compsim.utils</a></li>
 </ul>
@@ -403,7 +403,7 @@
     
     <li class="breadcrumb-item"><a href="suboptimumg.compsim.html" class="nav-link">suboptimumg.compsim</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.compsim.lapsim</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.compsim.lap</span></li>
   </ul>
 </nav>
 </div>
@@ -420,11 +420,12 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="suboptimumg-compsim-lapsim">
-<h1>suboptimumg.compsim.lapsim<a class="headerlink" href="#suboptimumg-compsim-lapsim" title="Link to this heading">#</a></h1>
+  <section id="module-suboptimumg.compsim.lap">
+<span id="suboptimumg-compsim-lap"></span><h1>suboptimumg.compsim.lap<a class="headerlink" href="#module-suboptimumg.compsim.lap" title="Link to this heading">#</a></h1>
+<p>Core lap simulation functions.</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="suboptimumg.compsim.lapsim">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.compsim.</span></span><span class="sig-name descname"><span class="pre">lapsim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mycar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multilap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_velocity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_coast</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extract_internal_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/lapsim.html#lapsim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.lapsim" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.compsim.lap.lapsim">
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.compsim.lap.</span></span><span class="sig-name descname"><span class="pre">lapsim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mycar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multilap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_velocity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_coast</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extract_internal_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/lap.html#lapsim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.lap.lapsim" title="Link to this definition">#</a></dt>
 <dd><p>Simulates a lap (TODO: or multiple laps) around a given track with a given car.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -501,7 +502,7 @@ of all the seeds. Acceleration, power, and force profiles correspond to the velo
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.compsim.lapsim"><code class="docutils literal notranslate"><span class="pre">lapsim()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.compsim.lap.lapsim"><code class="docutils literal notranslate"><span class="pre">lapsim()</span></code></a></li>
 </ul>
   </nav></div>
 
@@ -509,7 +510,7 @@ of all the seeds. Acceleration, power, and force profiles correspond to the velo
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/_autosummary/suboptimumg.compsim.lapsim.rst.txt"
+      <li><a href="../_sources/_autosummary/suboptimumg.compsim.lap.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>

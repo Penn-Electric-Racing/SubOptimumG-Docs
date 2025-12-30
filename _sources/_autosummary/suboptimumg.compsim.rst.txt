@@ -15,6 +15,6 @@ suboptimumg.compsim
 
    competition
    competition_factory
-   lapsim
+   lap
    models
    utils

@@ -1,6 +1,0 @@
-suboptimumg.compsim.lapsim
-==========================
-
-.. currentmodule:: suboptimumg.compsim
-
-.. autofunction:: lapsim

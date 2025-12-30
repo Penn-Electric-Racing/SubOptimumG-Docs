@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>suboptimumg.compsim.lapsim &#8212; SubOptimumG</title>
+    <title>suboptimumg.compsim.lap &#8212; SubOptimumG</title>
   
   
   
@@ -47,7 +47,7 @@
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/compsim/lapsim';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/compsim/lap';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -299,7 +299,7 @@
     
     <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.compsim.lapsim</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.compsim.lap</span></li>
   </ul>
 </nav>
 </div>
@@ -316,8 +316,12 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <h1>Source code for suboptimumg.compsim.lapsim</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+  <h1>Source code for suboptimumg.compsim.lap</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Core lap simulation functions.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -446,7 +450,7 @@
 
 
 <div class="viewcode-block" id="lapsim">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.lapsim.html#suboptimumg.compsim.lapsim">[docs]</a>
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.lap.html#suboptimumg.compsim.lap.lapsim">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">lapsim</span><span class="p">(</span>
     <span class="n">mycar</span><span class="p">:</span> <span class="n">Car</span><span class="p">,</span>
     <span class="n">track</span><span class="p">:</span> <span class="n">Track</span><span class="p">,</span>
