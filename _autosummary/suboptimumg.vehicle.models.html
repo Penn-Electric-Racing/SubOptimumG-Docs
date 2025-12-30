@@ -1,0 +1,1881 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>suboptimumg.vehicle.models &#8212; SubOptimumG</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.vehicle.models';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="suboptimumg.vehicle.powertrain" href="suboptimumg.vehicle.powertrain.html" />
+    <link rel="prev" title="suboptimumg.vehicle.driver_interface.driver_interface" href="suboptimumg.vehicle.driver_interface.driver_interface.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SubOptimumG</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="suboptimumg.html">suboptimumg</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.compsim.html">suboptimumg.compsim</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.competition.html">suboptimumg.compsim.competition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.competition_factory.html">suboptimumg.compsim.competition_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.lapsim.html">suboptimumg.compsim.lapsim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.models.html">suboptimumg.compsim.models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.utils.html">suboptimumg.compsim.utils</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="suboptimumg.constants.html">suboptimumg.constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="suboptimumg.gdrive.html">suboptimumg.gdrive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="suboptimumg.models.html">suboptimumg.models</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.plotting.html">suboptimumg.plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bar_chart.html">suboptimumg.plotting.bar_chart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.color_themes.html">suboptimumg.plotting.color_themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.generic_plot.html">suboptimumg.plotting.generic_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot.html">suboptimumg.plotting.grid_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plots.html">suboptimumg.plotting.overlay_plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plotting_constants.html">suboptimumg.plotting.plotting_constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.stem_plot.html">suboptimumg.plotting.stem_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.types.html">suboptimumg.plotting.types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.utils.html">suboptimumg.plotting.utils</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.sweep.html">suboptimumg.sweep</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.array_sweep_results.html">suboptimumg.sweep.array_sweep_results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.array_sweeper.html">suboptimumg.sweep.array_sweeper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.constants.html">suboptimumg.sweep.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.models.html">suboptimumg.sweep.models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep.html">suboptimumg.sweep.motor_sweep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html">suboptimumg.sweep.motor_sweep_results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_1var.html">suboptimumg.sweep.sweep_results_1var</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_2var.html">suboptimumg.sweep.sweep_results_2var</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_1d.html">suboptimumg.sweep.sweeper_1d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_2d.html">suboptimumg.sweep.sweeper_2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_factory.html">suboptimumg.sweep.sweeper_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.types.html">suboptimumg.sweep.types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.utils.html">suboptimumg.sweep.utils</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.track.html">suboptimumg.track</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.gps.html">suboptimumg.track.gps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.models.html">suboptimumg.track.models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track.html">suboptimumg.track.track</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track_factory.html">suboptimumg.track.track_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.utils.html">suboptimumg.track.utils</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.vehicle.html">suboptimumg.vehicle</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.vehicle.accumulator.html">suboptimumg.vehicle.accumulator</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.accumulator.accumulator.html">suboptimumg.vehicle.accumulator.accumulator</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.vehicle.aerodynamics.html">suboptimumg.vehicle.aerodynamics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.aerodynamics.aerodynamics.html">suboptimumg.vehicle.aerodynamics.aerodynamics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.vehicle.chassis.html">suboptimumg.vehicle.chassis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.chassis.chassis.html">suboptimumg.vehicle.chassis.chassis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.vehicle.driver_interface.html">suboptimumg.vehicle.driver_interface</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.driver_interface.driver_interface.html">suboptimumg.vehicle.driver_interface.driver_interface</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">suboptimumg.vehicle.models</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.vehicle.powertrain.html">suboptimumg.vehicle.powertrain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.powertrain.powertrain.html">suboptimumg.vehicle.powertrain.powertrain</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.vehicle.suspension.html">suboptimumg.vehicle.suspension</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.suspension.suspension.html">suboptimumg.vehicle.suspension.suspension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.suspension.tire.html">suboptimumg.vehicle.suspension.tire</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.vehicle.vehicle.html">suboptimumg.vehicle.vehicle</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="suboptimumg.yaml.html">suboptimumg.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api/index.html" class="nav-link">Code Documentation</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="suboptimumg.html" class="nav-link">suboptimumg</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="suboptimumg.vehicle.html" class="nav-link">suboptimumg.vehicle</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.vehicle.models</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-suboptimumg.vehicle.models">
+<span id="suboptimumg-vehicle-models"></span><h1>suboptimumg.vehicle.models<a class="headerlink" href="#module-suboptimumg.vehicle.models" title="Link to this heading">#</a></h1>
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.AccumulatorModel">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.models.</span></span><span class="sig-name descname"><span class="pre">AccumulatorModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#AccumulatorModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.AccumulatorModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Config<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>validate_assignment</strong>: <em>bool = True</em></p></li>
+</ul>
+</dd>
+<dt class="field-even">Fields<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AccumulatorModel.pack_weight" title="suboptimumg.vehicle.models.AccumulatorModel.pack_weight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pack_weight</span> <span class="pre">(float)</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.AccumulatorModel.pack_weight">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pack_weight</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.AccumulatorModel.pack_weight" title="Link to this definition">#</a></dt>
+<dd><p>Battery pack weight (kg)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.AeroModel">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.models.</span></span><span class="sig-name descname"><span class="pre">AeroModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#AeroModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.AeroModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Config<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>validate_assignment</strong>: <em>bool = True</em></p></li>
+</ul>
+</dd>
+<dt class="field-even">Fields<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.cd" title="suboptimumg.vehicle.models.AeroModel.cd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cd</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.cl" title="suboptimumg.vehicle.models.AeroModel.cl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cl</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.cop" title="suboptimumg.vehicle.models.AeroModel.cop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cop</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.drs" title="suboptimumg.vehicle.models.AeroModel.drs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drs</span> <span class="pre">(suboptimumg.vehicle.models.DRSModel</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.front_area" title="suboptimumg.vehicle.models.AeroModel.front_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">front_area</span> <span class="pre">(float)</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Validators<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.validate_cd_plausible" title="suboptimumg.vehicle.models.AeroModel.validate_cd_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_cd_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.cd" title="suboptimumg.vehicle.models.AeroModel.cd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cd</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.validate_cl_plausible" title="suboptimumg.vehicle.models.AeroModel.validate_cl_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_cl_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.cl" title="suboptimumg.vehicle.models.AeroModel.cl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cl</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.validate_cop_plausible" title="suboptimumg.vehicle.models.AeroModel.validate_cop_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_cop_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.cop" title="suboptimumg.vehicle.models.AeroModel.cop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cop</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.validate_front_area_plausible" title="suboptimumg.vehicle.models.AeroModel.validate_front_area_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_front_area_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.front_area" title="suboptimumg.vehicle.models.AeroModel.front_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">front_area</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.AeroModel.cd">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cd</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.AeroModel.cd" title="Link to this definition">#</a></dt>
+<dd><p>Drag coefficient (unitless)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ge</strong> = 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.validate_cd_plausible" title="suboptimumg.vehicle.models.AeroModel.validate_cd_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_cd_plausible</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.AeroModel.cl">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cl</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.AeroModel.cl" title="Link to this definition">#</a></dt>
+<dd><p>Lift coefficient (unitless)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ge</strong> = 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.validate_cl_plausible" title="suboptimumg.vehicle.models.AeroModel.validate_cl_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_cl_plausible</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.AeroModel.front_area">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">front_area</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.AeroModel.front_area" title="Link to this definition">#</a></dt>
+<dd><p>Frontal area (m²)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.validate_front_area_plausible" title="suboptimumg.vehicle.models.AeroModel.validate_front_area_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_front_area_plausible</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.AeroModel.cop">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cop</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.AeroModel.cop" title="Link to this definition">#</a></dt>
+<dd><p>Center of pressure (fraction toward front, 0-1)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+<li><p><strong>lt</strong> = 1.0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.validate_cop_plausible" title="suboptimumg.vehicle.models.AeroModel.validate_cop_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_cop_plausible</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.AeroModel.drs">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">drs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#suboptimumg.vehicle.models.DRSModel" title="suboptimumg.vehicle.models.DRSModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">DRSModel</span></code></a> <span class="pre">|</span> <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.AeroModel.drs" title="Link to this definition">#</a></dt>
+<dd><p>DRS configuration</p>
+</dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.AeroModel.validate_cd_plausible">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_cd_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.cd" title="suboptimumg.vehicle.models.AeroModel.cd"><em class="xref py py-obj"><span class="pre">cd</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#AeroModel.validate_cd_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.AeroModel.validate_cd_plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.AeroModel.validate_cl_plausible">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_cl_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.cl" title="suboptimumg.vehicle.models.AeroModel.cl"><em class="xref py py-obj"><span class="pre">cl</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#AeroModel.validate_cl_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.AeroModel.validate_cl_plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.AeroModel.validate_front_area_plausible">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_front_area_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.front_area" title="suboptimumg.vehicle.models.AeroModel.front_area"><em class="xref py py-obj"><span class="pre">front_area</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#AeroModel.validate_front_area_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.AeroModel.validate_front_area_plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.AeroModel.validate_cop_plausible">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_cop_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel.cop" title="suboptimumg.vehicle.models.AeroModel.cop"><em class="xref py py-obj"><span class="pre">cop</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#AeroModel.validate_cop_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.AeroModel.validate_cop_plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.ChassisModel">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.models.</span></span><span class="sig-name descname"><span class="pre">ChassisModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#ChassisModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.ChassisModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.ComplexSuspensionModel">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.models.</span></span><span class="sig-name descname"><span class="pre">ComplexSuspensionModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#ComplexSuspensionModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.ComplexSuspensionModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Config<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>validate_assignment</strong>: <em>bool = True</em></p></li>
+</ul>
+</dd>
+<dt class="field-even">Fields<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.ComplexSuspensionModel.front_roll_center_height" title="suboptimumg.vehicle.models.ComplexSuspensionModel.front_roll_center_height"><code class="xref py py-obj docutils literal notranslate"><span class="pre">front_roll_center_height</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.ComplexSuspensionModel.front_roll_stiffness_k" title="suboptimumg.vehicle.models.ComplexSuspensionModel.front_roll_stiffness_k"><code class="xref py py-obj docutils literal notranslate"><span class="pre">front_roll_stiffness_k</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.ComplexSuspensionModel.rear_roll_center_height" title="suboptimumg.vehicle.models.ComplexSuspensionModel.rear_roll_center_height"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rear_roll_center_height</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.ComplexSuspensionModel.rear_roll_stiffness_k" title="suboptimumg.vehicle.models.ComplexSuspensionModel.rear_roll_stiffness_k"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rear_roll_stiffness_k</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.ComplexSuspensionModel.type" title="suboptimumg.vehicle.models.ComplexSuspensionModel.type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span> <span class="pre">(Literal['Complex'])</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.ComplexSuspensionModel.type">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code><span class="pre">[</span><code class="docutils literal notranslate"><span class="pre">'Complex'</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Complex'</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.ComplexSuspensionModel.type" title="Link to this definition">#</a></dt>
+<dd><p>Suspension type</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.ComplexSuspensionModel.front_roll_center_height">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">front_roll_center_height</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.ComplexSuspensionModel.front_roll_center_height" title="Link to this definition">#</a></dt>
+<dd><p>Front roll center height (m)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.ComplexSuspensionModel.rear_roll_center_height">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rear_roll_center_height</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.ComplexSuspensionModel.rear_roll_center_height" title="Link to this definition">#</a></dt>
+<dd><p>Rear roll center height (m)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.ComplexSuspensionModel.front_roll_stiffness_k">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">front_roll_stiffness_k</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.ComplexSuspensionModel.front_roll_stiffness_k" title="Link to this definition">#</a></dt>
+<dd><p>Front roll stiffness (Nm/rad)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.ComplexSuspensionModel.rear_roll_stiffness_k">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rear_roll_stiffness_k</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.ComplexSuspensionModel.rear_roll_stiffness_k" title="Link to this definition">#</a></dt>
+<dd><p>Rear roll stiffness (Nm/rad)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.DRSModel">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.models.</span></span><span class="sig-name descname"><span class="pre">DRSModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#DRSModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.DRSModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Config<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>validate_assignment</strong>: <em>bool = True</em></p></li>
+</ul>
+</dd>
+<dt class="field-even">Fields<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.DRSModel.drs_accel_thresh" title="suboptimumg.vehicle.models.DRSModel.drs_accel_thresh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drs_accel_thresh</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.DRSModel.drs_cd" title="suboptimumg.vehicle.models.DRSModel.drs_cd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drs_cd</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.DRSModel.drs_cl" title="suboptimumg.vehicle.models.DRSModel.drs_cl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drs_cl</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.DRSModel.drs_cop" title="suboptimumg.vehicle.models.DRSModel.drs_cop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drs_cop</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.DRSModel.drs_front_area" title="suboptimumg.vehicle.models.DRSModel.drs_front_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drs_front_area</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.DRSModel.drs_present" title="suboptimumg.vehicle.models.DRSModel.drs_present"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drs_present</span> <span class="pre">(bool)</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.DRSModel.drs_cd">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">drs_cd</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.DRSModel.drs_cd" title="Link to this definition">#</a></dt>
+<dd><p>DRS drag coefficient</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.DRSModel.drs_cl">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">drs_cl</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.DRSModel.drs_cl" title="Link to this definition">#</a></dt>
+<dd><p>DRS lift coefficient</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.DRSModel.drs_front_area">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">drs_front_area</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.DRSModel.drs_front_area" title="Link to this definition">#</a></dt>
+<dd><p>DRS frontal area (m²)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.DRSModel.drs_cop">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">drs_cop</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.DRSModel.drs_cop" title="Link to this definition">#</a></dt>
+<dd><p>DRS center of pressure (fraction toward front)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+<li><p><strong>lt</strong> = 1.0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.DRSModel.drs_accel_thresh">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">drs_accel_thresh</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.DRSModel.drs_accel_thresh" title="Link to this definition">#</a></dt>
+<dd><p>Acceleration threshold for DRS activation (m/s²)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ge</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.DRSModel.drs_present">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">drs_present</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.DRSModel.drs_present" title="Link to this definition">#</a></dt>
+<dd><p>Whether DRS is equipped</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.DriveSetup">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.models.</span></span><span class="sig-name descname"><span class="pre">DriveSetup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#DriveSetup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.DriveSetup" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.DriveSetup.FOUR_WHEEL_DRIVE">
+<span class="sig-name descname"><span class="pre">FOUR_WHEEL_DRIVE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FOUR_WHEEL_DRIVE'</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.DriveSetup.FOUR_WHEEL_DRIVE" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.DriveSetup.REAR_WHEEL_DRIVE">
+<span class="sig-name descname"><span class="pre">REAR_WHEEL_DRIVE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'REAR_WHEEL_DRIVE'</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.DriveSetup.REAR_WHEEL_DRIVE" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.DriverInterfaceModel">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.models.</span></span><span class="sig-name descname"><span class="pre">DriverInterfaceModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#DriverInterfaceModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.DriverInterfaceModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Config<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>validate_assignment</strong>: <em>bool = True</em></p></li>
+</ul>
+</dd>
+<dt class="field-even">Fields<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.DriverInterfaceModel.brake_bias" title="suboptimumg.vehicle.models.DriverInterfaceModel.brake_bias"><code class="xref py py-obj docutils literal notranslate"><span class="pre">brake_bias</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.DriverInterfaceModel.seat_angle" title="suboptimumg.vehicle.models.DriverInterfaceModel.seat_angle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seat_angle</span> <span class="pre">(float)</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Validators<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.DriverInterfaceModel.validate_brake_bias_plausible" title="suboptimumg.vehicle.models.DriverInterfaceModel.validate_brake_bias_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_brake_bias_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.DriverInterfaceModel.brake_bias" title="suboptimumg.vehicle.models.DriverInterfaceModel.brake_bias"><code class="xref py py-obj docutils literal notranslate"><span class="pre">brake_bias</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.DriverInterfaceModel.brake_bias">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">brake_bias</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.DriverInterfaceModel.brake_bias" title="Link to this definition">#</a></dt>
+<dd><p>Front brake bias (0-1, where 1.0 = all front)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+<li><p><strong>lt</strong> = 1.0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.DriverInterfaceModel.validate_brake_bias_plausible" title="suboptimumg.vehicle.models.DriverInterfaceModel.validate_brake_bias_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_brake_bias_plausible</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.DriverInterfaceModel.seat_angle">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">seat_angle</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.DriverInterfaceModel.seat_angle" title="Link to this definition">#</a></dt>
+<dd><p>Driver seat angle (degrees)</p>
+</dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.DriverInterfaceModel.validate_brake_bias_plausible">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_brake_bias_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.DriverInterfaceModel.brake_bias" title="suboptimumg.vehicle.models.DriverInterfaceModel.brake_bias"><em class="xref py py-obj"><span class="pre">brake_bias</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#DriverInterfaceModel.validate_brake_bias_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.DriverInterfaceModel.validate_brake_bias_plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.models.</span></span><span class="sig-name descname"><span class="pre">MotorModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#MotorModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Config<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>validate_assignment</strong>: <em>bool = True</em></p></li>
+</ul>
+</dd>
+<dt class="field-even">Fields<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.chain_efficiency" title="suboptimumg.vehicle.models.MotorModel.chain_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chain_efficiency</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.diff_efficiency" title="suboptimumg.vehicle.models.MotorModel.diff_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diff_efficiency</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.efficiency_method" title="suboptimumg.vehicle.models.MotorModel.efficiency_method"><code class="xref py py-obj docutils literal notranslate"><span class="pre">efficiency_method</span> <span class="pre">(Literal['sys',</span> <span class="pre">'indiv'])</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm" title="suboptimumg.vehicle.models.MotorModel.fw_rpm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_rpm</span> <span class="pre">(int)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_torque" title="suboptimumg.vehicle.models.MotorModel.fw_torque"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_torque</span> <span class="pre">(int)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.ideal_gear_ratio" title="suboptimumg.vehicle.models.MotorModel.ideal_gear_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ideal_gear_ratio</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.mass" title="suboptimumg.vehicle.models.MotorModel.mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.max_rpm" title="suboptimumg.vehicle.models.MotorModel.max_rpm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_rpm</span> <span class="pre">(int)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.max_torque" title="suboptimumg.vehicle.models.MotorModel.max_torque"><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_torque</span> <span class="pre">(int)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.moc_efficiency" title="suboptimumg.vehicle.models.MotorModel.moc_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moc_efficiency</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.motor_efficiency" title="suboptimumg.vehicle.models.MotorModel.motor_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">motor_efficiency</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.name" title="suboptimumg.vehicle.models.MotorModel.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span> <span class="pre">(str)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.pow_lim" title="suboptimumg.vehicle.models.MotorModel.pow_lim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pow_lim</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.system_efficiency" title="suboptimumg.vehicle.models.MotorModel.system_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_efficiency</span> <span class="pre">(float)</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Validators<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm_less_than_max_rpm" title="suboptimumg.vehicle.models.MotorModel.fw_rpm_less_than_max_rpm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_rpm_less_than_max_rpm</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm" title="suboptimumg.vehicle.models.MotorModel.fw_rpm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_rpm</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_torque_less_than_max_torque" title="suboptimumg.vehicle.models.MotorModel.fw_torque_less_than_max_torque"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_torque_less_than_max_torque</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_torque" title="suboptimumg.vehicle.models.MotorModel.fw_torque"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_torque</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_chain_efficiency" title="suboptimumg.vehicle.models.MotorModel.validate_chain_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_chain_efficiency</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.chain_efficiency" title="suboptimumg.vehicle.models.MotorModel.chain_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chain_efficiency</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_fw_rpm_plausible" title="suboptimumg.vehicle.models.MotorModel.validate_fw_rpm_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_fw_rpm_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm" title="suboptimumg.vehicle.models.MotorModel.fw_rpm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_rpm</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_fw_torque_plausible" title="suboptimumg.vehicle.models.MotorModel.validate_fw_torque_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_fw_torque_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_torque" title="suboptimumg.vehicle.models.MotorModel.fw_torque"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_torque</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_max_rpm_plausible" title="suboptimumg.vehicle.models.MotorModel.validate_max_rpm_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_max_rpm_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.max_rpm" title="suboptimumg.vehicle.models.MotorModel.max_rpm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_rpm</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_max_torque_plausible" title="suboptimumg.vehicle.models.MotorModel.validate_max_torque_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_max_torque_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.max_torque" title="suboptimumg.vehicle.models.MotorModel.max_torque"><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_torque</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_moc_efficiency" title="suboptimumg.vehicle.models.MotorModel.validate_moc_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_moc_efficiency</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.moc_efficiency" title="suboptimumg.vehicle.models.MotorModel.moc_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moc_efficiency</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_motor_efficiency" title="suboptimumg.vehicle.models.MotorModel.validate_motor_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_motor_efficiency</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.motor_efficiency" title="suboptimumg.vehicle.models.MotorModel.motor_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">motor_efficiency</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_power_limit" title="suboptimumg.vehicle.models.MotorModel.validate_power_limit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_power_limit</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.pow_lim" title="suboptimumg.vehicle.models.MotorModel.pow_lim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pow_lim</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.name">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.name" title="Link to this definition">#</a></dt>
+<dd><p>Product name</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.max_rpm">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_rpm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.max_rpm" title="Link to this definition">#</a></dt>
+<dd><p>Max RPM of motor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_max_rpm_plausible" title="suboptimumg.vehicle.models.MotorModel.validate_max_rpm_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_max_rpm_plausible</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.fw_rpm">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fw_rpm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm" title="Link to this definition">#</a></dt>
+<dd><p>Field weakening RPM inflection point</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm_less_than_max_rpm" title="suboptimumg.vehicle.models.MotorModel.fw_rpm_less_than_max_rpm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_rpm_less_than_max_rpm</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_fw_rpm_plausible" title="suboptimumg.vehicle.models.MotorModel.validate_fw_rpm_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_fw_rpm_plausible</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.max_torque">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_torque</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.max_torque" title="Link to this definition">#</a></dt>
+<dd><p>Max torque of motor (Nm)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_max_torque_plausible" title="suboptimumg.vehicle.models.MotorModel.validate_max_torque_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_max_torque_plausible</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.fw_torque">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fw_torque</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.fw_torque" title="Link to this definition">#</a></dt>
+<dd><p>Field weakening torque inflection point (Nm)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_torque_less_than_max_torque" title="suboptimumg.vehicle.models.MotorModel.fw_torque_less_than_max_torque"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_torque_less_than_max_torque</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_fw_torque_plausible" title="suboptimumg.vehicle.models.MotorModel.validate_fw_torque_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_fw_torque_plausible</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.pow_lim">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pow_lim</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.pow_lim" title="Link to this definition">#</a></dt>
+<dd><p>Power limit (W)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_power_limit" title="suboptimumg.vehicle.models.MotorModel.validate_power_limit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_power_limit</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.efficiency_method">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">efficiency_method</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code><span class="pre">[</span><code class="docutils literal notranslate"><span class="pre">'sys'</span></code><span class="pre">,</span> <code class="docutils literal notranslate"><span class="pre">'indiv'</span></code><span class="pre">]</span></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.efficiency_method" title="Link to this definition">#</a></dt>
+<dd><p>Efficiency calculation method: ‘sys’ or ‘indiv’</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.moc_efficiency">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">moc_efficiency</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.moc_efficiency" title="Link to this definition">#</a></dt>
+<dd><p>Motor controller efficiency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+<li><p><strong>le</strong> = 1.0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_moc_efficiency" title="suboptimumg.vehicle.models.MotorModel.validate_moc_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_moc_efficiency</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.motor_efficiency">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">motor_efficiency</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.motor_efficiency" title="Link to this definition">#</a></dt>
+<dd><p>Motor efficiency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+<li><p><strong>le</strong> = 1.0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_motor_efficiency" title="suboptimumg.vehicle.models.MotorModel.validate_motor_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_motor_efficiency</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.chain_efficiency">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">chain_efficiency</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.chain_efficiency" title="Link to this definition">#</a></dt>
+<dd><p>Chain efficiency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+<li><p><strong>le</strong> = 1.0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_chain_efficiency" title="suboptimumg.vehicle.models.MotorModel.validate_chain_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_chain_efficiency</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.diff_efficiency">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">diff_efficiency</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.diff_efficiency" title="Link to this definition">#</a></dt>
+<dd><p>Differential efficiency (currently unused)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+<li><p><strong>le</strong> = 1.0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.system_efficiency">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">system_efficiency</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.system_efficiency" title="Link to this definition">#</a></dt>
+<dd><p>Alternative to product of individual efficiencies if efficiency_method is ‘sys’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+<li><p><strong>le</strong> = 1.0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.mass">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mass</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.mass" title="Link to this definition">#</a></dt>
+<dd><p>Motor mass (kg)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.ideal_gear_ratio">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ideal_gear_ratio</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.ideal_gear_ratio" title="Link to this definition">#</a></dt>
+<dd><p>Ideal gear ratio (currently unused)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.fw_rpm_less_than_max_rpm">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fw_rpm_less_than_max_rpm</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm" title="suboptimumg.vehicle.models.MotorModel.fw_rpm"><em class="xref py py-obj"><span class="pre">fw_rpm</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#MotorModel.fw_rpm_less_than_max_rpm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm_less_than_max_rpm" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.fw_torque_less_than_max_torque">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fw_torque_less_than_max_torque</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_torque" title="suboptimumg.vehicle.models.MotorModel.fw_torque"><em class="xref py py-obj"><span class="pre">fw_torque</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#MotorModel.fw_torque_less_than_max_torque"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.fw_torque_less_than_max_torque" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.validate_power_limit">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_power_limit</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.pow_lim" title="suboptimumg.vehicle.models.MotorModel.pow_lim"><em class="xref py py-obj"><span class="pre">pow_lim</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#MotorModel.validate_power_limit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.validate_power_limit" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.validate_moc_efficiency">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_moc_efficiency</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.moc_efficiency" title="suboptimumg.vehicle.models.MotorModel.moc_efficiency"><em class="xref py py-obj"><span class="pre">moc_efficiency</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#MotorModel.validate_moc_efficiency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.validate_moc_efficiency" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.validate_motor_efficiency">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_motor_efficiency</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.motor_efficiency" title="suboptimumg.vehicle.models.MotorModel.motor_efficiency"><em class="xref py py-obj"><span class="pre">motor_efficiency</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#MotorModel.validate_motor_efficiency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.validate_motor_efficiency" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.validate_chain_efficiency">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_chain_efficiency</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.chain_efficiency" title="suboptimumg.vehicle.models.MotorModel.chain_efficiency"><em class="xref py py-obj"><span class="pre">chain_efficiency</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#MotorModel.validate_chain_efficiency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.validate_chain_efficiency" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.validate_max_rpm_plausible">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_max_rpm_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.max_rpm" title="suboptimumg.vehicle.models.MotorModel.max_rpm"><em class="xref py py-obj"><span class="pre">max_rpm</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#MotorModel.validate_max_rpm_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.validate_max_rpm_plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.validate_fw_rpm_plausible">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_fw_rpm_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm" title="suboptimumg.vehicle.models.MotorModel.fw_rpm"><em class="xref py py-obj"><span class="pre">fw_rpm</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#MotorModel.validate_fw_rpm_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.validate_fw_rpm_plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.validate_max_torque_plausible">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_max_torque_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.max_torque" title="suboptimumg.vehicle.models.MotorModel.max_torque"><em class="xref py py-obj"><span class="pre">max_torque</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#MotorModel.validate_max_torque_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.validate_max_torque_plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.validate_fw_torque_plausible">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_fw_torque_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_torque" title="suboptimumg.vehicle.models.MotorModel.fw_torque"><em class="xref py py-obj"><span class="pre">fw_torque</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#MotorModel.validate_fw_torque_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.validate_fw_torque_plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.PowertrainModel">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.models.</span></span><span class="sig-name descname"><span class="pre">PowertrainModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#PowertrainModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.PowertrainModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Powertrain configuration including motor and transmission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Config<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>validate_assignment</strong>: <em>bool = True</em></p></li>
+</ul>
+</dd>
+<dt class="field-even">Fields<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.coast_release_offset" title="suboptimumg.vehicle.models.PowertrainModel.coast_release_offset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coast_release_offset</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.coast_trigger" title="suboptimumg.vehicle.models.PowertrainModel.coast_trigger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coast_trigger</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.max_regen" title="suboptimumg.vehicle.models.PowertrainModel.max_regen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_regen</span> <span class="pre">(int)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.motor" title="suboptimumg.vehicle.models.PowertrainModel.motor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">motor</span> <span class="pre">(suboptimumg.vehicle.models.MotorModel)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.ratio" title="suboptimumg.vehicle.models.PowertrainModel.ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ratio</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.regen_percent" title="suboptimumg.vehicle.models.PowertrainModel.regen_percent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">regen_percent</span> <span class="pre">(float)</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Validators<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.validate_ratio_plausible" title="suboptimumg.vehicle.models.PowertrainModel.validate_ratio_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_ratio_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.ratio" title="suboptimumg.vehicle.models.PowertrainModel.ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ratio</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.validate_regen_config" title="suboptimumg.vehicle.models.PowertrainModel.validate_regen_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_regen_config</span></code></a> » <code class="xref py py-obj docutils literal notranslate"><span class="pre">all</span> <span class="pre">fields</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.PowertrainModel.motor">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">motor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel" title="suboptimumg.vehicle.models.MotorModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">MotorModel</span></code></a></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.PowertrainModel.motor" title="Link to this definition">#</a></dt>
+<dd><p>Motor configuration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validated by<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.validate_regen_config" title="suboptimumg.vehicle.models.PowertrainModel.validate_regen_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_regen_config</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.PowertrainModel.ratio">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ratio</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.PowertrainModel.ratio" title="Link to this definition">#</a></dt>
+<dd><p>Gear ratio (wheel_rpm = motor_rpm / ratio)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.validate_ratio_plausible" title="suboptimumg.vehicle.models.PowertrainModel.validate_ratio_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_ratio_plausible</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.validate_regen_config" title="suboptimumg.vehicle.models.PowertrainModel.validate_regen_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_regen_config</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.PowertrainModel.regen_percent">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">regen_percent</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.PowertrainModel.regen_percent" title="Link to this definition">#</a></dt>
+<dd><p>Regenerative braking percentage (0-1)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ge</strong> = 0</p></li>
+<li><p><strong>le</strong> = 1.0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.validate_regen_config" title="suboptimumg.vehicle.models.PowertrainModel.validate_regen_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_regen_config</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.PowertrainModel.max_regen">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_regen</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.PowertrainModel.max_regen" title="Link to this definition">#</a></dt>
+<dd><p>Maximum regenerative power (W)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ge</strong> = 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.validate_regen_config" title="suboptimumg.vehicle.models.PowertrainModel.validate_regen_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_regen_config</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.PowertrainModel.coast_trigger">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coast_trigger</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.PowertrainModel.coast_trigger" title="Link to this definition">#</a></dt>
+<dd><p>Coasting trigger threshold</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validated by<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.validate_regen_config" title="suboptimumg.vehicle.models.PowertrainModel.validate_regen_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_regen_config</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.PowertrainModel.coast_release_offset">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coast_release_offset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.PowertrainModel.coast_release_offset" title="Link to this definition">#</a></dt>
+<dd><p>Coasting release offset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validated by<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.validate_regen_config" title="suboptimumg.vehicle.models.PowertrainModel.validate_regen_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_regen_config</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.PowertrainModel.validate_ratio_plausible">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_ratio_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel.ratio" title="suboptimumg.vehicle.models.PowertrainModel.ratio"><em class="xref py py-obj"><span class="pre">ratio</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#PowertrainModel.validate_ratio_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.PowertrainModel.validate_ratio_plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.PowertrainModel.validate_regen_config">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_regen_config</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><em class="xref py py-obj"><span class="pre">all</span> <span class="pre">fields</span></em><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#PowertrainModel.validate_regen_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.PowertrainModel.validate_regen_config" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.SimpleSuspensionModel">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.models.</span></span><span class="sig-name descname"><span class="pre">SimpleSuspensionModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#SimpleSuspensionModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.SimpleSuspensionModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Config<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>validate_assignment</strong>: <em>bool = True</em></p></li>
+</ul>
+</dd>
+<dt class="field-even">Fields<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.SimpleSuspensionModel.type" title="suboptimumg.vehicle.models.SimpleSuspensionModel.type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span> <span class="pre">(Literal['Simple'])</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.SimpleSuspensionModel.type">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code><span class="pre">[</span><code class="docutils literal notranslate"><span class="pre">'Simple'</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Simple'</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.SimpleSuspensionModel.type" title="Link to this definition">#</a></dt>
+<dd><p>Suspension type</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.SuspensionType">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.models.</span></span><span class="sig-name descname"><span class="pre">SuspensionType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#SuspensionType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.SuspensionType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.SuspensionType.COMPLEX">
+<span class="sig-name descname"><span class="pre">COMPLEX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Complex'</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.SuspensionType.COMPLEX" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.SuspensionType.SIMPLE">
+<span class="sig-name descname"><span class="pre">SIMPLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Simple'</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.SuspensionType.SIMPLE" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.TireModel">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.models.</span></span><span class="sig-name descname"><span class="pre">TireModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#TireModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.TireModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Config<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>validate_assignment</strong>: <em>bool = True</em></p></li>
+</ul>
+</dd>
+<dt class="field-even">Fields<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.mu_lat_zero_load" title="suboptimumg.vehicle.models.TireModel.mu_lat_zero_load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mu_lat_zero_load</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.mu_long_lat_ratio" title="suboptimumg.vehicle.models.TireModel.mu_long_lat_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mu_long_lat_ratio</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.tire_radius" title="suboptimumg.vehicle.models.TireModel.tire_radius"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tire_radius</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.weight" title="suboptimumg.vehicle.models.TireModel.weight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weight</span> <span class="pre">(float)</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Validators<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.validate_mu_lat_zero_load_plausible" title="suboptimumg.vehicle.models.TireModel.validate_mu_lat_zero_load_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_mu_lat_zero_load_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.mu_lat_zero_load" title="suboptimumg.vehicle.models.TireModel.mu_lat_zero_load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mu_lat_zero_load</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.validate_mu_long_lat_ratio_plausible" title="suboptimumg.vehicle.models.TireModel.validate_mu_long_lat_ratio_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_mu_long_lat_ratio_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.mu_long_lat_ratio" title="suboptimumg.vehicle.models.TireModel.mu_long_lat_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mu_long_lat_ratio</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.validate_tire_radius_plausible" title="suboptimumg.vehicle.models.TireModel.validate_tire_radius_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_tire_radius_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.tire_radius" title="suboptimumg.vehicle.models.TireModel.tire_radius"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tire_radius</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.validate_weight_plausible" title="suboptimumg.vehicle.models.TireModel.validate_weight_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_weight_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.weight" title="suboptimumg.vehicle.models.TireModel.weight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weight</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.TireModel.weight">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weight</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.TireModel.weight" title="Link to this definition">#</a></dt>
+<dd><p>Weight of each tire (N)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.validate_weight_plausible" title="suboptimumg.vehicle.models.TireModel.validate_weight_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_weight_plausible</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.TireModel.tire_radius">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tire_radius</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.TireModel.tire_radius" title="Link to this definition">#</a></dt>
+<dd><p>Radius of each tire (inches)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.validate_tire_radius_plausible" title="suboptimumg.vehicle.models.TireModel.validate_tire_radius_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_tire_radius_plausible</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.TireModel.mu_lat_zero_load">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mu_lat_zero_load</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.TireModel.mu_lat_zero_load" title="Link to this definition">#</a></dt>
+<dd><p>Lateral friction coefficient at zero load (unitless)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.validate_mu_lat_zero_load_plausible" title="suboptimumg.vehicle.models.TireModel.validate_mu_lat_zero_load_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_mu_lat_zero_load_plausible</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.TireModel.mu_long_lat_ratio">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mu_long_lat_ratio</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.TireModel.mu_long_lat_ratio" title="Link to this definition">#</a></dt>
+<dd><p>Ratio of longitudinal to lateral friction (unitless)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.validate_mu_long_lat_ratio_plausible" title="suboptimumg.vehicle.models.TireModel.validate_mu_long_lat_ratio_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_mu_long_lat_ratio_plausible</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.TireModel.validate_weight_plausible">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_weight_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.weight" title="suboptimumg.vehicle.models.TireModel.weight"><em class="xref py py-obj"><span class="pre">weight</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#TireModel.validate_weight_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.TireModel.validate_weight_plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.TireModel.validate_tire_radius_plausible">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_tire_radius_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.tire_radius" title="suboptimumg.vehicle.models.TireModel.tire_radius"><em class="xref py py-obj"><span class="pre">tire_radius</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#TireModel.validate_tire_radius_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.TireModel.validate_tire_radius_plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.TireModel.validate_mu_lat_zero_load_plausible">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_mu_lat_zero_load_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.mu_lat_zero_load" title="suboptimumg.vehicle.models.TireModel.mu_lat_zero_load"><em class="xref py py-obj"><span class="pre">mu_lat_zero_load</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#TireModel.validate_mu_lat_zero_load_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.TireModel.validate_mu_lat_zero_load_plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.TireModel.validate_mu_long_lat_ratio_plausible">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_mu_long_lat_ratio_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel.mu_long_lat_ratio" title="suboptimumg.vehicle.models.TireModel.mu_long_lat_ratio"><em class="xref py py-obj"><span class="pre">mu_long_lat_ratio</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#TireModel.validate_mu_long_lat_ratio_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.TireModel.validate_mu_long_lat_ratio_plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.models.</span></span><span class="sig-name descname"><span class="pre">VehicleModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#VehicleModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Config<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>validate_assignment</strong>: <em>bool = True</em></p></li>
+</ul>
+</dd>
+<dt class="field-even">Fields<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.accum" title="suboptimumg.vehicle.models.VehicleModel.accum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">accum</span> <span class="pre">(suboptimumg.vehicle.models.AccumulatorModel)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.aero" title="suboptimumg.vehicle.models.VehicleModel.aero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aero</span> <span class="pre">(suboptimumg.vehicle.models.AeroModel)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.cg_h" title="suboptimumg.vehicle.models.VehicleModel.cg_h"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cg_h</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.chass" title="suboptimumg.vehicle.models.VehicleModel.chass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chass</span> <span class="pre">(suboptimumg.vehicle.models.ChassisModel</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.dri" title="suboptimumg.vehicle.models.VehicleModel.dri"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dri</span> <span class="pre">(suboptimumg.vehicle.models.DriverInterfaceModel)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.front_track" title="suboptimumg.vehicle.models.VehicleModel.front_track"><code class="xref py py-obj docutils literal notranslate"><span class="pre">front_track</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.mass" title="suboptimumg.vehicle.models.VehicleModel.mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.pwrtn" title="suboptimumg.vehicle.models.VehicleModel.pwrtn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pwrtn</span> <span class="pre">(suboptimumg.vehicle.models.PowertrainModel)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.rear_track" title="suboptimumg.vehicle.models.VehicleModel.rear_track"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rear_track</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.rolling_coeff" title="suboptimumg.vehicle.models.VehicleModel.rolling_coeff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rolling_coeff</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.setup" title="suboptimumg.vehicle.models.VehicleModel.setup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup</span> <span class="pre">(suboptimumg.vehicle.models.DriveSetup)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.sus" title="suboptimumg.vehicle.models.VehicleModel.sus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sus</span> <span class="pre">(suboptimumg.vehicle.models.SimpleSuspensionModel</span> <span class="pre">|</span> <span class="pre">suboptimumg.vehicle.models.ComplexSuspensionModel)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.tires" title="suboptimumg.vehicle.models.VehicleModel.tires"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tires</span> <span class="pre">(suboptimumg.vehicle.models.TireModel)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.w_distr_b" title="suboptimumg.vehicle.models.VehicleModel.w_distr_b"><code class="xref py py-obj docutils literal notranslate"><span class="pre">w_distr_b</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.wb" title="suboptimumg.vehicle.models.VehicleModel.wb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wb</span> <span class="pre">(float)</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Validators<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.validate_rolling_coeff" title="suboptimumg.vehicle.models.VehicleModel.validate_rolling_coeff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_rolling_coeff</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.rolling_coeff" title="suboptimumg.vehicle.models.VehicleModel.rolling_coeff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rolling_coeff</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.mass">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mass</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.mass" title="Link to this definition">#</a></dt>
+<dd><p>Total vehicle mass (kg)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.w_distr_b">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">w_distr_b</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.w_distr_b" title="Link to this definition">#</a></dt>
+<dd><p>Rear weight distribution percentage (0-1)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+<li><p><strong>lt</strong> = 1</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.cg_h">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cg_h</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.cg_h" title="Link to this definition">#</a></dt>
+<dd><p>Center of gravity height (m)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.wb">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wb</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.wb" title="Link to this definition">#</a></dt>
+<dd><p>Wheelbase (m)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.front_track">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">front_track</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.front_track" title="Link to this definition">#</a></dt>
+<dd><p>Front track width (m)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.rear_track">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rear_track</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.rear_track" title="Link to this definition">#</a></dt>
+<dd><p>Rear track width (m)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.rolling_coeff">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rolling_coeff</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.rolling_coeff" title="Link to this definition">#</a></dt>
+<dd><p>Rolling resistance coefficient (unitless)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ge</strong> = 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Validated by<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.validate_rolling_coeff" title="suboptimumg.vehicle.models.VehicleModel.validate_rolling_coeff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_rolling_coeff</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.setup">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setup</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#suboptimumg.vehicle.models.DriveSetup" title="suboptimumg.vehicle.models.DriveSetup"><code class="xref py py-class docutils literal notranslate"><span class="pre">DriveSetup</span></code></a></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.setup" title="Link to this definition">#</a></dt>
+<dd><p>Drive configuration</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.w_distr_front">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">w_distr_front</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.w_distr_front" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.track">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">track</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.track" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.aero">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">aero</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#suboptimumg.vehicle.models.AeroModel" title="suboptimumg.vehicle.models.AeroModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">AeroModel</span></code></a></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.aero" title="Link to this definition">#</a></dt>
+<dd><p>Aerodynamics configuration</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.pwrtn">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pwrtn</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#suboptimumg.vehicle.models.PowertrainModel" title="suboptimumg.vehicle.models.PowertrainModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PowertrainModel</span></code></a></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.pwrtn" title="Link to this definition">#</a></dt>
+<dd><p>Powertrain configuration</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.accum">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accum</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#suboptimumg.vehicle.models.AccumulatorModel" title="suboptimumg.vehicle.models.AccumulatorModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccumulatorModel</span></code></a></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.accum" title="Link to this definition">#</a></dt>
+<dd><p>Accumulator configuration</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.sus">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sus</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#suboptimumg.vehicle.models.SimpleSuspensionModel" title="suboptimumg.vehicle.models.SimpleSuspensionModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleSuspensionModel</span></code></a> <span class="pre">|</span> <a class="reference internal" href="#suboptimumg.vehicle.models.ComplexSuspensionModel" title="suboptimumg.vehicle.models.ComplexSuspensionModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">ComplexSuspensionModel</span></code></a></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.sus" title="Link to this definition">#</a></dt>
+<dd><p>Suspension configuration</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.tires">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tires</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#suboptimumg.vehicle.models.TireModel" title="suboptimumg.vehicle.models.TireModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">TireModel</span></code></a></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.tires" title="Link to this definition">#</a></dt>
+<dd><p>Tire parameters</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.dri">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dri</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#suboptimumg.vehicle.models.DriverInterfaceModel" title="suboptimumg.vehicle.models.DriverInterfaceModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">DriverInterfaceModel</span></code></a></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.dri" title="Link to this definition">#</a></dt>
+<dd><p>Driver interface configuration</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.chass">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">chass</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#suboptimumg.vehicle.models.ChassisModel" title="suboptimumg.vehicle.models.ChassisModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChassisModel</span></code></a> <span class="pre">|</span> <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.chass" title="Link to this definition">#</a></dt>
+<dd><p>Chassis configuration</p>
+</dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.validate_rolling_coeff">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_rolling_coeff</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.rolling_coeff" title="suboptimumg.vehicle.models.VehicleModel.rolling_coeff"><em class="xref py py-obj"><span class="pre">rolling_coeff</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#VehicleModel.validate_rolling_coeff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.validate_rolling_coeff" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="suboptimumg.vehicle.driver_interface.driver_interface.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">suboptimumg.vehicle.driver_interface.driver_interface</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="suboptimumg.vehicle.powertrain.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">suboptimumg.vehicle.powertrain</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AccumulatorModel"><code class="docutils literal notranslate"><span class="pre">AccumulatorModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AccumulatorModel.pack_weight"><code class="docutils literal notranslate"><span class="pre">AccumulatorModel.pack_weight</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AeroModel"><code class="docutils literal notranslate"><span class="pre">AeroModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AeroModel.cd"><code class="docutils literal notranslate"><span class="pre">AeroModel.cd</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AeroModel.cl"><code class="docutils literal notranslate"><span class="pre">AeroModel.cl</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AeroModel.front_area"><code class="docutils literal notranslate"><span class="pre">AeroModel.front_area</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AeroModel.cop"><code class="docutils literal notranslate"><span class="pre">AeroModel.cop</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AeroModel.drs"><code class="docutils literal notranslate"><span class="pre">AeroModel.drs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AeroModel.validate_cd_plausible"><code class="docutils literal notranslate"><span class="pre">AeroModel.validate_cd_plausible</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AeroModel.validate_cl_plausible"><code class="docutils literal notranslate"><span class="pre">AeroModel.validate_cl_plausible</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AeroModel.validate_front_area_plausible"><code class="docutils literal notranslate"><span class="pre">AeroModel.validate_front_area_plausible</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AeroModel.validate_cop_plausible"><code class="docutils literal notranslate"><span class="pre">AeroModel.validate_cop_plausible</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.ChassisModel"><code class="docutils literal notranslate"><span class="pre">ChassisModel</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.ComplexSuspensionModel"><code class="docutils literal notranslate"><span class="pre">ComplexSuspensionModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.ComplexSuspensionModel.type"><code class="docutils literal notranslate"><span class="pre">ComplexSuspensionModel.type</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.ComplexSuspensionModel.front_roll_center_height"><code class="docutils literal notranslate"><span class="pre">ComplexSuspensionModel.front_roll_center_height</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.ComplexSuspensionModel.rear_roll_center_height"><code class="docutils literal notranslate"><span class="pre">ComplexSuspensionModel.rear_roll_center_height</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.ComplexSuspensionModel.front_roll_stiffness_k"><code class="docutils literal notranslate"><span class="pre">ComplexSuspensionModel.front_roll_stiffness_k</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.ComplexSuspensionModel.rear_roll_stiffness_k"><code class="docutils literal notranslate"><span class="pre">ComplexSuspensionModel.rear_roll_stiffness_k</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.DRSModel"><code class="docutils literal notranslate"><span class="pre">DRSModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.DRSModel.drs_cd"><code class="docutils literal notranslate"><span class="pre">DRSModel.drs_cd</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.DRSModel.drs_cl"><code class="docutils literal notranslate"><span class="pre">DRSModel.drs_cl</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.DRSModel.drs_front_area"><code class="docutils literal notranslate"><span class="pre">DRSModel.drs_front_area</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.DRSModel.drs_cop"><code class="docutils literal notranslate"><span class="pre">DRSModel.drs_cop</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.DRSModel.drs_accel_thresh"><code class="docutils literal notranslate"><span class="pre">DRSModel.drs_accel_thresh</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.DRSModel.drs_present"><code class="docutils literal notranslate"><span class="pre">DRSModel.drs_present</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.DriveSetup"><code class="docutils literal notranslate"><span class="pre">DriveSetup</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.DriveSetup.FOUR_WHEEL_DRIVE"><code class="docutils literal notranslate"><span class="pre">DriveSetup.FOUR_WHEEL_DRIVE</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.DriveSetup.REAR_WHEEL_DRIVE"><code class="docutils literal notranslate"><span class="pre">DriveSetup.REAR_WHEEL_DRIVE</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.DriverInterfaceModel"><code class="docutils literal notranslate"><span class="pre">DriverInterfaceModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.DriverInterfaceModel.brake_bias"><code class="docutils literal notranslate"><span class="pre">DriverInterfaceModel.brake_bias</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.DriverInterfaceModel.seat_angle"><code class="docutils literal notranslate"><span class="pre">DriverInterfaceModel.seat_angle</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.DriverInterfaceModel.validate_brake_bias_plausible"><code class="docutils literal notranslate"><span class="pre">DriverInterfaceModel.validate_brake_bias_plausible</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel"><code class="docutils literal notranslate"><span class="pre">MotorModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.name"><code class="docutils literal notranslate"><span class="pre">MotorModel.name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.max_rpm"><code class="docutils literal notranslate"><span class="pre">MotorModel.max_rpm</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm"><code class="docutils literal notranslate"><span class="pre">MotorModel.fw_rpm</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.max_torque"><code class="docutils literal notranslate"><span class="pre">MotorModel.max_torque</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.fw_torque"><code class="docutils literal notranslate"><span class="pre">MotorModel.fw_torque</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.pow_lim"><code class="docutils literal notranslate"><span class="pre">MotorModel.pow_lim</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.efficiency_method"><code class="docutils literal notranslate"><span class="pre">MotorModel.efficiency_method</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.moc_efficiency"><code class="docutils literal notranslate"><span class="pre">MotorModel.moc_efficiency</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.motor_efficiency"><code class="docutils literal notranslate"><span class="pre">MotorModel.motor_efficiency</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.chain_efficiency"><code class="docutils literal notranslate"><span class="pre">MotorModel.chain_efficiency</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.diff_efficiency"><code class="docutils literal notranslate"><span class="pre">MotorModel.diff_efficiency</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.system_efficiency"><code class="docutils literal notranslate"><span class="pre">MotorModel.system_efficiency</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.mass"><code class="docutils literal notranslate"><span class="pre">MotorModel.mass</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.ideal_gear_ratio"><code class="docutils literal notranslate"><span class="pre">MotorModel.ideal_gear_ratio</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm_less_than_max_rpm"><code class="docutils literal notranslate"><span class="pre">MotorModel.fw_rpm_less_than_max_rpm</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.fw_torque_less_than_max_torque"><code class="docutils literal notranslate"><span class="pre">MotorModel.fw_torque_less_than_max_torque</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.validate_power_limit"><code class="docutils literal notranslate"><span class="pre">MotorModel.validate_power_limit</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.validate_moc_efficiency"><code class="docutils literal notranslate"><span class="pre">MotorModel.validate_moc_efficiency</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.validate_motor_efficiency"><code class="docutils literal notranslate"><span class="pre">MotorModel.validate_motor_efficiency</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.validate_chain_efficiency"><code class="docutils literal notranslate"><span class="pre">MotorModel.validate_chain_efficiency</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.validate_max_rpm_plausible"><code class="docutils literal notranslate"><span class="pre">MotorModel.validate_max_rpm_plausible</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.validate_fw_rpm_plausible"><code class="docutils literal notranslate"><span class="pre">MotorModel.validate_fw_rpm_plausible</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.validate_max_torque_plausible"><code class="docutils literal notranslate"><span class="pre">MotorModel.validate_max_torque_plausible</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.validate_fw_torque_plausible"><code class="docutils literal notranslate"><span class="pre">MotorModel.validate_fw_torque_plausible</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.PowertrainModel"><code class="docutils literal notranslate"><span class="pre">PowertrainModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.PowertrainModel.motor"><code class="docutils literal notranslate"><span class="pre">PowertrainModel.motor</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.PowertrainModel.ratio"><code class="docutils literal notranslate"><span class="pre">PowertrainModel.ratio</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.PowertrainModel.regen_percent"><code class="docutils literal notranslate"><span class="pre">PowertrainModel.regen_percent</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.PowertrainModel.max_regen"><code class="docutils literal notranslate"><span class="pre">PowertrainModel.max_regen</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.PowertrainModel.coast_trigger"><code class="docutils literal notranslate"><span class="pre">PowertrainModel.coast_trigger</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.PowertrainModel.coast_release_offset"><code class="docutils literal notranslate"><span class="pre">PowertrainModel.coast_release_offset</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.PowertrainModel.validate_ratio_plausible"><code class="docutils literal notranslate"><span class="pre">PowertrainModel.validate_ratio_plausible</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.PowertrainModel.validate_regen_config"><code class="docutils literal notranslate"><span class="pre">PowertrainModel.validate_regen_config</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.SimpleSuspensionModel"><code class="docutils literal notranslate"><span class="pre">SimpleSuspensionModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.SimpleSuspensionModel.type"><code class="docutils literal notranslate"><span class="pre">SimpleSuspensionModel.type</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.SuspensionType"><code class="docutils literal notranslate"><span class="pre">SuspensionType</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.SuspensionType.COMPLEX"><code class="docutils literal notranslate"><span class="pre">SuspensionType.COMPLEX</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.SuspensionType.SIMPLE"><code class="docutils literal notranslate"><span class="pre">SuspensionType.SIMPLE</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.TireModel"><code class="docutils literal notranslate"><span class="pre">TireModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.TireModel.weight"><code class="docutils literal notranslate"><span class="pre">TireModel.weight</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.TireModel.tire_radius"><code class="docutils literal notranslate"><span class="pre">TireModel.tire_radius</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.TireModel.mu_lat_zero_load"><code class="docutils literal notranslate"><span class="pre">TireModel.mu_lat_zero_load</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.TireModel.mu_long_lat_ratio"><code class="docutils literal notranslate"><span class="pre">TireModel.mu_long_lat_ratio</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.TireModel.validate_weight_plausible"><code class="docutils literal notranslate"><span class="pre">TireModel.validate_weight_plausible</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.TireModel.validate_tire_radius_plausible"><code class="docutils literal notranslate"><span class="pre">TireModel.validate_tire_radius_plausible</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.TireModel.validate_mu_lat_zero_load_plausible"><code class="docutils literal notranslate"><span class="pre">TireModel.validate_mu_lat_zero_load_plausible</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.TireModel.validate_mu_long_lat_ratio_plausible"><code class="docutils literal notranslate"><span class="pre">TireModel.validate_mu_long_lat_ratio_plausible</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel"><code class="docutils literal notranslate"><span class="pre">VehicleModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.mass"><code class="docutils literal notranslate"><span class="pre">VehicleModel.mass</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.w_distr_b"><code class="docutils literal notranslate"><span class="pre">VehicleModel.w_distr_b</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.cg_h"><code class="docutils literal notranslate"><span class="pre">VehicleModel.cg_h</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.wb"><code class="docutils literal notranslate"><span class="pre">VehicleModel.wb</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.front_track"><code class="docutils literal notranslate"><span class="pre">VehicleModel.front_track</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.rear_track"><code class="docutils literal notranslate"><span class="pre">VehicleModel.rear_track</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.rolling_coeff"><code class="docutils literal notranslate"><span class="pre">VehicleModel.rolling_coeff</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.setup"><code class="docutils literal notranslate"><span class="pre">VehicleModel.setup</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.w_distr_front"><code class="docutils literal notranslate"><span class="pre">VehicleModel.w_distr_front</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.track"><code class="docutils literal notranslate"><span class="pre">VehicleModel.track</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.aero"><code class="docutils literal notranslate"><span class="pre">VehicleModel.aero</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.pwrtn"><code class="docutils literal notranslate"><span class="pre">VehicleModel.pwrtn</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.accum"><code class="docutils literal notranslate"><span class="pre">VehicleModel.accum</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.sus"><code class="docutils literal notranslate"><span class="pre">VehicleModel.sus</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.tires"><code class="docutils literal notranslate"><span class="pre">VehicleModel.tires</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.dri"><code class="docutils literal notranslate"><span class="pre">VehicleModel.dri</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.chass"><code class="docutils literal notranslate"><span class="pre">VehicleModel.chass</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.validate_rolling_coeff"><code class="docutils literal notranslate"><span class="pre">VehicleModel.validate_rolling_coeff</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/suboptimumg.vehicle.models.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Penn Electric Racing.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

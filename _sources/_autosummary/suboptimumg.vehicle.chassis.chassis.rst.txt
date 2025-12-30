@@ -1,0 +1,8 @@
+suboptimumg.vehicle.chassis.chassis
+===================================
+
+.. automodule:: suboptimumg.vehicle.chassis.chassis
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

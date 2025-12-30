@@ -1,0 +1,16 @@
+suboptimumg.vehicle.powertrain
+==============================
+
+.. automodule:: suboptimumg.vehicle.powertrain
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   powertrain

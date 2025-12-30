@@ -31,6 +31,7 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
@@ -53,8 +54,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/notebook';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Contributing" href="contributing.html" />
-    <link rel="prev" title="Tutorial" href="tutorial.html" />
+    <link rel="next" title="References" href="../references/index.html" />
+    <link rel="prev" title="Getting Started" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -148,49 +149,11 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../vehicle/index.html">
-    Vehicle Model
+  <a class="nav-link nav-internal" href="../api/index.html">
+    Code Documentation
   </a>
 </li>
 
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../compsim/index.html">
-    Competition Model
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../sweep/index.html">
-    Parameter Sweeps
-  </a>
-</li>
-
-            <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false"
-                aria-controls="pst-nav-more-links">
-                    More
-                </button>
-                <ul id="pst-nav-more-links" class="dropdown-menu">
-                    
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="../plotting/index.html">
-    Plotting & Visualization
-  </a>
-</li>
-
-
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="../misc/index.html">
-    Misc.
-  </a>
-</li>
-
-                </ul>
-            </li>
-            
   </ul>
 </nav></div>
       
@@ -279,36 +242,8 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../vehicle/index.html">
-    Vehicle Model
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../compsim/index.html">
-    Competition Model
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../sweep/index.html">
-    Parameter Sweeps
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../plotting/index.html">
-    Plotting & Visualization
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../misc/index.html">
-    Misc.
+  <a class="nav-link nav-internal" href="../api/index.html">
+    Code Documentation
   </a>
 </li>
 
@@ -340,12 +275,7 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="tutorial.html">Tutorial</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">SuboptimumG Tutorial</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">SuboptimumG Tutorial</a></li>
 </ul>
 </div>
 </nav></div>
@@ -389,9 +319,6 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Getting Started</a></li>
     
-    
-    <li class="breadcrumb-item"><a href="tutorial.html" class="nav-link">Tutorial</a></li>
-    
     <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">SuboptimumG Tutorial</span></li>
   </ul>
 </nav>
@@ -420,27 +347,27 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.yaml import load_competition_from_yaml
-from suboptimumg.gdrive import load_competition_from_gdrive
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.yaml</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_competition_from_yaml</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.gdrive</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_competition_from_gdrive</span>
 
-# Create sample competitions
-michigan2023_revX = load_competition_from_yaml(
-    car_yaml_path=&quot;../parameters/car.yaml&quot;,
-    comp_yaml_path=&quot;../parameters/competition.yaml&quot;,
-)
-michigan2023_awd = load_competition_from_yaml(
-    car_yaml_path=&quot;../parameters/awd_car.yaml&quot;,
-    comp_yaml_path=&quot;../parameters/competition.yaml&quot;,
-)
+<span class="c1"># Create sample competitions</span>
+<span class="n">michigan2023_revX</span> <span class="o">=</span> <span class="n">load_competition_from_yaml</span><span class="p">(</span>
+    <span class="n">car_yaml_path</span><span class="o">=</span><span class="s2">&quot;../parameters/car.yaml&quot;</span><span class="p">,</span>
+    <span class="n">comp_yaml_path</span><span class="o">=</span><span class="s2">&quot;../parameters/competition.yaml&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">michigan2023_awd</span> <span class="o">=</span> <span class="n">load_competition_from_yaml</span><span class="p">(</span>
+    <span class="n">car_yaml_path</span><span class="o">=</span><span class="s2">&quot;../parameters/awd_car.yaml&quot;</span><span class="p">,</span>
+    <span class="n">comp_yaml_path</span><span class="o">=</span><span class="s2">&quot;../parameters/competition.yaml&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 
-revx_comp_data = michigan2023_revX.to_data()
-awd_comp_data = michigan2023_awd.to_data()
+<span class="n">revx_comp_data</span> <span class="o">=</span> <span class="n">michigan2023_revX</span><span class="o">.</span><span class="n">to_data</span><span class="p">()</span>
+<span class="n">awd_comp_data</span> <span class="o">=</span> <span class="n">michigan2023_awd</span><span class="o">.</span><span class="n">to_data</span><span class="p">()</span>
 
-# We can also optionally load parameters from published Google Sheets
-michigan2023_revX_alt = load_competition_from_gdrive(
-    car_config_url=&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vQRPeSToFhhcMYo4J12FvPuIoCv0xAVCvcOlb-SlRxRleQQJNwq7Jiw1H0Hwr6oYOFBcCD_422CosnJ/pub?output=csv&quot;,
-    comp_config_url=&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vSPaKIHa64Buiqw_2yk4P3iP3PlsNjuE-GjYSHQDenn6dFYG_EelNSg7oqwH5mEvXzSNfB7j1p42H12/pub?output=csv&quot;,
-)
+<span class="c1"># We can also optionally load parameters from published Google Sheets</span>
+<span class="n">michigan2023_revX_alt</span> <span class="o">=</span> <span class="n">load_competition_from_gdrive</span><span class="p">(</span>
+    <span class="n">car_config_url</span><span class="o">=</span><span class="s2">&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vQRPeSToFhhcMYo4J12FvPuIoCv0xAVCvcOlb-SlRxRleQQJNwq7Jiw1H0Hwr6oYOFBcCD_422CosnJ/pub?output=csv&quot;</span><span class="p">,</span>
+    <span class="n">comp_config_url</span><span class="o">=</span><span class="s2">&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vSPaKIHa64Buiqw_2yk4P3iP3PlsNjuE-GjYSHQDenn6dFYG_EelNSg7oqwH5mEvXzSNfB7j1p42H12/pub?output=csv&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -449,14 +376,14 @@ michigan2023_revX_alt = load_competition_from_gdrive(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.compsim import pretty_print_results
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.compsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">pretty_print_results</span>
 
-# Run sample competition
-comp_results = michigan2023_revX.run(extract_internal_data=True)
-awd_results = michigan2023_awd.run(extract_internal_data=True)
+<span class="c1"># Run sample competition</span>
+<span class="n">comp_results</span> <span class="o">=</span> <span class="n">michigan2023_revX</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">extract_internal_data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">awd_results</span> <span class="o">=</span> <span class="n">michigan2023_awd</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">extract_internal_data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-pretty_print_results(comp_results)
-pretty_print_results(awd_results)
+<span class="n">pretty_print_results</span><span class="p">(</span><span class="n">comp_results</span><span class="p">)</span>
+<span class="n">pretty_print_results</span><span class="p">(</span><span class="n">awd_results</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -465,10 +392,10 @@ pretty_print_results(awd_results)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>endu_res = comp_results.endurance
-endu_awd = awd_results.endurance
-autoX_res = comp_results.autoX
-autoX_awd = awd_results.autoX
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">endu_res</span> <span class="o">=</span> <span class="n">comp_results</span><span class="o">.</span><span class="n">endurance</span>
+<span class="n">endu_awd</span> <span class="o">=</span> <span class="n">awd_results</span><span class="o">.</span><span class="n">endurance</span>
+<span class="n">autoX_res</span> <span class="o">=</span> <span class="n">comp_results</span><span class="o">.</span><span class="n">autoX</span>
+<span class="n">autoX_awd</span> <span class="o">=</span> <span class="n">awd_results</span><span class="o">.</span><span class="n">autoX</span>
 </pre></div>
 </div>
 </div>
@@ -476,16 +403,16 @@ autoX_awd = awd_results.autoX
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting.internal_data_plots import plot_per_seed, Axis
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting.internal_data_plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_per_seed</span><span class="p">,</span> <span class="n">Axis</span>
 
-# endu_res = comp_results.endurance
+<span class="c1"># endu_res = comp_results.endurance</span>
 
-plot_per_seed(
-    results=endu_res.lapsim_results,
-    x_axis=Axis.DISTANCE,
-    include_indices=range(4),
-    include_power=True,
-)
+<span class="n">plot_per_seed</span><span class="p">(</span>
+    <span class="n">results</span><span class="o">=</span><span class="n">endu_res</span><span class="o">.</span><span class="n">lapsim_results</span><span class="p">,</span>
+    <span class="n">x_axis</span><span class="o">=</span><span class="n">Axis</span><span class="o">.</span><span class="n">DISTANCE</span><span class="p">,</span>
+    <span class="n">include_indices</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+    <span class="n">include_power</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -494,13 +421,13 @@ plot_per_seed(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting.internal_data_plots import plot_event_traces, Metric
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting.internal_data_plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_event_traces</span><span class="p">,</span> <span class="n">Metric</span>
 
-plot_event_traces(
-    results=endu_res.lapsim_results,
-    x_axis=Axis.DISTANCE,
-    metrics=[Metric.VELOCITY, Metric.ACCEL, Metric.POWER],
-)
+<span class="n">plot_event_traces</span><span class="p">(</span>
+    <span class="n">results</span><span class="o">=</span><span class="n">endu_res</span><span class="o">.</span><span class="n">lapsim_results</span><span class="p">,</span>
+    <span class="n">x_axis</span><span class="o">=</span><span class="n">Axis</span><span class="o">.</span><span class="n">DISTANCE</span><span class="p">,</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">Metric</span><span class="o">.</span><span class="n">VELOCITY</span><span class="p">,</span> <span class="n">Metric</span><span class="o">.</span><span class="n">ACCEL</span><span class="p">,</span> <span class="n">Metric</span><span class="o">.</span><span class="n">POWER</span><span class="p">],</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -508,14 +435,14 @@ plot_event_traces(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting.internal_data_plots import plot_event_traces, Metric
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting.internal_data_plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_event_traces</span><span class="p">,</span> <span class="n">Metric</span>
 
-plot_event_traces(
-    # results=[endu_res.lapsim_results, endu_awd.lapsim_results],
-    results=[autoX_res.lapsim_results, autoX_awd.lapsim_results],
-    x_axis=Axis.DISTANCE,
-    metrics=[Metric.VELOCITY, Metric.ACCEL, Metric.POWER],
-)
+<span class="n">plot_event_traces</span><span class="p">(</span>
+    <span class="c1"># results=[endu_res.lapsim_results, endu_awd.lapsim_results],</span>
+    <span class="n">results</span><span class="o">=</span><span class="p">[</span><span class="n">autoX_res</span><span class="o">.</span><span class="n">lapsim_results</span><span class="p">,</span> <span class="n">autoX_awd</span><span class="o">.</span><span class="n">lapsim_results</span><span class="p">],</span>
+    <span class="n">x_axis</span><span class="o">=</span><span class="n">Axis</span><span class="o">.</span><span class="n">DISTANCE</span><span class="p">,</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">Metric</span><span class="o">.</span><span class="n">VELOCITY</span><span class="p">,</span> <span class="n">Metric</span><span class="o">.</span><span class="n">ACCEL</span><span class="p">,</span> <span class="n">Metric</span><span class="o">.</span><span class="n">POWER</span><span class="p">],</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -524,14 +451,14 @@ plot_event_traces(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting.internal_data_plots import plot_competition_traces
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting.internal_data_plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_competition_traces</span>
 
-plot_competition_traces(
-    # competitions=comp_results,
-    competitions=[comp_results, awd_results],
-    x_axis=Axis.DISTANCE,
-    labels=[&quot;RWD&quot;, &quot;AWD&quot;],
-)
+<span class="n">plot_competition_traces</span><span class="p">(</span>
+    <span class="c1"># competitions=comp_results,</span>
+    <span class="n">competitions</span><span class="o">=</span><span class="p">[</span><span class="n">comp_results</span><span class="p">,</span> <span class="n">awd_results</span><span class="p">],</span>
+    <span class="n">x_axis</span><span class="o">=</span><span class="n">Axis</span><span class="o">.</span><span class="n">DISTANCE</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;RWD&quot;</span><span class="p">,</span> <span class="s2">&quot;AWD&quot;</span><span class="p">],</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -540,22 +467,22 @@ plot_competition_traces(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-from suboptimumg.plotting.generic_plot import plot2D
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting.generic_plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot2D</span>
 
-plot2D(
-    x_list=np.array(endu_res.lapsim_results.lap_t),
-    y_list=np.array(endu_res.lapsim_results.lap_powers) / 1000,
-    title=&quot;Power Usage over a Single Endurance Lap&quot;,
-    x_axis=&quot;Time since Lap Start (s)&quot;,
-    y_axis=&quot;Power (kW)&quot;,
-    theme=&quot;powertrain&quot;,
-)
+<span class="n">plot2D</span><span class="p">(</span>
+    <span class="n">x_list</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">endu_res</span><span class="o">.</span><span class="n">lapsim_results</span><span class="o">.</span><span class="n">lap_t</span><span class="p">),</span>
+    <span class="n">y_list</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">endu_res</span><span class="o">.</span><span class="n">lapsim_results</span><span class="o">.</span><span class="n">lap_powers</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Power Usage over a Single Endurance Lap&quot;</span><span class="p">,</span>
+    <span class="n">x_axis</span><span class="o">=</span><span class="s2">&quot;Time since Lap Start (s)&quot;</span><span class="p">,</span>
+    <span class="n">y_axis</span><span class="o">=</span><span class="s2">&quot;Power (kW)&quot;</span><span class="p">,</span>
+    <span class="n">theme</span><span class="o">=</span><span class="s2">&quot;powertrain&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 
-print(&quot;Power Statistics:&quot;)
-print(f&quot;Max Power: {np.max(endu_res.lapsim_results.lap_powers) / 1000} kW&quot;)
-print(f&quot;Min Power: {np.min(endu_res.lapsim_results.lap_powers) / 1000} kW&quot;)
-print(f&quot;Avg Power: {np.mean(endu_res.lapsim_results.lap_powers) / 1000} kW&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Power Statistics:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max Power: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">endu_res</span><span class="o">.</span><span class="n">lapsim_results</span><span class="o">.</span><span class="n">lap_powers</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="si">}</span><span class="s2"> kW&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Min Power: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">endu_res</span><span class="o">.</span><span class="n">lapsim_results</span><span class="o">.</span><span class="n">lap_powers</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="si">}</span><span class="s2"> kW&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Avg Power: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">endu_res</span><span class="o">.</span><span class="n">lapsim_results</span><span class="o">.</span><span class="n">lap_powers</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="si">}</span><span class="s2"> kW&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -564,8 +491,8 @@ print(f&quot;Avg Power: {np.mean(endu_res.lapsim_results.lap_powers) / 1000} kW&
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig, ax = michigan2023_revX.endurance.plot_arcs()
-fig
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">michigan2023_revX</span><span class="o">.</span><span class="n">endurance</span><span class="o">.</span><span class="n">plot_arcs</span><span class="p">()</span>
+<span class="n">fig</span>
 </pre></div>
 </div>
 </div>
@@ -573,13 +500,13 @@ fig
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = michigan2023_revX.endurance.plot_with_overlay(
-    variable=endu_res.lapsim_results.lap_vels,
-    label=&quot;Speed (m/s)&quot;,
-    theme=&quot;thermal&quot;,
-)
-fig.show()
-fig.write_html(&quot;endurance_speed_overlay.html&quot;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">michigan2023_revX</span><span class="o">.</span><span class="n">endurance</span><span class="o">.</span><span class="n">plot_with_overlay</span><span class="p">(</span>
+    <span class="n">variable</span><span class="o">=</span><span class="n">endu_res</span><span class="o">.</span><span class="n">lapsim_results</span><span class="o">.</span><span class="n">lap_vels</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Speed (m/s)&quot;</span><span class="p">,</span>
+    <span class="n">theme</span><span class="o">=</span><span class="s2">&quot;thermal&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">&quot;endurance_speed_overlay.html&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -587,13 +514,13 @@ fig.write_html(&quot;endurance_speed_overlay.html&quot;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = michigan2023_revX.endurance.plot_3d(
-    variable=endu_res.lapsim_results.lap_vels,
-    title=&quot;Speed over Endurance Lap&quot;,
-    z_label=&quot;Speed (m/s)&quot;,
-    theme=&quot;thermal&quot;,
-)
-fig.show()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">michigan2023_revX</span><span class="o">.</span><span class="n">endurance</span><span class="o">.</span><span class="n">plot_3d</span><span class="p">(</span>
+    <span class="n">variable</span><span class="o">=</span><span class="n">endu_res</span><span class="o">.</span><span class="n">lapsim_results</span><span class="o">.</span><span class="n">lap_vels</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Speed over Endurance Lap&quot;</span><span class="p">,</span>
+    <span class="n">z_label</span><span class="o">=</span><span class="s2">&quot;Speed (m/s)&quot;</span><span class="p">,</span>
+    <span class="n">theme</span><span class="o">=</span><span class="s2">&quot;thermal&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -607,16 +534,16 @@ fig.show()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.sweep import *
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.sweep</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 
-sweep_var_1 = SweepParamConfig(
-    name=&quot;mass&quot;,
-    min=200,
-    max=300,
-    steps=50,
-)
-mass_sweep = create_sweeper(comp_data=revx_comp_data, var_1=sweep_var_1)
-mass_results = mass_sweep.sweep()
+<span class="n">sweep_var_1</span> <span class="o">=</span> <span class="n">SweepParamConfig</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+    <span class="n">steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">mass_sweep</span> <span class="o">=</span> <span class="n">create_sweeper</span><span class="p">(</span><span class="n">comp_data</span><span class="o">=</span><span class="n">revx_comp_data</span><span class="p">,</span> <span class="n">var_1</span><span class="o">=</span><span class="n">sweep_var_1</span><span class="p">)</span>
+<span class="n">mass_results</span> <span class="o">=</span> <span class="n">mass_sweep</span><span class="o">.</span><span class="n">sweep</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -625,13 +552,13 @@ mass_results = mass_sweep.sweep()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = mass_results.plot(
-    x_label=&quot;Mass (kg)&quot;,
-    y_label=&quot;Total Points&quot;,
-    title=&quot;Mass Sweep - Total Points&quot;,
-)
-fig.write_html(&quot;mass_sweep_total_points.html&quot;)
-fig.show()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">mass_results</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">x_label</span><span class="o">=</span><span class="s2">&quot;Mass (kg)&quot;</span><span class="p">,</span>
+    <span class="n">y_label</span><span class="o">=</span><span class="s2">&quot;Total Points&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Mass Sweep - Total Points&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">&quot;mass_sweep_total_points.html&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -640,10 +567,10 @@ fig.show()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(f&quot;Total points @ mass=257kg: {mass_results.y_at_x(x=257)}&quot;)
-print(
-    f&quot;Change in points for every 1kg increase in mass @ mass=257kg: {mass_results.dydx_at_x(x=257)}&quot;
-)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total points @ mass=257kg: </span><span class="si">{</span><span class="n">mass_results</span><span class="o">.</span><span class="n">y_at_x</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">257</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;Change in points for every 1kg increase in mass @ mass=257kg: </span><span class="si">{</span><span class="n">mass_results</span><span class="o">.</span><span class="n">dydx_at_x</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">257</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -652,28 +579,28 @@ print(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.sweep import *
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.sweep</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 
-sweep_var_1 = SweepParamConfig(
-    name=&quot;aero.cl&quot;,
-    min=2.8,
-    max=3.8,
-    steps=15,
-)
+<span class="n">sweep_var_1</span> <span class="o">=</span> <span class="n">SweepParamConfig</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;aero.cl&quot;</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mf">2.8</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mf">3.8</span><span class="p">,</span>
+    <span class="n">steps</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+<span class="p">)</span>
 
-sweep_var_2 = SweepParamConfig(
-    name=&quot;aero.cd&quot;,
-    min=1.0,
-    max=2.0,
-    steps=15,
-)
+<span class="n">sweep_var_2</span> <span class="o">=</span> <span class="n">SweepParamConfig</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;aero.cd&quot;</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+    <span class="n">steps</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+<span class="p">)</span>
 
-aero_sweep = create_sweeper(
-    comp_data=revx_comp_data,
-    var_1=sweep_var_1,
-    var_2=sweep_var_2,
-)
-aero_results = aero_sweep.sweep()
+<span class="n">aero_sweep</span> <span class="o">=</span> <span class="n">create_sweeper</span><span class="p">(</span>
+    <span class="n">comp_data</span><span class="o">=</span><span class="n">revx_comp_data</span><span class="p">,</span>
+    <span class="n">var_1</span><span class="o">=</span><span class="n">sweep_var_1</span><span class="p">,</span>
+    <span class="n">var_2</span><span class="o">=</span><span class="n">sweep_var_2</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">aero_results</span> <span class="o">=</span> <span class="n">aero_sweep</span><span class="o">.</span><span class="n">sweep</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -682,14 +609,14 @@ aero_results = aero_sweep.sweep()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># x refers to var_1 (aero.cl in this case) and y refers to var_2 (aero.cd in this case)
-print(f&quot;Total points @ cl=3.55, cd=1.65: {aero_results.z_at_xy(x=3.55, y=1.65)}&quot;)
-print(
-    f&quot;Additional point gain for every 1.0 increase in cl @ cl=3.55, cd=1.65: {aero_results.dzdx_at_xy(x=3.55, y=1.65)}&quot;
-)
-print(
-    f&quot;Additional point gain for every 1.0 increase in cd @ cl=3.55, cd=1.65: {aero_results.dzdy_at_xy(x=3.55, y=1.65)}&quot;
-)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># x refers to var_1 (aero.cl in this case) and y refers to var_2 (aero.cd in this case)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total points @ cl=3.55, cd=1.65: </span><span class="si">{</span><span class="n">aero_results</span><span class="o">.</span><span class="n">z_at_xy</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">3.55</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="mf">1.65</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;Additional point gain for every 1.0 increase in cl @ cl=3.55, cd=1.65: </span><span class="si">{</span><span class="n">aero_results</span><span class="o">.</span><span class="n">dzdx_at_xy</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">3.55</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="mf">1.65</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;Additional point gain for every 1.0 increase in cd @ cl=3.55, cd=1.65: </span><span class="si">{</span><span class="n">aero_results</span><span class="o">.</span><span class="n">dzdy_at_xy</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">3.55</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="mf">1.65</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -698,11 +625,11 @@ print(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = aero_results.plot_contour(
-    x_label=&quot;CL&quot;, y_label=&quot;CD&quot;, z_label=&quot;Total Points&quot;, title=&quot;CL vs CD Sweep&quot;
-)
-fig.write_html(&quot;aero_sweep_contour.html&quot;)
-fig.show()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">aero_results</span><span class="o">.</span><span class="n">plot_contour</span><span class="p">(</span>
+    <span class="n">x_label</span><span class="o">=</span><span class="s2">&quot;CL&quot;</span><span class="p">,</span> <span class="n">y_label</span><span class="o">=</span><span class="s2">&quot;CD&quot;</span><span class="p">,</span> <span class="n">z_label</span><span class="o">=</span><span class="s2">&quot;Total Points&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;CL vs CD Sweep&quot;</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">&quot;aero_sweep_contour.html&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -710,12 +637,12 @@ fig.show()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting import PlotType
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">PlotType</span>
 
-aero_results.grid_plot(
-    # show_event_times=True,
-    plot_type=PlotType.CONTOUR,
-)
+<span class="n">aero_results</span><span class="o">.</span><span class="n">grid_plot</span><span class="p">(</span>
+    <span class="c1"># show_event_times=True,</span>
+    <span class="n">plot_type</span><span class="o">=</span><span class="n">PlotType</span><span class="o">.</span><span class="n">CONTOUR</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -723,17 +650,17 @@ aero_results.grid_plot(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.plotting import SceneConfig
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">SceneConfig</span>
 
-fig = aero_results.plot_surface(
-    x_label=&quot;CL&quot;,
-    y_label=&quot;CD&quot;,
-    z_label=&quot;Total Points&quot;,
-    title=&quot;CL vs CD Sweep&quot;,
-    scene_config=SceneConfig(default_view_angle=120),
-)
-fig.write_html(&quot;aero_sweep_surface.html&quot;)
-fig.show()
+<span class="n">fig</span> <span class="o">=</span> <span class="n">aero_results</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span>
+    <span class="n">x_label</span><span class="o">=</span><span class="s2">&quot;CL&quot;</span><span class="p">,</span>
+    <span class="n">y_label</span><span class="o">=</span><span class="s2">&quot;CD&quot;</span><span class="p">,</span>
+    <span class="n">z_label</span><span class="o">=</span><span class="s2">&quot;Total Points&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;CL vs CD Sweep&quot;</span><span class="p">,</span>
+    <span class="n">scene_config</span><span class="o">=</span><span class="n">SceneConfig</span><span class="p">(</span><span class="n">default_view_angle</span><span class="o">=</span><span class="mi">120</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">&quot;aero_sweep_surface.html&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -749,23 +676,23 @@ fig.show()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from suboptimumg.sweep import ArraySweeper
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.sweep</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArraySweeper</span>
 
-arr_sweep_params = [
-    &quot;mass&quot;,
-    &quot;w_distr_b&quot;,
-    &quot;cg_h&quot;,
-    &quot;wb&quot;,
-    &quot;front_track&quot;,
-    &quot;rear_track&quot;,
-    &quot;aero.cl&quot;,
-    &quot;aero.cd&quot;,
-    &quot;aero.front_area&quot;,
-    &quot;aero.cop&quot;,
-    &quot;pwrtn.ratio&quot;,
-]
-arr_sweep = ArraySweeper(comp_data=revx_comp_data, var_list=arr_sweep_params)
-arr_sweep_results = arr_sweep.sweep(verbose=True)
+<span class="n">arr_sweep_params</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;mass&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;w_distr_b&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cg_h&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;wb&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;front_track&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rear_track&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aero.cl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aero.cd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aero.front_area&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aero.cop&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pwrtn.ratio&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">arr_sweep</span> <span class="o">=</span> <span class="n">ArraySweeper</span><span class="p">(</span><span class="n">comp_data</span><span class="o">=</span><span class="n">revx_comp_data</span><span class="p">,</span> <span class="n">var_list</span><span class="o">=</span><span class="n">arr_sweep_params</span><span class="p">)</span>
+<span class="n">arr_sweep_results</span> <span class="o">=</span> <span class="n">arr_sweep</span><span class="o">.</span><span class="n">sweep</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -773,12 +700,12 @@ arr_sweep_results = arr_sweep.sweep(verbose=True)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = arr_sweep_results.plot(
-    y_label=&quot;Total Points&quot;,
-    title=&quot;Array Sweep - Total Points&quot;,
-)
-fig.write_html(&quot;array_sweep_total_points.html&quot;)
-fig.show()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">arr_sweep_results</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">y_label</span><span class="o">=</span><span class="s2">&quot;Total Points&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Array Sweep - Total Points&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">&quot;array_sweep_total_points.html&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -796,20 +723,20 @@ fig.show()
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="tutorial.html"
+       href="index.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tutorial</p>
+        <p class="prev-next-title">Getting Started</p>
       </div>
     </a>
     <a class="right-next"
-       href="contributing.html"
+       href="../references/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Contributing</p>
+        <p class="prev-next-title">References</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -880,7 +807,7 @@ fig.show()
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
     <br/>
   </p>
 </div>

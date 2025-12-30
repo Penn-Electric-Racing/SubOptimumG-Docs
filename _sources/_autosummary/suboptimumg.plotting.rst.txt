@@ -1,0 +1,25 @@
+suboptimumg.plotting
+====================
+
+.. automodule:: suboptimumg.plotting
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   bar_chart
+   color_themes
+   generic_plot
+   grid_plot
+   internal_data_plots
+   overlay_plots
+   plotting_constants
+   stem_plot
+   types
+   utils

@@ -1,0 +1,8 @@
+suboptimumg.plotting.bar\_chart
+===============================
+
+.. automodule:: suboptimumg.plotting.bar_chart
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

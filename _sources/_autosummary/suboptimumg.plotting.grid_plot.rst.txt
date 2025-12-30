@@ -1,0 +1,8 @@
+suboptimumg.plotting.grid\_plot
+===============================
+
+.. automodule:: suboptimumg.plotting.grid_plot
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

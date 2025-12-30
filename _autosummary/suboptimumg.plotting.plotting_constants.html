@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>suboptimumg.plotting.plotting_constants &#8212; SubOptimumG</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.plotting.plotting_constants';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="suboptimumg.plotting.stem_plot" href="suboptimumg.plotting.stem_plot.html" />
+    <link rel="prev" title="suboptimumg.plotting.overlay_plots" href="suboptimumg.plotting.overlay_plots.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SubOptimumG</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="suboptimumg.html">suboptimumg</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.compsim.html">suboptimumg.compsim</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.competition.html">suboptimumg.compsim.competition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.competition_factory.html">suboptimumg.compsim.competition_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.lapsim.html">suboptimumg.compsim.lapsim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.models.html">suboptimumg.compsim.models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.utils.html">suboptimumg.compsim.utils</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="suboptimumg.constants.html">suboptimumg.constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="suboptimumg.gdrive.html">suboptimumg.gdrive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="suboptimumg.models.html">suboptimumg.models</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.plotting.html">suboptimumg.plotting</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bar_chart.html">suboptimumg.plotting.bar_chart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.color_themes.html">suboptimumg.plotting.color_themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.generic_plot.html">suboptimumg.plotting.generic_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot.html">suboptimumg.plotting.grid_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plots.html">suboptimumg.plotting.overlay_plots</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">suboptimumg.plotting.plotting_constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.stem_plot.html">suboptimumg.plotting.stem_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.types.html">suboptimumg.plotting.types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.utils.html">suboptimumg.plotting.utils</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.sweep.html">suboptimumg.sweep</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.array_sweep_results.html">suboptimumg.sweep.array_sweep_results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.array_sweeper.html">suboptimumg.sweep.array_sweeper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.constants.html">suboptimumg.sweep.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.models.html">suboptimumg.sweep.models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep.html">suboptimumg.sweep.motor_sweep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html">suboptimumg.sweep.motor_sweep_results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_1var.html">suboptimumg.sweep.sweep_results_1var</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_2var.html">suboptimumg.sweep.sweep_results_2var</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_1d.html">suboptimumg.sweep.sweeper_1d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_2d.html">suboptimumg.sweep.sweeper_2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_factory.html">suboptimumg.sweep.sweeper_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.types.html">suboptimumg.sweep.types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.utils.html">suboptimumg.sweep.utils</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.track.html">suboptimumg.track</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.gps.html">suboptimumg.track.gps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.models.html">suboptimumg.track.models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track.html">suboptimumg.track.track</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track_factory.html">suboptimumg.track.track_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.utils.html">suboptimumg.track.utils</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.vehicle.html">suboptimumg.vehicle</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.vehicle.accumulator.html">suboptimumg.vehicle.accumulator</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.accumulator.accumulator.html">suboptimumg.vehicle.accumulator.accumulator</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.vehicle.aerodynamics.html">suboptimumg.vehicle.aerodynamics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.aerodynamics.aerodynamics.html">suboptimumg.vehicle.aerodynamics.aerodynamics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.vehicle.chassis.html">suboptimumg.vehicle.chassis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.chassis.chassis.html">suboptimumg.vehicle.chassis.chassis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.vehicle.driver_interface.html">suboptimumg.vehicle.driver_interface</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.driver_interface.driver_interface.html">suboptimumg.vehicle.driver_interface.driver_interface</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.vehicle.models.html">suboptimumg.vehicle.models</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.vehicle.powertrain.html">suboptimumg.vehicle.powertrain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.powertrain.powertrain.html">suboptimumg.vehicle.powertrain.powertrain</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.vehicle.suspension.html">suboptimumg.vehicle.suspension</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.suspension.suspension.html">suboptimumg.vehicle.suspension.suspension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.suspension.tire.html">suboptimumg.vehicle.suspension.tire</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.vehicle.vehicle.html">suboptimumg.vehicle.vehicle</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="suboptimumg.yaml.html">suboptimumg.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api/index.html" class="nav-link">Code Documentation</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="suboptimumg.html" class="nav-link">suboptimumg</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="suboptimumg.plotting.html" class="nav-link">suboptimumg.plotting</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.plotting.plotting_constants</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-suboptimumg.plotting.plotting_constants">
+<span id="suboptimumg-plotting-plotting-constants"></span><h1>suboptimumg.plotting.plotting_constants<a class="headerlink" href="#module-suboptimumg.plotting.plotting_constants" title="Link to this heading">#</a></h1>
+<p>Configuration objects for plotting module.</p>
+<p>This module provides Plotly-style configuration objects to control various
+aspects of plots without cluttering function interfaces. All magic numbers
+are centralized here for easy customization.</p>
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.ColorbarConfig">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.plotting_constants.</span></span><span class="sig-name descname"><span class="pre">ColorbarConfig</span></span><a class="reference internal" href="../_modules/suboptimumg/plotting/plotting_constants.html#ColorbarConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.ColorbarConfig" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Colorbar configuration for 3D plots.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Fields<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.ColorbarConfig.length" title="suboptimumg.plotting.plotting_constants.ColorbarConfig.length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">length</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.ColorbarConfig.thickness" title="suboptimumg.plotting.plotting_constants.ColorbarConfig.thickness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">thickness</span> <span class="pre">(int)</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.ColorbarConfig.thickness">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">thickness</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">15</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.ColorbarConfig.thickness" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.ColorbarConfig.length">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">length</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.7</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.ColorbarConfig.length" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.FontConfig">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.plotting_constants.</span></span><span class="sig-name descname"><span class="pre">FontConfig</span></span><a class="reference internal" href="../_modules/suboptimumg/plotting/plotting_constants.html#FontConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.FontConfig" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Font configuration for plot elements.</p>
+<p>Simplified to three sizes that work across all plot types:
+- Large: Titles
+- Medium: Subtitles, axis labels, legend titles
+- Small: Tick labels, legend items, contour labels</p>
+<dl class="field-list simple">
+<dt class="field-odd">Fields<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.FontConfig.large" title="suboptimumg.plotting.plotting_constants.FontConfig.large"><code class="xref py py-obj docutils literal notranslate"><span class="pre">large</span> <span class="pre">(int)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.FontConfig.medium" title="suboptimumg.plotting.plotting_constants.FontConfig.medium"><code class="xref py py-obj docutils literal notranslate"><span class="pre">medium</span> <span class="pre">(int)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.FontConfig.small" title="suboptimumg.plotting.plotting_constants.FontConfig.small"><code class="xref py py-obj docutils literal notranslate"><span class="pre">small</span> <span class="pre">(int)</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.FontConfig.large">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">large</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">24</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.FontConfig.large" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.FontConfig.medium">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">medium</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.FontConfig.medium" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.FontConfig.small">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">small</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.FontConfig.small" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.LayoutConfig">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.plotting_constants.</span></span><span class="sig-name descname"><span class="pre">LayoutConfig</span></span><a class="reference internal" href="../_modules/suboptimumg/plotting/plotting_constants.html#LayoutConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.LayoutConfig" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Layout configuration for plot dimensions and spacing.</p>
+<p>Unified dimensions that work across all plot types. Users can override
+when creating custom plots if needed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Fields<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.grid_height_per_row" title="suboptimumg.plotting.plotting_constants.LayoutConfig.grid_height_per_row"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grid_height_per_row</span> <span class="pre">(int)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.grid_horizontal_spacing" title="suboptimumg.plotting.plotting_constants.LayoutConfig.grid_horizontal_spacing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grid_horizontal_spacing</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.grid_vertical_spacing" title="suboptimumg.plotting.plotting_constants.LayoutConfig.grid_vertical_spacing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grid_vertical_spacing</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.grid_width_per_col" title="suboptimumg.plotting.plotting_constants.LayoutConfig.grid_width_per_col"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grid_width_per_col</span> <span class="pre">(int)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.height" title="suboptimumg.plotting.plotting_constants.LayoutConfig.height"><code class="xref py py-obj docutils literal notranslate"><span class="pre">height</span> <span class="pre">(int)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.margin" title="suboptimumg.plotting.plotting_constants.LayoutConfig.margin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">margin</span> <span class="pre">(Dict[str,</span> <span class="pre">int])</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.plot_bgcolor" title="suboptimumg.plotting.plotting_constants.LayoutConfig.plot_bgcolor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_bgcolor</span> <span class="pre">(str)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.scene_bgcolor" title="suboptimumg.plotting.plotting_constants.LayoutConfig.scene_bgcolor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scene_bgcolor</span> <span class="pre">(str)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.title_x" title="suboptimumg.plotting.plotting_constants.LayoutConfig.title_x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">title_x</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.title_xanchor" title="suboptimumg.plotting.plotting_constants.LayoutConfig.title_xanchor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">title_xanchor</span> <span class="pre">(str)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.title_yanchor" title="suboptimumg.plotting.plotting_constants.LayoutConfig.title_yanchor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">title_yanchor</span> <span class="pre">(str)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.width" title="suboptimumg.plotting.plotting_constants.LayoutConfig.width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span> <span class="pre">(int)</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.LayoutConfig.width">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">width</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1000</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.width" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.LayoutConfig.height">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">height</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">700</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.height" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.LayoutConfig.grid_width_per_col">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">grid_width_per_col</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">400</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.grid_width_per_col" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.LayoutConfig.grid_height_per_row">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">grid_height_per_row</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">350</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.grid_height_per_row" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.LayoutConfig.grid_horizontal_spacing">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">grid_horizontal_spacing</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.08</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.grid_horizontal_spacing" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.LayoutConfig.grid_vertical_spacing">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">grid_vertical_spacing</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.12</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.grid_vertical_spacing" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.LayoutConfig.margin">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">margin</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code><span class="pre">,</span> <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code><span class="pre">]</span></em><em class="property"> <span class="pre">[Optional]</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.margin" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.LayoutConfig.plot_bgcolor">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plot_bgcolor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'white'</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.plot_bgcolor" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.LayoutConfig.scene_bgcolor">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scene_bgcolor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)'</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.scene_bgcolor" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.LayoutConfig.title_x">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title_x</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.5</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.title_x" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.LayoutConfig.title_xanchor">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title_xanchor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'center'</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.title_xanchor" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.LayoutConfig.title_yanchor">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title_yanchor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'top'</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.title_yanchor" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.ReferenceLineConfig">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.plotting_constants.</span></span><span class="sig-name descname"><span class="pre">ReferenceLineConfig</span></span><a class="reference internal" href="../_modules/suboptimumg/plotting/plotting_constants.html#ReferenceLineConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Configuration for reference lines (h_line, v_line).</p>
+<p>This class combines the line value, label, and styling into a single object.
+Pass instances of this class to plotting functions instead of separate parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Fields<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.color" title="suboptimumg.plotting.plotting_constants.ReferenceLineConfig.color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">color</span> <span class="pre">(str)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.dash" title="suboptimumg.plotting.plotting_constants.ReferenceLineConfig.dash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dash</span> <span class="pre">(str)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.label" title="suboptimumg.plotting.plotting_constants.ReferenceLineConfig.label"><code class="xref py py-obj docutils literal notranslate"><span class="pre">label</span> <span class="pre">(str</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.value" title="suboptimumg.plotting.plotting_constants.ReferenceLineConfig.value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">value</span> <span class="pre">(float</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.width" title="suboptimumg.plotting.plotting_constants.ReferenceLineConfig.width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span> <span class="pre">(int)</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.ReferenceLineConfig.value">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> <span class="pre">|</span> <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.value" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.ReferenceLineConfig.label">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> <span class="pre">|</span> <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.label" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.ReferenceLineConfig.width">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">width</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.width" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.ReferenceLineConfig.dash">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dash</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'dash'</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.dash" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.ReferenceLineConfig.color">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">color</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'red'</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.color" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.SceneConfig">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.plotting_constants.</span></span><span class="sig-name descname"><span class="pre">SceneConfig</span></span><a class="reference internal" href="../_modules/suboptimumg/plotting/plotting_constants.html#SceneConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SceneConfig" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>3D scene configuration for surface plots.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Fields<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.SceneConfig.aspect_ratio_x" title="suboptimumg.plotting.plotting_constants.SceneConfig.aspect_ratio_x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aspect_ratio_x</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.SceneConfig.aspect_ratio_y" title="suboptimumg.plotting.plotting_constants.SceneConfig.aspect_ratio_y"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aspect_ratio_y</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.SceneConfig.aspect_ratio_z" title="suboptimumg.plotting.plotting_constants.SceneConfig.aspect_ratio_z"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aspect_ratio_z</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.SceneConfig.camera_distance" title="suboptimumg.plotting.plotting_constants.SceneConfig.camera_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">camera_distance</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.SceneConfig.camera_up_x" title="suboptimumg.plotting.plotting_constants.SceneConfig.camera_up_x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">camera_up_x</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.SceneConfig.camera_up_y" title="suboptimumg.plotting.plotting_constants.SceneConfig.camera_up_y"><code class="xref py py-obj docutils literal notranslate"><span class="pre">camera_up_y</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.SceneConfig.camera_up_z" title="suboptimumg.plotting.plotting_constants.SceneConfig.camera_up_z"><code class="xref py py-obj docutils literal notranslate"><span class="pre">camera_up_z</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.SceneConfig.camera_z" title="suboptimumg.plotting.plotting_constants.SceneConfig.camera_z"><code class="xref py py-obj docutils literal notranslate"><span class="pre">camera_z</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.SceneConfig.default_view_angle" title="suboptimumg.plotting.plotting_constants.SceneConfig.default_view_angle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">default_view_angle</span> <span class="pre">(int)</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.SceneConfig.aspect_ratio_x">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">aspect_ratio_x</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SceneConfig.aspect_ratio_x" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.SceneConfig.aspect_ratio_y">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">aspect_ratio_y</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SceneConfig.aspect_ratio_y" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.SceneConfig.aspect_ratio_z">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">aspect_ratio_z</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.8</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SceneConfig.aspect_ratio_z" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.SceneConfig.camera_distance">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">camera_distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2.0</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SceneConfig.camera_distance" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.SceneConfig.camera_z">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">camera_z</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.8</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SceneConfig.camera_z" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.SceneConfig.default_view_angle">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_view_angle</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-60</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SceneConfig.default_view_angle" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.SceneConfig.camera_up_x">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">camera_up_x</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SceneConfig.camera_up_x" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.SceneConfig.camera_up_y">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">camera_up_y</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SceneConfig.camera_up_y" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.SceneConfig.camera_up_z">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">camera_up_z</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SceneConfig.camera_up_z" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.SmoothingConfig">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.plotting_constants.</span></span><span class="sig-name descname"><span class="pre">SmoothingConfig</span></span><a class="reference internal" href="../_modules/suboptimumg/plotting/plotting_constants.html#SmoothingConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SmoothingConfig" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Smoothing and interpolation configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Fields<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.SmoothingConfig.interp_factor" title="suboptimumg.plotting.plotting_constants.SmoothingConfig.interp_factor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interp_factor</span> <span class="pre">(int)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.SmoothingConfig.interp_method" title="suboptimumg.plotting.plotting_constants.SmoothingConfig.interp_method"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interp_method</span> <span class="pre">(str)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.SmoothingConfig.smoothing_sigma" title="suboptimumg.plotting.plotting_constants.SmoothingConfig.smoothing_sigma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smoothing_sigma</span> <span class="pre">(float)</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.SmoothingConfig.interp_factor">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">interp_factor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SmoothingConfig.interp_factor" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.SmoothingConfig.smoothing_sigma">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">smoothing_sigma</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SmoothingConfig.smoothing_sigma" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.SmoothingConfig.interp_method">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">interp_method</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'linear'</span></em><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SmoothingConfig.interp_method" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="suboptimumg.plotting.overlay_plots.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">suboptimumg.plotting.overlay_plots</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="suboptimumg.plotting.stem_plot.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">suboptimumg.plotting.stem_plot</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.ColorbarConfig"><code class="docutils literal notranslate"><span class="pre">ColorbarConfig</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.ColorbarConfig.thickness"><code class="docutils literal notranslate"><span class="pre">ColorbarConfig.thickness</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.ColorbarConfig.length"><code class="docutils literal notranslate"><span class="pre">ColorbarConfig.length</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.FontConfig"><code class="docutils literal notranslate"><span class="pre">FontConfig</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.FontConfig.large"><code class="docutils literal notranslate"><span class="pre">FontConfig.large</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.FontConfig.medium"><code class="docutils literal notranslate"><span class="pre">FontConfig.medium</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.FontConfig.small"><code class="docutils literal notranslate"><span class="pre">FontConfig.small</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.LayoutConfig"><code class="docutils literal notranslate"><span class="pre">LayoutConfig</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.width"><code class="docutils literal notranslate"><span class="pre">LayoutConfig.width</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.height"><code class="docutils literal notranslate"><span class="pre">LayoutConfig.height</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.grid_width_per_col"><code class="docutils literal notranslate"><span class="pre">LayoutConfig.grid_width_per_col</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.grid_height_per_row"><code class="docutils literal notranslate"><span class="pre">LayoutConfig.grid_height_per_row</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.grid_horizontal_spacing"><code class="docutils literal notranslate"><span class="pre">LayoutConfig.grid_horizontal_spacing</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.grid_vertical_spacing"><code class="docutils literal notranslate"><span class="pre">LayoutConfig.grid_vertical_spacing</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.margin"><code class="docutils literal notranslate"><span class="pre">LayoutConfig.margin</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.plot_bgcolor"><code class="docutils literal notranslate"><span class="pre">LayoutConfig.plot_bgcolor</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.scene_bgcolor"><code class="docutils literal notranslate"><span class="pre">LayoutConfig.scene_bgcolor</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.title_x"><code class="docutils literal notranslate"><span class="pre">LayoutConfig.title_x</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.title_xanchor"><code class="docutils literal notranslate"><span class="pre">LayoutConfig.title_xanchor</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.title_yanchor"><code class="docutils literal notranslate"><span class="pre">LayoutConfig.title_yanchor</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig"><code class="docutils literal notranslate"><span class="pre">ReferenceLineConfig</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.value"><code class="docutils literal notranslate"><span class="pre">ReferenceLineConfig.value</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.label"><code class="docutils literal notranslate"><span class="pre">ReferenceLineConfig.label</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.width"><code class="docutils literal notranslate"><span class="pre">ReferenceLineConfig.width</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.dash"><code class="docutils literal notranslate"><span class="pre">ReferenceLineConfig.dash</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.color"><code class="docutils literal notranslate"><span class="pre">ReferenceLineConfig.color</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.SceneConfig"><code class="docutils literal notranslate"><span class="pre">SceneConfig</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.SceneConfig.aspect_ratio_x"><code class="docutils literal notranslate"><span class="pre">SceneConfig.aspect_ratio_x</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.SceneConfig.aspect_ratio_y"><code class="docutils literal notranslate"><span class="pre">SceneConfig.aspect_ratio_y</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.SceneConfig.aspect_ratio_z"><code class="docutils literal notranslate"><span class="pre">SceneConfig.aspect_ratio_z</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.SceneConfig.camera_distance"><code class="docutils literal notranslate"><span class="pre">SceneConfig.camera_distance</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.SceneConfig.camera_z"><code class="docutils literal notranslate"><span class="pre">SceneConfig.camera_z</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.SceneConfig.default_view_angle"><code class="docutils literal notranslate"><span class="pre">SceneConfig.default_view_angle</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.SceneConfig.camera_up_x"><code class="docutils literal notranslate"><span class="pre">SceneConfig.camera_up_x</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.SceneConfig.camera_up_y"><code class="docutils literal notranslate"><span class="pre">SceneConfig.camera_up_y</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.SceneConfig.camera_up_z"><code class="docutils literal notranslate"><span class="pre">SceneConfig.camera_up_z</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.SmoothingConfig"><code class="docutils literal notranslate"><span class="pre">SmoothingConfig</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.SmoothingConfig.interp_factor"><code class="docutils literal notranslate"><span class="pre">SmoothingConfig.interp_factor</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.SmoothingConfig.smoothing_sigma"><code class="docutils literal notranslate"><span class="pre">SmoothingConfig.smoothing_sigma</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.plotting_constants.SmoothingConfig.interp_method"><code class="docutils literal notranslate"><span class="pre">SmoothingConfig.interp_method</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/suboptimumg.plotting.plotting_constants.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Penn Electric Racing.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

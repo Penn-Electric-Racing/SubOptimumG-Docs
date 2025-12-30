@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>SubOptimumG - FSAE Competition Simulator &#8212; SubOptimumG</title>
+    <title>SubOptimumG &#8212; SubOptimumG</title>
   
   
   
@@ -31,6 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -47,8 +48,6 @@
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -146,49 +145,11 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="vehicle/index.html">
-    Vehicle Model
+  <a class="nav-link nav-internal" href="api/index.html">
+    Code Documentation
   </a>
 </li>
 
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="compsim/index.html">
-    Competition Model
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="sweep/index.html">
-    Parameter Sweeps
-  </a>
-</li>
-
-            <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false"
-                aria-controls="pst-nav-more-links">
-                    More
-                </button>
-                <ul id="pst-nav-more-links" class="dropdown-menu">
-                    
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="plotting/index.html">
-    Plotting & Visualization
-  </a>
-</li>
-
-
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="misc/index.html">
-    Misc.
-  </a>
-</li>
-
-                </ul>
-            </li>
-            
   </ul>
 </nav></div>
       
@@ -279,36 +240,8 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="vehicle/index.html">
-    Vehicle Model
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="compsim/index.html">
-    Competition Model
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="sweep/index.html">
-    Parameter Sweeps
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="plotting/index.html">
-    Plotting & Visualization
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="misc/index.html">
-    Misc.
+  <a class="nav-link nav-internal" href="api/index.html">
+    Code Documentation
   </a>
 </li>
 
@@ -362,61 +295,24 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="suboptimumg-fsae-competition-simulator">
-<h1>SubOptimumG - FSAE Competition Simulator<a class="headerlink" href="#suboptimumg-fsae-competition-simulator" title="Link to this heading">#</a></h1>
-<p>SubOptimumG is a Formula SAE Competition Simulator designed to model and analyze vehicle performance in FSAE
-events. This is a GGV-based point mass 4-tire lap simulation that runs every competition event to determine
-high-level car parameters. This sim assumes instantaneous weight transfer (i.e., no suspension) and contains a
-Tire friction circle fitted to TTC data.</p>
+  <section id="suboptimumg">
+<h1>SubOptimumG<a class="headerlink" href="#suboptimumg" title="Link to this heading">#</a></h1>
+<p>SubOptimumG is a 4-tire Vehicle Dynamics simulation used to analyze performance with respect to FSAE events.
+It models the car as a point mass with instantaneous weight transfer (i.e. no suspension) and incorporates a
+tire friction ellipse fitted to TTC data.</p>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="references/index.html">References</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core Components</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="vehicle/index.html">Vehicle Model</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vehicle/vehicle.html">vehicle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vehicle/accumulator/index.html">Accumulator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vehicle/aerodynamics/index.html">Aerodynamics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vehicle/chassis/index.html">Chassis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vehicle/driver_interface/index.html">Driver Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vehicle/powertrain/index.html">Powertrain</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vehicle/suspension/index.html">Suspension</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="compsim/index.html">Competition Model</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="compsim/compsim.html">compsim</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compsim/lapsim.html">lapsim</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compsim/track.html">track</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="sweep/index.html">Parameter Sweeps</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sweep/sweep.html">sweep</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sweep/sweep_results.html">sweep_results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sweep/capacity_sweep.html">capacity_sweep</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sweep/capacity_sweep_results.html">capacity_sweep_results</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="plotting/index.html">Plotting &amp; Visualization</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="plotting/plot_lapsim.html">plot_lapsim</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plotting/utils.html">utils</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Utilities</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="misc/index.html">Misc.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">Code Documentation</a></li>
 </ul>
 </div>
 </section>
@@ -494,7 +390,7 @@ Tire friction circle fitted to TTC data.</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
     <br/>
   </p>
 </div>

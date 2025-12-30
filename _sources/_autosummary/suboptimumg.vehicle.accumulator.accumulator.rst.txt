@@ -1,0 +1,8 @@
+suboptimumg.vehicle.accumulator.accumulator
+===========================================
+
+.. automodule:: suboptimumg.vehicle.accumulator.accumulator
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

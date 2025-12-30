@@ -1,0 +1,28 @@
+suboptimumg.sweep
+=================
+
+.. automodule:: suboptimumg.sweep
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   array_sweep_results
+   array_sweeper
+   constants
+   models
+   motor_sweep
+   motor_sweep_results
+   sweep_results_1var
+   sweep_results_2var
+   sweeper_1d
+   sweeper_2d
+   sweeper_factory
+   types
+   utils

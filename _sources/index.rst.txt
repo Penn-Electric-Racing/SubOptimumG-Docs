@@ -1,35 +1,21 @@
-SubOptimumG - FSAE Competition Simulator
+SubOptimumG
 =========================================
 
-SubOptimumG is a Formula SAE Competition Simulator designed to model and analyze vehicle performance in FSAE
-events. This is a GGV-based point mass 4-tire lap simulation that runs every competition event to determine
-high-level car parameters. This sim assumes instantaneous weight transfer (i.e., no suspension) and contains a
-Tire friction circle fitted to TTC data.
-
+SubOptimumG is a 4-tire Vehicle Dynamics simulation used to analyze performance with respect to FSAE events.
+It models the car as a point mass with instantaneous weight transfer (i.e. no suspension) and incorporates a
+tire friction ellipse fitted to TTC data.
 
 .. toctree::
    :maxdepth: 1
-   :caption: Getting Started
 
    getting_started/index
 
 .. toctree::
    :maxdepth: 1
-   :caption: References
 
    references/index
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Core Components
-
-   vehicle/index
-   compsim/index
-   sweep/index
-   plotting/index
-
-.. toctree::
    :maxdepth: 1
-   :caption: Utilities
 
-   misc/index
+   api/index

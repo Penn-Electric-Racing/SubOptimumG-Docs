@@ -1,0 +1,8 @@
+suboptimumg.vehicle.vehicle
+===========================
+
+.. automodule:: suboptimumg.vehicle.vehicle
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

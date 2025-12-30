@@ -1,0 +1,17 @@
+suboptimumg.vehicle.suspension
+==============================
+
+.. automodule:: suboptimumg.vehicle.suspension
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   suspension
+   tire

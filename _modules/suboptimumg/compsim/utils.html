@@ -1,0 +1,621 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>suboptimumg.compsim.utils &#8212; SubOptimumG</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/compsim/utils';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SubOptimumG</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.compsim.utils</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for suboptimumg.compsim.utils</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">npt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">joule_to_kwh</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="compute_event_points">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.utils.html#suboptimumg.compsim.utils.compute_event_points">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_event_points</span><span class="p">(</span><span class="n">scoring_config</span><span class="p">:</span> <span class="n">EventScoring</span><span class="p">,</span> <span class="n">t_your</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute competition points for an event based on your time.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    scoring_config : EventScoring</span>
+<span class="sd">        Configuration for event scoring</span>
+<span class="sd">    t_your : float</span>
+<span class="sd">        Your time for the event</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Competition points earned</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">best_time</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">t_your</span><span class="p">,</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">event_best_time</span><span class="p">)</span>
+    <span class="n">worst_time</span> <span class="o">=</span> <span class="n">best_time</span> <span class="o">*</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">worst_time_ratio</span>
+
+    <span class="n">your_ratio_to_worst</span> <span class="o">=</span> <span class="p">(</span><span class="n">worst_time</span> <span class="o">/</span> <span class="n">t_your</span><span class="p">)</span> <span class="o">**</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">scale_time_ratio</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">best_ratio_to_worst</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">worst_time</span> <span class="o">/</span> <span class="n">best_time</span>
+    <span class="p">)</span> <span class="o">**</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">scale_time_ratio</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">min_points</span> <span class="o">+</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">max_point_gain</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="n">your_ratio_to_worst</span> <span class="o">/</span> <span class="n">best_ratio_to_worst</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="compute_efficiency_points">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.utils.html#suboptimumg.compsim.utils.compute_efficiency_points">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_efficiency_points</span><span class="p">(</span>
+    <span class="n">scoring_config</span><span class="p">:</span> <span class="n">EfficiencyScoring</span><span class="p">,</span> <span class="n">consumed_energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">endurance_runtime</span><span class="p">:</span> <span class="nb">float</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute efficiency points based on energy consumption and endurance runtime.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    scoring_config : EfficiencyScoring</span>
+<span class="sd">        Configuration for efficiency scoring</span>
+<span class="sd">    consumed_energy : float</span>
+<span class="sd">        Energy consumed per lap (kWh)</span>
+<span class="sd">    endurance_runtime : float</span>
+<span class="sd">        Total endurance runtime (seconds)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Efficiency points earned</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Calculate our car&#39;s CO2 emissions (Assumes power is constant across each lap)</span>
+    <span class="n">total_energy</span> <span class="o">=</span> <span class="n">consumed_energy</span> <span class="o">*</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">num_endurance_laps</span>
+    <span class="n">co2_your</span> <span class="o">=</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">co2_scaling</span> <span class="o">*</span> <span class="n">total_energy</span>
+
+    <span class="c1"># Calculate our average laptime</span>
+    <span class="n">laptime_your</span> <span class="o">=</span> <span class="n">endurance_runtime</span> <span class="o">/</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">num_endurance_laps</span>
+
+    <span class="c1"># Calculate our efficiency factor</span>
+    <span class="n">t_ratio</span> <span class="o">=</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">fastest_lap_time</span> <span class="o">/</span> <span class="n">laptime_your</span>
+    <span class="n">co2_ratio</span> <span class="o">=</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">co2_min</span> <span class="o">/</span> <span class="n">co2_your</span>
+    <span class="n">eff_your</span> <span class="o">=</span> <span class="n">t_ratio</span> <span class="o">*</span> <span class="n">co2_ratio</span>
+
+    <span class="c1"># Calculate the rules-defined minimum efficiency, a constant used to scale points</span>
+    <span class="n">eff_min_t_ratio</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">max_time_scale</span>
+    <span class="n">eff_min_co2_ratio</span> <span class="o">=</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">co2_min</span> <span class="o">/</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">eff_min_co2_your</span>
+    <span class="n">eff_min</span> <span class="o">=</span> <span class="n">eff_min_t_ratio</span> <span class="o">*</span> <span class="n">eff_min_co2_ratio</span>
+
+    <span class="c1"># Convert efficiency factor to competition points</span>
+    <span class="n">eff_points</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">scoring_config</span><span class="o">.</span><span class="n">max_eff_points</span>
+        <span class="o">*</span> <span class="p">(</span><span class="n">eff_your</span> <span class="o">-</span> <span class="n">eff_min</span><span class="p">)</span>
+        <span class="o">/</span> <span class="p">(</span><span class="n">scoring_config</span><span class="o">.</span><span class="n">eff_max</span> <span class="o">-</span> <span class="n">eff_min</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">eff_points</span><span class="p">,</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">max_eff_points</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="energy_data">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.utils.html#suboptimumg.compsim.utils.energy_data">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">energy_data</span><span class="p">(</span>
+    <span class="n">time_list</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">power_list</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Manually integrates power to determine energy consumption across a lap. Uses trapezoidal integration</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    time_list: npt.ndarray[np.float64]</span>
+<span class="sd">        Cumulative timestamps corresponding to power values (seconds)</span>
+<span class="sd">    power_list : npt.ndarray[np.float64]</span>
+<span class="sd">        List of power values (Watts)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Positive energy consumption in kWh</span>
+<span class="sd">    float</span>
+<span class="sd">        Negative energy consumption in kWh</span>
+<span class="sd">    float</span>
+<span class="sd">        Net energy consumption in kWh</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">power_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>  <span class="c1"># n - 1 intervals</span>
+    <span class="n">interval_energy</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="p">)</span> <span class="o">*</span> <span class="n">dt</span>  <span class="c1"># trapezoidal rule over n - 1 intervals</span>
+
+    <span class="n">pos_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">neg_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">pos_joules</span> <span class="o">=</span> <span class="n">interval_energy</span><span class="p">[</span><span class="n">pos_mask</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">neg_joules</span> <span class="o">=</span> <span class="n">interval_energy</span><span class="p">[</span><span class="n">neg_mask</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">total_joules</span> <span class="o">=</span> <span class="n">interval_energy</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">joule_to_kwh</span><span class="p">(</span><span class="n">pos_joules</span><span class="p">),</span>
+        <span class="n">joule_to_kwh</span><span class="p">(</span><span class="n">neg_joules</span><span class="p">),</span>
+        <span class="n">joule_to_kwh</span><span class="p">(</span><span class="n">total_joules</span><span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="backsolve_energy_from_efficiency">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.utils.html#suboptimumg.compsim.utils.backsolve_energy_from_efficiency">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">backsolve_energy_from_efficiency</span><span class="p">(</span>
+    <span class="n">scoring_config</span><span class="p">:</span> <span class="n">EfficiencyScoring</span><span class="p">,</span>
+    <span class="n">total_endurance_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">efficiency_score</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates consumed energy in kWh given competition configuration,</span>
+<span class="sd">    total endurance event time, and efficiency score.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    scoring_config : EfficiencyScoring</span>
+<span class="sd">    total_endurance_time : float</span>
+<span class="sd">        Total endurance event time in seconds (tyour)</span>
+<span class="sd">    efficiency_score : float</span>
+<span class="sd">        Efficiency points score</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Consumed energy in kWh</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Calculate eff_min (efficiency factor minimum)</span>
+    <span class="c1"># From: compute_efficiency_factor(max_time_scale * fastest_lap_time, eff_min_co2_your)</span>
+    <span class="n">eff_min</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">max_time_scale</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="n">scoring_config</span><span class="o">.</span><span class="n">co2_min</span> <span class="o">/</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">eff_min_co2_your</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Solve for eff_your from efficiency_score</span>
+    <span class="c1"># eff_points = max_eff_points * (eff_your - eff_min) / (eff_max - eff_min)</span>
+    <span class="n">eff_your</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">efficiency_score</span>
+        <span class="o">*</span> <span class="p">(</span><span class="n">scoring_config</span><span class="o">.</span><span class="n">eff_max</span> <span class="o">-</span> <span class="n">eff_min</span><span class="p">)</span>
+        <span class="o">/</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">max_eff_points</span>
+        <span class="o">+</span> <span class="n">eff_min</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Calculate average laptime</span>
+    <span class="n">laptime_your</span> <span class="o">=</span> <span class="n">total_endurance_time</span> <span class="o">/</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">num_endurance_laps</span>
+
+    <span class="c1"># Solve for co2_your from eff_your</span>
+    <span class="c1"># eff_your = (fastest_lap_time / laptime_your) * (co2_min / co2_your)</span>
+    <span class="n">co2_your</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">scoring_config</span><span class="o">.</span><span class="n">fastest_lap_time</span> <span class="o">/</span> <span class="n">laptime_your</span><span class="p">)</span>
+        <span class="o">*</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">co2_min</span>
+        <span class="o">/</span> <span class="n">eff_your</span>
+    <span class="p">)</span>
+    <span class="c1"># Solve for consumed_energy from co2_your</span>
+    <span class="c1"># co2_your = co2_scaling * consumed_energy_total</span>
+    <span class="n">consumed_energy_kwh</span> <span class="o">=</span> <span class="n">co2_your</span> <span class="o">/</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">co2_scaling</span>
+
+    <span class="k">return</span> <span class="n">consumed_energy_kwh</span></div>
+
+
+
+<div class="viewcode-block" id="pretty_print_results">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.utils.html#suboptimumg.compsim.utils.pretty_print_results">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">pretty_print_results</span><span class="p">(</span>
+    <span class="n">comp_results</span><span class="p">:</span> <span class="n">CompetitionResults</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Print formatted competition results.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    comp_results : CompetitionResults</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">accel_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">comp_results</span><span class="o">.</span><span class="n">accel</span><span class="o">.</span><span class="n">tyour</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">accel_pts</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">comp_results</span><span class="o">.</span><span class="n">accel</span><span class="o">.</span><span class="n">points</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Accel time:&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">accel_time</span><span class="si">:</span><span class="s2">&lt;8</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Accel points:&#39;</span><span class="si">:</span><span class="s2">&lt;14</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">accel_pts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">skidpad_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">comp_results</span><span class="o">.</span><span class="n">skidpad</span><span class="o">.</span><span class="n">tyour</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">skidpad_pts</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">comp_results</span><span class="o">.</span><span class="n">skidpad</span><span class="o">.</span><span class="n">points</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;SkidP time:&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">skidpad_time</span><span class="si">:</span><span class="s2">&lt;8</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;SkidP points:&#39;</span><span class="si">:</span><span class="s2">&lt;14</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">skidpad_pts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">autox_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">comp_results</span><span class="o">.</span><span class="n">autoX</span><span class="o">.</span><span class="n">tyour</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">autox_pts</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">comp_results</span><span class="o">.</span><span class="n">autoX</span><span class="o">.</span><span class="n">points</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;AutoX time:&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">autox_time</span><span class="si">:</span><span class="s2">&lt;8</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;AutoX points:&#39;</span><span class="si">:</span><span class="s2">&lt;14</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">autox_pts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">endurance_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">comp_results</span><span class="o">.</span><span class="n">endurance</span><span class="o">.</span><span class="n">tyour</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">endurance_pts</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">comp_results</span><span class="o">.</span><span class="n">endurance</span><span class="o">.</span><span class="n">points</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">efficiency_pts</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">comp_results</span><span class="o">.</span><span class="n">efficiency_points</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Endur time:&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">endurance_time</span><span class="si">:</span><span class="s2">&lt;8</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Endur points:&#39;</span><span class="si">:</span><span class="s2">&lt;14</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">endurance_pts</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="si">:</span><span class="s2">&lt;21</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Effcy points:&#39;</span><span class="si">:</span><span class="s2">&lt;14</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">efficiency_pts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">total_pts</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">comp_results</span><span class="o">.</span><span class="n">total_points</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="si">:</span><span class="s2">&lt;21</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Total points:&#39;</span><span class="si">:</span><span class="s2">&lt;14</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">total_pts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Penn Electric Racing.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,995 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>suboptimumg.plotting.internal_data_plots &#8212; SubOptimumG</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/plotting/internal_data_plots';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SubOptimumG</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.plotting.internal_data_plots</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for suboptimumg.plotting.internal_data_plots</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">npt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">axis</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.models</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.plotting_constants</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axis</span><span class="p">,</span> <span class="n">Metric</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_x_vals</span><span class="p">(</span><span class="n">results</span><span class="p">:</span> <span class="n">LapsimResults</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="n">Axis</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+    <span class="k">match</span> <span class="n">axis</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">Axis</span><span class="o">.</span><span class="n">DISTANCE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">lap_dxs</span><span class="p">)</span>
+        <span class="k">case</span> <span class="n">Axis</span><span class="o">.</span><span class="n">TIME</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">results</span><span class="o">.</span><span class="n">lap_t</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported axis: </span><span class="si">{</span><span class="n">axis</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_extract_data_by_key</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="n">LapsimResults</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract data from LapsimResults by key name.</span>
+
+<span class="sd">    Supports both top-level and per-seed keys. Per-seed keys should be in the</span>
+<span class="sd">    format &quot;{field}_seed_{n}&quot;, e.g., &quot;v_proposal_seed_2&quot;.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    key : str</span>
+<span class="sd">        Key name to extract from results</span>
+<span class="sd">    results : LapsimResults</span>
+<span class="sd">        Lapsim results object</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    npt.NDArray[np.float64]</span>
+<span class="sd">        Extracted data array</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If the key is not found in either InternalData or LapsimResults</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s2">&quot;_seed_&quot;</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+        <span class="n">field_name</span><span class="p">,</span> <span class="n">seed_str</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;_seed_&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">seed_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">seed_str</span><span class="p">)</span>
+        <span class="n">seed_data</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">per_seed</span><span class="p">[</span><span class="n">seed_idx</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">seed_data</span><span class="p">,</span> <span class="n">field_name</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Invalid key. Per-seed data does not have field &#39;</span><span class="si">{</span><span class="n">field_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">seed_data</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">internal_data</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">internal_data</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Invalid key. Neither InternalData nor LapsimResults has field &#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
+        <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_mask_trace</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">grown_forward_mask</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">slower_mask</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">scatter_kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Split a trace into up to 4 traces based on two boolean masks.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : np.ndarray</span>
+<span class="sd">        X coordinates for the trace</span>
+<span class="sd">    y : np.ndarray</span>
+<span class="sd">        Y coordinates for the trace</span>
+<span class="sd">    grown_forward_mask : np.ndarray</span>
+<span class="sd">        Boolean mask where True -&gt; red, False -&gt; blue</span>
+<span class="sd">    slower_mask : np.ndarray</span>
+<span class="sd">        Boolean mask where True -&gt; &#39;x&#39; markers, False -&gt; circle markers</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Base name for the trace</span>
+<span class="sd">    **scatter_kwargs</span>
+<span class="sd">        Additional keyword arguments passed to go.Scatter</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list[go.Scatter]</span>
+<span class="sd">        List of Scatter traces split by mask combinations</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">traces</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Create 4 combinations: (grown_forward, is_slower)</span>
+    <span class="c1"># Use markers only to avoid interpolation between non-contiguous points</span>
+    <span class="n">combinations</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;fwd, is_slower&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="s2">&quot;circle&quot;</span><span class="p">,</span> <span class="s2">&quot;fwd&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;back, is_slower&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="s2">&quot;circle&quot;</span><span class="p">,</span> <span class="s2">&quot;back&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">grown_val</span><span class="p">,</span> <span class="n">slower_val</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">suffix</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">:</span>
+        <span class="c1"># Create mask for this combination</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">grown_forward_mask</span> <span class="o">==</span> <span class="n">grown_val</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">slower_mask</span> <span class="o">==</span> <span class="n">slower_val</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">mask</span><span class="p">):</span>
+            <span class="k">continue</span>  <span class="c1"># Skip if no points match this combination</span>
+
+        <span class="c1"># Extract masked points</span>
+        <span class="n">x_masked</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="n">y_masked</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+        <span class="n">trace_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x_masked</span><span class="p">,</span>
+            <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">y_masked</span><span class="p">,</span>
+            <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="n">mode</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;marker&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">color</span><span class="p">,</span> <span class="s2">&quot;symbol&quot;</span><span class="p">:</span> <span class="n">symbol</span><span class="p">},</span>
+            <span class="o">**</span><span class="n">scatter_kwargs</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">traces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="o">**</span><span class="n">trace_kwargs</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">traces</span>
+
+
+<div class="viewcode-block" id="plot_per_seed">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.internal_data_plots.html#suboptimumg.plotting.internal_data_plots.plot_per_seed">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_per_seed</span><span class="p">(</span>
+    <span class="n">results</span><span class="p">:</span> <span class="n">LapsimResults</span> <span class="o">|</span> <span class="n">List</span><span class="p">[</span><span class="n">LapsimResults</span><span class="p">],</span>
+    <span class="n">x_axis</span><span class="p">:</span> <span class="n">Axis</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">include_indices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">include_power</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
+    <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Draws one subplot per seed index showing velocity proposals, accel, power, and masks.</span>
+
+<span class="sd">    Allows overlaying seed traces across multiple lapsims.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    results : LapsimResults or List[LapsimResults]</span>
+<span class="sd">        For consistency, these should be the same event across different runs</span>
+<span class="sd">    x_axis : Axis</span>
+<span class="sd">        Use distance or time for the x-axis</span>
+<span class="sd">    include_indices : List[int], optional</span>
+<span class="sd">        Specify which seeds to include. e.x. [0, 1] only includes first two seeds.</span>
+<span class="sd">        Defaults to all seeds found.</span>
+<span class="sd">    include_power : bool, optional</span>
+<span class="sd">        Include power proposals (kW). True by default</span>
+<span class="sd">    title : str, optional</span>
+<span class="sd">        Plot title</span>
+<span class="sd">    font_config : FontConfig, optional</span>
+<span class="sd">        Font configuration object</span>
+<span class="sd">    layout_config : LayoutConfig, optional</span>
+<span class="sd">        Layout configuration object</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    go.Figure</span>
+<span class="sd">        Plotly figure object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">results</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">internal_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;LapsimResults must include internal_data to plot per-seed traces.&quot;</span>
+            <span class="p">)</span>
+
+    <span class="n">indices</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">seed_idx_list</span>
+        <span class="k">if</span> <span class="n">include_indices</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">seed_idx_list</span><span class="p">[</span><span class="n">include_indices</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">num_subplots</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span>
+        <span class="n">rows</span><span class="o">=</span><span class="n">num_subplots</span><span class="p">,</span>
+        <span class="n">cols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">shared_xaxes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">subplot_titles</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Seed_idx = </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">],</span>
+        <span class="n">specs</span><span class="o">=</span><span class="p">[[{</span><span class="s2">&quot;secondary_y&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_subplots</span><span class="p">)],</span>
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_subplots</span><span class="p">):</span>
+        <span class="n">row_idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">for</span> <span class="n">run_idx</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">include_indices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">target_seed_data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">per_seed</span><span class="p">[</span><span class="n">include_indices</span><span class="p">[</span><span class="n">idx</span><span class="p">]]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">target_seed_data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">per_seed</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+            <span class="n">x_vals</span> <span class="o">=</span> <span class="n">_get_x_vals</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x_axis</span><span class="p">)</span>
+            <span class="n">legend</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Run </span><span class="si">{</span><span class="n">run_idx</span><span class="si">}</span><span class="s2">&quot;</span>
+
+            <span class="c1"># Add masked traces for v_proposal</span>
+            <span class="k">for</span> <span class="n">trace</span> <span class="ow">in</span> <span class="n">_mask_trace</span><span class="p">(</span>
+                <span class="n">x_vals</span><span class="p">,</span>
+                <span class="n">target_seed_data</span><span class="o">.</span><span class="n">v_proposal</span><span class="p">,</span>
+                <span class="n">target_seed_data</span><span class="o">.</span><span class="n">grown_forward_mask</span><span class="p">,</span>
+                <span class="n">target_seed_data</span><span class="o">.</span><span class="n">slower_mask</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">legend</span><span class="si">}</span><span class="s2">:v_proposal&quot;</span><span class="p">,</span>
+                <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span>
+            <span class="p">):</span>
+                <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># Add v_max_pre (baseline before this seed&#39;s modifications)</span>
+            <span class="c1"># For seed 0, use the initial v_max_profile</span>
+            <span class="c1"># For seed i &gt; 0, use v_max_post from seed i-1</span>
+            <span class="n">actual_seed_idx</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">include_indices</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">if</span> <span class="n">include_indices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">idx</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">actual_seed_idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">v_max_pre</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">v_max_profile</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">v_max_pre</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">per_seed</span><span class="p">[</span><span class="n">actual_seed_idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">v_max_post</span>
+
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">x_vals</span><span class="p">,</span>
+                    <span class="n">y</span><span class="o">=</span><span class="n">v_max_pre</span><span class="p">,</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">legend</span><span class="si">}</span><span class="s2">:v_max_pre&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span>
+                <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Add acceleration</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">x_vals</span><span class="p">,</span>
+                    <span class="n">y</span><span class="o">=</span><span class="n">target_seed_data</span><span class="o">.</span><span class="n">acc_proposal</span><span class="p">,</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">legend</span><span class="si">}</span><span class="s2">:acc&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span>
+                <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">secondary_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Add power if requested</span>
+            <span class="k">if</span> <span class="n">include_power</span><span class="p">:</span>
+                <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                    <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                        <span class="n">x</span><span class="o">=</span><span class="n">x_vals</span><span class="p">,</span>
+                        <span class="n">y</span><span class="o">=</span><span class="n">target_seed_data</span><span class="o">.</span><span class="n">p_proposal</span> <span class="o">/</span> <span class="mf">1000.0</span><span class="p">,</span>
+                        <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span>
+                        <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">legend</span><span class="si">}</span><span class="s2">:power(kW)&quot;</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span>
+                    <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">secondary_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Velocity (m/s)&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span>
+            <span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Accel / Power&quot;</span><span class="p">,</span> <span class="n">secondary_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span>
+            <span class="n">title_text</span><span class="o">=</span><span class="n">x_axis</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span>
+            <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">height</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">height</span> <span class="o">*</span> <span class="n">num_subplots</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">,</span>  <span class="c1"># Intentionally wide graph for visibility</span>
+        <span class="n">title</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">title</span> <span class="ow">or</span> <span class="s2">&quot;Per-seed Internal Traces&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">large</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
+            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">title_x</span><span class="p">,</span>
+            <span class="s2">&quot;xanchor&quot;</span><span class="p">:</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">title_xanchor</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="n">legend</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;v&quot;</span><span class="p">,</span>
+            <span class="n">yanchor</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span>
+            <span class="n">xanchor</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">margin</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">margin</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<div class="viewcode-block" id="plot_event_traces">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.internal_data_plots.html#suboptimumg.plotting.internal_data_plots.plot_event_traces">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_event_traces</span><span class="p">(</span>
+    <span class="n">results</span><span class="p">:</span> <span class="n">LapsimResults</span> <span class="o">|</span> <span class="n">List</span><span class="p">[</span><span class="n">LapsimResults</span><span class="p">],</span>
+    <span class="n">x_axis</span><span class="p">:</span> <span class="n">Axis</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">metrics</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Metric</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">Metric</span><span class="o">.</span><span class="n">VELOCITY</span><span class="p">,</span> <span class="n">Metric</span><span class="o">.</span><span class="n">ACCEL</span><span class="p">,</span> <span class="n">Metric</span><span class="o">.</span><span class="n">POWER</span><span class="p">],</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
+    <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot final velocity, acceleration, and power traces on a single plot.</span>
+
+<span class="sd">    Allows overlaying traces across multiple lapsims for direct comparison</span>
+<span class="sd">    of different vehicle configurations.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    results : LapsimResults or List[LapsimResults]</span>
+<span class="sd">        Results to plot. Pass a list to overlay multiple configurations.</span>
+<span class="sd">    x_axis : Axis</span>
+<span class="sd">        Axis to use for the x-axis (distance or time)</span>
+<span class="sd">    labels : List[str], optional</span>
+<span class="sd">        Labels for each result set (e.g., [&quot;baseline&quot;, &quot;new_config&quot;]).</span>
+<span class="sd">        If not provided, defaults to &quot;run_0&quot;, &quot;run_1&quot;, etc.</span>
+<span class="sd">    metrics : List[Metric], optional</span>
+<span class="sd">        Metrics to plot. Defaults to all three (velocity, accel, power)</span>
+<span class="sd">    title : str, optional</span>
+<span class="sd">        Plot title</span>
+<span class="sd">    layout_config : LayoutConfig, optional</span>
+<span class="sd">        Layout configuration object</span>
+<span class="sd">    font_config : FontConfig, optional</span>
+<span class="sd">        Font configuration object</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    go.Figure</span>
+<span class="sd">        Plotly figure object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Normalize inputs to lists</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">results</span><span class="p">]</span>
+
+    <span class="c1"># Generate default labels if not provided</span>
+    <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;run_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">))]</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;run_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">))]</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">run_idx</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">x_vals</span> <span class="o">=</span> <span class="n">_get_x_vals</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x_axis</span><span class="p">)</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">run_idx</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">:</span>
+            <span class="n">y_vals</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">metric</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">metric</span> <span class="o">==</span> <span class="n">Metric</span><span class="o">.</span><span class="n">POWER</span><span class="p">:</span>
+                <span class="n">y_vals</span> <span class="o">=</span> <span class="n">y_vals</span> <span class="o">/</span> <span class="mf">1000.0</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">x_vals</span><span class="p">,</span>
+                    <span class="n">y</span><span class="o">=</span><span class="n">y_vals</span><span class="p">,</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">metric</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="n">x_axis</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">height</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">title</span> <span class="ow">or</span> <span class="s2">&quot;Event Traces&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">large</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
+            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">title_x</span><span class="p">,</span>
+            <span class="s2">&quot;xanchor&quot;</span><span class="p">:</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">title_xanchor</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="n">legend</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;v&quot;</span><span class="p">,</span>
+            <span class="n">yanchor</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span>
+            <span class="n">xanchor</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">margin</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">margin</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<div class="viewcode-block" id="plot_competition_traces">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.internal_data_plots.html#suboptimumg.plotting.internal_data_plots.plot_competition_traces">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_competition_traces</span><span class="p">(</span>
+    <span class="n">competitions</span><span class="p">:</span> <span class="n">CompetitionResults</span> <span class="o">|</span> <span class="n">List</span><span class="p">[</span><span class="n">CompetitionResults</span><span class="p">],</span>
+    <span class="n">x_axis</span><span class="p">:</span> <span class="n">Axis</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
+    <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot one subplot for each event in a competition, displaying velocity, accel, and power traces.</span>
+
+<span class="sd">    Allows overlaying traces across multiple competitions.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    competitions : CompetitionResults or List[CompetitionResults]</span>
+<span class="sd">        Competition results to plot</span>
+<span class="sd">    x_axis : Axis</span>
+<span class="sd">        Axis to use for the x-axis (distance or time)</span>
+<span class="sd">    labels : List[str], optional</span>
+<span class="sd">        Labels for each competition (e.g., [&quot;baseline&quot;, &quot;new_config&quot;]).</span>
+<span class="sd">        If not provided, defaults to &quot;comp_0&quot;, &quot;comp_1&quot;, etc.</span>
+<span class="sd">    title : str, optional</span>
+<span class="sd">        Plot title</span>
+<span class="sd">    layout_config : LayoutConfig, optional</span>
+<span class="sd">        Layout configuration object</span>
+<span class="sd">    font_config : FontConfig, optional</span>
+<span class="sd">        Font configuration object</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    go.Figure</span>
+<span class="sd">        Plotly figure object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">competitions</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">competitions</span> <span class="o">=</span> <span class="p">[</span><span class="n">competitions</span><span class="p">]</span>
+
+    <span class="c1"># Generate default labels if not provided</span>
+    <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;comp_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">competitions</span><span class="p">))]</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">competitions</span><span class="p">):</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;comp_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">competitions</span><span class="p">))]</span>
+
+    <span class="n">events</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;accel&quot;</span><span class="p">,</span> <span class="s2">&quot;skidpad&quot;</span><span class="p">,</span> <span class="s2">&quot;autoX&quot;</span><span class="p">,</span> <span class="s2">&quot;endurance&quot;</span><span class="p">]</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span>
+        <span class="n">rows</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">events</span><span class="p">),</span>
+        <span class="n">cols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">shared_xaxes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">subplot_titles</span><span class="o">=</span><span class="n">events</span><span class="p">,</span>
+        <span class="n">specs</span><span class="o">=</span><span class="p">[[{</span><span class="s2">&quot;secondary_y&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">events</span><span class="p">],</span>
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">e_label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">events</span><span class="p">):</span>
+        <span class="n">row_idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">comp_idx</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">competitions</span><span class="p">):</span>
+            <span class="n">event_lapsim</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">e_label</span><span class="p">)</span><span class="o">.</span><span class="n">lapsim_results</span>
+            <span class="n">x_vals</span> <span class="o">=</span> <span class="n">_get_x_vals</span><span class="p">(</span><span class="n">event_lapsim</span><span class="p">,</span> <span class="n">x_axis</span><span class="p">)</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">comp_idx</span><span class="p">]</span>
+
+            <span class="c1"># Plot velocity</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">x_vals</span><span class="p">,</span>
+                    <span class="n">y</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">event_lapsim</span><span class="p">,</span> <span class="s2">&quot;lap_vels&quot;</span><span class="p">),</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">:velocity&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span>
+                <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">secondary_y</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Plot acceleration</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">x_vals</span><span class="p">,</span>
+                    <span class="n">y</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">event_lapsim</span><span class="p">,</span> <span class="s2">&quot;lap_accs&quot;</span><span class="p">),</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">:accel&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span>
+                <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">secondary_y</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Plot power</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">x_vals</span><span class="p">,</span>
+                    <span class="n">y</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">event_lapsim</span><span class="p">,</span> <span class="s2">&quot;lap_powers&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.0</span><span class="p">,</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">:power&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span>
+                <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">secondary_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Velocity / Accel&quot;</span><span class="p">,</span> <span class="n">secondary_y</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Power (kW)&quot;</span><span class="p">,</span> <span class="n">secondary_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span>
+            <span class="n">title_text</span><span class="o">=</span><span class="n">x_axis</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">height</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">height</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">events</span><span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">title</span> <span class="ow">or</span> <span class="s2">&quot;Competition Traces (velocity, accel, power)&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">large</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
+            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">title_x</span><span class="p">,</span>
+            <span class="s2">&quot;xanchor&quot;</span><span class="p">:</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">title_xanchor</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="n">legend</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;v&quot;</span><span class="p">,</span>
+            <span class="n">yanchor</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span>
+            <span class="n">xanchor</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">margin</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">margin</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<div class="viewcode-block" id="plot_internal_keys">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.internal_data_plots.html#suboptimumg.plotting.internal_data_plots.plot_internal_keys">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_internal_keys</span><span class="p">(</span>
+    <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">LapsimResults</span><span class="p">],</span>
+    <span class="n">keys</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">x_axis</span><span class="p">:</span> <span class="n">Axis</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
+    <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot any tracked internal variables (top-level or per-seed) by key name.</span>
+
+<span class="sd">    Provided for back compatibility and more flexible access.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    results : List[LapsimResults]</span>
+<span class="sd">        List of lapsim results to plot</span>
+<span class="sd">    keys : List[str]</span>
+<span class="sd">        List of keys to plot</span>
+<span class="sd">    x_axis : Axis</span>
+<span class="sd">        Axis to use for the x-axis (distance or time)</span>
+<span class="sd">    title : str, optional</span>
+<span class="sd">        Plot title</span>
+<span class="sd">    layout_config : LayoutConfig, optional</span>
+<span class="sd">        Layout configuration object</span>
+<span class="sd">    font_config : FontConfig, optional</span>
+<span class="sd">        Font configuration object</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    go.Figure</span>
+<span class="sd">        Plotly figure object</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Possible key names:</span>
+<span class="sd">    - Internal Data top-level keys: ``v_max_profile``, ``seed_idx_list``, ``cumulative_dist``</span>
+<span class="sd">    - LapsimResults top-level keys: ``lap_t``, ``lap_dxs``, ``lap_vels``, ``lap_accs``, ``lap_powers``, ``lap_eff_motor_torques``</span>
+<span class="sd">    - Per-seed keys in the form ``{field}_seed_{n}`` (e.g. ``v_proposal_seed_2``)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span>
+        <span class="n">rows</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">),</span>
+        <span class="n">cols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">shared_xaxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">subplot_titles</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">keys</span><span class="p">):</span>
+        <span class="n">row_idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">for</span> <span class="n">run_idx</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+            <span class="n">x_vals</span> <span class="o">=</span> <span class="n">_get_x_vals</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+            <span class="n">y_vals</span> <span class="o">=</span> <span class="n">_extract_data_by_key</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">x_vals</span><span class="p">,</span>
+                    <span class="n">y</span><span class="o">=</span><span class="n">y_vals</span><span class="p">,</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;run_</span><span class="si">{</span><span class="n">run_idx</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span>
+                <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="n">x_axis</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">height</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">height</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">title</span> <span class="ow">or</span> <span class="s2">&quot;Internal variable traces&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">large</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
+            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">title_x</span><span class="p">,</span>
+            <span class="s2">&quot;xanchor&quot;</span><span class="p">:</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">title_xanchor</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="n">legend</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;v&quot;</span><span class="p">,</span>
+            <span class="n">yanchor</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span>
+            <span class="n">xanchor</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">margin</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">margin</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Penn Electric Racing.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

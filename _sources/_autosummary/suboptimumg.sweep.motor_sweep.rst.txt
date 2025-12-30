@@ -1,0 +1,8 @@
+suboptimumg.sweep.motor\_sweep
+==============================
+
+.. automodule:: suboptimumg.sweep.motor_sweep
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

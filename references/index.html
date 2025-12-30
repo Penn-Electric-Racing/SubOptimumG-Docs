@@ -31,6 +31,7 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,8 +51,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'references/index';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="References" href="references.html" />
-    <link rel="prev" title="Contributing" href="../getting_started/contributing.html" />
+    <link rel="next" title="Code Documentation" href="../api/index.html" />
+    <link rel="prev" title="SuboptimumG Tutorial" href="../getting_started/notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -145,49 +146,11 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../vehicle/index.html">
-    Vehicle Model
+  <a class="nav-link nav-internal" href="../api/index.html">
+    Code Documentation
   </a>
 </li>
 
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../compsim/index.html">
-    Competition Model
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../sweep/index.html">
-    Parameter Sweeps
-  </a>
-</li>
-
-            <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false"
-                aria-controls="pst-nav-more-links">
-                    More
-                </button>
-                <ul id="pst-nav-more-links" class="dropdown-menu">
-                    
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="../plotting/index.html">
-    Plotting & Visualization
-  </a>
-</li>
-
-
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="../misc/index.html">
-    Misc.
-  </a>
-</li>
-
-                </ul>
-            </li>
-            
   </ul>
 </nav></div>
       
@@ -276,36 +239,8 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../vehicle/index.html">
-    Vehicle Model
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../compsim/index.html">
-    Competition Model
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../sweep/index.html">
-    Parameter Sweeps
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../plotting/index.html">
-    Plotting & Visualization
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../misc/index.html">
-    Misc.
+  <a class="nav-link nav-internal" href="../api/index.html">
+    Code Documentation
   </a>
 </li>
 
@@ -336,10 +271,7 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
-</ul>
-</div>
+  <div class="bd-toc-item navbar-nav"></div>
 </nav></div>
     </div>
   
@@ -397,11 +329,47 @@
                   
   <section id="references">
 <h1>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
+<section id="design-process-vehicle-dynamics">
+<h2>Design Process &amp; Vehicle Dynamics<a class="headerlink" href="#design-process-vehicle-dynamics" title="Link to this heading">#</a></h2>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li><p><strong>FSAE Design Process Guide</strong></p>
+<p>A comprehensive forum thread on systematic FSAE vehicle design, with pages 4-5
+particularly relevant to lap time simulation.</p>
+<p><a class="reference external" href="http://www.fsae.com/forums/showthread.php?362-Reasoning-your-way-through-the-FSAE-design-process/page4">Read on FSAE Forums</a></p>
+</li>
+<li><p><strong>Vehicle Design Priorities</strong></p>
+<p>Overview of fundamental priorities in FSAE vehicle design.</p>
+<p><a class="reference external" href="https://www.designjudges.com/articles/overall-vehicle-priorities">Design Judges - Overall Vehicle Priorities</a></p>
+</li>
+<li><p><strong>Electric Vehicle Performance Guide</strong></p>
+<p>Fundamentals of electric vehicle performance in FSAE context.</p>
+<p><a class="reference external" href="https://www.designjudges.com/articles/ev-performance-fundamentals">Design Judges - EV Performance Fundamentals</a></p>
+</li>
 </ul>
-</div>
+</section>
+<section id="technical-documentation">
+<h2>Technical Documentation<a class="headerlink" href="#technical-documentation" title="Link to this heading">#</a></h2>
+<ul>
+<li><p><strong>REV2 Design Report</strong></p>
+<p>Comprehensive design documentation from the REV2 team.</p>
+<p><a class="reference external" href="https://drive.google.com/file/d/0B3iGzkJcn8fCRGdzSThsTDVsLWM/view?usp=sharing&amp;resourcekey=0-z6QuZPuWEsr7h2AeGgyEjw">View REV 2 Report</a></p>
+</li>
+<li><p><strong>GFR 2015 Design Report</strong></p>
+<p>Design report from Global Formula Racing’s dominant 2010-2015 period.</p>
+<p><a class="reference external" href="https://drive.google.com/file/d/1yOdP1vyLwJbQijoOKnRQ6ZPYkeYR0FAd/view?usp=sharing">View GFR eport</a></p>
+</li>
+</ul>
+</section>
+<section id="research-papers">
+<h2>Research Papers<a class="headerlink" href="#research-papers" title="Link to this heading">#</a></h2>
+<ul>
+<li><p><strong>Tire Modeling Research</strong></p>
+<p>“Tire Model with Temperature Effects for Formula SAE Vehicle” - Academic paper on
+temperature-dependent tire modeling.</p>
+<p><a class="reference external" href="https://www.mdpi.com/2076-3417/9/24/5328">Read Paper</a></p>
+</li>
+</ul>
+</section>
 </section>
 
 
@@ -415,20 +383,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../getting_started/contributing.html"
+       href="../getting_started/notebook.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Contributing</p>
+        <p class="prev-next-title">SuboptimumG Tutorial</p>
       </div>
     </a>
     <a class="right-next"
-       href="references.html"
+       href="../api/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">References</p>
+        <p class="prev-next-title">Code Documentation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -442,6 +410,20 @@
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#design-process-vehicle-dynamics">Design Process &amp; Vehicle Dynamics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-documentation">Technical Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#research-papers">Research Papers</a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div role="note" aria-label="source link">
@@ -486,7 +468,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
     <br/>
   </p>
 </div>

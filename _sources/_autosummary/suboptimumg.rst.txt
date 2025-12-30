@@ -1,0 +1,24 @@
+﻿suboptimumg
+===========
+
+.. automodule:: suboptimumg
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   compsim
+   constants
+   gdrive
+   models
+   plotting
+   sweep
+   track
+   vehicle
+   yaml
