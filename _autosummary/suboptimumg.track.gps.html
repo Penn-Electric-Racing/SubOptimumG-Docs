@@ -276,6 +276,7 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.compsim.html">suboptimumg.compsim</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.competition.html">suboptimumg.compsim.competition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.competition_factory.html">suboptimumg.compsim.competition_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.custom_run.html">suboptimumg.compsim.custom_run</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.lap.html">suboptimumg.compsim.lap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.models.html">suboptimumg.compsim.models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.utils.html">suboptimumg.compsim.utils</a></li>
@@ -441,7 +442,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.track.gps.gps_interpolate">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.track.gps.</span></span><span class="sig-name descname"><span class="pre">gps_interpolate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smooth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/track/gps.html#gps_interpolate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.track.gps.gps_interpolate" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.track.gps.</span></span><span class="sig-name descname"><span class="pre">gps_interpolate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/track/gps.html#gps_interpolate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.track.gps.gps_interpolate" title="Link to this definition">#</a></dt>
 <dd><p>Cleans GPS data, then interpolates to get a new set of coordinates with at
 a constant distance interval</p>
 <dl class="field-list simple">
@@ -482,7 +483,7 @@ array based on the new coordinates</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.track.gps.gps_to_cartesian">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.track.gps.</span></span><span class="sig-name descname"><span class="pre">gps_to_cartesian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin_offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/track/gps.html#gps_to_cartesian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.track.gps.gps_to_cartesian" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.track.gps.</span></span><span class="sig-name descname"><span class="pre">gps_to_cartesian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin_offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/track/gps.html#gps_to_cartesian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.track.gps.gps_to_cartesian" title="Link to this definition">#</a></dt>
 <dd><p>Converts GPS coordinates (lat/lon) to Cartesian coordinates (x, y) in meters.
 Uses Web Mercator projection (EPSG:3857).</p>
 <dl class="field-list simple">
@@ -490,13 +491,19 @@ Uses Web Mercator projection (EPSG:3857).</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>coords</strong> (<a class="reference internal" href="suboptimumg.track.models.html#suboptimumg.track.models.CoordinateListInput" title="suboptimumg.track.models.CoordinateListInput"><em>CoordinateListInput</em></a>) – GPS coordinates to convert</p></li>
 <li><p><strong>origin_offset</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, offsets coordinates so the first point is at (0, 0) (default: True)</p></li>
+<li><p><strong>origin</strong> (<em>Tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>] </em><em>| </em><em>None</em>)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>(x_m, y_m) - Arrays of x and y coordinates in meters</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code>]], <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code>]]]</span></p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Tuple[NDArray[float64], NDArray[float64]]</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>NDArray[np.float64]</em> – x_m - Arrays of x coordinates in meters</p></li>
+<li><p><em>NDArray[np.float64]</em> – y_m - Arrays of x and y coordinates in meters</p></li>
+<li><p><em>Tuple[float, float]</em> – absolute_origin - The original (un-offset) origin point in meters</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>

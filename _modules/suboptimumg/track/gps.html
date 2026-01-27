@@ -332,7 +332,9 @@
 <div class="viewcode-block" id="gps_to_cartesian">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.track.gps.html#suboptimumg.track.gps.gps_to_cartesian">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">gps_to_cartesian</span><span class="p">(</span>
-    <span class="n">coords</span><span class="p">:</span> <span class="n">CoordinateListInput</span><span class="p">,</span> <span class="n">origin_offset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">coords</span><span class="p">:</span> <span class="n">CoordinateListInput</span><span class="p">,</span>
+    <span class="n">origin_offset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">origin</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts GPS coordinates (lat/lon) to Cartesian coordinates (x, y) in meters.</span>
@@ -347,8 +349,12 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    Tuple[NDArray[float64], NDArray[float64]]</span>
-<span class="sd">        (x_m, y_m) - Arrays of x and y coordinates in meters</span>
+<span class="sd">    NDArray[np.float64]</span>
+<span class="sd">        x_m - Arrays of x coordinates in meters</span>
+<span class="sd">    NDArray[np.float64]</span>
+<span class="sd">        y_m - Arrays of x and y coordinates in meters</span>
+<span class="sd">    Tuple[float, float]</span>
+<span class="sd">        absolute_origin - The original (un-offset) origin point in meters</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Convert from WGS84 (EPSG:4326) to Web Mercator (EPSG:3857)</span>
     <span class="n">transformer</span> <span class="o">=</span> <span class="n">Transformer</span><span class="o">.</span><span class="n">from_crs</span><span class="p">(</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">,</span> <span class="s2">&quot;EPSG:3857&quot;</span><span class="p">,</span> <span class="n">always_xy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -357,19 +363,24 @@
     <span class="n">x_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_m</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">y_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_m</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
+    <span class="n">absolute_origin</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_m</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_m</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
     <span class="c1"># Offset to start at origin if requested</span>
     <span class="k">if</span> <span class="n">origin_offset</span><span class="p">:</span>
-        <span class="n">x_m</span> <span class="o">=</span> <span class="n">x_m</span> <span class="o">-</span> <span class="n">x_m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">y_m</span> <span class="o">=</span> <span class="n">y_m</span> <span class="o">-</span> <span class="n">y_m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">x_origin</span> <span class="o">=</span> <span class="n">x_m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">origin</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">origin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">y_origin</span> <span class="o">=</span> <span class="n">y_m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">origin</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">origin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-    <span class="k">return</span> <span class="n">x_m</span><span class="p">,</span> <span class="n">y_m</span></div>
+        <span class="n">x_m</span> <span class="o">=</span> <span class="n">x_m</span> <span class="o">-</span> <span class="n">x_origin</span>
+        <span class="n">y_m</span> <span class="o">=</span> <span class="n">y_m</span> <span class="o">-</span> <span class="n">y_origin</span>
+
+    <span class="k">return</span> <span class="n">x_m</span><span class="p">,</span> <span class="n">y_m</span><span class="p">,</span> <span class="n">absolute_origin</span></div>
 
 
 
 <div class="viewcode-block" id="gps_interpolate">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.track.gps.html#suboptimumg.track.gps.gps_interpolate">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">gps_interpolate</span><span class="p">(</span>
-    <span class="n">coords</span><span class="p">:</span> <span class="n">CoordinateListInput</span><span class="p">,</span> <span class="n">smooth</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">coords</span><span class="p">:</span> <span class="n">CoordinateListInput</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">CoordinateListInput</span><span class="p">,</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Cleans GPS data, then interpolates to get a new set of coordinates with at</span>
@@ -397,8 +408,10 @@
 
     <span class="c1"># Create smoothed spline</span>
     <span class="n">tck</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">splprep</span><span class="p">(</span>
-        <span class="p">[</span><span class="n">_gps_data</span><span class="o">.</span><span class="n">latitudes</span><span class="p">,</span> <span class="n">_gps_data</span><span class="o">.</span><span class="n">longitudes</span><span class="p">],</span> <span class="n">u</span><span class="o">=</span><span class="n">xi</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">smooth</span>
-    <span class="p">)</span>  <span class="c1"># &#39;s&#39; controls smoothness</span>
+        <span class="p">[</span><span class="n">_gps_data</span><span class="o">.</span><span class="n">latitudes</span><span class="p">,</span> <span class="n">_gps_data</span><span class="o">.</span><span class="n">longitudes</span><span class="p">],</span>
+        <span class="n">u</span><span class="o">=</span><span class="n">xi</span><span class="p">,</span>
+        <span class="n">s</span><span class="o">=</span><span class="n">coords</span><span class="o">.</span><span class="n">smoothing</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">xi</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">coords</span><span class="o">.</span><span class="n">distance_step</span><span class="p">))</span>
 
     <span class="n">cumulative_dist_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xi</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xi</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">num</span><span class="p">)</span>

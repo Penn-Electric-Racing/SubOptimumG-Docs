@@ -1,0 +1,8 @@
+suboptimumg.compsim.custom\_run
+===============================
+
+.. automodule:: suboptimumg.compsim.custom_run
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

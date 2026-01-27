@@ -399,11 +399,16 @@
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A list of latitude coordinates, must match longitudes length&quot;</span>
     <span class="p">)</span>
     <span class="n">distance_step</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The length dx to be used to quantize the track&quot;</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>  <span class="c1"># Default step size is 1 decimeter</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The length dx to be used to quantize the track&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">sample_dist</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Distance to sample before/after a point for Menger curvature calculation&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">smoothing</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Smoothing parameter for spline interpolation&quot;</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -427,6 +432,9 @@
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Distance to sample for Menger curvature calculation&quot;</span>
     <span class="p">)</span>
     <span class="n">tck</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;B-spline representation (tuple from scipy)&quot;</span><span class="p">)</span>
+    <span class="n">absolute_origin</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The original (un-offset) origin point in meters&quot;</span>
+    <span class="p">)</span>
     <span class="n">seed_idx</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Array of simulation seed indices&quot;</span>
     <span class="p">)</span></div>

@@ -15,6 +15,7 @@ suboptimumg.compsim
 
    competition
    competition_factory
+   custom_run
    lap
    models
    utils

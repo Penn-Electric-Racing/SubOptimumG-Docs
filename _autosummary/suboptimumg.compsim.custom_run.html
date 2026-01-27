@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>suboptimumg.sweep.motor_sweep &#8212; SubOptimumG</title>
+    <title>suboptimumg.compsim.custom_run &#8212; SubOptimumG</title>
   
   
   
@@ -48,11 +48,11 @@
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.sweep.motor_sweep';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.compsim.custom_run';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="suboptimumg.sweep.motor_sweep_results" href="suboptimumg.sweep.motor_sweep_results.html" />
-    <link rel="prev" title="suboptimumg.sweep.models" href="suboptimumg.sweep.models.html" />
+    <link rel="next" title="suboptimumg.compsim.lap" href="suboptimumg.compsim.lap.html" />
+    <link rel="prev" title="suboptimumg.compsim.competition_factory" href="suboptimumg.compsim.competition_factory.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -273,10 +273,10 @@
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="suboptimumg.html">suboptimumg</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.compsim.html">suboptimumg.compsim</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.compsim.html">suboptimumg.compsim</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.competition.html">suboptimumg.compsim.competition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.competition_factory.html">suboptimumg.compsim.competition_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.custom_run.html">suboptimumg.compsim.custom_run</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">suboptimumg.compsim.custom_run</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.lap.html">suboptimumg.compsim.lap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.models.html">suboptimumg.compsim.models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.compsim.utils.html">suboptimumg.compsim.utils</a></li>
@@ -298,12 +298,12 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.utils.html">suboptimumg.plotting.utils</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.sweep.html">suboptimumg.sweep</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.sweep.html">suboptimumg.sweep</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.array_sweep_results.html">suboptimumg.sweep.array_sweep_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.array_sweeper.html">suboptimumg.sweep.array_sweeper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.constants.html">suboptimumg.sweep.constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.models.html">suboptimumg.sweep.models</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">suboptimumg.sweep.motor_sweep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep.html">suboptimumg.sweep.motor_sweep</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html">suboptimumg.sweep.motor_sweep_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_1var.html">suboptimumg.sweep.sweep_results_1var</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_2var.html">suboptimumg.sweep.sweep_results_2var</a></li>
@@ -402,9 +402,9 @@
     <li class="breadcrumb-item"><a href="suboptimumg.html" class="nav-link">suboptimumg</a></li>
     
     
-    <li class="breadcrumb-item"><a href="suboptimumg.sweep.html" class="nav-link">suboptimumg.sweep</a></li>
+    <li class="breadcrumb-item"><a href="suboptimumg.compsim.html" class="nav-link">suboptimumg.compsim</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.sweep.motor_sweep</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.compsim.custom_run</span></li>
   </ul>
 </nav>
 </div>
@@ -421,40 +421,141 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-suboptimumg.sweep.motor_sweep">
-<span id="suboptimumg-sweep-motor-sweep"></span><h1>suboptimumg.sweep.motor_sweep<a class="headerlink" href="#module-suboptimumg.sweep.motor_sweep" title="Link to this heading">#</a></h1>
+  <section id="module-suboptimumg.compsim.custom_run">
+<span id="suboptimumg-compsim-custom-run"></span><h1>suboptimumg.compsim.custom_run<a class="headerlink" href="#module-suboptimumg.compsim.custom_run" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="suboptimumg.sweep.motor_sweep.MotorSweeper">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.motor_sweep.</span></span><span class="sig-name descname"><span class="pre">MotorSweeper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comp_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">motors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/motor_sweep.html#MotorSweeper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.motor_sweep.MotorSweeper" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.compsim.custom_run.CustomRun">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.compsim.custom_run.</span></span><span class="sig-name descname"><span class="pre">CustomRun</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mycar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/custom_run.html#CustomRun"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.custom_run.CustomRun" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>comp_data</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionData" title="suboptimumg.compsim.models.CompetitionData"><em>CompetitionData</em></a>)</p></li>
-<li><p><strong>motors</strong> (<em>list</em><em>[</em><a class="reference internal" href="suboptimumg.vehicle.models.html#suboptimumg.vehicle.models.MotorModel" title="suboptimumg.vehicle.models.MotorModel"><em>MotorModel</em></a><em>]</em>)</p></li>
-<li><p><strong>var_1</strong> (<a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepParamConfig" title="suboptimumg.sweep.models.SweepParamConfig"><em>SweepParamConfig</em></a>)</p></li>
+<li><p><strong>mycar</strong> (<a class="reference internal" href="suboptimumg.vehicle.vehicle.html#suboptimumg.vehicle.vehicle.Car" title="suboptimumg.vehicle.vehicle.Car"><em>Car</em></a>)</p></li>
+<li><p><strong>track</strong> (<a class="reference internal" href="suboptimumg.track.track.html#suboptimumg.track.track.Track" title="suboptimumg.track.track.Track"><em>Track</em></a>)</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.sweep.motor_sweep.MotorSweeper.sweep">
-<span class="sig-name descname"><span class="pre">sweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/motor_sweep.html#MotorSweeper.sweep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.motor_sweep.MotorSweeper.sweep" title="Link to this definition">#</a></dt>
-<dd><p>Runs a one-parameter sweep across all motors.</p>
+<dt class="sig sig-object py" id="suboptimumg.compsim.custom_run.CustomRun.comparison_track_overlays">
+<span class="sig-name descname"><span class="pre">comparison_track_overlays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">long</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_coast</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotate_by_deg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_matching_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/custom_run.html#CustomRun.comparison_track_overlays"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.custom_run.CustomRun.comparison_track_overlays" title="Link to this definition">#</a></dt>
+<dd><p>Overlay plot comparing simulation results to real-world data on the track layout.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show detailed progress (default is False)</p></li>
-<li><p><strong>num_processes</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of processes to use. Defaults to CPU count.</p></li>
+<li><p><strong>sim_var</strong> (<a class="reference internal" href="#suboptimumg.compsim.custom_run.OverlayOptions" title="suboptimumg.compsim.custom_run.OverlayOptions"><em>OverlayOptions</em></a>) – The simulation variable to compare</p></li>
+<li><p><strong>data_var</strong> (<em>npt.NDArray</em>) – The real-world data variable to compare</p></li>
+<li><p><strong>lat</strong> (<em>npt.NDArray</em>) – Array of GPS latitudes corresponding to the data variable</p></li>
+<li><p><strong>long</strong> (<em>npt.NDArray</em>) – Array of GPS longitudes corresponding to the data variable</p></li>
+<li><p><strong>use_coast</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use coasting results from the simulation. Default is True</p></li>
+<li><p><strong>rotate_by_deg</strong> (<em>float</em><em>, </em><em>optional</em>) – Degrees to rotate the track plot for better visualization. Default is 0.0</p></li>
+<li><p><strong>show_matching_info</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, print matching information during GPS to track matching. Default is False</p></li>
+<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a><em> | </em><em>None</em><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a><em> | </em><em>None</em><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>colorbar_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.ColorbarConfig" title="suboptimumg.plotting.plotting_constants.ColorbarConfig"><em>ColorbarConfig</em></a><em> | </em><em>None</em><em>, </em><em>optional</em>)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Results of the motor sweep operation</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html#suboptimumg.sweep.motor_sweep_results.MotorSweepResults" title="suboptimumg.sweep.motor_sweep_results.MotorSweepResults">MotorSweepResults</a></p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.compsim.custom_run.CustomRun.f1_trace_1">
+<span class="sig-name descname"><span class="pre">f1_trace_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/custom_run.html#CustomRun.f1_trace_1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.custom_run.CustomRun.f1_trace_1" title="Link to this definition">#</a></dt>
+<dd><p>Plot F1 Trace 1 for the custom run results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.compsim.custom_run.CustomRun.f1_trace_2">
+<span class="sig-name descname"><span class="pre">f1_trace_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/custom_run.html#CustomRun.f1_trace_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.custom_run.CustomRun.f1_trace_2" title="Link to this definition">#</a></dt>
+<dd><p>Plot F1 Trace 2 for the custom run results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.compsim.custom_run.CustomRun.print_results_summary">
+<span class="sig-name descname"><span class="pre">print_results_summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/custom_run.html#CustomRun.print_results_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.custom_run.CustomRun.print_results_summary" title="Link to this definition">#</a></dt>
+<dd><p>Print a summary of the custom run results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.compsim.custom_run.CustomRun.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">extract_internal_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/custom_run.html#CustomRun.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.custom_run.CustomRun.run" title="Link to this definition">#</a></dt>
+<dd><p>Simulates a run along the custom track. Sets the sim_results attribute for future use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>extract_internal_data</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to extract internal data during the simulation, by default False.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from running the custom track.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.LapsimResults" title="suboptimumg.compsim.models.LapsimResults">LapsimResults</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.compsim.custom_run.CustomRun.track_overlay">
+<span class="sig-name descname"><span class="pre">track_overlay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">OverlayOptions.VELOCITY</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_coast</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotate_by_deg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/custom_run.html#CustomRun.track_overlay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.custom_run.CustomRun.track_overlay" title="Link to this definition">#</a></dt>
+<dd><p>Overlay plot of the custom run results on the track layout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var</strong> (<a class="reference internal" href="#suboptimumg.compsim.custom_run.OverlayOptions" title="suboptimumg.compsim.custom_run.OverlayOptions"><em>OverlayOptions</em></a><em>, </em><em>optional</em>) – The variable to overlay on the track plot. Default is velocity</p></li>
+<li><p><strong>use_coast</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use coasting results from the simulation. Default is True</p></li>
+<li><p><strong>rotate_by_deg</strong> (<em>float</em><em>, </em><em>optional</em>) – Degrees to rotate the track plot for better visualization. Default is 0.0</p></li>
+<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a><em> | </em><em>None</em><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a><em> | </em><em>None</em><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>colorbar_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.ColorbarConfig" title="suboptimumg.plotting.plotting_constants.ColorbarConfig"><em>ColorbarConfig</em></a><em> | </em><em>None</em><em>, </em><em>optional</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="suboptimumg.compsim.custom_run.OverlayOptions">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">suboptimumg.compsim.custom_run.</span></span><span class="sig-name descname"><span class="pre">OverlayOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/custom_run.html#OverlayOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.custom_run.OverlayOptions" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.compsim.custom_run.OverlayOptions.ACCELERATION">
+<span class="sig-name descname"><span class="pre">ACCELERATION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lap_accs'</span></em><a class="headerlink" href="#suboptimumg.compsim.custom_run.OverlayOptions.ACCELERATION" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.compsim.custom_run.OverlayOptions.MOTOR_TORQUE">
+<span class="sig-name descname"><span class="pre">MOTOR_TORQUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lap_eff_motor_torques'</span></em><a class="headerlink" href="#suboptimumg.compsim.custom_run.OverlayOptions.MOTOR_TORQUE" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.compsim.custom_run.OverlayOptions.POWER">
+<span class="sig-name descname"><span class="pre">POWER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lap_powers'</span></em><a class="headerlink" href="#suboptimumg.compsim.custom_run.OverlayOptions.POWER" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.compsim.custom_run.OverlayOptions.VELOCITY">
+<span class="sig-name descname"><span class="pre">VELOCITY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lap_vels'</span></em><a class="headerlink" href="#suboptimumg.compsim.custom_run.OverlayOptions.VELOCITY" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -471,20 +572,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="suboptimumg.sweep.models.html"
+       href="suboptimumg.compsim.competition_factory.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">suboptimumg.sweep.models</p>
+        <p class="prev-next-title">suboptimumg.compsim.competition_factory</p>
       </div>
     </a>
     <a class="right-next"
-       href="suboptimumg.sweep.motor_sweep_results.html"
+       href="suboptimumg.compsim.lap.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">suboptimumg.sweep.motor_sweep_results</p>
+        <p class="prev-next-title">suboptimumg.compsim.lap</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -507,8 +608,20 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.motor_sweep.MotorSweeper"><code class="docutils literal notranslate"><span class="pre">MotorSweeper</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.motor_sweep.MotorSweeper.sweep"><code class="docutils literal notranslate"><span class="pre">MotorSweeper.sweep()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.compsim.custom_run.CustomRun"><code class="docutils literal notranslate"><span class="pre">CustomRun</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.compsim.custom_run.CustomRun.comparison_track_overlays"><code class="docutils literal notranslate"><span class="pre">CustomRun.comparison_track_overlays()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.compsim.custom_run.CustomRun.f1_trace_1"><code class="docutils literal notranslate"><span class="pre">CustomRun.f1_trace_1()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.compsim.custom_run.CustomRun.f1_trace_2"><code class="docutils literal notranslate"><span class="pre">CustomRun.f1_trace_2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.compsim.custom_run.CustomRun.print_results_summary"><code class="docutils literal notranslate"><span class="pre">CustomRun.print_results_summary()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.compsim.custom_run.CustomRun.run"><code class="docutils literal notranslate"><span class="pre">CustomRun.run()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.compsim.custom_run.CustomRun.track_overlay"><code class="docutils literal notranslate"><span class="pre">CustomRun.track_overlay()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.compsim.custom_run.OverlayOptions"><code class="docutils literal notranslate"><span class="pre">OverlayOptions</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.compsim.custom_run.OverlayOptions.ACCELERATION"><code class="docutils literal notranslate"><span class="pre">OverlayOptions.ACCELERATION</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.compsim.custom_run.OverlayOptions.MOTOR_TORQUE"><code class="docutils literal notranslate"><span class="pre">OverlayOptions.MOTOR_TORQUE</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.compsim.custom_run.OverlayOptions.POWER"><code class="docutils literal notranslate"><span class="pre">OverlayOptions.POWER</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.compsim.custom_run.OverlayOptions.VELOCITY"><code class="docutils literal notranslate"><span class="pre">OverlayOptions.VELOCITY</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -518,7 +631,7 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/_autosummary/suboptimumg.sweep.motor_sweep.rst.txt"
+      <li><a href="../_sources/_autosummary/suboptimumg.compsim.custom_run.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>

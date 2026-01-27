@@ -317,7 +317,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.track.track</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">npt</span>
@@ -390,6 +390,7 @@
             <span class="c1"># Additional continuous representation data (only populated if continuous=True)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sample_dist</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;sample_dist&quot;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tck</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;tck&quot;</span><span class="p">]</span>  <span class="c1"># B-spline representation</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">absolute_origin</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;absolute_origin&quot;</span><span class="p">]</span>
 
         <span class="c1"># Compute seed indices</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seed_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_seed_indices</span><span class="p">()</span>
@@ -416,6 +417,7 @@
                 <span class="n">distance_step</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">distance_step</span><span class="p">,</span>
                 <span class="n">sample_dist</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sample_dist</span><span class="p">,</span>
                 <span class="n">tck</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tck</span><span class="p">,</span>
+                <span class="n">absolute_origin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">absolute_origin</span><span class="p">,</span>
                 <span class="n">seed_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">seed_idx</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -630,19 +632,60 @@
         <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span></div>
 
 
+    <span class="k">def</span><span class="w"> </span><span class="nf">_rotate_coordinates</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">degrees</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Rotate track coordinates counterclockwise around the first point.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        degrees : float</span>
+<span class="sd">            Rotation angle in degrees (counterclockwise)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple[NDArray[float64], NDArray[float64]]</span>
+<span class="sd">            Rotated x and y coordinates</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Convert to radians</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>
+
+        <span class="c1"># Use first point as rotation center</span>
+        <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_m</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Translate to origin</span>
+        <span class="n">x_translated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_m</span> <span class="o">-</span> <span class="n">x0</span>
+        <span class="n">y_translated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_m</span> <span class="o">-</span> <span class="n">y0</span>
+
+        <span class="c1"># Rotate counterclockwise</span>
+        <span class="n">cos_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+        <span class="n">sin_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+        <span class="n">x_rotated</span> <span class="o">=</span> <span class="n">x_translated</span> <span class="o">*</span> <span class="n">cos_theta</span> <span class="o">-</span> <span class="n">y_translated</span> <span class="o">*</span> <span class="n">sin_theta</span>
+        <span class="n">y_rotated</span> <span class="o">=</span> <span class="n">x_translated</span> <span class="o">*</span> <span class="n">sin_theta</span> <span class="o">+</span> <span class="n">y_translated</span> <span class="o">*</span> <span class="n">cos_theta</span>
+
+        <span class="c1"># Translate back</span>
+        <span class="n">x_final</span> <span class="o">=</span> <span class="n">x_rotated</span> <span class="o">+</span> <span class="n">x0</span>
+        <span class="n">y_final</span> <span class="o">=</span> <span class="n">y_rotated</span> <span class="o">+</span> <span class="n">y0</span>
+
+        <span class="k">return</span> <span class="n">x_final</span><span class="p">,</span> <span class="n">y_final</span>
+
 <div class="viewcode-block" id="Track.plot">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.track.track.html#suboptimumg.track.track.Track.plot">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">theme</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">font_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;FontConfig&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">layout_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;LayoutConfig&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">rotate_by_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Visualizes the track.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
+<span class="sd">        rotate_by_deg : float, optional</span>
+<span class="sd">            Rotation angle in degrees counterclockwise around the first point (default: 0.0)</span>
 <span class="sd">        theme : str, optional</span>
 <span class="sd">            The color theme to use (default: None, uses default theme)</span>
 <span class="sd">        font_config : FontConfig, optional</span>
@@ -660,8 +703,12 @@
         <span class="n">font_config</span> <span class="o">=</span> <span class="n">font_config</span> <span class="ow">or</span> <span class="n">DEFAULT_FONT_CONFIG</span>
         <span class="n">layout_config</span> <span class="o">=</span> <span class="n">layout_config</span> <span class="ow">or</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span>
 
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_m</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_m</span>
+        <span class="c1"># Apply rotation if specified</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rotate_coordinates</span><span class="p">(</span><span class="n">rotate_by_deg</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rotate_by_deg</span>
+            <span class="k">else</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_m</span><span class="p">)</span>
+        <span class="p">)</span>
 
         <span class="c1"># Create scatter plot with color mapping</span>
         <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
@@ -726,11 +773,13 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">plot_with_overlay</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">variable</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
-        <span class="n">label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">theme</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">font_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;FontConfig&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">layout_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;LayoutConfig&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">colorbar_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;ColorbarConfig&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">rotate_by_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">colorbar_config</span><span class="p">:</span> <span class="n">ColorbarConfig</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Visualizes a scalar variable as color along the 2D track.</span>
@@ -741,6 +790,8 @@
 <span class="sd">            Array of values to map as colors (e.g., velocity, power)</span>
 <span class="sd">        label : str, optional</span>
 <span class="sd">            Colorbar label (default: None)</span>
+<span class="sd">        rotate_by_deg : float, optional</span>
+<span class="sd">            Rotation angle in degrees counterclockwise around the first point (default: 0.0)</span>
 <span class="sd">        theme : str, optional</span>
 <span class="sd">            The color theme to use (default: None, uses default theme)</span>
 <span class="sd">        font_config : FontConfig, optional</span>
@@ -775,9 +826,14 @@
             <span class="p">)</span>
             <span class="n">variable</span> <span class="o">=</span> <span class="n">interp_func</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
 
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_m</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_m</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">variable</span>
+
+        <span class="c1"># Apply rotation if specified</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rotate_coordinates</span><span class="p">(</span><span class="n">rotate_by_deg</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rotate_by_deg</span>
+            <span class="k">else</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_m</span><span class="p">)</span>
+        <span class="p">)</span>
 
         <span class="c1"># Create scatter plot with color mapping</span>
         <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
@@ -806,6 +862,17 @@
                 <span class="n">hovertemplate</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;x: %</span><span class="se">{{</span><span class="s2">x:</span><span class="si">{</span><span class="n">FLOAT_PRECISION</span><span class="si">}</span><span class="se">}}</span><span class="s2">&lt;br&gt;y: %</span><span class="se">{{</span><span class="s2">y:</span><span class="si">{</span><span class="n">FLOAT_PRECISION</span><span class="si">}</span><span class="se">}}</span><span class="s2">&lt;br&gt;value: %</span><span class="se">{{</span><span class="s2">marker.color:</span><span class="si">{</span><span class="n">FLOAT_PRECISION</span><span class="si">}</span><span class="se">}}</span><span class="s2">&lt;extra&gt;&lt;/extra&gt;&quot;</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">title</span><span class="p">:</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+                <span class="n">title</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+                    <span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">large</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
+                    <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">title_x</span><span class="p">,</span>
+                    <span class="s2">&quot;xanchor&quot;</span><span class="p">:</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">title_xanchor</span><span class="p">,</span>
+                    <span class="s2">&quot;yanchor&quot;</span><span class="p">:</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">title_yanchor</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="p">)</span>
 
         <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
             <span class="n">width</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">width</span><span class="p">,</span>
@@ -853,12 +920,12 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">plot_3d</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">variable</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
-        <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">z_label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">theme</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">font_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;FontConfig&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">layout_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;LayoutConfig&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">scene_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;SceneConfig&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">z_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">scene_config</span><span class="p">:</span> <span class="n">SceneConfig</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Maps a variable onto the z-axis of the track for 3D visualization using Plotly.</span>
