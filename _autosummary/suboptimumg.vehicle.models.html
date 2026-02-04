@@ -848,6 +848,7 @@
 <dd class="field-even"><ul class="simple">
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.chain_efficiency" title="suboptimumg.vehicle.models.MotorModel.chain_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chain_efficiency</span> <span class="pre">(float)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.diff_efficiency" title="suboptimumg.vehicle.models.MotorModel.diff_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diff_efficiency</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.efficiency_data" title="suboptimumg.vehicle.models.MotorModel.efficiency_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">efficiency_data</span> <span class="pre">(list)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.efficiency_method" title="suboptimumg.vehicle.models.MotorModel.efficiency_method"><code class="xref py py-obj docutils literal notranslate"><span class="pre">efficiency_method</span> <span class="pre">(Literal['sys',</span> <span class="pre">'indiv'])</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm" title="suboptimumg.vehicle.models.MotorModel.fw_rpm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_rpm</span> <span class="pre">(int)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_torque" title="suboptimumg.vehicle.models.MotorModel.fw_torque"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_torque</span> <span class="pre">(int)</span></code></a></p></li>
@@ -859,7 +860,9 @@
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.motor_efficiency" title="suboptimumg.vehicle.models.MotorModel.motor_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">motor_efficiency</span> <span class="pre">(float)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.name" title="suboptimumg.vehicle.models.MotorModel.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span> <span class="pre">(str)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.pow_lim" title="suboptimumg.vehicle.models.MotorModel.pow_lim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pow_lim</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.setup" title="suboptimumg.vehicle.models.MotorModel.setup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup</span> <span class="pre">(suboptimumg.vehicle.models.DriveSetup)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.system_efficiency" title="suboptimumg.vehicle.models.MotorModel.system_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_efficiency</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.use_efficiency_lut" title="suboptimumg.vehicle.models.MotorModel.use_efficiency_lut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">use_efficiency_lut</span> <span class="pre">(bool)</span></code></a></p></li>
 </ul>
 </dd>
 <dt class="field-odd">Validators<span class="colon">:</span></dt>
@@ -867,6 +870,7 @@
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm_less_than_max_rpm" title="suboptimumg.vehicle.models.MotorModel.fw_rpm_less_than_max_rpm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_rpm_less_than_max_rpm</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm" title="suboptimumg.vehicle.models.MotorModel.fw_rpm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_rpm</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_torque_less_than_max_torque" title="suboptimumg.vehicle.models.MotorModel.fw_torque_less_than_max_torque"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_torque_less_than_max_torque</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_torque" title="suboptimumg.vehicle.models.MotorModel.fw_torque"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_torque</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_chain_efficiency" title="suboptimumg.vehicle.models.MotorModel.validate_chain_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_chain_efficiency</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.chain_efficiency" title="suboptimumg.vehicle.models.MotorModel.chain_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chain_efficiency</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_efficiency_data_plausible" title="suboptimumg.vehicle.models.MotorModel.validate_efficiency_data_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_efficiency_data_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.efficiency_data" title="suboptimumg.vehicle.models.MotorModel.efficiency_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">efficiency_data</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_fw_rpm_plausible" title="suboptimumg.vehicle.models.MotorModel.validate_fw_rpm_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_fw_rpm_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm" title="suboptimumg.vehicle.models.MotorModel.fw_rpm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_rpm</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_fw_torque_plausible" title="suboptimumg.vehicle.models.MotorModel.validate_fw_torque_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_fw_torque_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_torque" title="suboptimumg.vehicle.models.MotorModel.fw_torque"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fw_torque</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_max_rpm_plausible" title="suboptimumg.vehicle.models.MotorModel.validate_max_rpm_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_max_rpm_plausible</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.max_rpm" title="suboptimumg.vehicle.models.MotorModel.max_rpm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_rpm</span></code></a></p></li>
@@ -874,6 +878,7 @@
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_moc_efficiency" title="suboptimumg.vehicle.models.MotorModel.validate_moc_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_moc_efficiency</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.moc_efficiency" title="suboptimumg.vehicle.models.MotorModel.moc_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moc_efficiency</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_motor_efficiency" title="suboptimumg.vehicle.models.MotorModel.validate_motor_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_motor_efficiency</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.motor_efficiency" title="suboptimumg.vehicle.models.MotorModel.motor_efficiency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">motor_efficiency</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_power_limit" title="suboptimumg.vehicle.models.MotorModel.validate_power_limit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_power_limit</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.pow_lim" title="suboptimumg.vehicle.models.MotorModel.pow_lim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pow_lim</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_setup" title="suboptimumg.vehicle.models.MotorModel.validate_setup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_setup</span></code></a> » <a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.setup" title="suboptimumg.vehicle.models.MotorModel.setup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -881,6 +886,19 @@
 <dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.name">
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.name" title="Link to this definition">#</a></dt>
 <dd><p>Product name</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.setup">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setup</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#suboptimumg.vehicle.models.DriveSetup" title="suboptimumg.vehicle.models.DriveSetup"><code class="xref py py-class docutils literal notranslate"><span class="pre">DriveSetup</span></code></a></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.setup" title="Link to this definition">#</a></dt>
+<dd><p>Drive configuration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validated by<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_setup" title="suboptimumg.vehicle.models.MotorModel.validate_setup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_setup</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute pydantic_field">
@@ -1092,6 +1110,30 @@
 </dl>
 </dd></dl>
 
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.use_efficiency_lut">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">use_efficiency_lut</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.use_efficiency_lut" title="Link to this definition">#</a></dt>
+<dd><p>Whether or not to initialize a more advanced motor efficiency solution</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.efficiency_data">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">efficiency_data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.efficiency_data" title="Link to this definition">#</a></dt>
+<dd><p>List of efficiency map data points [RPM, Torque (Nm), Efficiency (%)]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validated by<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.validate_efficiency_data_plausible" title="suboptimumg.vehicle.models.MotorModel.validate_efficiency_data_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_efficiency_data_plausible</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.validate_setup">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_setup</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.setup" title="suboptimumg.vehicle.models.MotorModel.setup"><em class="xref py py-obj"><span class="pre">setup</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#MotorModel.validate_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.validate_setup" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py method pydantic_validator">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.fw_rpm_less_than_max_rpm">
 <em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fw_rpm_less_than_max_rpm</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm" title="suboptimumg.vehicle.models.MotorModel.fw_rpm"><em class="xref py py-obj"><span class="pre">fw_rpm</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#MotorModel.fw_rpm_less_than_max_rpm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm_less_than_max_rpm" title="Link to this definition">#</a></dt>
@@ -1140,6 +1182,11 @@
 <dl class="py method pydantic_validator">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.validate_fw_torque_plausible">
 <em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_fw_torque_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.fw_torque" title="suboptimumg.vehicle.models.MotorModel.fw_torque"><em class="xref py py-obj"><span class="pre">fw_torque</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#MotorModel.validate_fw_torque_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.validate_fw_torque_plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.MotorModel.validate_efficiency_data_plausible">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_efficiency_data_plausible</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#suboptimumg.vehicle.models.MotorModel.efficiency_data" title="suboptimumg.vehicle.models.MotorModel.efficiency_data"><em class="xref py py-obj"><span class="pre">efficiency_data</span></em></a><a class="reference internal" href="../_modules/suboptimumg/vehicle/models.html#MotorModel.validate_efficiency_data_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.models.MotorModel.validate_efficiency_data_plausible" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1462,7 +1509,6 @@
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.pwrtn" title="suboptimumg.vehicle.models.VehicleModel.pwrtn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pwrtn</span> <span class="pre">(suboptimumg.vehicle.models.PowertrainModel)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.rear_track" title="suboptimumg.vehicle.models.VehicleModel.rear_track"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rear_track</span> <span class="pre">(float)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.rolling_coeff" title="suboptimumg.vehicle.models.VehicleModel.rolling_coeff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rolling_coeff</span> <span class="pre">(float)</span></code></a></p></li>
-<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.setup" title="suboptimumg.vehicle.models.VehicleModel.setup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup</span> <span class="pre">(suboptimumg.vehicle.models.DriveSetup)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.sus" title="suboptimumg.vehicle.models.VehicleModel.sus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sus</span> <span class="pre">(suboptimumg.vehicle.models.SimpleSuspensionModel</span> <span class="pre">|</span> <span class="pre">suboptimumg.vehicle.models.ComplexSuspensionModel)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.tires" title="suboptimumg.vehicle.models.VehicleModel.tires"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tires</span> <span class="pre">(suboptimumg.vehicle.models.TireModel)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.VehicleModel.w_distr_b" title="suboptimumg.vehicle.models.VehicleModel.w_distr_b"><code class="xref py py-obj docutils literal notranslate"><span class="pre">w_distr_b</span> <span class="pre">(float)</span></code></a></p></li>
@@ -1570,12 +1616,6 @@
 </ul>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py attribute pydantic_field">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.models.VehicleModel.setup">
-<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setup</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#suboptimumg.vehicle.models.DriveSetup" title="suboptimumg.vehicle.models.DriveSetup"><code class="xref py py-class docutils literal notranslate"><span class="pre">DriveSetup</span></code></a></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.VehicleModel.setup" title="Link to this definition">#</a></dt>
-<dd><p>Drive configuration</p>
 </dd></dl>
 
 <dl class="py property">
@@ -1733,6 +1773,7 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel"><code class="docutils literal notranslate"><span class="pre">MotorModel</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.name"><code class="docutils literal notranslate"><span class="pre">MotorModel.name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.setup"><code class="docutils literal notranslate"><span class="pre">MotorModel.setup</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.max_rpm"><code class="docutils literal notranslate"><span class="pre">MotorModel.max_rpm</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm"><code class="docutils literal notranslate"><span class="pre">MotorModel.fw_rpm</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.max_torque"><code class="docutils literal notranslate"><span class="pre">MotorModel.max_torque</span></code></a></li>
@@ -1746,6 +1787,9 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.system_efficiency"><code class="docutils literal notranslate"><span class="pre">MotorModel.system_efficiency</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.mass"><code class="docutils literal notranslate"><span class="pre">MotorModel.mass</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.ideal_gear_ratio"><code class="docutils literal notranslate"><span class="pre">MotorModel.ideal_gear_ratio</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.use_efficiency_lut"><code class="docutils literal notranslate"><span class="pre">MotorModel.use_efficiency_lut</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.efficiency_data"><code class="docutils literal notranslate"><span class="pre">MotorModel.efficiency_data</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.validate_setup"><code class="docutils literal notranslate"><span class="pre">MotorModel.validate_setup</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.fw_rpm_less_than_max_rpm"><code class="docutils literal notranslate"><span class="pre">MotorModel.fw_rpm_less_than_max_rpm</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.fw_torque_less_than_max_torque"><code class="docutils literal notranslate"><span class="pre">MotorModel.fw_torque_less_than_max_torque</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.validate_power_limit"><code class="docutils literal notranslate"><span class="pre">MotorModel.validate_power_limit</span></code></a></li>
@@ -1756,6 +1800,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.validate_fw_rpm_plausible"><code class="docutils literal notranslate"><span class="pre">MotorModel.validate_fw_rpm_plausible</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.validate_max_torque_plausible"><code class="docutils literal notranslate"><span class="pre">MotorModel.validate_max_torque_plausible</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.validate_fw_torque_plausible"><code class="docutils literal notranslate"><span class="pre">MotorModel.validate_fw_torque_plausible</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.MotorModel.validate_efficiency_data_plausible"><code class="docutils literal notranslate"><span class="pre">MotorModel.validate_efficiency_data_plausible</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.PowertrainModel"><code class="docutils literal notranslate"><span class="pre">PowertrainModel</span></code></a><ul class="nav section-nav flex-column">
@@ -1797,7 +1842,6 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.front_track"><code class="docutils literal notranslate"><span class="pre">VehicleModel.front_track</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.rear_track"><code class="docutils literal notranslate"><span class="pre">VehicleModel.rear_track</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.rolling_coeff"><code class="docutils literal notranslate"><span class="pre">VehicleModel.rolling_coeff</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.setup"><code class="docutils literal notranslate"><span class="pre">VehicleModel.setup</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.w_distr_front"><code class="docutils literal notranslate"><span class="pre">VehicleModel.w_distr_front</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.track"><code class="docutils literal notranslate"><span class="pre">VehicleModel.track</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.VehicleModel.aero"><code class="docutils literal notranslate"><span class="pre">VehicleModel.aero</span></code></a></li>

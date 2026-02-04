@@ -333,6 +333,16 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span> <span class="o">=</span> <span class="n">vehicle_model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">vehicle_model</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">motor</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">efficiency_map</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># will contain polyval coefficients</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rpm_norm_params</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># needed for numerical stability in polyfit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">torque_norm_params</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># as above</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">use_efficiency_lut</span><span class="p">:</span>
+            <span class="c1"># Fill out self.efficiency_map</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit_efficiency_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">efficiency_data</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+            <span class="c1"># Note: if the shape is especially weird, may need to increase</span>
+            <span class="c1"># fit degree. Keep even degrees. Keep degree as low as possible</span>
+            <span class="c1"># to limit evaluation complexity</span>
+
 <div class="viewcode-block" id="Motor.get_torque_at_rpm">
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.powertrain.powertrain.html#suboptimumg.vehicle.powertrain.powertrain.Motor.get_torque_at_rpm">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_torque_at_rpm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_rpm</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -392,26 +402,22 @@
 <span class="sd">        motor_power : float</span>
 <span class="sd">            Motor power output (W)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">tire_cir</span> <span class="o">=</span> <span class="n">circumference</span><span class="p">(</span>
-            <span class="n">in_to_m</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">tire_radius</span><span class="p">)</span>
-        <span class="p">)</span>  <span class="c1"># meters</span>
-
-        <span class="c1"># Calculate motor RPM from vehicle velocity</span>
-        <span class="n">rot_per_sec</span> <span class="o">=</span> <span class="n">v</span> <span class="o">/</span> <span class="n">tire_cir</span>
-        <span class="n">wheel_rpm</span> <span class="o">=</span> <span class="n">rot_per_sec</span> <span class="o">*</span> <span class="mi">60</span>
-        <span class="n">motor_rpm</span> <span class="o">=</span> <span class="n">wheel_rpm</span> <span class="o">*</span> <span class="n">ratio</span>  <span class="c1"># rpm_out = rpm_in / ratio</span>
+        <span class="n">motor_rpm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_to_rpm</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">ratio</span><span class="p">)</span>
 
         <span class="c1"># Get motor torque from piecewise function</span>
         <span class="n">motor_torque</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_torque_at_rpm</span><span class="p">(</span><span class="n">motor_rpm</span><span class="p">)</span>
 
         <span class="c1"># Clamp motor torque with power limit</span>
         <span class="n">motor_torque</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
-            <span class="n">motor_torque</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pow_lim</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">rpm_to_rad_s</span><span class="p">(</span><span class="n">motor_rpm</span><span class="p">),</span> <span class="mf">1e-6</span><span class="p">)</span>
+            <span class="n">motor_torque</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pow_lim</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">rpm_to_rad_s</span><span class="p">(</span><span class="n">motor_rpm</span><span class="p">),</span> <span class="mf">1e-6</span><span class="p">),</span>
         <span class="p">)</span>
 
         <span class="c1"># Convert to wheel torque</span>
         <span class="n">wheel_torque</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">motor_torque</span> <span class="o">*</span> <span class="n">ratio</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">powertrain_efficiency</span><span class="p">()</span>
+            <span class="n">motor_torque</span>
+            <span class="o">*</span> <span class="n">ratio</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">powertrain_efficiency</span><span class="p">(</span><span class="n">rpm</span><span class="o">=</span><span class="n">motor_rpm</span><span class="p">,</span> <span class="n">torque</span><span class="o">=</span><span class="n">motor_torque</span><span class="p">)</span>
         <span class="p">)</span>  <span class="c1"># torque_out = torque_in * ratio * efficiency</span>
         <span class="n">ground_force</span> <span class="o">=</span> <span class="n">wheel_torque</span> <span class="o">/</span> <span class="n">in_to_m</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">tire_radius</span><span class="p">)</span>
 
@@ -419,13 +425,27 @@
         <span class="k">return</span> <span class="n">ground_force</span><span class="p">,</span> <span class="n">motor_torque</span> <span class="o">*</span> <span class="n">rpm_to_rad_s</span><span class="p">(</span><span class="n">motor_rpm</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="Motor.v_to_rpm">
+<a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.powertrain.powertrain.html#suboptimumg.vehicle.powertrain.powertrain.Motor.v_to_rpm">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">v_to_rpm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">ratio</span><span class="p">):</span>
+        <span class="n">tire_cir</span> <span class="o">=</span> <span class="n">circumference</span><span class="p">(</span>
+            <span class="n">in_to_m</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">tire_radius</span><span class="p">)</span>
+        <span class="p">)</span>  <span class="c1"># meters</span>
+        <span class="c1"># Calculate index of torque curve given current velocity</span>
+        <span class="n">rot_per_sec</span> <span class="o">=</span> <span class="n">v</span> <span class="o">/</span> <span class="n">tire_cir</span>
+        <span class="n">wheel_rpm</span> <span class="o">=</span> <span class="n">rot_per_sec</span> <span class="o">*</span> <span class="mi">60</span>
+        <span class="k">return</span> <span class="n">wheel_rpm</span> <span class="o">*</span> <span class="n">ratio</span>  <span class="c1"># rpm_out = rpm_in / ratio</span></div>
+
+
 <div class="viewcode-block" id="Motor.powertrain_efficiency">
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.powertrain.powertrain.html#suboptimumg.vehicle.powertrain.powertrain.Motor.powertrain_efficiency">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">powertrain_efficiency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">powertrain_efficiency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rpm</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">torque</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates the system efficiency of the powertrain.</span>
 
 <span class="sd">        Uses system efficiency if it is set, otherwise uses the product of the individual efficiencies.</span>
+
+<span class="sd">        If velocity (v, m/s) is provided and a motor efficiency map exists, will pull that.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -437,17 +457,105 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">efficiency_method</span> <span class="o">==</span> <span class="s2">&quot;sys&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">system_efficiency</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">efficiency_method</span> <span class="o">==</span> <span class="s2">&quot;indiv&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">(</span>
+            <span class="n">partial_eff</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">moc_efficiency</span>
-                <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">motor_efficiency</span>
                 <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">chain_efficiency</span>
                 <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">diff_efficiency</span>
             <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">use_efficiency_lut</span> <span class="ow">and</span> <span class="n">rpm</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">torque</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">partial_eff</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_efficiency_map</span><span class="p">(</span><span class="n">rpm</span><span class="p">,</span> <span class="n">torque</span><span class="p">)</span>
+                <span class="c1"># NOTE: technically this isn&#39;t completely accurate, but it&#39;s</span>
+                <span class="c1"># better than nothing. irl should be iterated ~3x if at pow lim</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">motor_efficiency</span> <span class="o">*</span> <span class="n">partial_eff</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;Invalid efficiency method. Must be &#39;sys&#39; or &#39;indiv&#39;. Got: &quot;</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">efficiency_method</span><span class="p">,</span>
             <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Motor.fit_efficiency_data">
+<a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.powertrain.powertrain.html#suboptimumg.vehicle.powertrain.powertrain.Motor.fit_efficiency_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_efficiency_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">degv</span><span class="p">,</span> <span class="n">degt</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fit a 2D polynomial z = f(x, y) to data points [[x, y, z], ...]</span>
+<span class="sd">        Returns coefficient matrix C[i,j] for x^i y^j</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+        <span class="n">rpm</span><span class="p">,</span> <span class="n">torque</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">pts</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="c1"># Store normalization parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rpm_norm_params</span> <span class="o">=</span> <span class="p">(</span><span class="n">rpm</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">rpm</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">torque_norm_params</span> <span class="o">=</span> <span class="p">(</span><span class="n">torque</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">torque</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+        <span class="c1"># Normalize to [0, 1] for numerical stability</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">rpm</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">rpm_norm_params</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rpm_norm_params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">rpm_norm_params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">torque</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_norm_params</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">torque_norm_params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_norm_params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Build tensor-product basis</span>
+        <span class="n">terms</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="o">**</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span><span class="o">**</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degv</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+
+        <span class="c1"># Solve least squares</span>
+        <span class="n">coeffs</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">efficiency_map</span> <span class="o">=</span> <span class="n">coeffs</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">degv</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">degt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">efficiency_map</span></div>
+
+
+<div class="viewcode-block" id="Motor.eval_efficiency_map">
+<a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.powertrain.powertrain.html#suboptimumg.vehicle.powertrain.powertrain.Motor.eval_efficiency_map">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval_efficiency_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rpm</span><span class="p">,</span> <span class="n">torque</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluate efficiency map with edge clamping and distance penalty for OOB.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">efficiency_map</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: EFFICIENCY MAP IS EVALUATING BUT DOES NOT EXIST&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">motor_efficiency</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">efficiency_map</span>
+        <span class="n">rpm_min</span><span class="p">,</span> <span class="n">rpm_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rpm_norm_params</span>
+        <span class="n">torque_min</span><span class="p">,</span> <span class="n">torque_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_norm_params</span>
+        <span class="n">rpm_range</span> <span class="o">=</span> <span class="n">rpm_max</span> <span class="o">-</span> <span class="n">rpm_min</span>
+        <span class="n">torque_range</span> <span class="o">=</span> <span class="n">torque_max</span> <span class="o">-</span> <span class="n">torque_min</span>
+
+        <span class="c1"># Distance outside bounds (normalized)</span>
+        <span class="n">rpm_dist</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">rpm_min</span> <span class="o">-</span> <span class="n">rpm</span><span class="p">,</span> <span class="n">rpm</span> <span class="o">-</span> <span class="n">rpm_max</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">rpm_range</span>
+        <span class="n">torque_dist</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">torque_min</span> <span class="o">-</span> <span class="n">torque</span><span class="p">,</span> <span class="n">torque</span> <span class="o">-</span> <span class="n">torque_max</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">torque_range</span>
+        <span class="n">total_dist</span> <span class="o">=</span> <span class="p">(</span><span class="n">rpm_dist</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">torque_dist</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+
+        <span class="c1"># Clamp inputs to valid range</span>
+        <span class="n">rpm_clamped</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">rpm_min</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">rpm_max</span><span class="p">,</span> <span class="n">rpm</span><span class="p">))</span>
+        <span class="n">torque_clamped</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">torque_min</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">torque_max</span><span class="p">,</span> <span class="n">torque</span><span class="p">))</span>
+
+        <span class="c1"># Normalize clamped inputs</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">rpm_clamped</span> <span class="o">-</span> <span class="n">rpm_min</span><span class="p">)</span> <span class="o">/</span> <span class="n">rpm_range</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">torque_clamped</span> <span class="o">-</span> <span class="n">torque_min</span><span class="p">)</span> <span class="o">/</span> <span class="n">torque_range</span>
+
+        <span class="c1"># Horner&#39;s method evaluation</span>
+        <span class="n">degx</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">degy</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">degx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">eff</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">degy</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degy</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">eff</span> <span class="o">=</span> <span class="n">eff</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+            <span class="n">tmp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">eff</span>
+        <span class="n">eff</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="n">degx</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">eff</span> <span class="o">=</span> <span class="n">eff</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">tmp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="c1"># Apply distance penalty (exponential decay)</span>
+        <span class="k">if</span> <span class="n">total_dist</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">penalty</span> <span class="o">=</span> <span class="mf">2.71828</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">total_dist</span> <span class="o">*</span> <span class="mf">0.3</span><span class="p">)</span>  <span class="c1"># ~0.74 at dist=1.0</span>
+            <span class="n">eff</span> <span class="o">=</span> <span class="n">eff</span> <span class="o">*</span> <span class="n">penalty</span>
+
+        <span class="c1"># Floor at 66%, cap at 99%</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.66</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">eff</span><span class="p">))</span></div>
 </div>
 
 

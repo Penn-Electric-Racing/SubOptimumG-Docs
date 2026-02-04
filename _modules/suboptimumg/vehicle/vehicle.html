@@ -501,7 +501,8 @@
 
         <span class="k">for</span> <span class="n">tire</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">list</span><span class="p">:</span>
             <span class="n">mu_lat</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">tire</span><span class="o">.</span><span class="n">calc_mu</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">mu_long_lat_ratio</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">mu_lat_zero_load</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">mu_long_lat_ratio</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">mu_lat_zero_load</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">f_lat_maxs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mu_lat</span> <span class="o">*</span> <span class="n">tire</span><span class="o">.</span><span class="n">normal</span><span class="p">)</span>
 
@@ -531,7 +532,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">check_all_tires_valid_lateral_force</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">tire</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">list</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">tire</span><span class="o">.</span><span class="n">is_current_lateral_force_valid</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">mu_long_lat_ratio</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">mu_lat_zero_load</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">mu_long_lat_ratio</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">mu_lat_zero_load</span><span class="p">,</span>
             <span class="p">):</span>
                 <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
@@ -544,7 +546,8 @@
         <span class="k">for</span> <span class="n">tire</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">list</span><span class="p">:</span>
             <span class="c1"># Calculate the longitudinal force budget left for that tire</span>
             <span class="n">f_long</span> <span class="o">=</span> <span class="n">tire</span><span class="o">.</span><span class="n">long_remain</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">mu_long_lat_ratio</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">mu_lat_zero_load</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">mu_long_lat_ratio</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">mu_lat_zero_load</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">long_forces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f_long</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">long_forces</span></div>
@@ -593,7 +596,7 @@
             <span class="p">)</span>
 
             <span class="c1"># Calculate f_long_ptrain based on drive setup</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">setup</span> <span class="o">==</span> <span class="n">DriveSetup</span><span class="o">.</span><span class="n">FOUR_WHEEL_DRIVE</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">setup</span> <span class="o">==</span> <span class="n">DriveSetup</span><span class="o">.</span><span class="n">FOUR_WHEEL_DRIVE</span><span class="p">:</span>
                 <span class="c1"># AWD logic: sum the minimum of motor force and each tire&#39;s force</span>
                 <span class="c1"># ASSUME ALL GEAR RATIOS EQUAL</span>
                 <span class="n">f_long_ptrain</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">motor_f</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">long_forces</span><span class="p">[:])</span>
@@ -701,7 +704,7 @@
             <span class="p">)</span>  <span class="c1"># in the case of awd, motor_f should be the max force a single motor can apply</span>
             <span class="n">f_long_ptrain</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">motor_f</span><span class="p">,</span> <span class="n">f_long_net</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">setup</span> <span class="o">==</span> <span class="n">DriveSetup</span><span class="o">.</span><span class="n">FOUR_WHEEL_DRIVE</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">setup</span> <span class="o">==</span> <span class="n">DriveSetup</span><span class="o">.</span><span class="n">FOUR_WHEEL_DRIVE</span><span class="p">:</span>
                 <span class="c1"># ASSUME ALL GEAR RATIOS EQUAL AND PERFECT TV</span>
 
                 <span class="c1"># in awd config, motor_f is max f by single motor. ~30kW lim</span>

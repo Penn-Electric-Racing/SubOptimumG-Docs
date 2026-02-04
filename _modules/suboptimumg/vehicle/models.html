@@ -366,7 +366,9 @@
     <span class="n">drs_cl</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DRS lift coefficient&quot;</span><span class="p">)</span>
     <span class="n">drs_front_area</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DRS frontal area (m²)&quot;</span><span class="p">)</span>
     <span class="n">drs_cop</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">lt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DRS center of pressure (fraction toward front)&quot;</span>
+        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">lt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DRS center of pressure (fraction toward front)&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">drs_accel_thresh</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Acceleration threshold for DRS activation (m/s²)&quot;</span>
@@ -384,7 +386,9 @@
     <span class="n">cl</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Lift coefficient (unitless)&quot;</span><span class="p">)</span>
     <span class="n">front_area</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Frontal area (m²)&quot;</span><span class="p">)</span>
     <span class="n">cop</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">lt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Center of pressure (fraction toward front, 0-1)&quot;</span>
+        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">lt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Center of pressure (fraction toward front, 0-1)&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">drs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DRSModel</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DRS configuration&quot;</span><span class="p">)</span>
 
@@ -437,7 +441,6 @@
 <div class="viewcode-block" id="ChassisModel">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.models.html#suboptimumg.vehicle.models.ChassisModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ChassisModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-
     <span class="k">pass</span></div>
 
 
@@ -448,7 +451,9 @@
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">brake_bias</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">lt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Front brake bias (0-1, where 1.0 = all front)&quot;</span>
+        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">lt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Front brake bias (0-1, where 1.0 = all front)&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">seat_angle</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Driver seat angle (degrees)&quot;</span><span class="p">)</span>
 
@@ -475,6 +480,7 @@
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Product name&quot;</span><span class="p">)</span>
+    <span class="n">setup</span><span class="p">:</span> <span class="n">DriveSetup</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Drive configuration&quot;</span><span class="p">)</span>
     <span class="n">max_rpm</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Max RPM of motor&quot;</span><span class="p">)</span>
     <span class="n">fw_rpm</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Field weakening RPM inflection point&quot;</span><span class="p">)</span>
     <span class="n">max_torque</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Max torque of motor (Nm)&quot;</span><span class="p">)</span>
@@ -502,6 +508,20 @@
     <span class="n">ideal_gear_ratio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Ideal gear ratio (currently unused)&quot;</span>
     <span class="p">)</span>
+    <span class="n">use_efficiency_lut</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Whether or not to initialize a more advanced motor efficiency solution&quot;</span>
+    <span class="p">)</span>
+    <span class="n">efficiency_data</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;List of efficiency map data points [RPM, Torque (Nm), Efficiency (%)]&quot;</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="MotorModel.validate_setup">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.models.html#suboptimumg.vehicle.models.MotorModel.validate_setup">[docs]</a>
+    <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;setup&quot;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_setup</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="c1"># TODO: @chukka not sure exactly how to do this since it&#39;s a pydantic model</span>
+        <span class="k">return</span> <span class="n">v</span></div>
+
 
 <div class="viewcode-block" id="MotorModel.fw_rpm_less_than_max_rpm">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.models.html#suboptimumg.vehicle.models.MotorModel.fw_rpm_less_than_max_rpm">[docs]</a>
@@ -526,9 +546,9 @@
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;pow_lim&quot;</span><span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">validate_power_limit</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mi">25000</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Power limit should not be less than 25000 W&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Power limit should not be less than 25000 W&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mi">80000</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Power limit should not be greater than 80000 W&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Power limit should not be greater than 80000 W&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
 
 
@@ -537,7 +557,7 @@
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;moc_efficiency&quot;</span><span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">validate_moc_efficiency</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mf">0.95</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MOC efficiency should not be less than 0.95&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;MOC efficiency should not be less than 0.95&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
 
 
@@ -545,8 +565,8 @@
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.models.html#suboptimumg.vehicle.models.MotorModel.validate_motor_efficiency">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;motor_efficiency&quot;</span><span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">validate_motor_efficiency</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mf">0.93</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Motor efficiency should not be less than 0.93&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mf">0.85</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Motor efficiency should not be less than 0.85&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
 
 
@@ -555,7 +575,7 @@
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;chain_efficiency&quot;</span><span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">validate_chain_efficiency</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mf">0.9</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chain efficiency should not be less than 0.90&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Chain efficiency should not be less than 0.90&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
 
 
@@ -598,6 +618,27 @@
             <span class="nb">print</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;WARNING: Field weakening torque of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [10, 400] Nm&quot;</span>
             <span class="p">)</span>
+        <span class="k">return</span> <span class="n">v</span></div>
+
+
+<div class="viewcode-block" id="MotorModel.validate_efficiency_data_plausible">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.models.html#suboptimumg.vehicle.models.MotorModel.validate_efficiency_data_plausible">[docs]</a>
+    <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;efficiency_data&quot;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_efficiency_data_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">25</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;WARNING: Efficiency data </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> must contain at least 25 unique points for correct fitment.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;WARNING: Efficiency data points </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2"> must have 3 elements [RPM, Torque (Nm), Efficiency (%)]. Error at idx: </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.7</span> <span class="ow">or</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1.00</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;WARNING: Efficiency data point idx:</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> has efficiency </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2"> outside recommended range [0.70, 1.00]&quot;</span>
+                    <span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
 </div>
 
@@ -685,7 +726,8 @@
     <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Weight of each tire (N)&quot;</span><span class="p">)</span>
     <span class="n">tire_radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Radius of each tire (inches)&quot;</span><span class="p">)</span>
     <span class="n">mu_lat_zero_load</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Lateral friction coefficient at zero load (unitless)&quot;</span>
+        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Lateral friction coefficient at zero load (unitless)&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">mu_long_lat_ratio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
@@ -759,7 +801,7 @@
     <span class="n">rolling_coeff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Rolling resistance coefficient (unitless)&quot;</span>
     <span class="p">)</span>
-    <span class="n">setup</span><span class="p">:</span> <span class="n">DriveSetup</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Drive configuration&quot;</span><span class="p">)</span>
+    <span class="c1"># setup: DriveSetup = Field(description=&quot;Drive configuration&quot;)</span>
 
     <span class="nd">@computed_field</span>
     <span class="nd">@property</span>
@@ -788,7 +830,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">validate_rolling_coeff</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">!=</span> <span class="mf">0.02</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Currently only rolling coefficient of 0.02 is considered valid&quot;</span>
+                <span class="s2">&quot;Currently only rolling coefficient of 0.02 is considered valid&quot;</span>
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
 </div>

@@ -457,6 +457,19 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Motor.eval_efficiency_map">
+<span class="sig-name descname"><span class="pre">eval_efficiency_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rpm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">torque</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor.eval_efficiency_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.eval_efficiency_map" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate efficiency map with edge clamping and distance penalty for OOB.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Motor.fit_efficiency_data">
+<span class="sig-name descname"><span class="pre">fit_efficiency_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor.fit_efficiency_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.fit_efficiency_data" title="Link to this definition">#</a></dt>
+<dd><p>Fit a 2D polynomial z = f(x, y) to data points [[x, y, z], …]
+Returns coefficient matrix C[i,j] for x^i y^j</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Motor.get_torque_at_rpm">
 <span class="sig-name descname"><span class="pre">get_torque_at_rpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_rpm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor.get_torque_at_rpm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.get_torque_at_rpm" title="Link to this definition">#</a></dt>
 <dd><p>Get motor torque at a given RPM using piecewise function.</p>
@@ -479,9 +492,10 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Motor.powertrain_efficiency">
-<span class="sig-name descname"><span class="pre">powertrain_efficiency</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor.powertrain_efficiency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.powertrain_efficiency" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">powertrain_efficiency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rpm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">torque</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor.powertrain_efficiency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.powertrain_efficiency" title="Link to this definition">#</a></dt>
 <dd><p>Calculates the system efficiency of the powertrain.</p>
 <p>Uses system efficiency if it is set, otherwise uses the product of the individual efficiencies.</p>
+<p>If velocity (v, m/s) is provided and a motor efficiency map exists, will pull that.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>System efficiency of the powertrain</p>
@@ -491,6 +505,11 @@
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Motor.v_to_rpm">
+<span class="sig-name descname"><span class="pre">v_to_rpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor.v_to_rpm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.v_to_rpm" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -556,8 +575,11 @@
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor"><code class="docutils literal notranslate"><span class="pre">Motor</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.calculate_max_ground_force_and_motor_power"><code class="docutils literal notranslate"><span class="pre">Motor.calculate_max_ground_force_and_motor_power()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.eval_efficiency_map"><code class="docutils literal notranslate"><span class="pre">Motor.eval_efficiency_map()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.fit_efficiency_data"><code class="docutils literal notranslate"><span class="pre">Motor.fit_efficiency_data()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.get_torque_at_rpm"><code class="docutils literal notranslate"><span class="pre">Motor.get_torque_at_rpm()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.powertrain_efficiency"><code class="docutils literal notranslate"><span class="pre">Motor.powertrain_efficiency()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.v_to_rpm"><code class="docutils literal notranslate"><span class="pre">Motor.v_to_rpm()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Powertrain"><code class="docutils literal notranslate"><span class="pre">Powertrain</span></code></a></li>
