@@ -505,6 +505,8 @@ If not provided, defaults to “run_0”, “run_1”, etc.</p></li>
 - Internal Data top-level keys: <code class="docutils literal notranslate"><span class="pre">v_max_profile</span></code>, <code class="docutils literal notranslate"><span class="pre">seed_idx_list</span></code>, <code class="docutils literal notranslate"><span class="pre">cumulative_dist</span></code>
 - LapsimResults top-level keys: <code class="docutils literal notranslate"><span class="pre">lap_t</span></code>, <code class="docutils literal notranslate"><span class="pre">lap_dxs</span></code>, <code class="docutils literal notranslate"><span class="pre">lap_vels</span></code>, <code class="docutils literal notranslate"><span class="pre">lap_accs</span></code>, <code class="docutils literal notranslate"><span class="pre">lap_powers</span></code>, <code class="docutils literal notranslate"><span class="pre">lap_eff_motor_torques</span></code>
 - Per-seed keys in the form <code class="docutils literal notranslate"><span class="pre">{field}_seed_{n}</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">v_proposal_seed_2</span></code>)</p>
+<p>Special case: <code class="docutils literal notranslate"><span class="pre">seed_idx_list</span></code> ignores the x_axis parameter and always plots
+v_max_profile vs cumulative_dist with red dots overlaid at seed index positions.</p>
 </dd></dl>
 
 <dl class="py function">

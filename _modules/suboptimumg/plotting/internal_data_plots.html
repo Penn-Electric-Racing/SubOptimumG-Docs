@@ -832,6 +832,67 @@
 
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_plot_seed_idx_list</span><span class="p">(</span>
+    <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">LapsimResults</span><span class="p">],</span>
+    <span class="n">x_axis</span><span class="p">:</span> <span class="n">Axis</span><span class="p">,</span>
+    <span class="n">row_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">fig</span><span class="p">:</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Special plotting for seed_idx_list: shows v_max_profile vs cumulative_dist</span>
+<span class="sd">    with red dots overlaid at seed index positions.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    results : List[LapsimResults]</span>
+<span class="sd">        List of lapsim results to plot</span>
+<span class="sd">    x_axis : Axis</span>
+<span class="sd">        Axis to use for the x-axis (distance or time)</span>
+<span class="sd">    row_idx : int</span>
+<span class="sd">        Row index for the subplot</span>
+<span class="sd">    fig : go.Figure</span>
+<span class="sd">        Figure to add traces to</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">run_idx</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">x_vals</span> <span class="o">=</span> <span class="n">_get_x_vals</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x_axis</span><span class="p">)</span>
+
+        <span class="n">v_max_profile</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">v_max_profile</span>
+        <span class="n">seed_idx_list</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">seed_idx_list</span>
+
+        <span class="c1"># Plot v_max_profile as the base line</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">x_vals</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">v_max_profile</span><span class="p">,</span>
+                <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;run_</span><span class="si">{</span><span class="n">run_idx</span><span class="si">}</span><span class="s2">:v_max_profile&quot;</span><span class="p">,</span>
+                <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span>
+            <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Overlay red dots at seed indices</span>
+        <span class="n">seed_x</span> <span class="o">=</span> <span class="n">x_vals</span><span class="p">[</span><span class="n">seed_idx_list</span><span class="p">]</span>
+        <span class="n">seed_y</span> <span class="o">=</span> <span class="n">v_max_profile</span><span class="p">[</span><span class="n">seed_idx_list</span><span class="p">]</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">seed_x</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">seed_y</span><span class="p">,</span>
+                <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;run_</span><span class="si">{</span><span class="n">run_idx</span><span class="si">}</span><span class="s2">:seed_indices&quot;</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">MARKER_SIZE_LARGE</span><span class="p">,</span> <span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;circle&quot;</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span>
+            <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span>
+            <span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;v_max_profile w/ seeds highlighted&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="n">Axis</span><span class="o">.</span><span class="n">DISTANCE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
 <div class="viewcode-block" id="plot_internal_keys">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.internal_data_plots.html#suboptimumg.plotting.internal_data_plots.plot_internal_keys">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_internal_keys</span><span class="p">(</span>
@@ -874,19 +935,32 @@
 <span class="sd">    - Internal Data top-level keys: ``v_max_profile``, ``seed_idx_list``, ``cumulative_dist``</span>
 <span class="sd">    - LapsimResults top-level keys: ``lap_t``, ``lap_dxs``, ``lap_vels``, ``lap_accs``, ``lap_powers``, ``lap_eff_motor_torques``</span>
 <span class="sd">    - Per-seed keys in the form ``{field}_seed_{n}`` (e.g. ``v_proposal_seed_2``)</span>
+
+<span class="sd">    Special case: ``seed_idx_list`` ignores the x_axis parameter and always plots</span>
+<span class="sd">    v_max_profile vs cumulative_dist with red dots overlaid at seed index positions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Normalize inputs to lists</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">results</span><span class="p">]</span>
+
     <span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span>
         <span class="n">rows</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">),</span>
         <span class="n">cols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">shared_xaxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">shared_xaxes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">subplot_titles</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">keys</span><span class="p">):</span>
         <span class="n">row_idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">true_axis</span> <span class="o">=</span> <span class="n">x_axis</span>
+
+        <span class="c1"># Special case for seed_idx_list</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;seed_idx_list&quot;</span><span class="p">:</span>
+            <span class="n">_plot_seed_idx_list</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">x_axis</span><span class="p">,</span> <span class="n">row_idx</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+            <span class="k">continue</span>
 
         <span class="k">for</span> <span class="n">run_idx</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
-            <span class="n">x_vals</span> <span class="o">=</span> <span class="n">_get_x_vals</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+            <span class="n">x_vals</span> <span class="o">=</span> <span class="n">_get_x_vals</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">true_axis</span><span class="p">)</span>
             <span class="n">y_vals</span> <span class="o">=</span> <span class="n">_extract_data_by_key</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
 
             <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
@@ -900,8 +974,8 @@
                 <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="n">true_axis</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="n">x_axis</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
         <span class="n">height</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">height</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">),</span>
         <span class="n">title</span><span class="o">=</span><span class="p">{</span>

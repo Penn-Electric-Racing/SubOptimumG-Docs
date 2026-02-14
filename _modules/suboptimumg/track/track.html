@@ -667,7 +667,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">rotate_by_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
-        <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&quot;suspension&quot;</span><span class="p">,</span>
         <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
@@ -691,7 +691,7 @@
 <span class="sd">            Plotly figure object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Use provided configs or defaults</span>
-        <span class="c1"># theme_colors = get_theme(theme)</span>
+        <span class="n">theme_colors</span> <span class="o">=</span> <span class="n">get_theme</span><span class="p">(</span><span class="n">theme</span><span class="p">)</span>
         <span class="n">font_config</span> <span class="o">=</span> <span class="n">font_config</span> <span class="ow">or</span> <span class="n">DEFAULT_FONT_CONFIG</span>
         <span class="n">layout_config</span> <span class="o">=</span> <span class="n">layout_config</span> <span class="ow">or</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span>
 
@@ -705,9 +705,6 @@
         <span class="c1"># Create scatter plot with color mapping</span>
         <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
 
-        <span class="c1"># # Clip radius to 200 m temporarily</span>
-        <span class="c1"># radius_clipped = np.clip(self.radius, None, 200)</span>
-
         <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
             <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
                 <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
@@ -716,15 +713,13 @@
                 <span class="n">marker</span><span class="o">=</span><span class="p">{</span>
                     <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">MARKER_SIZE_LARGE</span><span class="p">,</span>
                     <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span>
-                    <span class="c1"># &quot;color&quot;: radius_clipped,</span>
-                    <span class="s2">&quot;colorscale&quot;</span><span class="p">:</span> <span class="s2">&quot;Viridis&quot;</span><span class="p">,</span>  <span class="c1"># change if desired</span>
+                    <span class="s2">&quot;colorscale&quot;</span><span class="p">:</span> <span class="n">theme_colors</span><span class="p">[</span><span class="s2">&quot;colorscale&quot;</span><span class="p">],</span>
                     <span class="s2">&quot;cmin&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                     <span class="s2">&quot;cmax&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
                     <span class="s2">&quot;colorbar&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Radius (m)&quot;</span><span class="p">},</span>
                 <span class="p">},</span>
                 <span class="n">hovertext</span><span class="o">=</span><span class="p">[</span>
                     <span class="sa">f</span><span class="s2">&quot;Distance: </span><span class="si">{</span><span class="n">dist</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> m&lt;br&gt;Radius: </span><span class="si">{</span><span class="n">rad</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> m&quot;</span>
-                    <span class="c1"># for dist, rad in zip(self.cumulative_dist, radius_clipped)</span>
                     <span class="k">for</span> <span class="n">dist</span><span class="p">,</span> <span class="n">rad</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cumulative_dist</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>
                 <span class="p">],</span>
                 <span class="n">hovertemplate</span><span class="o">=</span><span class="p">(</span>

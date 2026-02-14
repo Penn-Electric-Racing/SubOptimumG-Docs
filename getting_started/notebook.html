@@ -364,10 +364,11 @@
 <span class="n">awd_comp_data</span> <span class="o">=</span> <span class="n">michigan2023_awd</span><span class="o">.</span><span class="n">to_data</span><span class="p">()</span>
 
 <span class="c1"># We can also optionally load parameters from published Google Sheets</span>
-<span class="n">michigan2023_revX_alt</span> <span class="o">=</span> <span class="n">load_competition_from_gdrive</span><span class="p">(</span>
-    <span class="n">car_config_url</span><span class="o">=</span><span class="s2">&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vQRPeSToFhhcMYo4J12FvPuIoCv0xAVCvcOlb-SlRxRleQQJNwq7Jiw1H0Hwr6oYOFBcCD_422CosnJ/pub?output=csv&quot;</span><span class="p">,</span>
-    <span class="n">comp_config_url</span><span class="o">=</span><span class="s2">&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vSPaKIHa64Buiqw_2yk4P3iP3PlsNjuE-GjYSHQDenn6dFYG_EelNSg7oqwH5mEvXzSNfB7j1p42H12/pub?output=csv&quot;</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="c1"># WARNING: Sheets are not up to date at this moment</span>
+<span class="c1"># michigan2023_revX_alt = load_competition_from_gdrive(</span>
+<span class="c1">#     car_config_url=&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vQRPeSToFhhcMYo4J12FvPuIoCv0xAVCvcOlb-SlRxRleQQJNwq7Jiw1H0Hwr6oYOFBcCD_422CosnJ/pub?output=csv&quot;,</span>
+<span class="c1">#     comp_config_url=&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vSPaKIHa64Buiqw_2yk4P3iP3PlsNjuE-GjYSHQDenn6dFYG_EelNSg7oqwH5mEvXzSNfB7j1p42H12/pub?output=csv&quot;,</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
@@ -403,16 +404,20 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting.internal_data_plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_per_seed</span><span class="p">,</span> <span class="n">Axis</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_per_seed</span><span class="p">,</span> <span class="n">plot_internal_keys</span><span class="p">,</span> <span class="n">Axis</span>
 
-<span class="c1"># endu_res = comp_results.endurance</span>
-
-<span class="n">plot_per_seed</span><span class="p">(</span>
+<span class="n">plot_internal_keys</span><span class="p">(</span>
     <span class="n">results</span><span class="o">=</span><span class="n">endu_res</span><span class="o">.</span><span class="n">lapsim_results</span><span class="p">,</span>
+    <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;v_max_profile&quot;</span><span class="p">,</span> <span class="s2">&quot;seed_idx_list&quot;</span><span class="p">],</span>
     <span class="n">x_axis</span><span class="o">=</span><span class="n">Axis</span><span class="o">.</span><span class="n">DISTANCE</span><span class="p">,</span>
-    <span class="n">include_indices</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
-    <span class="n">include_power</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
+
+<span class="c1"># plot_per_seed(</span>
+<span class="c1">#     results=endu_res.lapsim_results,</span>
+<span class="c1">#     x_axis=Axis.DISTANCE,</span>
+<span class="c1">#     include_indices=range(4),</span>
+<span class="c1">#     include_power=True,</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
