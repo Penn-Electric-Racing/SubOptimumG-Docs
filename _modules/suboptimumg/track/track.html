@@ -542,23 +542,15 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">continuous</span><span class="p">:</span>
             <span class="n">seeds</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="n">n</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">,</span> <span class="n">prev_radius</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
-            <span class="k">while</span> <span class="n">curr_idx</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-                <span class="c1"># If a segment of the track is close to constant radius (abs diff &lt; 1), we prefer to</span>
-                <span class="c1"># take the midpoint of the whole segment. This makes our seeding less noisy.</span>
-                <span class="n">const_radius_start</span> <span class="o">=</span> <span class="n">curr_idx</span>
-                <span class="n">curr_radius</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">]</span>
-                <span class="k">while</span> <span class="n">curr_idx</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">]</span> <span class="o">-</span> <span class="n">curr_radius</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="n">const_radius_end</span> <span class="o">=</span> <span class="n">curr_idx</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">):</span>
+                <span class="c1"># Do not include the ends</span>
+                <span class="c1"># Technically more elegant ways of excluding these exist, but this is intuitive</span>
+                <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">idx</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">continue</span>
 
-                <span class="c1"># Compare with previous and next radius to determine whether it&#39;s a local minima</span>
-                <span class="k">if</span> <span class="n">curr_radius</span> <span class="o">&lt;</span> <span class="n">prev_radius</span> <span class="ow">and</span> <span class="p">(</span>
-                    <span class="n">curr_idx</span> <span class="o">==</span> <span class="n">n</span> <span class="ow">or</span> <span class="n">curr_radius</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">]</span>
-                <span class="p">):</span>
-                    <span class="n">seeds</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">const_radius_start</span> <span class="o">+</span> <span class="n">const_radius_end</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
-
-                <span class="n">prev_radius</span> <span class="o">=</span> <span class="n">curr_radius</span>
+                <span class="c1"># if r(idx-1) &gt; r(idx) &lt; r(idx+1), that is a local minima</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">[</span><span class="n">idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">r</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">seeds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">seeds</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
 
@@ -699,7 +691,7 @@
 <span class="sd">            Plotly figure object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Use provided configs or defaults</span>
-        <span class="n">theme_colors</span> <span class="o">=</span> <span class="n">get_theme</span><span class="p">(</span><span class="n">theme</span><span class="p">)</span>
+        <span class="c1"># theme_colors = get_theme(theme)</span>
         <span class="n">font_config</span> <span class="o">=</span> <span class="n">font_config</span> <span class="ow">or</span> <span class="n">DEFAULT_FONT_CONFIG</span>
         <span class="n">layout_config</span> <span class="o">=</span> <span class="n">layout_config</span> <span class="ow">or</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span>
 
@@ -713,17 +705,34 @@
         <span class="c1"># Create scatter plot with color mapping</span>
         <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
 
+        <span class="c1"># # Clip radius to 200 m temporarily</span>
+        <span class="c1"># radius_clipped = np.clip(self.radius, None, 200)</span>
+
         <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
             <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
                 <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
                 <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
                 <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span>
-                <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                    <span class="n">size</span><span class="o">=</span><span class="n">MARKER_SIZE_LARGE</span><span class="p">,</span>
-                    <span class="n">color</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="s2">&quot;dark&quot;</span><span class="p">],</span>
+                <span class="n">marker</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">MARKER_SIZE_LARGE</span><span class="p">,</span>
+                    <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span>
+                    <span class="c1"># &quot;color&quot;: radius_clipped,</span>
+                    <span class="s2">&quot;colorscale&quot;</span><span class="p">:</span> <span class="s2">&quot;Viridis&quot;</span><span class="p">,</span>  <span class="c1"># change if desired</span>
+                    <span class="s2">&quot;cmin&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                    <span class="s2">&quot;cmax&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+                    <span class="s2">&quot;colorbar&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Radius (m)&quot;</span><span class="p">},</span>
+                <span class="p">},</span>
+                <span class="n">hovertext</span><span class="o">=</span><span class="p">[</span>
+                    <span class="sa">f</span><span class="s2">&quot;Distance: </span><span class="si">{</span><span class="n">dist</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> m&lt;br&gt;Radius: </span><span class="si">{</span><span class="n">rad</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> m&quot;</span>
+                    <span class="c1"># for dist, rad in zip(self.cumulative_dist, radius_clipped)</span>
+                    <span class="k">for</span> <span class="n">dist</span><span class="p">,</span> <span class="n">rad</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cumulative_dist</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>
+                <span class="p">],</span>
+                <span class="n">hovertemplate</span><span class="o">=</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;x: %</span><span class="se">{{</span><span class="s2">x:</span><span class="si">{</span><span class="n">FLOAT_PRECISION</span><span class="si">}</span><span class="se">}}</span><span class="s2">&lt;br&gt;&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;y: %</span><span class="se">{{</span><span class="s2">y:</span><span class="si">{</span><span class="n">FLOAT_PRECISION</span><span class="si">}</span><span class="se">}}</span><span class="s2">&lt;br&gt;&quot;</span>
+                    <span class="s2">&quot;%</span><span class="si">{hovertext}</span><span class="s2">&lt;extra&gt;&lt;/extra&gt;&quot;</span>
                 <span class="p">),</span>
                 <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                <span class="n">hovertemplate</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;x: %</span><span class="se">{{</span><span class="s2">x:</span><span class="si">{</span><span class="n">FLOAT_PRECISION</span><span class="si">}</span><span class="se">}}</span><span class="s2">&lt;br&gt;y: %</span><span class="se">{{</span><span class="s2">y:</span><span class="si">{</span><span class="n">FLOAT_PRECISION</span><span class="si">}</span><span class="se">}}</span><span class="s2">&lt;extra&gt;&lt;/extra&gt;&quot;</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -731,36 +740,36 @@
             <span class="n">width</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">width</span><span class="p">,</span>
             <span class="n">height</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>
             <span class="n">margin</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">margin</span><span class="p">,</span>
-            <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                <span class="n">scaleanchor</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span>
-                <span class="n">scaleratio</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                <span class="n">showgrid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">gridcolor</span><span class="o">=</span><span class="n">GRID_COLOR</span><span class="p">,</span>
-                <span class="n">gridwidth</span><span class="o">=</span><span class="n">GRID_WIDTH</span><span class="p">,</span>
-                <span class="n">zeroline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">zerolinecolor</span><span class="o">=</span><span class="n">ZEROLINE_COLOR</span><span class="p">,</span>
-                <span class="n">zerolinewidth</span><span class="o">=</span><span class="n">ZEROLINE_WIDTH</span><span class="p">,</span>
-                <span class="n">tickfont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">small</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
-                <span class="n">tickformat</span><span class="o">=</span><span class="n">FLOAT_PRECISION</span><span class="p">,</span>
-                <span class="n">title</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;x position (m)&quot;</span><span class="p">,</span>
-                    <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">medium</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
-                <span class="p">),</span>
-            <span class="p">),</span>
-            <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                <span class="n">showgrid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">gridcolor</span><span class="o">=</span><span class="n">GRID_COLOR</span><span class="p">,</span>
-                <span class="n">gridwidth</span><span class="o">=</span><span class="n">GRID_WIDTH</span><span class="p">,</span>
-                <span class="n">zeroline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">zerolinecolor</span><span class="o">=</span><span class="n">ZEROLINE_COLOR</span><span class="p">,</span>
-                <span class="n">zerolinewidth</span><span class="o">=</span><span class="n">ZEROLINE_WIDTH</span><span class="p">,</span>
-                <span class="n">tickfont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">small</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
-                <span class="n">tickformat</span><span class="o">=</span><span class="n">FLOAT_PRECISION</span><span class="p">,</span>
-                <span class="n">title</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;y position (m)&quot;</span><span class="p">,</span>
-                    <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">medium</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
-                <span class="p">),</span>
-            <span class="p">),</span>
+            <span class="n">xaxis</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;scaleanchor&quot;</span><span class="p">:</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;scaleratio&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;showgrid&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;gridcolor&quot;</span><span class="p">:</span> <span class="n">GRID_COLOR</span><span class="p">,</span>
+                <span class="s2">&quot;gridwidth&quot;</span><span class="p">:</span> <span class="n">GRID_WIDTH</span><span class="p">,</span>
+                <span class="s2">&quot;zeroline&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;zerolinecolor&quot;</span><span class="p">:</span> <span class="n">ZEROLINE_COLOR</span><span class="p">,</span>
+                <span class="s2">&quot;zerolinewidth&quot;</span><span class="p">:</span> <span class="n">ZEROLINE_WIDTH</span><span class="p">,</span>
+                <span class="s2">&quot;tickfont&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">small</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
+                <span class="s2">&quot;tickformat&quot;</span><span class="p">:</span> <span class="n">FLOAT_PRECISION</span><span class="p">,</span>
+                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;x position (m)&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">medium</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
+            <span class="n">yaxis</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;showgrid&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;gridcolor&quot;</span><span class="p">:</span> <span class="n">GRID_COLOR</span><span class="p">,</span>
+                <span class="s2">&quot;gridwidth&quot;</span><span class="p">:</span> <span class="n">GRID_WIDTH</span><span class="p">,</span>
+                <span class="s2">&quot;zeroline&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;zerolinecolor&quot;</span><span class="p">:</span> <span class="n">ZEROLINE_COLOR</span><span class="p">,</span>
+                <span class="s2">&quot;zerolinewidth&quot;</span><span class="p">:</span> <span class="n">ZEROLINE_WIDTH</span><span class="p">,</span>
+                <span class="s2">&quot;tickfont&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">small</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
+                <span class="s2">&quot;tickformat&quot;</span><span class="p">:</span> <span class="n">FLOAT_PRECISION</span><span class="p">,</span>
+                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;y position (m)&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">medium</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
             <span class="n">plot_bgcolor</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">plot_bgcolor</span><span class="p">,</span>
             <span class="n">hovermode</span><span class="o">=</span><span class="n">HOVER_MODE</span><span class="p">,</span>
         <span class="p">)</span>

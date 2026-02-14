@@ -396,10 +396,17 @@
     <span class="k">if</span> <span class="n">v_curr</span> <span class="o">&lt;=</span> <span class="n">lap_vels</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-5</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
 
+    <span class="c1"># Instantly terminate if velocity is unreasonably high</span>
+    <span class="k">if</span> <span class="n">v_curr</span> <span class="o">&gt;</span> <span class="n">lap_vels</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="mf">2.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
     <span class="c1"># Terminate forward pass if velocity limit is decreasing and current simulated</span>
-    <span class="c1"># speed has exceeded velocity limit</span>
+    <span class="c1"># and speed has exceeded velocity limit</span>
     <span class="k">if</span> <span class="p">(</span>
-        <span class="n">lap_vels</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lap_vels</span><span class="p">[</span><span class="n">idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mf">1e-6</span>
+        <span class="c1"># lap_vels[idx] &lt; lap_vels[idx - 1] - 1e-6</span>
+        <span class="c1"># NOTE: look ahead instead of behind because starts at perfect local</span>
+        <span class="c1"># minima will immediately terminate if lookback bias is used</span>
+        <span class="n">lap_vels</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lap_vels</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">-</span> <span class="mf">1e-6</span>
         <span class="ow">and</span> <span class="n">v_curr</span> <span class="o">&gt;</span> <span class="n">lap_vels</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-6</span>
         <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">lap_vels</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
     <span class="p">):</span>
@@ -436,6 +443,10 @@
     <span class="c1"># Do not terminate if the current speed is more restrictive</span>
     <span class="k">if</span> <span class="n">v_curr</span> <span class="o">&lt;=</span> <span class="n">lap_vels</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-5</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># Instantly terminate if velocity is unreasonably high</span>
+    <span class="k">if</span> <span class="n">v_curr</span> <span class="o">&gt;</span> <span class="n">lap_vels</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="mf">2.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
 
     <span class="c1"># Terminate backwards pass if velocity limit is decreasing (as we move backwards)</span>
     <span class="c1"># and current simulated speed has exceeded velocity limit</span>
@@ -502,7 +513,7 @@
     <span class="c1"># Set a seed to be the initial velocity, if one is provided</span>
     <span class="k">if</span> <span class="n">initial_velocity</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
         <span class="n">seed_v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seed_v</span><span class="p">,</span> <span class="n">initial_velocity</span><span class="p">)</span>
-        <span class="n">seed_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seed_idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">seed_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seed_idx</span><span class="p">,</span> <span class="mf">1e-6</span><span class="p">)</span>
 
     <span class="c1"># Seeds sorted by velocity (lowest to highest)</span>
     <span class="n">sorted_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">seed_v</span><span class="p">)</span>
@@ -671,7 +682,9 @@
 
         <span class="n">lap_powers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">is_almost_slower_mask</span><span class="p">,</span> <span class="n">p_proposal</span><span class="p">,</span> <span class="n">lap_powers</span><span class="p">)</span>
         <span class="n">lap_eff_motor_torques</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
-            <span class="n">is_almost_slower_mask</span><span class="p">,</span> <span class="n">eff_motor_torque_proposal</span><span class="p">,</span> <span class="n">lap_eff_motor_torques</span>
+            <span class="n">is_almost_slower_mask</span><span class="p">,</span>
+            <span class="n">eff_motor_torque_proposal</span><span class="p">,</span>
+            <span class="n">lap_eff_motor_torques</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">extract_internal_data</span><span class="p">:</span>
