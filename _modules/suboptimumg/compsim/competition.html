@@ -534,8 +534,8 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        Tuple[EventResults, float]</span>
-<span class="sd">            The results of the endurance event simulation and efficiency points.</span>
+<span class="sd">        Tuple[EventResults, float, float]</span>
+<span class="sd">            Endurance event results, efficiency points, and consumed energy in kWh.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">endu_res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">endurance_event</span><span class="p">(</span><span class="n">extract_internal_data</span><span class="o">=</span><span class="n">extract_internal_data</span><span class="p">)</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">consumed_energy</span> <span class="o">=</span> <span class="n">energy_data</span><span class="p">(</span>
@@ -548,7 +548,7 @@
             <span class="n">endu_res</span><span class="o">.</span><span class="n">tyour</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">endu_res</span><span class="p">,</span> <span class="n">eff_points</span></div>
+        <span class="k">return</span> <span class="n">endu_res</span><span class="p">,</span> <span class="n">eff_points</span><span class="p">,</span> <span class="n">consumed_energy</span></div>
 
 
 <div class="viewcode-block" id="Competition.run">
@@ -576,8 +576,8 @@
             <span class="n">extract_internal_data</span><span class="o">=</span><span class="n">extract_internal_data</span>
         <span class="p">)</span>
         <span class="n">autoX_results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoX_event</span><span class="p">(</span><span class="n">extract_internal_data</span><span class="o">=</span><span class="n">extract_internal_data</span><span class="p">)</span>
-        <span class="n">endurance_results</span><span class="p">,</span> <span class="n">efficiency_points</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">efficiency_endurance_event</span><span class="p">(</span>
-            <span class="n">extract_internal_data</span><span class="o">=</span><span class="n">extract_internal_data</span>
+        <span class="n">endurance_results</span><span class="p">,</span> <span class="n">efficiency_points</span><span class="p">,</span> <span class="n">consumed_energy</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">efficiency_endurance_event</span><span class="p">(</span><span class="n">extract_internal_data</span><span class="o">=</span><span class="n">extract_internal_data</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">CompetitionResults</span><span class="p">(</span>
             <span class="n">accel</span><span class="o">=</span><span class="n">accel_results</span><span class="p">,</span>
@@ -585,6 +585,7 @@
             <span class="n">autoX</span><span class="o">=</span><span class="n">autoX_results</span><span class="p">,</span>
             <span class="n">endurance</span><span class="o">=</span><span class="n">endurance_results</span><span class="p">,</span>
             <span class="n">efficiency_points</span><span class="o">=</span><span class="n">efficiency_points</span><span class="p">,</span>
+            <span class="n">endu_consumed_energy</span><span class="o">=</span><span class="n">consumed_energy</span><span class="p">,</span>
         <span class="p">)</span></div>
 </div>
 

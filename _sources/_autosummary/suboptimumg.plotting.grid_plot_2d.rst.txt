@@ -1,7 +1,7 @@
-suboptimumg.plotting.overlay\_plots
+suboptimumg.plotting.grid\_plot\_2d
 ===================================
 
-.. automodule:: suboptimumg.plotting.overlay_plots
+.. automodule:: suboptimumg.plotting.grid_plot_2d
    :members:
    :undoc-members:
    :show-inheritance:

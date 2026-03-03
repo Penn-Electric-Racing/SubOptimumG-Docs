@@ -288,10 +288,13 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.plotting.html">suboptimumg.plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bar_chart.html">suboptimumg.plotting.bar_chart</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.color_themes.html">suboptimumg.plotting.color_themes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.generic_plot.html">suboptimumg.plotting.generic_plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot.html">suboptimumg.plotting.grid_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_2d.html">suboptimumg.plotting.grid_plot_2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html">suboptimumg.plotting.grid_plot_3d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plots.html">suboptimumg.plotting.overlay_plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_grid_plot_2d.html">suboptimumg.plotting.overlay_grid_plot_2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plot_2d.html">suboptimumg.plotting.overlay_plot_2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_2d.html">suboptimumg.plotting.plot_2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_3d.html">suboptimumg.plotting.plot_3d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plotting_constants.html">suboptimumg.plotting.plotting_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.stem_plot.html">suboptimumg.plotting.stem_plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.types.html">suboptimumg.plotting.types</a></li>
@@ -305,6 +308,9 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.models.html">suboptimumg.sweep.models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep.html">suboptimumg.sweep.motor_sweep</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html">suboptimumg.sweep.motor_sweep_results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.pack_optimizer_models.html">suboptimumg.sweep.pack_optimizer_models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.pack_optimizer_results.html">suboptimumg.sweep.pack_optimizer_results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.pack_optimizer_sweep.html">suboptimumg.sweep.pack_optimizer_sweep</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_1var.html">suboptimumg.sweep.sweep_results_1var</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_2var.html">suboptimumg.sweep.sweep_results_2var</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_1d.html">suboptimumg.sweep.sweeper_1d</a></li>
@@ -435,6 +441,8 @@
 </dd>
 <dt class="field-even">Fields<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AccumulatorModel.capacity" title="suboptimumg.vehicle.models.AccumulatorModel.capacity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">capacity</span> <span class="pre">(float)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AccumulatorModel.energy_density" title="suboptimumg.vehicle.models.AccumulatorModel.energy_density"><code class="xref py py-obj docutils literal notranslate"><span class="pre">energy_density</span> <span class="pre">(float)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#suboptimumg.vehicle.models.AccumulatorModel.pack_weight" title="suboptimumg.vehicle.models.AccumulatorModel.pack_weight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pack_weight</span> <span class="pre">(float)</span></code></a></p></li>
 </ul>
 </dd>
@@ -443,6 +451,32 @@
 <dt class="sig sig-object py" id="suboptimumg.vehicle.models.AccumulatorModel.pack_weight">
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pack_weight</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.AccumulatorModel.pack_weight" title="Link to this definition">#</a></dt>
 <dd><p>Battery pack weight (kg)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.AccumulatorModel.capacity">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">capacity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.AccumulatorModel.capacity" title="Link to this definition">#</a></dt>
+<dd><p>Nominal battery capacity (kWh)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Constraints<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt</strong> = 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.models.AccumulatorModel.energy_density">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">energy_density</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#suboptimumg.vehicle.models.AccumulatorModel.energy_density" title="Link to this definition">#</a></dt>
+<dd><p>Pack energy density (kWh/kg)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Constraints<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1728,6 +1762,8 @@
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AccumulatorModel"><code class="docutils literal notranslate"><span class="pre">AccumulatorModel</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AccumulatorModel.pack_weight"><code class="docutils literal notranslate"><span class="pre">AccumulatorModel.pack_weight</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AccumulatorModel.capacity"><code class="docutils literal notranslate"><span class="pre">AccumulatorModel.capacity</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AccumulatorModel.energy_density"><code class="docutils literal notranslate"><span class="pre">AccumulatorModel.energy_density</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.models.AeroModel"><code class="docutils literal notranslate"><span class="pre">AeroModel</span></code></a><ul class="nav section-nav flex-column">

@@ -426,7 +426,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting.internal_data_plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_event_traces</span><span class="p">,</span> <span class="n">Metric</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_event_traces</span><span class="p">,</span> <span class="n">Metric</span>
 
 <span class="n">plot_event_traces</span><span class="p">(</span>
     <span class="n">results</span><span class="o">=</span><span class="n">endu_res</span><span class="o">.</span><span class="n">lapsim_results</span><span class="p">,</span>
@@ -440,7 +440,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting.internal_data_plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_event_traces</span><span class="p">,</span> <span class="n">Metric</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_event_traces</span><span class="p">,</span> <span class="n">Metric</span>
 
 <span class="n">plot_event_traces</span><span class="p">(</span>
     <span class="c1"># results=[endu_res.lapsim_results, endu_awd.lapsim_results],</span>
@@ -456,7 +456,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting.internal_data_plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_competition_traces</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_competition_traces</span>
 
 <span class="n">plot_competition_traces</span><span class="p">(</span>
     <span class="c1"># competitions=comp_results,</span>
@@ -473,7 +473,7 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting.generic_plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot2D</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot2D</span>
 
 <span class="n">plot2D</span><span class="p">(</span>
     <span class="n">x_list</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">endu_res</span><span class="o">.</span><span class="n">lapsim_results</span><span class="o">.</span><span class="n">lap_t</span><span class="p">),</span>

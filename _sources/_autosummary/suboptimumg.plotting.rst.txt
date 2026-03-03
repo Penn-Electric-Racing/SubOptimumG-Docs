@@ -15,10 +15,13 @@ suboptimumg.plotting
 
    bar_chart
    color_themes
-   generic_plot
-   grid_plot
+   grid_plot_2d
+   grid_plot_3d
    internal_data_plots
-   overlay_plots
+   overlay_grid_plot_2d
+   overlay_plot_2d
+   plot_2d
+   plot_3d
    plotting_constants
    stem_plot
    types

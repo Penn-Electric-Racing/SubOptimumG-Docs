@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>suboptimumg.plotting.overlay_plots &#8212; SubOptimumG</title>
+    <title>suboptimumg.plotting.grid_plot_2d &#8212; SubOptimumG</title>
   
   
   
@@ -48,11 +48,11 @@
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.plotting.overlay_plots';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.plotting.grid_plot_2d';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="suboptimumg.plotting.plotting_constants" href="suboptimumg.plotting.plotting_constants.html" />
-    <link rel="prev" title="suboptimumg.plotting.internal_data_plots" href="suboptimumg.plotting.internal_data_plots.html" />
+    <link rel="next" title="suboptimumg.plotting.grid_plot_3d" href="suboptimumg.plotting.grid_plot_3d.html" />
+    <link rel="prev" title="suboptimumg.plotting.color_themes" href="suboptimumg.plotting.color_themes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -288,10 +288,13 @@
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.plotting.html">suboptimumg.plotting</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bar_chart.html">suboptimumg.plotting.bar_chart</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.color_themes.html">suboptimumg.plotting.color_themes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.generic_plot.html">suboptimumg.plotting.generic_plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot.html">suboptimumg.plotting.grid_plot</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">suboptimumg.plotting.grid_plot_2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html">suboptimumg.plotting.grid_plot_3d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">suboptimumg.plotting.overlay_plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_grid_plot_2d.html">suboptimumg.plotting.overlay_grid_plot_2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plot_2d.html">suboptimumg.plotting.overlay_plot_2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_2d.html">suboptimumg.plotting.plot_2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_3d.html">suboptimumg.plotting.plot_3d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plotting_constants.html">suboptimumg.plotting.plotting_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.stem_plot.html">suboptimumg.plotting.stem_plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.types.html">suboptimumg.plotting.types</a></li>
@@ -305,6 +308,9 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.models.html">suboptimumg.sweep.models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep.html">suboptimumg.sweep.motor_sweep</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html">suboptimumg.sweep.motor_sweep_results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.pack_optimizer_models.html">suboptimumg.sweep.pack_optimizer_models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.pack_optimizer_results.html">suboptimumg.sweep.pack_optimizer_results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.pack_optimizer_sweep.html">suboptimumg.sweep.pack_optimizer_sweep</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_1var.html">suboptimumg.sweep.sweep_results_1var</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_2var.html">suboptimumg.sweep.sweep_results_2var</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_1d.html">suboptimumg.sweep.sweeper_1d</a></li>
@@ -404,7 +410,7 @@
     
     <li class="breadcrumb-item"><a href="suboptimumg.plotting.html" class="nav-link">suboptimumg.plotting</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.plotting.overlay_plots</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.plotting.grid_plot_2d</span></li>
   </ul>
 </nav>
 </div>
@@ -421,63 +427,25 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-suboptimumg.plotting.overlay_plots">
-<span id="suboptimumg-plotting-overlay-plots"></span><h1>suboptimumg.plotting.overlay_plots<a class="headerlink" href="#module-suboptimumg.plotting.overlay_plots" title="Link to this heading">#</a></h1>
+  <section id="module-suboptimumg.plotting.grid_plot_2d">
+<span id="suboptimumg-plotting-grid-plot-2d"></span><h1>suboptimumg.plotting.grid_plot_2d<a class="headerlink" href="#module-suboptimumg.plotting.grid_plot_2d" title="Link to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="suboptimumg.plotting.overlay_plots.overlay_grid_plot_2D">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.overlay_plots.</span></span><span class="sig-name descname"><span class="pre">overlay_grid_plot_2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subplot_titles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_curve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothing_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SmoothingConfig(interp_factor=5,</span> <span class="pre">smoothing_sigma=0,</span> <span class="pre">interp_method='linear')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/overlay_plots.html#overlay_grid_plot_2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.overlay_plots.overlay_grid_plot_2D" title="Link to this definition">#</a></dt>
-<dd><p>Generic 2D overlay grid plotting utility for comparing multiple series.</p>
+<dt class="sig sig-object py" id="suboptimumg.plotting.grid_plot_2d.plot_grid_2D">
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.grid_plot_2d.</span></span><span class="sig-name descname"><span class="pre">plot_grid_2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subplot_titles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_curve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothing_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/grid_plot_2d.html#plot_grid_2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.grid_plot_2d.plot_grid_2D" title="Link to this definition">#</a></dt>
+<dd><p>Generic 2D grid plotting utility.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x_data_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>npt.NDArray</em><em>[</em><em>np.number</em><em>]</em><em>]</em><em>]</em>) – {subplot_key: {trace_label: x_data_array}}
-- subplot_key: identifies which subplot the data belongs to (must match order in subplot_titles)
-- trace_label: identifies which trace/series (must match keys in y_data_dict[subplot_key])</p></li>
-<li><p><strong>y_data_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>npt.NDArray</em><em>[</em><em>np.number</em><em>]</em><em>]</em><em>]</em>) – {subplot_key: {trace_label: y_data_array}}
-- subplot_key: identifies which subplot the data belongs to (must match order in subplot_titles)
-- trace_label: identifies which trace/series (must match keys in x_data_dict[subplot_key])</p></li>
-<li><p><strong>subplot_titles</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of titles for each subplot</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Overall title for the grid</p></li>
-<li><p><strong>x_label</strong> (<em>str</em>) – Label for x-axis</p></li>
-<li><p><strong>y_label</strong> (<em>str</em>) – Label for y-axis</p></li>
+<li><p><strong>x_list</strong> (<em>numpy.ndarray</em>) – Numpy array of x coordinates (shared across all subplots)</p></li>
+<li><p><strong>y_data_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>np.ndarray</em><em>]</em>) – Dictionary mapping event keys to y-data arrays</p></li>
+<li><p><strong>subplot_titles</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of subplot titles in order</p></li>
+<li><p><strong>title</strong> (<em>str</em>) – Overall grid title</p></li>
+<li><p><strong>x_label</strong> (<em>str</em>) – X-axis label for all subplots</p></li>
+<li><p><strong>y_label</strong> (<em>str</em>) – Y-axis label for all subplots</p></li>
 <li><p><strong>rows</strong> (<em>int</em>) – Number of rows in the grid</p></li>
 <li><p><strong>cols</strong> (<em>int</em>) – Number of columns in the grid</p></li>
-<li><p><strong>show_legend</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, shows legend on the first subplot</p></li>
-<li><p><strong>fit_curve</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use spline fitting for curves</p></li>
-<li><p><strong>smoothing</strong> (<em>float</em><em>, </em><em>optional</em>) – Smoothing parameter (deprecated, use smoothing_config)</p></li>
-<li><p><strong>interp_factor</strong> (<em>int</em><em>, </em><em>optional</em>) – Interpolation factor (deprecated, use smoothing_config)</p></li>
-<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a><em>, </em><em>optional</em>) – Layout configuration object</p></li>
-<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a><em>, </em><em>optional</em>) – Font configuration object</p></li>
-<li><p><strong>smoothing_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.SmoothingConfig" title="suboptimumg.plotting.plotting_constants.SmoothingConfig"><em>SmoothingConfig</em></a><em>, </em><em>optional</em>) – Smoothing configuration object</p></li>
-<li><p><strong>show_points</strong> (<em>bool</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Plotly figure object</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>go.Figure</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="suboptimumg.plotting.overlay_plots.overlay_plot2D">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.overlay_plots.</span></span><span class="sig-name descname"><span class="pre">overlay_plot2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_axis</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_curve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subtitle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothing_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/overlay_plots.html#overlay_plot2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.overlay_plots.overlay_plot2D" title="Link to this definition">#</a></dt>
-<dd><p>Generic 2D overlay plotting utility for comparing multiple series.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x_data_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>npt.NDArray</em><em>[</em><em>np.number</em><em>]</em><em>]</em>) – Dictionary mapping trace labels to x data arrays</p></li>
-<li><p><strong>y_data_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>npt.NDArray</em><em>[</em><em>np.number</em><em>]</em><em>]</em>) – Dictionary mapping trace labels to y data arrays</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Plot title</p></li>
-<li><p><strong>x_axis</strong> (<em>str</em>) – X-axis label</p></li>
-<li><p><strong>y_axis</strong> (<em>str</em>) – Y-axis label</p></li>
-<li><p><strong>h_line</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.ReferenceLineConfig" title="suboptimumg.plotting.plotting_constants.ReferenceLineConfig"><em>ReferenceLineConfig</em></a><em>, </em><em>optional</em>) – ReferenceLineConfig for horizontal reference line (None = no line)</p></li>
-<li><p><strong>v_line</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.ReferenceLineConfig" title="suboptimumg.plotting.plotting_constants.ReferenceLineConfig"><em>ReferenceLineConfig</em></a><em>, </em><em>optional</em>) – ReferenceLineConfig for vertical reference line (None = no line)</p></li>
-<li><p><strong>fit_curve</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to fit a curve to the data points</p></li>
-<li><p><strong>show_points</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show individual data points</p></li>
-<li><p><strong>subtitle</strong> (<em>str</em><em>, </em><em>optional</em>) – Optional subtitle</p></li>
+<li><p><strong>theme</strong> (<em>str</em><em>, </em><em>optional</em>) – Color theme name</p></li>
+<li><p><strong>fit_curve</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to fit curves to data</p></li>
 <li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a><em>, </em><em>optional</em>) – FontConfig object for font settings</p></li>
 <li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a><em>, </em><em>optional</em>) – LayoutConfig object for layout settings</p></li>
 <li><p><strong>smoothing_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.SmoothingConfig" title="suboptimumg.plotting.plotting_constants.SmoothingConfig"><em>SmoothingConfig</em></a><em>, </em><em>optional</em>) – SmoothingConfig object for smoothing settings</p></li>
@@ -505,20 +473,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="suboptimumg.plotting.internal_data_plots.html"
+       href="suboptimumg.plotting.color_themes.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">suboptimumg.plotting.internal_data_plots</p>
+        <p class="prev-next-title">suboptimumg.plotting.color_themes</p>
       </div>
     </a>
     <a class="right-next"
-       href="suboptimumg.plotting.plotting_constants.html"
+       href="suboptimumg.plotting.grid_plot_3d.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">suboptimumg.plotting.plotting_constants</p>
+        <p class="prev-next-title">suboptimumg.plotting.grid_plot_3d</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -541,8 +509,7 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.overlay_plots.overlay_grid_plot_2D"><code class="docutils literal notranslate"><span class="pre">overlay_grid_plot_2D()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.overlay_plots.overlay_plot2D"><code class="docutils literal notranslate"><span class="pre">overlay_plot2D()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.grid_plot_2d.plot_grid_2D"><code class="docutils literal notranslate"><span class="pre">plot_grid_2D()</span></code></a></li>
 </ul>
   </nav></div>
 
@@ -550,7 +517,7 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/_autosummary/suboptimumg.plotting.overlay_plots.rst.txt"
+      <li><a href="../_sources/_autosummary/suboptimumg.plotting.grid_plot_2d.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>

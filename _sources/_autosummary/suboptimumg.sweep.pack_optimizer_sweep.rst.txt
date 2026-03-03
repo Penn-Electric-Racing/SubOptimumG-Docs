@@ -1,0 +1,8 @@
+suboptimumg.sweep.pack\_optimizer\_sweep
+========================================
+
+.. automodule:: suboptimumg.sweep.pack_optimizer_sweep
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

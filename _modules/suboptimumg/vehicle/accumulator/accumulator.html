@@ -329,7 +329,56 @@
         <span class="n">vehicle_model</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span> <span class="o">=</span> <span class="n">vehicle_model</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">vehicle_model</span><span class="o">.</span><span class="n">accum</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">vehicle_model</span><span class="o">.</span><span class="n">accum</span>
+        <span class="c1"># Capture the nominal mass at construction time so that mass_to_capacity</span>
+        <span class="c1"># and capacity_to_mass always use the baseline, even if the vehicle model</span>
+        <span class="c1"># mass is later mutated via modify_params.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nominal_mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">vehicle_model</span><span class="o">.</span><span class="n">mass</span>
+
+<div class="viewcode-block" id="Accumulator.mass_to_capacity">
+<a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.accumulator.accumulator.html#suboptimumg.vehicle.accumulator.accumulator.Accumulator.mass_to_capacity">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mass_to_capacity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the battery capacity (kWh) corresponding to a given total vehicle mass (kg),</span>
+<span class="sd">        assuming the mass difference from the current car mass is solely due to changes in battery</span>
+<span class="sd">        mass based on the energy density. Should be used when trying to check if the mass of the car</span>
+<span class="sd">        provides sufficient battery capacity.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        -----------</span>
+<span class="sd">        mass : float</span>
+<span class="sd">            Total vehicle mass (kg) for which to compute the corresponding battery capacity.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        --------</span>
+<span class="sd">        float</span>
+<span class="sd">            Battery capacity (kWh)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mass_delta</span> <span class="o">=</span> <span class="n">mass</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nominal_mass</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">capacity</span> <span class="o">+</span> <span class="n">mass_delta</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">energy_density</span></div>
+
+
+<div class="viewcode-block" id="Accumulator.capacity_to_mass">
+<a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.accumulator.accumulator.html#suboptimumg.vehicle.accumulator.accumulator.Accumulator.capacity_to_mass">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">capacity_to_mass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capacity</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the total vehicle mass (kg) corresponding to a given battery capacity (kWh),</span>
+<span class="sd">        assuming that any extra mass can be solely used to increase battery mass. Should be used</span>
+<span class="sd">        when trying to modify the mass of the car based on a desired battery capacity.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        -----------</span>
+<span class="sd">        capacity : float</span>
+<span class="sd">            Battery capacity (kWh) for which to compute the corresponding total vehicle mass.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        --------</span>
+<span class="sd">        float</span>
+<span class="sd">            Total vehicle mass (kg)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cap_delta</span> <span class="o">=</span> <span class="n">capacity</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">capacity</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nominal_mass</span> <span class="o">+</span> <span class="n">cap_delta</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">energy_density</span></div>
+</div>
 
 </pre></div>
 

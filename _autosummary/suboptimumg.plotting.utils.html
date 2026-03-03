@@ -288,10 +288,13 @@
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.plotting.html">suboptimumg.plotting</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bar_chart.html">suboptimumg.plotting.bar_chart</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.color_themes.html">suboptimumg.plotting.color_themes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.generic_plot.html">suboptimumg.plotting.generic_plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot.html">suboptimumg.plotting.grid_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_2d.html">suboptimumg.plotting.grid_plot_2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html">suboptimumg.plotting.grid_plot_3d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plots.html">suboptimumg.plotting.overlay_plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_grid_plot_2d.html">suboptimumg.plotting.overlay_grid_plot_2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plot_2d.html">suboptimumg.plotting.overlay_plot_2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_2d.html">suboptimumg.plotting.plot_2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_3d.html">suboptimumg.plotting.plot_3d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plotting_constants.html">suboptimumg.plotting.plotting_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.stem_plot.html">suboptimumg.plotting.stem_plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.types.html">suboptimumg.plotting.types</a></li>
@@ -305,6 +308,9 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.models.html">suboptimumg.sweep.models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep.html">suboptimumg.sweep.motor_sweep</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html">suboptimumg.sweep.motor_sweep_results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.pack_optimizer_models.html">suboptimumg.sweep.pack_optimizer_models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.pack_optimizer_results.html">suboptimumg.sweep.pack_optimizer_results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.pack_optimizer_sweep.html">suboptimumg.sweep.pack_optimizer_sweep</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_1var.html">suboptimumg.sweep.sweep_results_1var</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_2var.html">suboptimumg.sweep.sweep_results_2var</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_1d.html">suboptimumg.sweep.sweeper_1d</a></li>
@@ -440,6 +446,23 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="suboptimumg.plotting.utils.color_cycle">
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.utils.</span></span><span class="sig-name descname"><span class="pre">color_cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/utils.html#color_cycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.utils.color_cycle" title="Link to this definition">#</a></dt>
+<dd><p>Get n distinct colors from Plotly’s qualitative palette.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – Number of colors needed</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Iterable of color strings, repeating if n exceeds palette size</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Iterable[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.plotting.utils.prepare_smooth_data_2D">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.utils.</span></span><span class="sig-name descname"><span class="pre">prepare_smooth_data_2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothing_config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/utils.html#prepare_smooth_data_2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.utils.prepare_smooth_data_2D" title="Link to this definition">#</a></dt>
 <dd><p>Helper function to prepare smoothed data for plots.</p>
@@ -511,6 +534,30 @@
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="suboptimumg.plotting.utils.validate_data">
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.utils.</span></span><span class="sig-name descname"><span class="pre">validate_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/utils.html#validate_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.utils.validate_data" title="Link to this definition">#</a></dt>
+<dd><p>Determine if the input data is grid-based or scatter-based.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_list</strong> (<em>array_like</em>) – X coordinates</p></li>
+<li><p><strong>y_list</strong> (<em>array_like</em>) – Y coordinates</p></li>
+<li><p><strong>z_list</strong> (<em>array_like</em>) – Z values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Enum indicating whether data is GridInput or ScatterInput</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#suboptimumg.plotting.utils.DataType3D" title="suboptimumg.plotting.utils.DataType3D">DataType3D</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If data dimensions are invalid or mismatched</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -565,9 +612,11 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.utils.DataType3D.ScatterInput"><code class="docutils literal notranslate"><span class="pre">DataType3D.ScatterInput</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.utils.color_cycle"><code class="docutils literal notranslate"><span class="pre">color_cycle()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.utils.prepare_smooth_data_2D"><code class="docutils literal notranslate"><span class="pre">prepare_smooth_data_2D()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.utils.prepare_smooth_data_3D"><code class="docutils literal notranslate"><span class="pre">prepare_smooth_data_3D()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.utils.prepare_smooth_data_3D_scatter"><code class="docutils literal notranslate"><span class="pre">prepare_smooth_data_3D_scatter()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.utils.validate_data"><code class="docutils literal notranslate"><span class="pre">validate_data()</span></code></a></li>
 </ul>
   </nav></div>
 

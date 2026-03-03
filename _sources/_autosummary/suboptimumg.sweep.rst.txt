@@ -19,6 +19,9 @@ suboptimumg.sweep
    models
    motor_sweep
    motor_sweep_results
+   pack_optimizer_models
+   pack_optimizer_results
+   pack_optimizer_sweep
    sweep_results_1var
    sweep_results_2var
    sweeper_1d
