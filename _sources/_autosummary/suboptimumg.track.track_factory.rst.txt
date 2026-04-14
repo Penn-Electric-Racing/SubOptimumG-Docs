@@ -1,8 +1,0 @@
-suboptimumg.track.track\_factory
-================================
-
-.. automodule:: suboptimumg.track.track_factory
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

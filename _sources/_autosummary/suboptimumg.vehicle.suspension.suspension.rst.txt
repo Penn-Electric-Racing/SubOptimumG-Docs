@@ -1,8 +1,0 @@
-suboptimumg.vehicle.suspension.suspension
-=========================================
-
-.. automodule:: suboptimumg.vehicle.suspension.suspension
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
