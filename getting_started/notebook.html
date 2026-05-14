@@ -404,12 +404,13 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_per_seed</span><span class="p">,</span> <span class="n">plot_internal_keys</span><span class="p">,</span> <span class="n">Axis</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_per_seed</span><span class="p">,</span> <span class="n">Axis</span>
 
-<span class="n">plot_internal_keys</span><span class="p">(</span>
+<span class="c1"># By default, includes an overlay of seeds on top of v_max_profile</span>
+<span class="n">plot_per_seed</span><span class="p">(</span>
     <span class="n">results</span><span class="o">=</span><span class="n">endu_res</span><span class="o">.</span><span class="n">lapsim_results</span><span class="p">,</span>
-    <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;v_max_profile&quot;</span><span class="p">,</span> <span class="s2">&quot;seed_idx_list&quot;</span><span class="p">],</span>
     <span class="n">x_axis</span><span class="o">=</span><span class="n">Axis</span><span class="o">.</span><span class="n">DISTANCE</span><span class="p">,</span>
+    <span class="n">include_seed_overview</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="c1"># plot_per_seed(</span>
