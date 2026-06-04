@@ -1,0 +1,1067 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>suboptimumg.loganalysis.derived &#8212; SubOptimumG</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+
+    <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/loganalysis/derived';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SubOptimumG</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.loganalysis.derived</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for suboptimumg.loganalysis.derived</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Derived quantities computed from raw log data.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">G</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.irl_car</span><span class="w"> </span><span class="kn">import</span> <span class="n">IrlCar</span>
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Private helpers</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">remedy</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raise a helpful KeyError if *col* is missing from *df*.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="ow">or</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">col</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column &#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&#39; not found. </span><span class="si">{</span><span class="n">remedy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_safe_gradient</span><span class="p">(</span><span class="n">signal</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Time derivative with forward/back-fill where dt == 0.&quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">dt</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span> <span class="o">/</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Ground speed</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="compute_groundspeed">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.derived.html#suboptimumg.loganalysis.compute_groundspeed">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_groundspeed</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">fl_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.wheelSpeeds.frontLeft&quot;</span><span class="p">,</span>
+    <span class="n">fr_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.wheelSpeeds.frontRight&quot;</span><span class="p">,</span>
+    <span class="n">out_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;groundSpeed&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Average front wheel speeds to estimate ground speed.</span>
+
+<span class="sd">    Uses undriven (front) wheels to avoid slip contamination from</span>
+<span class="sd">    the driven (rear) axle.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">DEPRECATION WARNING: compute_groundspeed is deprecated and will be removed in a future release.</span>
+
+<span class="sd">Use suboptimumg.log_analysis.add_groundspeed instead, which operates directly on a PERDA SingleRunData object.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="n">fl_col</span><span class="p">,</span>
+        <span class="s2">&quot;Ensure wheel speed columns exist after intake + convert_wheelspeeds_to_m_per_s().&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="n">fr_col</span><span class="p">,</span>
+        <span class="s2">&quot;Ensure wheel speed columns exist after intake + convert_wheelspeeds_to_m_per_s().&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="n">out_col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">fl_col</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="n">fr_col</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[derived] Added: </span><span class="si">{</span><span class="n">out_col</span><span class="si">}</span><span class="s2"> = avg(</span><span class="si">{</span><span class="n">fl_col</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">fr_col</span><span class="si">}</span><span class="s2">)  (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows)&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Track frame velocities</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="compute_track_frame_velocities">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.derived.html#suboptimumg.loganalysis.compute_track_frame_velocities">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_track_frame_velocities</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">vel_n_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;velN&quot;</span><span class="p">,</span>
+    <span class="n">vel_e_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;velE&quot;</span><span class="p">,</span>
+    <span class="n">yaw_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.yawPitchRoll.yaw&quot;</span><span class="p">,</span>
+    <span class="n">low_speed_thresh</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="n">out_vx</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;track.velocity.x&quot;</span><span class="p">,</span>
+    <span class="n">out_vy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;track.velocity.y&quot;</span><span class="p">,</span>
+    <span class="n">out_heading</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;track.heading&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute track-frame (velocity-frame) velocities from NED components.</span>
+
+<span class="sd">    Track heading is the course angle (direction of travel), same</span>
+<span class="sd">    convention as yaw (0 = North, 90 = East, wraps at +/-180).</span>
+<span class="sd">    At low speed the heading falls back to INS yaw.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">DEPRECATION WARNING: compute_track_frame_velocities is deprecated and will be removed in a future release.</span>
+
+<span class="sd">Use suboptimumg.log_analysis.add_track_frame_velocities instead, which operates directly on a PERDA SingleRunData object.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">vel_n_col</span><span class="p">,</span> <span class="s2">&quot;Run patch_ned_velocity() first to generate NED columns.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">vel_e_col</span><span class="p">,</span> <span class="s2">&quot;Run patch_ned_velocity() first to generate NED columns.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">yaw_col</span><span class="p">,</span> <span class="s2">&quot;Yaw column not found in DataFrame.&quot;</span><span class="p">)</span>
+
+    <span class="n">vel_n</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">vel_n_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">vel_e</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">vel_e_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="n">out_vx</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">vel_n</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">vel_e</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">out_vy</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">out_heading</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">vel_e</span><span class="p">,</span> <span class="n">vel_n</span><span class="p">))</span>
+
+    <span class="n">low_speed</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">out_vx</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">&lt;</span> <span class="n">low_speed_thresh</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">low_speed</span><span class="p">,</span> <span class="n">out_heading</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">low_speed</span><span class="p">,</span> <span class="n">yaw_col</span><span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;[derived] Added: </span><span class="si">{</span><span class="n">out_vx</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">out_vy</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">out_heading</span><span class="si">}</span><span class="s2">  &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows, low-speed gate @ </span><span class="si">{</span><span class="n">low_speed_thresh</span><span class="si">}</span><span class="s2"> m/s)&quot;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Body slip angle</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="compute_body_slip_angle">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.derived.html#suboptimumg.loganalysis.compute_body_slip_angle">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_body_slip_angle</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">track_heading_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;track.heading&quot;</span><span class="p">,</span>
+    <span class="n">yaw_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.yawPitchRoll.yaw&quot;</span><span class="p">,</span>
+    <span class="n">vel_body_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.velocityBody.x&quot;</span><span class="p">,</span>
+    <span class="n">low_speed_thresh</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="n">out_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;body.slipAngle&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute body slip angle (beta) from track heading and INS yaw.</span>
+
+<span class="sd">    Standard SAE sideslip: beta = track_heading - yaw, wrapped to +/-180.</span>
+<span class="sd">    Positive beta = velocity vector to the right of the nose.</span>
+<span class="sd">    Zeroed below *low_speed_thresh* where heading is unreliable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">DEPRECATION WARNING: compute_body_slip_angle is deprecated and will be removed in a future release.</span>
+
+<span class="sd">Use suboptimumg.log_analysis.add_body_slip_angle instead, which operates directly on a PERDA SingleRunData object.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">track_heading_col</span><span class="p">,</span> <span class="s2">&quot;Run compute_track_frame_velocities() first.&quot;</span><span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">yaw_col</span><span class="p">,</span> <span class="s2">&quot;Yaw column not found in DataFrame.&quot;</span><span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">vel_body_col</span><span class="p">,</span> <span class="s2">&quot;Run patch_ned_velocity() first to get body-frame velocity.&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">slip</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">track_heading_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="n">yaw_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">out_col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">slip</span> <span class="o">+</span> <span class="mf">180.0</span><span class="p">)</span> <span class="o">%</span> <span class="mf">360.0</span> <span class="o">-</span> <span class="mf">180.0</span>
+
+    <span class="n">low_speed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">vel_body_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">low_speed_thresh</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">low_speed</span><span class="p">,</span> <span class="n">out_col</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;[derived] Added: </span><span class="si">{</span><span class="n">out_col</span><span class="si">}</span><span class="s2">  &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows, low-speed gate @ </span><span class="si">{</span><span class="n">low_speed_thresh</span><span class="si">}</span><span class="s2"> m/s)&quot;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Curvature &amp; radius</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="compute_curvature">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.derived.html#suboptimumg.loganalysis.compute_curvature">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_curvature</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">yaw_rate_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.compensatedAngularRate.z&quot;</span><span class="p">,</span>
+    <span class="n">vel_body_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.velocityBody.x&quot;</span><span class="p">,</span>
+    <span class="n">track_heading_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;track.heading&quot;</span><span class="p">,</span>
+    <span class="n">vel_track_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;track.velocity.x&quot;</span><span class="p">,</span>
+    <span class="n">time_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;time_s&quot;</span><span class="p">,</span>
+    <span class="n">low_speed_thresh</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="n">median_window</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="n">radius_clip</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">500.0</span><span class="p">,</span>
+    <span class="n">out_body_curv</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;body.curvature&quot;</span><span class="p">,</span>
+    <span class="n">out_body_radius</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;body.radius&quot;</span><span class="p">,</span>
+    <span class="n">out_track_curv</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;track.curvature&quot;</span><span class="p">,</span>
+    <span class="n">out_track_radius</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;track.radius&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute path curvature and radius in body and track frames.</span>
+
+<span class="sd">    Body frame uses the measured yaw rate directly.  Track frame</span>
+<span class="sd">    differentiates the track heading.  Both apply a rolling median</span>
+<span class="sd">    and radius clipping.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">DEPRECATION WARNING: compute_curvature is deprecated and will be removed in a future release.</span>
+
+<span class="sd">Use suboptimumg.log_analysis.add_curvature instead, which operates directly on a PERDA SingleRunData object.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="n">yaw_rate_col</span><span class="p">,</span>
+        <span class="s2">&quot;Yaw rate column not found. Ensure compensatedAngularRate.z is in intake.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">vel_body_col</span><span class="p">,</span> <span class="s2">&quot;Run patch_ned_velocity() first to get body-frame velocity.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">track_heading_col</span><span class="p">,</span> <span class="s2">&quot;Run compute_track_frame_velocities() first.&quot;</span><span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">vel_track_col</span><span class="p">,</span> <span class="s2">&quot;Run compute_track_frame_velocities() first.&quot;</span><span class="p">)</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">._utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_time_array</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">get_time_array</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">time_col</span><span class="p">)</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="c1"># --- Body frame: curv = yaw_rate_rad / v_body ---</span>
+    <span class="n">yaw_rate_rad</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">yaw_rate_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>  <span class="c1"># already rad/s</span>
+    <span class="n">speed_body</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">vel_body_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+        <span class="n">curv_body_raw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">speed_body</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">low_speed_thresh</span><span class="p">,</span>
+            <span class="n">yaw_rate_rad</span> <span class="o">/</span> <span class="n">speed_body</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="n">out_body_curv</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">curv_body_raw</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">median_window</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">median</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">values</span>
+    <span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+        <span class="n">r_body</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">out_body_curv</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="mf">1.0</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="n">out_body_curv</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+            <span class="n">radius_clip</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">out_body_radius</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">r_body</span><span class="p">,</span> <span class="o">-</span><span class="n">radius_clip</span><span class="p">,</span> <span class="n">radius_clip</span><span class="p">)</span>
+
+    <span class="c1"># --- Track frame: curv = d(heading)/dt / v_track ---</span>
+    <span class="n">heading_unwrapped</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">track_heading_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+    <span class="n">heading_rate</span> <span class="o">=</span> <span class="n">_safe_gradient</span><span class="p">(</span><span class="n">heading_unwrapped</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>  <span class="c1"># rad/s</span>
+    <span class="n">speed_track</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">vel_track_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+        <span class="n">curv_track_raw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">speed_track</span> <span class="o">&gt;</span> <span class="n">low_speed_thresh</span><span class="p">,</span>
+            <span class="n">heading_rate</span> <span class="o">/</span> <span class="n">speed_track</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="n">out_track_curv</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">curv_track_raw</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">median_window</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">median</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">values</span>
+    <span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+        <span class="n">r_track</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">out_track_curv</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="mf">1.0</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="n">out_track_curv</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+            <span class="n">radius_clip</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">out_track_radius</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">r_track</span><span class="p">,</span> <span class="o">-</span><span class="n">radius_clip</span><span class="p">,</span> <span class="n">radius_clip</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;[derived] Added: </span><span class="si">{</span><span class="n">out_body_curv</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">out_body_radius</span><span class="si">}</span><span class="s2">, &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">out_track_curv</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">out_track_radius</span><span class="si">}</span><span class="s2">  &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows, median_window=</span><span class="si">{</span><span class="n">median_window</span><span class="si">}</span><span class="s2">, &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;radius_clip=</span><span class="si">{</span><span class="n">radius_clip</span><span class="si">}</span><span class="s2">m)&quot;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Lateral acceleration</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="compute_accelerations">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.derived.html#suboptimumg.loganalysis.compute_accelerations">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_accelerations</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">vel_body</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.velocityBody.x&quot;</span><span class="p">,</span>
+    <span class="n">curvature_body</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;body.curvature&quot;</span><span class="p">,</span>
+    <span class="n">vel_track</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;track.velocity.x&quot;</span><span class="p">,</span>
+    <span class="n">curvature_track</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;track.curvature&quot;</span><span class="p">,</span>
+    <span class="n">out_body</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;body.accLat&quot;</span><span class="p">,</span>
+    <span class="n">out_track</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;track.accLat&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute lateral acceleration from v^2 * curvature.</span>
+
+<span class="sd">    Computes both body and track frames by default.  All column</span>
+<span class="sd">    name arguments have defaults matching upstream function outputs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">DEPRECATION WARNING: compute_accelerations is deprecated and will be removed in a future release.</span>
+
+<span class="sd">Use suboptimumg.log_analysis.add_accelerations instead, which operates directly on a PERDA SingleRunData object.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">vel_body</span><span class="p">,</span> <span class="s2">&quot;Run patch_ned_velocity() first to get body-frame velocity.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">curvature_body</span><span class="p">,</span> <span class="s2">&quot;Run compute_curvature() first.&quot;</span><span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">vel_track</span><span class="p">,</span> <span class="s2">&quot;Run compute_track_frame_velocities() first.&quot;</span><span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">curvature_track</span><span class="p">,</span> <span class="s2">&quot;Run compute_curvature() first.&quot;</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="n">out_body</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">vel_body</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="n">curvature_body</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">out_track</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">vel_track</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="n">curvature_track</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[derived] Added: </span><span class="si">{</span><span class="n">out_body</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">out_track</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows)&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Kinematic steer angle</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="compute_kinematic_steer_angle">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.derived.html#suboptimumg.loganalysis.compute_kinematic_steer_angle">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_kinematic_steer_angle</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">curvature_body</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;body.curvature&quot;</span><span class="p">,</span>
+    <span class="n">curvature_track</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;track.curvature&quot;</span><span class="p">,</span>
+    <span class="n">wheelbase</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">car_yaml</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;parameters/car.yaml&quot;</span><span class="p">,</span>
+    <span class="n">out_body</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;body.steerAngle&quot;</span><span class="p">,</span>
+    <span class="n">out_track</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;track.steerAngle&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute kinematic steer angle from curvature (bicycle model).</span>
+
+<span class="sd">    ``delta = atan(wheelbase * curvature)`` in degrees.  Wheelbase</span>
+<span class="sd">    is auto-loaded from car.yaml if not specified.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">DEPRECATION WARNING: compute_kinematic_steer_angle is deprecated and will be removed in a future release.</span>
+
+<span class="sd">Use suboptimumg.log_analysis.add_kinematic_steer_angle instead, which operates directly on a PERDA SingleRunData object.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">curvature_body</span><span class="p">,</span> <span class="s2">&quot;Run compute_curvature() first.&quot;</span><span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">curvature_track</span><span class="p">,</span> <span class="s2">&quot;Run compute_curvature() first.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">wheelbase</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">car_yaml</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">car_cfg</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">wheelbase</span> <span class="o">=</span> <span class="n">car_cfg</span><span class="p">[</span><span class="s2">&quot;wb&quot;</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[derived] Loaded wheelbase=</span><span class="si">{</span><span class="n">wheelbase</span><span class="si">}</span><span class="s2">m from </span><span class="si">{</span><span class="n">car_yaml</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="n">out_body</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">wheelbase</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="n">curvature_body</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">out_track</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">wheelbase</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="n">curvature_track</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;[derived] Added: </span><span class="si">{</span><span class="n">out_body</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">out_track</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows, wb=</span><span class="si">{</span><span class="n">wheelbase</span><span class="si">}</span><span class="s2">m)&quot;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Rear slip ratio</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="compute_rear_slip_ratio">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.derived.html#suboptimumg.loganalysis.compute_rear_slip_ratio">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_rear_slip_ratio</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">wheel_speed_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.moc.motor.wheelSpeed&quot;</span><span class="p">,</span>
+    <span class="n">ground_speed_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;groundSpeed&quot;</span><span class="p">,</span>
+    <span class="n">out_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;rear.slipRatio&quot;</span><span class="p">,</span>
+    <span class="n">low_speed_thresh</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute rear axle longitudinal slip ratio.</span>
+
+<span class="sd">    ``slip = (v_wheel - v_ground) / v_ground``</span>
+
+<span class="sd">    Positive = driven wheels spinning faster (traction loss).</span>
+<span class="sd">    Zeroed below *low_speed_thresh* to avoid division blow-up.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">DEPRECATION WARNING: compute_rear_slip_ratio is deprecated and will be removed in a future release.</span>
+
+<span class="sd">Use suboptimumg.log_analysis.add_rear_slip_ratio instead, which operates directly on a PERDA SingleRunData object.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">wheel_speed_col</span><span class="p">,</span> <span class="s2">&quot;Run correct_motor_data() first.&quot;</span><span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">ground_speed_col</span><span class="p">,</span> <span class="s2">&quot;Run compute_groundspeed() first.&quot;</span><span class="p">)</span>
+
+    <span class="n">v_wheel</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">wheel_speed_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">v_ground</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">ground_speed_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+        <span class="n">slip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">v_ground</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">low_speed_thresh</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">v_wheel</span> <span class="o">-</span> <span class="n">v_ground</span><span class="p">)</span> <span class="o">/</span> <span class="n">v_ground</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="n">out_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">slip</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;[derived] Added: </span><span class="si">{</span><span class="n">out_col</span><span class="si">}</span><span class="s2">  &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows, low-speed gate @ </span><span class="si">{</span><span class="n">low_speed_thresh</span><span class="si">}</span><span class="s2"> m/s)&quot;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Aerodynamic coefficients</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="compute_cla">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.derived.html#suboptimumg.loganalysis.compute_cla">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_cla</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">irl_car</span><span class="p">:</span> <span class="n">IrlCar</span><span class="p">,</span>
+    <span class="n">ref_time_range</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">vel_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;groundSpeed&quot;</span><span class="p">,</span>
+    <span class="n">pot_fl</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ludwig.shockpot.frontLeft&quot;</span><span class="p">,</span>
+    <span class="n">pot_fr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ludwig.shockpot.frontRight&quot;</span><span class="p">,</span>
+    <span class="n">pot_rl</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ludwig.shockpot.rearLeft&quot;</span><span class="p">,</span>
+    <span class="n">pot_rr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ludwig.shockpot.rearRight&quot;</span><span class="p">,</span>
+    <span class="n">ax_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.linearAccelBody.x&quot;</span><span class="p">,</span>
+    <span class="n">rho</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.225</span><span class="p">,</span>
+    <span class="n">low_speed_thresh</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">,</span>
+    <span class="n">out_cla</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;aero.cla&quot;</span><span class="p">,</span>
+    <span class="n">out_cop</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;aero.cop&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimate CLA and aero CoP from shock pot compression.</span>
+
+<span class="sd">    A reference time range defines the &quot;zero-aero&quot; baseline (e.g. car</span>
+<span class="sd">    sitting still).  At each timestep, the change in average axle pot</span>
+<span class="sd">    compression is converted to vertical force via the ``IrlCar``</span>
+<span class="sd">    suspension math, and the aero contribution is isolated by</span>
+<span class="sd">    subtracting longitudinal weight transfer through the springs.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : DataFrame</span>
+<span class="sd">        Must contain shock pot columns, a velocity column, and a</span>
+<span class="sd">        longitudinal acceleration column.</span>
+<span class="sd">    irl_car : IrlCar</span>
+<span class="sd">        Provides mass, frontal area, heave stiffness, motion ratios,</span>
+<span class="sd">        and anti-dive/squat percentages.</span>
+<span class="sd">    ref_time_range : (t_start, t_end)</span>
+<span class="sd">        Index (``time_s``) window where the car is stationary or at a</span>
+<span class="sd">        known-zero-aero condition.</span>
+<span class="sd">    vel_col : str</span>
+<span class="sd">        Velocity source for dynamic pressure.</span>
+<span class="sd">    rho : float</span>
+<span class="sd">        Air density in kg/m^3.</span>
+<span class="sd">    low_speed_thresh : float</span>
+<span class="sd">        Below this speed (m/s) CLA and CoP are zeroed.</span>
+<span class="sd">    out_cla, out_cop : str</span>
+<span class="sd">        Output column names.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">DEPRECATION WARNING: compute_cla is deprecated and will be removed in a future release.</span>
+
+<span class="sd">Use suboptimumg.log_analysis.add_cla instead, which operates directly on a PERDA SingleRunData object.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">remedy</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">vel_col</span><span class="p">,</span> <span class="s2">&quot;Run compute_groundspeed() first.&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">pot_fl</span><span class="p">,</span> <span class="s2">&quot;Shock pot column not found in DataFrame.&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">pot_fr</span><span class="p">,</span> <span class="s2">&quot;Shock pot column not found in DataFrame.&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">pot_rl</span><span class="p">,</span> <span class="s2">&quot;Shock pot column not found in DataFrame.&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">pot_rr</span><span class="p">,</span> <span class="s2">&quot;Shock pot column not found in DataFrame.&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">ax_col</span><span class="p">,</span> <span class="s2">&quot;Longitudinal accel column not found in DataFrame.&quot;</span><span class="p">),</span>
+    <span class="p">]:</span>
+        <span class="n">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">remedy</span><span class="p">)</span>
+
+    <span class="n">t_start</span><span class="p">,</span> <span class="n">t_end</span> <span class="o">=</span> <span class="n">ref_time_range</span>
+    <span class="n">ref</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">t_start</span><span class="p">:</span><span class="n">t_end</span><span class="p">]</span>
+
+    <span class="n">ref_front_avg</span> <span class="o">=</span> <span class="p">((</span><span class="n">ref</span><span class="p">[</span><span class="n">pot_fl</span><span class="p">]</span> <span class="o">+</span> <span class="n">ref</span><span class="p">[</span><span class="n">pot_fr</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">ref_rear_avg</span> <span class="o">=</span> <span class="p">((</span><span class="n">ref</span><span class="p">[</span><span class="n">pot_rl</span><span class="p">]</span> <span class="o">+</span> <span class="n">ref</span><span class="p">[</span><span class="n">pot_rr</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="n">front_avg</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">pot_fl</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="n">pot_fr</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span>
+    <span class="n">rear_avg</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">pot_rl</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="n">pot_rr</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+    <span class="n">front_delta_mm</span> <span class="o">=</span> <span class="p">(</span><span class="n">front_avg</span> <span class="o">-</span> <span class="n">ref_front_avg</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">rear_delta_mm</span> <span class="o">=</span> <span class="p">(</span><span class="n">rear_avg</span> <span class="o">-</span> <span class="n">ref_rear_avg</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+
+    <span class="n">ax_g</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">ax_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">/</span> <span class="n">G</span>
+
+    <span class="n">f_front</span><span class="p">,</span> <span class="n">f_rear</span> <span class="o">=</span> <span class="n">irl_car</span><span class="o">.</span><span class="n">aero_force_from_pots</span><span class="p">(</span><span class="n">front_delta_mm</span><span class="p">,</span> <span class="n">rear_delta_mm</span><span class="p">,</span> <span class="n">ax_g</span><span class="p">)</span>
+    <span class="n">f_total</span> <span class="o">=</span> <span class="n">f_front</span> <span class="o">+</span> <span class="n">f_rear</span>
+
+    <span class="n">v</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">vel_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">q_A</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">v</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">irl_car</span><span class="o">.</span><span class="n">front_area</span>
+
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+        <span class="n">cla</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">low_speed_thresh</span><span class="p">,</span> <span class="n">f_total</span> <span class="o">/</span> <span class="n">q_A</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="n">cop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f_total</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">f_front</span> <span class="o">/</span> <span class="n">f_total</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="n">out_cla</span><span class="p">]</span> <span class="o">=</span> <span class="n">cla</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">out_cop</span><span class="p">]</span> <span class="o">=</span> <span class="n">cop</span>
+
+    <span class="n">low_speed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">low_speed_thresh</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">low_speed</span><span class="p">,</span> <span class="n">out_cla</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">low_speed</span><span class="p">,</span> <span class="n">out_cop</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;[derived] Added: </span><span class="si">{</span><span class="n">out_cla</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">out_cop</span><span class="si">}</span><span class="s2">  &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows, ref=[</span><span class="si">{</span><span class="n">t_start</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">t_end</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">]s, &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;low-speed gate @ </span><span class="si">{</span><span class="n">low_speed_thresh</span><span class="si">}</span><span class="s2"> m/s)&quot;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<div class="viewcode-block" id="compute_cda">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.derived.html#suboptimumg.loganalysis.compute_cda">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_cda</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">irl_car</span><span class="p">:</span> <span class="n">IrlCar</span><span class="p">,</span>
+    <span class="n">vel_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;groundSpeed&quot;</span><span class="p">,</span>
+    <span class="n">time_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;time_s&quot;</span><span class="p">,</span>
+    <span class="n">rho</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.225</span><span class="p">,</span>
+    <span class="n">low_speed_thresh</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">,</span>
+    <span class="n">out_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;aero.cda&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimate CDA from coastdown deceleration (free-rolling assumption).</span>
+
+<span class="sd">    ``F_drag = -m * a_x - F_rolling``  then  ``CDA = F_drag / (0.5 * rho * v^2)``</span>
+
+<span class="sd">    The user should trim the DataFrame to a coasting segment (no</span>
+<span class="sd">    throttle, no braking) before calling this, or filter the output to</span>
+<span class="sd">    regions where throttle and brake are zero.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : DataFrame</span>
+<span class="sd">        Must contain a velocity column and time index.</span>
+<span class="sd">    irl_car : IrlCar</span>
+<span class="sd">        Provides mass, frontal area, and rolling resistance coefficient.</span>
+<span class="sd">    vel_col : str</span>
+<span class="sd">        Velocity source (m/s).</span>
+<span class="sd">    rho : float</span>
+<span class="sd">        Air density in kg/m^3.</span>
+<span class="sd">    low_speed_thresh : float</span>
+<span class="sd">        Below this speed (m/s) CDA is zeroed.</span>
+<span class="sd">    out_col : str</span>
+<span class="sd">        Output column name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">DEPRECATION WARNING: compute_cda is deprecated and will be removed in a future release.</span>
+
+<span class="sd">Use suboptimumg.log_analysis.add_cda instead, which operates directly on a PERDA SingleRunData object.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">vel_col</span><span class="p">,</span> <span class="s2">&quot;Run compute_groundspeed() first.&quot;</span><span class="p">)</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">._utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_time_array</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">get_time_array</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">time_col</span><span class="p">)</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="n">v</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">vel_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">a_x</span> <span class="o">=</span> <span class="n">_safe_gradient</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="n">irl_car</span><span class="o">.</span><span class="n">mass</span>
+    <span class="n">f_rolling</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">G</span> <span class="o">*</span> <span class="n">irl_car</span><span class="o">.</span><span class="n">rolling_coeff</span>
+    <span class="n">f_drag</span> <span class="o">=</span> <span class="o">-</span><span class="n">m</span> <span class="o">*</span> <span class="n">a_x</span> <span class="o">-</span> <span class="n">f_rolling</span>
+
+    <span class="n">q</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">v</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+        <span class="n">cda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">low_speed_thresh</span><span class="p">,</span> <span class="n">f_drag</span> <span class="o">/</span> <span class="n">q</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="n">out_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">cda</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;[derived] Added: </span><span class="si">{</span><span class="n">out_col</span><span class="si">}</span><span class="s2">  &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows, low-speed gate @ </span><span class="si">{</span><span class="n">low_speed_thresh</span><span class="si">}</span><span class="s2"> m/s)&quot;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Bicycle-model front steer angle (from steering wheel + Ackermann)</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="compute_bicycle_steer_angle">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.derived.html#suboptimumg.loganalysis.compute_bicycle_steer_angle">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_bicycle_steer_angle</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">irl_car</span><span class="p">:</span> <span class="n">IrlCar</span><span class="p">,</span>
+    <span class="n">sw_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ludwig.steeringWheel.angle&quot;</span><span class="p">,</span>
+    <span class="n">out_left</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;front.steerAngle.left&quot;</span><span class="p">,</span>
+    <span class="n">out_right</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;front.steerAngle.right&quot;</span><span class="p">,</span>
+    <span class="n">out_avg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;front.steerAngle.bicycle&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute front tire steer angles from the steering wheel sensor.</span>
+
+<span class="sd">    Uses the Ackermann polynomial fit in *irl_car* to convert the</span>
+<span class="sd">    steering wheel angle to individual left/right tire angles, then</span>
+<span class="sd">    averages them for the bicycle-model front axle steer angle.</span>
+
+<span class="sd">    All outputs are in degrees.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">DEPRECATION WARNING: compute_bicycle_steer_angle is deprecated and will be removed in a future release.</span>
+
+<span class="sd">Use suboptimumg.log_analysis.add_bicycle_steer_angle instead, which operates directly on a PERDA SingleRunData object.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+    <span class="n">_require_col</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">sw_col</span><span class="p">,</span> <span class="s2">&quot;Steering wheel angle column not found in DataFrame.&quot;</span><span class="p">)</span>
+
+    <span class="n">sw</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">sw_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">irl_car</span><span class="o">.</span><span class="n">tire_angles</span><span class="p">(</span><span class="n">sw</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="n">out_left</span><span class="p">]</span> <span class="o">=</span> <span class="n">left</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">out_right</span><span class="p">]</span> <span class="o">=</span> <span class="n">right</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">out_avg</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[derived] Added: </span><span class="si">{</span><span class="n">out_left</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">out_right</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">out_avg</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows)&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Penn Electric Racing.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

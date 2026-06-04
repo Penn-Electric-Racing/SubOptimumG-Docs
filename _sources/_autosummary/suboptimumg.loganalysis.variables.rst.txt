@@ -1,0 +1,8 @@
+suboptimumg.loganalysis.variables
+=================================
+
+.. automodule:: suboptimumg.loganalysis.variables
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

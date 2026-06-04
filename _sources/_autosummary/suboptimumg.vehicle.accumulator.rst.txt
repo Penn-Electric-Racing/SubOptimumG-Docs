@@ -1,0 +1,16 @@
+suboptimumg.vehicle.accumulator
+===============================
+
+.. automodule:: suboptimumg.vehicle.accumulator
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   accumulator

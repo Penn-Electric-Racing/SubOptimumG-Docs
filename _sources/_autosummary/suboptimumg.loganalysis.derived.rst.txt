@@ -1,0 +1,8 @@
+suboptimumg.loganalysis.derived
+===============================
+
+.. automodule:: suboptimumg.loganalysis.derived
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

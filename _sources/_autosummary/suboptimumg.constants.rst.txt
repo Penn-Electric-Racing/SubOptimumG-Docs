@@ -1,0 +1,8 @@
+suboptimumg.constants
+=====================
+
+.. automodule:: suboptimumg.constants
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

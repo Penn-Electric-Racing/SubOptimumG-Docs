@@ -1,0 +1,8 @@
+suboptimumg.plotting.plot\_3d
+=============================
+
+.. automodule:: suboptimumg.plotting.plot_3d
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

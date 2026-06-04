@@ -1,0 +1,8 @@
+suboptimumg.plotting.internal\_data\_plots
+==========================================
+
+.. automodule:: suboptimumg.plotting.internal_data_plots
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

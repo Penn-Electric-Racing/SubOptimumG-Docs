@@ -1,0 +1,8 @@
+suboptimumg.sweep.constants
+===========================
+
+.. automodule:: suboptimumg.sweep.constants
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

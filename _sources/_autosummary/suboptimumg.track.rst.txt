@@ -1,0 +1,20 @@
+suboptimumg.track
+=================
+
+.. automodule:: suboptimumg.track
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   gps
+   models
+   track
+   track_factory
+   utils

@@ -1,0 +1,776 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>suboptimumg.loganalysis.irl_car &#8212; SubOptimumG</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+
+    <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/loganalysis/irl_car';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SubOptimumG</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.loganalysis.irl_car</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for suboptimumg.loganalysis.irl_car</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;IrlCar — real-world car wrapper combining Car + vehicle_setup parameters.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">G</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.vehicle.vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">Car</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.fitted_curve</span><span class="w"> </span><span class="kn">import</span> <span class="n">FittedCurve</span>
+
+
+<div class="viewcode-block" id="IrlCar">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.irl_car.html#suboptimumg.loganalysis.IrlCar">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">IrlCar</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Car + real-world setup parameters for log analysis.</span>
+
+<span class="sd">    Wraps a :class:`Car` instance (loaded from ``car.yaml``) with the</span>
+<span class="sd">    extra session-specific parameters from ``vehicle_setup.yaml``.</span>
+<span class="sd">    Provides derived computation methods that combine both sources.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    car : Car</span>
+<span class="sd">        Simulation car object (carries mass, wheelbase, track widths,</span>
+<span class="sd">        CG height, etc. via ``car.params``).</span>
+<span class="sd">    setup : dict</span>
+<span class="sd">        Processed vehicle setup dict (from :func:`load_vehicle_setup`).</span>
+<span class="sd">        Curve entries should already be :class:`FittedCurve` objects.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">car</span><span class="p">:</span> <span class="n">Car</span><span class="p">,</span> <span class="n">setup</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">DEPRECATION WARNING: suboptimumg.loganalysis.IrlCar is deprecated and will be removed in a future release.</span>
+
+<span class="sd">Please use suboptimumg.vehicle.IrlCar instead.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car</span> <span class="o">=</span> <span class="n">car</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup</span> <span class="o">=</span> <span class="n">setup</span>
+
+        <span class="c1"># --- From Car.params (VehicleModel) ---</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">car</span><span class="o">.</span><span class="n">params</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">mass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wheelbase</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">wb</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">front_track</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">front_track</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rear_track</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">rear_track</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cg_height</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">cg_h</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w_distr_front</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">w_distr_front</span>
+
+        <span class="c1"># --- From setup dict — alignment ---</span>
+        <span class="n">align</span> <span class="o">=</span> <span class="n">setup</span><span class="p">[</span><span class="s2">&quot;alignment&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">camber_front_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">align</span><span class="p">[</span><span class="s2">&quot;camber_front_deg&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">camber_rear_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">align</span><span class="p">[</span><span class="s2">&quot;camber_rear_deg&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toe_front_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">align</span><span class="p">[</span><span class="s2">&quot;toe_front_deg&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toe_rear_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">align</span><span class="p">[</span><span class="s2">&quot;toe_rear_deg&quot;</span><span class="p">]</span>
+
+        <span class="c1"># --- Steering ---</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ackermann</span><span class="p">:</span> <span class="n">FittedCurve</span> <span class="o">=</span> <span class="n">setup</span><span class="p">[</span><span class="s2">&quot;steering&quot;</span><span class="p">][</span><span class="s2">&quot;ackermann&quot;</span><span class="p">]</span>
+
+        <span class="c1"># --- Suspension ---</span>
+        <span class="n">sus</span> <span class="o">=</span> <span class="n">setup</span><span class="p">[</span><span class="s2">&quot;suspension&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">roll_stiffness_front</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">sus</span><span class="p">[</span><span class="s2">&quot;roll_stiffness_front_Nm_per_rad&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">roll_stiffness_rear</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">sus</span><span class="p">[</span><span class="s2">&quot;roll_stiffness_rear_Nm_per_rad&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heave_stiffness_front</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">sus</span><span class="p">[</span><span class="s2">&quot;heave_stiffness_front_N_per_m&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heave_stiffness_rear</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">sus</span><span class="p">[</span><span class="s2">&quot;heave_stiffness_rear_N_per_m&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">anti_dive_pct</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">sus</span><span class="p">[</span><span class="s2">&quot;anti_dive_pct&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">anti_squat_pct</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">sus</span><span class="p">[</span><span class="s2">&quot;anti_squat_pct&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motion_ratio_front</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">sus</span><span class="p">[</span><span class="s2">&quot;motion_ratio_front&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motion_ratio_rear</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">sus</span><span class="p">[</span><span class="s2">&quot;motion_ratio_rear&quot;</span><span class="p">]</span>
+
+        <span class="c1"># --- From Car.params (VehicleModel) — aero &amp; rolling ---</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">front_area</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">aero</span><span class="o">.</span><span class="n">front_area</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rolling_coeff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">rolling_coeff</span>
+
+    <span class="c1"># -----------------------------------------------------------------</span>
+    <span class="c1"># Construction helpers</span>
+    <span class="c1"># -----------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="IrlCar.from_yaml">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.irl_car.html#suboptimumg.loganalysis.IrlCar.from_yaml">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_yaml</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">car_yaml</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;parameters/car.yaml&quot;</span><span class="p">,</span>
+        <span class="n">setup_yaml</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;parameters/vehicle_setup.yaml&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IrlCar</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load both YAML files and construct an IrlCar.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">DEPRECATION WARNING: suboptimumg.loganalysis.IrlCar is deprecated and will be removed in a future release.</span>
+
+<span class="sd">Please use suboptimumg.vehicle.IrlCar instead.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+        <span class="p">)</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.yaml</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_car_from_yaml</span>
+
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.variables</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_vehicle_setup</span>
+
+        <span class="n">car</span> <span class="o">=</span> <span class="n">load_car_from_yaml</span><span class="p">(</span><span class="n">car_yaml</span><span class="p">)</span>
+        <span class="n">setup</span> <span class="o">=</span> <span class="n">load_vehicle_setup</span><span class="p">(</span><span class="n">setup_yaml</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">car</span><span class="p">,</span> <span class="n">setup</span><span class="p">)</span></div>
+
+
+    <span class="c1"># -----------------------------------------------------------------</span>
+    <span class="c1"># Steering</span>
+    <span class="c1"># -----------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="IrlCar.right_tire_angle">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.irl_car.html#suboptimumg.loganalysis.IrlCar.right_tire_angle">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">right_tire_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sw_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Right tire steer angle from the ackermann curve.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sw_deg : float or array</span>
+<span class="sd">            Steering wheel angle in degrees. Positive = right turn</span>
+<span class="sd">            (right tire is inner, steers more); negative = left turn</span>
+<span class="sd">            (right tire is outer, steers less).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ackermann</span><span class="p">(</span><span class="n">sw_deg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="IrlCar.left_tire_angle">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.irl_car.html#suboptimumg.loganalysis.IrlCar.left_tire_angle">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">left_tire_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sw_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Left tire steer angle via ackermann symmetry: ``-f(-x)``.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">ackermann</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sw_deg</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="IrlCar.tire_angles">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.irl_car.html#suboptimumg.loganalysis.IrlCar.tire_angles">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tire_angles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sw_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return ``(left_deg, right_deg)`` for a given steering input.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_tire_angle</span><span class="p">(</span><span class="n">sw_deg</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_tire_angle</span><span class="p">(</span><span class="n">sw_deg</span><span class="p">)</span></div>
+
+
+    <span class="c1"># -----------------------------------------------------------------</span>
+    <span class="c1"># Roll stiffness</span>
+    <span class="c1"># -----------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="IrlCar.roll_stiffness_total">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.irl_car.html#suboptimumg.loganalysis.IrlCar.roll_stiffness_total">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">roll_stiffness_total</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Total roll stiffness (front + rear) in Nm/rad.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">roll_stiffness_front</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">roll_stiffness_rear</span></div>
+
+
+<div class="viewcode-block" id="IrlCar.roll_stiffness_distribution">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.irl_car.html#suboptimumg.loganalysis.IrlCar.roll_stiffness_distribution">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">roll_stiffness_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Front roll stiffness as a fraction of total (0-1).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">roll_stiffness_front</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">roll_stiffness_total</span><span class="p">()</span></div>
+
+
+    <span class="c1"># -----------------------------------------------------------------</span>
+    <span class="c1"># Weight transfer</span>
+    <span class="c1"># -----------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="IrlCar.lateral_weight_transfer">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.irl_car.html#suboptimumg.loganalysis.IrlCar.lateral_weight_transfer">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lateral_weight_transfer</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">ay_g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lateral weight transfer per axle.</span>
+
+<span class="sd">        Combines elastic (roll stiffness distribution) and geometric</span>
+<span class="sd">        (direct load path through CG) components.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ay_g : float or array</span>
+<span class="sd">            Lateral acceleration in g&#39;s (positive = turning left).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        (front_wt_N, rear_wt_N)</span>
+<span class="sd">            Weight transfer at the front and rear axles in Newtons.</span>
+<span class="sd">            Positive values indicate load transfer to the outside wheel.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ay_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ay_g</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">ay</span> <span class="o">=</span> <span class="n">ay_g</span> <span class="o">*</span> <span class="n">G</span>
+
+        <span class="n">total_lateral_force</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="o">*</span> <span class="n">ay</span>
+
+        <span class="c1"># Geometric (non-roll) component — splits by static weight dist</span>
+        <span class="c1"># This is the direct lateral force component through the CG</span>
+        <span class="n">wt_geo_front</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">w_distr_front</span> <span class="o">*</span> <span class="n">total_lateral_force</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cg_height</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">front_track</span>
+        <span class="p">)</span>
+        <span class="n">wt_geo_rear</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">w_distr_front</span><span class="p">)</span>
+            <span class="o">*</span> <span class="n">total_lateral_force</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cg_height</span>
+            <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">rear_track</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Elastic (roll couple) component — splits by roll stiffness</span>
+        <span class="n">roll_dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">roll_stiffness_distribution</span><span class="p">()</span>
+        <span class="n">roll_moment</span> <span class="o">=</span> <span class="n">total_lateral_force</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cg_height</span>
+        <span class="n">wt_elastic_front</span> <span class="o">=</span> <span class="n">roll_dist</span> <span class="o">*</span> <span class="n">roll_moment</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">front_track</span>
+        <span class="n">wt_elastic_rear</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">roll_dist</span><span class="p">)</span> <span class="o">*</span> <span class="n">roll_moment</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">rear_track</span>
+
+        <span class="c1"># Total is the sum of both (geometric already included in the</span>
+        <span class="c1"># roll moment derivation for a simplified model, but we keep</span>
+        <span class="c1"># them separate for clarity — the standard LLTD approach uses</span>
+        <span class="c1"># roll stiffness distribution on the elastic portion only)</span>
+        <span class="n">front_wt</span> <span class="o">=</span> <span class="n">wt_elastic_front</span>
+        <span class="n">rear_wt</span> <span class="o">=</span> <span class="n">wt_elastic_rear</span>
+
+        <span class="k">return</span> <span class="n">front_wt</span><span class="p">,</span> <span class="n">rear_wt</span></div>
+
+
+<div class="viewcode-block" id="IrlCar.longitudinal_weight_transfer">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.irl_car.html#suboptimumg.loganalysis.IrlCar.longitudinal_weight_transfer">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">longitudinal_weight_transfer</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">ax_g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Longitudinal weight transfer on the front axle.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ax_g : float or array</span>
+<span class="sd">            Longitudinal acceleration in g&#39;s (positive = accelerating</span>
+<span class="sd">            forward, negative = braking).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or np.ndarray</span>
+<span class="sd">            Change in front axle normal force (N). Negative under</span>
+<span class="sd">            acceleration (rear loads up), positive under braking</span>
+<span class="sd">            (front loads up). Anti-dive/squat percentages reduce the</span>
+<span class="sd">            geometric weight transfer through the springs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ax_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ax_g</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">ax_g</span> <span class="o">*</span> <span class="n">G</span>
+
+        <span class="n">wt_total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="o">*</span> <span class="n">ax</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cg_height</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">wheelbase</span>
+
+        <span class="c1"># Anti-dive (braking) reduces front spring compression</span>
+        <span class="c1"># Anti-squat (accel) reduces rear spring compression</span>
+        <span class="c1"># Both reduce the *sprung mass* pitch but the total WT is the same.</span>
+        <span class="c1"># Here we return the total geometric WT (anti features affect</span>
+        <span class="c1"># ride height, not net normal force).</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">wt_total</span></div>
+
+
+    <span class="c1"># -----------------------------------------------------------------</span>
+    <span class="c1"># Suspension math</span>
+    <span class="c1"># -----------------------------------------------------------------</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_mr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return motion ratio for &#39;front&#39; or &#39;rear&#39;.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">axle</span> <span class="o">==</span> <span class="s2">&quot;front&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">motion_ratio_front</span>
+        <span class="k">if</span> <span class="n">axle</span> <span class="o">==</span> <span class="s2">&quot;rear&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">motion_ratio_rear</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;axle must be &#39;front&#39; or &#39;rear&#39;, got &#39;</span><span class="si">{</span><span class="n">axle</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_heave_k</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return heave stiffness (N/m) for &#39;front&#39; or &#39;rear&#39;.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">axle</span> <span class="o">==</span> <span class="s2">&quot;front&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">heave_stiffness_front</span>
+        <span class="k">if</span> <span class="n">axle</span> <span class="o">==</span> <span class="s2">&quot;rear&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">heave_stiffness_rear</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;axle must be &#39;front&#39; or &#39;rear&#39;, got &#39;</span><span class="si">{</span><span class="n">axle</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="IrlCar.pot_to_heave">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.irl_car.html#suboptimumg.loganalysis.IrlCar.pot_to_heave">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pot_to_heave</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pot_mm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Shock pot displacement (mm) -&gt; chassis heave displacement (m).</span>
+
+<span class="sd">        ``heave_m = pot_mm / 1000 * MR``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pot_mm</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mr</span><span class="p">(</span><span class="n">axle</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="IrlCar.heave_to_force">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.irl_car.html#suboptimumg.loganalysis.IrlCar.heave_to_force">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">heave_to_force</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">heave_m</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Heave displacement (m) -&gt; vertical spring force (N).</span>
+
+<span class="sd">        ``F = heave_stiffness * heave_m``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_heave_k</span><span class="p">(</span><span class="n">axle</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">heave_m</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="IrlCar.pot_to_force">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.irl_car.html#suboptimumg.loganalysis.IrlCar.pot_to_force">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pot_to_force</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pot_mm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Shock pot displacement (mm) -&gt; vertical spring force (N).</span>
+
+<span class="sd">        Combines :meth:`pot_to_heave` and :meth:`heave_to_force`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">heave_to_force</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pot_to_heave</span><span class="p">(</span><span class="n">pot_mm</span><span class="p">,</span> <span class="n">axle</span><span class="p">),</span> <span class="n">axle</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="IrlCar.aero_force_from_pots">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.irl_car.html#suboptimumg.loganalysis.IrlCar.aero_force_from_pots">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">aero_force_from_pots</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">front_pot_delta_mm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">rear_pot_delta_mm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">ax_g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Estimate front/rear aero downforce from shock pot deltas.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        front_pot_delta_mm, rear_pot_delta_mm</span>
+<span class="sd">            Change in average axle pot displacement from a reference</span>
+<span class="sd">            (zero-aero) state, in mm.  Positive = compression.</span>
+<span class="sd">        ax_g</span>
+<span class="sd">            Longitudinal acceleration in g&#39;s (positive = forward accel,</span>
+<span class="sd">            negative = braking).  Used to subtract weight transfer</span>
+<span class="sd">            through the springs (accounting for anti-dive/squat).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        (front_aero_N, rear_aero_N)</span>
+<span class="sd">            Estimated aero downforce at each axle in Newtons.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ax_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ax_g</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+        <span class="n">f_front_spring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pot_to_force</span><span class="p">(</span><span class="n">front_pot_delta_mm</span><span class="p">,</span> <span class="s2">&quot;front&quot;</span><span class="p">)</span>
+        <span class="n">f_rear_spring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pot_to_force</span><span class="p">(</span><span class="n">rear_pot_delta_mm</span><span class="p">,</span> <span class="s2">&quot;rear&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Longitudinal weight transfer (total, geometric)</span>
+        <span class="n">wt_total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="o">*</span> <span class="n">ax_g</span> <span class="o">*</span> <span class="n">G</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cg_height</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">wheelbase</span>
+        <span class="c1"># Under braking (ax_g &lt; 0): wt_total &lt; 0 → front loads up.</span>
+        <span class="c1"># Anti-dive reduces the fraction that goes through front springs.</span>
+        <span class="c1"># Under accel (ax_g &gt; 0): wt_total &gt; 0 → rear loads up.</span>
+        <span class="c1"># Anti-squat reduces the fraction through rear springs.</span>
+        <span class="n">wt_front_spring</span> <span class="o">=</span> <span class="o">-</span><span class="n">wt_total</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">anti_dive_pct</span><span class="p">)</span>
+        <span class="n">wt_rear_spring</span> <span class="o">=</span> <span class="n">wt_total</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">anti_squat_pct</span><span class="p">)</span>
+
+        <span class="n">front_aero</span> <span class="o">=</span> <span class="n">f_front_spring</span> <span class="o">-</span> <span class="n">wt_front_spring</span>
+        <span class="n">rear_aero</span> <span class="o">=</span> <span class="n">f_rear_spring</span> <span class="o">-</span> <span class="n">wt_rear_spring</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">front_aero</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span>
+            <span class="n">rear_aero</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span>
+        <span class="p">)</span></div>
+
+
+    <span class="c1"># -----------------------------------------------------------------</span>
+    <span class="c1"># Repr</span>
+    <span class="c1"># -----------------------------------------------------------------</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;IrlCar(mass=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mass</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> kg, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;wb=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">wheelbase</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> m, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;camber=(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">camber_front_deg</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">camber_rear_deg</span><span class="si">}</span><span class="s2">) deg, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;toe=(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">toe_front_deg</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">toe_rear_deg</span><span class="si">}</span><span class="s2">) deg)&quot;</span>
+        <span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Penn Electric Racing.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

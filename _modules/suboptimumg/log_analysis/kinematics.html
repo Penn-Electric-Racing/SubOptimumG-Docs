@@ -1,0 +1,849 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>suboptimumg.log_analysis.kinematics &#8212; SubOptimumG</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+
+    <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/log_analysis/kinematics';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SubOptimumG</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.log_analysis.kinematics</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for suboptimumg.log_analysis.kinematics</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures.data_instance</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DataInstance</span><span class="p">,</span>
+    <span class="n">left_join_data_instances</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures.single_run_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleRunData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">perda.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">_to_seconds</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.preprocess_gps</span><span class="w"> </span><span class="kn">import</span> <span class="n">POS_X</span><span class="p">,</span> <span class="n">POS_Y</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_gradient</span>
+
+<span class="n">GROUND_SPEED</span> <span class="o">=</span> <span class="s2">&quot;groundSpeed&quot;</span>
+<span class="n">CUMULATIVE_DISTANCE</span> <span class="o">=</span> <span class="s2">&quot;lapDist&quot;</span>
+<span class="n">VEL_N</span> <span class="o">=</span> <span class="s2">&quot;velN&quot;</span>
+<span class="n">VEL_E</span> <span class="o">=</span> <span class="s2">&quot;velE&quot;</span>
+<span class="n">VEL_D</span> <span class="o">=</span> <span class="s2">&quot;velD&quot;</span>
+<span class="n">TRACK_VELOCITY_X</span> <span class="o">=</span> <span class="s2">&quot;track.velocity.x&quot;</span>
+<span class="n">TRACK_VELOCITY_Y</span> <span class="o">=</span> <span class="s2">&quot;track.velocity.y&quot;</span>
+<span class="n">TRACK_HEADING</span> <span class="o">=</span> <span class="s2">&quot;track.heading&quot;</span>
+<span class="n">BODY_SLIP_ANGLE</span> <span class="o">=</span> <span class="s2">&quot;body.slipAngle&quot;</span>
+<span class="n">CURVATURE_BODY</span> <span class="o">=</span> <span class="s2">&quot;body.curvature&quot;</span>
+<span class="n">RADIUS_BODY</span> <span class="o">=</span> <span class="s2">&quot;body.radius&quot;</span>
+<span class="n">CURVATURE_TRACK</span> <span class="o">=</span> <span class="s2">&quot;track.curvature&quot;</span>
+<span class="n">RADIUS_TRACK</span> <span class="o">=</span> <span class="s2">&quot;track.radius&quot;</span>
+<span class="n">BODY_LAT_ACC</span> <span class="o">=</span> <span class="s2">&quot;body.accLat&quot;</span>
+<span class="n">TRACK_LAT_ACC</span> <span class="o">=</span> <span class="s2">&quot;track.accLat&quot;</span>
+
+
+<div class="viewcode-block" id="add_groundspeed">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.kinematics.html#suboptimumg.log_analysis.kinematics.add_groundspeed">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_groundspeed</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SingleRunData</span><span class="p">,</span>
+    <span class="n">fl_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.wheelSpeeds.frontLeft&quot;</span><span class="p">,</span>
+    <span class="n">fr_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.wheelSpeeds.frontRight&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add ground speed as the average of the two front (undriven) wheel speeds. Stores it</span>
+<span class="sd">    in the variable ``groundSpeed``, accessible via the constant ``GROUND_SPEED``.</span>
+
+<span class="sd">    Requires the ``convert_wheelspeeds_to_m_per_s`` preprocessing step.</span>
+<span class="sd">    Stores ``groundSpeed``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : SingleRunData</span>
+<span class="sd">    fl_col : str</span>
+<span class="sd">        Column name for front left wheel speed in m/s.</span>
+<span class="sd">    fr_col : str</span>
+<span class="sd">        Column name for front right wheel speed in m/s.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    SingleRunData</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">gs</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">fl_col</span><span class="p">]</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="n">fr_col</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">GROUND_SPEED</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">gs</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">gs</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ground Speed (m/s)&quot;</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">GROUND_SPEED</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+
+<div class="viewcode-block" id="add_cumulative_distance">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.kinematics.html#suboptimumg.log_analysis.kinematics.add_cumulative_distance">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_cumulative_distance</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SingleRunData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add cumulative arc-length distance to the data. Uses the same distance calculation as</span>
+<span class="sd">    track_factory.from_perda_logs, to ensure consistency when comparing laps against a track</span>
+<span class="sd">    generated from GPS data.</span>
+
+<span class="sd">    Stores the cumulative distance in the variable ``lapDist``, accessible via the constant</span>
+<span class="sd">    ``CUMULATIVE_DISTANCE``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : SingleRunData</span>
+<span class="sd">        Input data containing position information.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    SingleRunData</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="n">POS_X</span><span class="p">,</span> <span class="n">POS_Y</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;add_cumulative_distance: missing variables(s) </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Try running preprocess_gps_data_instances first.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">pos_x_ref</span><span class="p">,</span> <span class="n">pos_y_aligned</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">POS_X</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">POS_Y</span><span class="p">])</span>
+
+    <span class="n">dX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">pos_x_ref</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span> <span class="n">prepend</span><span class="o">=</span><span class="n">pos_x_ref</span><span class="o">.</span><span class="n">value_np</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">dY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">pos_y_aligned</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span> <span class="n">prepend</span><span class="o">=</span><span class="n">pos_y_aligned</span><span class="o">.</span><span class="n">value_np</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">arc_steps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dX</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dY</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">arc_steps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">cumulative_dist_raw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">arc_steps</span><span class="p">)</span>
+
+    <span class="n">data</span><span class="p">[</span><span class="n">CUMULATIVE_DISTANCE</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">pos_x_ref</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">cumulative_dist_raw</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cumulative Arc-Length (m)&quot;</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">CUMULATIVE_DISTANCE</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+
+<div class="viewcode-block" id="add_ned_velocities">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.kinematics.html#suboptimumg.log_analysis.kinematics.add_ned_velocities">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_ned_velocities</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SingleRunData</span><span class="p">,</span>
+    <span class="n">vel_x_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.velocityBody.x&quot;</span><span class="p">,</span>
+    <span class="n">vel_y_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.velocityBody.y&quot;</span><span class="p">,</span>
+    <span class="n">vel_z_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.velocityBody.z&quot;</span><span class="p">,</span>
+    <span class="n">yaw_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.yawPitchRoll.yaw&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add NED velocity components by using body-frame velocity (FRD) and yaw rotation.</span>
+<span class="sd">        velN =  v_fwd * cos(yaw) - v_right * sin(yaw)</span>
+<span class="sd">        velE =  v_fwd * sin(yaw) + v_right * cos(yaw)</span>
+<span class="sd">        velD =  v_down            (unchanged)</span>
+
+<span class="sd">    Stores results in ``velN``, ``velE``, and ``velD``, accessible via the constants</span>
+<span class="sd">    ``VEL_N``, ``VEL_E``, and ``VEL_D``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : SingleRunData</span>
+<span class="sd">        Input data containing position information.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    SingleRunData</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    ------</span>
+<span class="sd">    In older data, the VectorNav was configured such that velocityBody columns contained NED velocities.</span>
+<span class="sd">    Such data can be patched with the ``patch_ned_velocity`` preprocessing step from PERDA. In that case,</span>
+<span class="sd">    this function is unnecessary and roughly a no-op.</span>
+<span class="sd">    This function intentionally follows PERDA&#39;s naming convention of velN, velE, and velD for NED velocity components.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">v_fwd</span><span class="p">,</span> <span class="n">v_right</span><span class="p">,</span> <span class="n">v_down</span><span class="p">,</span> <span class="n">yaw</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">vel_x_col</span><span class="p">],</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">vel_y_col</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">vel_z_col</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">yaw_col</span><span class="p">]]</span>
+    <span class="p">)</span>
+
+    <span class="n">yaw_rad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">yaw</span><span class="o">.</span><span class="n">value_np</span><span class="p">)</span>
+    <span class="n">cos_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">yaw_rad</span><span class="p">)</span>
+    <span class="n">sin_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">yaw_rad</span><span class="p">)</span>
+
+    <span class="n">vel_n</span> <span class="o">=</span> <span class="n">v_fwd</span><span class="o">.</span><span class="n">value_np</span> <span class="o">*</span> <span class="n">cos_y</span> <span class="o">-</span> <span class="n">v_right</span><span class="o">.</span><span class="n">value_np</span> <span class="o">*</span> <span class="n">sin_y</span>
+    <span class="n">vel_e</span> <span class="o">=</span> <span class="n">v_fwd</span><span class="o">.</span><span class="n">value_np</span> <span class="o">*</span> <span class="n">sin_y</span> <span class="o">+</span> <span class="n">v_right</span><span class="o">.</span><span class="n">value_np</span> <span class="o">*</span> <span class="n">cos_y</span>
+    <span class="n">vel_d</span> <span class="o">=</span> <span class="n">v_down</span><span class="o">.</span><span class="n">value_np</span>
+
+    <span class="n">data</span><span class="p">[</span><span class="n">VEL_N</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">v_fwd</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">vel_n</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;North Velocity (m/s)&quot;</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">VEL_N</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">VEL_E</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">v_fwd</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">vel_e</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;East Velocity (m/s)&quot;</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">VEL_E</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">VEL_D</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">v_fwd</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">vel_d</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Down Velocity (m/s)&quot;</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">VEL_D</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+
+<div class="viewcode-block" id="add_track_frame_velocities">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.kinematics.html#suboptimumg.log_analysis.kinematics.add_track_frame_velocities">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_track_frame_velocities</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SingleRunData</span><span class="p">,</span>
+    <span class="n">vel_n_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;velN&quot;</span><span class="p">,</span>
+    <span class="n">vel_e_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;velE&quot;</span><span class="p">,</span>
+    <span class="n">yaw_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.yawPitchRoll.yaw&quot;</span><span class="p">,</span>
+    <span class="n">low_speed_thresh</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add track-frame speed and course heading from NED velocity components.</span>
+
+<span class="sd">    Track heading uses the direction of travel (0 = North, 90 = East, wraps +/-180°).</span>
+<span class="sd">    Below ``low_speed_thresh`` heading falls back to INS yaw to avoid noise.</span>
+
+<span class="sd">    Stores results in ``track.velocity.x``, ``track.velocity.y``, and ``track.heading``,</span>
+<span class="sd">    accesible via the constants ``TRACK_VELOCITY_X``, ``TRACK_VELOCITY_Y``, and ``TRACK_HEADING``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    low_speed_thresh : float</span>
+<span class="sd">        Speed (m/s) below which heading is replaced with INS yaw.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="n">vel_n_col</span><span class="p">,</span> <span class="n">vel_e_col</span><span class="p">,</span> <span class="n">yaw_col</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;add_track_frame_velocities: missing variables(s) </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Try running add_ned_velocities first&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">vel_n</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">vel_n_col</span><span class="p">]</span>
+    <span class="n">vel_n</span><span class="p">,</span> <span class="n">vel_e_aln</span><span class="p">,</span> <span class="n">yaw_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span>
+        <span class="n">vel_n</span><span class="p">,</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">vel_e_col</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">yaw_col</span><span class="p">]]</span>
+    <span class="p">)</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">vel_n</span><span class="o">.</span><span class="n">timestamp_np</span>
+    <span class="n">vn</span><span class="p">,</span> <span class="n">ve</span> <span class="o">=</span> <span class="n">vel_n</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span> <span class="n">vel_e_aln</span><span class="o">.</span><span class="n">value_np</span>
+
+    <span class="n">speed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">vn</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">ve</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">heading</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">ve</span><span class="p">,</span> <span class="n">vn</span><span class="p">))</span>
+    <span class="n">heading</span><span class="p">[</span><span class="n">speed</span> <span class="o">&lt;</span> <span class="n">low_speed_thresh</span><span class="p">]</span> <span class="o">=</span> <span class="n">yaw_aln</span><span class="o">.</span><span class="n">value_np</span><span class="p">[</span><span class="n">speed</span> <span class="o">&lt;</span> <span class="n">low_speed_thresh</span><span class="p">]</span>
+
+    <span class="n">data</span><span class="p">[</span><span class="n">TRACK_VELOCITY_X</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">speed</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Track Frame Speed (m/s)&quot;</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">TRACK_VELOCITY_X</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">TRACK_VELOCITY_Y</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">speed</span><span class="p">),</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Track Frame Lateral Speed (m/s)&quot;</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">TRACK_VELOCITY_Y</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">TRACK_HEADING</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">heading</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Track Heading (deg)&quot;</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">TRACK_HEADING</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+
+<div class="viewcode-block" id="add_body_slip_angle">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.kinematics.html#suboptimumg.log_analysis.kinematics.add_body_slip_angle">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_body_slip_angle</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SingleRunData</span><span class="p">,</span>
+    <span class="n">yaw_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.yawPitchRoll.yaw&quot;</span><span class="p">,</span>
+    <span class="n">vel_body_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.velocityBody.x&quot;</span><span class="p">,</span>
+    <span class="n">low_speed_thresh</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add body slip angle (beta) using SAE convention: beta = track_heading - yaw</span>
+<span class="sd">    and stores it in the variable ``body.slipAngle``, accessible via the constant ``BODY_SLIP_ANGLE``.</span>
+
+<span class="sd">    Zeroed below ``low_speed_thresh`` where course heading is unreliable.</span>
+<span class="sd">    Requires ``add_track_frame_velocities``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    low_speed_thresh : float</span>
+<span class="sd">        Speed (m/s) below which slip angle is forced to zero.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="n">TRACK_HEADING</span><span class="p">,</span> <span class="n">yaw_col</span><span class="p">,</span> <span class="n">vel_body_col</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;add_body_slip_angle: missing variables(s) </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Try running add_track_frame_velocities first.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">th</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">TRACK_HEADING</span><span class="p">]</span>
+    <span class="n">th</span><span class="p">,</span> <span class="n">yaw_aln</span><span class="p">,</span> <span class="n">vbx_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span>
+        <span class="n">th</span><span class="p">,</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">yaw_col</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">vel_body_col</span><span class="p">]]</span>
+    <span class="p">)</span>
+
+    <span class="n">slip</span> <span class="o">=</span> <span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">value_np</span> <span class="o">-</span> <span class="n">yaw_aln</span><span class="o">.</span><span class="n">value_np</span> <span class="o">+</span> <span class="mf">180.0</span><span class="p">)</span> <span class="o">%</span> <span class="mf">360.0</span> <span class="o">-</span> <span class="mf">180.0</span>
+    <span class="n">slip</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">vbx_aln</span><span class="o">.</span><span class="n">value_np</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">low_speed_thresh</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="n">data</span><span class="p">[</span><span class="n">BODY_SLIP_ANGLE</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">th</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">slip</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Body Slip Angle (deg)&quot;</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">BODY_SLIP_ANGLE</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+
+<div class="viewcode-block" id="add_curvature">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.kinematics.html#suboptimumg.log_analysis.kinematics.add_curvature">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_curvature</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SingleRunData</span><span class="p">,</span>
+    <span class="n">yaw_rate_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.compensatedAngularRate.z&quot;</span><span class="p">,</span>
+    <span class="n">vel_body_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.velocityBody.x&quot;</span><span class="p">,</span>
+    <span class="n">low_speed_thresh</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="n">median_window</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="n">radius_clip</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">500.0</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add path curvature and radius in body and track frames and stores results</span>
+<span class="sd">    in ``body.curvature``, ``body.radius``, ``track.curvature``, and ``track.radius``,</span>
+<span class="sd">    accessible via the constants ``CURVATURE_BODY``, ``RADIUS_BODY``, ``CURVATURE_TRACK``,</span>
+<span class="sd">    and ``RADIUS_TRACK``.</span>
+
+<span class="sd">    Body-frame curvature uses yaw rate / forward speed. Track-frame curvature</span>
+<span class="sd">    differentiates the track heading. Both are smoothed with a rolling median.</span>
+<span class="sd">    Requires ``add_track_frame_velocities``.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    low_speed_thresh : float</span>
+<span class="sd">        Speed (m/s) below which curvature is forced to zero.</span>
+<span class="sd">    median_window : int</span>
+<span class="sd">        Rolling median half-window for noise suppression.</span>
+<span class="sd">    radius_clip : float</span>
+<span class="sd">        Maximum absolute radius (m) before clipping.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="n">TRACK_HEADING</span><span class="p">,</span> <span class="n">TRACK_VELOCITY_X</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;add_curvature: missing </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Try running add_track_frame_velocities first.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Body frame: curvature = yaw_rate / v_body</span>
+    <span class="n">yr</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">yaw_rate_col</span><span class="p">]</span>
+    <span class="n">yr</span><span class="p">,</span> <span class="n">vbx_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">yr</span><span class="p">,</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">vel_body_col</span><span class="p">]])</span>
+    <span class="n">ts_body</span> <span class="o">=</span> <span class="n">yr</span><span class="o">.</span><span class="n">timestamp_np</span>
+    <span class="n">speed_body</span> <span class="o">=</span> <span class="n">vbx_aln</span><span class="o">.</span><span class="n">value_np</span>
+
+    <span class="n">curv_body_raw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">speed_body</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">speed_body</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">low_speed_thresh</span>
+    <span class="n">curv_body_raw</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">yr</span><span class="o">.</span><span class="n">value_np</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">/</span> <span class="n">speed_body</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">half</span> <span class="o">=</span> <span class="n">median_window</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">curv_body</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">curv_body_raw</span><span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">half</span><span class="p">)</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">half</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">curv_body_raw</span><span class="p">))</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">r_body</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">curv_body</span><span class="p">,</span> <span class="n">radius_clip</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">curv_body</span> <span class="o">!=</span> <span class="mi">0</span>
+    <span class="n">r_body</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">curv_body</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">r_body</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">r_body</span><span class="p">,</span> <span class="o">-</span><span class="n">radius_clip</span><span class="p">,</span> <span class="n">radius_clip</span><span class="p">)</span>
+
+    <span class="n">data</span><span class="p">[</span><span class="n">CURVATURE_BODY</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_body</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">curv_body</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Body Frame Curvature (1/m)&quot;</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">CURVATURE_BODY</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">RADIUS_BODY</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_body</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">r_body</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Body Frame Radius (m)&quot;</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">RADIUS_BODY</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Track frame: curvature = d(heading)/dt / v_track</span>
+    <span class="n">th</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">TRACK_HEADING</span><span class="p">]</span>
+    <span class="n">th</span><span class="p">,</span> <span class="n">vtx_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">th</span><span class="p">,</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">TRACK_VELOCITY_X</span><span class="p">]])</span>
+    <span class="n">ts_track</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">timestamp_np</span>
+    <span class="n">t_s</span> <span class="o">=</span> <span class="n">_to_seconds</span><span class="p">(</span><span class="n">ts_track</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">)</span>
+
+    <span class="n">heading_rate</span> <span class="o">=</span> <span class="n">safe_gradient</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">value_np</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">t_s</span><span class="p">))</span>
+    <span class="n">speed_track</span> <span class="o">=</span> <span class="n">vtx_aln</span><span class="o">.</span><span class="n">value_np</span>
+
+    <span class="n">curv_track_raw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">speed_track</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">speed_track</span> <span class="o">&gt;</span> <span class="n">low_speed_thresh</span>
+    <span class="n">curv_track_raw</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">heading_rate</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">/</span> <span class="n">speed_track</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">curv_track</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">curv_track_raw</span><span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">half</span><span class="p">)</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">half</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">curv_track_raw</span><span class="p">))</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">r_track</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">curv_track</span><span class="p">,</span> <span class="n">radius_clip</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">curv_track</span> <span class="o">!=</span> <span class="mi">0</span>
+    <span class="n">r_track</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">curv_track</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">r_track</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">r_track</span><span class="p">,</span> <span class="o">-</span><span class="n">radius_clip</span><span class="p">,</span> <span class="n">radius_clip</span><span class="p">)</span>
+
+    <span class="n">data</span><span class="p">[</span><span class="n">CURVATURE_TRACK</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_track</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">curv_track</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Track Frame Curvature (1/m)&quot;</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">CURVATURE_TRACK</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">RADIUS_TRACK</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_track</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">r_track</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Track Frame Radius (m)&quot;</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">RADIUS_TRACK</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+
+<div class="viewcode-block" id="add_accelerations">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.kinematics.html#suboptimumg.log_analysis.kinematics.add_accelerations">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_accelerations</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SingleRunData</span><span class="p">,</span>
+    <span class="n">vel_body_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcm.vnav.velocityBody.x&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add lateral acceleration as v^2 * curvature in body and track frames and</span>
+<span class="sd">    stores results in ``body.accLat`` and ``track.accLat``, accessible via the constants</span>
+<span class="sd">    ``BODY_LAT_ACC`` and ``TRACK_LAT_ACC``.</span>
+
+<span class="sd">    Requires ``add_curvature`` and ``add_track_frame_velocities``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">c</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="n">vel_body_col</span><span class="p">,</span> <span class="n">CURVATURE_BODY</span><span class="p">,</span> <span class="n">TRACK_VELOCITY_X</span><span class="p">,</span> <span class="n">CURVATURE_TRACK</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;add_accelerations: missing variables(s) </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Try running add_curvature and add_track_frame_velocities first.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">curv_body</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">CURVATURE_BODY</span><span class="p">]</span>
+    <span class="n">curv_body</span><span class="p">,</span> <span class="n">vbx_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">curv_body</span><span class="p">,</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">vel_body_col</span><span class="p">]])</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">BODY_LAT_ACC</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">curv_body</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">vbx_aln</span><span class="o">.</span><span class="n">value_np</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">curv_body</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Body Lateral Acceleration (m/s²)&quot;</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">BODY_LAT_ACC</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">curv_track</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">CURVATURE_TRACK</span><span class="p">]</span>
+    <span class="n">curv_track</span><span class="p">,</span> <span class="n">vtx_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">curv_track</span><span class="p">,</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">TRACK_VELOCITY_X</span><span class="p">]])</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">TRACK_LAT_ACC</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">curv_track</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">vtx_aln</span><span class="o">.</span><span class="n">value_np</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">curv_track</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Track Lateral Acceleration (m/s²)&quot;</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">TRACK_LAT_ACC</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Penn Electric Racing.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

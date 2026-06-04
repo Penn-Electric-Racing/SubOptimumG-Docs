@@ -1,0 +1,8 @@
+suboptimumg.loganalysis.macros
+==============================
+
+.. automodule:: suboptimumg.loganalysis.macros
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

@@ -1,0 +1,8 @@
+suboptimumg.log\_analysis.gps\_laps
+===================================
+
+.. automodule:: suboptimumg.log_analysis.gps_laps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

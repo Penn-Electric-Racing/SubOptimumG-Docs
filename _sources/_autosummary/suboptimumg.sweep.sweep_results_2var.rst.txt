@@ -1,0 +1,8 @@
+suboptimumg.sweep.sweep\_results\_2var
+======================================
+
+.. automodule:: suboptimumg.sweep.sweep_results_2var
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

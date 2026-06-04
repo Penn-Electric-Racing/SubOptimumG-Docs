@@ -1,0 +1,23 @@
+suboptimumg.log\_analysis
+=========================
+
+.. automodule:: suboptimumg.log_analysis
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   aero
+   drivetrain
+   gps_laps
+   kinematics
+   preprocess_gps
+   steering
+   understeer
+   utils

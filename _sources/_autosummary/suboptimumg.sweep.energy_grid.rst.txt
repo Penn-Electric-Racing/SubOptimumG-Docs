@@ -1,0 +1,8 @@
+suboptimumg.sweep.energy\_grid
+==============================
+
+.. automodule:: suboptimumg.sweep.energy_grid
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

@@ -1,0 +1,8 @@
+suboptimumg.loganalysis.intake
+==============================
+
+.. automodule:: suboptimumg.loganalysis.intake
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

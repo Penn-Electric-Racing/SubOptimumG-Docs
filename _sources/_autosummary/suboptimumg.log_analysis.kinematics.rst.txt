@@ -1,0 +1,8 @@
+suboptimumg.log\_analysis.kinematics
+====================================
+
+.. automodule:: suboptimumg.log_analysis.kinematics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

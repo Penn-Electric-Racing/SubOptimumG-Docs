@@ -1,0 +1,8 @@
+suboptimumg.loganalysis.irl\_car
+================================
+
+.. automodule:: suboptimumg.loganalysis.irl_car
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

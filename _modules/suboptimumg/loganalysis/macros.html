@@ -1,0 +1,877 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>suboptimumg.loganalysis.macros &#8212; SubOptimumG</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+
+    <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/loganalysis/macros';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SubOptimumG</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.loganalysis.macros</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for suboptimumg.loganalysis.macros</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;High-level convenience macros that chain multiple loganalysis steps.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.corrections</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">compute_ned_from_body</span><span class="p">,</span>
+    <span class="n">convert_wheelspeeds_to_m_per_s</span><span class="p">,</span>
+    <span class="n">correct_motor_data</span><span class="p">,</span>
+    <span class="n">patch_ned_velocity</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.derived</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_groundspeed</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.filtering</span><span class="w"> </span><span class="kn">import</span> <span class="n">lowpass_filter</span><span class="p">,</span> <span class="n">plot_fft</span><span class="p">,</span> <span class="n">zscore_filter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.gps</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">compute_elapsed_distance</span><span class="p">,</span>
+    <span class="n">prepare_gps_data</span><span class="p">,</span>
+    <span class="n">resolve_gps_columns</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.intake</span><span class="w"> </span><span class="kn">import</span> <span class="n">perda_to_dataframe</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_log</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">perda.analyzer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Analyzer</span>
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Default intake variable list for vehicle dynamics analysis</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<span class="n">VD_INTAKE_VARS</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># VectorNav GPS/INS</span>
+    <span class="s2">&quot;pcm.vnav.posLla.latitude&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.posLla.longitude&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.posLla.altitude&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.gpsFix&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.yawPitchRoll.yaw&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.yawPitchRoll.pitch&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.yawPitchRoll.roll&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.velocityBody.x&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.velocityBody.y&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.velocityBody.z&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.compensatedAccel.x&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.compensatedAccel.y&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.compensatedAccel.z&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.linearAccelBody.x&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.linearAccelBody.y&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.linearAccelBody.z&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.compensatedAngularRate.x&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.compensatedAngularRate.y&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.compensatedAngularRate.z&quot;</span><span class="p">,</span>
+    <span class="c1"># Wheel speeds</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.frontLeft&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.frontRight&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.backLeft&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.backRight&quot;</span><span class="p">,</span>
+    <span class="c1"># Shock pots</span>
+    <span class="s2">&quot;ludwig.shockpot.frontLeft&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ludwig.shockpot.frontRight&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ludwig.shockpot.rearLeft&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ludwig.shockpot.rearRight&quot;</span><span class="p">,</span>
+    <span class="c1"># Motor / inverter</span>
+    <span class="s2">&quot;pcm.moc.motor.angularSpeed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.moc.motor.torqueFeedback&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.moc.motor.requestedTorque&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.moc.motor.driverTorque&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.moc.temp&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.moc.motor.temp&quot;</span><span class="p">,</span>
+    <span class="c1"># Brakes</span>
+    <span class="s2">&quot;pcm.pedals.brakePressure.front&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.pedals.brakePressure.rear&quot;</span><span class="p">,</span>
+    <span class="c1"># Traction control</span>
+    <span class="s2">&quot;pcm.tractionControl.slipRatio&quot;</span><span class="p">,</span>
+    <span class="c1"># Cooling</span>
+    <span class="s2">&quot;pcm.coolingLoop.temp&quot;</span><span class="p">,</span>
+    <span class="c1"># Steering</span>
+    <span class="s2">&quot;ludwig.steeringWheel.angle&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ludwig.steeringWheel.raw&quot;</span><span class="p">,</span>
+    <span class="c1"># Tire temperatures</span>
+    <span class="s2">&quot;ludwig.tireTemps.sensorTemp[0]&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ludwig.tireTemps.sensorTemp[1]&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ludwig.tireTemps.sensorTemp[2]&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ludwig.tireTemps.sensorTemp[3]&quot;</span><span class="p">,</span>
+    <span class="c1"># BMS</span>
+    <span class="s2">&quot;bms.pack.voltage&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;bms.pack.current&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;bms.pack.power&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;bms.stack.mma.temp.min&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;bms.stack.mma.temp.max&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;bms.stack.mma.temp.avg&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">_VD_DEDUP_VARS</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;pcm.vnav.posLla.latitude&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.posLla.longitude&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.velocityBody.x&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.velocityBody.y&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.velocityBody.z&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># VectorNav writes lat/lon = 0.0 as a &quot;no INS solution&quot; sentinel, sometimes</span>
+<span class="c1"># even when gpsFix == 3.  These samples must be removed from the source</span>
+<span class="c1"># DataInstance *before* dedup/resampling — otherwise dedup collapses long</span>
+<span class="c1"># zero runs to a single (t, 0.0) marker and linear interpolation then ramps</span>
+<span class="c1"># from 0 up to the next real fix, smearing garbage across the whole gap.</span>
+<span class="n">_GPS_SENTINEL_VARS</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;pcm.vnav.posLla.latitude&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.vnav.posLla.longitude&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_strip_gps_sentinel_zeros</span><span class="p">(</span><span class="n">analyzer</span><span class="p">:</span> <span class="n">Analyzer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Drop lat/lon samples whose value is exactly 0.0 from the analyzer.</span>
+
+<span class="sd">    Mutates ``analyzer.data.id_to_instance`` in place, replacing each</span>
+<span class="sd">    sentinel-affected ``DataInstance`` with a copy whose timestamp/value</span>
+<span class="sd">    arrays have the zero samples removed.  Variables that aren&#39;t present</span>
+<span class="sd">    or have no zero samples are left untouched.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">perda.analyzer</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataInstance</span>
+
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">_GPS_SENTINEL_VARS</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">di</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="n">vals</span> <span class="o">=</span> <span class="n">di</span><span class="o">.</span><span class="n">value_np</span>
+        <span class="n">keep</span> <span class="o">=</span> <span class="n">vals</span> <span class="o">!=</span> <span class="mf">0.0</span>
+        <span class="n">n_drop</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="o">~</span><span class="n">keep</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">n_drop</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">analyzer</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">id_to_instance</span><span class="p">[</span><span class="n">di</span><span class="o">.</span><span class="n">var_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+            <span class="n">timestamp_np</span><span class="o">=</span><span class="n">di</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span>
+            <span class="n">value_np</span><span class="o">=</span><span class="n">vals</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">di</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
+            <span class="n">var_id</span><span class="o">=</span><span class="n">di</span><span class="o">.</span><span class="n">var_id</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;[macro] strip_gps_sentinel_zeros: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;dropped </span><span class="si">{</span><span class="n">n_drop</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span><span class="si">}</span><span class="s2"> (0.0) samples&quot;</span>
+        <span class="p">)</span>
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Column matching helper</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<span class="n">_BACKUP_SUFFIXES</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;_pre_lp&quot;</span><span class="p">,</span> <span class="s2">&quot;_raw&quot;</span><span class="p">,</span> <span class="s2">&quot;_mph&quot;</span><span class="p">,</span> <span class="s2">&quot;_original&quot;</span><span class="p">)</span>
+
+<span class="n">_NEVER_FILTER</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;pcm.vnav.yawPitchRoll.yaw&quot;</span><span class="p">,</span>  <span class="c1"># wrapping discontinuities; filter after unwrap</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_match_columns</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">partial_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">exclude</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return columns whose name starts with *partial_path* + &#39;.&#39;.</span>
+
+<span class="sd">    Excludes backup columns (``_pre_lp``, ``_raw``, ``_mph``,</span>
+<span class="sd">    ``_original``).  Pass *exclude* to additionally skip specific</span>
+<span class="sd">    column names (used by filter macros to protect yaw etc.).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">partial_path</span> <span class="k">if</span> <span class="n">partial_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">partial_path</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">c</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">prefix</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">_BACKUP_SUFFIXES</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">exclude</span> <span class="ow">and</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">exclude</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [macro] Skipping </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> (protected from filtering)&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="n">matches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">matches</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;No columns match prefix &#39;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">&#39;. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Available: </span><span class="si">{</span><span class="p">[</span><span class="n">c</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">partial_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">c</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Intake</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="intake_vd_starter_kit">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.macros.html#suboptimumg.loganalysis.intake_vd_starter_kit">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">intake_vd_starter_kit</span><span class="p">(</span>
+    <span class="n">analyzer</span><span class="p">:</span> <span class="n">Analyzer</span><span class="p">,</span>
+    <span class="n">deduplicate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">resample_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load the standard vehicle-dynamics variable set into a DataFrame.</span>
+
+<span class="sd">    Wraps ``perda_to_dataframe`` with the default VD variable list and</span>
+<span class="sd">    ZOH deduplication on VectorNav position and velocity channels.</span>
+
+<span class="sd">    ``pcm.vnav.gpsFix`` is always resampled with zero-order hold (it is</span>
+<span class="sd">    a discrete state, not a continuous signal — linear interpolation</span>
+<span class="sd">    between ``0`` and ``3`` would produce nonsensical fractional fix</span>
+<span class="sd">    values that defeat downstream gpsFix-based masking).</span>
+
+<span class="sd">    Sentinel ``0.0`` samples in ``posLla.latitude``/``.longitude``</span>
+<span class="sd">    (VectorNav&#39;s &quot;no INS solution&quot; marker) are stripped from the source</span>
+<span class="sd">    ``DataInstance`` before resampling so dedup + linear interpolation</span>
+<span class="sd">    don&#39;t smear them into ramps across no-fix gaps.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_strip_gps_sentinel_zeros</span><span class="p">(</span><span class="n">analyzer</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resample_method</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">method_arg</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;pcm.vnav.gpsFix&quot;</span><span class="p">:</span> <span class="s2">&quot;zoh&quot;</span><span class="p">}</span>
+        <span class="c1"># All other vars fall back to the user-requested default via the</span>
+        <span class="c1"># per-name dict lookup in perda_to_dataframe (defaults to &quot;linear&quot;</span>
+        <span class="c1"># for missing keys), so we preserve `resample_method` only when</span>
+        <span class="c1"># it differs from the dict default.</span>
+        <span class="k">if</span> <span class="n">resample_method</span> <span class="o">!=</span> <span class="s2">&quot;linear&quot;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">VD_INTAKE_VARS</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">v</span> <span class="o">!=</span> <span class="s2">&quot;pcm.vnav.gpsFix&quot;</span><span class="p">:</span>
+                    <span class="n">method_arg</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">resample_method</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">method_arg</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;pcm.vnav.gpsFix&quot;</span><span class="p">:</span> <span class="s2">&quot;zoh&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">resample_method</span><span class="p">}</span>
+
+    <span class="n">dedup</span> <span class="o">=</span> <span class="n">_VD_DEDUP_VARS</span> <span class="k">if</span> <span class="n">deduplicate</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">perda_to_dataframe</span><span class="p">(</span>
+        <span class="n">analyzer</span><span class="p">,</span>
+        <span class="n">VD_INTAKE_VARS</span><span class="p">,</span>
+        <span class="n">resample_method</span><span class="o">=</span><span class="n">method_arg</span><span class="p">,</span>
+        <span class="n">deduplicate_vars</span><span class="o">=</span><span class="n">dedup</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Speed preprocessing</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<span class="n">_WHEELSPEED_COLS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.frontLeft&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.frontRight&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.backLeft&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.backRight&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="preprocess_speeds">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.macros.html#suboptimumg.loganalysis.preprocess_speeds">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">preprocess_speeds</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">patch_ned</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">car_yaml</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;parameters/car.yaml&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;NED velocity patch, wheelspeed unit conversion, motor correction, ground speed.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">patch_ned</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">patch_ned_velocity</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">compute_ned_from_body</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">convert_wheelspeeds_to_m_per_s</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">_WHEELSPEED_COLS</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">correct_motor_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">car_yaml</span><span class="o">=</span><span class="n">car_yaml</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">compute_groundspeed</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># GPS preprocessing</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="preprocess_gps">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.macros.html#suboptimumg.loganalysis.preprocess_gps">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">preprocess_gps</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve GPS columns, clean/project, and compute elapsed distance.&quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">resolve_gps_columns</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">prepare_gps_data</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">compute_elapsed_distance</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Group operations (column prefix matching)</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="fft_group">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.macros.html#suboptimumg.loganalysis.fft_group">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fft_group</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">partial_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">log_y</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">stacked</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot FFT for all columns matching *partial_path*.*.</span>
+
+<span class="sd">    Default is linear y-axis and overlaid traces.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">_match_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">partial_path</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[macro] fft_group: </span><span class="si">{</span><span class="n">partial_path</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">cols</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">plot_fft</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="n">stacked</span><span class="p">,</span> <span class="n">log_y</span><span class="o">=</span><span class="n">log_y</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="lowpass_group">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.macros.html#suboptimumg.loganalysis.lowpass_group">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">lowpass_group</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">partial_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">cutoff_hz</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Lowpass filter all columns matching *partial_path*.*.&quot;&quot;&quot;</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">_match_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">partial_path</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="n">_NEVER_FILTER</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[macro] lowpass_group: </span><span class="si">{</span><span class="n">partial_path</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">cols</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lowpass_filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">cutoff_hz</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="zfilter_group">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.macros.html#suboptimumg.loganalysis.zfilter_group">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">zfilter_group</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">partial_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">window_s</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">4.8</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Z-score filter all columns matching *partial_path*.*.&quot;&quot;&quot;</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">_match_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">partial_path</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="n">_NEVER_FILTER</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[macro] zfilter_group: </span><span class="si">{</span><span class="n">partial_path</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">cols</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">zscore_filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">window_s</span><span class="o">=</span><span class="n">window_s</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="plot_group">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.macros.html#suboptimumg.loganalysis.plot_group">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_group</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">partial_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">stacked</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot all columns matching *partial_path*.*.</span>
+
+<span class="sd">    Default is overlaid traces on a single axis.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">_match_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">partial_path</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[macro] plot_group: </span><span class="si">{</span><span class="n">partial_path</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">cols</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">plot_log</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="n">stacked</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Speed filtering</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<span class="n">_SPEED_ZSCORE_COLS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.frontLeft&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.frontRight&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.backLeft&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.backRight&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">_SPEED_LP_COLS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.frontLeft&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.frontRight&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.backLeft&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.wheelSpeeds.backRight&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pcm.moc.motor.wheelSpeed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;groundSpeed&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="filter_speeds">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.macros.html#suboptimumg.loganalysis.filter_speeds">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">filter_speeds</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">zscore_window</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">8.0</span><span class="p">,</span>
+    <span class="n">zscore_thresh</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.5</span><span class="p">,</span>
+    <span class="n">lowpass_hz</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Z-score + lowpass pipeline for wheel speed signals.</span>
+
+<span class="sd">    1. Z-score filter the four raw wheelspeed sensors.</span>
+<span class="sd">    2. Recompute groundSpeed from the cleaned front wheelspeeds.</span>
+<span class="sd">    3. Lowpass all wheelspeeds, motor wheelSpeed, and groundSpeed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">zscore_filter</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">_SPEED_ZSCORE_COLS</span><span class="p">,</span> <span class="n">window_s</span><span class="o">=</span><span class="n">zscore_window</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">zscore_thresh</span>
+    <span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">compute_groundspeed</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">lowpass_filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">_SPEED_LP_COLS</span><span class="p">,</span> <span class="n">cutoff_hz</span><span class="o">=</span><span class="n">lowpass_hz</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Derived quantities (stub)</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="derive_quantities">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.macros.html#suboptimumg.loganalysis.derive_quantities">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">derive_quantities</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute all standard derived quantities.</span>
+
+<span class="sd">    TODO: Wire up the full set of derived.py calls.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># QSS simulation</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="simulate_on_track">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.loganalysis.macros.html#suboptimumg.loganalysis.simulate_on_track">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_on_track</span><span class="p">(</span>
+    <span class="n">lap_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">track</span><span class="p">,</span>
+    <span class="n">car_yaml</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;../parameters/car.yaml&quot;</span><span class="p">,</span>
+    <span class="n">velocity_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;groundSpeed&quot;</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load a car, simulate on a Track, and return a QSS DataFrame.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lap_df : DataFrame</span>
+<span class="sd">        The trimmed single-lap DataFrame used to build the track.</span>
+<span class="sd">    track : Track</span>
+<span class="sd">        A QSS-compatible Track (from :func:`build_qss_track`).</span>
+<span class="sd">    car_yaml : str</span>
+<span class="sd">        Path to the car YAML config file.</span>
+<span class="sd">    velocity_col : str</span>
+<span class="sd">        Column to read IRL initial speed from.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    (sim, qss_df)</span>
+<span class="sd">        *sim* is the :class:`CustomRun` instance (carries push/coast</span>
+<span class="sd">        results).  *qss_df* is a distance-indexed DataFrame with</span>
+<span class="sd">        ``qss.*`` columns.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.compsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">CustomRun</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.yaml</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_car_from_yaml</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.track_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">qss_results_to_dataframe</span>
+
+    <span class="n">initial_speed</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lap_df</span><span class="p">[</span><span class="n">velocity_col</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">car</span> <span class="o">=</span> <span class="n">load_car_from_yaml</span><span class="p">(</span><span class="n">car_yaml</span><span class="p">)</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">CustomRun</span><span class="p">(</span><span class="n">mycar</span><span class="o">=</span><span class="n">car</span><span class="p">,</span> <span class="n">track</span><span class="o">=</span><span class="n">track</span><span class="p">)</span>
+    <span class="n">push</span><span class="p">,</span> <span class="n">coast</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">extract_internal_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">initial_velocity</span><span class="o">=</span><span class="n">initial_speed</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">print_results_summary</span><span class="p">()</span>
+
+    <span class="n">qss_df</span> <span class="o">=</span> <span class="n">qss_results_to_dataframe</span><span class="p">(</span><span class="n">push</span><span class="p">,</span> <span class="n">track</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sim</span><span class="p">,</span> <span class="n">qss_df</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Penn Electric Racing.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

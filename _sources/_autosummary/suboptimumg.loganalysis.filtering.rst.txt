@@ -1,0 +1,8 @@
+suboptimumg.loganalysis.filtering
+=================================
+
+.. automodule:: suboptimumg.loganalysis.filtering
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

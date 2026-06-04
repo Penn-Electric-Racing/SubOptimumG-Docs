@@ -1,0 +1,30 @@
+suboptimumg.plotting
+====================
+
+.. automodule:: suboptimumg.plotting
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   bar_chart
+   color_themes
+   gps_visualization
+   grid_plot_2d
+   grid_plot_3d
+   internal_data_plots
+   overlay_grid_plot_2d
+   overlay_plot_2d
+   plot_2d
+   plot_3d
+   plot_polynomial_fit
+   plotting_constants
+   stem_plot
+   types
+   utils

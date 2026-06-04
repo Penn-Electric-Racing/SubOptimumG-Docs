@@ -1,0 +1,8 @@
+suboptimumg.plotting.plotting\_constants
+========================================
+
+.. automodule:: suboptimumg.plotting.plotting_constants
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

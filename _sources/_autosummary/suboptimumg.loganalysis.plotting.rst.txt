@@ -1,0 +1,8 @@
+suboptimumg.loganalysis.plotting
+================================
+
+.. automodule:: suboptimumg.loganalysis.plotting
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

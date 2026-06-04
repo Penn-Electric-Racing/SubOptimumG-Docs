@@ -1,0 +1,8 @@
+suboptimumg.log\_analysis.aero
+==============================
+
+.. automodule:: suboptimumg.log_analysis.aero
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

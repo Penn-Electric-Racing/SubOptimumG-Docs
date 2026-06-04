@@ -1,0 +1,8 @@
+suboptimumg.log\_analysis.utils
+===============================
+
+.. automodule:: suboptimumg.log_analysis.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

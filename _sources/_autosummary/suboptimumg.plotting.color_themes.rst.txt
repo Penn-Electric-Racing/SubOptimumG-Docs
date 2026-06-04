@@ -1,0 +1,8 @@
+suboptimumg.plotting.color\_themes
+==================================
+
+.. automodule:: suboptimumg.plotting.color_themes
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
