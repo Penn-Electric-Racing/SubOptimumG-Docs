@@ -1,0 +1,8 @@
+suboptimumg.log\_analysis.yaw\_segmentation\_models
+===================================================
+
+.. automodule:: suboptimumg.log_analysis.yaw_segmentation_models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

@@ -26,18 +26,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
 
     <script src="../_static/documentation_options.js?v=a58bc63e"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
@@ -350,6 +350,12 @@
 <li><a href="suboptimumg/log_analysis/steering.html">suboptimumg.log_analysis.steering</a></li>
 <li><a href="suboptimumg/log_analysis/understeer.html">suboptimumg.log_analysis.understeer</a></li>
 <li><a href="suboptimumg/log_analysis/utils.html">suboptimumg.log_analysis.utils</a></li>
+<li><a href="suboptimumg/log_analysis/yaw_artifact.html">suboptimumg.log_analysis.yaw_artifact</a></li>
+<li><a href="suboptimumg/log_analysis/yaw_fit.html">suboptimumg.log_analysis.yaw_fit</a></li>
+<li><a href="suboptimumg/log_analysis/yaw_fit_models.html">suboptimumg.log_analysis.yaw_fit_models</a></li>
+<li><a href="suboptimumg/log_analysis/yaw_plots.html">suboptimumg.log_analysis.yaw_plots</a></li>
+<li><a href="suboptimumg/log_analysis/yaw_segmentation.html">suboptimumg.log_analysis.yaw_segmentation</a></li>
+<li><a href="suboptimumg/log_analysis/yaw_segmentation_models.html">suboptimumg.log_analysis.yaw_segmentation_models</a></li>
 <li><a href="suboptimumg/loganalysis/_utils.html">suboptimumg.loganalysis._utils</a></li>
 <li><a href="suboptimumg/loganalysis/corrections.html">suboptimumg.loganalysis.corrections</a></li>
 <li><a href="suboptimumg/loganalysis/derived.html">suboptimumg.loganalysis.derived</a></li>
@@ -366,6 +372,7 @@
 <li><a href="suboptimumg/loganalysis/variables.html">suboptimumg.loganalysis.variables</a></li>
 <li><a href="suboptimumg/models.html">suboptimumg.models</a></li>
 <li><a href="suboptimumg/plotting/bar_chart.html">suboptimumg.plotting.bar_chart</a></li>
+<li><a href="suboptimumg/plotting/binned_scatter.html">suboptimumg.plotting.binned_scatter</a></li>
 <li><a href="suboptimumg/plotting/color_themes.html">suboptimumg.plotting.color_themes</a></li>
 <li><a href="suboptimumg/plotting/gps_visualization.html">suboptimumg.plotting.gps_visualization</a></li>
 <li><a href="suboptimumg/plotting/grid_plot_2d.html">suboptimumg.plotting.grid_plot_2d</a></li>
@@ -378,6 +385,7 @@
 <li><a href="suboptimumg/plotting/plot_polynomial_fit.html">suboptimumg.plotting.plot_polynomial_fit</a></li>
 <li><a href="suboptimumg/plotting/plotting_constants.html">suboptimumg.plotting.plotting_constants</a></li>
 <li><a href="suboptimumg/plotting/stem_plot.html">suboptimumg.plotting.stem_plot</a></li>
+<li><a href="suboptimumg/plotting/two_panel_spectrum.html">suboptimumg.plotting.two_panel_spectrum</a></li>
 <li><a href="suboptimumg/plotting/types.html">suboptimumg.plotting.types</a></li>
 <li><a href="suboptimumg/plotting/utils.html">suboptimumg.plotting.utils</a></li>
 <li><a href="suboptimumg/sweep/array_sweep_results.html">suboptimumg.sweep.array_sweep_results</a></li>
@@ -441,8 +449,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -476,7 +484,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
 </p></div>
       
     </div>

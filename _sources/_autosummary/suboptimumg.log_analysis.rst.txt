@@ -21,3 +21,9 @@ suboptimumg.log\_analysis
    steering
    understeer
    utils
+   yaw_artifact
+   yaw_fit
+   yaw_fit_models
+   yaw_plots
+   yaw_segmentation
+   yaw_segmentation_models

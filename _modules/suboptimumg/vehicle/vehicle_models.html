@@ -26,18 +26,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
 
     <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -535,14 +535,63 @@
 
 
 
+<div class="viewcode-block" id="DynamicsPriorBoundsModel">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.DynamicsPriorBoundsModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DynamicsPriorBoundsModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Soft +/- percentage bounds for the yaw-response bicycle priors.</span>
+
+<span class="sd">    Used by an LPV output-error fit to build the optimizer&#39;s parameter box around ``Ca_front``, ``Ca_rear`` and ``Izz``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">Ca_front_pct</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Front cornering-stiffness bound (+/- percent)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">Ca_rear_pct</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Rear cornering-stiffness bound (+/- percent)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">Izz_pct</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Yaw-inertia bound (+/- percent)&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="DynamicsSetupModel">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.DynamicsSetupModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DynamicsSetupModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Linear-region bicycle-model parameters used as soft priors for a LPV yaw-response output-error fit</span>
+
+<span class="sd">    Backsolve from four cornering operating points (skidpad / steady turns) using SAE bicycle algebra:</span>
+<span class="sd">        delta_tire = L/R + (m/L)(l_r/Ca_f - l_f/Ca_r) V^2/R</span>
+<span class="sd">        beta       = l_r/R - (m a_y l_f) / (L Ca_r)</span>
+
+<span class="sd">    Ca_r is the multi-point consensus from three well-conditioned points.  Ca_f comes from the lowest-a_y point only (front tires</span>
+<span class="sd">    saturate above ~1g, biasing fits low). Izz should be an FSAE rule-of-thumb (~0.7 m wb track / 4).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">Ca_front_N_per_rad</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Per-axle front cornering stiffness prior (N/rad)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">Ca_rear_N_per_rad</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Per-axle rear cornering stiffness prior (N/rad)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">Izz_kg_m2</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Yaw inertia about the CG (kg.m^2)&quot;</span><span class="p">)</span>
+    <span class="n">prior_bounds</span><span class="p">:</span> <span class="n">DynamicsPriorBoundsModel</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Soft +/- percentage bounds for the optimizer&quot;</span>
+    <span class="p">)</span></div>
+
+
+
 <div class="viewcode-block" id="ExtendedVehicleModel">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.ExtendedVehicleModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ExtendedVehicleModel</span><span class="p">(</span><span class="n">VehicleModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;VehicleModel extended with real-world session setup parameters.</span>
 
 <span class="sd">    Set ``type: irl_setup`` in the YAML to trigger this model.</span>
-<span class="sd">    Includes alignment, steering ackermann, and suspension setup fields</span>
-<span class="sd">    on top of the base car parameters.</span>
+<span class="sd">    Includes alignment, steering ackermann, suspension setup, and yaw-response dynamics priors on top of the base car</span>
+<span class="sd">    parameters.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -555,6 +604,9 @@
     <span class="p">)</span>
     <span class="n">suspension_setup</span><span class="p">:</span> <span class="n">SuspensionSetupModel</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Real-world suspension setup parameters&quot;</span>
+    <span class="p">)</span>
+    <span class="n">dynamics_setup</span><span class="p">:</span> <span class="n">DynamicsSetupModel</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Linear-bicycle priors for yaw-response identification&quot;</span>
     <span class="p">)</span></div>
 
 
@@ -591,8 +643,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -626,7 +678,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
 </p></div>
       
     </div>
