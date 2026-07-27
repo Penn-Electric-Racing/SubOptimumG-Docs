@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/compsim/models';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -337,18 +336,12 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.compsim.models</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Pydantic models for competition simulation data structures.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">ConfigDict</span><span class="p">,</span> <span class="n">Field</span><span class="p">,</span> <span class="n">computed_field</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic.dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..track.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">TrackData</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle.vehicle_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">VehicleModel</span>
@@ -361,9 +354,7 @@
     <span class="n">worst_time_ratio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The maximum race time for this event, expressed as a ratio of the track_best_time&quot;</span>
     <span class="p">)</span>
-    <span class="n">min_points</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The minimum amount of points awarded for this event&quot;</span>
-    <span class="p">)</span>
+    <span class="n">min_points</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;The minimum amount of points awarded for this event&quot;</span><span class="p">)</span>
     <span class="n">max_point_gain</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The maximum amount of point a car can gain on this event, if they meet or exceed track_best_time&quot;</span>
     <span class="p">)</span>
@@ -379,16 +370,12 @@
     <span class="n">num_endurance_laps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Number of laps around the track for endurance event&quot;</span>
     <span class="p">)</span>
-    <span class="n">max_eff_points</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Maximum amount of points awarded for efficiency&quot;</span>
-    <span class="p">)</span>
+    <span class="n">max_eff_points</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Maximum amount of points awarded for efficiency&quot;</span><span class="p">)</span>
     <span class="n">co2_scaling</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;(kg CO2 / kWh) ratio to convert EV to IC (from FSAE Rules)&quot;</span>
     <span class="p">)</span>
 
-    <span class="n">fastest_lap_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Average lap time for fastest endurance finisher&quot;</span>
-    <span class="p">)</span>
+    <span class="n">fastest_lap_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Average lap time for fastest endurance finisher&quot;</span><span class="p">)</span>
     <span class="n">co2_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Minimum co2 usage out of teams that were eligible for endurance score&quot;</span>
     <span class="p">)</span>
@@ -419,13 +406,21 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">InternalDataSeedInfo</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="n">v_proposal</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">acc_proposal</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">grown_forward_mask</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">slower_mask</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">v_max_post</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">acc_max_post</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">p_proposal</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></div>
+    <span class="n">v_proposal</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Proposed velocity profile&quot;</span><span class="p">)</span>
+    <span class="n">acc_proposal</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Proposed acceleration profile&quot;</span><span class="p">)</span>
+    <span class="n">grown_forward_mask</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Mask of indices grown forward from the seed&quot;</span>
+    <span class="p">)</span>
+    <span class="n">slower_mask</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Mask of indices where the proposal is slower than the current max&quot;</span>
+    <span class="p">)</span>
+    <span class="n">v_max_post</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Velocity profile after merging this seed&#39;s proposal&quot;</span>
+    <span class="p">)</span>
+    <span class="n">acc_max_post</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Acceleration profile after merging this seed&#39;s proposal&quot;</span>
+    <span class="p">)</span>
+    <span class="n">p_proposal</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Proposed power profile&quot;</span><span class="p">)</span></div>
 
 
 
@@ -434,9 +429,7 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">InternalData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="n">initial_velocity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Initial velocity at start of track (m/s)&quot;</span>
-    <span class="p">)</span>
+    <span class="n">initial_velocity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Initial velocity at start of track (m/s)&quot;</span><span class="p">)</span>
     <span class="n">v_max_profile</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Initial maximum velocity profile for the track (m/s)&quot;</span>
     <span class="p">)</span>
@@ -450,7 +443,7 @@
     <span class="n">seed_v_list</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;List of seed velocities, corresponding to seed_idx_list&quot;</span>
     <span class="p">)</span>
-    <span class="n">per_seed</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">InternalDataSeedInfo</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+    <span class="n">per_seed</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">InternalDataSeedInfo</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;List of per-seed internal data, corresponding to seed_idx_list&quot;</span>
     <span class="p">)</span></div>
 
@@ -469,23 +462,32 @@
     <span class="n">lap_eff_motor_torques</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;List of effective motor torques (N⋅m)&quot;</span>
     <span class="p">)</span>
-    <span class="n">internal_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">InternalData</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+    <span class="n">internal_data</span><span class="p">:</span> <span class="n">InternalData</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Optional internal data from the simulation&quot;</span>
     <span class="p">)</span>
 
 <div class="viewcode-block" id="LapsimResults.write_csv">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.models.html#suboptimumg.compsim.models.LapsimResults.write_csv">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">write_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="s2">&quot;Time (s)&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lap_t</span><span class="p">,</span>
-                <span class="s2">&quot;Distance (m)&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lap_dxs</span><span class="p">,</span>
-                <span class="s2">&quot;Velocity (m/s)&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lap_vels</span><span class="p">,</span>
-                <span class="s2">&quot;Acceleration (m/s^2)&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lap_accs</span><span class="p">,</span>
-                <span class="s2">&quot;Power Draw (W)&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lap_powers</span><span class="p">,</span>
-                <span class="s2">&quot;Effective Motor Torque (N⋅m)&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lap_eff_motor_torques</span><span class="p">,</span>
-            <span class="p">}</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write the lap simulation time series to a CSV file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filepath : str or Path</span>
+<span class="sd">            Destination CSV file path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Time (s)&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lap_t</span><span class="p">,</span>
+            <span class="s2">&quot;Distance (m)&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lap_dxs</span><span class="p">,</span>
+            <span class="s2">&quot;Velocity (m/s)&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lap_vels</span><span class="p">,</span>
+            <span class="s2">&quot;Acceleration (m/s^2)&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lap_accs</span><span class="p">,</span>
+            <span class="s2">&quot;Power Draw (W)&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lap_powers</span><span class="p">,</span>
+            <span class="s2">&quot;Effective Motor Torque (N⋅m)&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lap_eff_motor_torques</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">columns</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span></div>
 </div>
 
 
@@ -510,14 +512,12 @@
     <span class="n">skidpad</span><span class="p">:</span> <span class="n">EventResults</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Skidpad event results&quot;</span><span class="p">)</span>
     <span class="n">autoX</span><span class="p">:</span> <span class="n">EventResults</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Autocross event results&quot;</span><span class="p">)</span>
     <span class="n">endurance</span><span class="p">:</span> <span class="n">EventResults</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Endurance event results&quot;</span><span class="p">)</span>
-    <span class="n">efficiency_points</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Efficiency points scored in the endurance event&quot;</span>
-    <span class="p">)</span>
-    <span class="n">endu_consumed_energy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Energy consumed in the endurance event (kWh)&quot;</span>
-    <span class="p">)</span>
+    <span class="n">efficiency_points</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Efficiency points scored in the endurance event&quot;</span><span class="p">)</span>
+    <span class="n">endu_consumed_energy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Energy consumed in the endurance event (kWh)&quot;</span><span class="p">)</span>
 
-    <span class="nd">@computed_field</span>
+    <span class="nd">@computed_field</span>  <span class="c1"># type: ignore[prop-decorator]</span>
+    <span class="c1"># See vehicle_models.py: valid Pydantic V2 pattern, mypy plugin currently</span>
+    <span class="c1"># incompatible with the installed mypy version.</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">total_points</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span>

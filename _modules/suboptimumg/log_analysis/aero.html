@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/log_analysis/aero';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -338,11 +337,11 @@
                   
   <h1>Source code for suboptimumg.log_analysis.aero</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures.data_instance</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DataInstance</span><span class="p">,</span>
+    <span class="n">SingleRunData</span><span class="p">,</span>
     <span class="n">left_join_data_instances</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures.single_run_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleRunData</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">perda.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">_from_seconds</span><span class="p">,</span> <span class="n">_to_seconds</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">suboptimumg.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">RHO</span><span class="p">,</span> <span class="n">G</span>
@@ -389,8 +388,7 @@
     <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="n">GROUND_SPEED</span><span class="p">,)</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;add_cla: missing variables(s) </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Try running add_groundspeed first.&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;add_cla: missing variables(s) </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="sa">f</span><span class="s2">&quot;Try running add_groundspeed first.&quot;</span>
         <span class="p">)</span>
 
     <span class="n">pfl</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">pot_fl</span><span class="p">]</span>
@@ -410,9 +408,7 @@
     <span class="n">front_delta</span> <span class="o">=</span> <span class="n">front_avg</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">front_avg</span><span class="p">[</span><span class="n">ref_mask</span><span class="p">])</span>
     <span class="n">rear_delta</span> <span class="o">=</span> <span class="n">rear_avg</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rear_avg</span><span class="p">[</span><span class="n">ref_mask</span><span class="p">])</span>
 
-    <span class="n">f_front</span><span class="p">,</span> <span class="n">f_rear</span> <span class="o">=</span> <span class="n">irl_car</span><span class="o">.</span><span class="n">aero_force_from_pots</span><span class="p">(</span>
-        <span class="n">front_delta</span><span class="p">,</span> <span class="n">rear_delta</span><span class="p">,</span> <span class="n">ax_aln</span><span class="o">.</span><span class="n">value_np</span> <span class="o">/</span> <span class="n">G</span>
-    <span class="p">)</span>
+    <span class="n">f_front</span><span class="p">,</span> <span class="n">f_rear</span> <span class="o">=</span> <span class="n">irl_car</span><span class="o">.</span><span class="n">aero_force_from_pots</span><span class="p">(</span><span class="n">front_delta</span><span class="p">,</span> <span class="n">rear_delta</span><span class="p">,</span> <span class="n">ax_aln</span><span class="o">.</span><span class="n">value_np</span> <span class="o">/</span> <span class="n">G</span><span class="p">)</span>
     <span class="n">f_total</span> <span class="o">=</span> <span class="n">f_front</span> <span class="o">+</span> <span class="n">f_rear</span>
 
     <span class="n">v</span> <span class="o">=</span> <span class="n">vel_aln</span><span class="o">.</span><span class="n">value_np</span>
@@ -470,8 +466,7 @@
     <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="n">GROUND_SPEED</span><span class="p">,</span> <span class="n">ax_col</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;add_cda: missing variables(s) </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Try running add_groundspeed first.&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;add_cda: missing variables(s) </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="sa">f</span><span class="s2">&quot;Try running add_groundspeed first.&quot;</span>
         <span class="p">)</span>
 
     <span class="n">gs</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">GROUND_SPEED</span><span class="p">]</span>

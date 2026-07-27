@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/plotting/grid_plot_3d';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -338,15 +337,31 @@
                   
   <h1>Source code for suboptimumg.plotting.grid_plot_3d</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.io</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.color_themes</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_theme</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.plotting_constants</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.plotting_constants</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CONTOUR_LABEL_COLOR</span><span class="p">,</span>
+    <span class="n">DEFAULT_COLORBAR_CONFIG</span><span class="p">,</span>
+    <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
+    <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
+    <span class="n">DEFAULT_SMOOTHING_CONFIG</span><span class="p">,</span>
+    <span class="n">FLOAT_PRECISION</span><span class="p">,</span>
+    <span class="n">GRID_COLOR</span><span class="p">,</span>
+    <span class="n">GRID_WIDTH</span><span class="p">,</span>
+    <span class="n">LINE_WIDTH</span><span class="p">,</span>
+    <span class="n">NUM_CONTOURS</span><span class="p">,</span>
+    <span class="n">TEXT_COLOR_DARK</span><span class="p">,</span>
+    <span class="n">ColorbarConfig</span><span class="p">,</span>
+    <span class="n">FontConfig</span><span class="p">,</span>
+    <span class="n">LayoutConfig</span><span class="p">,</span>
+    <span class="n">SmoothingConfig</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">prepare_smooth_data_3D</span>
 
 <span class="c1"># Set default plotly template for better aesthetics</span>
@@ -366,23 +381,23 @@
 <div class="viewcode-block" id="plot_grid_3D">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.grid_plot_3d.html#suboptimumg.plotting.grid_plot_3d.plot_grid_3D">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_grid_3D</span><span class="p">(</span>
-    <span class="n">x_list</span><span class="p">,</span>
-    <span class="n">y_list</span><span class="p">,</span>
-    <span class="n">z_data_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
-    <span class="n">subplot_titles</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">x_list</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+    <span class="n">y_list</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+    <span class="n">z_data_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]],</span>
+    <span class="n">subplot_titles</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">x_label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">y_label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">z_label_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+    <span class="n">z_label_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
     <span class="n">rows</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">cols</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">plot_type</span><span class="p">:</span> <span class="n">PlotType</span><span class="p">,</span>
-    <span class="n">theme</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">font_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FontConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">layout_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">LayoutConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">colorbar_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ColorbarConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">smoothing_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SmoothingConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">):</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
+    <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
+    <span class="n">colorbar_config</span><span class="p">:</span> <span class="n">ColorbarConfig</span> <span class="o">=</span> <span class="n">DEFAULT_COLORBAR_CONFIG</span><span class="p">,</span>
+    <span class="n">smoothing_config</span><span class="p">:</span> <span class="n">SmoothingConfig</span> <span class="o">=</span> <span class="n">DEFAULT_SMOOTHING_CONFIG</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generic 3D grid plotting utility for contour or surface plots.</span>
 
@@ -394,10 +409,10 @@
 <span class="sd">        1D numpy array of x coordinates defining the grid x-axis</span>
 <span class="sd">    y_list : numpy.ndarray</span>
 <span class="sd">        1D numpy array of y coordinates defining the grid y-axis</span>
-<span class="sd">    z_data_dict : Dict[str, np.ndarray]</span>
+<span class="sd">    z_data_dict : dict[str, np.ndarray]</span>
 <span class="sd">        Dictionary mapping event keys to z-data 2D arrays.</span>
 <span class="sd">        Each z array must have shape (len(x_list), len(y_list))</span>
-<span class="sd">    subplot_titles : List[str]</span>
+<span class="sd">    subplot_titles : list[str]</span>
 <span class="sd">        List of subplot titles in order</span>
 <span class="sd">    title : str</span>
 <span class="sd">        Overall grid title</span>
@@ -405,7 +420,7 @@
 <span class="sd">        X-axis label</span>
 <span class="sd">    y_label : str</span>
 <span class="sd">        Y-axis label</span>
-<span class="sd">    z_label_dict : Dict[str, str]</span>
+<span class="sd">    z_label_dict : dict[str, str]</span>
 <span class="sd">        Dictionary mapping event keys to z-axis labels</span>
 <span class="sd">    rows : int</span>
 <span class="sd">        Number of rows in the grid</span>
@@ -429,21 +444,10 @@
 <span class="sd">    go.Figure</span>
 <span class="sd">        Plotly figure object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">font_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">font_config</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span>
-    <span class="k">if</span> <span class="n">layout_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">layout_config</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span>
-    <span class="k">if</span> <span class="n">colorbar_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">colorbar_config</span> <span class="o">=</span> <span class="n">DEFAULT_COLORBAR_CONFIG</span>
-    <span class="k">if</span> <span class="n">smoothing_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">smoothing_config</span> <span class="o">=</span> <span class="n">DEFAULT_SMOOTHING_CONFIG</span>
-
     <span class="n">is_surface</span> <span class="o">=</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="n">PlotType</span><span class="o">.</span><span class="n">SURFACE</span>
 
     <span class="n">specs</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="p">[[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;surface&quot;</span><span class="p">}</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">)]</span>
-        <span class="k">if</span> <span class="n">is_surface</span>
-        <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">[[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;surface&quot;</span><span class="p">}</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">)]</span> <span class="k">if</span> <span class="n">is_surface</span> <span class="k">else</span> <span class="kc">None</span>
     <span class="p">)</span>
 
     <span class="c1"># Create figure</span>
@@ -503,20 +507,12 @@
         <span class="c1"># Set axis titles</span>
         <span class="n">yaxis_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;yaxis</span><span class="si">{</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;yaxis&quot;</span>
         <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="n">yaxis_name</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">y_label</span><span class="p">,</span> <span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">font_config</span><span class="o">.</span><span class="n">medium</span><span class="p">}}</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
+            <span class="p">{</span><span class="n">yaxis_name</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">y_label</span><span class="p">,</span> <span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">font_config</span><span class="o">.</span><span class="n">medium</span><span class="p">}}}}</span>
         <span class="p">)</span>
 
         <span class="n">xaxis_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;xaxis</span><span class="si">{</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;xaxis&quot;</span>
         <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="n">xaxis_name</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">x_label</span><span class="p">,</span> <span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">font_config</span><span class="o">.</span><span class="n">medium</span><span class="p">}}</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
+            <span class="p">{</span><span class="n">xaxis_name</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">x_label</span><span class="p">,</span> <span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">font_config</span><span class="o">.</span><span class="n">medium</span><span class="p">}}}}</span>
         <span class="p">)</span>
 
     <span class="c1"># Configure overall layout</span>
@@ -583,17 +579,17 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_add_contour_trace</span><span class="p">(</span>
-    <span class="n">fig</span><span class="p">,</span>
-    <span class="n">row</span><span class="p">,</span>
-    <span class="n">col</span><span class="p">,</span>
-    <span class="n">x_interp</span><span class="p">,</span>
-    <span class="n">y_interp</span><span class="p">,</span>
-    <span class="n">z_smooth</span><span class="p">,</span>
-    <span class="n">colorscale</span><span class="p">,</span>
-    <span class="n">z_label</span><span class="p">,</span>
+    <span class="n">fig</span><span class="p">:</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span>
+    <span class="n">row</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">col</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">x_interp</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+    <span class="n">y_interp</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+    <span class="n">z_smooth</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+    <span class="n">colorscale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">z_label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span><span class="p">,</span>
     <span class="n">colorbar_config</span><span class="p">:</span> <span class="n">ColorbarConfig</span><span class="p">,</span>
-<span class="p">):</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper function to add contour trace to figure.</span>
 
@@ -661,17 +657,17 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_add_surface_trace</span><span class="p">(</span>
-    <span class="n">fig</span><span class="p">,</span>
-    <span class="n">row</span><span class="p">,</span>
-    <span class="n">col</span><span class="p">,</span>
-    <span class="n">x_interp</span><span class="p">,</span>
-    <span class="n">y_interp</span><span class="p">,</span>
-    <span class="n">z_smooth</span><span class="p">,</span>
-    <span class="n">colorscale</span><span class="p">,</span>
-    <span class="n">z_label</span><span class="p">,</span>
+    <span class="n">fig</span><span class="p">:</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span>
+    <span class="n">row</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">col</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">x_interp</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+    <span class="n">y_interp</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+    <span class="n">z_smooth</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+    <span class="n">colorscale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">z_label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span><span class="p">,</span>
     <span class="n">colorbar_config</span><span class="p">:</span> <span class="n">ColorbarConfig</span><span class="p">,</span>
-<span class="p">):</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper function to add surface trace to figure.</span>
 
@@ -699,9 +695,7 @@
 <span class="sd">        Colorbar configuration object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">contour_size</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="p">(</span><span class="n">z_smooth</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">z_smooth</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="n">NUM_CONTOURS</span>
-        <span class="k">if</span> <span class="n">z_smooth</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">z_smooth</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-        <span class="k">else</span> <span class="mi">1</span>
+        <span class="p">(</span><span class="n">z_smooth</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">z_smooth</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="n">NUM_CONTOURS</span> <span class="k">if</span> <span class="n">z_smooth</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">z_smooth</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="k">else</span> <span class="mi">1</span>
     <span class="p">)</span>
     <span class="n">trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span>
         <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x_interp</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_interp</span><span class="p">)),</span>
@@ -737,13 +731,13 @@
     <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_position_colorbar</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">subplot_num</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_position_colorbar</span><span class="p">(</span><span class="n">trace</span><span class="p">:</span> <span class="n">go</span><span class="o">.</span><span class="n">Contour</span> <span class="o">|</span> <span class="n">go</span><span class="o">.</span><span class="n">Surface</span><span class="p">,</span> <span class="n">fig</span><span class="p">:</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span> <span class="n">subplot_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dynamically position the colorbar for a subplot in a grid.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    trace : plotly trace object</span>
+<span class="sd">    trace : go.Contour or go.Surface</span>
 <span class="sd">        The trace containing the colorbar to position</span>
 <span class="sd">    fig : go.Figure</span>
 <span class="sd">        The figure containing the subplot</span>

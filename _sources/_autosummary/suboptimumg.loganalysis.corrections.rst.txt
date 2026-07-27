@@ -1,8 +1,0 @@
-suboptimumg.loganalysis.corrections
-===================================
-
-.. automodule:: suboptimumg.loganalysis.corrections
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

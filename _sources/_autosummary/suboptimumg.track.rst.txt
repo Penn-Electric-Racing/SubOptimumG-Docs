@@ -13,7 +13,6 @@ suboptimumg.track
    :toctree:
    :recursive:
 
-   gps
    models
    track
    track_factory

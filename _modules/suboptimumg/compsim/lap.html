@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/compsim/lap';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -337,25 +336,19 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.compsim.lap</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Core lap simulation functions.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">npt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..models</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationState</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..track</span><span class="w"> </span><span class="kn">import</span> <span class="n">Track</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">Car</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">InternalData</span><span class="p">,</span> <span class="n">InternalDataSeedInfo</span><span class="p">,</span> <span class="n">LapsimResults</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_calculate_v_max_profile</span><span class="p">(</span>
-    <span class="n">mycar</span><span class="p">:</span> <span class="n">Car</span><span class="p">,</span> <span class="n">r_full_track</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_calculate_v_max_profile</span><span class="p">(</span><span class="n">mycar</span><span class="p">:</span> <span class="n">Car</span><span class="p">,</span> <span class="n">r_full_track</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the maximum velocity profile for the entire track.</span>
 
@@ -366,12 +359,12 @@
 <span class="sd">    ----------</span>
 <span class="sd">    mycar : Car</span>
 <span class="sd">        The car object</span>
-<span class="sd">    r_full_track : np.ndarray</span>
+<span class="sd">    r_full_track : NDArray[np.float64]</span>
 <span class="sd">        Array of radius values for each point on the track</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    np.ndarray</span>
+<span class="sd">    NDArray[np.float64]</span>
 <span class="sd">        Array of maximum velocities for each point on the track</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -379,16 +372,12 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">cached_max_speed</span><span class="p">(</span><span class="n">radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">mycar</span><span class="o">.</span><span class="n">max_stable_speed</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
 
-    <span class="n">v_max_profile</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-        <span class="p">[</span><span class="n">cached_max_speed</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">r_full_track</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span>
-    <span class="p">)</span>
+    <span class="n">v_max_profile</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cached_max_speed</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">r_full_track</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">v_max_profile</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_should_terminate_forward_pass</span><span class="p">(</span>
-    <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">v_curr</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lap_vels</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_should_terminate_forward_pass</span><span class="p">(</span><span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">v_curr</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lap_vels</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Determines whether to terminate during the forward pass of the lap simulation.</span>
 
@@ -398,7 +387,7 @@
 <span class="sd">        Current index in the track array</span>
 <span class="sd">    v_curr : float</span>
 <span class="sd">        Current velocity at the index</span>
-<span class="sd">    lap_vels : np.ndarray</span>
+<span class="sd">    lap_vels : NDArray[np.float64]</span>
 <span class="sd">        Current most restrictive lap velocities</span>
 
 <span class="sd">    Returns</span>
@@ -434,9 +423,7 @@
     <span class="k">return</span> <span class="kc">False</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_should_terminate_backward_pass</span><span class="p">(</span>
-    <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">v_curr</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lap_vels</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_should_terminate_backward_pass</span><span class="p">(</span><span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">v_curr</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lap_vels</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Determines whether to terminate during the backward pass of the lap simulation.</span>
 
@@ -446,7 +433,7 @@
 <span class="sd">        Current index in the track array</span>
 <span class="sd">    v_curr : float</span>
 <span class="sd">        Current velocity at the index</span>
-<span class="sd">    lap_vels : np.ndarray</span>
+<span class="sd">    lap_vels : NDArray[np.float64]</span>
 <span class="sd">        Current most restrictive lap velocities</span>
 
 <span class="sd">    Returns</span>
@@ -502,6 +489,9 @@
 <span class="sd">        Whether to simulate multiple laps, by default False</span>
 <span class="sd">    initial_velocity : float, optional</span>
 <span class="sd">        The initial velocity to start the simulation with, by default -1</span>
+<span class="sd">    use_coast : bool, optional</span>
+<span class="sd">        Whether to allow the car to coast and regen instead of braking, by</span>
+<span class="sd">        default False</span>
 <span class="sd">    extract_internal_data : bool, optional</span>
 <span class="sd">        Whether to extract internal data during simulation, by default False</span>
 
@@ -547,7 +537,7 @@
 
     <span class="n">top_speed</span> <span class="o">=</span> <span class="n">mycar</span><span class="o">.</span><span class="n">calculate_top_speed</span><span class="p">()</span>
 
-    <span class="n">per_seed_proposals</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">InternalDataSeedInfo</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">per_seed_proposals</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">InternalDataSeedInfo</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="c1"># Simulate each seed</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seed_idx</span><span class="p">)):</span>
@@ -579,9 +569,7 @@
                     <span class="n">is_coasting</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># Regular move</span>
-                <span class="n">new_state</span> <span class="o">=</span> <span class="n">mycar</span><span class="o">.</span><span class="n">accelerate_forwards_dx</span><span class="p">(</span>
-                    <span class="n">radius</span><span class="p">,</span> <span class="n">lap_dxs</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">old_state</span>
-                <span class="p">)</span>
+                <span class="n">new_state</span> <span class="o">=</span> <span class="n">mycar</span><span class="o">.</span><span class="n">accelerate_forwards_dx</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="n">lap_dxs</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">old_state</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">use_coast</span> <span class="ow">and</span> <span class="n">new_state</span><span class="o">.</span><span class="n">v</span> <span class="o">&gt;</span> <span class="n">mycar</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">coast_trigger</span><span class="p">:</span>
                     <span class="n">is_coasting</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -618,9 +606,7 @@
             <span class="n">eff_motor_torque_proposal</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_state</span><span class="o">.</span><span class="n">motor_torque</span>
             <span class="n">is_grown_forward_proposal</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
-            <span class="n">terminate_forward</span> <span class="o">=</span> <span class="n">_should_terminate_forward_pass</span><span class="p">(</span>
-                <span class="n">idx</span><span class="p">,</span> <span class="n">new_state</span><span class="o">.</span><span class="n">v</span><span class="p">,</span> <span class="n">lap_vels</span>
-            <span class="p">)</span>
+            <span class="n">terminate_forward</span> <span class="o">=</span> <span class="n">_should_terminate_forward_pass</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">new_state</span><span class="o">.</span><span class="n">v</span><span class="p">,</span> <span class="n">lap_vels</span><span class="p">)</span>
             <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="c1"># Reset to initial seed state for backwards pass</span>
@@ -664,9 +650,7 @@
             <span class="n">acc_proposal</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">new_state</span><span class="o">.</span><span class="n">acc</span>
             <span class="n">eff_motor_torque_proposal</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_state</span><span class="o">.</span><span class="n">motor_torque</span>
 
-            <span class="n">terminate_backward</span> <span class="o">=</span> <span class="n">_should_terminate_backward_pass</span><span class="p">(</span>
-                <span class="n">idx</span><span class="p">,</span> <span class="n">new_state</span><span class="o">.</span><span class="n">v</span><span class="p">,</span> <span class="n">lap_vels</span>
-            <span class="p">)</span>
+            <span class="n">terminate_backward</span> <span class="o">=</span> <span class="n">_should_terminate_backward_pass</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">new_state</span><span class="o">.</span><span class="n">v</span><span class="p">,</span> <span class="n">lap_vels</span><span class="p">)</span>
             <span class="n">idx</span> <span class="o">-=</span> <span class="mi">1</span>
 
         <span class="c1"># Construct the masks for what states are more conservative</span>
@@ -683,9 +667,7 @@
         <span class="c1"># meaning flat or slightly limited regions never save power or torque data.</span>
         <span class="c1"># We still need that data, as it&#39;s the best estimate of what should</span>
         <span class="c1"># actually be happening, so add some margin to capture those cases.</span>
-        <span class="n">is_almost_slower_mask</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">v_proposal</span> <span class="o">&lt;</span> <span class="n">lap_vels</span> <span class="o">+</span> <span class="mf">0.2</span>
-        <span class="p">)</span> <span class="o">&amp;</span> <span class="n">is_grown_forward_proposal</span>
+        <span class="n">is_almost_slower_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">v_proposal</span> <span class="o">&lt;</span> <span class="n">lap_vels</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">is_grown_forward_proposal</span>
 
         <span class="n">lap_powers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">is_almost_slower_mask</span><span class="p">,</span> <span class="n">p_proposal</span><span class="p">,</span> <span class="n">lap_powers</span><span class="p">)</span>
         <span class="n">lap_eff_motor_torques</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>

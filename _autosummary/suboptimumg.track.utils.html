@@ -46,7 +46,6 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.track.utils';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -311,7 +310,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.constants.html">suboptimumg.constants</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suboptimumg.gdrive.html">suboptimumg.gdrive</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.log_analysis.html">suboptimumg.log_analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.aero.html">suboptimumg.log_analysis.aero</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.drivetrain.html">suboptimumg.log_analysis.drivetrain</a></li>
@@ -327,22 +325,6 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_plots.html">suboptimumg.log_analysis.yaw_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation.html">suboptimumg.log_analysis.yaw_segmentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation_models.html">suboptimumg.log_analysis.yaw_segmentation_models</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.loganalysis.html">suboptimumg.loganalysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.corrections.html">suboptimumg.loganalysis.corrections</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.derived.html">suboptimumg.loganalysis.derived</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.filtering.html">suboptimumg.loganalysis.filtering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.fitted_curve.html">suboptimumg.loganalysis.fitted_curve</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.gps.html">suboptimumg.loganalysis.gps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.intake.html">suboptimumg.loganalysis.intake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.irl_car.html">suboptimumg.loganalysis.irl_car</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.laps.html">suboptimumg.loganalysis.laps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.macros.html">suboptimumg.loganalysis.macros</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.plotting.html">suboptimumg.loganalysis.plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.track_builder.html">suboptimumg.loganalysis.track_builder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.understeer.html">suboptimumg.loganalysis.understeer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.variables.html">suboptimumg.loganalysis.variables</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.models.html">suboptimumg.models</a></li>
@@ -386,7 +368,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.track.html">suboptimumg.track</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.gps.html">suboptimumg.track.gps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.models.html">suboptimumg.track.models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track.html">suboptimumg.track.track</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track_factory.html">suboptimumg.track.track_factory</a></li>
@@ -511,7 +492,7 @@
 <dd class="field-even"><p>(track_length, cumulative_distances) - Total track length and array of cumulative distances</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Tuple[float, NDArray[float64]]</p>
+<dd class="field-odd"><p>tuple[float, NDArray[float64]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -535,29 +516,7 @@ Uses three points: one at dist-sample_dist, one at dist, and one at dist+sample_
 <dd class="field-even"><p>(curvature, radius) - Curvature (1/m) and radius of curvature (m)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Tuple[float, float]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="suboptimumg.track.utils.calculate_radii">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.track.utils.</span></span><span class="sig-name descname"><span class="pre">calculate_radii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cumulative_dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_dist</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/track/utils.html#calculate_radii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.track.utils.calculate_radii" title="Link to this definition">#</a></dt>
-<dd><p>Calculates the radius of curvature at each point in a track.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x_m</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Array of x coordinates in meters</p></li>
-<li><p><strong>y_m</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Array of y coordinates in meters</p></li>
-<li><p><strong>cumulative_dist</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Array of cumulative distances</p></li>
-<li><p><strong>sample_dist</strong> (<em>float</em>) – Distance to sample for Menger curvature calculation</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>An array containing the Radius of Curvature at each point</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>npt.NDArray[float64]</p>
+<dd class="field-odd"><p>tuple[float, float]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -572,7 +531,7 @@ with an initial heading angle, and tracks the path by computing arc geometry.</p
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>corners</strong> (<em>List</em><em>[</em><em>List</em><em>]</em>) – List of corners specified as [radius (m), length (steps)]
+<li><p><strong>corners</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>float</em><em>]</em><em>]</em>) – List of corners specified as [radius (m), length (steps)]
 where length is the number of discrete steps (not meters)</p></li>
 <li><p><strong>distance_step</strong> (<em>float</em>) – The distance in meters represented by each step</p></li>
 <li><p><strong>start_angle_deg</strong> (<em>float</em><em>, </em><em>optional</em>) – Initial heading angle in degrees (default: 0)</p></li>
@@ -582,7 +541,7 @@ where length is the number of discrete steps (not meters)</p></li>
 <dd class="field-even"><p>(x_m, y_m, arcs) - Arrays of x and y coordinates in meters, and list of ArcData objects</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Tuple[NDArray[float64], NDArray[float64], List[<a class="reference internal" href="suboptimumg.track.models.html#suboptimumg.track.models.ArcData" title="suboptimumg.track.models.ArcData">ArcData</a>]]</p>
+<dd class="field-odd"><p>tuple[NDArray[float64], NDArray[float64], list[<a class="reference internal" href="suboptimumg.track.models.html#suboptimumg.track.models.ArcData" title="suboptimumg.track.models.ArcData">ArcData</a>]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -612,7 +571,7 @@ convert corner length (meters) to number of simulation steps (unitless).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>corners</strong> (<em>List</em><em>[</em><em>List</em><em>]</em>) – List of corners specified as [radius (m), length (decimeters)]</p></li>
+<li><p><strong>corners</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>float</em><em>]</em><em>]</em>) – List of corners specified as [radius (m), length (decimeters)]</p></li>
 <li><p><strong>ratio</strong> (<em>float</em>) – The scaling to apply, before rounding.</p></li>
 </ul>
 </dd>
@@ -620,7 +579,7 @@ convert corner length (meters) to number of simulation steps (unitless).</p>
 <dd class="field-even"><p>Same list of corners with lengths scaled, represented as [radius (m), steps]</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[List]</p>
+<dd class="field-odd"><p>list[list[float]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -632,13 +591,13 @@ convert corner length (meters) to number of simulation steps (unitless).</p>
 a factor of ((20 - r) / 10)^1.2</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>corners</strong> (<em>List</em><em>[</em><em>List</em><em>]</em>) – List of corners specified as [radius (m), length (decimeters)]</p>
+<dd class="field-odd"><p><strong>corners</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>float</em><em>]</em><em>]</em>) – List of corners specified as [radius (m), length (decimeters)]</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The same corners, but with cleaned radii</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[List]</p>
+<dd class="field-odd"><p>list[list[float]]</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -652,7 +611,7 @@ a factor of ((20 - r) / 10)^1.2</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>corners</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>int</em><em>]</em><em>]</em>) – List of corners specified as [radius (m), length (decimeters)]</p></li>
+<li><p><strong>corners</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>float</em><em>]</em><em>]</em>) – List of corners specified as [radius (m), length (decimeters)]</p></li>
 <li><p><strong>distance_step</strong> (<em>float</em>) – Length of each step in the simulation</p></li>
 </ul>
 </dd>
@@ -660,7 +619,7 @@ a factor of ((20 - r) / 10)^1.2</p>
 <dd class="field-even"><p>(dx, radius, cumulative_dist)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Tuple[npt.NDArray[float64], npt.NDArray[float64], npt.NDArray[float64]]</p>
+<dd class="field-odd"><p>tuple[NDArray[float64], NDArray[float64], NDArray[float64]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -716,7 +675,6 @@ a factor of ((20 - r) / 10)^1.2</p>
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.utils.calculate_cumulative_distances"><code class="docutils literal notranslate"><span class="pre">calculate_cumulative_distances()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.utils.calculate_menger_curvature"><code class="docutils literal notranslate"><span class="pre">calculate_menger_curvature()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.utils.calculate_radii"><code class="docutils literal notranslate"><span class="pre">calculate_radii()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.utils.corners_to_cartesian"><code class="docutils literal notranslate"><span class="pre">corners_to_cartesian()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.utils.get_2d_rotation_matrix"><code class="docutils literal notranslate"><span class="pre">get_2d_rotation_matrix()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.utils.scale_and_discretize_corner_lengths"><code class="docutils literal notranslate"><span class="pre">scale_and_discretize_corner_lengths()</span></code></a></li>

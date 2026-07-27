@@ -45,7 +45,6 @@
     <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/vehicle/suspension/suspension';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -338,60 +337,45 @@
                   
   <h1>Source code for suboptimumg.vehicle.suspension.suspension</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">..subsystem_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ComplexSuspensionModel</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">VehicleModel</span>
 
 
 <div class="viewcode-block" id="Suspension">
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.suspension.html#suboptimumg.vehicle.suspension.suspension.Suspension">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Suspension</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle_model</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle_model</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the suspension with the full vehicle model.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vehicle_model : VehicleModel</span>
+<span class="sd">            Vehicle model providing suspension and mass parameters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span> <span class="o">=</span> <span class="n">vehicle_model</span>
 
 <div class="viewcode-block" id="Suspension.lateral_weight_transfer">
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.suspension.html#suboptimumg.vehicle.suspension.suspension.Suspension.lateral_weight_transfer">[docs]</a>
-    <span class="nd">@staticmethod</span>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">lateral_weight_transfer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">pass</span></div>
-
-
-<div class="viewcode-block" id="Suspension.longitudinal_weight_transfer">
-<a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.suspension.html#suboptimumg.vehicle.suspension.suspension.Suspension.longitudinal_weight_transfer">[docs]</a>
-    <span class="nd">@staticmethod</span>
-    <span class="nd">@abstractmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">longitudinal_weight_transfer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">pass</span></div>
-</div>
-
-
-
-<div class="viewcode-block" id="SimpleSuspension">
-<a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.suspension.html#suboptimumg.vehicle.suspension.suspension.SimpleSuspension">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">SimpleSuspension</span><span class="p">(</span><span class="n">Suspension</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle_model</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">vehicle_model</span><span class="o">=</span><span class="n">vehicle_model</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span><span class="o">.</span><span class="n">sus</span>
-
-<div class="viewcode-block" id="SimpleSuspension.lateral_weight_transfer">
-<a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.suspension.html#suboptimumg.vehicle.suspension.suspension.SimpleSuspension.lateral_weight_transfer">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">lateral_weight_transfer</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">axle</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;front&quot;</span><span class="p">,</span> <span class="s2">&quot;rear&quot;</span><span class="p">],</span>
         <span class="n">axle_track</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">m_front</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">m_rear</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">cg_height</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">lat_acc_x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculate lateral weight transfer using simple suspension model.</span>
+<span class="sd">        Calculate lateral weight transfer at one axle.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        axle : str</span>
-<span class="sd">            &quot;front&quot; or &quot;rear&quot; — which axle to compute the transfer for.</span>
+<span class="sd">        axle : {&quot;front&quot;, &quot;rear&quot;}</span>
+<span class="sd">            Which axle to compute the transfer for.</span>
 <span class="sd">        axle_track : float</span>
 <span class="sd">            Track width of the axle (m)</span>
 <span class="sd">        m_front : float</span>
@@ -402,8 +386,90 @@
 <span class="sd">            Height of the center of gravity (m)</span>
 <span class="sd">        lat_acc_x : float</span>
 <span class="sd">            Lateral acceleration of the vehicle (m/s^2); positive means left turn</span>
-<span class="sd">        **kwargs : dict</span>
-<span class="sd">            Additional keyword arguments (unused)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple[float, float]</span>
+<span class="sd">            Lateral weight transfer (N) at the specified axle, (left, right)</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="Suspension.longitudinal_weight_transfer">
+<a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.suspension.html#suboptimumg.vehicle.suspension.suspension.Suspension.longitudinal_weight_transfer">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">longitudinal_weight_transfer</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">wheelbase</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">total_mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">cg_height</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">long_acc_z</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate longitudinal weight transfer between the front and rear axles.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        wheelbase : float</span>
+<span class="sd">            Wheelbase of the vehicle (m)</span>
+<span class="sd">        total_mass : float</span>
+<span class="sd">            Total mass of the vehicle (kg)</span>
+<span class="sd">        cg_height : float</span>
+<span class="sd">            Height of the center of gravity (m)</span>
+<span class="sd">        long_acc_z : float</span>
+<span class="sd">            Longitudinal acceleration of the vehicle (m/s^2); positive means go faster</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple[float, float]</span>
+<span class="sd">            Longitudinal weight transfer (N) (front, rear)</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="SimpleSuspension">
+<a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.suspension.html#suboptimumg.vehicle.suspension.suspension.SimpleSuspension">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SimpleSuspension</span><span class="p">(</span><span class="n">Suspension</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle_model</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the simple suspension model.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vehicle_model : VehicleModel</span>
+<span class="sd">            Vehicle model providing suspension and mass parameters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">vehicle_model</span><span class="o">=</span><span class="n">vehicle_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span><span class="o">.</span><span class="n">sus</span>
+
+<div class="viewcode-block" id="SimpleSuspension.lateral_weight_transfer">
+<a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.suspension.html#suboptimumg.vehicle.suspension.suspension.SimpleSuspension.lateral_weight_transfer">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lateral_weight_transfer</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">axle</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;front&quot;</span><span class="p">,</span> <span class="s2">&quot;rear&quot;</span><span class="p">],</span>
+        <span class="n">axle_track</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">m_front</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">m_rear</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">cg_height</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">lat_acc_x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate lateral weight transfer using simple suspension model.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        axle : {&quot;front&quot;, &quot;rear&quot;}</span>
+<span class="sd">            Which axle to compute the transfer for.</span>
+<span class="sd">        axle_track : float</span>
+<span class="sd">            Track width of the axle (m)</span>
+<span class="sd">        m_front : float</span>
+<span class="sd">            Mass on the front axle (kg)</span>
+<span class="sd">        m_rear : float</span>
+<span class="sd">            Mass on the rear axle (kg)</span>
+<span class="sd">        cg_height : float</span>
+<span class="sd">            Height of the center of gravity (m)</span>
+<span class="sd">        lat_acc_x : float</span>
+<span class="sd">            Lateral acceleration of the vehicle (m/s^2); positive means left turn</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -423,10 +489,11 @@
 <span class="sd">        total chassis transfer m_total * a * h_cg / track (when t_front == t_rear).</span>
 <span class="sd">        The earlier version used m_total here for each axle, which double-counted</span>
 <span class="sd">        the transfer.</span>
+
+<span class="sd">        TODO: Standardize naming to avoid x/y coordinates and use long/lat instead;</span>
+<span class="sd">        x in general should be long and y should be lat. Also add plausibility</span>
+<span class="sd">        checks to input values.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># TODO: Standardize naming to avoid x/y coordinates and use long/lat instead.</span>
-        <span class="c1"># Also, x in general should be long and y should be lat</span>
-        <span class="c1"># TODO: add plausibility checks to inputed values</span>
         <span class="k">if</span> <span class="n">axle</span> <span class="o">==</span> <span class="s2">&quot;front&quot;</span><span class="p">:</span>
             <span class="n">m_axle</span> <span class="o">=</span> <span class="n">m_front</span>
         <span class="k">elif</span> <span class="n">axle</span> <span class="o">==</span> <span class="s2">&quot;rear&quot;</span><span class="p">:</span>
@@ -449,7 +516,6 @@
         <span class="n">total_mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">cg_height</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">long_acc_z</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate longitudinal weight transfer using simple suspension model.</span>
@@ -464,8 +530,6 @@
 <span class="sd">            Height of the center of gravity (m)</span>
 <span class="sd">        long_acc_z : float</span>
 <span class="sd">            Longitudinal acceleration of the vehicle (m/s^2); positive means go faster</span>
-<span class="sd">        **kwargs : dict</span>
-<span class="sd">            Additional keyword arguments (unused)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -481,8 +545,9 @@
 <span class="sd">            |\\Delta F_{y,sus}| = \\frac{m \\cdot a_z \\cdot h_{CG}}{L}</span>
 
 <span class="sd">        where :math:`\\Delta F_{y,sus}` is change in normal force on the suspension (N)</span>
+
+<span class="sd">        TODO: add plausibility checks to input values.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># TODO: add plausibility checks to inputed values</span>
         <span class="n">delta_f_y_total</span> <span class="o">=</span> <span class="p">(</span><span class="n">total_mass</span> <span class="o">*</span> <span class="n">long_acc_z</span> <span class="o">*</span> <span class="n">cg_height</span><span class="p">)</span> <span class="o">/</span> <span class="n">wheelbase</span>
         <span class="n">front_delta</span> <span class="o">=</span> <span class="o">-</span><span class="n">delta_f_y_total</span>
         <span class="n">rear_delta</span> <span class="o">=</span> <span class="n">delta_f_y_total</span>
@@ -494,46 +559,56 @@
 <div class="viewcode-block" id="ComplexSuspension">
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.suspension.html#suboptimumg.vehicle.suspension.suspension.ComplexSuspension">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ComplexSuspension</span><span class="p">(</span><span class="n">Suspension</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    https://kktse.github.io/jekyll/update/2021/05/12/simplied-lateral-load-transfer-analysis.html</span>
-
-<span class="sd">    Front &amp; Rear Roll Stiffness includes:</span>
-<span class="sd">    - Corner Spring/Torsion Bar Stiffness (Spring Rate, Motion Ratio, etc.)</span>
-<span class="sd">    - Anti-roll bar stiffness (ARB Setting, Motion Ratio, etc.)</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">vehicle_model</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">vehicle_model</span><span class="o">=</span><span class="n">vehicle_model</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span><span class="o">.</span><span class="n">sus</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the complex suspension model.</span>
 
-        <span class="c1"># Hypothetical parameters for complex longitudinal weight transfer, right now unimplemented</span>
-        <span class="c1"># self.k_theta_f = front_pitch_stiffness_k</span>
-        <span class="c1"># self.k_theta_r = rear_pitch_stiffness_k</span>
-        <span class="c1"># self.PC_h = pitch_center_height</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vehicle_model : VehicleModel</span>
+<span class="sd">            Vehicle model whose suspension parameters must be a</span>
+<span class="sd">            ``ComplexSuspensionModel``.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Model is based on</span>
+<span class="sd">        https://kktse.github.io/jekyll/update/2021/05/12/simplied-lateral-load-transfer-analysis.html</span>
+
+<span class="sd">        Front and rear roll stiffness include:</span>
+
+<span class="sd">        - Corner spring/torsion bar stiffness (spring rate, motion ratio, etc.)</span>
+<span class="sd">        - Anti-roll bar stiffness (ARB setting, motion ratio, etc.)</span>
+
+<span class="sd">        Complex longitudinal weight transfer (front/rear pitch stiffness and</span>
+<span class="sd">        pitch center height) is not yet implemented; see</span>
+<span class="sd">        ``longitudinal_weight_transfer`` below.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">vehicle_model</span><span class="o">=</span><span class="n">vehicle_model</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vehicle_model</span><span class="o">.</span><span class="n">sus</span><span class="p">,</span> <span class="n">ComplexSuspensionModel</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ComplexSuspension requires a ComplexSuspensionModel&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">vehicle_model</span><span class="o">.</span><span class="n">sus</span>
 
 <div class="viewcode-block" id="ComplexSuspension.lateral_weight_transfer">
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.suspension.html#suboptimumg.vehicle.suspension.suspension.ComplexSuspension.lateral_weight_transfer">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">lateral_weight_transfer</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">axle</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;front&quot;</span><span class="p">,</span> <span class="s2">&quot;rear&quot;</span><span class="p">],</span>
         <span class="n">axle_track</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">m_front</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">m_rear</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">cg_height</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">lat_acc_x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate lateral weight transfer using complex suspension model.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        axle : str</span>
-<span class="sd">            The position of the suspension (either &#39;front&#39; or &#39;rear&#39;)</span>
+<span class="sd">        axle : {&quot;front&quot;, &quot;rear&quot;}</span>
+<span class="sd">            The position of the suspension.</span>
 <span class="sd">        axle_track : float</span>
 <span class="sd">            The track width of the axle (m)</span>
 <span class="sd">        m_front : float</span>
@@ -544,8 +619,6 @@
 <span class="sd">            The height of the center of gravity of the vehicle (m)</span>
 <span class="sd">        lat_acc_x : float</span>
 <span class="sd">            The lateral acceleration of the vehicle (m/s^2)</span>
-<span class="sd">        **kwargs : dict</span>
-<span class="sd">            Additional keyword arguments (unused)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -628,7 +701,6 @@
         <span class="n">total_mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">cg_height</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">long_acc_z</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate longitudinal weight transfer using complex suspension model.</span>
@@ -643,8 +715,6 @@
 <span class="sd">            Height of the center of gravity (m)</span>
 <span class="sd">        long_acc_z : float</span>
 <span class="sd">            Longitudinal acceleration of the vehicle (m/s^2)</span>
-<span class="sd">        **kwargs : dict</span>
-<span class="sd">            Additional keyword arguments (unused)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -675,132 +745,12 @@
 <span class="sd">        - :math:`k_{\\theta,axle}` : pitch stiffness of the axle (Nm/rad)</span>
 <span class="sd">        - :math:`h_{CG}` : height of the center of gravity (m)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Right now, complex longitudinal weight transfer is lacking parameters</span>
         <span class="n">delta_f_y_total</span> <span class="o">=</span> <span class="p">(</span><span class="n">total_mass</span> <span class="o">*</span> <span class="n">long_acc_z</span> <span class="o">*</span> <span class="n">cg_height</span><span class="p">)</span> <span class="o">/</span> <span class="n">wheelbase</span>
         <span class="n">front_delta</span> <span class="o">=</span> <span class="o">-</span><span class="n">delta_f_y_total</span>
         <span class="n">rear_delta</span> <span class="o">=</span> <span class="n">delta_f_y_total</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">front_delta</span><span class="p">,</span> <span class="n">rear_delta</span><span class="p">)</span></div>
 </div>
 
-
-        <span class="c1"># # Calculate geometric load transfer</span>
-        <span class="c1"># geometric_load_transfer = (total_mass * self.PC_h * long_acc_z) / wheelbase</span>
-
-        <span class="c1"># # Calculate elastic load transfer</span>
-        <span class="c1"># elastic_load_transfer = (</span>
-        <span class="c1">#     total_mass * (cg_height - self.PC_h) * long_acc_z</span>
-        <span class="c1"># ) / wheelbase</span>
-
-        <span class="c1"># # Calculate total pitch stiffness</span>
-        <span class="c1"># total_pitch_stiffness = self.k_theta_f + self.k_theta_r</span>
-
-        <span class="c1"># # Calculate elastic load transfer distribution</span>
-        <span class="c1"># front_elastic_ratio = self.k_theta_f / total_pitch_stiffness</span>
-        <span class="c1"># rear_elastic_ratio = self.k_theta_r / total_pitch_stiffness</span>
-
-        <span class="c1"># # Calculate total load transfer for each axle</span>
-        <span class="c1"># front_delta = -geometric_load_transfer - (</span>
-        <span class="c1">#     front_elastic_ratio * elastic_load_transfer</span>
-        <span class="c1"># )</span>
-        <span class="c1"># rear_delta = geometric_load_transfer + (</span>
-        <span class="c1">#     rear_elastic_ratio * elastic_load_transfer</span>
-        <span class="c1"># )</span>
-
-        <span class="c1"># return (front_delta, rear_delta)</span>
-
-
-<span class="c1"># class Suspension:</span>
-<span class="c1">#     def __init__(</span>
-<span class="c1">#         self,</span>
-<span class="c1">#         front_roll_k: float,</span>
-<span class="c1">#         rear_roll_k: float,</span>
-<span class="c1">#         front_z: float,</span>
-<span class="c1">#         rear_z: float,</span>
-<span class="c1">#         front_h: float,</span>
-<span class="c1">#         rear_h: float,</span>
-<span class="c1">#         torsion_k: float,</span>
-<span class="c1">#         front_d: float,</span>
-<span class="c1">#         rear_d: float,</span>
-<span class="c1">#         front_m_sprung: float,</span>
-<span class="c1">#         rear_m_sprung: float,</span>
-<span class="c1">#         front_m_unsprung: float,</span>
-<span class="c1">#         rear_m_unsprung: float,</span>
-<span class="c1">#         **kwargs,</span>
-<span class="c1">#     ):</span>
-<span class="c1">#         self.torsion_k = torsion_k  # torsion stiffness (TODO: check units)</span>
-
-<span class="c1">#         # Front Suspension</span>
-<span class="c1">#         self.front_roll_k = front_roll_k  # front roll stiffness (TODO: check units)</span>
-<span class="c1">#         self.front_z = front_z  # front vertical stiffness (TODO: check units)</span>
-<span class="c1">#         self.front_h = front_h  # front roll center height (m)</span>
-<span class="c1">#         self.front_d = front_d  # front damping coefficient (TODO: check units)</span>
-<span class="c1">#         self.front_m_sprung = front_m_sprung  # front sprung mass (kg)</span>
-<span class="c1">#         self.front_m_unsprung = front_m_unsprung  # front unsprung mass (kg)</span>
-
-<span class="c1">#         # Rear Suspension</span>
-<span class="c1">#         self.rear_roll_k = rear_roll_k  # rear roll stiffness (TODO: check units)</span>
-<span class="c1">#         self.rear_z = rear_z  # rear vertical stiffness (TODO: check units)</span>
-<span class="c1">#         self.rear_h = rear_h  # rear roll center height (m)</span>
-<span class="c1">#         self.rear_d = rear_d  # rear damping coefficient (TODO: check units)</span>
-<span class="c1">#         self.rear_m_sprung = rear_m_sprung  # rear sprung mass (kg)</span>
-<span class="c1">#         self.rear_m_unsprung = rear_m_unsprung  # rear unsprung mass (kg)</span>
-
-<span class="c1">#     def lat_wt_sus(self, axle, lat_acc, axle_track):</span>
-<span class="c1">#         &quot;&quot;&quot;</span>
-<span class="c1">#         Calculates the lateral weight transfer using a suspension model</span>
-
-<span class="c1">#         Args:</span>
-<span class="c1">#             axle (str): The position of the suspension (either &#39;front&#39; or &#39;rear&#39;).</span>
-<span class="c1">#             lat_acc (float): The lateral acceleration of the vehicle.</span>
-<span class="c1">#             axle_track (float): The front or rear track width of the vehicle.</span>
-
-<span class="c1">#         Returns:</span>
-<span class="c1">#             float: Lateral weight transfer (N)</span>
-<span class="c1">#         &quot;&quot;&quot;</span>
-<span class="c1">#         if axle == &quot;front&quot;:</span>
-<span class="c1">#             roll_k = self.front_roll_k</span>
-<span class="c1">#             z = self.front_z</span>
-<span class="c1">#             h = self.front_h</span>
-<span class="c1">#             d = self.front_d</span>
-<span class="c1">#             m_sprung = self.front_m_sprung</span>
-<span class="c1">#             m_unsprung = self.front_m_unsprung</span>
-<span class="c1">#             opp_roll_k = self.rear_roll_k</span>
-<span class="c1">#             opp_d = self.rear_d</span>
-<span class="c1">#             opp_m_sprung = self.rear_m_sprung</span>
-<span class="c1">#         elif axle == &quot;rear&quot;:</span>
-<span class="c1">#             roll_k = self.rear_roll_k</span>
-<span class="c1">#             z = self.rear_z</span>
-<span class="c1">#             h = self.rear_h</span>
-<span class="c1">#             d = self.rear_d</span>
-<span class="c1">#             m_sprung = self.rear_m_sprung</span>
-<span class="c1">#             m_unsprung = self.rear_m_unsprung</span>
-<span class="c1">#             opp_roll_k = self.front_roll_k</span>
-<span class="c1">#             opp_d = self.front_d</span>
-<span class="c1">#             opp_m_sprung = self.front_m_sprung</span>
-<span class="c1">#         else:</span>
-<span class="c1">#             raise ValueError(&quot;Position must be &#39;front&#39; or &#39;rear&#39;&quot;)</span>
-
-<span class="c1">#         lat_wt_sus = (</span>
-<span class="c1">#             lat_acc</span>
-<span class="c1">#             / axle_track</span>
-<span class="c1">#             * (</span>
-<span class="c1">#                 (roll_k * d * m_sprung)</span>
-<span class="c1">#                 / (</span>
-<span class="c1">#                     roll_k</span>
-<span class="c1">#                     + (opp_roll_k * self.torsion_k / (opp_roll_k + self.torsion_k))</span>
-<span class="c1">#                 )</span>
-<span class="c1">#                 + (</span>
-<span class="c1">#                     (roll_k * self.torsion_k / (roll_k + self.torsion_k))</span>
-<span class="c1">#                     * opp_d</span>
-<span class="c1">#                     * opp_m_sprung</span>
-<span class="c1">#                 )</span>
-<span class="c1">#                 / ((roll_k * self.torsion_k / (roll_k + self.torsion_k)) + opp_roll_k)</span>
-<span class="c1">#                 + z * m_sprung</span>
-<span class="c1">#                 + h * m_unsprung</span>
-<span class="c1">#             )</span>
-<span class="c1">#         )</span>
-
-<span class="c1">#         return lat_wt_sus</span>
 </pre></div>
 
                 </article>

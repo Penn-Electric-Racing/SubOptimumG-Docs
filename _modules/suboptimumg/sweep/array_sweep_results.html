@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/sweep/array_sweep_results';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -337,9 +336,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.sweep.array_sweep_results</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.bar_chart</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_bar_chart</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.bar_chart</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_bar_chart</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArraySweepData</span><span class="p">,</span> <span class="n">SweepData1D</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepDatatype</span>
 
@@ -368,8 +365,8 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">y_var</span><span class="p">:</span> <span class="n">SweepDatatype</span> <span class="o">=</span> <span class="n">SweepDatatype</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">y_label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">y_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -396,9 +393,7 @@
         <span class="n">baseline_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_data</span><span class="o">.</span><span class="n">sweep_outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_var</span><span class="o">.</span><span class="n">value</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_data</span><span class="o">.</span><span class="n">percent_steps</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">baseline_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_data</span><span class="o">.</span><span class="n">sweep_outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_var</span><span class="o">.</span><span class="n">value</span><span class="p">)[</span>
-                    <span class="n">idx</span>
-                <span class="p">]</span>
+                <span class="n">baseline_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_data</span><span class="o">.</span><span class="n">sweep_outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_var</span><span class="o">.</span><span class="n">value</span><span class="p">)[</span><span class="n">idx</span><span class="p">]</span>
                 <span class="k">break</span>
 
         <span class="c1"># Build data for plotting from strongly-typed sweep data</span>

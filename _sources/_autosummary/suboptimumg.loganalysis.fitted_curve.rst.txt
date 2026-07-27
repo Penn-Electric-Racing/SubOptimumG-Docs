@@ -1,8 +1,0 @@
-suboptimumg.loganalysis.fitted\_curve
-=====================================
-
-.. automodule:: suboptimumg.loganalysis.fitted_curve
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/plotting/types';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -347,14 +346,22 @@
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.types.html#suboptimumg.plotting.types.NewArc">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NewArc</span><span class="p">(</span><span class="n">Arc</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">xy</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">theta1</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">theta2</span><span class="o">=</span><span class="mf">360.0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
-    <span class="p">):</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">xy</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">angle</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">theta1</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">theta2</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">360.0</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Override of matplotlib Arc to allow customization of the number of interpolation points.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        xy : tuple</span>
+<span class="sd">        xy : tuple[float, float]</span>
 <span class="sd">            Center of the arc</span>
 <span class="sd">        width : float</span>
 <span class="sd">            Width of the arc</span>
@@ -370,26 +377,29 @@
 <span class="sd">            Number of points used to approximate the arc (smoother with more points)</span>
 <span class="sd">        **kwargs</span>
 <span class="sd">            Additional keyword arguments passed to Arc</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        ``_theta_stretch`` is a private method matplotlib uses internally to</span>
+<span class="sd">        compute the stretched arc parameters; it exists at runtime but is not</span>
+<span class="sd">        part of matplotlib&#39;s public type stubs, hence the ignore below.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">fill</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;fill&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># Arc must not be filled</span>
+        <span class="n">fill</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;fill&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">fill</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Arc objects cannot be filled&quot;</span><span class="p">)</span>
 
-        <span class="c1"># Initialize base Arc class</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="n">angle</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">theta1</span> <span class="o">=</span> <span class="n">theta1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">theta2</span> <span class="o">=</span> <span class="n">theta2</span>
 
-        <span class="c1"># Compute stretched arc parameters</span>
         <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_theta1</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_theta2</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_stretched_width</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_stretched_height</span><span class="p">,</span>
-        <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_theta_stretch</span><span class="p">()</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_theta_stretch</span><span class="p">()</span>  <span class="c1"># type: ignore[attr-defined]</span>
 
-        <span class="c1"># Generate path using specified number of interpolation points</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_theta1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_theta2</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span></div>
 
 

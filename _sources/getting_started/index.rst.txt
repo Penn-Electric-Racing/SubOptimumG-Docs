@@ -124,10 +124,6 @@ to open a Pull Request for your branch. Add a Software/Vehicle Dynamics lead as 
 Example Notebook
 ------------------
 
-**This notebook is included in the project repository. You should be able to run it after following the
-installation instructions above.**
-
-.. toctree::
-   :maxdepth: 1
-
-   notebook
+An example notebook demonstrating the key features of SuboptimumG is available in the project
+repository at ``notebooks/tutorial.ipynb``. You should be able to run it after following the
+installation instructions above.

@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/sweep/energy_grid';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -343,14 +342,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringIO</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pool</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">brentq</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..compsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">energy_data</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.competition_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">from_data</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompetitionData</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_efficiency_points</span><span class="p">,</span> <span class="n">compute_event_points</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_efficiency_points</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">ROUNDING_PRECISION</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.energy_grid_models</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">EnergyGridConfig</span><span class="p">,</span>
@@ -359,7 +357,6 @@
     <span class="n">EnergyGridProcessOutput</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.energy_grid_results</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnergyGridResults</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepParamConfig</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.types</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">COAST_TRIGGER_PARAM</span><span class="p">,</span>
     <span class="n">PACK_WEIGHT_PARAM</span><span class="p">,</span>
@@ -443,9 +440,7 @@
                     <span class="n">maxiter</span><span class="o">=</span><span class="n">inp</span><span class="o">.</span><span class="n">bisection_max_iter</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="n">feasible</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="n">iters_used</span> <span class="o">+=</span> <span class="p">(</span>
-                    <span class="n">inp</span><span class="o">.</span><span class="n">bisection_max_iter</span>
-                <span class="p">)</span>  <span class="c1"># upper bound; brentq converges fast</span>
+                <span class="n">iters_used</span> <span class="o">+=</span> <span class="n">inp</span><span class="o">.</span><span class="n">bisection_max_iter</span>  <span class="c1"># upper bound; brentq converges fast</span>
 
             <span class="c1"># Final endurance run at converged coast_trigger ────</span>
             <span class="n">comp</span><span class="o">.</span><span class="n">mycar</span><span class="o">.</span><span class="n">modify_params</span><span class="p">(</span><span class="n">COAST_TRIGGER_PARAM</span><span class="p">,</span> <span class="n">optimal_ct</span><span class="p">)</span>
@@ -463,11 +458,7 @@
             <span class="p">)</span>
 
             <span class="n">total</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="n">accel_res</span><span class="o">.</span><span class="n">points</span>
-                <span class="o">+</span> <span class="n">skidpad_res</span><span class="o">.</span><span class="n">points</span>
-                <span class="o">+</span> <span class="n">autoX_res</span><span class="o">.</span><span class="n">points</span>
-                <span class="o">+</span> <span class="n">endu_res</span><span class="o">.</span><span class="n">points</span>
-                <span class="o">+</span> <span class="n">eff_pts</span>
+                <span class="n">accel_res</span><span class="o">.</span><span class="n">points</span> <span class="o">+</span> <span class="n">skidpad_res</span><span class="o">.</span><span class="n">points</span> <span class="o">+</span> <span class="n">autoX_res</span><span class="o">.</span><span class="n">points</span> <span class="o">+</span> <span class="n">endu_res</span><span class="o">.</span><span class="n">points</span> <span class="o">+</span> <span class="n">eff_pts</span>
             <span class="p">)</span>
 
             <span class="n">warnings</span> <span class="o">=</span> <span class="n">buf</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
@@ -521,16 +512,12 @@
 <span class="sd">    energy equals (pack capacity - buffer).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_data</span><span class="p">:</span> <span class="n">CompetitionData</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">EnergyGridConfig</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_data</span><span class="p">:</span> <span class="n">CompetitionData</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">EnergyGridConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">comp_data</span> <span class="o">=</span> <span class="n">comp_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">var_1_list</span> <span class="o">=</span> <span class="n">create_steps</span><span class="p">(</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">var_1</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">var_1</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">var_1</span><span class="o">.</span><span class="n">steps</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var_2_list</span> <span class="o">=</span> <span class="n">create_steps</span><span class="p">(</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">var_2</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">var_2</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">var_2</span><span class="o">.</span><span class="n">steps</span>
-        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_1_list</span> <span class="o">=</span> <span class="n">create_steps</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">var_1</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">var_1</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">var_1</span><span class="o">.</span><span class="n">steps</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_2_list</span> <span class="o">=</span> <span class="n">create_steps</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">var_2</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">var_2</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">var_2</span><span class="o">.</span><span class="n">steps</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">grid_data</span> <span class="o">=</span> <span class="n">EnergyGridData</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
             <span class="n">config</span><span class="o">.</span><span class="n">var_1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -576,7 +563,7 @@
         <span class="p">)</span>
 
         <span class="c1"># Build flattened input list</span>
-        <span class="n">inputs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">inputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">EnergyGridProcessInput</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x_idx</span><span class="p">,</span> <span class="n">x_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var_1_list</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">y_idx</span><span class="p">,</span> <span class="n">y_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var_2_list</span><span class="p">):</span>
                 <span class="n">inputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
@@ -604,7 +591,9 @@
             <span class="n">bar_format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{l_bar}{bar}</span><span class="s2">| </span><span class="si">{n_fmt}</span><span class="s2">/</span><span class="si">{total_fmt}</span><span class="s2"> [</span><span class="si">{elapsed}</span><span class="s2">&lt;</span><span class="si">{remaining}</span><span class="s2">, </span><span class="si">{rate_fmt}</span><span class="s2">]&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="n">errors</span> <span class="o">=</span> <span class="p">[[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var_2_list</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var_1_list</span><span class="p">))]</span>
+        <span class="n">errors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var_2_list</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var_1_list</span><span class="p">))</span>
+        <span class="p">]</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="n">num_processes</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
@@ -620,9 +609,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">grid_data</span><span class="o">.</span><span class="n">skidpad_t</span><span class="p">[</span><span class="n">xi</span><span class="p">][</span><span class="n">yi</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">skidpad_t</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">grid_data</span><span class="o">.</span><span class="n">autoX_t</span><span class="p">[</span><span class="n">xi</span><span class="p">][</span><span class="n">yi</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">autoX_t</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">grid_data</span><span class="o">.</span><span class="n">endurance_t</span><span class="p">[</span><span class="n">xi</span><span class="p">][</span><span class="n">yi</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">endurance_t</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">grid_data</span><span class="o">.</span><span class="n">optimal_coast_trigger</span><span class="p">[</span><span class="n">xi</span><span class="p">][</span>
-                        <span class="n">yi</span>
-                    <span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">optimal_coast_trigger</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">grid_data</span><span class="o">.</span><span class="n">optimal_coast_trigger</span><span class="p">[</span><span class="n">xi</span><span class="p">][</span><span class="n">yi</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">optimal_coast_trigger</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">grid_data</span><span class="o">.</span><span class="n">net_energy_kwh</span><span class="p">[</span><span class="n">xi</span><span class="p">][</span><span class="n">yi</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">net_energy_kwh</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">grid_data</span><span class="o">.</span><span class="n">capacity_kwh</span><span class="p">[</span><span class="n">xi</span><span class="p">][</span><span class="n">yi</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">capacity_kwh</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">grid_data</span><span class="o">.</span><span class="n">vehicle_mass</span><span class="p">[</span><span class="n">xi</span><span class="p">][</span><span class="n">yi</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">vehicle_mass</span>

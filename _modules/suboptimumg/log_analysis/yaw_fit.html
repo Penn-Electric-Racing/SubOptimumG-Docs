@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/log_analysis/yaw_fit';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -337,17 +336,31 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.log_analysis.yaw_fit</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures.data_instance</span><span class="w"> </span><span class="kn">import</span> <span class="n">left_join_data_instances</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures.single_run_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleRunData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleRunData</span><span class="p">,</span> <span class="n">left_join_data_instances</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">perda.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">_to_seconds</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">least_squares</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle.irl_vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">IrlCar</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.kinematics</span><span class="w"> </span><span class="kn">import</span> <span class="n">BODY_SLIP_ANGLE</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.steering</span><span class="w"> </span><span class="kn">import</span> <span class="n">FRONT_BICYCLE_MODEL_STEER_ANGLE</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.yaw_fit_models</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.yaw_fit_models</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BicycleCoeffs</span><span class="p">,</span>
+    <span class="n">BicyclePoint</span><span class="p">,</span>
+    <span class="n">ChassisParams</span><span class="p">,</span>
+    <span class="n">FitComparison</span><span class="p">,</span>
+    <span class="n">FitContext</span><span class="p">,</span>
+    <span class="n">FitSpec</span><span class="p">,</span>
+    <span class="n">Param</span><span class="p">,</span>
+    <span class="n">ParamLayout</span><span class="p">,</span>
+    <span class="n">Prediction</span><span class="p">,</span>
+    <span class="n">WindowArrays</span><span class="p">,</span>
+    <span class="n">WindowMetrics</span><span class="p">,</span>
+    <span class="n">YawFit</span><span class="p">,</span>
+<span class="p">)</span>
 
 <span class="c1"># Speed floor for every 1/V term, guarding the coefficient singularity at V=0.</span>
 <span class="n">V_FLOOR_MPS</span> <span class="o">=</span> <span class="mf">1.0</span>
@@ -359,9 +372,7 @@
 
 <div class="viewcode-block" id="extract_window_arrays">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_fit.html#suboptimumg.log_analysis.yaw_fit.extract_window_arrays">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">extract_window_arrays</span><span class="p">(</span>
-    <span class="n">sub</span><span class="p">:</span> <span class="n">SingleRunData</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">FitContext</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WindowArrays</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_window_arrays</span><span class="p">(</span><span class="n">sub</span><span class="p">:</span> <span class="n">SingleRunData</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">FitContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WindowArrays</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Pull the aligned numpy arrays for one sub-window off a ``SingleRunData``.</span>
 
 <span class="sd">    Every channel is joined onto the yaw-rate timestamp grid, so the returned</span>
@@ -396,9 +407,7 @@
     <span class="n">joined</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">sub</span><span class="p">[</span><span class="n">ctx</span><span class="o">.</span><span class="n">yaw_rate_col</span><span class="p">],</span> <span class="n">deps</span><span class="p">)</span>
 
     <span class="n">yaw_di</span> <span class="o">=</span> <span class="n">joined</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">values</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">col</span><span class="p">:</span> <span class="n">joined</span><span class="p">[</span><span class="mi">2</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">optional</span><span class="p">)</span>
-    <span class="p">}</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">joined</span><span class="p">[</span><span class="mi">2</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">optional</span><span class="p">)}</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">to_rad</span><span class="p">(</span><span class="n">col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">units</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
@@ -409,7 +418,10 @@
     <span class="n">u</span> <span class="o">=</span> <span class="n">joined</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">value_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">WindowArrays</span><span class="p">(</span>
         <span class="n">sw_id</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
-        <span class="n">t</span><span class="o">=</span><span class="n">_to_seconds</span><span class="p">(</span><span class="n">yaw_di</span><span class="o">.</span><span class="n">timestamp_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span> <span class="n">sub</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">),</span>
+        <span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span>
+            <span class="n">_to_seconds</span><span class="p">(</span><span class="n">yaw_di</span><span class="o">.</span><span class="n">timestamp_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span> <span class="n">sub</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">),</span>
+            <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+        <span class="p">),</span>
         <span class="n">speed</span><span class="o">=</span><span class="n">joined</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">value_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
         <span class="n">yaw_rate</span><span class="o">=</span><span class="n">yaw_di</span><span class="o">.</span><span class="n">value_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
         <span class="n">u_rad</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">input_units</span> <span class="o">==</span> <span class="s2">&quot;deg&quot;</span> <span class="k">else</span> <span class="n">u</span><span class="p">,</span>
@@ -842,11 +854,7 @@
                 <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">params</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="p">)</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="p">(</span>
-                <span class="n">p</span><span class="o">.</span><span class="n">model_copy</span><span class="p">(</span><span class="n">update</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;init&quot;</span><span class="p">:</span> <span class="n">pin</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="s2">&quot;pinned&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
-                <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">pin</span>
-                <span class="k">else</span> <span class="n">p</span>
-            <span class="p">)</span>
+            <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">model_copy</span><span class="p">(</span><span class="n">update</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;init&quot;</span><span class="p">:</span> <span class="n">pin</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="s2">&quot;pinned&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">pin</span> <span class="k">else</span> <span class="n">p</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">params</span>
         <span class="p">]</span>
 
@@ -920,12 +928,8 @@
     <span class="k">if</span> <span class="n">spec</span><span class="o">.</span><span class="n">ca_scheduler</span> <span class="o">!=</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
         <span class="n">alpha_f_sig</span><span class="p">,</span> <span class="n">alpha_r_sig</span> <span class="o">=</span> <span class="n">axle_slip_angles</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">irl_car</span><span class="p">)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;p&quot;</span><span class="p">)</span>
-        <span class="n">Ca_f_t</span> <span class="o">=</span> <span class="n">chassis</span><span class="o">.</span><span class="n">Ca_f</span> <span class="o">/</span> <span class="p">(</span>
-            <span class="mf">1.0</span> <span class="o">+</span> <span class="n">layout</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;alpha_f&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">alpha_f_sig</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="n">Ca_r_t</span> <span class="o">=</span> <span class="n">chassis</span><span class="o">.</span><span class="n">Ca_r</span> <span class="o">/</span> <span class="p">(</span>
-            <span class="mf">1.0</span> <span class="o">+</span> <span class="n">layout</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;alpha_r&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">alpha_r_sig</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-        <span class="p">)</span>
+        <span class="n">Ca_f_t</span> <span class="o">=</span> <span class="n">chassis</span><span class="o">.</span><span class="n">Ca_f</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">layout</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;alpha_f&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">alpha_f_sig</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+        <span class="n">Ca_r_t</span> <span class="o">=</span> <span class="n">chassis</span><span class="o">.</span><span class="n">Ca_r</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">layout</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;alpha_r&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">alpha_r_sig</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">simulate_lpv_yaw</span><span class="p">(</span>
         <span class="n">w</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">u_eff</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">speed</span><span class="p">,</span> <span class="n">chassis</span><span class="p">,</span> <span class="n">irl_car</span><span class="p">,</span> <span class="n">Ca_f</span><span class="o">=</span><span class="n">Ca_f_t</span><span class="p">,</span> <span class="n">Ca_r</span><span class="o">=</span><span class="n">Ca_r_t</span><span class="p">,</span> <span class="n">y_init</span><span class="o">=</span><span class="n">y_init</span>
@@ -962,9 +966,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;mirror_all&quot;</span><span class="p">,</span> <span class="s2">&quot;flip_half&quot;</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Unknown balance mode &#39;</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&#39;; expected none, mirror_all, or flip_half&quot;</span>
-        <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown balance mode &#39;</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&#39;; expected none, mirror_all, or flip_half&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[(</span><span class="n">w</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">window_arrays</span><span class="p">)]</span>
@@ -1017,7 +1019,7 @@
         <span class="n">rmse_raw_rad_s</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">err_raw</span><span class="o">**</span><span class="mi">2</span><span class="p">))),</span>
         <span class="n">rmse_ac_rad_s</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">err_ac</span><span class="o">**</span><span class="mi">2</span><span class="p">))),</span>
         <span class="n">yaw_rate_std_meas_rad_s</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y_meas</span><span class="p">)),</span>
-        <span class="n">vaf_ac_pct</span><span class="o">=</span><span class="mf">100.0</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">err_ac</span><span class="p">)</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">var_meas</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">)),</span>
+        <span class="n">vaf_ac_pct</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="mf">100.0</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">err_ac</span><span class="p">)</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">var_meas</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">))),</span>
     <span class="p">)</span>
 
 
@@ -1075,9 +1077,8 @@
     <span class="n">layout</span><span class="p">:</span> <span class="n">ParamLayout</span><span class="p">,</span>
     <span class="n">ctx</span><span class="p">:</span> <span class="n">FitContext</span><span class="p">,</span>
     <span class="n">balance_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
-    <span class="n">verbose</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">max_nfev</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">350</span><span class="p">,</span>
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;trf&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">YawFit</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Fit ``spec`` to the sub-windows by bounded output-error least squares.</span>
 
@@ -1102,7 +1103,7 @@
 <span class="sd">    balance_mode : str, optional</span>
 <span class="sd">        Not used here; only recorded on the fit so you can see later how the</span>
 <span class="sd">        views were weighted. See ``build_fit_views``.</span>
-<span class="sd">    verbose, max_nfev, method : optional</span>
+<span class="sd">    verbose, max_nfev : optional</span>
 <span class="sd">        Forwarded to ``scipy.optimize.least_squares``.</span>
 
 <span class="sd">    Returns</span>
@@ -1115,9 +1116,7 @@
         <span class="n">chunks</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">sign</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">fit_views</span><span class="p">:</span>
             <span class="n">y_meas</span> <span class="o">=</span> <span class="n">sign</span> <span class="o">*</span> <span class="n">w</span><span class="o">.</span><span class="n">yaw_rate</span>
-            <span class="n">y_hat</span> <span class="o">=</span> <span class="n">predict_yaw</span><span class="p">(</span>
-                <span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">irl_car</span><span class="p">,</span> <span class="n">y_init</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">y_meas</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">sign</span><span class="o">=</span><span class="n">sign</span>
-            <span class="p">)</span>
+            <span class="n">y_hat</span> <span class="o">=</span> <span class="n">predict_yaw</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">irl_car</span><span class="p">,</span> <span class="n">y_init</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">y_meas</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">sign</span><span class="o">=</span><span class="n">sign</span><span class="p">)</span>
             <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_meas</span> <span class="o">-</span> <span class="n">y_hat</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span>
 
@@ -1126,14 +1125,12 @@
         <span class="n">layout</span><span class="o">.</span><span class="n">x0</span><span class="p">,</span>
         <span class="n">bounds</span><span class="o">=</span><span class="n">layout</span><span class="o">.</span><span class="n">bounds</span><span class="p">,</span>
         <span class="n">x_scale</span><span class="o">=</span><span class="n">layout</span><span class="o">.</span><span class="n">x_scale</span><span class="p">,</span>
-        <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+        <span class="n">method</span><span class="o">=</span><span class="s2">&quot;trf&quot;</span><span class="p">,</span>
         <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
         <span class="n">max_nfev</span><span class="o">=</span><span class="n">max_nfev</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">train</span> <span class="o">=</span> <span class="n">_predict_all</span><span class="p">(</span>
-        <span class="n">window_arrays</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">irl_car</span><span class="p">,</span> <span class="n">layout</span><span class="o">.</span><span class="n">n_free</span>
-    <span class="p">)</span>
+    <span class="n">train</span> <span class="o">=</span> <span class="n">_predict_all</span><span class="p">(</span><span class="n">window_arrays</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">irl_car</span><span class="p">,</span> <span class="n">layout</span><span class="o">.</span><span class="n">n_free</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">YawFit</span><span class="p">(</span>
         <span class="n">spec</span><span class="o">=</span><span class="n">spec</span><span class="p">,</span>
@@ -1193,9 +1190,7 @@
 
 <div class="viewcode-block" id="summarize_fit">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_fit.html#suboptimumg.log_analysis.yaw_fit.summarize_fit">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">summarize_fit</span><span class="p">(</span>
-    <span class="n">fit</span><span class="p">:</span> <span class="n">YawFit</span><span class="p">,</span> <span class="n">sample_speeds</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">)</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">summarize_fit</span><span class="p">(</span><span class="n">fit</span><span class="p">:</span> <span class="n">YawFit</span><span class="p">,</span> <span class="n">sample_speeds</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Console summary of a fit plus its linear-region coefficients at ``sample_speeds``.</span>
 
 <span class="sd">    The coefficients are the *linear-region* ones, i.e. evaluated with the</span>

@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/compsim/utils';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -337,15 +336,11 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.compsim.utils</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Utility functions for competition scoring and energy calculations.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">npt</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">joule_to_kwh</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompetitionResults</span><span class="p">,</span> <span class="n">EfficiencyScoring</span><span class="p">,</span> <span class="n">EventScoring</span>
 
 
 <div class="viewcode-block" id="compute_event_points">
@@ -370,9 +365,7 @@
     <span class="n">worst_time</span> <span class="o">=</span> <span class="n">best_time</span> <span class="o">*</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">worst_time_ratio</span>
 
     <span class="n">your_ratio_to_worst</span> <span class="o">=</span> <span class="p">(</span><span class="n">worst_time</span> <span class="o">/</span> <span class="n">t_your</span><span class="p">)</span> <span class="o">**</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">scale_time_ratio</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">best_ratio_to_worst</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">worst_time</span> <span class="o">/</span> <span class="n">best_time</span>
-    <span class="p">)</span> <span class="o">**</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">scale_time_ratio</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">best_ratio_to_worst</span> <span class="o">=</span> <span class="p">(</span><span class="n">worst_time</span> <span class="o">/</span> <span class="n">best_time</span><span class="p">)</span> <span class="o">**</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">scale_time_ratio</span> <span class="o">-</span> <span class="mi">1</span>
 
     <span class="k">return</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">min_points</span> <span class="o">+</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">max_point_gain</span> <span class="o">*</span> <span class="p">(</span>
         <span class="n">your_ratio_to_worst</span> <span class="o">/</span> <span class="n">best_ratio_to_worst</span>
@@ -421,9 +414,7 @@
 
     <span class="c1"># Convert efficiency factor to competition points</span>
     <span class="n">eff_points</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">scoring_config</span><span class="o">.</span><span class="n">max_eff_points</span>
-        <span class="o">*</span> <span class="p">(</span><span class="n">eff_your</span> <span class="o">-</span> <span class="n">eff_min</span><span class="p">)</span>
-        <span class="o">/</span> <span class="p">(</span><span class="n">scoring_config</span><span class="o">.</span><span class="n">eff_max</span> <span class="o">-</span> <span class="n">eff_min</span><span class="p">)</span>
+        <span class="n">scoring_config</span><span class="o">.</span><span class="n">max_eff_points</span> <span class="o">*</span> <span class="p">(</span><span class="n">eff_your</span> <span class="o">-</span> <span class="n">eff_min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">scoring_config</span><span class="o">.</span><span class="n">eff_max</span> <span class="o">-</span> <span class="n">eff_min</span><span class="p">)</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">eff_points</span><span class="p">,</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">max_eff_points</span><span class="p">)</span></div>
 
@@ -432,16 +423,16 @@
 <div class="viewcode-block" id="energy_data">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.utils.html#suboptimumg.compsim.utils.energy_data">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">energy_data</span><span class="p">(</span>
-    <span class="n">time_list</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">power_list</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
+    <span class="n">time_list</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">power_list</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Manually integrates power to determine energy consumption across a lap. Uses trapezoidal integration</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    time_list: npt.ndarray[np.float64]</span>
+<span class="sd">    time_list: NDArray[np.float64]</span>
 <span class="sd">        Cumulative timestamps corresponding to power values (seconds)</span>
-<span class="sd">    power_list : npt.ndarray[np.float64]</span>
+<span class="sd">    power_list : NDArray[np.float64]</span>
 <span class="sd">        List of power values (Watts)</span>
 
 <span class="sd">    Returns</span>
@@ -452,14 +443,18 @@
 <span class="sd">        Negative energy consumption in kWh</span>
 <span class="sd">    float</span>
 <span class="sd">        Net energy consumption in kWh</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Energy in each interval between consecutive samples is estimated with</span>
+<span class="sd">    the trapezoidal rule, then summed separately for positive (consumption)</span>
+<span class="sd">    and negative (regen) intervals.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">power_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
-    <span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>  <span class="c1"># n - 1 intervals</span>
-    <span class="n">interval_energy</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-    <span class="p">)</span> <span class="o">*</span> <span class="n">dt</span>  <span class="c1"># trapezoidal rule over n - 1 intervals</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">interval_energy</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span> <span class="o">*</span> <span class="n">dt</span>
 
     <span class="n">pos_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">neg_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
@@ -509,9 +504,7 @@
     <span class="c1"># Solve for eff_your from efficiency_score</span>
     <span class="c1"># eff_points = max_eff_points * (eff_your - eff_min) / (eff_max - eff_min)</span>
     <span class="n">eff_your</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">efficiency_score</span>
-        <span class="o">*</span> <span class="p">(</span><span class="n">scoring_config</span><span class="o">.</span><span class="n">eff_max</span> <span class="o">-</span> <span class="n">eff_min</span><span class="p">)</span>
-        <span class="o">/</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">max_eff_points</span>
+        <span class="n">efficiency_score</span> <span class="o">*</span> <span class="p">(</span><span class="n">scoring_config</span><span class="o">.</span><span class="n">eff_max</span> <span class="o">-</span> <span class="n">eff_min</span><span class="p">)</span> <span class="o">/</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">max_eff_points</span>
         <span class="o">+</span> <span class="n">eff_min</span>
     <span class="p">)</span>
 
@@ -520,11 +513,7 @@
 
     <span class="c1"># Solve for co2_your from eff_your</span>
     <span class="c1"># eff_your = (fastest_lap_time / laptime_your) * (co2_min / co2_your)</span>
-    <span class="n">co2_your</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="p">(</span><span class="n">scoring_config</span><span class="o">.</span><span class="n">fastest_lap_time</span> <span class="o">/</span> <span class="n">laptime_your</span><span class="p">)</span>
-        <span class="o">*</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">co2_min</span>
-        <span class="o">/</span> <span class="n">eff_your</span>
-    <span class="p">)</span>
+    <span class="n">co2_your</span> <span class="o">=</span> <span class="p">(</span><span class="n">scoring_config</span><span class="o">.</span><span class="n">fastest_lap_time</span> <span class="o">/</span> <span class="n">laptime_your</span><span class="p">)</span> <span class="o">*</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">co2_min</span> <span class="o">/</span> <span class="n">eff_your</span>
     <span class="c1"># Solve for consumed_energy from co2_your</span>
     <span class="c1"># co2_your = co2_scaling * consumed_energy_total</span>
     <span class="n">consumed_energy_kwh</span> <span class="o">=</span> <span class="n">co2_your</span> <span class="o">/</span> <span class="n">scoring_config</span><span class="o">.</span><span class="n">co2_scaling</span>
@@ -537,7 +526,7 @@
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.utils.html#suboptimumg.compsim.utils.pretty_print_results">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">pretty_print_results</span><span class="p">(</span>
     <span class="n">comp_results</span><span class="p">:</span> <span class="n">CompetitionResults</span><span class="p">,</span>
-<span class="p">):</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Print formatted competition results.</span>
 
@@ -580,9 +569,7 @@
     <span class="p">)</span>
 
     <span class="n">total_pts</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">comp_results</span><span class="o">.</span><span class="n">total_points</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="si">:</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">text_margin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">number_margin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Total points:&#39;</span><span class="si">:</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">text_margin</span><span class="si">}}</span><span class="s2"> </span><span class="si">{</span><span class="n">total_pts</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="p">)</span></div>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="si">:</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">text_margin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">number_margin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Total points:&#39;</span><span class="si">:</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">text_margin</span><span class="si">}}</span><span class="s2"> </span><span class="si">{</span><span class="n">total_pts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 </pre></div>
 

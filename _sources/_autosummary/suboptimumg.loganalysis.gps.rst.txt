@@ -1,8 +1,0 @@
-suboptimumg.loganalysis.gps
-===========================
-
-.. automodule:: suboptimumg.loganalysis.gps
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

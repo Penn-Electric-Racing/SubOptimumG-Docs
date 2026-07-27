@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/plotting/internal_data_plots';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -338,16 +337,30 @@
                   
   <h1>Source code for suboptimumg.plotting.internal_data_plots</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">npt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.models</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.plotting_constants</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompetitionResults</span><span class="p">,</span> <span class="n">InternalData</span><span class="p">,</span> <span class="n">LapsimResults</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.plotting_constants</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
+    <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
+    <span class="n">MARKER_SIZE_LARGE</span><span class="p">,</span>
+    <span class="n">TEXT_COLOR_DARK</span><span class="p">,</span>
+    <span class="n">FontConfig</span><span class="p">,</span>
+    <span class="n">LayoutConfig</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axis</span><span class="p">,</span> <span class="n">Metric</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_get_x_vals</span><span class="p">(</span><span class="n">results</span><span class="p">:</span> <span class="n">LapsimResults</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="n">Axis</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_require_internal_data</span><span class="p">(</span><span class="n">results</span><span class="p">:</span> <span class="n">LapsimResults</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InternalData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the results&#39; internal data, raising if it is missing.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">internal_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;LapsimResults must include internal_data to plot per-seed traces.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">results</span><span class="o">.</span><span class="n">internal_data</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_x_vals</span><span class="p">(</span><span class="n">results</span><span class="p">:</span> <span class="n">LapsimResults</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="n">Axis</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
     <span class="k">match</span> <span class="n">axis</span><span class="p">:</span>
         <span class="k">case</span> <span class="n">Axis</span><span class="o">.</span><span class="n">DISTANCE</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">lap_dxs</span><span class="p">)</span>
@@ -358,10 +371,10 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_mask_trace</span><span class="p">(</span>
-    <span class="n">x</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
-    <span class="n">y</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
-    <span class="n">grown_forward_mask</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">],</span>
-    <span class="n">slower_mask</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">],</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+    <span class="n">grown_forward_mask</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">],</span>
+    <span class="n">slower_mask</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">],</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="o">**</span><span class="n">scatter_kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">]:</span>
@@ -370,13 +383,13 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    x : npt.NDArray[np.float64]</span>
+<span class="sd">    x : NDArray[np.float64]</span>
 <span class="sd">        X coordinates for the trace</span>
-<span class="sd">    y : npt.NDArray[np.float64]</span>
+<span class="sd">    y : NDArray[np.float64]</span>
 <span class="sd">        Y coordinates for the trace</span>
-<span class="sd">    grown_forward_mask : npt.NDArray[np.bool_]</span>
+<span class="sd">    grown_forward_mask : NDArray[np.bool_]</span>
 <span class="sd">        Boolean mask where True -&gt; red, False -&gt; blue</span>
-<span class="sd">    slower_mask : npt.NDArray[np.bool_]</span>
+<span class="sd">    slower_mask : NDArray[np.bool_]</span>
 <span class="sd">        Boolean mask where True -&gt; &#39;x&#39; markers, False -&gt; circle markers</span>
 <span class="sd">    name : str</span>
 <span class="sd">        Base name for the trace</span>
@@ -427,10 +440,10 @@
 <div class="viewcode-block" id="plot_per_seed">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.internal_data_plots.html#suboptimumg.plotting.internal_data_plots.plot_per_seed">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_per_seed</span><span class="p">(</span>
-    <span class="n">results</span><span class="p">:</span> <span class="n">LapsimResults</span> <span class="o">|</span> <span class="n">List</span><span class="p">[</span><span class="n">LapsimResults</span><span class="p">],</span>
+    <span class="n">results</span><span class="p">:</span> <span class="n">LapsimResults</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="n">LapsimResults</span><span class="p">],</span>
     <span class="n">x_axis</span><span class="p">:</span> <span class="n">Axis</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">include_indices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">include_indices</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">include_power</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">include_seed_overview</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -444,11 +457,11 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    results : LapsimResults or List[LapsimResults]</span>
+<span class="sd">    results : LapsimResults or list[LapsimResults]</span>
 <span class="sd">        For consistency, these should be the same event across different runs</span>
 <span class="sd">    x_axis : Axis</span>
 <span class="sd">        Use distance or time for the x-axis</span>
-<span class="sd">    include_indices : List[int], optional</span>
+<span class="sd">    include_indices : list[int], optional</span>
 <span class="sd">        Specify which seeds to include. e.x. [0, 1] only includes first two seeds.</span>
 <span class="sd">        Defaults to all seeds found.</span>
 <span class="sd">    include_power : bool, optional</span>
@@ -471,16 +484,12 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">results</span><span class="p">]</span>
 
-    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">internal_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;LapsimResults must include internal_data to plot per-seed traces.&quot;</span>
-            <span class="p">)</span>
+    <span class="n">internal_data_by_result</span> <span class="o">=</span> <span class="p">[</span><span class="n">_require_internal_data</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">]</span>
 
     <span class="n">indices</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">seed_idx_list</span>
+        <span class="n">internal_data_by_result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">seed_idx_list</span>
         <span class="k">if</span> <span class="n">include_indices</span> <span class="ow">is</span> <span class="kc">None</span>
-        <span class="k">else</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">seed_idx_list</span><span class="p">[</span><span class="n">include_indices</span><span class="p">]</span>
+        <span class="k">else</span> <span class="n">internal_data_by_result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">seed_idx_list</span><span class="p">[</span><span class="n">include_indices</span><span class="p">]</span>
     <span class="p">)</span>
     <span class="n">num_seed_subplots</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
     <span class="n">num_subplots</span> <span class="o">=</span> <span class="n">num_seed_subplots</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">include_seed_overview</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
@@ -503,8 +512,8 @@
     <span class="k">if</span> <span class="n">include_seed_overview</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">run_idx</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
             <span class="n">x_vals</span> <span class="o">=</span> <span class="n">_get_x_vals</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x_axis</span><span class="p">)</span>
-            <span class="n">v_max_profile</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">v_max_profile</span>
-            <span class="n">seed_idx_list</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">seed_idx_list</span>
+            <span class="n">v_max_profile</span> <span class="o">=</span> <span class="n">internal_data_by_result</span><span class="p">[</span><span class="n">run_idx</span><span class="p">]</span><span class="o">.</span><span class="n">v_max_profile</span>
+            <span class="n">seed_idx_list</span> <span class="o">=</span> <span class="n">internal_data_by_result</span><span class="p">[</span><span class="n">run_idx</span><span class="p">]</span><span class="o">.</span><span class="n">seed_idx_list</span>
 
             <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
                 <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
@@ -535,10 +544,11 @@
         <span class="n">row_idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">seed_row_offset</span>
 
         <span class="k">for</span> <span class="n">run_idx</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+            <span class="n">run_internal_data</span> <span class="o">=</span> <span class="n">internal_data_by_result</span><span class="p">[</span><span class="n">run_idx</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">include_indices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">target_seed_data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">per_seed</span><span class="p">[</span><span class="n">include_indices</span><span class="p">[</span><span class="n">idx</span><span class="p">]]</span>
+                <span class="n">target_seed_data</span> <span class="o">=</span> <span class="n">run_internal_data</span><span class="o">.</span><span class="n">per_seed</span><span class="p">[</span><span class="n">include_indices</span><span class="p">[</span><span class="n">idx</span><span class="p">]]</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">target_seed_data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">per_seed</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                <span class="n">target_seed_data</span> <span class="o">=</span> <span class="n">run_internal_data</span><span class="o">.</span><span class="n">per_seed</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
 
             <span class="n">x_vals</span> <span class="o">=</span> <span class="n">_get_x_vals</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x_axis</span><span class="p">)</span>
             <span class="n">legend</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Run </span><span class="si">{</span><span class="n">run_idx</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -557,13 +567,11 @@
             <span class="c1"># Add v_max_pre (baseline before this seed&#39;s modifications)</span>
             <span class="c1"># For seed 0, use the initial v_max_profile</span>
             <span class="c1"># For seed i &gt; 0, use v_max_post from seed i-1</span>
-            <span class="n">actual_seed_idx</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="n">include_indices</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">if</span> <span class="n">include_indices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">idx</span>
-            <span class="p">)</span>
+            <span class="n">actual_seed_idx</span> <span class="o">=</span> <span class="n">include_indices</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">if</span> <span class="n">include_indices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">idx</span>
             <span class="k">if</span> <span class="n">actual_seed_idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">v_max_pre</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">v_max_profile</span>
+                <span class="n">v_max_pre</span> <span class="o">=</span> <span class="n">run_internal_data</span><span class="o">.</span><span class="n">v_max_profile</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">v_max_pre</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">internal_data</span><span class="o">.</span><span class="n">per_seed</span><span class="p">[</span><span class="n">actual_seed_idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">v_max_post</span>
+                <span class="n">v_max_pre</span> <span class="o">=</span> <span class="n">run_internal_data</span><span class="o">.</span><span class="n">per_seed</span><span class="p">[</span><span class="n">actual_seed_idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">v_max_post</span>
 
             <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
                 <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
@@ -602,9 +610,7 @@
                     <span class="n">secondary_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                 <span class="p">)</span>
         <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Velocity (m/s)&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span>
-            <span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Accel / Power&quot;</span><span class="p">,</span> <span class="n">secondary_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span>
-        <span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Accel / Power&quot;</span><span class="p">,</span> <span class="n">secondary_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span>
             <span class="n">title_text</span><span class="o">=</span><span class="n">x_axis</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
             <span class="n">row</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span>
@@ -634,11 +640,11 @@
 <div class="viewcode-block" id="plot_event_traces">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.internal_data_plots.html#suboptimumg.plotting.internal_data_plots.plot_event_traces">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_event_traces</span><span class="p">(</span>
-    <span class="n">results</span><span class="p">:</span> <span class="n">LapsimResults</span> <span class="o">|</span> <span class="n">List</span><span class="p">[</span><span class="n">LapsimResults</span><span class="p">],</span>
+    <span class="n">results</span><span class="p">:</span> <span class="n">LapsimResults</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="n">LapsimResults</span><span class="p">],</span>
     <span class="n">x_axis</span><span class="p">:</span> <span class="n">Axis</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">labels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">metrics</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Metric</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">Metric</span><span class="o">.</span><span class="n">VELOCITY</span><span class="p">,</span> <span class="n">Metric</span><span class="o">.</span><span class="n">ACCEL</span><span class="p">,</span> <span class="n">Metric</span><span class="o">.</span><span class="n">POWER</span><span class="p">],</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">metrics</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Metric</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">Metric</span><span class="o">.</span><span class="n">VELOCITY</span><span class="p">,</span> <span class="n">Metric</span><span class="o">.</span><span class="n">ACCEL</span><span class="p">,</span> <span class="n">Metric</span><span class="o">.</span><span class="n">POWER</span><span class="p">],</span>
     <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
     <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
@@ -651,14 +657,14 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    results : LapsimResults or List[LapsimResults]</span>
+<span class="sd">    results : LapsimResults or list[LapsimResults]</span>
 <span class="sd">        Results to plot. Pass a list to overlay multiple configurations.</span>
 <span class="sd">    x_axis : Axis</span>
 <span class="sd">        Axis to use for the x-axis (distance or time)</span>
-<span class="sd">    labels : List[str], optional</span>
+<span class="sd">    labels : list[str], optional</span>
 <span class="sd">        Labels for each result set (e.g., [&quot;baseline&quot;, &quot;new_config&quot;]).</span>
 <span class="sd">        If not provided, defaults to &quot;run_0&quot;, &quot;run_1&quot;, etc.</span>
-<span class="sd">    metrics : List[Metric], optional</span>
+<span class="sd">    metrics : list[Metric], optional</span>
 <span class="sd">        Metrics to plot. Defaults to all three (velocity, accel, power)</span>
 <span class="sd">    title : str, optional</span>
 <span class="sd">        Plot title</span>
@@ -722,10 +728,10 @@
 <div class="viewcode-block" id="plot_competition_traces">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.internal_data_plots.html#suboptimumg.plotting.internal_data_plots.plot_competition_traces">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_competition_traces</span><span class="p">(</span>
-    <span class="n">competitions</span><span class="p">:</span> <span class="n">CompetitionResults</span> <span class="o">|</span> <span class="n">List</span><span class="p">[</span><span class="n">CompetitionResults</span><span class="p">],</span>
+    <span class="n">competitions</span><span class="p">:</span> <span class="n">CompetitionResults</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="n">CompetitionResults</span><span class="p">],</span>
     <span class="n">x_axis</span><span class="p">:</span> <span class="n">Axis</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">labels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
     <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
@@ -737,11 +743,11 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    competitions : CompetitionResults or List[CompetitionResults]</span>
+<span class="sd">    competitions : CompetitionResults or list[CompetitionResults]</span>
 <span class="sd">        Competition results to plot</span>
 <span class="sd">    x_axis : Axis</span>
 <span class="sd">        Axis to use for the x-axis (distance or time)</span>
-<span class="sd">    labels : List[str], optional</span>
+<span class="sd">    labels : list[str], optional</span>
 <span class="sd">        Labels for each competition (e.g., [&quot;baseline&quot;, &quot;new_config&quot;]).</span>
 <span class="sd">        If not provided, defaults to &quot;comp_0&quot;, &quot;comp_1&quot;, etc.</span>
 <span class="sd">    title : str, optional</span>

@@ -46,7 +46,6 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.plotting.plotting_constants';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -311,7 +310,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.constants.html">suboptimumg.constants</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suboptimumg.gdrive.html">suboptimumg.gdrive</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.log_analysis.html">suboptimumg.log_analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.aero.html">suboptimumg.log_analysis.aero</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.drivetrain.html">suboptimumg.log_analysis.drivetrain</a></li>
@@ -327,22 +325,6 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_plots.html">suboptimumg.log_analysis.yaw_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation.html">suboptimumg.log_analysis.yaw_segmentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation_models.html">suboptimumg.log_analysis.yaw_segmentation_models</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.loganalysis.html">suboptimumg.loganalysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.corrections.html">suboptimumg.loganalysis.corrections</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.derived.html">suboptimumg.loganalysis.derived</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.filtering.html">suboptimumg.loganalysis.filtering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.fitted_curve.html">suboptimumg.loganalysis.fitted_curve</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.gps.html">suboptimumg.loganalysis.gps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.intake.html">suboptimumg.loganalysis.intake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.irl_car.html">suboptimumg.loganalysis.irl_car</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.laps.html">suboptimumg.loganalysis.laps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.macros.html">suboptimumg.loganalysis.macros</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.plotting.html">suboptimumg.loganalysis.plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.track_builder.html">suboptimumg.loganalysis.track_builder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.understeer.html">suboptimumg.loganalysis.understeer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.variables.html">suboptimumg.loganalysis.variables</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.models.html">suboptimumg.models</a></li>
@@ -386,7 +368,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.track.html">suboptimumg.track</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.gps.html">suboptimumg.track.gps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.models.html">suboptimumg.track.models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track.html">suboptimumg.track.track</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track_factory.html">suboptimumg.track.track_factory</a></li>
@@ -654,7 +635,7 @@ when creating custom plots if needed.</p>
 <td><p><code class="docutils literal notranslate"><span class="pre">700</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.margin" title="suboptimumg.plotting.plotting_constants.LayoutConfig.margin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">margin</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p></td>
 <td><p>No</p></td>
 <td><p><em>factory</em></p></td>
 </tr>
@@ -700,7 +681,7 @@ when creating custom plots if needed.</p>
 <li><p><strong>grid_height_per_row</strong> (<em>int</em>)</p></li>
 <li><p><strong>grid_horizontal_spacing</strong> (<em>float</em>)</p></li>
 <li><p><strong>grid_vertical_spacing</strong> (<em>float</em>)</p></li>
-<li><p><strong>margin</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>int</em><em>]</em>)</p></li>
+<li><p><strong>margin</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>int</em><em>]</em>)</p></li>
 <li><p><strong>plot_bgcolor</strong> (<em>str</em>)</p></li>
 <li><p><strong>scene_bgcolor</strong> (<em>str</em>)</p></li>
 <li><p><strong>title_x</strong> (<em>float</em>)</p></li>
@@ -736,7 +717,7 @@ when creating custom plots if needed.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.LayoutConfig.margin">
-<span class="sig-name descname"><span class="pre">margin</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.margin" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">margin</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.LayoutConfig.margin" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1000,7 +981,7 @@ Pass instances of this class to plotting functions instead of separate parameter
 <td><p><code class="docutils literal notranslate"><span class="pre">5</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.plotting.plotting_constants.SmoothingConfig.interp_method" title="suboptimumg.plotting.plotting_constants.SmoothingConfig.interp_method"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interp_method</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘linear’, ‘nearest’, ‘slinear’, ‘cubic’]</p></td>
 <td><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">'linear'</span></code></p></td>
 </tr>
@@ -1017,7 +998,7 @@ Pass instances of this class to plotting functions instead of separate parameter
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>interp_factor</strong> (<em>int</em>)</p></li>
 <li><p><strong>smoothing_sigma</strong> (<em>float</em>)</p></li>
-<li><p><strong>interp_method</strong> (<em>str</em>)</p></li>
+<li><p><strong>interp_method</strong> (<em>Literal</em><em>[</em><em>'linear'</em><em>, </em><em>'nearest'</em><em>, </em><em>'slinear'</em><em>, </em><em>'cubic'</em><em>]</em>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -1028,7 +1009,7 @@ Pass instances of this class to plotting functions instead of separate parameter
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="suboptimumg.plotting.plotting_constants.SmoothingConfig.interp_method">
-<span class="sig-name descname"><span class="pre">interp_method</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SmoothingConfig.interp_method" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">interp_method</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'linear'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'nearest'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'slinear'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'cubic'</span></span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.plotting.plotting_constants.SmoothingConfig.interp_method" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

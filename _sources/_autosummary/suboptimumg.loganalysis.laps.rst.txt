@@ -1,8 +1,0 @@
-suboptimumg.loganalysis.laps
-============================
-
-.. automodule:: suboptimumg.loganalysis.laps
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

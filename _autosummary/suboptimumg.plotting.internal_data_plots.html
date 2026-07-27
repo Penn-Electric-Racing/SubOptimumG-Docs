@@ -46,7 +46,6 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.plotting.internal_data_plots';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -311,7 +310,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.constants.html">suboptimumg.constants</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suboptimumg.gdrive.html">suboptimumg.gdrive</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.log_analysis.html">suboptimumg.log_analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.aero.html">suboptimumg.log_analysis.aero</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.drivetrain.html">suboptimumg.log_analysis.drivetrain</a></li>
@@ -327,22 +325,6 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_plots.html">suboptimumg.log_analysis.yaw_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation.html">suboptimumg.log_analysis.yaw_segmentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation_models.html">suboptimumg.log_analysis.yaw_segmentation_models</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.loganalysis.html">suboptimumg.loganalysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.corrections.html">suboptimumg.loganalysis.corrections</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.derived.html">suboptimumg.loganalysis.derived</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.filtering.html">suboptimumg.loganalysis.filtering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.fitted_curve.html">suboptimumg.loganalysis.fitted_curve</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.gps.html">suboptimumg.loganalysis.gps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.intake.html">suboptimumg.loganalysis.intake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.irl_car.html">suboptimumg.loganalysis.irl_car</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.laps.html">suboptimumg.loganalysis.laps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.macros.html">suboptimumg.loganalysis.macros</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.plotting.html">suboptimumg.loganalysis.plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.track_builder.html">suboptimumg.loganalysis.track_builder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.understeer.html">suboptimumg.loganalysis.understeer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.variables.html">suboptimumg.loganalysis.variables</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.models.html">suboptimumg.models</a></li>
@@ -386,7 +368,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.track.html">suboptimumg.track</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.gps.html">suboptimumg.track.gps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.models.html">suboptimumg.track.models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track.html">suboptimumg.track.track</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track_factory.html">suboptimumg.track.track_factory</a></li>
@@ -504,9 +485,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>competitions</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionResults" title="suboptimumg.compsim.models.CompetitionResults"><em>CompetitionResults</em></a><em> or </em><em>List</em><em>[</em><a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionResults" title="suboptimumg.compsim.models.CompetitionResults"><em>CompetitionResults</em></a><em>]</em>) – Competition results to plot</p></li>
+<li><p><strong>competitions</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionResults" title="suboptimumg.compsim.models.CompetitionResults"><em>CompetitionResults</em></a><em> or </em><em>list</em><em>[</em><a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionResults" title="suboptimumg.compsim.models.CompetitionResults"><em>CompetitionResults</em></a><em>]</em>) – Competition results to plot</p></li>
 <li><p><strong>x_axis</strong> (<a class="reference internal" href="suboptimumg.plotting.types.html#suboptimumg.plotting.types.Axis" title="suboptimumg.plotting.types.Axis"><em>Axis</em></a>) – Axis to use for the x-axis (distance or time)</p></li>
-<li><p><strong>labels</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Labels for each competition (e.g., [“baseline”, “new_config”]).
+<li><p><strong>labels</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Labels for each competition (e.g., [“baseline”, “new_config”]).
 If not provided, defaults to “comp_0”, “comp_1”, etc.</p></li>
 <li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Plot title</p></li>
 <li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a><em>, </em><em>optional</em>) – Layout configuration object</p></li>
@@ -531,11 +512,11 @@ of different vehicle configurations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>results</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.LapsimResults" title="suboptimumg.compsim.models.LapsimResults"><em>LapsimResults</em></a><em> or </em><em>List</em><em>[</em><a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.LapsimResults" title="suboptimumg.compsim.models.LapsimResults"><em>LapsimResults</em></a><em>]</em>) – Results to plot. Pass a list to overlay multiple configurations.</p></li>
+<li><p><strong>results</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.LapsimResults" title="suboptimumg.compsim.models.LapsimResults"><em>LapsimResults</em></a><em> or </em><em>list</em><em>[</em><a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.LapsimResults" title="suboptimumg.compsim.models.LapsimResults"><em>LapsimResults</em></a><em>]</em>) – Results to plot. Pass a list to overlay multiple configurations.</p></li>
 <li><p><strong>x_axis</strong> (<a class="reference internal" href="suboptimumg.plotting.types.html#suboptimumg.plotting.types.Axis" title="suboptimumg.plotting.types.Axis"><em>Axis</em></a>) – Axis to use for the x-axis (distance or time)</p></li>
-<li><p><strong>labels</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Labels for each result set (e.g., [“baseline”, “new_config”]).
+<li><p><strong>labels</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Labels for each result set (e.g., [“baseline”, “new_config”]).
 If not provided, defaults to “run_0”, “run_1”, etc.</p></li>
-<li><p><strong>metrics</strong> (<em>List</em><em>[</em><a class="reference internal" href="suboptimumg.plotting.types.html#suboptimumg.plotting.types.Metric" title="suboptimumg.plotting.types.Metric"><em>Metric</em></a><em>]</em><em>, </em><em>optional</em>) – Metrics to plot. Defaults to all three (velocity, accel, power)</p></li>
+<li><p><strong>metrics</strong> (<em>list</em><em>[</em><a class="reference internal" href="suboptimumg.plotting.types.html#suboptimumg.plotting.types.Metric" title="suboptimumg.plotting.types.Metric"><em>Metric</em></a><em>]</em><em>, </em><em>optional</em>) – Metrics to plot. Defaults to all three (velocity, accel, power)</p></li>
 <li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Plot title</p></li>
 <li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a><em>, </em><em>optional</em>) – Layout configuration object</p></li>
 <li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a><em>, </em><em>optional</em>) – Font configuration object</p></li>
@@ -558,9 +539,9 @@ If not provided, defaults to “run_0”, “run_1”, etc.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>results</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.LapsimResults" title="suboptimumg.compsim.models.LapsimResults"><em>LapsimResults</em></a><em> or </em><em>List</em><em>[</em><a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.LapsimResults" title="suboptimumg.compsim.models.LapsimResults"><em>LapsimResults</em></a><em>]</em>) – For consistency, these should be the same event across different runs</p></li>
+<li><p><strong>results</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.LapsimResults" title="suboptimumg.compsim.models.LapsimResults"><em>LapsimResults</em></a><em> or </em><em>list</em><em>[</em><a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.LapsimResults" title="suboptimumg.compsim.models.LapsimResults"><em>LapsimResults</em></a><em>]</em>) – For consistency, these should be the same event across different runs</p></li>
 <li><p><strong>x_axis</strong> (<a class="reference internal" href="suboptimumg.plotting.types.html#suboptimumg.plotting.types.Axis" title="suboptimumg.plotting.types.Axis"><em>Axis</em></a>) – Use distance or time for the x-axis</p></li>
-<li><p><strong>include_indices</strong> (<em>List</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Specify which seeds to include. e.x. [0, 1] only includes first two seeds.
+<li><p><strong>include_indices</strong> (<em>list</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Specify which seeds to include. e.x. [0, 1] only includes first two seeds.
 Defaults to all seeds found.</p></li>
 <li><p><strong>include_power</strong> (<em>bool</em><em>, </em><em>optional</em>) – Include power proposals (kW). True by default</p></li>
 <li><p><strong>include_seed_overview</strong> (<em>bool</em><em>, </em><em>optional</em>) – Prepend a subplot showing v_max_profile with seed positions marked as red dots.

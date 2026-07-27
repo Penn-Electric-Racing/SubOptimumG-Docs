@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/vehicle/irl_vehicle';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -338,7 +337,7 @@
                   
   <h1>Source code for suboptimumg.vehicle.irl_vehicle</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">npt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">G</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">Car</span>
@@ -370,7 +369,9 @@
 
 <div class="viewcode-block" id="IrlCar.right_tire_angle">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar.right_tire_angle">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">right_tire_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sw_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">right_tire_angle</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">sw_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Right tire steer angle from the ackermann curve.</span>
 
 <span class="sd">        Positive sw_deg = right turn (right tire is inner, steers more).</span>
@@ -380,14 +381,18 @@
 
 <div class="viewcode-block" id="IrlCar.left_tire_angle">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar.left_tire_angle">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">left_tire_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sw_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">left_tire_angle</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">sw_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Left tire steer angle via ackermann symmetry: ``-f(-x)``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">ackermann</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sw_deg</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="IrlCar.tire_angles">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar.tire_angles">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">tire_angles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sw_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tire_angles</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">sw_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return ``(left_deg, right_deg)`` for a given steering input.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_tire_angle</span><span class="p">(</span><span class="n">sw_deg</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_tire_angle</span><span class="p">(</span><span class="n">sw_deg</span><span class="p">)</span></div>
 
@@ -406,21 +411,19 @@
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar.roll_stiffness_distribution">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">roll_stiffness_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Front roll stiffness as a fraction of total (0-1).&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sus_setup</span><span class="o">.</span><span class="n">roll_stiffness_front_Nm_per_rad</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">roll_stiffness_total</span><span class="p">()</span>
-        <span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sus_setup</span><span class="o">.</span><span class="n">roll_stiffness_front_Nm_per_rad</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">roll_stiffness_total</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="IrlCar.lateral_weight_transfer">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar.lateral_weight_transfer">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">lateral_weight_transfer</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">ay_g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">ay_g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Lateral weight transfer per axle (elastic component only).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        ay_g : float or array</span>
+<span class="sd">        ay_g : float | NDArray[np.float64]</span>
 <span class="sd">            Lateral acceleration in g&#39;s (positive = turning left).</span>
 
 <span class="sd">        Returns</span>
@@ -445,18 +448,18 @@
 <div class="viewcode-block" id="IrlCar.longitudinal_weight_transfer">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar.longitudinal_weight_transfer">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">longitudinal_weight_transfer</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">ax_g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">ax_g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Longitudinal weight transfer on the front axle.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        ax_g : float or array</span>
+<span class="sd">        ax_g : float | NDArray[np.float64]</span>
 <span class="sd">            Longitudinal acceleration in g&#39;s (positive = forward accel).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        float or np.ndarray</span>
+<span class="sd">        float | NDArray[np.float64]</span>
 <span class="sd">            Change in front axle normal force (N). Negative under</span>
 <span class="sd">            acceleration, positive under braking.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -468,13 +471,13 @@
 <div class="viewcode-block" id="IrlCar.pot_to_heave">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar.pot_to_heave">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">pot_to_heave</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">pot_mm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">pot_mm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts shock pot displacement (mm) to chassis heave displacement (m).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        pot_mm : float | npt.NDArray[np.float64]</span>
+<span class="sd">        pot_mm : float | NDArray[np.float64]</span>
 <span class="sd">            Shock pot displacement in millimeters. Positive = compression.</span>
 
 <span class="sd">        axle : str</span>
@@ -482,7 +485,7 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        float | npt.NDArray[np.float64]</span>
+<span class="sd">        float | NDArray[np.float64]</span>
 <span class="sd">            Heave displacement in meters. Positive = compression.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">axle</span> <span class="o">==</span> <span class="s2">&quot;front&quot;</span><span class="p">:</span>
@@ -497,20 +500,20 @@
 <div class="viewcode-block" id="IrlCar.heave_to_force">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar.heave_to_force">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">heave_to_force</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">heave_m</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">heave_m</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts Heave displacement (m) to vertical spring force (N).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        heave_m : float | npt.NDArray[np.float64]</span>
+<span class="sd">        heave_m : float | NDArray[np.float64]</span>
 <span class="sd">            Heave displacement in meters. Positive = compression.</span>
 <span class="sd">        axle : str</span>
 <span class="sd">            &quot;front&quot; or &quot;rear&quot;, used to select the correct heave stiffness.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        float | npt.NDArray[np.float64]</span>
+<span class="sd">        float | NDArray[np.float64]</span>
 <span class="sd">            Vertical spring force in Newtons. Positive = compression.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">axle</span> <span class="o">==</span> <span class="s2">&quot;front&quot;</span><span class="p">:</span>
@@ -525,13 +528,13 @@
 <div class="viewcode-block" id="IrlCar.pot_to_force">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar.pot_to_force">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">pot_to_force</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">pot_mm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">pot_mm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts shock pot displacement (mm) to vertical spring force (N).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        pot_mm : float | npt.NDArray[np.float64]</span>
+<span class="sd">        pot_mm : float | NDArray[np.float64]</span>
 <span class="sd">            Shock pot displacement in millimeters. Positive = compression.</span>
 <span class="sd">        axle : str</span>
 <span class="sd">            &quot;front&quot; or &quot;rear&quot;, used to select the correct motion ratio and</span>
@@ -539,7 +542,7 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        float | npt.NDArray[np.float64]</span>
+<span class="sd">        float | NDArray[np.float64]</span>
 <span class="sd">            Vertical spring force in Newtons. Positive = compression.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">heave_to_force</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pot_to_heave</span><span class="p">(</span><span class="n">pot_mm</span><span class="p">,</span> <span class="n">axle</span><span class="p">),</span> <span class="n">axle</span><span class="p">)</span></div>
@@ -549,10 +552,10 @@
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar.aero_force_from_pots">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">aero_force_from_pots</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">front_pot_delta_mm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
-        <span class="n">rear_pot_delta_mm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
-        <span class="n">ax_g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
+        <span class="n">front_pot_delta_mm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+        <span class="n">rear_pot_delta_mm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+        <span class="n">ax_g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Estimate front/rear aero downforce from shock pot deltas.</span>
 
 <span class="sd">        Parameters</span>
@@ -582,9 +585,7 @@
         <span class="n">front_aero</span> <span class="o">=</span> <span class="n">f_front_spring</span> <span class="o">-</span> <span class="n">wt_front_spring</span>
         <span class="n">rear_aero</span> <span class="o">=</span> <span class="n">f_rear_spring</span> <span class="o">-</span> <span class="n">wt_rear_spring</span>
 
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">front_aero</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span>
-            <span class="n">rear_aero</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span>
-        <span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">front_aero</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rear_aero</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

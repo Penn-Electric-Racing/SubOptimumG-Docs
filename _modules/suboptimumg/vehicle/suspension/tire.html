@@ -45,7 +45,6 @@
     <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/vehicle/suspension/tire';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -339,7 +338,6 @@
   <h1>Source code for suboptimumg.vehicle.suspension.tire</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">...constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">in_to_m</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">VehicleModel</span>
 
 
@@ -349,7 +347,15 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">vehicle_model</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">,</span>
-    <span class="p">):</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the four corner tires for a vehicle.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vehicle_model : VehicleModel</span>
+<span class="sd">            Vehicle model providing the tire parameters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span> <span class="o">=</span> <span class="n">vehicle_model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span><span class="o">.</span><span class="n">tires</span>
 
@@ -360,7 +366,21 @@
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.tire.html#suboptimumg.vehicle.suspension.tire.Tires.initialize_tires">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">initialize_tires</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">fl_norm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">fr_norm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">bl_norm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">br_norm</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="p">):</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the initial normal force on each of the four tires.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        fl_norm : float</span>
+<span class="sd">            Normal force on the front left tire (N)</span>
+<span class="sd">        fr_norm : float</span>
+<span class="sd">            Normal force on the front right tire (N)</span>
+<span class="sd">        bl_norm : float</span>
+<span class="sd">            Normal force on the back left tire (N)</span>
+<span class="sd">        br_norm : float</span>
+<span class="sd">            Normal force on the back right tire (N)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fl</span><span class="o">.</span><span class="n">normal</span> <span class="o">=</span> <span class="n">fl_norm</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fr</span><span class="o">.</span><span class="n">normal</span> <span class="o">=</span> <span class="n">fr_norm</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bl</span><span class="o">.</span><span class="n">normal</span> <span class="o">=</span> <span class="n">bl_norm</span>
@@ -369,9 +389,21 @@
 
 <div class="viewcode-block" id="Tires.reset_tires">
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.tire.html#suboptimumg.vehicle.suspension.tire.Tires.reset_tires">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">reset_tires</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">fl_norm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">fr_norm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">bl_norm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">br_norm</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset_tires</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fl_norm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">fr_norm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">bl_norm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">br_norm</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reset all four tires, then set their normal forces.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        fl_norm : float</span>
+<span class="sd">            Normal force on the front left tire (N)</span>
+<span class="sd">        fr_norm : float</span>
+<span class="sd">            Normal force on the front right tire (N)</span>
+<span class="sd">        bl_norm : float</span>
+<span class="sd">            Normal force on the back left tire (N)</span>
+<span class="sd">        br_norm : float</span>
+<span class="sd">            Normal force on the back right tire (N)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">tire</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">:</span>
             <span class="n">tire</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
@@ -386,24 +418,30 @@
 <div class="viewcode-block" id="Tire">
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.tire.html#suboptimumg.vehicle.suspension.tire.Tire">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Tire</span><span class="p">:</span>
-    <span class="c1"># TODO: redo the tire model</span>
-    <span class="c1"># assumes maximum slip ratio</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a single tire with default grip state.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The tire model assumes maximum slip ratio and is due for a rework.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">normal</span> <span class="o">=</span> <span class="mf">1e-6</span>  <span class="c1"># normal force (N) default value</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lateral</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># lateral grip (N)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">longitudinal</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># longitudinal grip (N)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lateral</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># lateral grip (N)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">longitudinal</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># longitudinal grip (N)</span>
 
 <div class="viewcode-block" id="Tire.reset">
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.tire.html#suboptimumg.vehicle.suspension.tire.Tire.reset">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset the tire&#39;s normal, lateral, and longitudinal forces to defaults.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">normal</span> <span class="o">=</span> <span class="mf">1e-6</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lateral</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">longitudinal</span> <span class="o">=</span> <span class="mi">0</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lateral</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">longitudinal</span> <span class="o">=</span> <span class="mf">0.0</span></div>
 
 
 <div class="viewcode-block" id="Tire.calc_mu">
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.tire.html#suboptimumg.vehicle.suspension.tire.Tire.calc_mu">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">calc_mu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu_long_lat_ratio</span><span class="p">,</span> <span class="n">mu_lat_zero_load</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_mu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu_long_lat_ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mu_lat_zero_load</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate mu_lat and mu_long according to an equation fitted from TTC data.</span>
 
@@ -427,9 +465,7 @@
 <span class="sd">        Returns (0, 0) if tire is lifted (normal force &lt;= 0).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">mu_lat</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="o">-</span><span class="mf">7.66113e-8</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">2.82666e-4</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span> <span class="o">+</span> <span class="n">mu_lat_zero_load</span>
-        <span class="p">)</span>
+        <span class="n">mu_lat</span> <span class="o">=</span> <span class="o">-</span><span class="mf">7.66113e-8</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">2.82666e-4</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span> <span class="o">+</span> <span class="n">mu_lat_zero_load</span>
         <span class="n">mu_lat</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">mu_lat</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Clip if bad</span>
         <span class="n">mu_long</span> <span class="o">=</span> <span class="n">mu_lat</span> <span class="o">*</span> <span class="n">mu_long_lat_ratio</span>
 
@@ -441,7 +477,9 @@
 
 <div class="viewcode-block" id="Tire.is_current_lateral_force_valid">
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.tire.html#suboptimumg.vehicle.suspension.tire.Tire.is_current_lateral_force_valid">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">is_current_lateral_force_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu_long_lat_ratio</span><span class="p">,</span> <span class="n">mu_lat_zero_load</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_current_lateral_force_valid</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">mu_long_lat_ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mu_lat_zero_load</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check whether the requested lateral force results in oversaturating the tire.</span>
 
@@ -468,18 +506,30 @@
 
 <div class="viewcode-block" id="Tire.long_remain">
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.suspension.tire.html#suboptimumg.vehicle.suspension.tire.Tire.long_remain">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">long_remain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu_long_lat_ratio</span><span class="p">,</span> <span class="n">mu_lat_zero_load</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">long_remain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu_long_lat_ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mu_lat_zero_load</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculates the remaining longitudinal grip of the tire based on a friction ellipse</span>
+<span class="sd">        Calculate the remaining longitudinal grip of the tire based on a friction ellipse.</span>
 
-<span class="sd">        ELLIPSE EQN:</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mu_long_lat_ratio : float</span>
+<span class="sd">            Ratio of longitudinal to lateral friction coefficients (unitless)</span>
+<span class="sd">        mu_lat_zero_load : float</span>
+<span class="sd">            Lateral friction coefficient at zero normal force (unitless)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Remaining longitudinal grip (N)</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Friction ellipse equation:</span>
+
 <span class="sd">        (x^2 / radius_x^2) + (y^2 / radius_y^2) = n^2</span>
 
 <span class="sd">        (f_lat^2 / mu_lat^2) + (f_long^2 / mu_long^2) = f_normal^2</span>
 <span class="sd">        f_long = mu_long * sqrt( f_normal^2 - ( f_lat^2 / mu_lat^2 ) )</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            float: Remaining longitudinal grip (N).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Calculate remaining longitudinal grip with friction ellipse</span>
         <span class="n">mu_lat</span><span class="p">,</span> <span class="n">mu_long</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_mu</span><span class="p">(</span><span class="n">mu_long_lat_ratio</span><span class="p">,</span> <span class="n">mu_lat_zero_load</span><span class="p">)</span>

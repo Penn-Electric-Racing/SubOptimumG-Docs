@@ -46,7 +46,6 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.vehicle.subsystem_models';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -311,7 +310,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.constants.html">suboptimumg.constants</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suboptimumg.gdrive.html">suboptimumg.gdrive</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.log_analysis.html">suboptimumg.log_analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.aero.html">suboptimumg.log_analysis.aero</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.drivetrain.html">suboptimumg.log_analysis.drivetrain</a></li>
@@ -327,22 +325,6 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_plots.html">suboptimumg.log_analysis.yaw_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation.html">suboptimumg.log_analysis.yaw_segmentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation_models.html">suboptimumg.log_analysis.yaw_segmentation_models</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.loganalysis.html">suboptimumg.loganalysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.corrections.html">suboptimumg.loganalysis.corrections</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.derived.html">suboptimumg.loganalysis.derived</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.filtering.html">suboptimumg.loganalysis.filtering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.fitted_curve.html">suboptimumg.loganalysis.fitted_curve</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.gps.html">suboptimumg.loganalysis.gps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.intake.html">suboptimumg.loganalysis.intake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.irl_car.html">suboptimumg.loganalysis.irl_car</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.laps.html">suboptimumg.loganalysis.laps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.macros.html">suboptimumg.loganalysis.macros</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.plotting.html">suboptimumg.loganalysis.plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.track_builder.html">suboptimumg.loganalysis.track_builder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.understeer.html">suboptimumg.loganalysis.understeer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.variables.html">suboptimumg.loganalysis.variables</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.models.html">suboptimumg.models</a></li>
@@ -386,7 +368,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.track.html">suboptimumg.track</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.gps.html">suboptimumg.track.gps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.models.html">suboptimumg.track.models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track.html">suboptimumg.track.track</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track_factory.html">suboptimumg.track.track_factory</a></li>
@@ -500,6 +481,7 @@
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.AccumulatorModel">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.subsystem_models.</span></span><span class="sig-name descname"><span class="pre">AccumulatorModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#AccumulatorModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.AccumulatorModel" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Battery accumulator configuration.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id1">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id1" title="Link to this table">#</a></caption>
 <thead>
@@ -574,6 +556,7 @@
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.AeroModel">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.subsystem_models.</span></span><span class="sig-name descname"><span class="pre">AeroModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#AeroModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.AeroModel" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Aerodynamics configuration.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id2">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id2" title="Link to this table">#</a></caption>
 <thead>
@@ -685,22 +668,54 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.AeroModel.validate_cd_plausible">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_cd_plausible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#AeroModel.validate_cd_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.AeroModel.validate_cd_plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.AeroModel.validate_cl_plausible">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_cl_plausible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#AeroModel.validate_cl_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.AeroModel.validate_cl_plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.AeroModel.validate_cop_plausible">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_cop_plausible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#AeroModel.validate_cop_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.AeroModel.validate_cop_plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.AeroModel.validate_front_area_plausible">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_front_area_plausible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#AeroModel.validate_front_area_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.AeroModel.validate_front_area_plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -708,6 +723,7 @@
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.ChassisModel">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.subsystem_models.</span></span><span class="sig-name descname"><span class="pre">ChassisModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#ChassisModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.ChassisModel" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Chassis configuration (currently no parameters).</p>
 <dl class="field-list simple">
 </dl>
 </dd></dl>
@@ -716,6 +732,7 @@
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.ComplexSuspensionModel">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.subsystem_models.</span></span><span class="sig-name descname"><span class="pre">ComplexSuspensionModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#ComplexSuspensionModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.ComplexSuspensionModel" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Complex suspension configuration with roll center and stiffness details.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id4">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id4" title="Link to this table">#</a></caption>
 <thead>
@@ -802,6 +819,7 @@
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.DRSModel">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.subsystem_models.</span></span><span class="sig-name descname"><span class="pre">DRSModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#DRSModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.DRSModel" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Drag reduction system (DRS) configuration.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id5">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id5" title="Link to this table">#</a></caption>
 <thead>
@@ -916,6 +934,7 @@
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.DriverInterfaceModel">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.subsystem_models.</span></span><span class="sig-name descname"><span class="pre">DriverInterfaceModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#DriverInterfaceModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.DriverInterfaceModel" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Driver interface configuration.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id6">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id6" title="Link to this table">#</a></caption>
 <thead>
@@ -979,7 +998,15 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.DriverInterfaceModel.validate_brake_bias_plausible">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_brake_bias_plausible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#DriverInterfaceModel.validate_brake_bias_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.DriverInterfaceModel.validate_brake_bias_plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -987,6 +1014,7 @@
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.subsystem_models.</span></span><span class="sig-name descname"><span class="pre">MotorModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#MotorModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.MotorModel" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Electric motor configuration.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id8">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id8" title="Link to this table">#</a></caption>
 <thead>
@@ -1011,7 +1039,7 @@
 <td><p>gt=0, le=1.0</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.MotorModel.efficiency_data" title="suboptimumg.vehicle.subsystem_models.MotorModel.efficiency_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">efficiency_data</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]]</p></td>
 <td><p>Yes</p></td>
 <td></td>
 <td></td>
@@ -1189,7 +1217,7 @@
 <li><p><strong>mass</strong> (<em>Annotated</em><em>[</em><em>float</em><em>, </em><em>Gt</em><em>(</em><em>gt=0</em><em>)</em><em>]</em>)</p></li>
 <li><p><strong>ideal_gear_ratio</strong> (<em>Annotated</em><em>[</em><em>float</em><em>, </em><em>Gt</em><em>(</em><em>gt=0</em><em>)</em><em>]</em>)</p></li>
 <li><p><strong>use_efficiency_lut</strong> (<em>bool</em>)</p></li>
-<li><p><strong>efficiency_data</strong> (<em>list</em>)</p></li>
+<li><p><strong>efficiency_data</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>float</em><em>]</em><em>]</em>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -1205,7 +1233,7 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel.efficiency_data">
-<span class="sig-name descname"><span class="pre">efficiency_data</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></span><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.MotorModel.efficiency_data" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">efficiency_data</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.MotorModel.efficiency_data" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1221,7 +1249,18 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel.fw_rpm_less_than_max_rpm">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">fw_rpm_less_than_max_rpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#MotorModel.fw_rpm_less_than_max_rpm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.MotorModel.fw_rpm_less_than_max_rpm" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>float</em>)</p></li>
+<li><p><strong>info</strong> (<em>ValidationInfo</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel.fw_torque">
@@ -1231,7 +1270,18 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel.fw_torque_less_than_max_torque">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">fw_torque_less_than_max_torque</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#MotorModel.fw_torque_less_than_max_torque"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.MotorModel.fw_torque_less_than_max_torque" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>float</em>)</p></li>
+<li><p><strong>info</strong> (<em>ValidationInfo</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel.ideal_gear_ratio">
@@ -1296,52 +1346,132 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel.validate_chain_efficiency">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_chain_efficiency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#MotorModel.validate_chain_efficiency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.MotorModel.validate_chain_efficiency" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel.validate_efficiency_data_plausible">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_efficiency_data_plausible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#MotorModel.validate_efficiency_data_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.MotorModel.validate_efficiency_data_plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>float</em><em>]</em><em>]</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[list[float]]</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel.validate_fw_rpm_plausible">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_fw_rpm_plausible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#MotorModel.validate_fw_rpm_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.MotorModel.validate_fw_rpm_plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel.validate_fw_torque_plausible">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_fw_torque_plausible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#MotorModel.validate_fw_torque_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.MotorModel.validate_fw_torque_plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel.validate_max_rpm_plausible">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_max_rpm_plausible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#MotorModel.validate_max_rpm_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.MotorModel.validate_max_rpm_plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel.validate_max_torque_plausible">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_max_torque_plausible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#MotorModel.validate_max_torque_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.MotorModel.validate_max_torque_plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel.validate_moc_efficiency">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_moc_efficiency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#MotorModel.validate_moc_efficiency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.MotorModel.validate_moc_efficiency" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel.validate_motor_efficiency">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_motor_efficiency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#MotorModel.validate_motor_efficiency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.MotorModel.validate_motor_efficiency" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel.validate_power_limit">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_power_limit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#MotorModel.validate_power_limit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.MotorModel.validate_power_limit" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.MotorModel.validate_setup">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#MotorModel.validate_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.MotorModel.validate_setup" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.DriveSetup" title="suboptimumg.vehicle.subsystem_models.DriveSetup"><em>DriveSetup</em></a>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.DriveSetup" title="suboptimumg.vehicle.subsystem_models.DriveSetup"><em>DriveSetup</em></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1477,12 +1607,25 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_ratio_plausible">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_ratio_plausible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#PowertrainModel.validate_ratio_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_ratio_plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_regen_config">
 <span class="sig-name descname"><span class="pre">validate_regen_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#PowertrainModel.validate_regen_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_regen_config" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel" title="suboptimumg.vehicle.subsystem_models.PowertrainModel"><em>PowertrainModel</em></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1490,6 +1633,7 @@
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.SimpleSuspensionModel">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.subsystem_models.</span></span><span class="sig-name descname"><span class="pre">SimpleSuspensionModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#SimpleSuspensionModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.SimpleSuspensionModel" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Simple suspension configuration (no additional parameters).</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id12">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id12" title="Link to this table">#</a></caption>
 <thead>
@@ -1540,6 +1684,7 @@
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.TireModel">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.subsystem_models.</span></span><span class="sig-name descname"><span class="pre">TireModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#TireModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.TireModel" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Tire configuration.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id13">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id13" title="Link to this table">#</a></caption>
 <thead>
@@ -1658,22 +1803,58 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.TireModel.validate_mu_lat_zero_load_plausible">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_mu_lat_zero_load_plausible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#TireModel.validate_mu_lat_zero_load_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.TireModel.validate_mu_lat_zero_load_plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.TireModel.validate_mu_long_lat_ratio_plausible">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_mu_long_lat_ratio_plausible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#TireModel.validate_mu_long_lat_ratio_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.TireModel.validate_mu_long_lat_ratio_plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.TireModel.validate_tire_radius_plausible">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_tire_radius_plausible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#TireModel.validate_tire_radius_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.TireModel.validate_tire_radius_plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Check tire diameter (converted from inches) against a plausible range.</p>
+<p class="rubric">Notes</p>
+<p><code class="docutils literal notranslate"><span class="pre">tire_radius</span></code> is in inches; the diameter is converted to meters
+before comparing against the recommended 8-24 inch range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.TireModel.validate_weight_plausible">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_weight_plausible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#TireModel.validate_weight_plausible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.TireModel.validate_weight_plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.TireModel.weight">

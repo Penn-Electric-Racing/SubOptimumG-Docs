@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/compsim/competition';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -337,22 +336,25 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.compsim.competition</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Full FSAE competition with scoring logic.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">..track</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">..track</span><span class="w"> </span><span class="kn">import</span> <span class="n">Track</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">Car</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.lap</span><span class="w"> </span><span class="kn">import</span> <span class="n">lapsim</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CompetitionData</span><span class="p">,</span>
+    <span class="n">CompetitionResults</span><span class="p">,</span>
+    <span class="n">CompetitionScoring</span><span class="p">,</span>
+    <span class="n">EventResults</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_efficiency_points</span><span class="p">,</span> <span class="n">compute_event_points</span><span class="p">,</span> <span class="n">energy_data</span>
 
 
 <div class="viewcode-block" id="Competition">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.competition.html#suboptimumg.compsim.competition.Competition">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Competition</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs and scores a full FSAE competition for a given car and set of tracks.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">mycar</span><span class="p">:</span> <span class="n">Car</span><span class="p">,</span>
@@ -361,14 +363,29 @@
         <span class="n">autoX</span><span class="p">:</span> <span class="n">Track</span><span class="p">,</span>
         <span class="n">endurance</span><span class="p">:</span> <span class="n">Track</span><span class="p">,</span>
         <span class="n">scoring</span><span class="p">:</span> <span class="n">CompetitionScoring</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-    <span class="p">):</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mycar : Car</span>
+<span class="sd">            Vehicle to simulate through each event.</span>
+<span class="sd">        accel : Track</span>
+<span class="sd">            Acceleration event track.</span>
+<span class="sd">        skidpad : Track</span>
+<span class="sd">            Skidpad event track.</span>
+<span class="sd">        autoX : Track</span>
+<span class="sd">            Autocross event track.</span>
+<span class="sd">        endurance : Track</span>
+<span class="sd">            Endurance event track.</span>
+<span class="sd">        scoring : CompetitionScoring</span>
+<span class="sd">            Scoring configuration used to convert event times into points.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mycar</span> <span class="o">=</span> <span class="n">mycar</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">accel</span> <span class="o">=</span> <span class="n">accel</span>  <span class="c1"># accel track</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">skidpad</span> <span class="o">=</span> <span class="n">skidpad</span>  <span class="c1"># skidpad track</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">autoX</span> <span class="o">=</span> <span class="n">autoX</span>  <span class="c1"># autoX track</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">endurance</span> <span class="o">=</span> <span class="n">endurance</span>  <span class="c1"># endurance track</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accel</span> <span class="o">=</span> <span class="n">accel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skidpad</span> <span class="o">=</span> <span class="n">skidpad</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoX</span> <span class="o">=</span> <span class="n">autoX</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">endurance</span> <span class="o">=</span> <span class="n">endurance</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">scoring</span> <span class="o">=</span> <span class="n">scoring</span>
 
@@ -408,8 +425,10 @@
 <span class="sd">        EventResults</span>
 <span class="sd">            The results of the acceleration event simulation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">original_drs_status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mycar</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">aero</span><span class="o">.</span><span class="n">drs</span><span class="o">.</span><span class="n">drs_present</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mycar</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">aero</span><span class="o">.</span><span class="n">drs</span><span class="o">.</span><span class="n">drs_present</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">drs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mycar</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">aero</span><span class="o">.</span><span class="n">drs</span>
+        <span class="k">if</span> <span class="n">drs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">original_drs_status</span> <span class="o">=</span> <span class="n">drs</span><span class="o">.</span><span class="n">drs_present</span>
+            <span class="n">drs</span><span class="o">.</span><span class="n">drs_present</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="n">lapsim_results</span> <span class="o">=</span> <span class="n">lapsim</span><span class="p">(</span>
             <span class="n">mycar</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mycar</span><span class="p">,</span>
@@ -422,7 +441,8 @@
         <span class="n">points</span> <span class="o">=</span> <span class="n">compute_event_points</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scoring</span><span class="o">.</span><span class="n">accel</span><span class="p">,</span> <span class="n">tyour</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mycar</span><span class="o">.</span><span class="n">car_reset</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">mycar</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">aero</span><span class="o">.</span><span class="n">drs</span><span class="o">.</span><span class="n">drs_present</span> <span class="o">=</span> <span class="n">original_drs_status</span>
+        <span class="k">if</span> <span class="n">drs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">drs</span><span class="o">.</span><span class="n">drs_present</span> <span class="o">=</span> <span class="n">original_drs_status</span>
 
         <span class="k">return</span> <span class="n">EventResults</span><span class="p">(</span>
             <span class="n">points</span><span class="o">=</span><span class="n">points</span><span class="p">,</span>
@@ -480,13 +500,17 @@
 <span class="sd">        -------</span>
 <span class="sd">        EventResults</span>
 <span class="sd">            The results of the autocross event simulation.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The initial velocity is set to 1.0 m/s rather than 0, since the</span>
+<span class="sd">        timer uses a transponder at the back of the car, giving roughly</span>
+<span class="sd">        one wheelbase of rollout before timing starts.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">lapsim_results</span> <span class="o">=</span> <span class="n">lapsim</span><span class="p">(</span>
             <span class="n">mycar</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mycar</span><span class="p">,</span>
             <span class="n">track</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">autoX</span><span class="p">,</span>
             <span class="n">initial_velocity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-            <span class="c1"># timer uses transponder at back of car, so you effectively get</span>
-            <span class="c1"># ~1 wheelbase of rollout.</span>
             <span class="n">extract_internal_data</span><span class="o">=</span><span class="n">extract_internal_data</span><span class="p">,</span>
         <span class="p">)</span>
 
@@ -513,17 +537,25 @@
 <span class="sd">        ----------</span>
 <span class="sd">        extract_internal_data : bool, optional</span>
 <span class="sd">            Whether to extract internal data during the simulation, by default False.</span>
+<span class="sd">        use_coast : bool, optional</span>
+<span class="sd">            Whether to allow the car to coast and regen instead of braking, by</span>
+<span class="sd">            default True.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        EventResults</span>
 <span class="sd">            The results of the endurance event simulation.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The initial velocity is set to 1.0 m/s for the same rollout reason</span>
+<span class="sd">        described in `autoX_event`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">lapsim_results</span> <span class="o">=</span> <span class="n">lapsim</span><span class="p">(</span>
             <span class="n">mycar</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mycar</span><span class="p">,</span>
             <span class="n">track</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">endurance</span><span class="p">,</span>
             <span class="n">multilap</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-            <span class="n">initial_velocity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># same reason as in autoX</span>
+            <span class="n">initial_velocity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
             <span class="n">use_coast</span><span class="o">=</span><span class="n">use_coast</span><span class="p">,</span>
             <span class="n">extract_internal_data</span><span class="o">=</span><span class="n">extract_internal_data</span><span class="p">,</span>
         <span class="p">)</span>
@@ -543,7 +575,7 @@
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.competition.html#suboptimumg.compsim.competition.Competition.efficiency_endurance_event">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">efficiency_endurance_event</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">extract_internal_data</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">EventResults</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">EventResults</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Simulates the endurance event in the competition, and also calculates efficiency points.</span>
 
@@ -554,7 +586,7 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        Tuple[EventResults, float, float]</span>
+<span class="sd">        tuple[EventResults, float, float]</span>
 <span class="sd">            Endurance event results, efficiency points, and consumed energy in kWh.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">endu_res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">endurance_event</span><span class="p">(</span><span class="n">extract_internal_data</span><span class="o">=</span><span class="n">extract_internal_data</span><span class="p">)</span>
@@ -592,12 +624,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">accel_results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">accel_event</span><span class="p">(</span><span class="n">extract_internal_data</span><span class="o">=</span><span class="n">extract_internal_data</span><span class="p">)</span>
-        <span class="n">skidpad_results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">skidpad_event</span><span class="p">(</span>
-            <span class="n">extract_internal_data</span><span class="o">=</span><span class="n">extract_internal_data</span>
-        <span class="p">)</span>
+        <span class="n">skidpad_results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">skidpad_event</span><span class="p">(</span><span class="n">extract_internal_data</span><span class="o">=</span><span class="n">extract_internal_data</span><span class="p">)</span>
         <span class="n">autoX_results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoX_event</span><span class="p">(</span><span class="n">extract_internal_data</span><span class="o">=</span><span class="n">extract_internal_data</span><span class="p">)</span>
-        <span class="n">endurance_results</span><span class="p">,</span> <span class="n">efficiency_points</span><span class="p">,</span> <span class="n">consumed_energy</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">efficiency_endurance_event</span><span class="p">(</span><span class="n">extract_internal_data</span><span class="o">=</span><span class="n">extract_internal_data</span><span class="p">)</span>
+        <span class="n">endurance_results</span><span class="p">,</span> <span class="n">efficiency_points</span><span class="p">,</span> <span class="n">consumed_energy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">efficiency_endurance_event</span><span class="p">(</span>
+            <span class="n">extract_internal_data</span><span class="o">=</span><span class="n">extract_internal_data</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">CompetitionResults</span><span class="p">(</span>
             <span class="n">accel</span><span class="o">=</span><span class="n">accel_results</span><span class="p">,</span>

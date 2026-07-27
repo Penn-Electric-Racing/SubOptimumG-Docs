@@ -46,7 +46,6 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.compsim.competition';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -311,7 +310,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.constants.html">suboptimumg.constants</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suboptimumg.gdrive.html">suboptimumg.gdrive</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.log_analysis.html">suboptimumg.log_analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.aero.html">suboptimumg.log_analysis.aero</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.drivetrain.html">suboptimumg.log_analysis.drivetrain</a></li>
@@ -327,22 +325,6 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_plots.html">suboptimumg.log_analysis.yaw_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation.html">suboptimumg.log_analysis.yaw_segmentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation_models.html">suboptimumg.log_analysis.yaw_segmentation_models</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.loganalysis.html">suboptimumg.loganalysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.corrections.html">suboptimumg.loganalysis.corrections</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.derived.html">suboptimumg.loganalysis.derived</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.filtering.html">suboptimumg.loganalysis.filtering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.fitted_curve.html">suboptimumg.loganalysis.fitted_curve</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.gps.html">suboptimumg.loganalysis.gps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.intake.html">suboptimumg.loganalysis.intake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.irl_car.html">suboptimumg.loganalysis.irl_car</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.laps.html">suboptimumg.loganalysis.laps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.macros.html">suboptimumg.loganalysis.macros</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.plotting.html">suboptimumg.loganalysis.plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.track_builder.html">suboptimumg.loganalysis.track_builder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.understeer.html">suboptimumg.loganalysis.understeer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.variables.html">suboptimumg.loganalysis.variables</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.models.html">suboptimumg.models</a></li>
@@ -386,7 +368,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.track.html">suboptimumg.track</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.gps.html">suboptimumg.track.gps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.models.html">suboptimumg.track.models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track.html">suboptimumg.track.track</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track_factory.html">suboptimumg.track.track_factory</a></li>
@@ -496,11 +477,11 @@
                   
   <section id="module-suboptimumg.compsim.competition">
 <span id="suboptimumg-compsim-competition"></span><h1>suboptimumg.compsim.competition<a class="headerlink" href="#module-suboptimumg.compsim.competition" title="Link to this heading">#</a></h1>
-<p>Full FSAE competition with scoring logic.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="suboptimumg.compsim.competition.Competition">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.compsim.competition.</span></span><span class="sig-name descname"><span class="pre">Competition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mycar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skidpad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autoX</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endurance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/competition.html#Competition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.competition.Competition" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.compsim.competition.</span></span><span class="sig-name descname"><span class="pre">Competition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mycar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skidpad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autoX</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endurance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/competition.html#Competition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.competition.Competition" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Runs and scores a full FSAE competition for a given car and set of tracks.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -545,6 +526,10 @@
 <dd class="field-odd"><p><a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.EventResults" title="suboptimumg.compsim.models.EventResults">EventResults</a></p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>The initial velocity is set to 1.0 m/s rather than 0, since the
+timer uses a transponder at the back of the car, giving roughly
+one wheelbase of rollout before timing starts.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -559,7 +544,7 @@
 <dd class="field-even"><p>Endurance event results, efficiency points, and consumed energy in kWh.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Tuple[<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.EventResults" title="suboptimumg.compsim.models.EventResults">EventResults</a>, float, float]</p>
+<dd class="field-odd"><p>tuple[<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.EventResults" title="suboptimumg.compsim.models.EventResults">EventResults</a>, float, float]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -572,7 +557,8 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>extract_internal_data</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to extract internal data during the simulation, by default False.</p></li>
-<li><p><strong>use_coast</strong> (<em>bool</em>)</p></li>
+<li><p><strong>use_coast</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to allow the car to coast and regen instead of braking, by
+default True.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -582,6 +568,9 @@
 <dd class="field-odd"><p><a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.EventResults" title="suboptimumg.compsim.models.EventResults">EventResults</a></p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>The initial velocity is set to 1.0 m/s for the same rollout reason
+described in <cite>autoX_event</cite>.</p>
 </dd></dl>
 
 <dl class="py method">

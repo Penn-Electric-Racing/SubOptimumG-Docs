@@ -15,9 +15,7 @@
 
    compsim
    constants
-   gdrive
    log_analysis
-   loganalysis
    models
    plotting
    sweep

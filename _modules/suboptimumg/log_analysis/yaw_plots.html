@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/log_analysis/yaw_plots';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -480,9 +479,7 @@
         <span class="k">for</span> <span class="n">v_idx</span><span class="p">,</span> <span class="n">V</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">V_picks</span><span class="p">):</span>
             <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">, V=</span><span class="si">{</span><span class="n">V</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="n">row</span> <span class="o">=</span> <span class="n">mag</span><span class="p">[</span><span class="n">v_idx</span><span class="p">]</span>
-            <span class="n">mag_by</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="n">row</span> <span class="k">if</span> <span class="n">linear_scale</span> <span class="k">else</span> <span class="mf">20.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">))</span>
-            <span class="p">)</span>
+            <span class="n">mag_by</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span> <span class="k">if</span> <span class="n">linear_scale</span> <span class="k">else</span> <span class="mf">20.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">))</span>
             <span class="n">phase_by</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">phase</span><span class="p">[</span><span class="n">v_idx</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">fit_idx</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">dashed</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
@@ -498,9 +495,7 @@
 
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_display_idx</span><span class="p">(</span>
-    <span class="n">n_points</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">duration_s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_display_hz</span><span class="p">:</span> <span class="nb">float</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">intp</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_display_idx</span><span class="p">(</span><span class="n">n_points</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">duration_s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_display_hz</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">intp</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Indices that cap the plotted sample rate at ``max_display_hz``.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">max_display_hz</span> <span class="ow">or</span> <span class="n">duration_s</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n_points</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_points</span><span class="p">)</span>
@@ -607,9 +602,7 @@
                 <span class="n">secondary_y</span><span class="o">=</span><span class="n">on_y2</span><span class="p">,</span>
             <span class="p">)</span>
 
-        <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span>
-            <span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;yaw rate (rad/s)&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">secondary_y</span><span class="o">=</span><span class="kc">False</span>
-        <span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;yaw rate (rad/s)&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">secondary_y</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span>
             <span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;error (rad/s)&quot;</span><span class="p">,</span>
             <span class="nb">range</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">error_ylim</span><span class="p">),</span>
@@ -656,8 +649,8 @@
 <span class="sd">    prediction : Prediction</span>
 <span class="sd">        Supplies the residuals; must be aligned with ``window_arrays``.</span>
 <span class="sd">    x_of : {&quot;input&quot;, &quot;amplitude&quot;, &quot;speed&quot;}, optional</span>
-<span class="sd">        What to put on the x axis: signed steering (deg), |steering| (deg), or</span>
-<span class="sd">        speed (m/s).</span>
+<span class="sd">        What to put on the x axis: signed steering (deg), absolute steering</span>
+<span class="sd">        (deg), or speed (m/s).</span>
 <span class="sd">    n_bins : int, optional</span>
 <span class="sd">        Number of quantile bins for the mean/sigma overlay.</span>
 
@@ -671,9 +664,7 @@
 <span class="sd">        If ``x_of`` is unrecognised.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">x_of</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">RESIDUAL_X_AXES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;unknown x_of &#39;</span><span class="si">{</span><span class="n">x_of</span><span class="si">}</span><span class="s2">&#39;; expected one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">RESIDUAL_X_AXES</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown x_of &#39;</span><span class="si">{</span><span class="n">x_of</span><span class="si">}</span><span class="s2">&#39;; expected one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">RESIDUAL_X_AXES</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">x_values</span><span class="p">(</span><span class="n">w</span><span class="p">:</span> <span class="n">WindowArrays</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
         <span class="k">if</span> <span class="n">x_of</span> <span class="o">==</span> <span class="s2">&quot;input&quot;</span><span class="p">:</span>
@@ -684,9 +675,7 @@
 
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x_values</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">window_arrays</span><span class="p">])</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">prediction</span><span class="o">.</span><span class="n">err_per_window</span><span class="p">])</span>
-    <span class="n">sw_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
-        <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">t</span><span class="p">),</span> <span class="n">w</span><span class="o">.</span><span class="n">sw_id</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">window_arrays</span><span class="p">]</span>
-    <span class="p">)</span>
+    <span class="n">sw_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">t</span><span class="p">),</span> <span class="n">w</span><span class="o">.</span><span class="n">sw_id</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">window_arrays</span><span class="p">])</span>
 
     <span class="n">x_label</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="n">RESIDUAL_X_AXES</span><span class="p">[</span><span class="n">x_of</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">plot_binned_scatter</span><span class="p">(</span>

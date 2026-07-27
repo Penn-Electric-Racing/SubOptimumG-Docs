@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/compsim/custom_run';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -337,8 +336,10 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.compsim.custom_run</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">enum</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleRunData</span><span class="p">,</span> <span class="n">left_join_data_instances</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..log_analysis</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">CUMULATIVE_DISTANCE</span><span class="p">,</span>
@@ -352,14 +353,17 @@
     <span class="n">plot_track_heatmap</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.plotting_constants</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DEFAULT_COLORBAR_CONFIG</span><span class="p">,</span>
+    <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
+    <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
     <span class="n">ColorbarConfig</span><span class="p">,</span>
     <span class="n">FontConfig</span><span class="p">,</span>
     <span class="n">LayoutConfig</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">..track</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..track</span><span class="w"> </span><span class="kn">import</span> <span class="n">Track</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">Car</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.lap</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.lap</span><span class="w"> </span><span class="kn">import</span> <span class="n">lapsim</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">LapsimResults</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">energy_data</span>
 
 
@@ -376,11 +380,23 @@
 <div class="viewcode-block" id="CustomRun">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.custom_run.html#suboptimumg.compsim.custom_run.CustomRun">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">CustomRun</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs and visualizes a simulated lap along an arbitrary (non-competition) track.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">mycar</span><span class="p">:</span> <span class="n">Car</span><span class="p">,</span>
         <span class="n">track</span><span class="p">:</span> <span class="n">Track</span><span class="p">,</span>
-    <span class="p">):</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mycar : Car</span>
+<span class="sd">            Vehicle to simulate along the track.</span>
+<span class="sd">        track : Track</span>
+<span class="sd">            Track to simulate the vehicle along.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mycar</span> <span class="o">=</span> <span class="n">mycar</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">track</span> <span class="o">=</span> <span class="n">track</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_no_coast</span><span class="p">:</span> <span class="n">LapsimResults</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
@@ -390,7 +406,7 @@
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.custom_run.html#suboptimumg.compsim.custom_run.CustomRun.run">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">extract_internal_data</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">initial_velocity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LapsimResults</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">LapsimResults</span><span class="p">,</span> <span class="n">LapsimResults</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Simulates a run along the custom track. Sets the sim_results attribute for future use.</span>
 
@@ -433,19 +449,22 @@
 <span class="sd">        Print a summary of the custom run results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_no_coast</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_coast</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+            <span class="n">sim_results_no_coast</span><span class="p">,</span> <span class="n">sim_results_coast</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sim_results_no_coast</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_no_coast</span>
+            <span class="n">sim_results_coast</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_coast</span>
 
         <span class="n">distance</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">track</span><span class="o">.</span><span class="n">cumulative_dist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Distance:&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39; m&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
 
-        <span class="n">time_no_coast</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sim_results_no_coast</span><span class="o">.</span><span class="n">lap_t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="n">time_coast</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sim_results_coast</span><span class="o">.</span><span class="n">lap_t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">time_no_coast</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">sim_results_no_coast</span><span class="o">.</span><span class="n">lap_t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">time_coast</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">sim_results_coast</span><span class="o">.</span><span class="n">lap_t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">regened_energy_no_coast</span><span class="p">,</span> <span class="n">consumed_energy_no_coast</span> <span class="o">=</span> <span class="n">energy_data</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_no_coast</span><span class="o">.</span><span class="n">lap_t</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_no_coast</span><span class="o">.</span><span class="n">lap_powers</span><span class="p">,</span>
+            <span class="n">sim_results_no_coast</span><span class="o">.</span><span class="n">lap_t</span><span class="p">,</span>
+            <span class="n">sim_results_no_coast</span><span class="o">.</span><span class="n">lap_powers</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">regened_energy_coast</span><span class="p">,</span> <span class="n">consumed_energy_coast</span> <span class="o">=</span> <span class="n">energy_data</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_coast</span><span class="o">.</span><span class="n">lap_t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_coast</span><span class="o">.</span><span class="n">lap_powers</span>
+            <span class="n">sim_results_coast</span><span class="o">.</span><span class="n">lap_t</span><span class="p">,</span> <span class="n">sim_results_coast</span><span class="o">.</span><span class="n">lap_powers</span>
         <span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">NO COAST&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Laptime:&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">time_no_coast</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39; s&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -494,11 +513,13 @@
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_no_coast</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_coast</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">sim_results_coast</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sim_results_coast</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_coast</span>
 
         <span class="n">di</span> <span class="o">=</span> <span class="n">real_lap_data</span><span class="p">[</span><span class="n">real_data_key</span><span class="p">]</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">di_aligned</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">real_lap_data</span><span class="p">[</span><span class="n">POS_X</span><span class="p">],</span> <span class="p">[</span><span class="n">di</span><span class="p">])</span>
-        <span class="n">qss_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sim_results_coast</span><span class="p">,</span> <span class="n">qss_var</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">qss_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sim_results_coast</span><span class="p">,</span> <span class="n">qss_var</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">plot_track_heatmap</span><span class="p">(</span>
             <span class="n">baseline_pos_x</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">track</span><span class="o">.</span><span class="n">x_m</span><span class="p">,</span>
@@ -540,7 +561,6 @@
 <span class="sd">            The QSS variable to overlay on the plot.</span>
 <span class="sd">        layout_config : LayoutConfig, optional</span>
 <span class="sd">        font_config : FontConfig, optional</span>
-<span class="sd">        colorbar_config : ColorbarConfig, optional</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">lap</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">real_laps</span><span class="p">)</span> <span class="k">if</span> <span class="n">GROUND_SPEED</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lap</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
@@ -550,7 +570,9 @@
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_no_coast</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_coast</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">sim_results_coast</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sim_results_coast</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_coast</span>
 
         <span class="k">for</span> <span class="n">lap</span> <span class="ow">in</span> <span class="n">real_laps</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">CUMULATIVE_DISTANCE</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lap</span><span class="p">:</span>
@@ -559,8 +581,8 @@
         <span class="n">laps</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;QSS&quot;</span><span class="p">:</span> <span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">track</span><span class="o">.</span><span class="n">get_dist_from_start_array</span><span class="p">(),</span>
-                <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sim_results_coast</span><span class="p">,</span> <span class="n">qss_var</span><span class="o">.</span><span class="n">value</span><span class="p">),</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_coast</span><span class="o">.</span><span class="n">lap_vels</span><span class="p">,</span>
+                <span class="nb">getattr</span><span class="p">(</span><span class="n">sim_results_coast</span><span class="p">,</span> <span class="n">qss_var</span><span class="o">.</span><span class="n">value</span><span class="p">),</span>
+                <span class="n">sim_results_coast</span><span class="o">.</span><span class="n">lap_vels</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">}</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">lap</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">real_laps</span><span class="p">):</span>

@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/sweep/sweeper_factory';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -337,7 +336,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.sweep.sweeper_factory</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompetitionData</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepParamConfig</span>
@@ -350,10 +349,29 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">create_sweeper</span><span class="p">(</span>
     <span class="n">comp_data</span><span class="p">:</span> <span class="n">CompetitionData</span><span class="p">,</span>
     <span class="n">var_1</span><span class="p">:</span> <span class="n">SweepParamConfig</span><span class="p">,</span>
-    <span class="n">var_2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SweepParamConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">dependencies</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sweeper1D</span><span class="p">,</span> <span class="n">Sweeper2D</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Factory function to create the appropriate sweeper based on the number of variables.&quot;&quot;&quot;</span>
+    <span class="n">var_2</span><span class="p">:</span> <span class="n">SweepParamConfig</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">dependencies</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sweeper1D</span> <span class="o">|</span> <span class="n">Sweeper2D</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create the appropriate sweeper based on the number of variables.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    comp_data : CompetitionData</span>
+<span class="sd">        Competition configuration data model</span>
+<span class="sd">    var_1 : SweepParamConfig</span>
+<span class="sd">        First sweep variable configuration</span>
+<span class="sd">    var_2 : SweepParamConfig, optional</span>
+<span class="sd">        Second sweep variable configuration. If omitted, a 1D sweeper is created.</span>
+<span class="sd">    dependencies : dict, optional</span>
+<span class="sd">        Mapping of dependent parameter names to functions computing their value</span>
+<span class="sd">        from the sweep variable(s)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Sweeper1D or Sweeper2D</span>
+<span class="sd">        A 1D sweeper if `var_2` is None, otherwise a 2D sweeper</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">var_2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Sweeper1D</span><span class="p">(</span><span class="n">comp_data</span><span class="p">,</span> <span class="n">var_1</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Sweeper2D</span><span class="p">(</span><span class="n">comp_data</span><span class="p">,</span> <span class="n">var_1</span><span class="p">,</span> <span class="n">var_2</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">)</span></div>

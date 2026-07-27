@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/sweep/types';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -382,7 +381,7 @@
 
 
 <span class="c1"># Human readable labels for energy grid metrics, for use in plot axes and hover templates</span>
-<span class="n">ENERGY_GRID_METRIC_LABELS</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">ENERGY_GRID_METRIC_LABELS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">EnergyGridMetric</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="n">EnergyGridMetric</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">:</span> <span class="s2">&quot;Total Points&quot;</span><span class="p">,</span>
     <span class="n">EnergyGridMetric</span><span class="o">.</span><span class="n">ACCEL_PTS</span><span class="p">:</span> <span class="s2">&quot;Accel Points&quot;</span><span class="p">,</span>
     <span class="n">EnergyGridMetric</span><span class="o">.</span><span class="n">SKIDPAD_PTS</span><span class="p">:</span> <span class="s2">&quot;Skidpad Points&quot;</span><span class="p">,</span>

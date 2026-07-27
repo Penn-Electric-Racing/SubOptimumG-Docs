@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/log_analysis/steering';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -338,8 +337,7 @@
                   
   <h1>Source code for suboptimumg.log_analysis.steering</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures.data_instance</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataInstance</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures.single_run_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleRunData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataInstance</span><span class="p">,</span> <span class="n">SingleRunData</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle.irl_vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">IrlCar</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.kinematics</span><span class="w"> </span><span class="kn">import</span> <span class="n">CURVATURE_BODY</span><span class="p">,</span> <span class="n">CURVATURE_TRACK</span>
@@ -432,7 +430,9 @@
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;add_bicycle_steer_angle: missing variable &#39;</span><span class="si">{</span><span class="n">sw_col</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
 
     <span class="n">sw</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">sw_col</span><span class="p">]</span>
-    <span class="n">left_vals</span><span class="p">,</span> <span class="n">right_vals</span> <span class="o">=</span> <span class="n">irl_car</span><span class="o">.</span><span class="n">tire_angles</span><span class="p">(</span><span class="n">sw</span><span class="o">.</span><span class="n">value_np</span><span class="p">)</span>
+    <span class="n">left_vals_raw</span><span class="p">,</span> <span class="n">right_vals_raw</span> <span class="o">=</span> <span class="n">irl_car</span><span class="o">.</span><span class="n">tire_angles</span><span class="p">(</span><span class="n">sw</span><span class="o">.</span><span class="n">value_np</span><span class="p">)</span>
+    <span class="n">left_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">left_vals_raw</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">right_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">right_vals_raw</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">avg_vals</span> <span class="o">=</span> <span class="p">(</span><span class="n">left_vals</span> <span class="o">+</span> <span class="n">right_vals</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
 
     <span class="n">data</span><span class="p">[</span><span class="n">FRONT_LEFT_TIRE_STEERING_ANGLE</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>

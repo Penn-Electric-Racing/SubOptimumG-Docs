@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/vehicle/subsystem_models';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -337,13 +336,16 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.vehicle.subsystem_models</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">BaseModel</span><span class="p">,</span>
     <span class="n">ConfigDict</span><span class="p">,</span>
     <span class="n">Field</span><span class="p">,</span>
+    <span class="n">ValidationInfo</span><span class="p">,</span>
     <span class="n">field_validator</span><span class="p">,</span>
     <span class="n">model_validator</span><span class="p">,</span>
 <span class="p">)</span>
@@ -370,20 +372,22 @@
 <div class="viewcode-block" id="AccumulatorModel">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.AccumulatorModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">AccumulatorModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Battery accumulator configuration.&quot;&quot;&quot;</span>
+
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">pack_weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Battery pack weight (kg)&quot;</span><span class="p">)</span>
     <span class="n">capacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Nominal battery capacity (kWh)&quot;</span><span class="p">)</span>
     <span class="n">energy_density</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Pack energy density (kWh/kg)&quot;</span><span class="p">)</span>
-    <span class="n">total_pow_lim</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Total power limit, per FSAE rules (W)&quot;</span>
-    <span class="p">)</span></div>
+    <span class="n">total_pow_lim</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Total power limit, per FSAE rules (W)&quot;</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="DRSModel">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.DRSModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DRSModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Drag reduction system (DRS) configuration.&quot;&quot;&quot;</span>
+
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">drs_cd</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DRS drag coefficient&quot;</span><span class="p">)</span>
@@ -404,6 +408,8 @@
 <div class="viewcode-block" id="AeroModel">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.AeroModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">AeroModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Aerodynamics configuration.&quot;&quot;&quot;</span>
+
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">cd</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Drag coefficient (unitless)&quot;</span><span class="p">)</span>
@@ -414,49 +420,41 @@
         <span class="n">lt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Center of pressure (fraction toward front, 0-1)&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">drs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DRSModel</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DRS configuration&quot;</span><span class="p">)</span>
+    <span class="n">drs</span><span class="p">:</span> <span class="n">DRSModel</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DRS configuration&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AeroModel.validate_cd_plausible">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.AeroModel.validate_cd_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;cd&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_cd_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_cd_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">&lt;=</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;WARNING: Drag coefficient of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [0.5, 4]&quot;</span>
-            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Drag coefficient of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [0.5, 4]&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
 
 
 <div class="viewcode-block" id="AeroModel.validate_cl_plausible">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.AeroModel.validate_cl_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;cl&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_cl_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_cl_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.25</span> <span class="o">&lt;=</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;WARNING: Lift coefficient of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [0.25, 4]&quot;</span>
-            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Lift coefficient of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [0.25, 4]&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
 
 
 <div class="viewcode-block" id="AeroModel.validate_front_area_plausible">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.AeroModel.validate_front_area_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;front_area&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_front_area_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_front_area_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.9</span> <span class="o">&lt;=</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mf">1.5</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;WARNING: Frontal area of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [0.9, 1.5] m²&quot;</span>
-            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Frontal area of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [0.9, 1.5] m²&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
 
 
 <div class="viewcode-block" id="AeroModel.validate_cop_plausible">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.AeroModel.validate_cop_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;cop&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_cop_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_cop_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.2</span> <span class="o">&lt;=</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mf">0.8</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;WARNING: Center of pressure of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [0.2, 0.8]&quot;</span>
-            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Center of pressure of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [0.2, 0.8]&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
 </div>
 
@@ -465,13 +463,15 @@
 <div class="viewcode-block" id="ChassisModel">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.ChassisModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ChassisModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-    <span class="k">pass</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Chassis configuration (currently no parameters).&quot;&quot;&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="DriverInterfaceModel">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.DriverInterfaceModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DriverInterfaceModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Driver interface configuration.&quot;&quot;&quot;</span>
+
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">brake_bias</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
@@ -484,11 +484,9 @@
 <div class="viewcode-block" id="DriverInterfaceModel.validate_brake_bias_plausible">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.DriverInterfaceModel.validate_brake_bias_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;brake_bias&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_brake_bias_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_brake_bias_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mf">0.55</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;WARNING: Brake bias of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is too rear-biased for a typical racing application&quot;</span>
-            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Brake bias of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is too rear-biased for a typical racing application&quot;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;WARNING: Brake bias of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is too front-biased for a typical racing application&quot;</span>
@@ -501,6 +499,8 @@
 <div class="viewcode-block" id="MotorModel">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.MotorModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MotorModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Electric motor configuration.&quot;&quot;&quot;</span>
+
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Product name&quot;</span><span class="p">)</span>
@@ -508,9 +508,7 @@
     <span class="n">max_rpm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Max RPM of motor&quot;</span><span class="p">)</span>
     <span class="n">fw_rpm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Field weakening RPM inflection point&quot;</span><span class="p">)</span>
     <span class="n">max_torque</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Max torque of motor (Nm)&quot;</span><span class="p">)</span>
-    <span class="n">fw_torque</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Field weakening torque inflection point (Nm)&quot;</span>
-    <span class="p">)</span>
+    <span class="n">fw_torque</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Field weakening torque inflection point (Nm)&quot;</span><span class="p">)</span>
     <span class="n">pow_lim</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Power limit (W)&quot;</span><span class="p">)</span>
     <span class="n">moi_motor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;MOI (kg-m^2) of motor rotor, with no gearbox accomodations.&quot;</span>
@@ -518,9 +516,7 @@
     <span class="n">efficiency_method</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;sys&quot;</span><span class="p">,</span> <span class="s2">&quot;indiv&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Efficiency calculation method: &#39;sys&#39; or &#39;indiv&#39;&quot;</span>
     <span class="p">)</span>
-    <span class="n">moc_efficiency</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Motor controller efficiency&quot;</span>
-    <span class="p">)</span>
+    <span class="n">moc_efficiency</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Motor controller efficiency&quot;</span><span class="p">)</span>
     <span class="n">motor_efficiency</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Motor efficiency&quot;</span><span class="p">)</span>
     <span class="n">chain_efficiency</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Chain efficiency&quot;</span><span class="p">)</span>
     <span class="n">diff_efficiency</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
@@ -532,28 +528,25 @@
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Alternative to product of individual efficiencies if efficiency_method is &#39;sys&#39;&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Motor mass (kg)&quot;</span><span class="p">)</span>
-    <span class="n">ideal_gear_ratio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Ideal gear ratio (currently unused)&quot;</span>
-    <span class="p">)</span>
+    <span class="n">ideal_gear_ratio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Ideal gear ratio (currently unused)&quot;</span><span class="p">)</span>
     <span class="n">use_efficiency_lut</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Whether or not to initialize a more advanced motor efficiency solution&quot;</span>
     <span class="p">)</span>
-    <span class="n">efficiency_data</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+    <span class="n">efficiency_data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;List of efficiency map data points [RPM, Torque (Nm), Efficiency (%)]&quot;</span>
     <span class="p">)</span>
 
 <div class="viewcode-block" id="MotorModel.validate_setup">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.MotorModel.validate_setup">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;setup&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_setup</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-        <span class="c1"># TODO: @chukka not sure exactly how to do this since it&#39;s a pydantic model</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_setup</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">DriveSetup</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DriveSetup</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">v</span></div>
 
 
 <div class="viewcode-block" id="MotorModel.fw_rpm_less_than_max_rpm">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.MotorModel.fw_rpm_less_than_max_rpm">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;fw_rpm&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">fw_rpm_less_than_max_rpm</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fw_rpm_less_than_max_rpm</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="n">ValidationInfo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="n">info</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;max_rpm&quot;</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;fw_rpm must be less than or equal to max_rpm&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
@@ -562,7 +555,7 @@
 <div class="viewcode-block" id="MotorModel.fw_torque_less_than_max_torque">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.MotorModel.fw_torque_less_than_max_torque">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;fw_torque&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">fw_torque_less_than_max_torque</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fw_torque_less_than_max_torque</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="n">ValidationInfo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="n">info</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;max_torque&quot;</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;fw_torque must be less than or equal to max_torque&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
@@ -571,20 +564,18 @@
 <div class="viewcode-block" id="MotorModel.validate_power_limit">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.MotorModel.validate_power_limit">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;pow_lim&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_power_limit</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_power_limit</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mi">25000</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Power limit should not be less than 25000 W&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mi">80000</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;WARNING: Power limit of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> W is above recommended limit of 80000 W&quot;</span>
-            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Power limit of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> W is above recommended limit of 80000 W&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
 
 
 <div class="viewcode-block" id="MotorModel.validate_moc_efficiency">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.MotorModel.validate_moc_efficiency">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;moc_efficiency&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_moc_efficiency</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_moc_efficiency</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mf">0.95</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;MOC efficiency should not be less than 0.95&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
@@ -593,7 +584,7 @@
 <div class="viewcode-block" id="MotorModel.validate_motor_efficiency">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.MotorModel.validate_motor_efficiency">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;motor_efficiency&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_motor_efficiency</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_motor_efficiency</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mf">0.85</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Motor efficiency should not be less than 0.85&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
@@ -602,7 +593,7 @@
 <div class="viewcode-block" id="MotorModel.validate_chain_efficiency">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.MotorModel.validate_chain_efficiency">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;chain_efficiency&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_chain_efficiency</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_chain_efficiency</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mf">0.9</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Chain efficiency should not be less than 0.90&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
@@ -611,7 +602,7 @@
 <div class="viewcode-block" id="MotorModel.validate_max_rpm_plausible">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.MotorModel.validate_max_rpm_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;max_rpm&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_max_rpm_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_max_rpm_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">1000</span> <span class="o">&lt;=</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mi">30000</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Max RPM of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [1000, 30000]&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
@@ -620,29 +611,25 @@
 <div class="viewcode-block" id="MotorModel.validate_fw_rpm_plausible">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.MotorModel.validate_fw_rpm_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;fw_rpm&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_fw_rpm_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_fw_rpm_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">1000</span> <span class="o">&lt;=</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mi">25000</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;WARNING: Field weakening RPM of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [1000, 25000]&quot;</span>
-            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Field weakening RPM of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [1000, 25000]&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
 
 
 <div class="viewcode-block" id="MotorModel.validate_max_torque_plausible">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.MotorModel.validate_max_torque_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;max_torque&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_max_torque_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_max_torque_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">20</span> <span class="o">&lt;=</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mi">500</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;WARNING: Max torque of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [20, 500] Nm&quot;</span>
-            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Max torque of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [20, 500] Nm&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
 
 
 <div class="viewcode-block" id="MotorModel.validate_fw_torque_plausible">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.MotorModel.validate_fw_torque_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;fw_torque&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_fw_torque_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_fw_torque_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">10</span> <span class="o">&lt;=</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mi">400</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;WARNING: Field weakening torque of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [10, 400] Nm&quot;</span>
@@ -653,7 +640,7 @@
 <div class="viewcode-block" id="MotorModel.validate_efficiency_data_plausible">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.MotorModel.validate_efficiency_data_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;efficiency_data&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_efficiency_data_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_efficiency_data_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">25</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;WARNING: Efficiency data </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> must contain at least 25 unique points for correct fitment.&quot;</span>
@@ -676,17 +663,13 @@
 <div class="viewcode-block" id="PowertrainModel">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.PowertrainModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PowertrainModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Powertrain configuration including motor and transmission.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Powertrain configuration including motor and transmission.&quot;&quot;&quot;</span>
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">motor</span><span class="p">:</span> <span class="n">MotorModel</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Motor configuration&quot;</span><span class="p">)</span>
     <span class="n">ratio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Gear ratio (wheel_rpm = motor_rpm / ratio)&quot;</span><span class="p">)</span>
-    <span class="n">regen_percent</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Regenerative braking percentage (0-1)&quot;</span>
-    <span class="p">)</span>
+    <span class="n">regen_percent</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Regenerative braking percentage (0-1)&quot;</span><span class="p">)</span>
     <span class="n">max_regen</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Maximum regenerative power (W)&quot;</span><span class="p">)</span>
     <span class="n">coast_trigger</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Coasting trigger threshold&quot;</span><span class="p">)</span>
     <span class="n">coast_release_offset</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Coasting release offset&quot;</span><span class="p">)</span>
@@ -695,7 +678,7 @@
 <div class="viewcode-block" id="PowertrainModel.validate_ratio_plausible">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_ratio_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;ratio&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_ratio_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_ratio_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">&lt;=</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Gear ratio of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [0.5, 20]&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
@@ -704,7 +687,7 @@
 <div class="viewcode-block" id="PowertrainModel.validate_regen_config">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_regen_config">[docs]</a>
     <span class="nd">@model_validator</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;after&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_regen_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_regen_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowertrainModel</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regen_percent</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_regen</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="s2">&quot;WARNING: Max regen is non-zero but regen percent is zero. This will result in no regen braking&quot;</span>
@@ -721,6 +704,8 @@
 <div class="viewcode-block" id="SimpleSuspensionModel">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.SimpleSuspensionModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SimpleSuspensionModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple suspension configuration (no additional parameters).&quot;&quot;&quot;</span>
+
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="nb">type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;Simple&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;Simple&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Suspension type&quot;</span><span class="p">)</span></div>
@@ -730,27 +715,23 @@
 <div class="viewcode-block" id="ComplexSuspensionModel">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.ComplexSuspensionModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ComplexSuspensionModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Complex suspension configuration with roll center and stiffness details.&quot;&quot;&quot;</span>
+
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="nb">type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;Complex&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;Complex&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Suspension type&quot;</span><span class="p">)</span>
-    <span class="n">front_roll_center_height</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Front roll center height (m)&quot;</span>
-    <span class="p">)</span>
-    <span class="n">rear_roll_center_height</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Rear roll center height (m)&quot;</span>
-    <span class="p">)</span>
-    <span class="n">front_roll_stiffness_k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Front roll stiffness (Nm/rad)&quot;</span>
-    <span class="p">)</span>
-    <span class="n">rear_roll_stiffness_k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Rear roll stiffness (Nm/rad)&quot;</span>
-    <span class="p">)</span></div>
+    <span class="n">front_roll_center_height</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Front roll center height (m)&quot;</span><span class="p">)</span>
+    <span class="n">rear_roll_center_height</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Rear roll center height (m)&quot;</span><span class="p">)</span>
+    <span class="n">front_roll_stiffness_k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Front roll stiffness (Nm/rad)&quot;</span><span class="p">)</span>
+    <span class="n">rear_roll_stiffness_k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Rear roll stiffness (Nm/rad)&quot;</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="TireModel">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.TireModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TireModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tire configuration.&quot;&quot;&quot;</span>
+
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Weight of each tire (N)&quot;</span><span class="p">)</span>
@@ -769,19 +750,23 @@
 <div class="viewcode-block" id="TireModel.validate_weight_plausible">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.TireModel.validate_weight_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;weight&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_weight_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_weight_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mi">75</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;WARNING: Tire weight of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> kg is outside recommended range (0, 75]&quot;</span>
-            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Tire weight of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> kg is outside recommended range (0, 75]&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div>
 
 
 <div class="viewcode-block" id="TireModel.validate_tire_radius_plausible">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.TireModel.validate_tire_radius_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;tire_radius&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_tire_radius_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-        <span class="c1"># Tire radius is in inches, convert tire diameter to meters for comparison</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_tire_radius_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check tire diameter (converted from inches) against a plausible range.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        ``tire_radius`` is in inches; the diameter is converted to meters</span>
+<span class="sd">        before comparing against the recommended 8-24 inch range.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">diameter_m</span> <span class="o">=</span> <span class="n">in_to_m</span><span class="p">(</span><span class="n">v</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
         <span class="n">min_diam_m</span> <span class="o">=</span> <span class="n">in_to_m</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
         <span class="n">max_diam_m</span> <span class="o">=</span> <span class="n">in_to_m</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
@@ -795,7 +780,7 @@
 <div class="viewcode-block" id="TireModel.validate_mu_lat_zero_load_plausible">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.TireModel.validate_mu_lat_zero_load_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;mu_lat_zero_load&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_mu_lat_zero_load_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_mu_lat_zero_load_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.8</span> <span class="o">&lt;=</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mf">2.1</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;WARNING: Lateral friction coefficient of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [0.8, 2.1]&quot;</span>
@@ -806,7 +791,7 @@
 <div class="viewcode-block" id="TireModel.validate_mu_long_lat_ratio_plausible">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.TireModel.validate_mu_long_lat_ratio_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;mu_long_lat_ratio&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_mu_long_lat_ratio_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_mu_long_lat_ratio_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.3</span> <span class="o">&lt;=</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mf">1.3</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;WARNING: Longitudinal/lateral friction ratio of </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> is outside recommended range [0.3, 1.3]&quot;</span>

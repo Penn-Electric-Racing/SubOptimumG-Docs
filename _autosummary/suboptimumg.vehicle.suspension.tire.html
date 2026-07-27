@@ -46,7 +46,6 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.vehicle.suspension.tire';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -311,7 +310,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.constants.html">suboptimumg.constants</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suboptimumg.gdrive.html">suboptimumg.gdrive</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.log_analysis.html">suboptimumg.log_analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.aero.html">suboptimumg.log_analysis.aero</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.drivetrain.html">suboptimumg.log_analysis.drivetrain</a></li>
@@ -327,22 +325,6 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_plots.html">suboptimumg.log_analysis.yaw_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation.html">suboptimumg.log_analysis.yaw_segmentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation_models.html">suboptimumg.log_analysis.yaw_segmentation_models</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.loganalysis.html">suboptimumg.loganalysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.corrections.html">suboptimumg.loganalysis.corrections</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.derived.html">suboptimumg.loganalysis.derived</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.filtering.html">suboptimumg.loganalysis.filtering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.fitted_curve.html">suboptimumg.loganalysis.fitted_curve</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.gps.html">suboptimumg.loganalysis.gps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.intake.html">suboptimumg.loganalysis.intake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.irl_car.html">suboptimumg.loganalysis.irl_car</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.laps.html">suboptimumg.loganalysis.laps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.macros.html">suboptimumg.loganalysis.macros</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.plotting.html">suboptimumg.loganalysis.plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.track_builder.html">suboptimumg.loganalysis.track_builder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.understeer.html">suboptimumg.loganalysis.understeer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.variables.html">suboptimumg.loganalysis.variables</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.models.html">suboptimumg.models</a></li>
@@ -386,7 +368,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.track.html">suboptimumg.track</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.gps.html">suboptimumg.track.gps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.models.html">suboptimumg.track.models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track.html">suboptimumg.track.track</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track_factory.html">suboptimumg.track.track_factory</a></li>
@@ -503,6 +484,8 @@
 <dt class="sig sig-object py" id="suboptimumg.vehicle.suspension.tire.Tire">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.suspension.tire.</span></span><span class="sig-name descname"><span class="pre">Tire</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/suspension/tire.html#Tire"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.suspension.tire.Tire" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.suspension.tire.Tire.calc_mu">
 <span class="sig-name descname"><span class="pre">calc_mu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mu_long_lat_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_lat_zero_load</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/suspension/tire.html#Tire.calc_mu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.suspension.tire.Tire.calc_mu" title="Link to this definition">#</a></dt>
@@ -520,6 +503,9 @@
 <li><p><em>float</em> – mu_long - Longitudinal friction coefficient</p></li>
 </ul>
 </p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[float, float]</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -552,25 +538,38 @@ Returns (0, 0) if tire is lifted (normal force &lt;= 0).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.suspension.tire.Tire.long_remain">
 <span class="sig-name descname"><span class="pre">long_remain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mu_long_lat_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_lat_zero_load</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/suspension/tire.html#Tire.long_remain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.suspension.tire.Tire.long_remain" title="Link to this definition">#</a></dt>
-<dd><p>Calculates the remaining longitudinal grip of the tire based on a friction ellipse</p>
-<p>ELLIPSE EQN:
-(x^2 / radius_x^2) + (y^2 / radius_y^2) = n^2</p>
-<p>(f_lat^2 / mu_lat^2) + (f_long^2 / mu_long^2) = f_normal^2
-f_long = mu_long * sqrt( f_normal^2 - ( f_lat^2 / mu_lat^2 ) )</p>
+<dd><p>Calculate the remaining longitudinal grip of the tire based on a friction ellipse.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Remaining longitudinal grip (N).</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mu_long_lat_ratio</strong> (<em>float</em>) – Ratio of longitudinal to lateral friction coefficients (unitless)</p></li>
+<li><p><strong>mu_lat_zero_load</strong> (<em>float</em>) – Lateral friction coefficient at zero normal force (unitless)</p></li>
+</ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Remaining longitudinal grip (N)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>Friction ellipse equation:</p>
+<p>(x^2 / radius_x^2) + (y^2 / radius_y^2) = n^2</p>
+<p>(f_lat^2 / mu_lat^2) + (f_long^2 / mu_long^2) = f_normal^2
+f_long = mu_long * sqrt( f_normal^2 - ( f_lat^2 / mu_lat^2 ) )</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.suspension.tire.Tire.reset">
 <span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/suspension/tire.html#Tire.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.suspension.tire.Tire.reset" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Reset the tire’s normal, lateral, and longitudinal forces to defaults.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -586,14 +585,18 @@ f_long = mu_long * sqrt( f_normal^2 - ( f_lat^2 / mu_lat^2 ) )</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.suspension.tire.Tires.initialize_tires">
 <span class="sig-name descname"><span class="pre">initialize_tires</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fl_norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fr_norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bl_norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">br_norm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/suspension/tire.html#Tires.initialize_tires"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.suspension.tire.Tires.initialize_tires" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Set the initial normal force on each of the four tires.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fl_norm</strong> (<em>float</em>)</p></li>
-<li><p><strong>fr_norm</strong> (<em>float</em>)</p></li>
-<li><p><strong>bl_norm</strong> (<em>float</em>)</p></li>
-<li><p><strong>br_norm</strong> (<em>float</em>)</p></li>
+<li><p><strong>fl_norm</strong> (<em>float</em>) – Normal force on the front left tire (N)</p></li>
+<li><p><strong>fr_norm</strong> (<em>float</em>) – Normal force on the front right tire (N)</p></li>
+<li><p><strong>bl_norm</strong> (<em>float</em>) – Normal force on the back left tire (N)</p></li>
+<li><p><strong>br_norm</strong> (<em>float</em>) – Normal force on the back right tire (N)</p></li>
 </ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -601,14 +604,18 @@ f_long = mu_long * sqrt( f_normal^2 - ( f_lat^2 / mu_lat^2 ) )</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.suspension.tire.Tires.reset_tires">
 <span class="sig-name descname"><span class="pre">reset_tires</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fl_norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fr_norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bl_norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">br_norm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/suspension/tire.html#Tires.reset_tires"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.suspension.tire.Tires.reset_tires" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Reset all four tires, then set their normal forces.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fl_norm</strong> (<em>float</em>)</p></li>
-<li><p><strong>fr_norm</strong> (<em>float</em>)</p></li>
-<li><p><strong>bl_norm</strong> (<em>float</em>)</p></li>
-<li><p><strong>br_norm</strong> (<em>float</em>)</p></li>
+<li><p><strong>fl_norm</strong> (<em>float</em>) – Normal force on the front left tire (N)</p></li>
+<li><p><strong>fr_norm</strong> (<em>float</em>) – Normal force on the front right tire (N)</p></li>
+<li><p><strong>bl_norm</strong> (<em>float</em>) – Normal force on the back left tire (N)</p></li>
+<li><p><strong>br_norm</strong> (<em>float</em>) – Normal force on the back right tire (N)</p></li>
 </ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>

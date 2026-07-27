@@ -46,7 +46,6 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.vehicle.irl_vehicle';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -311,7 +310,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.constants.html">suboptimumg.constants</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suboptimumg.gdrive.html">suboptimumg.gdrive</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.log_analysis.html">suboptimumg.log_analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.aero.html">suboptimumg.log_analysis.aero</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.drivetrain.html">suboptimumg.log_analysis.drivetrain</a></li>
@@ -327,22 +325,6 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_plots.html">suboptimumg.log_analysis.yaw_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation.html">suboptimumg.log_analysis.yaw_segmentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation_models.html">suboptimumg.log_analysis.yaw_segmentation_models</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.loganalysis.html">suboptimumg.loganalysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.corrections.html">suboptimumg.loganalysis.corrections</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.derived.html">suboptimumg.loganalysis.derived</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.filtering.html">suboptimumg.loganalysis.filtering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.fitted_curve.html">suboptimumg.loganalysis.fitted_curve</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.gps.html">suboptimumg.loganalysis.gps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.intake.html">suboptimumg.loganalysis.intake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.irl_car.html">suboptimumg.loganalysis.irl_car</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.laps.html">suboptimumg.loganalysis.laps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.macros.html">suboptimumg.loganalysis.macros</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.plotting.html">suboptimumg.loganalysis.plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.track_builder.html">suboptimumg.loganalysis.track_builder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.understeer.html">suboptimumg.loganalysis.understeer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.variables.html">suboptimumg.loganalysis.variables</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.models.html">suboptimumg.models</a></li>
@@ -386,7 +368,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.track.html">suboptimumg.track</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.gps.html">suboptimumg.track.gps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.models.html">suboptimumg.track.models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track.html">suboptimumg.track.track</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track_factory.html">suboptimumg.track.track_factory</a></li>
@@ -541,7 +522,7 @@ spring-borne portion of longitudinal weight transfer
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>heave_m</strong> (<em>float</em><em> | </em><em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Heave displacement in meters. Positive = compression.</p></li>
+<li><p><strong>heave_m</strong> (<em>float</em><em> | </em><em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Heave displacement in meters. Positive = compression.</p></li>
 <li><p><strong>axle</strong> (<em>str</em>) – “front” or “rear”, used to select the correct heave stiffness.</p></li>
 </ul>
 </dd>
@@ -549,7 +530,7 @@ spring-borne portion of longitudinal weight transfer
 <dd class="field-even"><p>Vertical spring force in Newtons. Positive = compression.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float | npt.NDArray[np.float64]</p>
+<dd class="field-odd"><p>float | NDArray[np.float64]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -560,7 +541,7 @@ spring-borne portion of longitudinal weight transfer
 <dd><p>Lateral weight transfer per axle (elastic component only).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ay_g</strong> (<em>float</em><em> or </em><em>array</em>) – Lateral acceleration in g’s (positive = turning left).</p>
+<dd class="field-odd"><p><strong>ay_g</strong> (<em>float</em><em> | </em><em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Lateral acceleration in g’s (positive = turning left).</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Elastic weight transfer at front and rear axles (N).
@@ -578,10 +559,10 @@ Positive = load transfer to the outside wheel.</p>
 <dd><p>Left tire steer angle via ackermann symmetry: <code class="docutils literal notranslate"><span class="pre">-f(-x)</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>sw_deg</strong> (<em>float</em><em> | </em><em>ndarray</em>)</p>
+<dd class="field-odd"><p><strong>sw_deg</strong> (<em>float</em><em> | </em><em>ndarray</em><em>[</em><em>tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em><em>, </em><em>dtype</em><em>[</em><em>float64</em><em>]</em><em>]</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>ndarray</em></p>
+<dd class="field-even"><p><em>float64</em> | <em>ndarray</em>[tuple[<em>Any</em>, …], <em>dtype</em>[<em>float64</em>]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -592,14 +573,14 @@ Positive = load transfer to the outside wheel.</p>
 <dd><p>Longitudinal weight transfer on the front axle.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ax_g</strong> (<em>float</em><em> or </em><em>array</em>) – Longitudinal acceleration in g’s (positive = forward accel).</p>
+<dd class="field-odd"><p><strong>ax_g</strong> (<em>float</em><em> | </em><em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Longitudinal acceleration in g’s (positive = forward accel).</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Change in front axle normal force (N). Negative under
 acceleration, positive under braking.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float or np.ndarray</p>
+<dd class="field-odd"><p>float | NDArray[np.float64]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -611,7 +592,7 @@ acceleration, positive under braking.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pot_mm</strong> (<em>float</em><em> | </em><em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Shock pot displacement in millimeters. Positive = compression.</p></li>
+<li><p><strong>pot_mm</strong> (<em>float</em><em> | </em><em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Shock pot displacement in millimeters. Positive = compression.</p></li>
 <li><p><strong>axle</strong> (<em>str</em>) – “front” or “rear”, used to select the correct motion ratio and
 heave stiffness.</p></li>
 </ul>
@@ -620,7 +601,7 @@ heave stiffness.</p></li>
 <dd class="field-even"><p>Vertical spring force in Newtons. Positive = compression.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float | npt.NDArray[np.float64]</p>
+<dd class="field-odd"><p>float | NDArray[np.float64]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -632,7 +613,7 @@ heave stiffness.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pot_mm</strong> (<em>float</em><em> | </em><em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Shock pot displacement in millimeters. Positive = compression.</p></li>
+<li><p><strong>pot_mm</strong> (<em>float</em><em> | </em><em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Shock pot displacement in millimeters. Positive = compression.</p></li>
 <li><p><strong>axle</strong> (<em>str</em>) – “front” or “rear”, used to select the correct motion ratio.</p></li>
 </ul>
 </dd>
@@ -640,7 +621,7 @@ heave stiffness.</p></li>
 <dd class="field-even"><p>Heave displacement in meters. Positive = compression.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float | npt.NDArray[np.float64]</p>
+<dd class="field-odd"><p>float | NDArray[np.float64]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -652,10 +633,10 @@ heave stiffness.</p></li>
 <p>Positive sw_deg = right turn (right tire is inner, steers more).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>sw_deg</strong> (<em>float</em><em> | </em><em>ndarray</em>)</p>
+<dd class="field-odd"><p><strong>sw_deg</strong> (<em>float</em><em> | </em><em>ndarray</em><em>[</em><em>tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em><em>, </em><em>dtype</em><em>[</em><em>float64</em><em>]</em><em>]</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>ndarray</em></p>
+<dd class="field-even"><p><em>float64</em> | <em>ndarray</em>[tuple[<em>Any</em>, …], <em>dtype</em>[<em>float64</em>]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -688,10 +669,10 @@ heave stiffness.</p></li>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">(left_deg,</span> <span class="pre">right_deg)</span></code> for a given steering input.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>sw_deg</strong> (<em>float</em><em> | </em><em>ndarray</em>)</p>
+<dd class="field-odd"><p><strong>sw_deg</strong> (<em>float</em><em> | </em><em>ndarray</em><em>[</em><em>tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em><em>, </em><em>dtype</em><em>[</em><em>float64</em><em>]</em><em>]</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tuple[<em>ndarray</em>, <em>ndarray</em>]</p>
+<dd class="field-even"><p>tuple[<em>float64</em> | <em>ndarray</em>[tuple[<em>Any</em>, …], <em>dtype</em>[<em>float64</em>]], <em>float64</em> | <em>ndarray</em>[tuple[<em>Any</em>, …], <em>dtype</em>[<em>float64</em>]]]</p>
 </dd>
 </dl>
 </dd></dl>

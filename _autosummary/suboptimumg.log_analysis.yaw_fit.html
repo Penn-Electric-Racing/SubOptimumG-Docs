@@ -46,7 +46,6 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.log_analysis.yaw_fit';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -311,7 +310,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.constants.html">suboptimumg.constants</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suboptimumg.gdrive.html">suboptimumg.gdrive</a></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.log_analysis.html">suboptimumg.log_analysis</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.aero.html">suboptimumg.log_analysis.aero</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.drivetrain.html">suboptimumg.log_analysis.drivetrain</a></li>
@@ -327,22 +325,6 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_plots.html">suboptimumg.log_analysis.yaw_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation.html">suboptimumg.log_analysis.yaw_segmentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation_models.html">suboptimumg.log_analysis.yaw_segmentation_models</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.loganalysis.html">suboptimumg.loganalysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.corrections.html">suboptimumg.loganalysis.corrections</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.derived.html">suboptimumg.loganalysis.derived</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.filtering.html">suboptimumg.loganalysis.filtering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.fitted_curve.html">suboptimumg.loganalysis.fitted_curve</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.gps.html">suboptimumg.loganalysis.gps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.intake.html">suboptimumg.loganalysis.intake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.irl_car.html">suboptimumg.loganalysis.irl_car</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.laps.html">suboptimumg.loganalysis.laps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.macros.html">suboptimumg.loganalysis.macros</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.plotting.html">suboptimumg.loganalysis.plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.track_builder.html">suboptimumg.loganalysis.track_builder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.understeer.html">suboptimumg.loganalysis.understeer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.variables.html">suboptimumg.loganalysis.variables</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.models.html">suboptimumg.models</a></li>
@@ -386,7 +368,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.track.html">suboptimumg.track</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.gps.html">suboptimumg.track.gps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.models.html">suboptimumg.track.models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track.html">suboptimumg.track.track</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track_factory.html">suboptimumg.track.track_factory</a></li>
@@ -535,7 +516,7 @@ feedback through the simulated state during fitting.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>w</strong> (<a class="reference internal" href="suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.WindowArrays" title="suboptimumg.log_analysis.yaw_fit_models.WindowArrays"><em>WindowArrays</em></a>) – Must carry both <code class="docutils literal notranslate"><span class="pre">body_slip_rad</span></code> and <code class="docutils literal notranslate"><span class="pre">bicycle_steer_rad</span></code>.</p></li>
-<li><p><strong>irl_car</strong> (<a class="reference internal" href="suboptimumg.loganalysis.html#suboptimumg.loganalysis.IrlCar" title="suboptimumg.loganalysis.IrlCar"><em>IrlCar</em></a>) – Source of the wheelbase and CG split.</p></li>
+<li><p><strong>irl_car</strong> (<a class="reference internal" href="suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar" title="suboptimumg.vehicle.irl_vehicle.IrlCar"><em>IrlCar</em></a>) – Source of the wheelbase and CG split.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -559,7 +540,7 @@ feedback through the simulated state during fitting.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>V</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Speed(s) (m/s); must all be strictly positive.</p></li>
 <li><p><strong>chassis</strong> (<a class="reference internal" href="suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.ChassisParams" title="suboptimumg.log_analysis.yaw_fit_models.ChassisParams"><em>ChassisParams</em></a>) – The three chassis scalars. <code class="docutils literal notranslate"><span class="pre">Izz</span></code> is always taken from here.</p></li>
-<li><p><strong>irl_car</strong> (<a class="reference internal" href="suboptimumg.loganalysis.html#suboptimumg.loganalysis.IrlCar" title="suboptimumg.loganalysis.IrlCar"><em>IrlCar</em></a>) – Source of the mass, wheelbase, and CG split.</p></li>
+<li><p><strong>irl_car</strong> (<a class="reference internal" href="suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar" title="suboptimumg.vehicle.irl_vehicle.IrlCar"><em>IrlCar</em></a>) – Source of the mass, wheelbase, and CG split.</p></li>
 <li><p><strong>Ca_f</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em><em>, </em><em>optional</em>) – Per-sample cornering stiffnesses, overriding <code class="docutils literal notranslate"><span class="pre">chassis</span></code>. Used by the
 Ca-decay scheduler, where stiffness varies sample-by-sample.</p></li>
 <li><p><strong>Ca_r</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em><em>, </em><em>optional</em>) – Per-sample cornering stiffnesses, overriding <code class="docutils literal notranslate"><span class="pre">chassis</span></code>. Used by the
@@ -646,7 +627,7 @@ YAML’s <code class="docutils literal notranslate"><span class="pre">dynamics_s
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>spec</strong> (<a class="reference internal" href="suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.FitSpec" title="suboptimumg.log_analysis.yaw_fit_models.FitSpec"><em>FitSpec</em></a>) – Decides which optional parameters are appended.</p></li>
-<li><p><strong>irl_car</strong> (<a class="reference internal" href="suboptimumg.loganalysis.html#suboptimumg.loganalysis.IrlCar" title="suboptimumg.loganalysis.IrlCar"><em>IrlCar</em></a>) – Source of the <code class="docutils literal notranslate"><span class="pre">dynamics_setup</span></code> priors.</p></li>
+<li><p><strong>irl_car</strong> (<a class="reference internal" href="suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar" title="suboptimumg.vehicle.irl_vehicle.IrlCar"><em>IrlCar</em></a>) – Source of the <code class="docutils literal notranslate"><span class="pre">dynamics_setup</span></code> priors.</p></li>
 <li><p><strong>bounds_pct</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>, </em><em>optional</em>) – Overrides the YAML’s <code class="docutils literal notranslate"><span class="pre">prior_bounds</span></code>. Keys <code class="docutils literal notranslate"><span class="pre">Ca_front_pct</span></code>,
 <code class="docutils literal notranslate"><span class="pre">Ca_rear_pct</span></code>, <code class="docutils literal notranslate"><span class="pre">Izz_pct</span></code>.</p></li>
 <li><p><strong>u_off_max_deg</strong> (<em>float</em><em>, </em><em>optional</em>) – Symmetric bound on the steering-offset parameter (deg).</p></li>
@@ -712,7 +693,7 @@ Angles are converted to radians per the unit fields on <code class="docutils lit
 
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.yaw_fit.fit_yaw">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_fit.</span></span><span class="sig-name descname"><span class="pre">fit_yaw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fit_views</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_arrays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">balance_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_nfev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">350</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'trf'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_fit.html#fit_yaw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_fit.fit_yaw" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_fit.</span></span><span class="sig-name descname"><span class="pre">fit_yaw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fit_views</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_arrays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">balance_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_nfev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">350</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_fit.html#fit_yaw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_fit.fit_yaw" title="Link to this definition">#</a></dt>
 <dd><p>Fit <code class="docutils literal notranslate"><span class="pre">spec</span></code> to the sub-windows by bounded output-error least squares.</p>
 <p>The optimizer minimises the concatenated residual across <code class="docutils literal notranslate"><span class="pre">fit_views</span></code>.
 Each view’s simulation is initialised at that view’s measured yaw rate, so
@@ -731,7 +712,6 @@ produce the reported predictions.</p></li>
 views were weighted. See <code class="docutils literal notranslate"><span class="pre">build_fit_views</span></code>.</p></li>
 <li><p><strong>verbose</strong> (<em>optional</em>) – Forwarded to <code class="docutils literal notranslate"><span class="pre">scipy.optimize.least_squares</span></code>.</p></li>
 <li><p><strong>max_nfev</strong> (<em>optional</em>) – Forwarded to <code class="docutils literal notranslate"><span class="pre">scipy.optimize.least_squares</span></code>.</p></li>
-<li><p><strong>method</strong> (<em>optional</em>) – Forwarded to <code class="docutils literal notranslate"><span class="pre">scipy.optimize.least_squares</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -757,7 +737,7 @@ cornering stiffness against its own slip angle, then run the LPV biquad.</p>
 <li><p><strong>x</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Free-parameter vector, aligned with <code class="docutils literal notranslate"><span class="pre">layout.free</span></code>.</p></li>
 <li><p><strong>spec</strong> (<a class="reference internal" href="suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.FitSpec" title="suboptimumg.log_analysis.yaw_fit_models.FitSpec"><em>FitSpec</em></a>) – Selects the Ca scheduler and relaxation flavor.</p></li>
 <li><p><strong>layout</strong> (<a class="reference internal" href="suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.ParamLayout" title="suboptimumg.log_analysis.yaw_fit_models.ParamLayout"><em>ParamLayout</em></a>) – Maps <code class="docutils literal notranslate"><span class="pre">x</span></code> (plus any pinned values) onto named parameters.</p></li>
-<li><p><strong>irl_car</strong> (<a class="reference internal" href="suboptimumg.loganalysis.html#suboptimumg.loganalysis.IrlCar" title="suboptimumg.loganalysis.IrlCar"><em>IrlCar</em></a>) – Source of the mass, wheelbase, and CG split.</p></li>
+<li><p><strong>irl_car</strong> (<a class="reference internal" href="suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar" title="suboptimumg.vehicle.irl_vehicle.IrlCar"><em>IrlCar</em></a>) – Source of the mass, wheelbase, and CG split.</p></li>
 <li><p><strong>y_init</strong> (<em>float</em><em>, </em><em>optional</em>) – Forced initial output; see <code class="docutils literal notranslate"><span class="pre">simulate_lpv_yaw</span></code>.</p></li>
 <li><p><strong>sign</strong> (<em>float</em><em>, </em><em>optional</em>) – Mirrors the input, for the sign-balanced fit views.</p></li>
 </ul>
@@ -797,7 +777,7 @@ stiffnesses), then converted to a discrete biquad by Tustin substitution
 <li><p><strong>u_rad</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Front tire steer input (rad).</p></li>
 <li><p><strong>V</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Speed at each sample (m/s); clipped at <code class="docutils literal notranslate"><span class="pre">V_FLOOR_MPS</span></code>.</p></li>
 <li><p><strong>chassis</strong> (<a class="reference internal" href="suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.ChassisParams" title="suboptimumg.log_analysis.yaw_fit_models.ChassisParams"><em>ChassisParams</em></a>) – The three chassis scalars.</p></li>
-<li><p><strong>irl_car</strong> (<a class="reference internal" href="suboptimumg.loganalysis.html#suboptimumg.loganalysis.IrlCar" title="suboptimumg.loganalysis.IrlCar"><em>IrlCar</em></a>) – Source of the mass, wheelbase, and CG split.</p></li>
+<li><p><strong>irl_car</strong> (<a class="reference internal" href="suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar" title="suboptimumg.vehicle.irl_vehicle.IrlCar"><em>IrlCar</em></a>) – Source of the mass, wheelbase, and CG split.</p></li>
 <li><p><strong>Ca_f</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em><em>, </em><em>optional</em>) – Per-sample cornering stiffnesses; see <code class="docutils literal notranslate"><span class="pre">bicycle_coeffs</span></code>.</p></li>
 <li><p><strong>Ca_r</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em><em>, </em><em>optional</em>) – Per-sample cornering stiffnesses; see <code class="docutils literal notranslate"><span class="pre">bicycle_coeffs</span></code>.</p></li>
 <li><p><strong>y_init</strong> (<em>float</em><em>, </em><em>optional</em>) – Forced initial output (rad/s). The biquad states are set so <code class="docutils literal notranslate"><span class="pre">y[0]</span></code>

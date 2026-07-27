@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/sweep/motor_sweep';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -338,8 +337,8 @@
                   
   <h1>Source code for suboptimumg.sweep.motor_sweep</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompetitionData</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle.vehicle_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">MotorModel</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">MotorSweepData</span><span class="p">,</span> <span class="n">SweepParamConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle.subsystem_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">MotorModel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">MotorSweepData</span><span class="p">,</span> <span class="n">SweepData1D</span><span class="p">,</span> <span class="n">SweepParamConfig</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.motor_sweep_results</span><span class="w"> </span><span class="kn">import</span> <span class="n">MotorSweepResults</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.sweeper_1d</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sweeper1D</span>
 
@@ -347,21 +346,21 @@
 <div class="viewcode-block" id="MotorSweeper">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.motor_sweep.html#suboptimumg.sweep.motor_sweep.MotorSweeper">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MotorSweeper</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Runs a 1D parameter sweep once per motor, for cross-motor comparison.&quot;&quot;&quot;</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">comp_data</span><span class="p">:</span> <span class="n">CompetitionData</span><span class="p">,</span>
         <span class="n">motors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">MotorModel</span><span class="p">],</span>
         <span class="n">var_1</span><span class="p">:</span> <span class="n">SweepParamConfig</span><span class="p">,</span>
-    <span class="p">):</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">comp_data</span> <span class="o">=</span> <span class="n">comp_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">motors</span> <span class="o">=</span> <span class="n">motors</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var_1</span> <span class="o">=</span> <span class="n">var_1</span>
 
 <div class="viewcode-block" id="MotorSweeper.sweep">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.motor_sweep.html#suboptimumg.sweep.motor_sweep.MotorSweeper.sweep">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">sweep</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">num_processes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MotorSweepResults</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sweep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">num_processes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MotorSweepResults</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Runs a one-parameter sweep across all motors.</span>
 
@@ -377,7 +376,7 @@
 <span class="sd">        MotorSweepResults</span>
 <span class="sd">            Results of the motor sweep operation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">res</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SweepData1D</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="k">for</span> <span class="n">motor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">motors</span><span class="p">:</span>
             <span class="c1"># Create car config with new motor</span>

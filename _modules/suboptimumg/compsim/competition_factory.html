@@ -45,7 +45,6 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/compsim/competition_factory';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -337,11 +336,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.compsim.competition_factory</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Factory functions for creating Competition objects.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">..track.track_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">from_data</span> <span class="k">as</span> <span class="n">track_from_data</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">..track.track_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">from_data</span> <span class="k">as</span> <span class="n">track_from_data</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle.vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">Car</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.competition</span><span class="w"> </span><span class="kn">import</span> <span class="n">Competition</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompetitionData</span>
@@ -362,16 +357,13 @@
 <span class="sd">    -------</span>
 <span class="sd">    Competition</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Reconstruct the Car from VehicleModel</span>
     <span class="n">mycar</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="n">vehicle_model</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">vehicle_model</span><span class="p">)</span>
 
-    <span class="c1"># Reconstruct tracks from TrackData</span>
     <span class="n">accel</span> <span class="o">=</span> <span class="n">track_from_data</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">accel</span><span class="p">)</span>
     <span class="n">skidpad</span> <span class="o">=</span> <span class="n">track_from_data</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">skidpad</span><span class="p">)</span>
     <span class="n">autoX</span> <span class="o">=</span> <span class="n">track_from_data</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">autoX</span><span class="p">)</span>
     <span class="n">endurance</span> <span class="o">=</span> <span class="n">track_from_data</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">endurance</span><span class="p">)</span>
 
-    <span class="c1"># Create Competition instance</span>
     <span class="k">return</span> <span class="n">Competition</span><span class="p">(</span>
         <span class="n">mycar</span><span class="o">=</span><span class="n">mycar</span><span class="p">,</span>
         <span class="n">accel</span><span class="o">=</span><span class="n">accel</span><span class="p">,</span>

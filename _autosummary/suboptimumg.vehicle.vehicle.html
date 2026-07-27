@@ -46,7 +46,6 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.vehicle.vehicle';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -311,7 +310,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.constants.html">suboptimumg.constants</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suboptimumg.gdrive.html">suboptimumg.gdrive</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.log_analysis.html">suboptimumg.log_analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.aero.html">suboptimumg.log_analysis.aero</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.drivetrain.html">suboptimumg.log_analysis.drivetrain</a></li>
@@ -327,22 +325,6 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_plots.html">suboptimumg.log_analysis.yaw_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation.html">suboptimumg.log_analysis.yaw_segmentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation_models.html">suboptimumg.log_analysis.yaw_segmentation_models</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.loganalysis.html">suboptimumg.loganalysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.corrections.html">suboptimumg.loganalysis.corrections</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.derived.html">suboptimumg.loganalysis.derived</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.filtering.html">suboptimumg.loganalysis.filtering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.fitted_curve.html">suboptimumg.loganalysis.fitted_curve</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.gps.html">suboptimumg.loganalysis.gps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.intake.html">suboptimumg.loganalysis.intake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.irl_car.html">suboptimumg.loganalysis.irl_car</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.laps.html">suboptimumg.loganalysis.laps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.macros.html">suboptimumg.loganalysis.macros</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.plotting.html">suboptimumg.loganalysis.plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.track_builder.html">suboptimumg.loganalysis.track_builder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.understeer.html">suboptimumg.loganalysis.understeer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.loganalysis.variables.html">suboptimumg.loganalysis.variables</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.models.html">suboptimumg.models</a></li>
@@ -386,7 +368,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.track.html">suboptimumg.track</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.gps.html">suboptimumg.track.gps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.models.html">suboptimumg.track.models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track.html">suboptimumg.track.track</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.track.track_factory.html">suboptimumg.track.track_factory</a></li>
@@ -500,6 +481,7 @@
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.vehicle.</span></span><span class="sig-name descname"><span class="pre">Car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vehicle_model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Composes all vehicle subsystems and simulates the car moving through a corner.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>vehicle_model</strong> (<a class="reference internal" href="suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.VehicleModel" title="suboptimumg.vehicle.vehicle_models.VehicleModel"><em>VehicleModel</em></a>)</p>
@@ -508,20 +490,20 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.accelerate_forwards_dx">
 <span class="sig-name descname"><span class="pre">accelerate_forwards_dx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.accelerate_forwards_dx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.accelerate_forwards_dx" title="Link to this definition">#</a></dt>
-<dd><p>Redesigned Move function that determines how the car should accelerate.</p>
+<dd><p>Advance the car forward by one distance step while accelerating.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>radius</strong> (<em>float</em>) – Radius of the current corner</p></li>
-<li><p><strong>distance_step</strong> (<em>float</em>)</p></li>
-<li><p><strong>state</strong> (<a class="reference internal" href="suboptimumg.models.html#suboptimumg.models.SimulationState" title="suboptimumg.models.SimulationState"><em>SimulationState</em></a>)</p></li>
+<li><p><strong>radius</strong> (<em>float</em>) – Radius of the current corner (m).</p></li>
+<li><p><strong>distance_step</strong> (<em>float</em>) – Distance to advance (m).</p></li>
+<li><p><strong>state</strong> (<a class="reference internal" href="suboptimumg.models.html#suboptimumg.models.SimulationState" title="suboptimumg.models.SimulationState"><em>SimulationState</em></a>) – Current simulation state.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>(dt, p, acc) time step [s], power [W], and longitudinal acceleration [m/s^2] respectively</p>
+<dd class="field-even"><p>Updated simulation state after the step.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple</p>
+<dd class="field-odd"><p><a class="reference internal" href="suboptimumg.models.html#suboptimumg.models.SimulationState" title="suboptimumg.models.SimulationState">SimulationState</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -529,13 +511,20 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.brake_backwards_dx">
 <span class="sig-name descname"><span class="pre">brake_backwards_dx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.brake_backwards_dx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.brake_backwards_dx" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Integrate the car backward by one distance step while braking.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>radius</strong> (<em>float</em>)</p></li>
-<li><p><strong>distance_step</strong> (<em>float</em>)</p></li>
-<li><p><strong>state</strong> (<a class="reference internal" href="suboptimumg.models.html#suboptimumg.models.SimulationState" title="suboptimumg.models.SimulationState"><em>SimulationState</em></a>)</p></li>
+<li><p><strong>radius</strong> (<em>float</em>) – Radius of the current corner (m).</p></li>
+<li><p><strong>distance_step</strong> (<em>float</em>) – Distance to integrate backward (m).</p></li>
+<li><p><strong>state</strong> (<a class="reference internal" href="suboptimumg.models.html#suboptimumg.models.SimulationState" title="suboptimumg.models.SimulationState"><em>SimulationState</em></a>) – Current simulation state.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updated simulation state after the step.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="suboptimumg.models.html#suboptimumg.models.SimulationState" title="suboptimumg.models.SimulationState">SimulationState</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -543,25 +532,51 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.calculate_and_return_longitudinal_forces">
 <span class="sig-name descname"><span class="pre">calculate_and_return_longitudinal_forces</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.calculate_and_return_longitudinal_forces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.calculate_and_return_longitudinal_forces" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Compute the remaining longitudinal force budget for each tire.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Longitudinal force budget (N) for each tire, in
+front-left, front-right, rear-left, rear-right order.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.calculate_and_update_lateral_forces">
 <span class="sig-name descname"><span class="pre">calculate_and_update_lateral_forces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat_acc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.calculate_and_update_lateral_forces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.calculate_and_update_lateral_forces" title="Link to this definition">#</a></dt>
-<dd><p>Calculates the lateral force exerted on each tire based on the normal force and the centripetal force acting on the vehicle.
-If the front or rear axle is completely off the ground, the correponding tire lateral forces will be evaluated as 0.</p>
+<dd><p>Update each tire’s lateral force from its normal force and the vehicle’s centripetal force.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lat_acc</strong> (<em>float</em>) – Lateral acceleration (m/s^2).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>If an axle is completely unloaded, its tires’ lateral forces are 0.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.calculate_norm_and_aero">
 <span class="sig-name descname"><span class="pre">calculate_norm_and_aero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">acc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_acc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roll</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backwards_pass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.calculate_norm_and_aero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.calculate_norm_and_aero" title="Link to this definition">#</a></dt>
-<dd><p>Calculates the aero moment based on current velocity, frontal area, and coefficient of lift.</p>
+<dd><p>Update each tire’s normal force from weight transfer and aero lift.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Aero moment.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>acc</strong> (<em>float</em>) – Longitudinal acceleration (m/s^2).</p></li>
+<li><p><strong>lat_acc</strong> (<em>float</em>) – Lateral acceleration (m/s^2).</p></li>
+<li><p><strong>roll</strong> (<em>float</em>) – Roll angle (rad).</p></li>
+<li><p><strong>pitch</strong> (<em>float</em>) – Pitch angle (rad).</p></li>
+<li><p><strong>vel</strong> (<em>float</em>) – Vehicle velocity (m/s).</p></li>
+<li><p><strong>backwards_pass</strong> (<em>bool</em>) – Whether this is a backwards (braking) integration pass.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -569,88 +584,17 @@ If the front or rear axle is completely off the ground, the correponding tire la
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.calculate_top_speed">
 <span class="sig-name descname"><span class="pre">calculate_top_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_low</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_high</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.calculate_top_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.calculate_top_speed" title="Link to this definition">#</a></dt>
-<dd><p>binary searches what velocity drag and rolling resistance equals max motor force</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.car_reset">
-<span class="sig-name descname"><span class="pre">car_reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.car_reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.car_reset" title="Link to this definition">#</a></dt>
-<dd><p>Resets the car’s state variables to their initial values for a fresh start.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.car_weight_distributor">
-<span class="sig-name descname"><span class="pre">car_weight_distributor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backwards_pass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_acc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.car_weight_distributor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.car_weight_distributor" title="Link to this definition">#</a></dt>
-<dd><p>does weight transfer, returns normal force of tires in N</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.check_all_tires_valid_lateral_force">
-<span class="sig-name descname"><span class="pre">check_all_tires_valid_lateral_force</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.check_all_tires_valid_lateral_force"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.check_all_tires_valid_lateral_force" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.coast_forwards_dx">
-<span class="sig-name descname"><span class="pre">coast_forwards_dx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.coast_forwards_dx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.coast_forwards_dx" title="Link to this definition">#</a></dt>
-<dd><p>Lifts and coasts for endurance.</p>
+<dd><p>Binary search for the velocity where drag and rolling resistance equal max motor force.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>radius</strong> (<em>float</em>) – Corner radius of the current corner.</p></li>
-<li><p><strong>distance_step</strong> (<em>float</em>)</p></li>
-<li><p><strong>state</strong> (<a class="reference internal" href="suboptimumg.models.html#suboptimumg.models.SimulationState" title="suboptimumg.models.SimulationState"><em>SimulationState</em></a>)</p></li>
+<li><p><strong>max_steps</strong> (<em>int</em>) – Maximum number of binary search iterations.</p></li>
+<li><p><strong>v_low</strong> (<em>float</em>) – Lower bound of the search interval (m/s).</p></li>
+<li><p><strong>v_high</strong> (<em>float</em>) – Upper bound of the search interval (m/s).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A tuple containing the time step (dt), power (p), and acceleration (acc).</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.convert_rotating_mass_to_linear_mass">
-<span class="sig-name descname"><span class="pre">convert_rotating_mass_to_linear_mass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.convert_rotating_mass_to_linear_mass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.convert_rotating_mass_to_linear_mass" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.get_current_params">
-<span class="sig-name descname"><span class="pre">get_current_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.get_current_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.get_current_params" title="Link to this definition">#</a></dt>
-<dd><p>Retrieves the current value of a car parameter given its name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>var_name</strong> (<em>str</em>) – The name of the parameter to retrieve (e.g., ‘pwrtn.motor.max_rpm’).</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The current value of the specified parameter.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>any</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.max_stable_speed">
-<span class="sig-name descname"><span class="pre">max_stable_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">converge_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.008</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stabilize_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.max_stable_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.max_stable_speed" title="Link to this definition">#</a></dt>
-<dd><p>Experimentally binary searches for the maximum speed at which the car can safely navigate a corner.
-DO NOT use this function in the middle of a simulated lap! This calculation will involve
-resetting the car’s state variables.
-Note that self.acc does not necessarily need to be near-zero when the solution is converged to be valid. (i.e., an understeery car)
-Note that stabilize_steps must be &gt;1 (probably &gt;5) for accurate results when roll/pitch/etc. sensitivity is used.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>radius</strong> (<em>float</em>) – The radius of the corner [m]</p></li>
-<li><p><strong>converge_steps</strong> (<em>int</em>) – The maximum number of solution iterations. Default: 20.</p></li>
-<li><p><strong>resolution</strong> (<em>float</em>) – Tolerance of final velocity solution. Default: 0.008 [m/s]</p></li>
-<li><p><strong>stabilize_steps</strong> (<em>int</em>) – How many times to iterate each velocity check. Necessary for roll/pitch/etc. Default: 1</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The maximum stable cornering speed [m/s]</p>
+<dd class="field-even"><p>Estimated top speed (m/s).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -659,15 +603,146 @@ Note that stabilize_steps must be &gt;1 (probably &gt;5) for accurate results wh
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.car_reset">
+<span class="sig-name descname"><span class="pre">car_reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.car_reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.car_reset" title="Link to this definition">#</a></dt>
+<dd><p>Resets the car’s state variables to their initial values for a fresh start.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.car_weight_distributor">
+<span class="sig-name descname"><span class="pre">car_weight_distributor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backwards_pass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">acc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_acc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.car_weight_distributor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.car_weight_distributor" title="Link to this definition">#</a></dt>
+<dd><p>Compute weight transfer and return each tire’s normal force.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>backwards_pass</strong> (<em>bool</em>) – Whether this is a backwards (braking) integration pass; flips the
+sign of the longitudinal acceleration used for weight transfer.</p></li>
+<li><p><strong>acc</strong> (<em>float</em>) – Longitudinal acceleration (m/s^2).</p></li>
+<li><p><strong>lat_acc</strong> (<em>float</em>) – Lateral acceleration (m/s^2).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Normal forces (N) for the front-left, front-right, rear-left,
+and rear-right tires.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple of float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.check_all_tires_valid_lateral_force">
+<span class="sig-name descname"><span class="pre">check_all_tires_valid_lateral_force</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.check_all_tires_valid_lateral_force"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.check_all_tires_valid_lateral_force" title="Link to this definition">#</a></dt>
+<dd><p>Check whether every tire’s current lateral force is within its friction limit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if all tires satisfy their lateral force limit.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.coast_forwards_dx">
+<span class="sig-name descname"><span class="pre">coast_forwards_dx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.coast_forwards_dx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.coast_forwards_dx" title="Link to this definition">#</a></dt>
+<dd><p>Lift off the throttle and coast (with regen) for one distance step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>radius</strong> (<em>float</em>) – Radius of the current corner (m).</p></li>
+<li><p><strong>distance_step</strong> (<em>float</em>) – Distance to advance (m).</p></li>
+<li><p><strong>state</strong> (<a class="reference internal" href="suboptimumg.models.html#suboptimumg.models.SimulationState" title="suboptimumg.models.SimulationState"><em>SimulationState</em></a>) – Current simulation state.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updated simulation state after the step.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="suboptimumg.models.html#suboptimumg.models.SimulationState" title="suboptimumg.models.SimulationState">SimulationState</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.convert_rotating_mass_to_linear_mass">
+<span class="sig-name descname"><span class="pre">convert_rotating_mass_to_linear_mass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.convert_rotating_mass_to_linear_mass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.convert_rotating_mass_to_linear_mass" title="Link to this definition">#</a></dt>
+<dd><p>Compute the linear-mass equivalent of all rotating inertia (tires, rims, motor, gearbox).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Equivalent linear mass (kg), i.e. rotating inertia J divided by
+tire radius squared, summed across all rotating components.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.get_current_params">
+<span class="sig-name descname"><span class="pre">get_current_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.get_current_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.get_current_params" title="Link to this definition">#</a></dt>
+<dd><p>Retrieve the current value of a car parameter given its dotted name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>var_name</strong> (<em>str</em>) – The name of the parameter to retrieve (e.g., ‘pwrtn.motor.max_rpm’).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The current value of the specified parameter.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.max_stable_speed">
+<span class="sig-name descname"><span class="pre">max_stable_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">converge_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.008</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stabilize_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.max_stable_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.max_stable_speed" title="Link to this definition">#</a></dt>
+<dd><p>Binary search for the maximum speed at which the car can safely navigate a corner.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>radius</strong> (<em>float</em>) – Radius of the corner (m).</p></li>
+<li><p><strong>converge_steps</strong> (<em>int</em>) – Maximum number of solution iterations.</p></li>
+<li><p><strong>resolution</strong> (<em>float</em>) – Tolerance of the final velocity solution (m/s).</p></li>
+<li><p><strong>stabilize_steps</strong> (<em>int</em>) – How many times to iterate each velocity check. Needed for
+roll/pitch/etc. sensitivity (should be &gt;1, ideally &gt;5, when used).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The maximum stable cornering speed (m/s).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Do not call this in the middle of a simulated lap: it resets the
+car’s state variables. The acceleration does not need to be near
+zero when converged (e.g. for an understeery car).</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.modify_params">
 <span class="sig-name descname"><span class="pre">modify_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_var_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.modify_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.modify_params" title="Link to this definition">#</a></dt>
-<dd><p>Modifies a car parameter given its name and new value.</p>
+<dd><p>Modify a car parameter given its dotted name and new value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>var_name</strong> (<em>str</em>) – The name of the parameter to modify (e.g., ‘pwrtn.motor.max_rpm’).</p></li>
-<li><p><strong>new_var_value</strong> (<em>any</em>) – The new value to set for the specified parameter.</p></li>
+<li><p><strong>new_var_value</strong> (<em>object</em>) – The new value to set for the specified parameter.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -675,11 +750,27 @@ Note that stabilize_steps must be &gt;1 (probably &gt;5) for accurate results wh
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.try_accelerate_forwards_for_max_speed_calc">
 <span class="sig-name descname"><span class="pre">try_accelerate_forwards_for_max_speed_calc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.try_accelerate_forwards_for_max_speed_calc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.try_accelerate_forwards_for_max_speed_calc" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Check whether the car can hold the given speed through a corner of the given radius.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>state</strong> (<a class="reference internal" href="suboptimumg.models.html#suboptimumg.models.SimulationState" title="suboptimumg.models.SimulationState"><em>SimulationState</em></a>)</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>radius</strong> (<em>float</em>) – Corner radius (m).</p></li>
+<li><p><strong>state</strong> (<a class="reference internal" href="suboptimumg.models.html#suboptimumg.models.SimulationState" title="suboptimumg.models.SimulationState"><em>SimulationState</em></a>) – Current simulation state.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the powertrain and tires can sustain this speed through
+the corner.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>Approximates a steady-state weight transfer by zeroing longitudinal
+acceleration for this check (a simplification pending further
+investigation of longitudinal weight transfer behavior). Modifies
+tire normal forces as a side effect.</p>
 </dd></dl>
 
 </dd></dl>
