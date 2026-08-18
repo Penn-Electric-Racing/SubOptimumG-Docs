@@ -1,8 +1,0 @@
-suboptimumg.models
-==================
-
-.. automodule:: suboptimumg.models
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

@@ -1,8 +1,0 @@
-suboptimumg.log\_analysis.drivetrain
-====================================
-
-.. automodule:: suboptimumg.log_analysis.drivetrain
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

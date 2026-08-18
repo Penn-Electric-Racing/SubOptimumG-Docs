@@ -1,8 +1,0 @@
-suboptimumg.compsim.lap
-=======================
-
-.. automodule:: suboptimumg.compsim.lap
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

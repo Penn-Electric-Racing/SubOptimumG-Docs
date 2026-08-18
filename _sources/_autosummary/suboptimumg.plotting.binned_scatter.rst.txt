@@ -1,8 +1,0 @@
-suboptimumg.plotting.binned\_scatter
-====================================
-
-.. automodule:: suboptimumg.plotting.binned_scatter
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

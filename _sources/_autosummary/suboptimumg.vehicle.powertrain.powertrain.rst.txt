@@ -1,8 +1,0 @@
-suboptimumg.vehicle.powertrain.powertrain
-=========================================
-
-.. automodule:: suboptimumg.vehicle.powertrain.powertrain
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

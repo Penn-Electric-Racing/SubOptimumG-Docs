@@ -1,8 +1,0 @@
-suboptimumg.log\_analysis.yaw\_fit\_models
-==========================================
-
-.. automodule:: suboptimumg.log_analysis.yaw_fit_models
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

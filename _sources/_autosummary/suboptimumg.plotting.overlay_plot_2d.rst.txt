@@ -1,8 +1,0 @@
-suboptimumg.plotting.overlay\_plot\_2d
-======================================
-
-.. automodule:: suboptimumg.plotting.overlay_plot_2d
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

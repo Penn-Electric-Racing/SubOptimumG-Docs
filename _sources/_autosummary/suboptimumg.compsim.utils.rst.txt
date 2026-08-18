@@ -1,8 +1,0 @@
-suboptimumg.compsim.utils
-=========================
-
-.. automodule:: suboptimumg.compsim.utils
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

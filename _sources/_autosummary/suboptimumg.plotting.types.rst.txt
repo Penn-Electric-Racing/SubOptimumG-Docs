@@ -1,8 +1,0 @@
-suboptimumg.plotting.types
-==========================
-
-.. automodule:: suboptimumg.plotting.types
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

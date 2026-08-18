@@ -1,8 +1,0 @@
-suboptimumg.vehicle.irl\_vehicle
-================================
-
-.. automodule:: suboptimumg.vehicle.irl_vehicle
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

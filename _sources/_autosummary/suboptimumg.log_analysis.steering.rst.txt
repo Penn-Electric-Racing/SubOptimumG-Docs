@@ -1,8 +1,0 @@
-suboptimumg.log\_analysis.steering
-==================================
-
-.. automodule:: suboptimumg.log_analysis.steering
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

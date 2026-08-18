@@ -1,8 +1,0 @@
-suboptimumg.vehicle.suspension.tire
-===================================
-
-.. automodule:: suboptimumg.vehicle.suspension.tire
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

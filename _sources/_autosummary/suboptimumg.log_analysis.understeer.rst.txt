@@ -1,8 +1,0 @@
-suboptimumg.log\_analysis.understeer
-====================================
-
-.. automodule:: suboptimumg.log_analysis.understeer
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

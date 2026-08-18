@@ -1,8 +1,0 @@
-suboptimumg.sweep.utils
-=======================
-
-.. automodule:: suboptimumg.sweep.utils
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

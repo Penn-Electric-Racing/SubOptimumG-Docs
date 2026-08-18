@@ -1,8 +1,0 @@
-suboptimumg.plotting.stem\_plot
-===============================
-
-.. automodule:: suboptimumg.plotting.stem_plot
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

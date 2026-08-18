@@ -1,8 +1,0 @@
-suboptimumg.sweep.types
-=======================
-
-.. automodule:: suboptimumg.sweep.types
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

@@ -1,8 +1,0 @@
-suboptimumg.track.utils
-=======================
-
-.. automodule:: suboptimumg.track.utils
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
