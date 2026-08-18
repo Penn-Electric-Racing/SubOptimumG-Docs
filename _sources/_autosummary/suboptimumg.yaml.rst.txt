@@ -1,0 +1,8 @@
+suboptimumg.yaml
+================
+
+.. automodule:: suboptimumg.yaml
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

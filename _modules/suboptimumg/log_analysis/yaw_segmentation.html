@@ -1,0 +1,830 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>suboptimumg.log_analysis.yaw_segmentation &#8212; SubOptimumG</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/log_analysis/yaw_segmentation';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SubOptimumG</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.log_analysis.yaw_segmentation</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for suboptimumg.log_analysis.yaw_segmentation</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DataInstance</span><span class="p">,</span>
+    <span class="n">ResampleMethod</span><span class="p">,</span>
+    <span class="n">SingleRunData</span><span class="p">,</span>
+    <span class="n">left_join_data_instances</span><span class="p">,</span>
+    <span class="n">trim_single_run_data</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">perda.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">from_seconds</span><span class="p">,</span> <span class="n">to_seconds</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">butter</span><span class="p">,</span> <span class="n">sosfiltfilt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.kinematics</span><span class="w"> </span><span class="kn">import</span> <span class="n">BODY_SLIP_ANGLE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">estimate_fs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.yaw_segmentation_models</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">MaskReport</span><span class="p">,</span>
+    <span class="n">StationarityCell</span><span class="p">,</span>
+    <span class="n">StationarityReport</span><span class="p">,</span>
+    <span class="n">SubwindowSummary</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">AX_FROM_SPEED</span> <span class="o">=</span> <span class="s2">"ax.fromSpeed"</span>
+
+
+<div class="viewcode-block" id="add_ax_from_speed">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_segmentation.html#suboptimumg.log_analysis.yaw_segmentation.add_ax_from_speed">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_ax_from_speed</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SingleRunData</span><span class="p">,</span>
+    <span class="n">speed_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"pcm.vnav.velocityBody.x"</span><span class="p">,</span>
+    <span class="n">out_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">AX_FROM_SPEED</span><span class="p">,</span>
+    <span class="n">smooth_hz</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Add longitudinal acceleration as the time derivative of speed.</span>
+
+<span class="sd">    Differentiation amplifies high-frequency noise, so the derivative is</span>
+<span class="sd">    lowpass-filtered at ``smooth_hz`` (zero-phase, so no group delay is</span>
+<span class="sd">    introduced). Duplicate and out-of-order timestamps are repaired first --</span>
+<span class="sd">    a single bad sample would otherwise poison the whole signal through the</span>
+<span class="sd">    filter.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : SingleRunData</span>
+<span class="sd">    speed_col : str</span>
+<span class="sd">        Source speed channel (m/s).</span>
+<span class="sd">    out_col : str</span>
+<span class="sd">        Destination acceleration channel (m/s^2).</span>
+<span class="sd">    smooth_hz : float</span>
+<span class="sd">        Lowpass cutoff (Hz); 0 disables smoothing.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    SingleRunData</span>
+<span class="sd">        ``data``, with ``out_col`` added, returned for chaining.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">speed_col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"add_ax_from_speed: missing variable '</span><span class="si">{</span><span class="n">speed_col</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
+
+    <span class="n">di</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">speed_col</span><span class="p">]</span>
+    <span class="n">ts_raw</span> <span class="o">=</span> <span class="n">di</span><span class="o">.</span><span class="n">timestamp_np</span>
+    <span class="n">t_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">to_seconds</span><span class="p">(</span><span class="n">ts_raw</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">di</span><span class="o">.</span><span class="n">value_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">t_s</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"stable"</span><span class="p">)</span>
+    <span class="n">t_sorted</span><span class="p">,</span> <span class="n">v_sorted</span> <span class="o">=</span> <span class="n">t_s</span><span class="p">[</span><span class="n">order</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+    <span class="n">keep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="kc">True</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t_sorted</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">t_clean</span><span class="p">,</span> <span class="n">v_clean</span> <span class="o">=</span> <span class="n">t_sorted</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">v_sorted</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span>
+
+    <span class="n">ax_clean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">v_clean</span><span class="p">,</span> <span class="n">t_clean</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">smooth_hz</span><span class="p">:</span>
+        <span class="n">fs</span> <span class="o">=</span> <span class="n">estimate_fs</span><span class="p">(</span><span class="n">t_clean</span><span class="p">)</span>
+        <span class="n">nyquist</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">fs</span>
+        <span class="k">if</span> <span class="n">fs</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">smooth_hz</span> <span class="o">&lt;</span> <span class="n">nyquist</span><span class="p">:</span>
+            <span class="n">sos</span> <span class="o">=</span> <span class="n">butter</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">Wn</span><span class="o">=</span><span class="n">smooth_hz</span> <span class="o">/</span> <span class="n">nyquist</span><span class="p">,</span> <span class="n">btype</span><span class="o">=</span><span class="s2">"low"</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s2">"sos"</span><span class="p">)</span>
+            <span class="n">ax_clean</span> <span class="o">=</span> <span class="n">sosfiltfilt</span><span class="p">(</span><span class="n">sos</span><span class="p">,</span> <span class="n">ax_clean</span><span class="p">)</span>
+
+    <span class="n">data</span><span class="p">[</span><span class="n">out_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_raw</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">t_s</span><span class="p">,</span> <span class="n">t_clean</span><span class="p">,</span> <span class="n">ax_clean</span><span class="p">),</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">"Longitudinal Acceleration from Speed (m/s^2)"</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">out_col</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+
+<div class="viewcode-block" id="scan_speed_stationarity">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_segmentation.html#suboptimumg.log_analysis.yaw_segmentation.scan_speed_stationarity">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">scan_speed_stationarity</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SingleRunData</span><span class="p">,</span>
+    <span class="n">win_lengths_s</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">),</span>
+    <span class="n">tol_pcts</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">),</span>
+    <span class="n">speed_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"pcm.vnav.velocityBody.x"</span><span class="p">,</span>
+    <span class="n">overlap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StationarityReport</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Measure how often the car holds an approximately constant speed.</span>
+
+<span class="sd">    For each ``(window length, tolerance)`` pair, count the fraction of sliding</span>
+<span class="sd">    windows whose peak-to-peak speed stays within ``tolerance`` percent of the</span>
+<span class="sd">    window mean. Near-zero fractions at the long windows are the evidence that</span>
+<span class="sd">    a nonparametric FRF will not work on this data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : SingleRunData</span>
+<span class="sd">    win_lengths_s : tuple of float</span>
+<span class="sd">        Sliding-window lengths to test (s).</span>
+<span class="sd">    tol_pcts : tuple of float</span>
+<span class="sd">        Allowed peak-to-peak speed variation, as a percent of the window mean.</span>
+<span class="sd">    speed_col : str</span>
+<span class="sd">    overlap : float</span>
+<span class="sd">        Window overlap fraction (0 = none, 0.5 = 50%).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    StationarityReport</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Lapping data is not a frequency-response test: the car is accelerating,</span>
+<span class="sd">    braking, and occasionally sliding. This scan quantifies how rarely the</span>
+<span class="sd">    speed is even approximately constant, and is the justification for</span>
+<span class="sd">    identifying the yaw response with a parametric LPV output-error fit</span>
+<span class="sd">    (``yaw_fit``) rather than a nonparametric Welch FRF, which would need</span>
+<span class="sd">    long constant-speed holds this data does not contain.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">speed_col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"scan_speed_stationarity: missing variable '</span><span class="si">{</span><span class="n">speed_col</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
+
+    <span class="n">t_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span>
+        <span class="n">to_seconds</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">speed_col</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">),</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">speed_col</span><span class="p">]</span><span class="o">.</span><span class="n">value_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">fs</span> <span class="o">=</span> <span class="n">estimate_fs</span><span class="p">(</span><span class="n">t_s</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">fs</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Could not estimate sample rate from the speed timestamps."</span><span class="p">)</span>
+
+    <span class="n">cells</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">StationarityCell</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">window_s</span> <span class="ow">in</span> <span class="n">win_lengths_s</span><span class="p">:</span>
+        <span class="n">n_win</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">window_s</span> <span class="o">*</span> <span class="n">fs</span><span class="p">)))</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">n_win</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">overlap</span><span class="p">))))</span>
+
+        <span class="k">if</span> <span class="n">n_win</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+            <span class="n">cells</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+                <span class="n">StationarityCell</span><span class="p">(</span>
+                    <span class="n">window_s</span><span class="o">=</span><span class="n">window_s</span><span class="p">,</span>
+                    <span class="n">tol_pct</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span>
+                    <span class="n">n_windows</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">n_passing</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">fraction_passing</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">),</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">tol</span> <span class="ow">in</span> <span class="n">tol_pcts</span>
+            <span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="n">starts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">-</span> <span class="n">n_win</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+        <span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">v</span><span class="p">[</span><span class="n">s</span> <span class="p">:</span> <span class="n">s</span> <span class="o">+</span> <span class="n">n_win</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">starts</span><span class="p">])</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">s</span> <span class="p">:</span> <span class="n">s</span> <span class="o">+</span> <span class="n">n_win</span><span class="p">])</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">starts</span><span class="p">])</span>
+        <span class="c1"># A window straddling a standstill has a near-zero mean; its relative</span>
+        <span class="c1"># variation is meaningless rather than infinite.</span>
+        <span class="n">safe_means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">means</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">means</span><span class="p">)</span>
+        <span class="n">relative_pp</span> <span class="o">=</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="n">ranges</span> <span class="o">/</span> <span class="n">safe_means</span>
+
+        <span class="k">for</span> <span class="n">tol</span> <span class="ow">in</span> <span class="n">tol_pcts</span><span class="p">:</span>
+            <span class="n">n_passing</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">relative_pp</span> <span class="o">&lt;=</span> <span class="n">tol</span><span class="p">))</span>
+            <span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">StationarityCell</span><span class="p">(</span>
+                    <span class="n">window_s</span><span class="o">=</span><span class="n">window_s</span><span class="p">,</span>
+                    <span class="n">tol_pct</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span>
+                    <span class="n">n_windows</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">starts</span><span class="p">)),</span>
+                    <span class="n">n_passing</span><span class="o">=</span><span class="n">n_passing</span><span class="p">,</span>
+                    <span class="n">fraction_passing</span><span class="o">=</span><span class="n">n_passing</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">starts</span><span class="p">),</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">StationarityReport</span><span class="p">(</span><span class="n">speed_col</span><span class="o">=</span><span class="n">speed_col</span><span class="p">,</span> <span class="n">overlap</span><span class="o">=</span><span class="n">overlap</span><span class="p">,</span> <span class="n">cells</span><span class="o">=</span><span class="n">cells</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_contiguous_runs</span><span class="p">(</span><span class="n">mask</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""``[start, end)`` index pairs for each run of True in ``mask``."""</span>
+    <span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">))</span>
+    <span class="n">starts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">diff</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ends</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">diff</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mask</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">starts</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mask</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">ends</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="auto_segment">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_segmentation.html#suboptimumg.log_analysis.yaw_segmentation.auto_segment">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">auto_segment</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SingleRunData</span><span class="p">,</span>
+    <span class="n">manual_windows</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]],</span>
+    <span class="n">min_speed_mps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">4.0</span><span class="p">,</span>
+    <span class="n">max_slip_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">7.0</span><span class="p">,</span>
+    <span class="n">min_window_s</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">8.0</span><span class="p">,</span>
+    <span class="n">speed_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"pcm.vnav.velocityBody.x"</span><span class="p">,</span>
+    <span class="n">slip_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">BODY_SLIP_ANGLE</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">SingleRunData</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">MaskReport</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""Split each coarse window into clean sub-windows by masking.</span>
+
+<span class="sd">    Within each window, samples below ``min_speed_mps`` (the car is not really</span>
+<span class="sd">    driving, and every 1/V term blows up) or above ``max_slip_deg`` of body</span>
+<span class="sd">    slip (the tires are past the linear region the bicycle model describes) are</span>
+<span class="sd">    dropped. Surviving runs shorter than ``min_window_s`` carry too little</span>
+<span class="sd">    low-frequency content to identify anything and are dropped too.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : SingleRunData</span>
+<span class="sd">    manual_windows : list of (t_start, t_end)</span>
+<span class="sd">        Coarse windows (s), typically read off the GPS trajectory.</span>
+<span class="sd">    min_speed_mps, max_slip_deg, min_window_s : float</span>
+<span class="sd">        Mask and length thresholds.</span>
+<span class="sd">    speed_col, slip_col : str</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    subwindows : list of SingleRunData</span>
+<span class="sd">        A flat list of every accepted sub-window, across all manual windows.</span>
+<span class="sd">    reports : list of MaskReport</span>
+<span class="sd">        One report per manual window.</span>
+<span class="sd">    """</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">(</span><span class="n">speed_col</span><span class="p">,</span> <span class="n">slip_col</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"auto_segment: missing variable '</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">'. Run add_groundspeed / "</span>
+                <span class="s2">"add_track_frame_velocities / add_body_slip_angle first."</span>
+            <span class="p">)</span>
+
+    <span class="n">speed_di</span><span class="p">,</span> <span class="n">slip_di</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">speed_col</span><span class="p">],</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">slip_col</span><span class="p">]])</span>
+    <span class="n">t_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span>
+        <span class="n">to_seconds</span><span class="p">(</span><span class="n">speed_di</span><span class="o">.</span><span class="n">timestamp_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">),</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">speed_di</span><span class="o">.</span><span class="n">value_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">slip</span> <span class="o">=</span> <span class="n">slip_di</span><span class="o">.</span><span class="n">value_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="n">subwindows</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">SingleRunData</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">reports</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">MaskReport</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">w_start</span><span class="p">,</span> <span class="n">w_end</span> <span class="ow">in</span> <span class="n">manual_windows</span><span class="p">:</span>
+        <span class="n">in_window</span> <span class="o">=</span> <span class="p">(</span><span class="n">t_s</span> <span class="o">&gt;=</span> <span class="n">w_start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">t_s</span> <span class="o">&lt;=</span> <span class="n">w_end</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">in_window</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+            <span class="n">reports</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">MaskReport</span><span class="p">(</span>
+                    <span class="n">manual_window</span><span class="o">=</span><span class="p">(</span><span class="n">w_start</span><span class="p">,</span> <span class="n">w_end</span><span class="p">),</span>
+                    <span class="n">n_input_pts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">n_kept_pts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">n_low_speed_pts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">n_high_slip_pts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">sub_windows</span><span class="o">=</span><span class="p">[],</span>
+                    <span class="n">rejected_short</span><span class="o">=</span><span class="p">[],</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">in_window</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">v_w</span><span class="p">,</span> <span class="n">slip_w</span><span class="p">,</span> <span class="n">t_w</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">slip</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">t_s</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">low_speed</span> <span class="o">=</span> <span class="n">v_w</span> <span class="o">&lt;</span> <span class="n">min_speed_mps</span>
+        <span class="n">high_slip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">slip_w</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_slip_deg</span>
+        <span class="n">valid</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="n">low_speed</span> <span class="o">|</span> <span class="n">high_slip</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">v_w</span><span class="p">)</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">slip_w</span><span class="p">))</span>
+
+        <span class="n">accepted</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">rejected</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">_contiguous_runs</span><span class="p">(</span><span class="n">valid</span><span class="p">):</span>
+            <span class="n">t_start</span><span class="p">,</span> <span class="n">t_end</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">t_w</span><span class="p">[</span><span class="n">start</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">t_w</span><span class="p">[</span><span class="n">end</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">t_end</span> <span class="o">-</span> <span class="n">t_start</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_window_s</span><span class="p">:</span>
+                <span class="n">rejected</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">t_start</span><span class="p">,</span> <span class="n">t_end</span><span class="p">))</span>
+                <span class="k">continue</span>
+            <span class="n">subwindows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">trim_single_run_data</span><span class="p">(</span>
+                    <span class="n">data</span><span class="p">,</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="n">from_seconds</span><span class="p">(</span><span class="n">t_start</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">)),</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="n">from_seconds</span><span class="p">(</span><span class="n">t_end</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">)),</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">accepted</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">t_start</span><span class="p">,</span> <span class="n">t_end</span><span class="p">))</span>
+
+        <span class="n">reports</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">MaskReport</span><span class="p">(</span>
+                <span class="n">manual_window</span><span class="o">=</span><span class="p">(</span><span class="n">w_start</span><span class="p">,</span> <span class="n">w_end</span><span class="p">),</span>
+                <span class="n">n_input_pts</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">in_window</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+                <span class="n">n_kept_pts</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">valid</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+                <span class="n">n_low_speed_pts</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">low_speed</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+                <span class="n">n_high_slip_pts</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">high_slip</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+                <span class="n">sub_windows</span><span class="o">=</span><span class="n">accepted</span><span class="p">,</span>
+                <span class="n">rejected_short</span><span class="o">=</span><span class="n">rejected</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">subwindows</span><span class="p">,</span> <span class="n">reports</span></div>
+
+
+
+<div class="viewcode-block" id="resample_subwindows">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_segmentation.html#suboptimumg.log_analysis.yaw_segmentation.resample_subwindows">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">resample_subwindows</span><span class="p">(</span>
+    <span class="n">subwindows</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">SingleRunData</span><span class="p">],</span>
+    <span class="n">target_hz</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">method</span><span class="p">:</span> <span class="n">ResampleMethod</span> <span class="o">=</span> <span class="n">ResampleMethod</span><span class="o">.</span><span class="n">LINEAR</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">SingleRunData</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Put every sub-window channel on a common uniform grid at ``target_hz``.</span>
+
+<span class="sd">    Raw logs run near 1 kHz with dt jitter, but the yaw mode is only a few Hz</span>
+<span class="sd">    wide, so 100 Hz is ample and roughly ten times cheaper to simulate. Landing</span>
+<span class="sd">    every channel on the *same* grid also makes the later left-join a no-op.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subwindows : list of SingleRunData</span>
+<span class="sd">        Output of ``auto_segment``.</span>
+<span class="sd">    target_hz : float</span>
+<span class="sd">    method : ResampleMethod</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list of SingleRunData</span>
+<span class="sd">        New sub-windows on the uniform grid. Channels with fewer than two</span>
+<span class="sd">        samples are dropped, and a sub-window left with no channels at all is</span>
+<span class="sd">        omitted.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">target_hz</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"target_hz must be &gt; 0, got </span><span class="si">{</span><span class="n">target_hz</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="n">out</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">SingleRunData</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">subwindows</span><span class="p">:</span>
+        <span class="n">resampled</span> <span class="o">=</span> <span class="n">SingleRunData</span><span class="p">(</span>
+            <span class="n">id_to_instance</span><span class="o">=</span><span class="p">{},</span>
+            <span class="n">cpp_name_to_id</span><span class="o">=</span><span class="p">{},</span>
+            <span class="n">id_to_cpp_name</span><span class="o">=</span><span class="p">{},</span>
+            <span class="n">id_to_descript</span><span class="o">=</span><span class="p">{},</span>
+            <span class="n">total_data_points</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">data_start_time</span><span class="o">=</span><span class="n">sub</span><span class="o">.</span><span class="n">data_start_time</span><span class="p">,</span>
+            <span class="n">data_end_time</span><span class="o">=</span><span class="n">sub</span><span class="o">.</span><span class="n">data_end_time</span><span class="p">,</span>
+            <span class="n">timestamp_unit</span><span class="o">=</span><span class="n">sub</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">,</span>
+            <span class="n">concat_boundaries</span><span class="o">=</span><span class="p">[],</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">cpp_name</span> <span class="ow">in</span> <span class="n">sub</span><span class="o">.</span><span class="n">cpp_name_to_id</span><span class="p">:</span>
+            <span class="n">di</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="n">cpp_name</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">di</span><span class="o">.</span><span class="n">value_np</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">resampled</span><span class="p">[</span><span class="n">cpp_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">di</span><span class="o">.</span><span class="n">resample_to_freq</span><span class="p">(</span><span class="n">target_hz</span><span class="p">,</span> <span class="n">sub</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">resampled</span><span class="o">.</span><span class="n">cpp_name_to_id</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resampled</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+
+
+
+<div class="viewcode-block" id="summarize_subwindows">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_segmentation.html#suboptimumg.log_analysis.yaw_segmentation.summarize_subwindows">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">summarize_subwindows</span><span class="p">(</span>
+    <span class="n">subwindows</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">SingleRunData</span><span class="p">],</span>
+    <span class="n">ax_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">AX_FROM_SPEED</span><span class="p">,</span>
+    <span class="n">input_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ludwig.steeringWheel.angle"</span><span class="p">,</span>
+    <span class="n">speed_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"pcm.vnav.velocityBody.x"</span><span class="p">,</span>
+    <span class="n">slip_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">BODY_SLIP_ANGLE</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">SubwindowSummary</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Per-sub-window quality summary, for triaging windows before fitting.</span>
+
+<span class="sd">    Duration and steering excitation say whether a window can identify</span>
+<span class="sd">    anything; speed hold and ``|a_x|`` say how hard the LPV scheduling is</span>
+<span class="sd">    working; slip RMS says how close to the linear region it stayed.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subwindows : list of SingleRunData</span>
+<span class="sd">    ax_col, input_col, speed_col, slip_col : str</span>
+<span class="sd">        Channels to summarize. Any that are absent are reported as NaN.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list of SubwindowSummary</span>
+<span class="sd">    """</span>
+    <span class="n">summaries</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">SubwindowSummary</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sub</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">subwindows</span><span class="p">):</span>
+        <span class="n">reference</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">cpp_name_to_id</span><span class="p">))</span>
+        <span class="n">t_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span>
+            <span class="n">to_seconds</span><span class="p">(</span><span class="n">sub</span><span class="p">[</span><span class="n">reference</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">sub</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">),</span>
+            <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">SubwindowSummary</span><span class="p">(</span>
+            <span class="n">sub_index</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+            <span class="n">n_pts</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="p">[</span><span class="n">reference</span><span class="p">]</span><span class="o">.</span><span class="n">value_np</span><span class="p">),</span>
+            <span class="n">duration_s</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">t_s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">t_s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">t_s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">fs_hz</span><span class="o">=</span><span class="n">estimate_fs</span><span class="p">(</span><span class="n">t_s</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">speed_col</span> <span class="ow">in</span> <span class="n">sub</span><span class="p">:</span>
+            <span class="n">speed</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="n">speed_col</span><span class="p">]</span><span class="o">.</span><span class="n">value_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+            <span class="n">mean</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">speed</span><span class="p">))</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">speed_mean</span> <span class="o">=</span> <span class="n">mean</span>
+            <span class="k">if</span> <span class="n">mean</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">row</span><span class="o">.</span><span class="n">speed_pp_pct</span> <span class="o">=</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">speed</span><span class="p">))</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ax_col</span> <span class="ow">in</span> <span class="n">sub</span><span class="p">:</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="n">ax_col</span><span class="p">]</span><span class="o">.</span><span class="n">value_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">ax_rms</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">ax</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">input_col</span> <span class="ow">in</span> <span class="n">sub</span><span class="p">:</span>
+            <span class="n">steer</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="n">input_col</span><span class="p">]</span><span class="o">.</span><span class="n">value_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">input_pp</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">steer</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">steer</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">slip_col</span> <span class="ow">in</span> <span class="n">sub</span><span class="p">:</span>
+            <span class="n">slip</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="n">slip_col</span><span class="p">]</span><span class="o">.</span><span class="n">value_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">slip_rms</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">slip</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+
+        <span class="n">summaries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">summaries</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Penn Electric Racing.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

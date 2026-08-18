@@ -47,7 +47,6 @@ in the commands below.
 	pip install -r requirements.txt
 	pip install -e .
 	pre-commit install
-	nbstripout --install
 
 
 4. Run a Notebook

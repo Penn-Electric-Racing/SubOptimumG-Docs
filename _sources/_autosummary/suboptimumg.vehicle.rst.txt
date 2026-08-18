@@ -1,0 +1,25 @@
+suboptimumg.vehicle
+===================
+
+.. automodule:: suboptimumg.vehicle
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   accumulator
+   aerodynamics
+   chassis
+   driver_interface
+   irl_vehicle
+   powertrain
+   subsystem_models
+   suspension
+   vehicle
+   vehicle_models

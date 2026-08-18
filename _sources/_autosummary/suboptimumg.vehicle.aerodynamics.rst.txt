@@ -1,0 +1,16 @@
+suboptimumg.vehicle.aerodynamics
+================================
+
+.. automodule:: suboptimumg.vehicle.aerodynamics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   aerodynamics

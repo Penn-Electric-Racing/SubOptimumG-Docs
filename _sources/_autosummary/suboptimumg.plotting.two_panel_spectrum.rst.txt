@@ -1,0 +1,8 @@
+suboptimumg.plotting.two\_panel\_spectrum
+=========================================
+
+.. automodule:: suboptimumg.plotting.two_panel_spectrum
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

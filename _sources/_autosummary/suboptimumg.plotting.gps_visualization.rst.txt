@@ -1,0 +1,8 @@
+suboptimumg.plotting.gps\_visualization
+=======================================
+
+.. automodule:: suboptimumg.plotting.gps_visualization
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

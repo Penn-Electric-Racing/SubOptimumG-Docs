@@ -1,0 +1,16 @@
+suboptimumg.vehicle.chassis
+===========================
+
+.. automodule:: suboptimumg.vehicle.chassis
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   chassis

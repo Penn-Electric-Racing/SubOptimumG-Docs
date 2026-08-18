@@ -1,0 +1,8 @@
+suboptimumg.log\_analysis.yaw\_artifact
+=======================================
+
+.. automodule:: suboptimumg.log_analysis.yaw_artifact
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

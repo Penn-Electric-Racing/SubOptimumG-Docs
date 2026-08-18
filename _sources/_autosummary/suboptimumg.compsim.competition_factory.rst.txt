@@ -1,0 +1,8 @@
+suboptimumg.compsim.competition\_factory
+========================================
+
+.. automodule:: suboptimumg.compsim.competition_factory
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

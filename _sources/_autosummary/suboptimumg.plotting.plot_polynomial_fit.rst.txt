@@ -1,0 +1,6 @@
+suboptimumg.plotting.plot\_polynomial\_fit
+==========================================
+
+.. currentmodule:: suboptimumg.plotting
+
+.. autofunction:: plot_polynomial_fit

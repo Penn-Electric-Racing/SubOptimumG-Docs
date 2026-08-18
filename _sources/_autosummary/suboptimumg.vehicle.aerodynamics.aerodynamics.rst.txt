@@ -1,0 +1,8 @@
+suboptimumg.vehicle.aerodynamics.aerodynamics
+=============================================
+
+.. automodule:: suboptimumg.vehicle.aerodynamics.aerodynamics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
