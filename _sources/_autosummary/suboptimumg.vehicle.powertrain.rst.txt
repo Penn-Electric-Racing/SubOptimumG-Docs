@@ -13,4 +13,5 @@ suboptimumg.vehicle.powertrain
    :toctree:
    :recursive:
 
+   motor
    powertrain

@@ -27,18 +27,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../_static/documentation_options.js?v=a58bc63e"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
@@ -335,6 +335,7 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.gps_visualization.html">suboptimumg.plotting.gps_visualization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_2d.html">suboptimumg.plotting.grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html">suboptimumg.plotting.grid_plot_3d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.heatmap.html">suboptimumg.plotting.heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_grid_plot_2d.html">suboptimumg.plotting.overlay_grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plot_2d.html">suboptimumg.plotting.overlay_plot_2d</a></li>
@@ -393,6 +394,7 @@
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.vehicle.irl_vehicle.html">suboptimumg.vehicle.irl_vehicle</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.vehicle.powertrain.html">suboptimumg.vehicle.powertrain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.powertrain.motor.html">suboptimumg.vehicle.powertrain.motor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.powertrain.powertrain.html">suboptimumg.vehicle.powertrain.powertrain</a></li>
 </ul>
 </details></li>
@@ -747,6 +749,11 @@ raises <cite>AttributeError</cite>, whichever part of the path is wrong, while
 a genuinely invalid value keeps its original validation error.</p>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.sus">
+<span class="sig-name descname"><span class="pre">sus</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="suboptimumg.vehicle.suspension.suspension.html#suboptimumg.vehicle.suspension.suspension.Suspension" title="suboptimumg.vehicle.suspension.suspension.Suspension"><span class="pre">Suspension</span></a></span><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.sus" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.try_accelerate_forwards_for_max_speed_calc">
 <span class="sig-name descname"><span class="pre">try_accelerate_forwards_for_max_speed_calc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.try_accelerate_forwards_for_max_speed_calc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.try_accelerate_forwards_for_max_speed_calc" title="Link to this definition">#</a></dt>
@@ -836,6 +843,7 @@ investigation of longitudinal weight transfer behavior).</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.get_current_params"><code class="docutils literal notranslate"><span class="pre">Car.get_current_params()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.max_stable_speed"><code class="docutils literal notranslate"><span class="pre">Car.max_stable_speed()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.modify_params"><code class="docutils literal notranslate"><span class="pre">Car.modify_params()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.sus"><code class="docutils literal notranslate"><span class="pre">Car.sus</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.try_accelerate_forwards_for_max_speed_calc"><code class="docutils literal notranslate"><span class="pre">Car.try_accelerate_forwards_for_max_speed_calc()</span></code></a></li>
 </ul>
 </li>
@@ -864,8 +872,8 @@ investigation of longitudinal weight transfer behavior).</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -899,7 +907,7 @@ investigation of longitudinal weight transfer behavior).</p>
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

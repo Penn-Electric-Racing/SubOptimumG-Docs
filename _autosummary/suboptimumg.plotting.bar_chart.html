@@ -27,18 +27,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../_static/documentation_options.js?v=a58bc63e"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
@@ -335,6 +335,7 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.gps_visualization.html">suboptimumg.plotting.gps_visualization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_2d.html">suboptimumg.plotting.grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html">suboptimumg.plotting.grid_plot_3d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.heatmap.html">suboptimumg.plotting.heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_grid_plot_2d.html">suboptimumg.plotting.overlay_grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plot_2d.html">suboptimumg.plotting.overlay_plot_2d</a></li>
@@ -393,6 +394,7 @@
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.vehicle.irl_vehicle.html">suboptimumg.vehicle.irl_vehicle</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.vehicle.powertrain.html">suboptimumg.vehicle.powertrain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.powertrain.motor.html">suboptimumg.vehicle.powertrain.motor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.powertrain.powertrain.html">suboptimumg.vehicle.powertrain.powertrain</a></li>
 </ul>
 </details></li>
@@ -477,6 +479,65 @@
                   
   <section id="module-suboptimumg.plotting.bar_chart">
 <span id="suboptimumg-plotting-bar-chart"></span><h1>suboptimumg.plotting.bar_chart<a class="headerlink" href="#module-suboptimumg.plotting.bar_chart" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="suboptimumg.plotting.bar_chart.BarChartSeries">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.bar_chart.</span></span><span class="sig-name descname"><span class="pre">BarChartSeries</span></span><a class="reference internal" href="../_modules/suboptimumg/plotting/bar_chart.html#BarChartSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.bar_chart.BarChartSeries" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>One variable’s worth of points to plot as a column in a bar chart.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="id1">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id1" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.plotting.bar_chart.BarChartSeries.plausible" title="suboptimumg.plotting.bar_chart.BarChartSeries.plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plausible</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>]</p></td>
+<td><p>Yes</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.plotting.bar_chart.BarChartSeries.points" title="suboptimumg.plotting.bar_chart.BarChartSeries.points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">points</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code>]</p></td>
+<td><p>Yes</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.plotting.bar_chart.BarChartSeries.var_name" title="suboptimumg.plotting.bar_chart.BarChartSeries.var_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">var_name</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Yes</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_name</strong> (<em>str</em>)</p></li>
+<li><p><strong>points</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
+<li><p><strong>plausible</strong> (<em>NDArray</em><em>[</em><em>bool</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.plotting.bar_chart.BarChartSeries.plausible">
+<span class="sig-name descname"><span class="pre">plausible</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.plotting.bar_chart.BarChartSeries.plausible" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.plotting.bar_chart.BarChartSeries.points">
+<span class="sig-name descname"><span class="pre">points</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.plotting.bar_chart.BarChartSeries.points" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.plotting.bar_chart.BarChartSeries.var_name">
+<span class="sig-name descname"><span class="pre">var_name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#suboptimumg.plotting.bar_chart.BarChartSeries.var_name" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.plotting.bar_chart.plot_bar_chart">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.bar_chart.</span></span><span class="sig-name descname"><span class="pre">plot_bar_chart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_by_variable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'chart_default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/bar_chart.html#plot_bar_chart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.bar_chart.plot_bar_chart" title="Link to this definition">#</a></dt>
@@ -484,8 +545,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data_by_variable</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – List of dicts with keys: ‘var_name’ (str), ‘points’ (numpy array),
-‘plausible’ (numpy boolean array)</p></li>
+<li><p><strong>data_by_variable</strong> (<em>list</em><em>[</em><a class="reference internal" href="#suboptimumg.plotting.bar_chart.BarChartSeries" title="suboptimumg.plotting.bar_chart.BarChartSeries"><em>BarChartSeries</em></a><em>]</em>) – One series per variable to show along the x-axis</p></li>
 <li><p><strong>percent_steps</strong> (<em>numpy.ndarray</em>) – Array of percent step values used in the sweep</p></li>
 <li><p><strong>baseline_value</strong> (<em>float</em>) – Float value to draw as a horizontal baseline</p></li>
 <li><p><strong>title</strong> (<em>str</em>) – Plot title</p></li>
@@ -553,6 +613,12 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.bar_chart.BarChartSeries"><code class="docutils literal notranslate"><span class="pre">BarChartSeries</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.bar_chart.BarChartSeries.plausible"><code class="docutils literal notranslate"><span class="pre">BarChartSeries.plausible</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.bar_chart.BarChartSeries.points"><code class="docutils literal notranslate"><span class="pre">BarChartSeries.points</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.bar_chart.BarChartSeries.var_name"><code class="docutils literal notranslate"><span class="pre">BarChartSeries.var_name</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.bar_chart.plot_bar_chart"><code class="docutils literal notranslate"><span class="pre">plot_bar_chart()</span></code></a></li>
 </ul>
   </nav></div>
@@ -579,8 +645,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -614,7 +680,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

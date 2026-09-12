@@ -26,18 +26,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -337,113 +337,18 @@
                   
   <h1>Source code for suboptimumg.log_analysis.preprocess_gps</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DataInstance</span><span class="p">,</span>
     <span class="n">SingleRunData</span><span class="p">,</span>
     <span class="n">left_join_data_instances</span><span class="p">,</span>
 <span class="p">)</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">..constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">EARTH_RADIUS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">perda.plotting.plotting_constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">GpsMapConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">perda.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">filter_gps_cartesian</span><span class="p">,</span> <span class="n">gps_to_enu</span>
 
 <span class="n">GPS_LATITUDE</span> <span class="o">=</span> <span class="s2">"latitudeFiltered"</span>
 <span class="n">GPS_LONGITUDE</span> <span class="o">=</span> <span class="s2">"longitudeFiltered"</span>
 <span class="n">POS_X</span> <span class="o">=</span> <span class="s2">"posX"</span>
 <span class="n">POS_Y</span> <span class="o">=</span> <span class="s2">"posY"</span>
-
-
-<div class="viewcode-block" id="gps_to_local_xy">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.preprocess_gps.html#suboptimumg.log_analysis.preprocess_gps.gps_to_local_xy">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">gps_to_local_xy</span><span class="p">(</span>
-    <span class="n">latitudes</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
-    <span class="n">longitudes</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
-    <span class="n">origin</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Equirectangular projection from lat/lon to local East/North coordinates (meters).</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    latitudes : NDArray[float64]</span>
-<span class="sd">        Array of latitude values in degrees (y/North)</span>
-<span class="sd">    longitudes : NDArray[float64]</span>
-<span class="sd">        Array of longitude values in degrees (x/East)</span>
-<span class="sd">    origin : (lat_deg, lon_deg) or None</span>
-<span class="sd">        Reference point for projection. If None, uses the median position.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    NDArray[float64]</span>
-<span class="sd">        x_m - East coordinates in meters  (same axis as longitude/x)</span>
-<span class="sd">    NDArray[float64]</span>
-<span class="sd">        y_m - North coordinates in meters  (same axis as latitude/y)</span>
-<span class="sd">    tuple[float, float]</span>
-<span class="sd">        origin_latlon - The (lat, lon) reference point used for projection</span>
-<span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">origin</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">lat_ref_deg</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">latitudes</span><span class="p">))</span>
-        <span class="n">lon_ref_deg</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">longitudes</span><span class="p">))</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">lat_ref_deg</span><span class="p">,</span> <span class="n">lon_ref_deg</span> <span class="o">=</span> <span class="n">origin</span>
-
-    <span class="n">lat_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lat_ref_deg</span><span class="p">)</span>
-    <span class="n">lon_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lon_ref_deg</span><span class="p">)</span>
-
-    <span class="c1"># East (x/lon)</span>
-    <span class="n">x_m</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">longitudes</span><span class="p">)</span> <span class="o">-</span> <span class="n">lon_ref</span><span class="p">)</span> <span class="o">*</span> <span class="n">EARTH_RADIUS</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat_ref</span><span class="p">)</span>
-    <span class="c1"># North (y/lat)</span>
-    <span class="n">y_m</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">latitudes</span><span class="p">)</span> <span class="o">-</span> <span class="n">lat_ref</span><span class="p">)</span> <span class="o">*</span> <span class="n">EARTH_RADIUS</span>
-
-    <span class="k">return</span> <span class="n">x_m</span><span class="p">,</span> <span class="n">y_m</span><span class="p">,</span> <span class="p">(</span><span class="n">lat_ref_deg</span><span class="p">,</span> <span class="n">lon_ref_deg</span><span class="p">)</span></div>
-
-
-
-<div class="viewcode-block" id="clean_gps_xy">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.preprocess_gps.html#suboptimumg.log_analysis.preprocess_gps.clean_gps_xy">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">clean_gps_xy</span><span class="p">(</span>
-    <span class="n">x_m</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
-    <span class="n">y_m</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
-    <span class="n">max_jump_m</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">30.0</span><span class="p">,</span>
-    <span class="n">max_radius_m</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1500.0</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Remove outliers from projected GPS coordinates. Applies radius filter first to</span>
-<span class="sd">    drop points further than max_radius_m from the median position, then applies jump</span>
-<span class="sd">    filter to drop points that are large jumps (&gt; max_jump_m) from the previous kept point.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    x_m : NDArray[float64]</span>
-<span class="sd">        East coordinates in meters</span>
-<span class="sd">    y_m : NDArray[float64]</span>
-<span class="sd">        North coordinates in meters</span>
-<span class="sd">    max_jump_m : float</span>
-<span class="sd">        Maximum allowed step distance between consecutive points (meters).</span>
-<span class="sd">    max_radius_m : float</span>
-<span class="sd">        Maximum allowed distance from the median position (meters).</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    NDArray[float64]</span>
-<span class="sd">        Cleaned x_m</span>
-<span class="sd">    NDArray[float64]</span>
-<span class="sd">        Cleaned y_m</span>
-<span class="sd">    NDArray[bool_]</span>
-<span class="sd">        Boolean mask, true where a point was kept.</span>
-<span class="sd">    """</span>
-    <span class="n">dist_from_median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x_m</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">x_m</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y_m</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">y_m</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">radius_mask</span> <span class="o">=</span> <span class="n">dist_from_median</span> <span class="o">&lt;=</span> <span class="n">max_radius_m</span>
-
-    <span class="n">x_r</span><span class="p">,</span> <span class="n">y_r</span> <span class="o">=</span> <span class="n">x_m</span><span class="p">[</span><span class="n">radius_mask</span><span class="p">],</span> <span class="n">y_m</span><span class="p">[</span><span class="n">radius_mask</span><span class="p">]</span>
-    <span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x_r</span><span class="p">,</span> <span class="n">prepend</span><span class="o">=</span><span class="n">x_r</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">dy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y_r</span><span class="p">,</span> <span class="n">prepend</span><span class="o">=</span><span class="n">y_r</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">jump_mask_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">max_jump_m</span>
-
-    <span class="c1"># Combine back into a mask over the original arrays</span>
-    <span class="n">keep</span> <span class="o">=</span> <span class="n">radius_mask</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">keep</span><span class="p">[</span><span class="n">radius_mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">jump_mask_r</span>
-    <span class="k">return</span> <span class="n">x_m</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">y_m</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">keep</span></div>
-
 
 
 <div class="viewcode-block" id="preprocess_gps_data_instances">
@@ -505,12 +410,14 @@
     <span class="n">lon_filtered</span> <span class="o">=</span> <span class="n">lon_di_aligned</span><span class="o">.</span><span class="n">value_np</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">ts_filtered</span> <span class="o">=</span> <span class="n">lat_di_aligned</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-    <span class="n">x_m</span><span class="p">,</span> <span class="n">y_m</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">gps_to_local_xy</span><span class="p">(</span><span class="n">lat_filtered</span><span class="p">,</span> <span class="n">lon_filtered</span><span class="p">)</span>
-
-    <span class="n">x_m</span><span class="p">,</span> <span class="n">y_m</span><span class="p">,</span> <span class="n">valid_pts</span> <span class="o">=</span> <span class="n">clean_gps_xy</span><span class="p">(</span><span class="n">x_m</span><span class="p">,</span> <span class="n">y_m</span><span class="p">)</span>
+    <span class="n">valid_pts</span> <span class="o">=</span> <span class="n">filter_gps_cartesian</span><span class="p">(</span>
+        <span class="n">lat_filtered</span><span class="p">,</span> <span class="n">lon_filtered</span><span class="p">,</span> <span class="n">GpsMapConfig</span><span class="p">(</span><span class="n">max_radius_m</span><span class="o">=</span><span class="mf">1500.0</span><span class="p">,</span> <span class="n">max_jump_m</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+    <span class="p">)</span>
     <span class="n">lat_filtered</span> <span class="o">=</span> <span class="n">lat_filtered</span><span class="p">[</span><span class="n">valid_pts</span><span class="p">]</span>
     <span class="n">lon_filtered</span> <span class="o">=</span> <span class="n">lon_filtered</span><span class="p">[</span><span class="n">valid_pts</span><span class="p">]</span>
     <span class="n">ts_filtered</span> <span class="o">=</span> <span class="n">ts_filtered</span><span class="p">[</span><span class="n">valid_pts</span><span class="p">]</span>
+
+    <span class="n">x_m</span><span class="p">,</span> <span class="n">y_m</span> <span class="o">=</span> <span class="n">gps_to_enu</span><span class="p">(</span><span class="n">lat_filtered</span><span class="p">,</span> <span class="n">lon_filtered</span><span class="p">)</span>
 
     <span class="n">data</span><span class="p">[</span><span class="n">GPS_LATITUDE</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
         <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_filtered</span><span class="p">,</span>
@@ -567,8 +474,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -602,7 +509,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

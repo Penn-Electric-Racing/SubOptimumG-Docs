@@ -27,18 +27,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../_static/documentation_options.js?v=a58bc63e"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
@@ -335,6 +335,7 @@
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">suboptimumg.plotting.gps_visualization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_2d.html">suboptimumg.plotting.grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html">suboptimumg.plotting.grid_plot_3d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.heatmap.html">suboptimumg.plotting.heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_grid_plot_2d.html">suboptimumg.plotting.overlay_grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plot_2d.html">suboptimumg.plotting.overlay_plot_2d</a></li>
@@ -393,6 +394,7 @@
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.vehicle.irl_vehicle.html">suboptimumg.vehicle.irl_vehicle</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.vehicle.powertrain.html">suboptimumg.vehicle.powertrain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.powertrain.motor.html">suboptimumg.vehicle.powertrain.motor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.powertrain.powertrain.html">suboptimumg.vehicle.powertrain.powertrain</a></li>
 </ul>
 </details></li>
@@ -574,7 +576,7 @@ when <em>baseline_dist/var/vel</em> are provided.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.plotting.gps_visualization.plot_track_heatmap">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.gps_visualization.</span></span><span class="sig-name descname"><span class="pre">plot_track_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">baseline_pos_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_pos_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_pos_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_pos_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Variable'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Baseline'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Comparison'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Viridis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/gps_visualization.html#plot_track_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.gps_visualization.plot_track_heatmap" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.gps_visualization.</span></span><span class="sig-name descname"><span class="pre">plot_track_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">baseline_pos_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_pos_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_pos_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_pos_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Variable'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Baseline'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Comparison'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Viridis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">ColorbarConfig(thickness=15,</span> <span class="pre">length=0.7)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/gps_visualization.html#plot_track_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.gps_visualization.plot_track_heatmap" title="Link to this definition">#</a></dt>
 <dd><p>2D track heatmap, either single-series or 3-panel comparison.</p>
 <p>When called with only the baseline series (no comparison arguments), a
 single 1:1-aspect scatter plot is returned.  When comparison data is
@@ -599,9 +601,9 @@ comparison arguments must be provided together or not at all.</p></li>
 <li><p><strong>data_label</strong> (<em>str</em>) – Label appended to hover and colorbar values.</p></li>
 <li><p><strong>colorscale</strong> (<em>str</em>) – Any Plotly named colorscale string (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;Viridis&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Plasma&quot;</span></code>).</p></li>
 <li><p><strong>title</strong> (<em>str</em><em> or </em><em>None</em>) – Plot title override.  <code class="docutils literal notranslate"><span class="pre">None</span></code> uses a generated default.</p></li>
-<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a><em> | </em><em>None</em>)</p></li>
-<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a><em> | </em><em>None</em>)</p></li>
-<li><p><strong>colorbar_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.ColorbarConfig" title="suboptimumg.plotting.plotting_constants.ColorbarConfig"><em>ColorbarConfig</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a>)</p></li>
+<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a>)</p></li>
+<li><p><strong>colorbar_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.ColorbarConfig" title="suboptimumg.plotting.plotting_constants.ColorbarConfig"><em>ColorbarConfig</em></a>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -689,8 +691,8 @@ comparison arguments must be provided together or not at all.</p></li>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -724,7 +726,7 @@ comparison arguments must be provided together or not at all.</p></li>
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

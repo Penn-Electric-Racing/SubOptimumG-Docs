@@ -26,18 +26,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -466,6 +466,46 @@
     <span class="k">return</span> <span class="kc">False</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_build_sorted_seeds</span><span class="p">(</span>
+    <span class="n">track_seed_idx</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">],</span>
+    <span class="n">v_max_profile</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+    <span class="n">initial_velocity</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">],</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Build the seed index and seed velocity arrays, sorted by ascending velocity.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    track_seed_idx : NDArray[np.int32]</span>
+<span class="sd">        Seed indices supplied by the track</span>
+<span class="sd">    v_max_profile : NDArray[np.float64]</span>
+<span class="sd">        Maximum velocity profile for the track</span>
+<span class="sd">    initial_velocity : float</span>
+<span class="sd">        Initial velocity to seed at index 0, or -1 for no initial velocity seed</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple[NDArray[np.int32], NDArray[np.float64]]</span>
+<span class="sd">        Seed indices and their velocities, both sorted by ascending velocity</span>
+<span class="sd">    """</span>
+    <span class="n">has_initial_velocity_seed</span> <span class="o">=</span> <span class="n">initial_velocity</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">seed_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">track_seed_idx</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">has_initial_velocity_seed</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">seed_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">seed_count</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">seed_v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">seed_count</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="n">seed_idx</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">track_seed_idx</span><span class="p">)]</span> <span class="o">=</span> <span class="n">track_seed_idx</span>
+    <span class="n">seed_v</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">track_seed_idx</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v_max_profile</span><span class="p">[</span><span class="n">track_seed_idx</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">has_initial_velocity_seed</span><span class="p">:</span>
+        <span class="n">seed_idx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">seed_v</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">initial_velocity</span>
+
+    <span class="n">sorted_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">seed_v</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">seed_idx</span><span class="p">[</span><span class="n">sorted_indices</span><span class="p">],</span> <span class="n">seed_v</span><span class="p">[</span><span class="n">sorted_indices</span><span class="p">]</span>
+
+
 <div class="viewcode-block" id="lapsim">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.lap.html#suboptimumg.compsim.lap.lapsim">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">lapsim</span><span class="p">(</span>
@@ -516,18 +556,8 @@
     <span class="c1"># Calculate v_max_profile</span>
     <span class="n">v_max_profile</span> <span class="o">=</span> <span class="n">_calculate_v_max_profile</span><span class="p">(</span><span class="n">mycar</span><span class="p">,</span> <span class="n">r_full_track</span><span class="p">)</span>
 
-    <span class="c1"># Obtain seed velocities from v_max_profile</span>
-    <span class="n">seed_v</span> <span class="o">=</span> <span class="n">v_max_profile</span><span class="p">[</span><span class="n">seed_idx</span><span class="p">]</span>
-
-    <span class="c1"># Set a seed to be the initial velocity, if one is provided</span>
-    <span class="k">if</span> <span class="n">initial_velocity</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">seed_v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seed_v</span><span class="p">,</span> <span class="n">initial_velocity</span><span class="p">)</span>
-        <span class="n">seed_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seed_idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
     <span class="c1"># Seeds sorted by velocity (lowest to highest)</span>
-    <span class="n">sorted_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">seed_v</span><span class="p">)</span>
-    <span class="n">seed_idx</span> <span class="o">=</span> <span class="n">seed_idx</span><span class="p">[</span><span class="n">sorted_indices</span><span class="p">]</span>
-    <span class="n">seed_v</span> <span class="o">=</span> <span class="n">seed_v</span><span class="p">[</span><span class="n">sorted_indices</span><span class="p">]</span>
+    <span class="n">seed_idx</span><span class="p">,</span> <span class="n">seed_v</span> <span class="o">=</span> <span class="n">_build_sorted_seeds</span><span class="p">(</span><span class="n">seed_idx</span><span class="p">,</span> <span class="n">v_max_profile</span><span class="p">,</span> <span class="n">initial_velocity</span><span class="p">)</span>
 
     <span class="n">lap_dxs</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">get_dx_array</span><span class="p">()</span>
     <span class="n">lap_vels</span> <span class="o">=</span> <span class="n">v_max_profile</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -753,8 +783,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -788,7 +818,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

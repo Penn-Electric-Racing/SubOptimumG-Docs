@@ -27,18 +27,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../_static/documentation_options.js?v=a58bc63e"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
@@ -51,7 +51,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="suboptimumg.vehicle.subsystem_models" href="suboptimumg.vehicle.subsystem_models.html" />
-    <link rel="prev" title="suboptimumg.vehicle.powertrain" href="suboptimumg.vehicle.powertrain.html" />
+    <link rel="prev" title="suboptimumg.vehicle.powertrain.motor" href="suboptimumg.vehicle.powertrain.motor.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -335,6 +335,7 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.gps_visualization.html">suboptimumg.plotting.gps_visualization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_2d.html">suboptimumg.plotting.grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html">suboptimumg.plotting.grid_plot_3d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.heatmap.html">suboptimumg.plotting.heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_grid_plot_2d.html">suboptimumg.plotting.overlay_grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plot_2d.html">suboptimumg.plotting.overlay_plot_2d</a></li>
@@ -393,6 +394,7 @@
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.vehicle.irl_vehicle.html">suboptimumg.vehicle.irl_vehicle</a></li>
 <li class="toctree-l3 current active has-children"><a class="reference internal" href="suboptimumg.vehicle.powertrain.html">suboptimumg.vehicle.powertrain</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.vehicle.powertrain.motor.html">suboptimumg.vehicle.powertrain.motor</a></li>
 <li class="toctree-l4 current active"><a class="current reference internal" href="#">suboptimumg.vehicle.powertrain.powertrain</a></li>
 </ul>
 </details></li>
@@ -481,251 +483,6 @@
   <section id="module-suboptimumg.vehicle.powertrain.powertrain">
 <span id="suboptimumg-vehicle-powertrain-powertrain"></span><h1>suboptimumg.vehicle.powertrain.powertrain<a class="headerlink" href="#module-suboptimumg.vehicle.powertrain.powertrain" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Motor">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.powertrain.powertrain.</span></span><span class="sig-name descname"><span class="pre">Motor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vehicle_model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Models motor torque output, efficiency, and power limits.</p>
-<p class="rubric">Notes</p>
-<p>The efficiency map, rpm/torque normalization parameters, and the
-power-limit grids are precomputed once at construction time (when
-<code class="docutils literal notranslate"><span class="pre">use_efficiency_lut</span></code> is set) so that the runtime hot path only needs a
-single <code class="docutils literal notranslate"><span class="pre">np.interp</span></code> lookup instead of a bisection loop. Call
-<code class="docutils literal notranslate"><span class="pre">build_power_limit_table</span></code> again if motor parameters are mutated at
-runtime.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>vehicle_model</strong> (<a class="reference internal" href="suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.VehicleModel" title="suboptimumg.vehicle.vehicle_models.VehicleModel"><em>VehicleModel</em></a>)</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Motor.build_power_limit_table">
-<span class="sig-name descname"><span class="pre">build_power_limit_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_rpm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor.build_power_limit_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.build_power_limit_table" title="Link to this definition">#</a></dt>
-<dd><p>Precompute the DC-power-limited max motor torque at each rpm.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>n_rpm</strong> (<em>int</em>) – Number of RPM points to precompute between 0 and max_rpm.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>At a given rpm, the binding DC constraint is
-<code class="docutils literal notranslate"><span class="pre">tau</span> <span class="pre">*</span> <span class="pre">omega</span> <span class="pre">/</span> <span class="pre">eta_elec(rpm,</span> <span class="pre">tau)</span> <span class="pre">&lt;=</span> <span class="pre">pow_lim</span></code>, which is implicit
-in tau because eta_elec depends on tau via the LUT. This inverts the
-constraint once by bisecting tau in [0, tau_curve(rpm)] at each rpm
-in a fixed grid, then looks the result up with <cite>np.interp</cite> at
-runtime.</p>
-<p>At rpm=0 there is no power binding (omega=0 implies P_DC=0 for any
-tau), so the static torque curve dominates. Where the static curve
-already fits under pow_lim, no inversion is needed (this also
-provides a cheap early-out when full torque is already under the
-power limit at a given rpm). The bisection itself relies on
-P_DC(tau) being non-decreasing in tau, because eta_elec is bounded
-(<cite>eval_efficiency_map</cite> clips to [0.66, 0.99]), so the tau term
-dominates as tau approaches 0.</p>
-<p>Rebuild this table if pow_lim, moc_efficiency, or the LUT itself
-changes after construction.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Motor.calculate_max_ground_force_and_motor_power">
-<span class="sig-name descname"><span class="pre">calculate_max_ground_force_and_motor_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor.calculate_max_ground_force_and_motor_power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.calculate_max_ground_force_and_motor_power" title="Link to this definition">#</a></dt>
-<dd><p>Calculates force and power output by the motor.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>v</strong> (<em>float</em>) – Velocity of the vehicle (m/s)</p></li>
-<li><p><strong>ratio</strong> (<em>float</em>) – Gear ratio</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><strong>ground_force</strong> (<em>float</em>) – Force at the ground (N)</p></li>
-<li><p><strong>motor_power</strong> (<em>float</em>) – Motor shaft power output (W)</p></li>
-</ul>
-</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple[float, float]</p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>The torque the motor can deliver is constrained by two things: the
-static torque curve tau_curve(rpm), and the DC-bus power limit
-pow_lim, via <code class="docutils literal notranslate"><span class="pre">tau</span> <span class="pre">*</span> <span class="pre">omega</span> <span class="pre">/</span> <span class="pre">eta_elec(rpm,</span> <span class="pre">tau)</span> <span class="pre">&lt;=</span> <span class="pre">pow_lim</span></code>, which
-is circular in tau because eta_elec depends on tau. When
-use_efficiency_lut is True this is resolved by an inverse lookup
-built once at init in <cite>build_power_limit_table</cite>.</p>
-<p>Only chain/diff efficiencies sit between shaft and wheel, so the
-wheel torque uses <cite>mechanical_efficiency</cite> (not the full chain). The
-inverter and motor losses are upstream of the shaft and affect
-battery draw, not wheel torque.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Motor.electrical_efficiency">
-<span class="sig-name descname"><span class="pre">electrical_efficiency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rpm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">torque</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor.electrical_efficiency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.electrical_efficiency" title="Link to this definition">#</a></dt>
-<dd><p>Loss factor between DC bus and motor shaft.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rpm</strong> (<em>float</em>) – Motor RPM (used if LUT is enabled)</p></li>
-<li><p><strong>torque</strong> (<em>float</em>) – Motor torque (used if LUT is enabled)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Motor efficiency * MOC efficiency</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>Covers the inverter (moc_efficiency) and the motor itself. When an
-efficiency LUT is in use and both rpm and torque are supplied, the
-motor’s contribution is pulled from the (rpm, torque) map; otherwise
-the scalar motor_efficiency is used.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Motor.eval_efficiency_map">
-<span class="sig-name descname"><span class="pre">eval_efficiency_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rpm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">torque</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor.eval_efficiency_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.eval_efficiency_map" title="Link to this definition">#</a></dt>
-<dd><p>Evaluate the 2D efficiency map at a given (rpm, torque) point.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rpm</strong> (<em>float</em>) – Motor RPM</p></li>
-<li><p><strong>torque</strong> (<em>float</em>) – Motor torque</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Motor efficiency (0.66 to 0.99)</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>Inputs outside the fitted rpm/torque range are clamped to the
-nearest in-range value before evaluating the polynomial, and the
-result is scaled down by an exponential penalty based on how far
-outside the range the original inputs were.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Motor.fit_efficiency_data">
-<span class="sig-name descname"><span class="pre">fit_efficiency_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor.fit_efficiency_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.fit_efficiency_data" title="Link to this definition">#</a></dt>
-<dd><p>Fit a 2D polynomial z = f(x, y) to data points [[x, y, z], …].</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>points</strong> (<em>list</em><em> of </em><em>lists</em>) – Each inner list is [rpm, torque, efficiency] for a data point.</p></li>
-<li><p><strong>degv</strong> (<em>int</em>) – Degree of the polynomial in the rpm (x) direction.</p></li>
-<li><p><strong>degt</strong> (<em>int</em>) – Degree of the polynomial in the torque (y) direction.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Coefficient matrix C[i,j] for x^i y^j.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>NDArray[np.float64]</p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>If the efficiency surface has an especially unusual shape, a higher
-fit degree may be needed. Keep degrees even, and as low as possible,
-to limit evaluation complexity.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Motor.get_torque_at_rpm">
-<span class="sig-name descname"><span class="pre">get_torque_at_rpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_rpm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor.get_torque_at_rpm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.get_torque_at_rpm" title="Link to this definition">#</a></dt>
-<dd><p>Get motor torque at a given RPM using piecewise function.</p>
-<p>The torque curve has three regions:
-1. Flat region (0 to fw_rpm): constant max torque
-2. Linear decay (fw_rpm to max_rpm): torque decreases linearly
-3. Zero region (above max_rpm): no torque</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>motor_rpm</strong> (<em>float</em>) – Motor RPM</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Motor torque at the given RPM (Nm)</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Motor.mechanical_efficiency">
-<span class="sig-name descname"><span class="pre">mechanical_efficiency</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor.mechanical_efficiency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.mechanical_efficiency" title="Link to this definition">#</a></dt>
-<dd><p>Loss factor between motor shaft and wheel.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Combined chain and differential efficiency (0.0 to 1.0)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>Only the components that physically sit downstream of the shaft act
-here: the chain/belt and the diff. The inverter and motor losses are
-electrical and do not reduce wheel torque; they show up as extra DC
-current draw and are accounted for in <cite>electrical_efficiency</cite>.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Motor.powertrain_efficiency">
-<span class="sig-name descname"><span class="pre">powertrain_efficiency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rpm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">torque</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor.powertrain_efficiency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.powertrain_efficiency" title="Link to this definition">#</a></dt>
-<dd><p>Full DC-bus-to-ground efficiency, used by callers converting between
-battery power and wheel power (or vice versa).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rpm</strong> (<em>float</em>) – Motor RPM (used if efficiency_method is ‘indiv’)</p></li>
-<li><p><strong>torque</strong> (<em>float</em>) – Motor torque (used if efficiency_method is ‘indiv’)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Overall powertrain efficiency (0.0 to 1.0)</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>Equals electrical_efficiency * mechanical_efficiency when in ‘indiv’
-mode. In ‘sys’ mode the lumped system_efficiency parameter is used
-directly. Diff efficiency is currently fixed at 100% (TODO).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Motor.v_to_rpm">
-<span class="sig-name descname"><span class="pre">v_to_rpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Motor.v_to_rpm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.v_to_rpm" title="Link to this definition">#</a></dt>
-<dd><p>Convert vehicle velocity to motor RPM given the gear ratio.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>v</strong> (<em>float</em>) – Velocity of the vehicle (m/s)</p></li>
-<li><p><strong>ratio</strong> (<em>float</em>) – Gear ratio</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Motor RPM</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Powertrain">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.powertrain.powertrain.</span></span><span class="sig-name descname"><span class="pre">Powertrain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vehicle_model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Powertrain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Powertrain" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -735,6 +492,25 @@ directly. Diff efficiency is currently fixed at 100% (TODO).</p>
 <dd class="field-odd"><p><strong>vehicle_model</strong> (<a class="reference internal" href="suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.VehicleModel" title="suboptimumg.vehicle.vehicle_models.VehicleModel"><em>VehicleModel</em></a>)</p>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Powertrain.swap_motor">
+<span class="sig-name descname"><span class="pre">swap_motor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_motor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Powertrain.swap_motor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Powertrain.swap_motor" title="Link to this definition">#</a></dt>
+<dd><p>Replace the motor, adjusting total vehicle mass by the mass difference.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>new_motor</strong> (<a class="reference internal" href="suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.MotorModel" title="suboptimumg.vehicle.subsystem_models.MotorModel"><em>MotorModel</em></a>) – Motor to install in place of the current one.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Total vehicle mass is an independent parameter covering the whole car,
+so swapping a component cannot re-derive it. Instead the difference
+between the outgoing and incoming motor masses is applied to it,
+leaving the rest of the car’s mass untouched.</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -750,12 +526,12 @@ directly. Diff efficiency is currently fixed at 100% (TODO).</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="suboptimumg.vehicle.powertrain.html"
+       href="suboptimumg.vehicle.powertrain.motor.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">suboptimumg.vehicle.powertrain</p>
+        <p class="prev-next-title">suboptimumg.vehicle.powertrain.motor</p>
       </div>
     </a>
     <a class="right-next"
@@ -786,19 +562,10 @@ directly. Diff efficiency is currently fixed at 100% (TODO).</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor"><code class="docutils literal notranslate"><span class="pre">Motor</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.build_power_limit_table"><code class="docutils literal notranslate"><span class="pre">Motor.build_power_limit_table()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.calculate_max_ground_force_and_motor_power"><code class="docutils literal notranslate"><span class="pre">Motor.calculate_max_ground_force_and_motor_power()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.electrical_efficiency"><code class="docutils literal notranslate"><span class="pre">Motor.electrical_efficiency()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.eval_efficiency_map"><code class="docutils literal notranslate"><span class="pre">Motor.eval_efficiency_map()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.fit_efficiency_data"><code class="docutils literal notranslate"><span class="pre">Motor.fit_efficiency_data()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.get_torque_at_rpm"><code class="docutils literal notranslate"><span class="pre">Motor.get_torque_at_rpm()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.mechanical_efficiency"><code class="docutils literal notranslate"><span class="pre">Motor.mechanical_efficiency()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.powertrain_efficiency"><code class="docutils literal notranslate"><span class="pre">Motor.powertrain_efficiency()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Motor.v_to_rpm"><code class="docutils literal notranslate"><span class="pre">Motor.v_to_rpm()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Powertrain"><code class="docutils literal notranslate"><span class="pre">Powertrain</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Powertrain.swap_motor"><code class="docutils literal notranslate"><span class="pre">Powertrain.swap_motor()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Powertrain"><code class="docutils literal notranslate"><span class="pre">Powertrain</span></code></a></li>
 </ul>
   </nav></div>
 
@@ -824,8 +591,8 @@ directly. Diff efficiency is currently fixed at 100% (TODO).</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -859,7 +626,7 @@ directly. Diff efficiency is currently fixed at 100% (TODO).</p>
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

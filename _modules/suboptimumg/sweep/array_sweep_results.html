@@ -26,18 +26,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -336,7 +336,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.sweep.array_sweep_results</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.bar_chart</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_bar_chart</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.bar_chart</span><span class="w"> </span><span class="kn">import</span> <span class="n">BarChartSeries</span><span class="p">,</span> <span class="n">plot_bar_chart</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArraySweepData</span><span class="p">,</span> <span class="n">SweepData1D</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepDatatype</span>
 
@@ -388,7 +388,7 @@
 <span class="sd">        go.Figure</span>
 <span class="sd">            Plotly figure object</span>
 <span class="sd">        """</span>
-        <span class="n">data_by_variable</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">data_by_variable</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">BarChartSeries</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="n">baseline_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_data</span><span class="o">.</span><span class="n">sweep_outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_var</span><span class="o">.</span><span class="n">value</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_data</span><span class="o">.</span><span class="n">percent_steps</span><span class="p">):</span>
@@ -401,11 +401,11 @@
             <span class="n">y_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sweep_output</span><span class="p">,</span> <span class="n">y_var</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
             <span class="n">data_by_variable</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="p">{</span>
-                    <span class="s2">"var_name"</span><span class="p">:</span> <span class="n">sweep_output</span><span class="o">.</span><span class="n">var_name</span><span class="p">,</span>
-                    <span class="s2">"points"</span><span class="p">:</span> <span class="n">y_data</span><span class="p">,</span>
-                    <span class="s2">"plausible"</span><span class="p">:</span> <span class="n">sweep_output</span><span class="o">.</span><span class="n">plausible</span><span class="p">,</span>
-                <span class="p">}</span>
+                <span class="n">BarChartSeries</span><span class="p">(</span>
+                    <span class="n">var_name</span><span class="o">=</span><span class="n">sweep_output</span><span class="o">.</span><span class="n">var_name</span><span class="p">,</span>
+                    <span class="n">points</span><span class="o">=</span><span class="n">y_data</span><span class="p">,</span>
+                    <span class="n">plausible</span><span class="o">=</span><span class="n">sweep_output</span><span class="o">.</span><span class="n">plausible</span><span class="p">,</span>
+                <span class="p">)</span>
             <span class="p">)</span>
 
         <span class="c1"># Generate final labels and title</span>
@@ -452,8 +452,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -487,7 +487,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

@@ -1,0 +1,8 @@
+suboptimumg.plotting.heatmap
+============================
+
+.. automodule:: suboptimumg.plotting.heatmap
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

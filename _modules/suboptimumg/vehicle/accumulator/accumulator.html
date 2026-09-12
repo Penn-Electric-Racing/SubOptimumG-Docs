@@ -26,18 +26,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -345,30 +345,29 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">vehicle_model</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">,</span>
-    <span class="p">):</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span> <span class="o">=</span> <span class="n">vehicle_model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">vehicle_model</span><span class="o">.</span><span class="n">accum</span>
-
-        <span class="c1"># Capture the nominal mass at construction time for pack weight to mass/capacity conversions</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nominal_mass</span> <span class="o">=</span> <span class="n">vehicle_model</span><span class="o">.</span><span class="n">mass</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nominal_pack_weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pack_weight</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nominal_capacity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">capacity</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">energy_density</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">energy_density</span>
 
 <div class="viewcode-block" id="Accumulator.apply_pack_weight">
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.accumulator.accumulator.html#suboptimumg.vehicle.accumulator.accumulator.Accumulator.apply_pack_weight">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply_pack_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_pack_weight</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        Derive vehicle mass and capacity from a new pack weight.</span>
+<span class="sd">        Resize the pack, updating vehicle mass and capacity to match.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
+<span class="sd">        new_pack_weight : float</span>
+<span class="sd">            Battery pack weight to install (kg).</span>
 
-<span class="sd">        Returns the new capacity (kWh).</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            The resulting pack capacity (kWh).</span>
 <span class="sd">        """</span>
-        <span class="n">delta</span> <span class="o">=</span> <span class="n">new_pack_weight</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">nominal_pack_weight</span>
-        <span class="n">new_mass</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nominal_mass</span> <span class="o">+</span> <span class="n">delta</span>
-        <span class="n">new_capacity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nominal_capacity</span> <span class="o">+</span> <span class="n">delta</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">energy_density</span>
+        <span class="n">pack_weight_delta</span> <span class="o">=</span> <span class="n">new_pack_weight</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pack_weight</span>
+        <span class="n">new_mass</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span><span class="o">.</span><span class="n">mass</span> <span class="o">+</span> <span class="n">pack_weight_delta</span>
+        <span class="n">new_capacity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">capacity</span> <span class="o">+</span> <span class="n">pack_weight_delta</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">energy_density</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span><span class="o">.</span><span class="n">mass</span> <span class="o">=</span> <span class="n">new_mass</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pack_weight</span> <span class="o">=</span> <span class="n">new_pack_weight</span>
@@ -406,8 +405,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -441,7 +440,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>
