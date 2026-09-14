@@ -502,7 +502,8 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>car_config</strong> (<em>dict</em>) – The vehicle configuration dictionary.</p></li>
-<li><p><strong>comp_config</strong> (<em>dict</em>) – The competition configuration dictionary.</p></li>
+<li><p><strong>comp_config</strong> (<em>dict</em>) – The competition configuration dictionary. Sampled track paths resolve
+against the current working directory.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -526,6 +527,31 @@
 <dd class="field-even"><p><a class="reference internal" href="suboptimumg.compsim.competition.html#suboptimumg.compsim.competition.Competition" title="suboptimumg.compsim.competition.Competition">Competition</a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="suboptimumg.yaml.save_track_to_yaml">
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.yaml.</span></span><span class="sig-name descname"><span class="pre">save_track_to_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">track</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaml_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/yaml.html#save_track_to_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.yaml.save_track_to_yaml" title="Link to this definition">#</a></dt>
+<dd><p>Save a Track as uniformly spaced samples so a competition YAML can reference it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>track</strong> (<a class="reference internal" href="suboptimumg.track.track.html#suboptimumg.track.track.Track" title="suboptimumg.track.track.Track"><em>Track</em></a>) – Track to save. Its radius, x and y samples are written.</p></li>
+<li><p><strong>yaml_path</strong> (<em>str</em>) – Destination file path.</p></li>
+<li><p><strong>source</strong> (<a class="reference internal" href="suboptimumg.track.models.html#suboptimumg.track.models.SampledTrackSource" title="suboptimumg.track.models.SampledTrackSource"><em>SampledTrackSource</em></a>) – Bookkeeping about which log and lap the track came from.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Reference the saved file from <code class="docutils literal notranslate"><span class="pre">parameters/competition.yaml</span></code> with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tracks</span><span class="p">:</span>
+  <span class="n">endurance</span><span class="p">:</span>
+    <span class="n">path</span><span class="p">:</span> <span class="n">tracks</span><span class="o">/&lt;</span><span class="n">file</span> <span class="n">name</span><span class="o">&gt;.</span><span class="n">yaml</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
@@ -571,6 +597,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.yaml.load_car_from_yaml"><code class="docutils literal notranslate"><span class="pre">load_car_from_yaml()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.yaml.load_competition_from_dicts"><code class="docutils literal notranslate"><span class="pre">load_competition_from_dicts()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.yaml.load_competition_from_yaml"><code class="docutils literal notranslate"><span class="pre">load_competition_from_yaml()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.yaml.save_track_to_yaml"><code class="docutils literal notranslate"><span class="pre">save_track_to_yaml()</span></code></a></li>
 </ul>
   </nav></div>
 

@@ -465,6 +465,53 @@
 
 <span class="n">TrackData</span> <span class="o">=</span> <span class="n">ContinuousTrackData</span> <span class="o">|</span> <span class="n">DiscreteTrackData</span>
 
+
+<div class="viewcode-block" id="SampledTrackSource">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.track.models.html#suboptimumg.track.models.SampledTrackSource">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SampledTrackSource</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Bookkeeping for where a sampled track came from."""</span>
+
+    <span class="n">log_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"File name of the log the track was built from"</span><span class="p">)</span>
+    <span class="n">lap_index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Index of the lap used, within the log"</span><span class="p">)</span>
+    <span class="n">lap_time_s</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Real lap time of the lap used, in seconds"</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="SampledTrackInput">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.track.models.html#suboptimumg.track.models.SampledTrackInput">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SampledTrackInput</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Track stored as uniformly spaced samples. This is the schema of a saved track YAML."""</span>
+
+    <span class="n">distance_step</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Spacing between samples in meters"</span><span class="p">)</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n">SampledTrackSource</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Where the samples came from"</span><span class="p">)</span>
+    <span class="n">radius</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">min_length</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Radius of curvature at each sample in meters"</span>
+    <span class="p">)</span>
+    <span class="n">x_m</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"x coordinate of each sample in meters"</span><span class="p">)</span>
+    <span class="n">y_m</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"y coordinate of each sample in meters"</span><span class="p">)</span>
+
+    <span class="nd">@model_validator</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">"after"</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_equal_lengths</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SampledTrackInput</span><span class="p">:</span>
+        <span class="n">lengths</span> <span class="o">=</span> <span class="p">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_m</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y_m</span><span class="p">)}</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"radius, x_m and y_m must have equal lengths, got </span><span class="si">{</span><span class="n">lengths</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+
+<div class="viewcode-block" id="SampledTrackReference">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.track.models.html#suboptimumg.track.models.SampledTrackReference">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SampledTrackReference</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Competition YAML entry pointing at a saved sampled track YAML."""</span>
+
+    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Path to the sampled track YAML, relative to the competition YAML"</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="n">TrackConfig</span> <span class="o">=</span> <span class="n">CornerListInput</span> <span class="o">|</span> <span class="n">SampledTrackReference</span>
+
 <span class="c1"># Keys required in SingleRunData for from_perda_logs, mapped to the function that produces them.</span>
 <span class="n">REQUIRED_PERDA_FIELDS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"body.curvature"</span><span class="p">:</span> <span class="s2">"add_curvature() from suboptimumg.log_analysis.kinematics"</span><span class="p">,</span>

@@ -1045,6 +1045,191 @@ or a list of corners.</p>
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="suboptimumg.track.models.SampledTrackInput">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.track.models.</span></span><span class="sig-name descname"><span class="pre">SampledTrackInput</span></span><a class="reference internal" href="../_modules/suboptimumg/track/models.html#SampledTrackInput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.track.models.SampledTrackInput" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Track stored as uniformly spaced samples. This is the schema of a saved track YAML.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="id7">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id7" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Constraints</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.track.models.SampledTrackInput.distance_step" title="suboptimumg.track.models.SampledTrackInput.distance_step"><code class="xref py py-obj docutils literal notranslate"><span class="pre">distance_step</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p>Yes</p></td>
+<td></td>
+<td><p>gt=0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.track.models.SampledTrackInput.radius" title="suboptimumg.track.models.SampledTrackInput.radius"><code class="xref py py-obj docutils literal notranslate"><span class="pre">radius</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]</p></td>
+<td><p>Yes</p></td>
+<td></td>
+<td><p>min_length=4</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.track.models.SampledTrackInput.source" title="suboptimumg.track.models.SampledTrackInput.source"><code class="xref py py-obj docutils literal notranslate"><span class="pre">source</span></code></a></p></td>
+<td><p><a class="reference internal" href="#suboptimumg.track.models.SampledTrackSource" title="suboptimumg.track.models.SampledTrackSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">SampledTrackSource</span></code></a></p></td>
+<td><p>Yes</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.track.models.SampledTrackInput.x_m" title="suboptimumg.track.models.SampledTrackInput.x_m"><code class="xref py py-obj docutils literal notranslate"><span class="pre">x_m</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]</p></td>
+<td><p>Yes</p></td>
+<td></td>
+<td><p>min_length=4</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.track.models.SampledTrackInput.y_m" title="suboptimumg.track.models.SampledTrackInput.y_m"><code class="xref py py-obj docutils literal notranslate"><span class="pre">y_m</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]</p></td>
+<td><p>Yes</p></td>
+<td></td>
+<td><p>min_length=4</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>distance_step</strong> (<em>Annotated</em><em>[</em><em>float</em><em>, </em><em>Gt</em><em>(</em><em>gt=0</em><em>)</em><em>]</em>)</p></li>
+<li><p><strong>source</strong> (<a class="reference internal" href="#suboptimumg.track.models.SampledTrackSource" title="suboptimumg.track.models.SampledTrackSource"><em>SampledTrackSource</em></a>)</p></li>
+<li><p><strong>radius</strong> (<em>Annotated</em><em>[</em><em>list</em><em>[</em><em>float</em><em>]</em><em>, </em><em>MinLen</em><em>(</em><em>min_length=4</em><em>)</em><em>]</em>)</p></li>
+<li><p><strong>x_m</strong> (<em>Annotated</em><em>[</em><em>list</em><em>[</em><em>float</em><em>]</em><em>, </em><em>MinLen</em><em>(</em><em>min_length=4</em><em>)</em><em>]</em>)</p></li>
+<li><p><strong>y_m</strong> (<em>Annotated</em><em>[</em><em>list</em><em>[</em><em>float</em><em>]</em><em>, </em><em>MinLen</em><em>(</em><em>min_length=4</em><em>)</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.track.models.SampledTrackInput.distance_step">
+<span class="sig-name descname"><span class="pre">distance_step</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.track.models.SampledTrackInput.distance_step" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.track.models.SampledTrackInput.radius">
+<span class="sig-name descname"><span class="pre">radius</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.track.models.SampledTrackInput.radius" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.track.models.SampledTrackInput.source">
+<span class="sig-name descname"><span class="pre">source</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#suboptimumg.track.models.SampledTrackSource" title="suboptimumg.track.models.SampledTrackSource"><span class="pre">SampledTrackSource</span></a></span><a class="headerlink" href="#suboptimumg.track.models.SampledTrackInput.source" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.track.models.SampledTrackInput.x_m">
+<span class="sig-name descname"><span class="pre">x_m</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.track.models.SampledTrackInput.x_m" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.track.models.SampledTrackInput.y_m">
+<span class="sig-name descname"><span class="pre">y_m</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.track.models.SampledTrackInput.y_m" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="suboptimumg.track.models.SampledTrackReference">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.track.models.</span></span><span class="sig-name descname"><span class="pre">SampledTrackReference</span></span><a class="reference internal" href="../_modules/suboptimumg/track/models.html#SampledTrackReference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.track.models.SampledTrackReference" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Competition YAML entry pointing at a saved sampled track YAML.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="id8">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id8" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.track.models.SampledTrackReference.path" title="suboptimumg.track.models.SampledTrackReference.path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">path</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Yes</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>)</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.track.models.SampledTrackReference.path">
+<span class="sig-name descname"><span class="pre">path</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#suboptimumg.track.models.SampledTrackReference.path" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="suboptimumg.track.models.SampledTrackSource">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.track.models.</span></span><span class="sig-name descname"><span class="pre">SampledTrackSource</span></span><a class="reference internal" href="../_modules/suboptimumg/track/models.html#SampledTrackSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.track.models.SampledTrackSource" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Bookkeeping for where a sampled track came from.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="id9">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id9" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Constraints</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.track.models.SampledTrackSource.lap_index" title="suboptimumg.track.models.SampledTrackSource.lap_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lap_index</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>Yes</p></td>
+<td></td>
+<td><p>ge=0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.track.models.SampledTrackSource.lap_time_s" title="suboptimumg.track.models.SampledTrackSource.lap_time_s"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lap_time_s</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p>Yes</p></td>
+<td></td>
+<td><p>gt=0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.track.models.SampledTrackSource.log_name" title="suboptimumg.track.models.SampledTrackSource.log_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log_name</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Yes</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>log_name</strong> (<em>str</em>)</p></li>
+<li><p><strong>lap_index</strong> (<em>Annotated</em><em>[</em><em>int</em><em>, </em><em>Ge</em><em>(</em><em>ge=0</em><em>)</em><em>]</em>)</p></li>
+<li><p><strong>lap_time_s</strong> (<em>Annotated</em><em>[</em><em>float</em><em>, </em><em>Gt</em><em>(</em><em>gt=0</em><em>)</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.track.models.SampledTrackSource.lap_index">
+<span class="sig-name descname"><span class="pre">lap_index</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#suboptimumg.track.models.SampledTrackSource.lap_index" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.track.models.SampledTrackSource.lap_time_s">
+<span class="sig-name descname"><span class="pre">lap_time_s</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.track.models.SampledTrackSource.lap_time_s" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="suboptimumg.track.models.SampledTrackSource.log_name">
+<span class="sig-name descname"><span class="pre">log_name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#suboptimumg.track.models.SampledTrackSource.log_name" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -1144,6 +1329,24 @@ or a list of corners.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.models.PerdaLogInput.distance_step"><code class="docutils literal notranslate"><span class="pre">PerdaLogInput.distance_step</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.models.PerdaLogInput.filter_order"><code class="docutils literal notranslate"><span class="pre">PerdaLogInput.filter_order</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.models.PerdaLogInput.max_radius"><code class="docutils literal notranslate"><span class="pre">PerdaLogInput.max_radius</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.models.SampledTrackInput"><code class="docutils literal notranslate"><span class="pre">SampledTrackInput</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.models.SampledTrackInput.distance_step"><code class="docutils literal notranslate"><span class="pre">SampledTrackInput.distance_step</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.models.SampledTrackInput.radius"><code class="docutils literal notranslate"><span class="pre">SampledTrackInput.radius</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.models.SampledTrackInput.source"><code class="docutils literal notranslate"><span class="pre">SampledTrackInput.source</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.models.SampledTrackInput.x_m"><code class="docutils literal notranslate"><span class="pre">SampledTrackInput.x_m</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.models.SampledTrackInput.y_m"><code class="docutils literal notranslate"><span class="pre">SampledTrackInput.y_m</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.models.SampledTrackReference"><code class="docutils literal notranslate"><span class="pre">SampledTrackReference</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.models.SampledTrackReference.path"><code class="docutils literal notranslate"><span class="pre">SampledTrackReference.path</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.models.SampledTrackSource"><code class="docutils literal notranslate"><span class="pre">SampledTrackSource</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.models.SampledTrackSource.lap_index"><code class="docutils literal notranslate"><span class="pre">SampledTrackSource.lap_index</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.models.SampledTrackSource.lap_time_s"><code class="docutils literal notranslate"><span class="pre">SampledTrackSource.lap_time_s</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.models.SampledTrackSource.log_name"><code class="docutils literal notranslate"><span class="pre">SampledTrackSource.log_name</span></code></a></li>
 </ul>
 </li>
 </ul>

@@ -613,8 +613,7 @@ Creates a 3D stem plot with vertical lines extending from baseline to data point
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.track.track.Track.plot_arcs">
 <span class="sig-name descname"><span class="pre">plot_arcs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(20,</span> <span class="pre">12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_endpoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/track/track.html#Track.plot_arcs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.track.track.Track.plot_arcs" title="Link to this definition">#</a></dt>
-<dd><p>Plot the track using Matplotlib Arc objects. Only available for discrete (corner-based)
-tracks. A validation tool to visualize our corners.</p>
+<dd><p>Plot the track using Matplotlib Arc objects. A validation tool to visualize our corners.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -629,6 +628,9 @@ tracks. A validation tool to visualize our corners.</p>
 <dd class="field-odd"><p>tuple[Figure, Axes]</p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>Continuous tracks have no corner arcs, so the sampled x/y path is drawn instead and
+<code class="docutils literal notranslate"><span class="pre">show_endpoints</span></code> marks only the start point.</p>
 </dd></dl>
 
 <dl class="py method">

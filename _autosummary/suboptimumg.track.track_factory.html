@@ -535,10 +535,28 @@
 <li><p>Align body.curvature and posE onto posN timestamp grid.</p></li>
 <li><p>Compute cumulative arc-length distance DataInstance from posN/posE.</p></li>
 <li><p>Apply PERDA spatial lowpass filter on aligned curvature.</p></li>
-<li><p>Resample filtered curvature, posN, posE onto uniform distance grid.</p></li>
-<li><p>Convert curvature to radius, clamped at max_radius.</p></li>
-<li><p>Fit B-spline to uniformly-resampled XY.</p></li>
+<li><p>Resample, clamp radius and fit the B-spline via _build_continuous_track.</p></li>
 </ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="suboptimumg.track.track_factory.from_sampled">
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.track.track_factory.</span></span><span class="sig-name descname"><span class="pre">from_sampled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampled</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_step</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/track/track_factory.html#from_sampled"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.track.track_factory.from_sampled" title="Link to this definition">#</a></dt>
+<dd><p>Factory method to rebuild a continuous Track from uniformly spaced samples saved in YAML.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sampled</strong> (<a class="reference internal" href="suboptimumg.track.models.html#suboptimumg.track.models.SampledTrackInput" title="suboptimumg.track.models.SampledTrackInput"><em>SampledTrackInput</em></a>) – Radius and position samples, spaced by <code class="docutils literal notranslate"><span class="pre">sampled.distance_step</span></code>.</p></li>
+<li><p><strong>distance_step</strong> (<em>float</em>) – Spacing to resample the track onto, in meters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Continuous Track instance with precomputed radius and B-spline.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="suboptimumg.track.track.html#suboptimumg.track.track.Track" title="suboptimumg.track.track.Track">Track</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -595,6 +613,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.track_factory.from_corners"><code class="docutils literal notranslate"><span class="pre">from_corners()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.track_factory.from_data"><code class="docutils literal notranslate"><span class="pre">from_data()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.track_factory.from_perda_logs"><code class="docutils literal notranslate"><span class="pre">from_perda_logs()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.track.track_factory.from_sampled"><code class="docutils literal notranslate"><span class="pre">from_sampled()</span></code></a></li>
 </ul>
   </nav></div>
 

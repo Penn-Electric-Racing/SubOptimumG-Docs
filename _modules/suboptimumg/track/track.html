@@ -583,8 +583,7 @@
         <span class="bp">self</span><span class="p">,</span> <span class="n">figsize</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">show_endpoints</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Figure</span><span class="p">,</span> <span class="n">Axes</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        Plot the track using Matplotlib Arc objects. Only available for discrete (corner-based)</span>
-<span class="sd">        tracks. A validation tool to visualize our corners.</span>
+<span class="sd">        Plot the track using Matplotlib Arc objects. A validation tool to visualize our corners.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -597,11 +596,21 @@
 <span class="sd">        -------</span>
 <span class="sd">        tuple[Figure, Axes]</span>
 <span class="sd">            (fig, ax) - matplotlib figure and axes objects</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Continuous tracks have no corner arcs, so the sampled x/y path is drawn instead and</span>
+<span class="sd">        ``show_endpoints`` marks only the start point.</span>
 <span class="sd">        """</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">continuous</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"plot_arcs() is not implemented for continuous tracks"</span><span class="p">)</span>
         <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">"equal"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">continuous</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_m</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"k"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">show_endpoints</span><span class="p">:</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_m</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_m</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"."</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"b"</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>
 
         <span class="c1"># Create matplotlib NewArc objects from ArcData (matching old track_vis behavior)</span>
         <span class="k">for</span> <span class="n">arc_data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arcs</span><span class="p">:</span>

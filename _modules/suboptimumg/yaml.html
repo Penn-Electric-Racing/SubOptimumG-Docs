@@ -336,17 +336,60 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.yaml</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeAdapter</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.compsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">Competition</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.compsim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompetitionScoring</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.track</span><span class="w"> </span><span class="kn">import</span> <span class="n">CornerListInput</span><span class="p">,</span> <span class="n">from_corners</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.track</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SampledTrackInput</span><span class="p">,</span>
+    <span class="n">SampledTrackReference</span><span class="p">,</span>
+    <span class="n">SampledTrackSource</span><span class="p">,</span>
+    <span class="n">Track</span><span class="p">,</span>
+    <span class="n">TrackConfig</span><span class="p">,</span>
+    <span class="n">from_corners</span><span class="p">,</span>
+    <span class="n">from_sampled</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">Car</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.vehicle.irl_vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">IrlCar</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.vehicle.vehicle_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnyVehicleModel</span><span class="p">,</span> <span class="n">ExtendedVehicleModel</span>
 
+<span class="n">_TRACK_CONFIG_ADAPTER</span><span class="p">:</span> <span class="n">TypeAdapter</span><span class="p">[</span><span class="n">TrackConfig</span><span class="p">]</span> <span class="o">=</span> <span class="n">TypeAdapter</span><span class="p">(</span><span class="n">TrackConfig</span><span class="p">)</span>
+<span class="n">_SAVED_TRACK_DECIMALS</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_competition_from_car_and_comp_dict</span><span class="p">(</span><span class="n">car</span><span class="p">:</span> <span class="n">Car</span><span class="p">,</span> <span class="n">comp_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Competition</span><span class="p">:</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_track_from_config</span><span class="p">(</span><span class="n">track_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">distance_step</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">base_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Track</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Build one event track from its ``tracks.&lt;event&gt;`` entry in a competition config.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    track_config : dict</span>
+<span class="sd">        Either a corner list (see CornerListInput) or a ``path`` to a sampled track YAML.</span>
+<span class="sd">    distance_step : float</span>
+<span class="sd">        Simulation distance step in meters, applied to every track.</span>
+<span class="sd">    base_dir : Path</span>
+<span class="sd">        Directory that a sampled track ``path`` is resolved against.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Track</span>
+<span class="sd">    """</span>
+    <span class="n">track_config</span><span class="p">[</span><span class="s2">"distance_step"</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance_step</span>
+    <span class="n">validated</span> <span class="o">=</span> <span class="n">_TRACK_CONFIG_ADAPTER</span><span class="o">.</span><span class="n">validate_python</span><span class="p">(</span><span class="n">track_config</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">validated</span><span class="p">,</span> <span class="n">SampledTrackReference</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">base_dir</span> <span class="o">/</span> <span class="n">validated</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">sampled</span> <span class="o">=</span> <span class="n">SampledTrackInput</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">from_sampled</span><span class="p">(</span><span class="n">sampled</span><span class="p">,</span> <span class="n">distance_step</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">from_corners</span><span class="p">(</span><span class="n">validated</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_competition_from_car_and_comp_dict</span><span class="p">(</span><span class="n">car</span><span class="p">:</span> <span class="n">Car</span><span class="p">,</span> <span class="n">comp_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">base_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Competition</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Create a Competition object from a Car instance and competition configuration dictionary.</span>
 
@@ -357,38 +400,61 @@
 <span class="sd">    comp_dict : dict</span>
 <span class="sd">        The competition configuration dictionary.</span>
 
+<span class="sd">    base_dir : Path</span>
+<span class="sd">        Directory that sampled track paths in ``comp_dict`` are resolved against.</span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Competition</span>
 <span class="sd">    """</span>
     <span class="n">distance_step</span> <span class="o">=</span> <span class="n">comp_dict</span><span class="p">[</span><span class="s2">"simulation"</span><span class="p">][</span><span class="s2">"distance_step"</span><span class="p">]</span>
-
-    <span class="n">accel_config</span> <span class="o">=</span> <span class="n">comp_dict</span><span class="p">[</span><span class="s2">"tracks"</span><span class="p">][</span><span class="s2">"accel"</span><span class="p">]</span>
-    <span class="n">accel_config</span><span class="p">[</span><span class="s2">"distance_step"</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance_step</span>
-    <span class="n">accel_track</span> <span class="o">=</span> <span class="n">from_corners</span><span class="p">(</span><span class="n">CornerListInput</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">accel_config</span><span class="p">))</span>
-
-    <span class="n">skidpad_config</span> <span class="o">=</span> <span class="n">comp_dict</span><span class="p">[</span><span class="s2">"tracks"</span><span class="p">][</span><span class="s2">"skidpad"</span><span class="p">]</span>
-    <span class="n">skidpad_config</span><span class="p">[</span><span class="s2">"distance_step"</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance_step</span>
-    <span class="n">skidpad_track</span> <span class="o">=</span> <span class="n">from_corners</span><span class="p">(</span><span class="n">CornerListInput</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">skidpad_config</span><span class="p">))</span>
-
-    <span class="n">autoX_config</span> <span class="o">=</span> <span class="n">comp_dict</span><span class="p">[</span><span class="s2">"tracks"</span><span class="p">][</span><span class="s2">"autoX"</span><span class="p">]</span>
-    <span class="n">autoX_config</span><span class="p">[</span><span class="s2">"distance_step"</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance_step</span>
-    <span class="n">autoX_track</span> <span class="o">=</span> <span class="n">from_corners</span><span class="p">(</span><span class="n">CornerListInput</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">autoX_config</span><span class="p">))</span>
-
-    <span class="n">endurance_config</span> <span class="o">=</span> <span class="n">comp_dict</span><span class="p">[</span><span class="s2">"tracks"</span><span class="p">][</span><span class="s2">"endurance"</span><span class="p">]</span>
-    <span class="n">endurance_config</span><span class="p">[</span><span class="s2">"distance_step"</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance_step</span>
-    <span class="n">endurance_track</span> <span class="o">=</span> <span class="n">from_corners</span><span class="p">(</span><span class="n">CornerListInput</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">endurance_config</span><span class="p">))</span>
-
-    <span class="n">scoring</span> <span class="o">=</span> <span class="n">CompetitionScoring</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">comp_dict</span><span class="p">[</span><span class="s2">"scoring"</span><span class="p">])</span>
+    <span class="n">tracks</span> <span class="o">=</span> <span class="n">comp_dict</span><span class="p">[</span><span class="s2">"tracks"</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">Competition</span><span class="p">(</span>
         <span class="n">car</span><span class="p">,</span>
-        <span class="n">accel_track</span><span class="p">,</span>
-        <span class="n">skidpad_track</span><span class="p">,</span>
-        <span class="n">autoX_track</span><span class="p">,</span>
-        <span class="n">endurance_track</span><span class="p">,</span>
-        <span class="n">scoring</span><span class="p">,</span>
+        <span class="n">_track_from_config</span><span class="p">(</span><span class="n">tracks</span><span class="p">[</span><span class="s2">"accel"</span><span class="p">],</span> <span class="n">distance_step</span><span class="p">,</span> <span class="n">base_dir</span><span class="p">),</span>
+        <span class="n">_track_from_config</span><span class="p">(</span><span class="n">tracks</span><span class="p">[</span><span class="s2">"skidpad"</span><span class="p">],</span> <span class="n">distance_step</span><span class="p">,</span> <span class="n">base_dir</span><span class="p">),</span>
+        <span class="n">_track_from_config</span><span class="p">(</span><span class="n">tracks</span><span class="p">[</span><span class="s2">"autoX"</span><span class="p">],</span> <span class="n">distance_step</span><span class="p">,</span> <span class="n">base_dir</span><span class="p">),</span>
+        <span class="n">_track_from_config</span><span class="p">(</span><span class="n">tracks</span><span class="p">[</span><span class="s2">"endurance"</span><span class="p">],</span> <span class="n">distance_step</span><span class="p">,</span> <span class="n">base_dir</span><span class="p">),</span>
+        <span class="n">CompetitionScoring</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">comp_dict</span><span class="p">[</span><span class="s2">"scoring"</span><span class="p">]),</span>
     <span class="p">)</span>
+
+
+<div class="viewcode-block" id="save_track_to_yaml">
+<a class="viewcode-back" href="../../_autosummary/suboptimumg.yaml.html#suboptimumg.yaml.save_track_to_yaml">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_track_to_yaml</span><span class="p">(</span><span class="n">track</span><span class="p">:</span> <span class="n">Track</span><span class="p">,</span> <span class="n">yaml_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">SampledTrackSource</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Save a Track as uniformly spaced samples so a competition YAML can reference it.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    track : Track</span>
+<span class="sd">        Track to save. Its radius, x and y samples are written.</span>
+<span class="sd">    yaml_path : str</span>
+<span class="sd">        Destination file path.</span>
+<span class="sd">    source : SampledTrackSource</span>
+<span class="sd">        Bookkeeping about which log and lap the track came from.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Reference the saved file from ``parameters/competition.yaml`` with::</span>
+
+<span class="sd">        tracks:</span>
+<span class="sd">          endurance:</span>
+<span class="sd">            path: tracks/&lt;file name&gt;.yaml</span>
+<span class="sd">    """</span>
+    <span class="n">sampled</span> <span class="o">=</span> <span class="n">SampledTrackInput</span><span class="p">(</span>
+        <span class="n">distance_step</span><span class="o">=</span><span class="n">track</span><span class="o">.</span><span class="n">distance_step</span><span class="p">,</span>
+        <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
+        <span class="n">radius</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">track</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">_SAVED_TRACK_DECIMALS</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="n">x_m</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">track</span><span class="o">.</span><span class="n">x_m</span><span class="p">,</span> <span class="n">_SAVED_TRACK_DECIMALS</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="n">y_m</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">track</span><span class="o">.</span><span class="n">y_m</span><span class="p">,</span> <span class="n">_SAVED_TRACK_DECIMALS</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">yaml</span><span class="o">.</span><span class="n">safe_dump</span><span class="p">(</span>
+            <span class="n">sampled</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(),</span> <span class="n">file</span><span class="p">,</span> <span class="n">default_flow_style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span></div>
+
 
 
 <div class="viewcode-block" id="load_car_from_yaml">
@@ -444,7 +510,7 @@
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">comp_yaml_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
         <span class="n">comp_config</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">_competition_from_car_and_comp_dict</span><span class="p">(</span><span class="n">car</span><span class="p">,</span> <span class="n">comp_config</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_competition_from_car_and_comp_dict</span><span class="p">(</span><span class="n">car</span><span class="p">,</span> <span class="n">comp_config</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="n">comp_yaml_path</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span></div>
 
 
 
@@ -460,7 +526,8 @@
 <span class="sd">        The vehicle configuration dictionary.</span>
 
 <span class="sd">    comp_config : dict</span>
-<span class="sd">        The competition configuration dictionary.</span>
+<span class="sd">        The competition configuration dictionary. Sampled track paths resolve</span>
+<span class="sd">        against the current working directory.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -473,7 +540,7 @@
         <span class="k">else</span> <span class="n">Car</span><span class="p">(</span><span class="n">vehicle_model</span><span class="o">=</span><span class="n">vehicle_model</span><span class="p">)</span>
     <span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">_competition_from_car_and_comp_dict</span><span class="p">(</span><span class="n">car</span><span class="p">,</span> <span class="n">comp_config</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_competition_from_car_and_comp_dict</span><span class="p">(</span><span class="n">car</span><span class="p">,</span> <span class="n">comp_config</span><span class="p">,</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">())</span></div>
 
 </pre></div>
 
