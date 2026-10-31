@@ -1,7 +1,7 @@
-suboptimumg.sweep.sweeper\_2d
+suboptimumg.sweep.sweep\_data
 =============================
 
-.. automodule:: suboptimumg.sweep.sweeper_2d
+.. automodule:: suboptimumg.sweep.sweep_data
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,0 +1,8 @@
+suboptimumg.sweep.sweep\_data\_interpolation
+============================================
+
+.. automodule:: suboptimumg.sweep.sweep_data_interpolation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

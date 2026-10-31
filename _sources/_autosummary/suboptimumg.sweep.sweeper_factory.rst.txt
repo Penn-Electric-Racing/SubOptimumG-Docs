@@ -1,8 +1,0 @@
-suboptimumg.sweep.sweeper\_factory
-==================================
-
-.. automodule:: suboptimumg.sweep.sweeper_factory
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

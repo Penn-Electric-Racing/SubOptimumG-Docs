@@ -1,0 +1,8 @@
+suboptimumg.sweep.sweep\_plotting
+=================================
+
+.. automodule:: suboptimumg.sweep.sweep_plotting
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

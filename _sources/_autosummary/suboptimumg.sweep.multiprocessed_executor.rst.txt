@@ -1,0 +1,8 @@
+suboptimumg.sweep.multiprocessed\_executor
+==========================================
+
+.. automodule:: suboptimumg.sweep.multiprocessed_executor
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
