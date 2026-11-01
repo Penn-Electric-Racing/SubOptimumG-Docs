@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>suboptimumg.sweep.array_sweep_results &#8212; SubOptimumG</title>
+    <title>suboptimumg.sweep.base_sweeper &#8212; SubOptimumG</title>
   
   
   
@@ -45,12 +45,12 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.sweep.array_sweep_results';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.sweep.base_sweeper';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="suboptimumg.sweep.array_sweeper" href="suboptimumg.sweep.array_sweeper.html" />
-    <link rel="prev" title="suboptimumg.sweep" href="suboptimumg.sweep.html" />
+    <link rel="next" title="suboptimumg.sweep.config_generator" href="suboptimumg.sweep.config_generator.html" />
+    <link rel="prev" title="suboptimumg.sweep.array_sweeper" href="suboptimumg.sweep.array_sweeper.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
@@ -350,8 +350,8 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.sweep.html">suboptimumg.sweep</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3 current active"><a aria-current="page" class="current reference internal" href="#">suboptimumg.sweep.array_sweep_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.array_sweeper.html">suboptimumg.sweep.array_sweeper</a></li>
+<li class="toctree-l3 current active"><a aria-current="page" class="current reference internal" href="#">suboptimumg.sweep.base_sweeper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.config_generator.html">suboptimumg.sweep.config_generator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.constants.html">suboptimumg.sweep.constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.energy_grid.html">suboptimumg.sweep.energy_grid</a></li>
@@ -459,7 +459,7 @@
     
     <li class="breadcrumb-item"><a href="suboptimumg.sweep.html" class="nav-link">suboptimumg.sweep</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.sweep.array_sweep_results</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.sweep.base_sweeper</span></li>
   </ul>
 </nav>
 </div>
@@ -476,51 +476,60 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-suboptimumg.sweep.array_sweep_results">
-<span id="suboptimumg-sweep-array-sweep-results"></span><h1>suboptimumg.sweep.array_sweep_results<a class="headerlink" href="#module-suboptimumg.sweep.array_sweep_results" title="Link to this heading">#</a></h1>
+  <section id="module-suboptimumg.sweep.base_sweeper">
+<span id="suboptimumg-sweep-base-sweeper"></span><h1>suboptimumg.sweep.base_sweeper<a class="headerlink" href="#module-suboptimumg.sweep.base_sweeper" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="suboptimumg.sweep.array_sweep_results.ArraySweepResults">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.array_sweep_results.</span></span><span class="sig-name descname"><span class="pre">ArraySweepResults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sweep_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/array_sweep_results.html#ArraySweepResults"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.array_sweep_results.ArraySweepResults" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dt class="sig sig-object py" id="suboptimumg.sweep.base_sweeper.BaseSweeper">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.base_sweeper.</span></span><span class="sig-name descname"><span class="pre">BaseSweeper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comp_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">executor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/base_sweeper.html#BaseSweeper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.base_sweeper.BaseSweeper" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">PlanT</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">DataT</span></code>]</p>
+<p>Owns a base competition and the results of sweeping it.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>sweep_data</strong> (<a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.ArraySweepData" title="suboptimumg.sweep.models.ArraySweepData"><em>ArraySweepData</em></a>)</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comp_data</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionData" title="suboptimumg.compsim.models.CompetitionData"><em>CompetitionData</em></a>) – Base competition. It is copied, so later edits to the original have no effect.</p></li>
+<li><p><strong>executor</strong> (<a class="reference internal" href="suboptimumg.sweep.executor.html#suboptimumg.sweep.executor.SweepExecutor" title="suboptimumg.sweep.executor.SweepExecutor"><em>SweepExecutor</em></a>) – How simulations are run</p></li>
+</ul>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>Subclasses say what to simulate in <cite>_generate_plan</cite>, and how to arrange the results in <cite>_assemble_data</cite>.
+The plan is regenerated on every <cite>sweep()</cite>, so edits to <cite>comp_data</cite> or the subclass’s configuration are picked up.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="suboptimumg.sweep.base_sweeper.BaseSweeper.data">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">data</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">DataT</span></span><a class="headerlink" href="#suboptimumg.sweep.base_sweeper.BaseSweeper.data" title="Link to this definition">#</a></dt>
+<dd><p>Results of the last sweep.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="suboptimumg.sweep.base_sweeper.BaseSweeper.is_stale">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_stale</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#suboptimumg.sweep.base_sweeper.BaseSweeper.is_stale" title="Link to this definition">#</a></dt>
+<dd><p>Whether the configuration has changed since the last sweep, or none has run.</p>
+</dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.sweep.array_sweep_results.ArraySweepResults.get_one_var_sweep_result">
-<span class="sig-name descname"><span class="pre">get_one_var_sweep_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/array_sweep_results.html#ArraySweepResults.get_one_var_sweep_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.array_sweep_results.ArraySweepResults.get_one_var_sweep_result" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dt class="sig sig-object py" id="suboptimumg.sweep.base_sweeper.BaseSweeper.sweep">
+<span class="sig-name descname"><span class="pre">sweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/base_sweeper.html#BaseSweeper.sweep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.base_sweeper.BaseSweeper.sweep" title="Link to this definition">#</a></dt>
+<dd><p>Run every simulation of the sweep, unless the results are already up to date.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>var_name</strong> (<em>str</em>)</p>
+<dd class="field-odd"><p><strong>force</strong> (<em>bool</em><em>, </em><em>optional</em>) – Rerun even when the results are up to date (default is False)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepData1D" title="suboptimumg.sweep.models.SweepData1D"><em>SweepData1D</em></a></p>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.sweep.array_sweep_results.ArraySweepResults.plot">
-<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SweepDatatype.TOTAL_PTS</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/array_sweep_results.html#ArraySweepResults.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.array_sweep_results.ArraySweepResults.plot" title="Link to this definition">#</a></dt>
-<dd><p>Uses Plotly to create an interactive categorical dot plot showing points vs variable names.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>y_var</strong> (<a class="reference internal" href="suboptimumg.sweep.types.html#suboptimumg.sweep.types.SweepDatatype" title="suboptimumg.sweep.types.SweepDatatype"><em>SweepDatatype</em></a><em>, </em><em>optional</em>) – Sweep datatype to plot on y-axis (default is SweepDatatype.TOTAL_PTS)</p></li>
-<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Plot title (default is “Independent Variable Sweep Results”)</p></li>
-<li><p><strong>y_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Y-axis label (default is y_var)</p></li>
-<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional arguments passed to plot_bar_chart</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Plotly figure object</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>go.Figure</p>
-</dd>
-</dl>
 </dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="suboptimumg.sweep.base_sweeper.PlanWithConfigurations">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.base_sweeper.</span></span><span class="sig-name descname"><span class="pre">PlanWithConfigurations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/base_sweeper.html#PlanWithConfigurations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.base_sweeper.PlanWithConfigurations" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Protocol</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="suboptimumg.sweep.base_sweeper.PlanWithConfigurations.configurations">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">configurations</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.CarConfiguration" title="suboptimumg.sweep.models.CarConfiguration"><span class="pre">CarConfiguration</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.base_sweeper.PlanWithConfigurations.configurations" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -537,20 +546,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="suboptimumg.sweep.html"
+       href="suboptimumg.sweep.array_sweeper.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">suboptimumg.sweep</p>
+        <p class="prev-next-title">suboptimumg.sweep.array_sweeper</p>
       </div>
     </a>
     <a class="right-next"
-       href="suboptimumg.sweep.array_sweeper.html"
+       href="suboptimumg.sweep.config_generator.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">suboptimumg.sweep.array_sweeper</p>
+        <p class="prev-next-title">suboptimumg.sweep.config_generator</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -573,9 +582,14 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.array_sweep_results.ArraySweepResults"><code class="docutils literal notranslate"><span class="pre">ArraySweepResults</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.array_sweep_results.ArraySweepResults.get_one_var_sweep_result"><code class="docutils literal notranslate"><span class="pre">ArraySweepResults.get_one_var_sweep_result()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.array_sweep_results.ArraySweepResults.plot"><code class="docutils literal notranslate"><span class="pre">ArraySweepResults.plot()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.base_sweeper.BaseSweeper"><code class="docutils literal notranslate"><span class="pre">BaseSweeper</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.base_sweeper.BaseSweeper.data"><code class="docutils literal notranslate"><span class="pre">BaseSweeper.data</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.base_sweeper.BaseSweeper.is_stale"><code class="docutils literal notranslate"><span class="pre">BaseSweeper.is_stale</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.base_sweeper.BaseSweeper.sweep"><code class="docutils literal notranslate"><span class="pre">BaseSweeper.sweep()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.base_sweeper.PlanWithConfigurations"><code class="docutils literal notranslate"><span class="pre">PlanWithConfigurations</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.base_sweeper.PlanWithConfigurations.configurations"><code class="docutils literal notranslate"><span class="pre">PlanWithConfigurations.configurations</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -584,7 +598,7 @@
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../_sources/_autosummary/suboptimumg.sweep.array_sweep_results.rst.txt">
+    <a href="../_sources/_autosummary/suboptimumg.sweep.base_sweeper.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

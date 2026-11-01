@@ -13,8 +13,8 @@ suboptimumg.sweep
    :toctree:
    :recursive:
 
-   array_sweep_results
    array_sweeper
+   base_sweeper
    config_generator
    constants
    energy_grid

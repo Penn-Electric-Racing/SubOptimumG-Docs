@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>suboptimumg.sweep.array_sweep_results &#8212; SubOptimumG</title>
+    <title>suboptimumg.sweep.base_sweeper &#8212; SubOptimumG</title>
   
   
   
@@ -44,7 +44,7 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/sweep/array_sweep_results';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/sweep/base_sweeper';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -318,7 +318,7 @@
     
     <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.sweep.array_sweep_results</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.sweep.base_sweeper</span></li>
   </ul>
 </nav>
 </div>
@@ -335,93 +335,103 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <h1>Source code for suboptimumg.sweep.array_sweep_results</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.bar_chart</span><span class="w"> </span><span class="kn">import</span> <span class="n">BarChartSeries</span><span class="p">,</span> <span class="n">plot_bar_chart</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArraySweepData</span><span class="p">,</span> <span class="n">SweepData1D</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepDatatype</span>
+  <h1>Source code for suboptimumg.sweep.base_sweeper</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">TypeVar</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompetitionData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepExecutor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CarConfiguration</span><span class="p">,</span> <span class="n">ConfigurationResult</span>
 
 
-<div class="viewcode-block" id="ArraySweepResults">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.array_sweep_results.html#suboptimumg.sweep.array_sweep_results.ArraySweepResults">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">ArraySweepResults</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">sweep_data</span><span class="p">:</span> <span class="n">ArraySweepData</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sweep_data</span> <span class="o">=</span> <span class="n">sweep_data</span>
-
-<div class="viewcode-block" id="ArraySweepResults.get_one_var_sweep_result">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.array_sweep_results.html#suboptimumg.sweep.array_sweep_results.ArraySweepResults.get_one_var_sweep_result">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_one_var_sweep_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SweepData1D</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sweep_data</span><span class="o">.</span><span class="n">sweep_outputs</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">output</span><span class="o">.</span><span class="n">var_name</span> <span class="o">==</span> <span class="n">var_name</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">output</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Variable </span><span class="si">{</span><span class="n">var_name</span><span class="si">}</span><span class="s2"> not found in sweep results"</span><span class="p">)</span></div>
+<div class="viewcode-block" id="PlanWithConfigurations">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.base_sweeper.html#suboptimumg.sweep.base_sweeper.PlanWithConfigurations">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PlanWithConfigurations</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">configurations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">CarConfiguration</span><span class="p">]:</span> <span class="o">...</span></div>
 
 
-<div class="viewcode-block" id="ArraySweepResults.plot">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.array_sweep_results.html#suboptimumg.sweep.array_sweep_results.ArraySweepResults.plot">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">y_var</span><span class="p">:</span> <span class="n">SweepDatatype</span> <span class="o">=</span> <span class="n">SweepDatatype</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
-        <span class="o">*</span><span class="p">,</span>
-        <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">y_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-    <span class="p">):</span>
+
+<span class="n">PlanT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"PlanT"</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="n">PlanWithConfigurations</span><span class="p">)</span>
+<span class="n">DataT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"DataT"</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="BaseSweeper">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.base_sweeper.html#suboptimumg.sweep.base_sweeper.BaseSweeper">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BaseSweeper</span><span class="p">(</span><span class="n">ABC</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">PlanT</span><span class="p">,</span> <span class="n">DataT</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Owns a base competition and the results of sweeping it.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    comp_data : CompetitionData</span>
+<span class="sd">        Base competition. It is copied, so later edits to the original have no effect.</span>
+<span class="sd">    executor : SweepExecutor</span>
+<span class="sd">        How simulations are run</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Subclasses say what to simulate in `_generate_plan`, and how to arrange the results in `_assemble_data`.</span>
+<span class="sd">    The plan is regenerated on every `sweep()`, so edits to `comp_data` or the subclass's configuration are picked up.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_data</span><span class="p">:</span> <span class="n">CompetitionData</span><span class="p">,</span> <span class="n">executor</span><span class="p">:</span> <span class="n">SweepExecutor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comp_data</span> <span class="o">=</span> <span class="n">comp_data</span><span class="o">.</span><span class="n">model_copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">executor</span> <span class="o">=</span> <span class="n">executor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span> <span class="n">DataT</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fingerprint</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="BaseSweeper.sweep">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.base_sweeper.html#suboptimumg.sweep.base_sweeper.BaseSweeper.sweep">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sweep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        Uses Plotly to create an interactive categorical dot plot showing points vs variable names.</span>
+<span class="sd">        Run every simulation of the sweep, unless the results are already up to date.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        y_var : SweepDatatype, optional</span>
-<span class="sd">            Sweep datatype to plot on y-axis (default is SweepDatatype.TOTAL_PTS)</span>
-<span class="sd">        title : str, optional</span>
-<span class="sd">            Plot title (default is "Independent Variable Sweep Results")</span>
-<span class="sd">        y_label : str, optional</span>
-<span class="sd">            Y-axis label (default is y_var)</span>
-<span class="sd">        **kwargs : dict</span>
-<span class="sd">            Additional arguments passed to plot_bar_chart</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        go.Figure</span>
-<span class="sd">            Plotly figure object</span>
+<span class="sd">        force : bool, optional</span>
+<span class="sd">            Rerun even when the results are up to date (default is False)</span>
 <span class="sd">        """</span>
-        <span class="n">data_by_variable</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">BarChartSeries</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">plan</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_plan</span><span class="p">()</span>
+        <span class="n">fingerprint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_plan_fingerprint</span><span class="p">(</span><span class="n">plan</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">force</span> <span class="ow">and</span> <span class="n">fingerprint</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fingerprint</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Sweep results are up to date; skipping the simulations."</span><span class="p">)</span>
+            <span class="k">return</span>
 
-        <span class="n">baseline_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_data</span><span class="o">.</span><span class="n">sweep_outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_var</span><span class="o">.</span><span class="n">value</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_data</span><span class="o">.</span><span class="n">percent_steps</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">baseline_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_data</span><span class="o">.</span><span class="n">sweep_outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_var</span><span class="o">.</span><span class="n">value</span><span class="p">)[</span><span class="n">idx</span><span class="p">]</span>
-                <span class="k">break</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">executor</span><span class="o">.</span><span class="n">simulate_configurations</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">comp_data</span><span class="p">,</span> <span class="n">plan</span><span class="o">.</span><span class="n">configurations</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_assemble_data</span><span class="p">(</span><span class="n">plan</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fingerprint</span> <span class="o">=</span> <span class="n">fingerprint</span></div>
 
-        <span class="c1"># Build data for plotting from strongly-typed sweep data</span>
-        <span class="k">for</span> <span class="n">sweep_output</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sweep_data</span><span class="o">.</span><span class="n">sweep_outputs</span><span class="p">:</span>
-            <span class="n">y_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sweep_output</span><span class="p">,</span> <span class="n">y_var</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
-            <span class="n">data_by_variable</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="n">BarChartSeries</span><span class="p">(</span>
-                    <span class="n">var_name</span><span class="o">=</span><span class="n">sweep_output</span><span class="o">.</span><span class="n">var_name</span><span class="p">,</span>
-                    <span class="n">points</span><span class="o">=</span><span class="n">y_data</span><span class="p">,</span>
-                    <span class="n">plausible</span><span class="o">=</span><span class="n">sweep_output</span><span class="o">.</span><span class="n">plausible</span><span class="p">,</span>
-                <span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_stale</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Whether the configuration has changed since the last sweep, or none has run."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fingerprint</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_plan_fingerprint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_generate_plan</span><span class="p">())</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataT</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Results of the last sweep."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"No results yet. Call sweep() first."</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stale</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">"The sweep configuration has changed since the last sweep(). "</span>
+                <span class="s2">"These results are out of date; call sweep() to refresh them."</span>
             <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
 
-        <span class="c1"># Generate final labels and title</span>
-        <span class="n">final_title</span> <span class="o">=</span> <span class="n">title</span> <span class="k">if</span> <span class="n">title</span> <span class="k">else</span> <span class="s2">"Independent Variable Sweep Results"</span>
-        <span class="n">final_y_label</span> <span class="o">=</span> <span class="n">y_label</span> <span class="k">if</span> <span class="n">y_label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">y_var</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PlanT</span><span class="p">:</span> <span class="o">...</span>
 
-        <span class="c1"># Use generic bar chart function</span>
-        <span class="k">return</span> <span class="n">plot_bar_chart</span><span class="p">(</span>
-            <span class="n">data_by_variable</span><span class="o">=</span><span class="n">data_by_variable</span><span class="p">,</span>
-            <span class="n">percent_steps</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_data</span><span class="o">.</span><span class="n">percent_steps</span><span class="p">,</span>
-            <span class="n">baseline_value</span><span class="o">=</span><span class="n">baseline_value</span><span class="p">,</span>
-            <span class="n">title</span><span class="o">=</span><span class="n">final_title</span><span class="p">,</span>
-            <span class="n">y_label</span><span class="o">=</span><span class="n">final_y_label</span><span class="p">,</span>
-            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-        <span class="p">)</span></div>
-</div>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_assemble_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plan</span><span class="p">:</span> <span class="n">PlanT</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ConfigurationResult</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">DataT</span><span class="p">:</span> <span class="o">...</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_plan_fingerprint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plan</span><span class="p">:</span> <span class="n">PlanT</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">comp_data</span><span class="p">,</span> <span class="n">plan</span><span class="o">.</span><span class="n">configurations</span><span class="p">)))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span></div>
 
 </pre></div>
 

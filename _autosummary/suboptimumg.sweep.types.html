@@ -350,8 +350,8 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.sweep.html">suboptimumg.sweep</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.array_sweep_results.html">suboptimumg.sweep.array_sweep_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.array_sweeper.html">suboptimumg.sweep.array_sweeper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.base_sweeper.html">suboptimumg.sweep.base_sweeper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.config_generator.html">suboptimumg.sweep.config_generator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.constants.html">suboptimumg.sweep.constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.energy_grid.html">suboptimumg.sweep.energy_grid</a></li>
@@ -541,58 +541,58 @@
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepDatatype">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.types.</span></span><span class="sig-name descname"><span class="pre">SweepDatatype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/types.html#SweepDatatype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.types.SweepDatatype" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepMetric">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.types.</span></span><span class="sig-name descname"><span class="pre">SweepMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/types.html#SweepMetric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.types.SweepMetric" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
 <p>All sweep variable types for strongly typed access.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepDatatype.ACCEL_PTS">
-<span class="sig-name descname"><span class="pre">ACCEL_PTS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'accel_pts'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepDatatype.ACCEL_PTS" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepMetric.ACCEL_PTS">
+<span class="sig-name descname"><span class="pre">ACCEL_PTS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'accel_pts'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepMetric.ACCEL_PTS" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepDatatype.ACCEL_T">
-<span class="sig-name descname"><span class="pre">ACCEL_T</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'accel_t'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepDatatype.ACCEL_T" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepMetric.ACCEL_T">
+<span class="sig-name descname"><span class="pre">ACCEL_T</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'accel_t'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepMetric.ACCEL_T" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepDatatype.AUTOX_PTS">
-<span class="sig-name descname"><span class="pre">AUTOX_PTS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'autoX_pts'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepDatatype.AUTOX_PTS" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepMetric.AUTOX_PTS">
+<span class="sig-name descname"><span class="pre">AUTOX_PTS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'autoX_pts'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepMetric.AUTOX_PTS" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepDatatype.AUTOX_T">
-<span class="sig-name descname"><span class="pre">AUTOX_T</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'autoX_t'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepDatatype.AUTOX_T" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepMetric.AUTOX_T">
+<span class="sig-name descname"><span class="pre">AUTOX_T</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'autoX_t'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepMetric.AUTOX_T" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepDatatype.EFFICIENCY_PTS">
-<span class="sig-name descname"><span class="pre">EFFICIENCY_PTS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'efficiency_pts'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepDatatype.EFFICIENCY_PTS" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepMetric.EFFICIENCY_PTS">
+<span class="sig-name descname"><span class="pre">EFFICIENCY_PTS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'efficiency_pts'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepMetric.EFFICIENCY_PTS" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepDatatype.ENDURANCE_PTS">
-<span class="sig-name descname"><span class="pre">ENDURANCE_PTS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'endurance_pts'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepDatatype.ENDURANCE_PTS" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepMetric.ENDURANCE_PTS">
+<span class="sig-name descname"><span class="pre">ENDURANCE_PTS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'endurance_pts'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepMetric.ENDURANCE_PTS" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepDatatype.ENDURANCE_T">
-<span class="sig-name descname"><span class="pre">ENDURANCE_T</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'endurance_t'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepDatatype.ENDURANCE_T" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepMetric.ENDURANCE_T">
+<span class="sig-name descname"><span class="pre">ENDURANCE_T</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'endurance_t'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepMetric.ENDURANCE_T" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepDatatype.SKIDPAD_PTS">
-<span class="sig-name descname"><span class="pre">SKIDPAD_PTS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'skidpad_pts'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepDatatype.SKIDPAD_PTS" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepMetric.SKIDPAD_PTS">
+<span class="sig-name descname"><span class="pre">SKIDPAD_PTS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'skidpad_pts'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepMetric.SKIDPAD_PTS" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepDatatype.SKIDPAD_T">
-<span class="sig-name descname"><span class="pre">SKIDPAD_T</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'skidpad_t'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepDatatype.SKIDPAD_T" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepMetric.SKIDPAD_T">
+<span class="sig-name descname"><span class="pre">SKIDPAD_T</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'skidpad_t'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepMetric.SKIDPAD_T" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepDatatype.TOTAL_PTS">
-<span class="sig-name descname"><span class="pre">TOTAL_PTS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'total_pts'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepDatatype.TOTAL_PTS" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.types.SweepMetric.TOTAL_PTS">
+<span class="sig-name descname"><span class="pre">TOTAL_PTS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'total_pts'</span></span><a class="headerlink" href="#suboptimumg.sweep.types.SweepMetric.TOTAL_PTS" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -660,17 +660,17 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.EnergyGridMetric.VEHICLE_MASS"><code class="docutils literal notranslate"><span class="pre">EnergyGridMetric.VEHICLE_MASS</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepDatatype"><code class="docutils literal notranslate"><span class="pre">SweepDatatype</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepDatatype.ACCEL_PTS"><code class="docutils literal notranslate"><span class="pre">SweepDatatype.ACCEL_PTS</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepDatatype.ACCEL_T"><code class="docutils literal notranslate"><span class="pre">SweepDatatype.ACCEL_T</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepDatatype.AUTOX_PTS"><code class="docutils literal notranslate"><span class="pre">SweepDatatype.AUTOX_PTS</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepDatatype.AUTOX_T"><code class="docutils literal notranslate"><span class="pre">SweepDatatype.AUTOX_T</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepDatatype.EFFICIENCY_PTS"><code class="docutils literal notranslate"><span class="pre">SweepDatatype.EFFICIENCY_PTS</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepDatatype.ENDURANCE_PTS"><code class="docutils literal notranslate"><span class="pre">SweepDatatype.ENDURANCE_PTS</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepDatatype.ENDURANCE_T"><code class="docutils literal notranslate"><span class="pre">SweepDatatype.ENDURANCE_T</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepDatatype.SKIDPAD_PTS"><code class="docutils literal notranslate"><span class="pre">SweepDatatype.SKIDPAD_PTS</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepDatatype.SKIDPAD_T"><code class="docutils literal notranslate"><span class="pre">SweepDatatype.SKIDPAD_T</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepDatatype.TOTAL_PTS"><code class="docutils literal notranslate"><span class="pre">SweepDatatype.TOTAL_PTS</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepMetric"><code class="docutils literal notranslate"><span class="pre">SweepMetric</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepMetric.ACCEL_PTS"><code class="docutils literal notranslate"><span class="pre">SweepMetric.ACCEL_PTS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepMetric.ACCEL_T"><code class="docutils literal notranslate"><span class="pre">SweepMetric.ACCEL_T</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepMetric.AUTOX_PTS"><code class="docutils literal notranslate"><span class="pre">SweepMetric.AUTOX_PTS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepMetric.AUTOX_T"><code class="docutils literal notranslate"><span class="pre">SweepMetric.AUTOX_T</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepMetric.EFFICIENCY_PTS"><code class="docutils literal notranslate"><span class="pre">SweepMetric.EFFICIENCY_PTS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepMetric.ENDURANCE_PTS"><code class="docutils literal notranslate"><span class="pre">SweepMetric.ENDURANCE_PTS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepMetric.ENDURANCE_T"><code class="docutils literal notranslate"><span class="pre">SweepMetric.ENDURANCE_T</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepMetric.SKIDPAD_PTS"><code class="docutils literal notranslate"><span class="pre">SweepMetric.SKIDPAD_PTS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepMetric.SKIDPAD_T"><code class="docutils literal notranslate"><span class="pre">SweepMetric.SKIDPAD_T</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.types.SweepMetric.TOTAL_PTS"><code class="docutils literal notranslate"><span class="pre">SweepMetric.TOTAL_PTS</span></code></a></li>
 </ul>
 </li>
 </ul>

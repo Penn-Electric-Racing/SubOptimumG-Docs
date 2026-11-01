@@ -1,0 +1,8 @@
+suboptimumg.sweep.base\_sweeper
+===============================
+
+.. automodule:: suboptimumg.sweep.base_sweeper
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

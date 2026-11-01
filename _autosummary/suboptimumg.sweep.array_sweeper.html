@@ -49,8 +49,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="suboptimumg.sweep.config_generator" href="suboptimumg.sweep.config_generator.html" />
-    <link rel="prev" title="suboptimumg.sweep.array_sweep_results" href="suboptimumg.sweep.array_sweep_results.html" />
+    <link rel="next" title="suboptimumg.sweep.base_sweeper" href="suboptimumg.sweep.base_sweeper.html" />
+    <link rel="prev" title="suboptimumg.sweep" href="suboptimumg.sweep.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
@@ -350,8 +350,8 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.sweep.html">suboptimumg.sweep</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.array_sweep_results.html">suboptimumg.sweep.array_sweep_results</a></li>
 <li class="toctree-l3 current active"><a aria-current="page" class="current reference internal" href="#">suboptimumg.sweep.array_sweeper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.base_sweeper.html">suboptimumg.sweep.base_sweeper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.config_generator.html">suboptimumg.sweep.config_generator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.constants.html">suboptimumg.sweep.constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.energy_grid.html">suboptimumg.sweep.energy_grid</a></li>
@@ -480,38 +480,42 @@
 <span id="suboptimumg-sweep-array-sweeper"></span><h1>suboptimumg.sweep.array_sweeper<a class="headerlink" href="#module-suboptimumg.sweep.array_sweeper" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="suboptimumg.sweep.array_sweeper.ArraySweeper">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.array_sweeper.</span></span><span class="sig-name descname"><span class="pre">ArraySweeper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comp_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_percent_step_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([-0.1,</span> <span class="pre">-0.08,</span> <span class="pre">-0.06,</span> <span class="pre">-0.04,</span> <span class="pre">-0.02,</span> <span class="pre">0.,</span> <span class="pre">0.02,</span> <span class="pre">0.04,</span> <span class="pre">0.06,</span> <span class="pre">0.08,</span> <span class="pre">0.1])</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/array_sweeper.html#ArraySweeper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.array_sweeper.ArraySweeper" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Sweeps a list of variables at a list of percent steps.</p>
-<p class="rubric">Notes</p>
-<p>Each variable is swept independently. The percent steps are relative to the
-default value of the variable. The 1D sweep calls this class with a single
-variable and a list of percent steps.</p>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.array_sweeper.</span></span><span class="sig-name descname"><span class="pre">ArraySweeper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">comp_data,</span> <span class="pre">parameter_names,</span> <span class="pre">percent_changes=[-0.1,</span> <span class="pre">-0.08,</span> <span class="pre">-0.06,</span> <span class="pre">-0.04,</span> <span class="pre">-0.02,</span> <span class="pre">0.0,</span> <span class="pre">0.02,</span> <span class="pre">0.04,</span> <span class="pre">0.06,</span> <span class="pre">0.08,</span> <span class="pre">0.1],</span> <span class="pre">executor=&lt;suboptimumg.sweep.multiprocessed_executor.MultiprocessSweepExecutor</span> <span class="pre">object&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/array_sweeper.html#ArraySweeper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.array_sweeper.ArraySweeper" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="suboptimumg.sweep.base_sweeper.html#suboptimumg.sweep.base_sweeper.BaseSweeper" title="suboptimumg.sweep.base_sweeper.BaseSweeper"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseSweeper</span></code></a>[<a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.ArraySweepPlan" title="suboptimumg.sweep.models.ArraySweepPlan"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArraySweepPlan</span></code></a>, <a class="reference internal" href="suboptimumg.sweep.sweep_data.html#suboptimumg.sweep.sweep_data.ArraySweepData" title="suboptimumg.sweep.sweep_data.ArraySweepData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArraySweepData</span></code></a>]</p>
+<p>Sweeps each parameter on its own, across percent changes from its base value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>comp_data</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionData" title="suboptimumg.compsim.models.CompetitionData"><em>CompetitionData</em></a>)</p></li>
-<li><p><strong>var_list</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
-<li><p><strong>var_percent_step_list</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
+<li><p><strong>comp_data</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionData" title="suboptimumg.compsim.models.CompetitionData"><em>CompetitionData</em></a>) – Base competition. It is copied, so later edits to the original have no effect.</p></li>
+<li><p><strong>parameter_names</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>) – Numeric parameters to sweep, e.g. <cite>[“mass”, “aero.cl”]</cite></p></li>
+<li><p><strong>percent_changes</strong> (<em>Sequence</em><em>[</em><em>float</em><em>]</em><em>, </em><em>optional</em>) – Changes from each parameter’s base value, as ascending fractions
+(default is -10% to +10% in steps of 2%)</p></li>
+<li><p><strong>executor</strong> (<a class="reference internal" href="suboptimumg.sweep.executor.html#suboptimumg.sweep.executor.SweepExecutor" title="suboptimumg.sweep.executor.SweepExecutor"><em>SweepExecutor</em></a><em>, </em><em>optional</em>) – How simulations are run (default runs them in a process pool)</p></li>
 </ul>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>Every parameter’s simulations, plus one of the unmodified car for the baseline, run in a single batch.
+<cite>comp_data</cite>, <cite>parameter_names</cite> and <cite>percent_changes</cite> can be edited after construction. <cite>sweep()</cite> only
+reruns the simulations when the generated configurations have changed.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.sweep.array_sweeper.ArraySweeper.sweep">
-<span class="sig-name descname"><span class="pre">sweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/array_sweeper.html#ArraySweeper.sweep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.array_sweeper.ArraySweeper.sweep" title="Link to this definition">#</a></dt>
-<dd><p>Run the sweep using multiprocessing.</p>
+<dt class="sig sig-object py" id="suboptimumg.sweep.array_sweeper.ArraySweeper.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SweepMetric.TOTAL_PTS</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">plot_options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/array_sweeper.html#ArraySweeper.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.array_sweeper.ArraySweeper.plot" title="Link to this definition">#</a></dt>
+<dd><p>Plot one metric of every swept parameter, colored by percent change.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show detailed progress (default is False)</p></li>
-<li><p><strong>num_processes</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of processes to use. Defaults to CPU count.</p></li>
+<li><p><strong>metric</strong> (<a class="reference internal" href="suboptimumg.sweep.types.html#suboptimumg.sweep.types.SweepMetric" title="suboptimumg.sweep.types.SweepMetric"><em>SweepMetric</em></a><em>, </em><em>optional</em>) – Metric to plot (default is SweepMetric.TOTAL_PTS)</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Text for the plot. Defaults are generated from the metric.</p></li>
+<li><p><strong>y_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Text for the plot. Defaults are generated from the metric.</p></li>
+<li><p><strong>**plot_options</strong> (<em>object</em>) – Passed to the plotting function, e.g. <cite>theme=”powertrain”</cite></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Results of the sweep operation</p>
+<dd class="field-even"><p>One column of points per parameter, with the unmodified car’s value as a baseline</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="suboptimumg.sweep.array_sweep_results.html#suboptimumg.sweep.array_sweep_results.ArraySweepResults" title="suboptimumg.sweep.array_sweep_results.ArraySweepResults">ArraySweepResults</a></p>
+<dd class="field-odd"><p>go.Figure</p>
 </dd>
 </dl>
 </dd></dl>
@@ -531,20 +535,20 @@ variable and a list of percent steps.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="suboptimumg.sweep.array_sweep_results.html"
+       href="suboptimumg.sweep.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">suboptimumg.sweep.array_sweep_results</p>
+        <p class="prev-next-title">suboptimumg.sweep</p>
       </div>
     </a>
     <a class="right-next"
-       href="suboptimumg.sweep.config_generator.html"
+       href="suboptimumg.sweep.base_sweeper.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">suboptimumg.sweep.config_generator</p>
+        <p class="prev-next-title">suboptimumg.sweep.base_sweeper</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -568,7 +572,7 @@ variable and a list of percent steps.</p>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.array_sweeper.ArraySweeper"><code class="docutils literal notranslate"><span class="pre">ArraySweeper</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.array_sweeper.ArraySweeper.sweep"><code class="docutils literal notranslate"><span class="pre">ArraySweeper.sweep()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.array_sweeper.ArraySweeper.plot"><code class="docutils literal notranslate"><span class="pre">ArraySweeper.plot()</span></code></a></li>
 </ul>
 </li>
 </ul>

@@ -350,8 +350,8 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.sweep.html">suboptimumg.sweep</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.array_sweep_results.html">suboptimumg.sweep.array_sweep_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.array_sweeper.html">suboptimumg.sweep.array_sweeper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.base_sweeper.html">suboptimumg.sweep.base_sweeper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.config_generator.html">suboptimumg.sweep.config_generator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.constants.html">suboptimumg.sweep.constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.energy_grid.html">suboptimumg.sweep.energy_grid</a></li>
@@ -479,10 +479,10 @@
   <section id="module-suboptimumg.sweep.models">
 <span id="suboptimumg-sweep-models"></span><h1>suboptimumg.sweep.models<a class="headerlink" href="#module-suboptimumg.sweep.models" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepData">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">ArraySweepData</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#ArraySweepData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepData" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepPlan">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">ArraySweepPlan</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#ArraySweepPlan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepPlan" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
-<p>Strongly typed container for array sweep data.</p>
+<p>Every configuration of an array sweep: the base car, then each parameter’s 1-D sweep.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id1">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id1" title="Link to this table">#</a></caption>
 <thead>
@@ -493,13 +493,18 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepData.percent_steps" title="suboptimumg.sweep.models.ArraySweepData.percent_steps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">percent_steps</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code>]</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepPlan.baseline" title="suboptimumg.sweep.models.ArraySweepPlan.baseline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">baseline</span></code></a></p></td>
+<td><p><a class="reference internal" href="#suboptimumg.sweep.models.SweepPlan" title="suboptimumg.sweep.models.SweepPlan"><code class="xref py py-class docutils literal notranslate"><span class="pre">SweepPlan</span></code></a></p></td>
 <td><p>Yes</p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepData.sweep_outputs" title="suboptimumg.sweep.models.ArraySweepData.sweep_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_outputs</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D" title="suboptimumg.sweep.models.SweepData1D"><code class="xref py py-class docutils literal notranslate"><span class="pre">SweepData1D</span></code></a>]</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepPlan.parameter_plans" title="suboptimumg.sweep.models.ArraySweepPlan.parameter_plans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parameter_plans</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="#suboptimumg.sweep.models.SweepPlan" title="suboptimumg.sweep.models.SweepPlan"><code class="xref py py-class docutils literal notranslate"><span class="pre">SweepPlan</span></code></a>]</p></td>
+<td><p>Yes</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepPlan.percent_changes" title="suboptimumg.sweep.models.ArraySweepPlan.percent_changes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">percent_changes</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]</p></td>
 <td><p>Yes</p></td>
 <td></td>
 </tr>
@@ -509,328 +514,31 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>percent_steps</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
-<li><p><strong>sweep_outputs</strong> (<em>list</em><em>[</em><a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D" title="suboptimumg.sweep.models.SweepData1D"><em>SweepData1D</em></a><em>]</em>)</p></li>
+<li><p><strong>percent_changes</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>)</p></li>
+<li><p><strong>baseline</strong> (<a class="reference internal" href="#suboptimumg.sweep.models.SweepPlan" title="suboptimumg.sweep.models.SweepPlan"><em>SweepPlan</em></a>)</p></li>
+<li><p><strong>parameter_plans</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="#suboptimumg.sweep.models.SweepPlan" title="suboptimumg.sweep.models.SweepPlan"><em>SweepPlan</em></a><em>]</em>)</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepData.percent_steps">
-<span class="sig-name descname"><span class="pre">percent_steps</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">np.float64</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepData.percent_steps" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepPlan.baseline">
+<span class="sig-name descname"><span class="pre">baseline</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#suboptimumg.sweep.models.SweepPlan" title="suboptimumg.sweep.models.SweepPlan"><span class="pre">SweepPlan</span></a></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepPlan.baseline" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepData.sweep_outputs">
-<span class="sig-name descname"><span class="pre">sweep_outputs</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D" title="suboptimumg.sweep.models.SweepData1D"><span class="pre">SweepData1D</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepData.sweep_outputs" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
+<dl class="py property">
+<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepPlan.configurations">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">configurations</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#suboptimumg.sweep.models.CarConfiguration" title="suboptimumg.sweep.models.CarConfiguration"><span class="pre">CarConfiguration</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepPlan.configurations" title="Link to this definition">#</a></dt>
+<dd><p>The baseline’s configuration, then every parameter plan’s, in order.</p>
 </dd></dl>
 
-<dl class="py class">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessInput">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">ArraySweepProcessInput</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#ArraySweepProcessInput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessInput" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
-<p>Input model for array sweep process.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id2">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id2" title="Link to this table">#</a></caption>
-<thead>
-<tr class="row-odd"><th class="head"><p>Field</p></th>
-<th class="head"><p>Type</p></th>
-<th class="head"><p>Required</p></th>
-<th class="head"><p>Default</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessInput.comp_data" title="suboptimumg.sweep.models.ArraySweepProcessInput.comp_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">comp_data</span></code></a></p></td>
-<td><p><a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionData" title="suboptimumg.compsim.models.CompetitionData"><code class="xref py py-class docutils literal notranslate"><span class="pre">CompetitionData</span></code></a></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessInput.step" title="suboptimumg.sweep.models.ArraySweepProcessInput.step"><code class="xref py py-obj docutils literal notranslate"><span class="pre">step</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessInput.step_idx" title="suboptimumg.sweep.models.ArraySweepProcessInput.step_idx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">step_idx</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessInput.var_idx" title="suboptimumg.sweep.models.ArraySweepProcessInput.var_idx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">var_idx</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessInput.var_name" title="suboptimumg.sweep.models.ArraySweepProcessInput.var_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">var_name</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>comp_data</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionData" title="suboptimumg.compsim.models.CompetitionData"><em>CompetitionData</em></a>)</p></li>
-<li><p><strong>var_name</strong> (<em>str</em>)</p></li>
-<li><p><strong>step</strong> (<em>float</em>)</p></li>
-<li><p><strong>var_idx</strong> (<em>int</em>)</p></li>
-<li><p><strong>step_idx</strong> (<em>int</em>)</p></li>
-</ul>
-</dd>
-</dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessInput.comp_data">
-<span class="sig-name descname"><span class="pre">comp_data</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionData" title="suboptimumg.compsim.models.CompetitionData"><span class="pre">CompetitionData</span></a></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessInput.comp_data" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepPlan.parameter_plans">
+<span class="sig-name descname"><span class="pre">parameter_plans</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#suboptimumg.sweep.models.SweepPlan" title="suboptimumg.sweep.models.SweepPlan"><span class="pre">SweepPlan</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepPlan.parameter_plans" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessInput.step">
-<span class="sig-name descname"><span class="pre">step</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessInput.step" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessInput.step_idx">
-<span class="sig-name descname"><span class="pre">step_idx</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessInput.step_idx" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessInput.var_idx">
-<span class="sig-name descname"><span class="pre">var_idx</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessInput.var_idx" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessInput.var_name">
-<span class="sig-name descname"><span class="pre">var_name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessInput.var_name" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessOutput">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">ArraySweepProcessOutput</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#ArraySweepProcessOutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessOutput" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
-<p>Output model for array sweep process.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id3">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id3" title="Link to this table">#</a></caption>
-<thead>
-<tr class="row-odd"><th class="head"><p>Field</p></th>
-<th class="head"><p>Type</p></th>
-<th class="head"><p>Required</p></th>
-<th class="head"><p>Default</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.accel_pts" title="suboptimumg.sweep.models.ArraySweepProcessOutput.accel_pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">accel_pts</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.accel_t" title="suboptimumg.sweep.models.ArraySweepProcessOutput.accel_t"><code class="xref py py-obj docutils literal notranslate"><span class="pre">accel_t</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.autoX_pts" title="suboptimumg.sweep.models.ArraySweepProcessOutput.autoX_pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">autoX_pts</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.autoX_t" title="suboptimumg.sweep.models.ArraySweepProcessOutput.autoX_t"><code class="xref py py-obj docutils literal notranslate"><span class="pre">autoX_t</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.efficiency_pts" title="suboptimumg.sweep.models.ArraySweepProcessOutput.efficiency_pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">efficiency_pts</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.endurance_pts" title="suboptimumg.sweep.models.ArraySweepProcessOutput.endurance_pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">endurance_pts</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.endurance_t" title="suboptimumg.sweep.models.ArraySweepProcessOutput.endurance_t"><code class="xref py py-obj docutils literal notranslate"><span class="pre">endurance_t</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.error" title="suboptimumg.sweep.models.ArraySweepProcessOutput.error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">error</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p></td>
-<td><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.plausible" title="suboptimumg.sweep.models.ArraySweepProcessOutput.plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plausible</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.skidpad_pts" title="suboptimumg.sweep.models.ArraySweepProcessOutput.skidpad_pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">skidpad_pts</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.skidpad_t" title="suboptimumg.sweep.models.ArraySweepProcessOutput.skidpad_t"><code class="xref py py-obj docutils literal notranslate"><span class="pre">skidpad_t</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.step_idx" title="suboptimumg.sweep.models.ArraySweepProcessOutput.step_idx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">step_idx</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.var_idx" title="suboptimumg.sweep.models.ArraySweepProcessOutput.var_idx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">var_idx</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.warnings" title="suboptimumg.sweep.models.ArraySweepProcessOutput.warnings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">warnings</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p></td>
-<td><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>var_idx</strong> (<em>int</em>)</p></li>
-<li><p><strong>step_idx</strong> (<em>int</em>)</p></li>
-<li><p><strong>plausible</strong> (<em>bool</em>)</p></li>
-<li><p><strong>accel_pts</strong> (<em>float</em>)</p></li>
-<li><p><strong>skidpad_pts</strong> (<em>float</em>)</p></li>
-<li><p><strong>autoX_pts</strong> (<em>float</em>)</p></li>
-<li><p><strong>endurance_pts</strong> (<em>float</em>)</p></li>
-<li><p><strong>efficiency_pts</strong> (<em>float</em>)</p></li>
-<li><p><strong>accel_t</strong> (<em>float</em>)</p></li>
-<li><p><strong>skidpad_t</strong> (<em>float</em>)</p></li>
-<li><p><strong>autoX_t</strong> (<em>float</em>)</p></li>
-<li><p><strong>endurance_t</strong> (<em>float</em>)</p></li>
-<li><p><strong>warnings</strong> (<em>str</em>)</p></li>
-<li><p><strong>error</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessOutput.accel_pts">
-<span class="sig-name descname"><span class="pre">accel_pts</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.accel_pts" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessOutput.accel_t">
-<span class="sig-name descname"><span class="pre">accel_t</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.accel_t" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessOutput.autoX_pts">
-<span class="sig-name descname"><span class="pre">autoX_pts</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.autoX_pts" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessOutput.autoX_t">
-<span class="sig-name descname"><span class="pre">autoX_t</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.autoX_t" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessOutput.efficiency_pts">
-<span class="sig-name descname"><span class="pre">efficiency_pts</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.efficiency_pts" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessOutput.endurance_pts">
-<span class="sig-name descname"><span class="pre">endurance_pts</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.endurance_pts" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessOutput.endurance_t">
-<span class="sig-name descname"><span class="pre">endurance_t</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.endurance_t" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessOutput.error">
-<span class="sig-name descname"><span class="pre">error</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.error" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessOutput.plausible">
-<span class="sig-name descname"><span class="pre">plausible</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessOutput.skidpad_pts">
-<span class="sig-name descname"><span class="pre">skidpad_pts</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.skidpad_pts" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessOutput.skidpad_t">
-<span class="sig-name descname"><span class="pre">skidpad_t</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.skidpad_t" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessOutput.step_idx">
-<span class="sig-name descname"><span class="pre">step_idx</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.step_idx" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessOutput.var_idx">
-<span class="sig-name descname"><span class="pre">var_idx</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.var_idx" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepProcessOutput.warnings">
-<span class="sig-name descname"><span class="pre">warnings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.warnings" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepVariableInput">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">ArraySweepVariableInput</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#ArraySweepVariableInput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepVariableInput" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
-<p>Per-variable sweep values used to build array sweep process inputs.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id4">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id4" title="Link to this table">#</a></caption>
-<thead>
-<tr class="row-odd"><th class="head"><p>Field</p></th>
-<th class="head"><p>Type</p></th>
-<th class="head"><p>Required</p></th>
-<th class="head"><p>Default</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepVariableInput.name" title="suboptimumg.sweep.models.ArraySweepVariableInput.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.ArraySweepVariableInput.sweep_values" title="suboptimumg.sweep.models.ArraySweepVariableInput.sweep_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_values</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code>]</p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>)</p></li>
-<li><p><strong>sweep_values</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepVariableInput.name">
-<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepVariableInput.name" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepVariableInput.sweep_values">
-<span class="sig-name descname"><span class="pre">sweep_values</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">np.float64</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepVariableInput.sweep_values" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.models.ArraySweepPlan.percent_changes">
+<span class="sig-name descname"><span class="pre">percent_changes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.ArraySweepPlan.percent_changes" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -840,8 +548,8 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">CarConfiguration</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#CarConfiguration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.CarConfiguration" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>A car, described as an ordered list of changes to the base car.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id5">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id5" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id2">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id2" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
 <th class="head"><p>Type</p></th>
@@ -875,8 +583,8 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">CategoricalAxis</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#CategoricalAxis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.CategoricalAxis" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>One swept entry and the labels of the values it takes.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id6">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id6" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id3">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id3" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
 <th class="head"><p>Type</p></th>
@@ -969,8 +677,8 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">CategoricalModification</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#CategoricalModification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.CategoricalModification" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Replace one car entry with a labeled value.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id7">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id7" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id4">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id4" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
 <th class="head"><p>Type</p></th>
@@ -1055,8 +763,8 @@
 <p class="rubric">Notes</p>
 <p>Each option replaces exactly one entry, the one at <cite>name</cite>. The entry can be a whole sub-model
 (e.g. ‘pwrtn.motor’) or a single value (e.g. a flag).</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id8">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id8" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id5">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id5" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
 <th class="head"><p>Type</p></th>
@@ -1106,8 +814,8 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">ConfigurationFailure</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#ConfigurationFailure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.ConfigurationFailure" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>A configuration whose simulation raised.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id9">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id9" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id6">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id6" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
 <th class="head"><p>Type</p></th>
@@ -1165,8 +873,8 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">ConfigurationSuccess</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#ConfigurationSuccess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.ConfigurationSuccess" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>A configuration that simulated successfully.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id10">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id10" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id7">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id7" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
 <th class="head"><p>Type</p></th>
@@ -1224,8 +932,8 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">FixedAxis</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#FixedAxis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.FixedAxis" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>An axis that was removed from sweep data by fixing it at one value.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id11">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id11" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id8">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id8" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
 <th class="head"><p>Type</p></th>
@@ -1282,8 +990,8 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">NumericAxis</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#NumericAxis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.NumericAxis" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>One swept parameter and the values it takes.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id12">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id12" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id9">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id9" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
 <th class="head"><p>Type</p></th>
@@ -1319,6 +1027,22 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.sweep.models.NumericAxis.from_relative_sweep_input">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_relative_sweep_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sweep_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_vehicle</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#NumericAxis.from_relative_sweep_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.NumericAxis.from_relative_sweep_input" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sweep_input</strong> (<a class="reference internal" href="#suboptimumg.sweep.models.RelativeSweepInput" title="suboptimumg.sweep.models.RelativeSweepInput"><em>RelativeSweepInput</em></a>)</p></li>
+<li><p><strong>base_vehicle</strong> (<a class="reference internal" href="suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.VehicleModel" title="suboptimumg.vehicle.vehicle_models.VehicleModel"><em>VehicleModel</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#suboptimumg.sweep.models.NumericAxis" title="suboptimumg.sweep.models.NumericAxis"><em>NumericAxis</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.sweep.models.NumericAxis.from_sweep_param">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_sweep_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sweep_input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#NumericAxis.from_sweep_param"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.NumericAxis.from_sweep_param" title="Link to this definition">#</a></dt>
@@ -1382,8 +1106,8 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">ParameterModification</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#ParameterModification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.ParameterModification" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Set one car parameter to a new value.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id13">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id13" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id10">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id10" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
 <th class="head"><p>Type</p></th>
@@ -1450,79 +1174,32 @@
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepData1D">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">SweepData1D</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#SweepData1D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.SweepData1D" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.models.RelativeSweepInput">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">RelativeSweepInput</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#RelativeSweepInput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.RelativeSweepInput" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
-<p>Strongly typed 1D sweep data container.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id14">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id14" title="Link to this table">#</a></caption>
+<p>Fields needed to sweep a parameter across percent changes from its base value.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="id11">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id11" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
 <th class="head"><p>Type</p></th>
 <th class="head"><p>Required</p></th>
 <th class="head"><p>Default</p></th>
+<th class="head"><p>Constraints</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D.accel_pts" title="suboptimumg.sweep.models.SweepData1D.accel_pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">accel_pts</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code>]</p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D.accel_t" title="suboptimumg.sweep.models.SweepData1D.accel_t"><code class="xref py py-obj docutils literal notranslate"><span class="pre">accel_t</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code>]</p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D.autoX_pts" title="suboptimumg.sweep.models.SweepData1D.autoX_pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">autoX_pts</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code>]</p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D.autoX_t" title="suboptimumg.sweep.models.SweepData1D.autoX_t"><code class="xref py py-obj docutils literal notranslate"><span class="pre">autoX_t</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code>]</p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D.efficiency_pts" title="suboptimumg.sweep.models.SweepData1D.efficiency_pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">efficiency_pts</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code>]</p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D.endurance_pts" title="suboptimumg.sweep.models.SweepData1D.endurance_pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">endurance_pts</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code>]</p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D.endurance_t" title="suboptimumg.sweep.models.SweepData1D.endurance_t"><code class="xref py py-obj docutils literal notranslate"><span class="pre">endurance_t</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code>]</p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D.plausible" title="suboptimumg.sweep.models.SweepData1D.plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plausible</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>]</p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D.skidpad_pts" title="suboptimumg.sweep.models.SweepData1D.skidpad_pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">skidpad_pts</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code>]</p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D.skidpad_t" title="suboptimumg.sweep.models.SweepData1D.skidpad_t"><code class="xref py py-obj docutils literal notranslate"><span class="pre">skidpad_t</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code>]</p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D.sweep_values" title="suboptimumg.sweep.models.SweepData1D.sweep_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_values</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code>]</p></td>
-<td><p>Yes</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D.var_name" title="suboptimumg.sweep.models.SweepData1D.var_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">var_name</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.RelativeSweepInput.name" title="suboptimumg.sweep.models.RelativeSweepInput.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
 <td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p></td>
 <td><p>Yes</p></td>
 <td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.models.RelativeSweepInput.percent_changes" title="suboptimumg.sweep.models.RelativeSweepInput.percent_changes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">percent_changes</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]</p></td>
+<td><p>Yes</p></td>
+<td></td>
+<td><p>min_length=1</p></td>
 </tr>
 </tbody>
 </table>
@@ -1530,102 +1207,19 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>var_name</strong> (<em>str</em>)</p></li>
-<li><p><strong>sweep_values</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
-<li><p><strong>accel_pts</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
-<li><p><strong>skidpad_pts</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
-<li><p><strong>autoX_pts</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
-<li><p><strong>endurance_pts</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
-<li><p><strong>efficiency_pts</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
-<li><p><strong>accel_t</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
-<li><p><strong>skidpad_t</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
-<li><p><strong>autoX_t</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
-<li><p><strong>endurance_t</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
-<li><p><strong>plausible</strong> (<em>NDArray</em><em>[</em><em>bool</em><em>]</em>)</p></li>
+<li><p><strong>name</strong> (<em>str</em>)</p></li>
+<li><p><strong>percent_changes</strong> (<em>Annotated</em><em>[</em><em>list</em><em>[</em><em>float</em><em>]</em><em>, </em><em>MinLen</em><em>(</em><em>min_length=1</em><em>)</em><em>]</em>)</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepData1D.accel_pts">
-<span class="sig-name descname"><span class="pre">accel_pts</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">np.float64</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.SweepData1D.accel_pts" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.models.RelativeSweepInput.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#suboptimumg.sweep.models.RelativeSweepInput.name" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepData1D.accel_t">
-<span class="sig-name descname"><span class="pre">accel_t</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">np.float64</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.SweepData1D.accel_t" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepData1D.autoX_pts">
-<span class="sig-name descname"><span class="pre">autoX_pts</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">np.float64</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.SweepData1D.autoX_pts" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepData1D.autoX_t">
-<span class="sig-name descname"><span class="pre">autoX_t</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">np.float64</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.SweepData1D.autoX_t" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepData1D.create">
-<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sweep_values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#SweepData1D.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.SweepData1D.create" title="Link to this definition">#</a></dt>
-<dd><p>Create a SweepData1D with pre-allocated numpy arrays of specified length.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>var_name</strong> (<em>str</em>)</p></li>
-<li><p><strong>sweep_values</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#suboptimumg.sweep.models.SweepData1D" title="suboptimumg.sweep.models.SweepData1D"><em>SweepData1D</em></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepData1D.efficiency_pts">
-<span class="sig-name descname"><span class="pre">efficiency_pts</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">np.float64</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.SweepData1D.efficiency_pts" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepData1D.endurance_pts">
-<span class="sig-name descname"><span class="pre">endurance_pts</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">np.float64</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.SweepData1D.endurance_pts" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepData1D.endurance_t">
-<span class="sig-name descname"><span class="pre">endurance_t</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">np.float64</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.SweepData1D.endurance_t" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepData1D.plausible">
-<span class="sig-name descname"><span class="pre">plausible</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">np.bool_</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.SweepData1D.plausible" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepData1D.skidpad_pts">
-<span class="sig-name descname"><span class="pre">skidpad_pts</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">np.float64</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.SweepData1D.skidpad_pts" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepData1D.skidpad_t">
-<span class="sig-name descname"><span class="pre">skidpad_t</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">np.float64</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.SweepData1D.skidpad_t" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepData1D.sweep_values">
-<span class="sig-name descname"><span class="pre">sweep_values</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">np.float64</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.SweepData1D.sweep_values" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepData1D.total_pts">
-<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">total_pts</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.SweepData1D.total_pts" title="Link to this definition">#</a></dt>
-<dd><p>Compute total points as sum of all point categories.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepData1D.var_name">
-<span class="sig-name descname"><span class="pre">var_name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#suboptimumg.sweep.models.SweepData1D.var_name" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.sweep.models.RelativeSweepInput.percent_changes">
+<span class="sig-name descname"><span class="pre">percent_changes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.models.RelativeSweepInput.percent_changes" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1635,8 +1229,8 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">SweepGrid</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#SweepGrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.SweepGrid" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>The swept axes, whose every combination of values is one grid point.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id15">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id15" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id12">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id12" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
 <th class="head"><p>Type</p></th>
@@ -1661,8 +1255,8 @@
 </tbody>
 </table>
 </div>
-<div class="pst-scrollable-table-container"><table class="table" id="id16">
-<caption><span class="caption-text">Validators</span><a class="headerlink" href="#id16" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id13">
+<caption><span class="caption-text">Validators</span><a class="headerlink" href="#id13" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Validator</p></th>
 <th class="head"><p>Mode</p></th>
@@ -1709,21 +1303,21 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>base_vehicle</strong> (<a class="reference internal" href="suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.VehicleModel" title="suboptimumg.vehicle.vehicle_models.VehicleModel"><em>VehicleModel</em></a>) – The vehicle the values will be applied to. It is not modified.</p>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If a name is not a parameter, or a value fails the parameter’s validation</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepGrid.from_inputs">
-<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#SweepGrid.from_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.SweepGrid.from_inputs" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_vehicle</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#SweepGrid.from_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.SweepGrid.from_inputs" title="Link to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>inputs</strong> (<em>Sequence</em><em>[</em><a class="reference internal" href="#suboptimumg.sweep.models.SweepParamConfig" title="suboptimumg.sweep.models.SweepParamConfig"><em>SweepParamConfig</em></a><em> | </em><a class="reference internal" href="#suboptimumg.sweep.models.CategoricalSweepInput" title="suboptimumg.sweep.models.CategoricalSweepInput"><em>CategoricalSweepInput</em></a><em>]</em>)</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>Sequence</em><em>[</em><a class="reference internal" href="#suboptimumg.sweep.models.SweepParamConfig" title="suboptimumg.sweep.models.SweepParamConfig"><em>SweepParamConfig</em></a><em> | </em><a class="reference internal" href="#suboptimumg.sweep.models.CategoricalSweepInput" title="suboptimumg.sweep.models.CategoricalSweepInput"><em>CategoricalSweepInput</em></a><em> | </em><a class="reference internal" href="#suboptimumg.sweep.models.RelativeSweepInput" title="suboptimumg.sweep.models.RelativeSweepInput"><em>RelativeSweepInput</em></a><em>]</em>)</p></li>
+<li><p><strong>base_vehicle</strong> (<a class="reference internal" href="suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.VehicleModel" title="suboptimumg.vehicle.vehicle_models.VehicleModel"><em>VehicleModel</em></a>)</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="#suboptimumg.sweep.models.SweepGrid" title="suboptimumg.sweep.models.SweepGrid"><em>SweepGrid</em></a></p>
@@ -1755,8 +1349,8 @@ categorical comes before numerical.</p>
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">SweepParamConfig</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#SweepParamConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.SweepParamConfig" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Fields needed to specify a sweep variable.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id17">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id17" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id14">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id14" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
 <th class="head"><p>Type</p></th>
@@ -1788,8 +1382,8 @@ categorical comes before numerical.</p>
 </tbody>
 </table>
 </div>
-<div class="pst-scrollable-table-container"><table class="table" id="id18">
-<caption><span class="caption-text">Validators</span><a class="headerlink" href="#id18" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id15">
+<caption><span class="caption-text">Validators</span><a class="headerlink" href="#id15" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Validator</p></th>
 <th class="head"><p>Mode</p></th>
@@ -1852,8 +1446,8 @@ categorical comes before numerical.</p>
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.models.</span></span><span class="sig-name descname"><span class="pre">SweepPlan</span></span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#SweepPlan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.SweepPlan" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Every configuration of a sweep, and the axes that produced them.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id19">
-<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id19" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id16">
+<caption><span class="caption-text">Fields</span><a class="headerlink" href="#id16" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
 <th class="head"><p>Type</p></th>
@@ -1880,8 +1474,8 @@ categorical comes before numerical.</p>
 </tbody>
 </table>
 </div>
-<div class="pst-scrollable-table-container"><table class="table" id="id20">
-<caption><span class="caption-text">Validators</span><a class="headerlink" href="#id20" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id17">
+<caption><span class="caption-text">Validators</span><a class="headerlink" href="#id17" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Validator</p></th>
 <th class="head"><p>Mode</p></th>
@@ -1982,39 +1576,11 @@ categorical comes before numerical.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepData"><code class="docutils literal notranslate"><span class="pre">ArraySweepData</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepData.percent_steps"><code class="docutils literal notranslate"><span class="pre">ArraySweepData.percent_steps</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepData.sweep_outputs"><code class="docutils literal notranslate"><span class="pre">ArraySweepData.sweep_outputs</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessInput"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessInput</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessInput.comp_data"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessInput.comp_data</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessInput.step"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessInput.step</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessInput.step_idx"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessInput.step_idx</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessInput.var_idx"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessInput.var_idx</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessInput.var_name"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessInput.var_name</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessOutput"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessOutput</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.accel_pts"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessOutput.accel_pts</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.accel_t"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessOutput.accel_t</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.autoX_pts"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessOutput.autoX_pts</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.autoX_t"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessOutput.autoX_t</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.efficiency_pts"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessOutput.efficiency_pts</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.endurance_pts"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessOutput.endurance_pts</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.endurance_t"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessOutput.endurance_t</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.error"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessOutput.error</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.plausible"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessOutput.plausible</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.skidpad_pts"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessOutput.skidpad_pts</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.skidpad_t"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessOutput.skidpad_t</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.step_idx"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessOutput.step_idx</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.var_idx"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessOutput.var_idx</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepProcessOutput.warnings"><code class="docutils literal notranslate"><span class="pre">ArraySweepProcessOutput.warnings</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepVariableInput"><code class="docutils literal notranslate"><span class="pre">ArraySweepVariableInput</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepVariableInput.name"><code class="docutils literal notranslate"><span class="pre">ArraySweepVariableInput.name</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepVariableInput.sweep_values"><code class="docutils literal notranslate"><span class="pre">ArraySweepVariableInput.sweep_values</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepPlan"><code class="docutils literal notranslate"><span class="pre">ArraySweepPlan</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepPlan.baseline"><code class="docutils literal notranslate"><span class="pre">ArraySweepPlan.baseline</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepPlan.configurations"><code class="docutils literal notranslate"><span class="pre">ArraySweepPlan.configurations</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepPlan.parameter_plans"><code class="docutils literal notranslate"><span class="pre">ArraySweepPlan.parameter_plans</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ArraySweepPlan.percent_changes"><code class="docutils literal notranslate"><span class="pre">ArraySweepPlan.percent_changes</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.CarConfiguration"><code class="docutils literal notranslate"><span class="pre">CarConfiguration</span></code></a><ul class="nav section-nav flex-column">
@@ -2062,6 +1628,7 @@ categorical comes before numerical.</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.NumericAxis"><code class="docutils literal notranslate"><span class="pre">NumericAxis</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.NumericAxis.from_relative_sweep_input"><code class="docutils literal notranslate"><span class="pre">NumericAxis.from_relative_sweep_input()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.NumericAxis.from_sweep_param"><code class="docutils literal notranslate"><span class="pre">NumericAxis.from_sweep_param()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.NumericAxis.get_formatted_values_at_index"><code class="docutils literal notranslate"><span class="pre">NumericAxis.get_formatted_values_at_index()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.NumericAxis.kind"><code class="docutils literal notranslate"><span class="pre">NumericAxis.kind</span></code></a></li>
@@ -2078,21 +1645,9 @@ categorical comes before numerical.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.ParameterModification.value"><code class="docutils literal notranslate"><span class="pre">ParameterModification.value</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepData1D"><code class="docutils literal notranslate"><span class="pre">SweepData1D</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepData1D.accel_pts"><code class="docutils literal notranslate"><span class="pre">SweepData1D.accel_pts</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepData1D.accel_t"><code class="docutils literal notranslate"><span class="pre">SweepData1D.accel_t</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepData1D.autoX_pts"><code class="docutils literal notranslate"><span class="pre">SweepData1D.autoX_pts</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepData1D.autoX_t"><code class="docutils literal notranslate"><span class="pre">SweepData1D.autoX_t</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepData1D.create"><code class="docutils literal notranslate"><span class="pre">SweepData1D.create()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepData1D.efficiency_pts"><code class="docutils literal notranslate"><span class="pre">SweepData1D.efficiency_pts</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepData1D.endurance_pts"><code class="docutils literal notranslate"><span class="pre">SweepData1D.endurance_pts</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepData1D.endurance_t"><code class="docutils literal notranslate"><span class="pre">SweepData1D.endurance_t</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepData1D.plausible"><code class="docutils literal notranslate"><span class="pre">SweepData1D.plausible</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepData1D.skidpad_pts"><code class="docutils literal notranslate"><span class="pre">SweepData1D.skidpad_pts</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepData1D.skidpad_t"><code class="docutils literal notranslate"><span class="pre">SweepData1D.skidpad_t</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepData1D.sweep_values"><code class="docutils literal notranslate"><span class="pre">SweepData1D.sweep_values</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepData1D.total_pts"><code class="docutils literal notranslate"><span class="pre">SweepData1D.total_pts</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepData1D.var_name"><code class="docutils literal notranslate"><span class="pre">SweepData1D.var_name</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.RelativeSweepInput"><code class="docutils literal notranslate"><span class="pre">RelativeSweepInput</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.RelativeSweepInput.name"><code class="docutils literal notranslate"><span class="pre">RelativeSweepInput.name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.RelativeSweepInput.percent_changes"><code class="docutils literal notranslate"><span class="pre">RelativeSweepInput.percent_changes</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.models.SweepGrid"><code class="docutils literal notranslate"><span class="pre">SweepGrid</span></code></a><ul class="nav section-nav flex-column">

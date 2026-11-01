@@ -344,7 +344,6 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.color_themes</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_theme</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.plotting_constants</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">BAR_CHART_IMPLAUSIBLE_SYMBOL</span><span class="p">,</span>
     <span class="n">BAR_CHART_XAXIS_TICKANGLE</span><span class="p">,</span>
     <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
     <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
@@ -372,9 +371,8 @@
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Name of the variable, used as the x-axis category"</span><span class="p">)</span>
-    <span class="n">points</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Y-values for each step of the sweep"</span><span class="p">)</span>
-    <span class="n">plausible</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">"Whether each corresponding point is physically plausible"</span>
+    <span class="n">points</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Y-values for each step of the sweep. NaN values are not drawn."</span>
     <span class="p">)</span></div>
 
 
@@ -437,34 +435,26 @@
         <span class="p">)</span>
     <span class="p">)</span>
 
-    <span class="c1"># Add all plausible points in a single trace with colorscale</span>
-    <span class="n">all_plausible_x</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">all_plausible_y</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">all_plausible_colors</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">all_plausible_text</span> <span class="o">=</span> <span class="p">[]</span>
-
+    <span class="c1"># Add every point in a single trace, colored by its percent step. NaN points are not drawn.</span>
+    <span class="n">all_x</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">all_y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">all_colors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">all_text</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">var_data</span> <span class="ow">in</span> <span class="n">data_by_variable</span><span class="p">:</span>
-        <span class="c1"># Use numpy masking to get plausible points</span>
-        <span class="n">var_name</span> <span class="o">=</span> <span class="n">var_data</span><span class="o">.</span><span class="n">var_name</span>
-        <span class="n">plausible_points</span> <span class="o">=</span> <span class="n">var_data</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="n">var_data</span><span class="o">.</span><span class="n">plausible</span><span class="p">]</span>
-        <span class="n">plausible_steps</span> <span class="o">=</span> <span class="n">percent_steps</span><span class="p">[</span><span class="n">var_data</span><span class="o">.</span><span class="n">plausible</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">point_value</span><span class="p">,</span> <span class="n">step_value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">var_data</span><span class="o">.</span><span class="n">points</span><span class="p">,</span> <span class="n">percent_steps</span><span class="p">):</span>
+            <span class="n">all_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var_data</span><span class="o">.</span><span class="n">var_name</span><span class="p">)</span>
+            <span class="n">all_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">point_value</span><span class="p">)</span>
+            <span class="n">all_colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step_value</span><span class="p">)</span>
+            <span class="n">all_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Step: </span><span class="si">{</span><span class="n">step_value</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-        <span class="c1"># Add all plausible points for this variable</span>
-        <span class="k">for</span> <span class="n">point_value</span><span class="p">,</span> <span class="n">step_value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">plausible_points</span><span class="p">,</span> <span class="n">plausible_steps</span><span class="p">):</span>
-            <span class="n">all_plausible_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var_name</span><span class="p">)</span>
-            <span class="n">all_plausible_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">point_value</span><span class="p">)</span>
-            <span class="n">all_plausible_colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step_value</span><span class="p">)</span>
-            <span class="n">all_plausible_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Step: </span><span class="si">{</span><span class="n">step_value</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-    <span class="c1"># Add a single trace for all plausible points using a colorscale</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
         <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
-            <span class="n">x</span><span class="o">=</span><span class="n">all_plausible_x</span><span class="p">,</span>
-            <span class="n">y</span><span class="o">=</span><span class="n">all_plausible_y</span><span class="p">,</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">all_x</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">all_y</span><span class="p">,</span>
             <span class="n">mode</span><span class="o">=</span><span class="s2">"markers"</span><span class="p">,</span>
             <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
                 <span class="n">size</span><span class="o">=</span><span class="n">MARKER_SIZE_LARGE</span><span class="p">,</span>
-                <span class="n">color</span><span class="o">=</span><span class="n">all_plausible_colors</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">all_colors</span><span class="p">,</span>
                 <span class="n">colorscale</span><span class="o">=</span><span class="n">colorscale</span><span class="p">,</span>
                 <span class="n">colorbar</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
                     <span class="n">title</span><span class="o">=</span><span class="s2">"Percent Change"</span><span class="p">,</span>
@@ -474,9 +464,9 @@
                     <span class="nb">len</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
                 <span class="p">),</span>
             <span class="p">),</span>
-            <span class="n">text</span><span class="o">=</span><span class="n">all_plausible_text</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">all_text</span><span class="p">,</span>
             <span class="n">hovertemplate</span><span class="o">=</span><span class="s2">"%</span><span class="si">{x}</span><span class="s2">&lt;br&gt;Points: %</span><span class="si">{y:.1f}</span><span class="s2">&lt;br&gt;%</span><span class="si">{text}</span><span class="s2">&lt;extra&gt;&lt;/extra&gt;"</span><span class="p">,</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">"Plausible Points"</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"Points"</span><span class="p">,</span>
             <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="p">)</span>
@@ -491,46 +481,10 @@
                 <span class="n">size</span><span class="o">=</span><span class="n">MARKER_SIZE_LARGE</span><span class="p">,</span>
                 <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">,</span>
             <span class="p">),</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">"Plausible Points"</span><span class="p">,</span>
-            <span class="n">legendgroup</span><span class="o">=</span><span class="s2">"plausible"</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"Points"</span><span class="p">,</span>
             <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="p">)</span>
-
-    <span class="c1"># Add a separate trace for implausible points</span>
-    <span class="n">all_implausible_x</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">all_implausible_y</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">all_implausible_text</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">for</span> <span class="n">var_data</span> <span class="ow">in</span> <span class="n">data_by_variable</span><span class="p">:</span>
-        <span class="c1"># Use numpy masking to get implausible points</span>
-        <span class="n">var_name</span> <span class="o">=</span> <span class="n">var_data</span><span class="o">.</span><span class="n">var_name</span>
-        <span class="n">implausible_points</span> <span class="o">=</span> <span class="n">var_data</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="o">~</span><span class="n">var_data</span><span class="o">.</span><span class="n">plausible</span><span class="p">]</span>
-        <span class="n">implausible_steps</span> <span class="o">=</span> <span class="n">percent_steps</span><span class="p">[</span><span class="o">~</span><span class="n">var_data</span><span class="o">.</span><span class="n">plausible</span><span class="p">]</span>
-
-        <span class="c1"># Add all implausible points for this variable</span>
-        <span class="k">for</span> <span class="n">point_value</span><span class="p">,</span> <span class="n">step_value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">implausible_points</span><span class="p">,</span> <span class="n">implausible_steps</span><span class="p">):</span>
-            <span class="n">all_implausible_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var_name</span><span class="p">)</span>
-            <span class="n">all_implausible_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">point_value</span><span class="p">)</span>
-            <span class="n">all_implausible_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Step: </span><span class="si">{</span><span class="n">step_value</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-    <span class="c1"># Add a single trace for all implausible points</span>
-    <span class="k">if</span> <span class="n">all_implausible_x</span><span class="p">:</span>
-        <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
-            <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
-                <span class="n">x</span><span class="o">=</span><span class="n">all_implausible_x</span><span class="p">,</span>
-                <span class="n">y</span><span class="o">=</span><span class="n">all_implausible_y</span><span class="p">,</span>
-                <span class="n">mode</span><span class="o">=</span><span class="s2">"markers"</span><span class="p">,</span>
-                <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                    <span class="n">size</span><span class="o">=</span><span class="n">MARKER_SIZE_LARGE</span><span class="p">,</span>
-                    <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">,</span>
-                    <span class="n">symbol</span><span class="o">=</span><span class="n">BAR_CHART_IMPLAUSIBLE_SYMBOL</span><span class="p">,</span>
-                <span class="p">),</span>
-                <span class="n">text</span><span class="o">=</span><span class="n">all_implausible_text</span><span class="p">,</span>
-                <span class="n">hovertemplate</span><span class="o">=</span><span class="s2">"%</span><span class="si">{x}</span><span class="s2">&lt;br&gt;Points: %</span><span class="si">{y:.1f}</span><span class="s2">&lt;br&gt;%</span><span class="si">{text}</span><span class="s2"> (Implausible)&lt;extra&gt;&lt;/extra&gt;"</span><span class="p">,</span>
-                <span class="n">name</span><span class="o">=</span><span class="s2">"Implausible Points"</span><span class="p">,</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
 
     <span class="c1"># Title, Axis, Labels, Legend</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>

@@ -350,8 +350,8 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.sweep.html">suboptimumg.sweep</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.array_sweep_results.html">suboptimumg.sweep.array_sweep_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.array_sweeper.html">suboptimumg.sweep.array_sweeper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.base_sweeper.html">suboptimumg.sweep.base_sweeper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.config_generator.html">suboptimumg.sweep.config_generator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.constants.html">suboptimumg.sweep.constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.energy_grid.html">suboptimumg.sweep.energy_grid</a></li>
@@ -481,7 +481,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="suboptimumg.sweep.sweeper.Sweeper">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.sweeper.</span></span><span class="sig-name descname"><span class="pre">Sweeper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comp_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependencies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">executor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;suboptimumg.sweep.multiprocessed_executor.MultiprocessSweepExecutor</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweeper.html#Sweeper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweeper.Sweeper" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="suboptimumg.sweep.base_sweeper.html#suboptimumg.sweep.base_sweeper.BaseSweeper" title="suboptimumg.sweep.base_sweeper.BaseSweeper"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseSweeper</span></code></a>[<a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepPlan" title="suboptimumg.sweep.models.SweepPlan"><code class="xref py py-class docutils literal notranslate"><span class="pre">SweepPlan</span></code></a>, <a class="reference internal" href="suboptimumg.sweep.sweep_data.html#suboptimumg.sweep.sweep_data.SweepData" title="suboptimumg.sweep.sweep_data.SweepData"><code class="xref py py-class docutils literal notranslate"><span class="pre">SweepData</span></code></a>]</p>
 <p>N-dimensional parameter sweeper that owns its configuration and results.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -498,21 +498,15 @@ applied, and return other parameters to change at that point</p></li>
 <p class="rubric">Notes</p>
 <p><cite>comp_data</cite> and <cite>config</cite> can be edited after construction. <cite>sweep()</cite> only
 reruns the simulations when the generated configurations have changed.</p>
-<dl class="py property">
-<dt class="sig sig-object py" id="suboptimumg.sweep.sweeper.Sweeper.data">
-<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">data</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="suboptimumg.sweep.sweep_data.html#suboptimumg.sweep.sweep_data.SweepData" title="suboptimumg.sweep.sweep_data.SweepData"><span class="pre">SweepData</span></a></span><a class="headerlink" href="#suboptimumg.sweep.sweeper.Sweeper.data" title="Link to this definition">#</a></dt>
-<dd><p>Results of the last sweep.</p>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.sweep.sweeper.Sweeper.evaluate_sweep_metric">
-<span class="sig-name descname"><span class="pre">evaluate_sweep_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fixed_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SweepDatatype.TOTAL_PTS</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweeper.html#Sweeper.evaluate_sweep_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweeper.Sweeper.evaluate_sweep_metric" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">evaluate_sweep_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fixed_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SweepMetric.TOTAL_PTS</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweeper.html#Sweeper.evaluate_sweep_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweeper.Sweeper.evaluate_sweep_metric" title="Link to this definition">#</a></dt>
 <dd><p>Read a metric at one point, interpolating between grid points.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fixed_params</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>float</em><em> | </em><em>str</em><em>]</em>) – Value of every swept parameter, e.g. <cite>{“mass”: 250, “pwrtn.motor”: “emrax208”}</cite></p></li>
-<li><p><strong>metric</strong> (<a class="reference internal" href="suboptimumg.sweep.types.html#suboptimumg.sweep.types.SweepDatatype" title="suboptimumg.sweep.types.SweepDatatype"><em>SweepDatatype</em></a><em>, </em><em>optional</em>) – Metric to read (default is SweepDatatype.TOTAL_PTS)</p></li>
+<li><p><strong>metric</strong> (<a class="reference internal" href="suboptimumg.sweep.types.html#suboptimumg.sweep.types.SweepMetric" title="suboptimumg.sweep.types.SweepMetric"><em>SweepMetric</em></a><em>, </em><em>optional</em>) – Metric to read (default is SweepMetric.TOTAL_PTS)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -526,13 +520,13 @@ reruns the simulations when the generated configurations have changed.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.sweep.sweeper.Sweeper.evaluate_sweep_metric_gradient">
-<span class="sig-name descname"><span class="pre">evaluate_sweep_metric_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fixed_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SweepDatatype.TOTAL_PTS</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweeper.html#Sweeper.evaluate_sweep_metric_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweeper.Sweeper.evaluate_sweep_metric_gradient" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">evaluate_sweep_metric_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fixed_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SweepMetric.TOTAL_PTS</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweeper.html#Sweeper.evaluate_sweep_metric_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweeper.Sweeper.evaluate_sweep_metric_gradient" title="Link to this definition">#</a></dt>
 <dd><p>Estimate the partial derivatives of a metric at one point.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fixed_params</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>float</em><em> | </em><em>str</em><em>]</em>) – Value of every swept parameter, e.g. <cite>{“mass”: 250, “pwrtn.motor”: “emrax208”}</cite></p></li>
-<li><p><strong>metric</strong> (<a class="reference internal" href="suboptimumg.sweep.types.html#suboptimumg.sweep.types.SweepDatatype" title="suboptimumg.sweep.types.SweepDatatype"><em>SweepDatatype</em></a><em>, </em><em>optional</em>) – Metric to differentiate (default is SweepDatatype.TOTAL_PTS)</p></li>
+<li><p><strong>metric</strong> (<a class="reference internal" href="suboptimumg.sweep.types.html#suboptimumg.sweep.types.SweepMetric" title="suboptimumg.sweep.types.SweepMetric"><em>SweepMetric</em></a><em>, </em><em>optional</em>) – Metric to differentiate (default is SweepMetric.TOTAL_PTS)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -573,20 +567,14 @@ Categorical axes take one of their labels.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="suboptimumg.sweep.sweeper.Sweeper.is_stale">
-<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_stale</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#suboptimumg.sweep.sweeper.Sweeper.is_stale" title="Link to this definition">#</a></dt>
-<dd><p>Whether the configuration has changed since the last sweep, or none has run.</p>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.sweep.sweeper.Sweeper.plot">
-<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SweepDatatype.TOTAL_PTS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">PlotType.CONTOUR</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subtitle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cividis'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">plot_options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweeper.html#Sweeper.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweeper.Sweeper.plot" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SweepMetric.TOTAL_PTS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">PlotType.CONTOUR</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subtitle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cividis'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">plot_options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweeper.html#Sweeper.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweeper.Sweeper.plot" title="Link to this definition">#</a></dt>
 <dd><p>Plot one metric against the swept parameters that are left free.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>metric</strong> (<a class="reference internal" href="suboptimumg.sweep.types.html#suboptimumg.sweep.types.SweepDatatype" title="suboptimumg.sweep.types.SweepDatatype"><em>SweepDatatype</em></a><em>, </em><em>optional</em>) – Metric to plot (default is SweepDatatype.TOTAL_PTS)</p></li>
+<li><p><strong>metric</strong> (<a class="reference internal" href="suboptimumg.sweep.types.html#suboptimumg.sweep.types.SweepMetric" title="suboptimumg.sweep.types.SweepMetric"><em>SweepMetric</em></a><em>, </em><em>optional</em>) – Metric to plot (default is SweepMetric.TOTAL_PTS)</p></li>
 <li><p><strong>plot_type</strong> (<a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html#suboptimumg.plotting.grid_plot_3d.PlotType" title="suboptimumg.plotting.grid_plot_3d.PlotType"><em>PlotType</em></a><em>, </em><em>optional</em>) – Contour or surface, for 2 free parameters (default is PlotType.CONTOUR)</p></li>
 <li><p><strong>fixed_params</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>float</em><em> | </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Swept parameters to fix, e.g. <cite>{“mass”: 250, “pwrtn.motor”: “emrax208”}</cite>.
 Numeric values between grid points are interpolated. Categorical axes
@@ -606,20 +594,6 @@ categorical axis is also free, or a contour or surface for 2 numeric</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>go.Figure</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.sweep.sweeper.Sweeper.sweep">
-<span class="sig-name descname"><span class="pre">sweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweeper.html#Sweeper.sweep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweeper.Sweeper.sweep" title="Link to this definition">#</a></dt>
-<dd><p>Run every simulation of the sweep, unless the results are already up to date.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>force</strong> (<em>bool</em><em>, </em><em>optional</em>) – Rerun even when the results are up to date (default is False)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -676,13 +650,10 @@ categorical axis is also free, or a contour or surface for 2 numeric</p>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.sweeper.Sweeper"><code class="docutils literal notranslate"><span class="pre">Sweeper</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.sweeper.Sweeper.data"><code class="docutils literal notranslate"><span class="pre">Sweeper.data</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.sweeper.Sweeper.evaluate_sweep_metric"><code class="docutils literal notranslate"><span class="pre">Sweeper.evaluate_sweep_metric()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.sweeper.Sweeper.evaluate_sweep_metric_gradient"><code class="docutils literal notranslate"><span class="pre">Sweeper.evaluate_sweep_metric_gradient()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.sweeper.Sweeper.grid_plot"><code class="docutils literal notranslate"><span class="pre">Sweeper.grid_plot()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.sweeper.Sweeper.is_stale"><code class="docutils literal notranslate"><span class="pre">Sweeper.is_stale</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.sweeper.Sweeper.plot"><code class="docutils literal notranslate"><span class="pre">Sweeper.plot()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.sweeper.Sweeper.sweep"><code class="docutils literal notranslate"><span class="pre">Sweeper.sweep()</span></code></a></li>
 </ul>
 </li>
 </ul>

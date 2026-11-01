@@ -389,7 +389,7 @@
 <span class="sd">        At each point the categorical replacements come first, then the numeric values, in axis order, followed by each dependency's changes, in dependency order.</span>
 <span class="sd">        Each dependency receives its own deep copy of the vehicle, with the point's swept values and the earlier dependencies' changes applied.</span>
 <span class="sd">        """</span>
-        <span class="n">grid</span> <span class="o">=</span> <span class="n">SweepGrid</span><span class="o">.</span><span class="n">from_inputs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="n">SweepGrid</span><span class="o">.</span><span class="n">from_inputs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="n">base_vehicle</span><span class="p">)</span>
         <span class="n">grid</span><span class="o">.</span><span class="n">check_values_are_settable</span><span class="p">(</span><span class="n">base_vehicle</span><span class="p">)</span>
 
         <span class="n">configurations</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">CarConfiguration</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>

@@ -352,11 +352,10 @@
     <span class="n">Field</span><span class="p">,</span>
     <span class="n">SerializeAsAny</span><span class="p">,</span>
     <span class="n">ValidationError</span><span class="p">,</span>
-    <span class="n">computed_field</span><span class="p">,</span>
     <span class="n">model_validator</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompetitionData</span><span class="p">,</span> <span class="n">CompetitionResults</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompetitionResults</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle.vehicle_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">VehicleModel</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_steps</span>
 
@@ -411,140 +410,22 @@
 
 
 
-<span class="n">SweepInput</span> <span class="o">=</span> <span class="n">SweepParamConfig</span> <span class="o">|</span> <span class="n">CategoricalSweepInput</span>
+<div class="viewcode-block" id="RelativeSweepInput">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.RelativeSweepInput">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RelativeSweepInput</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Fields needed to sweep a parameter across percent changes from its base value."""</span>
 
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="s2">"forbid"</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ArraySweepVariableInput">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.ArraySweepVariableInput">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">ArraySweepVariableInput</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Per-variable sweep values used to build array sweep process inputs."""</span>
-
-    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Name of the variable being swept"</span><span class="p">)</span>
-    <span class="n">sweep_values</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">"Values of the variable across the sweep steps"</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Name of the parameter"</span><span class="p">)</span>
+    <span class="n">percent_changes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Changes from the base value as ascending fractions, e.g. -0.1 for 10</span><span class="si">% le</span><span class="s2">ss"</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
 
-<div class="viewcode-block" id="ArraySweepProcessInput">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.ArraySweepProcessInput">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">ArraySweepProcessInput</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Input model for array sweep process."""</span>
-
-    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="n">comp_data</span><span class="p">:</span> <span class="n">CompetitionData</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Competition configuration data model"</span><span class="p">)</span>
-    <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Name of the variable being swept"</span><span class="p">)</span>
-    <span class="n">step</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Value of the variable for this iteration"</span><span class="p">)</span>
-    <span class="n">var_idx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Index of the variable in the sweep array"</span><span class="p">)</span>
-    <span class="n">step_idx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Index of the step in the sweep"</span><span class="p">)</span></div>
-
-
-
-<div class="viewcode-block" id="ArraySweepProcessOutput">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.ArraySweepProcessOutput">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">ArraySweepProcessOutput</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Output model for array sweep process."""</span>
-
-    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="n">var_idx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Index of the variable in the sweep array"</span><span class="p">)</span>
-    <span class="n">step_idx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Index of the step in the sweep"</span><span class="p">)</span>
-    <span class="n">plausible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Whether the parameter configuration is plausible"</span><span class="p">)</span>
-    <span class="n">accel_pts</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Acceleration event points"</span><span class="p">)</span>
-    <span class="n">skidpad_pts</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Skidpad event points"</span><span class="p">)</span>
-    <span class="n">autoX_pts</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Autocross event points"</span><span class="p">)</span>
-    <span class="n">endurance_pts</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Endurance event points"</span><span class="p">)</span>
-    <span class="n">efficiency_pts</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Efficiency points"</span><span class="p">)</span>
-    <span class="n">accel_t</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Acceleration event time"</span><span class="p">)</span>
-    <span class="n">skidpad_t</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Skidpad event time"</span><span class="p">)</span>
-    <span class="n">autoX_t</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Autocross event time"</span><span class="p">)</span>
-    <span class="n">endurance_t</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Endurance event time"</span><span class="p">)</span>
-    <span class="n">warnings</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Warning messages from the simulation"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span>
-    <span class="n">error</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Error message if simulation failed"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></div>
-
-
-
-<div class="viewcode-block" id="SweepData1D">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepData1D">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">SweepData1D</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Strongly typed 1D sweep data container."""</span>
-
-    <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Variable name being swept"</span><span class="p">)</span>
-    <span class="n">sweep_values</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">"Actual parameter values used in the sweep (x-values)"</span>
-    <span class="p">)</span>
-
-    <span class="n">accel_pts</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Acceleration event points"</span><span class="p">)</span>
-    <span class="n">skidpad_pts</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Skidpad event points"</span><span class="p">)</span>
-    <span class="n">autoX_pts</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Autocross event points"</span><span class="p">)</span>
-    <span class="n">endurance_pts</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Endurance event points"</span><span class="p">)</span>
-    <span class="n">efficiency_pts</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Efficiency points"</span><span class="p">)</span>
-    <span class="n">accel_t</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Acceleration event time"</span><span class="p">)</span>
-    <span class="n">skidpad_t</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Skidpad event time"</span><span class="p">)</span>
-    <span class="n">autoX_t</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Autocross event time"</span><span class="p">)</span>
-    <span class="n">endurance_t</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Endurance event time"</span><span class="p">)</span>
-
-    <span class="n">plausible</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">"Plausibility check result for each sweep step"</span>
-    <span class="p">)</span>
-
-    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="nd">@computed_field</span>  <span class="c1"># type: ignore[prop-decorator]</span>
-    <span class="c1"># See vehicle_models.py: valid Pydantic V2 pattern, mypy plugin currently</span>
-    <span class="c1"># incompatible with the installed mypy version.</span>
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">total_pts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""Compute total points as sum of all point categories."""</span>
-        <span class="k">return</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">accel_pts</span>
-            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">skidpad_pts</span>
-            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoX_pts</span>
-            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">endurance_pts</span>
-            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">efficiency_pts</span>
-        <span class="p">)</span>
-
-<div class="viewcode-block" id="SweepData1D.create">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepData1D.create">[docs]</a>
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">sweep_values</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">SweepData1D</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Create a SweepData1D with pre-allocated numpy arrays of specified length."""</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sweep_values</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">var_name</span><span class="o">=</span><span class="n">var_name</span><span class="p">,</span>
-            <span class="n">sweep_values</span><span class="o">=</span><span class="n">sweep_values</span><span class="p">,</span>
-            <span class="n">accel_pts</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span>
-            <span class="n">skidpad_pts</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span>
-            <span class="n">autoX_pts</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span>
-            <span class="n">endurance_pts</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span>
-            <span class="n">efficiency_pts</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span>
-            <span class="n">accel_t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span>
-            <span class="n">skidpad_t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span>
-            <span class="n">autoX_t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span>
-            <span class="n">endurance_t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span>
-            <span class="n">plausible</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">),</span>
-        <span class="p">)</span></div>
-</div>
-
-
-
-<div class="viewcode-block" id="ArraySweepData">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.ArraySweepData">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">ArraySweepData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Strongly typed container for array sweep data."""</span>
-
-    <span class="n">percent_steps</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">"Percent step values used in the sweep (shared across all variables)"</span>
-    <span class="p">)</span>
-    <span class="n">sweep_outputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">SweepData1D</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">"List of sweep output data for each variable"</span>
-    <span class="p">)</span>
-
-    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
-
+<span class="n">SweepInput</span> <span class="o">=</span> <span class="n">SweepParamConfig</span> <span class="o">|</span> <span class="n">CategoricalSweepInput</span> <span class="o">|</span> <span class="n">RelativeSweepInput</span>
 
 
 <span class="n">VehicleDependency</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">VehicleModel</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span>
@@ -659,6 +540,19 @@
         <span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="NumericAxis.from_relative_sweep_input">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.NumericAxis.from_relative_sweep_input">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_relative_sweep_input</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">sweep_input</span><span class="p">:</span> <span class="n">RelativeSweepInput</span><span class="p">,</span> <span class="n">base_vehicle</span><span class="p">:</span> <span class="n">VehicleModel</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumericAxis</span><span class="p">:</span>
+        <span class="n">base_value</span> <span class="o">=</span> <span class="n">base_vehicle</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="n">sweep_input</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">base_value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"`</span><span class="si">{</span><span class="n">sweep_input</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">` is not a numeric parameter"</span><span class="p">)</span>
+        <span class="n">percent_changes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sweep_input</span><span class="o">.</span><span class="n">percent_changes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">sweep_input</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">base_value</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">percent_changes</span><span class="p">))</span></div>
+
+
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
@@ -729,13 +623,19 @@
 <div class="viewcode-block" id="SweepGrid.from_inputs">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepGrid.from_inputs">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_inputs</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">SweepInput</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">SweepGrid</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_inputs</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">SweepInput</span><span class="p">],</span> <span class="n">base_vehicle</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SweepGrid</span><span class="p">:</span>
         <span class="n">axes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NumericAxis</span> <span class="o">|</span> <span class="n">CategoricalAxis</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">modifications_for_each_axis_value</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Modification</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">sweep_input</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
             <span class="k">match</span> <span class="n">sweep_input</span><span class="p">:</span>
                 <span class="k">case</span> <span class="n">SweepParamConfig</span><span class="p">():</span>
                     <span class="n">numeric_axis</span> <span class="o">=</span> <span class="n">NumericAxis</span><span class="o">.</span><span class="n">from_sweep_param</span><span class="p">(</span><span class="n">sweep_input</span><span class="p">)</span>
+                    <span class="n">axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numeric_axis</span><span class="p">)</span>
+                    <span class="n">modifications_for_each_axis_value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="n">numeric_axis</span><span class="o">.</span><span class="n">modifications_for_each_value</span><span class="p">()</span>
+                    <span class="p">)</span>
+                <span class="k">case</span> <span class="n">RelativeSweepInput</span><span class="p">():</span>
+                    <span class="n">numeric_axis</span> <span class="o">=</span> <span class="n">NumericAxis</span><span class="o">.</span><span class="n">from_relative_sweep_input</span><span class="p">(</span><span class="n">sweep_input</span><span class="p">,</span> <span class="n">base_vehicle</span><span class="p">)</span>
                     <span class="n">axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numeric_axis</span><span class="p">)</span>
                     <span class="n">modifications_for_each_axis_value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                         <span class="n">numeric_axis</span><span class="o">.</span><span class="n">modifications_for_each_value</span><span class="p">()</span>
@@ -775,11 +675,6 @@
 <span class="sd">        ----------</span>
 <span class="sd">        base_vehicle : VehicleModel</span>
 <span class="sd">            The vehicle the values will be applied to. It is not modified.</span>
-
-<span class="sd">        Raises</span>
-<span class="sd">        ------</span>
-<span class="sd">        ValueError</span>
-<span class="sd">            If a name is not a parameter, or a value fails the parameter's validation</span>
 <span class="sd">        """</span>
         <span class="k">for</span> <span class="n">axis_value_modifications</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modifications_for_each_axis_value</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">modification</span> <span class="ow">in</span> <span class="n">axis_value_modifications</span><span class="p">:</span>
@@ -848,6 +743,34 @@
             <span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 </div>
+
+
+
+<div class="viewcode-block" id="ArraySweepPlan">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.ArraySweepPlan">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ArraySweepPlan</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Every configuration of an array sweep: the base car, then each parameter's 1-D sweep."""</span>
+
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">percent_changes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Changes from each parameter's base value, shared by every parameter"</span>
+    <span class="p">)</span>
+    <span class="n">baseline</span><span class="p">:</span> <span class="n">SweepPlan</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Plan with no axes and a single configuration that changes nothing"</span>
+    <span class="p">)</span>
+    <span class="n">parameter_plans</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SweepPlan</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"One 1-D plan per swept parameter, keyed by parameter name"</span>
+    <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">configurations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">CarConfiguration</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""The baseline's configuration, then every parameter plan's, in order."""</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">configuration</span>
+            <span class="k">for</span> <span class="n">plan</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">baseline</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">parameter_plans</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+            <span class="k">for</span> <span class="n">configuration</span> <span class="ow">in</span> <span class="n">plan</span><span class="o">.</span><span class="n">configurations</span>
+        <span class="p">]</span></div>
 
 </pre></div>
 

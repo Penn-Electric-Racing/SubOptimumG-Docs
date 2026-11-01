@@ -336,253 +336,117 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.sweep.array_sweeper</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mp</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringIO</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pool</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.competition_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">from_data</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.array_sweep_results</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArraySweepResults</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">ROUNDING_PRECISION</span><span class="p">,</span> <span class="n">SWEEP_VAR_PERCENT_STEP_LIST</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompetitionData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.base_sweeper</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseSweeper</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.config_generator</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepConfigGenerator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT_PERCENT_CHANGES</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepExecutor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">ArraySweepData</span><span class="p">,</span>
-    <span class="n">ArraySweepProcessInput</span><span class="p">,</span>
-    <span class="n">ArraySweepProcessOutput</span><span class="p">,</span>
-    <span class="n">ArraySweepVariableInput</span><span class="p">,</span>
-    <span class="n">CompetitionData</span><span class="p">,</span>
-    <span class="n">SweepData1D</span><span class="p">,</span>
+    <span class="n">ArraySweepPlan</span><span class="p">,</span>
+    <span class="n">CarConfiguration</span><span class="p">,</span>
+    <span class="n">ConfigurationResult</span><span class="p">,</span>
+    <span class="n">RelativeSweepInput</span><span class="p">,</span>
+    <span class="n">SweepPlan</span><span class="p">,</span>
 <span class="p">)</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">_process_sweep_item</span><span class="p">(</span><span class="n">input_model</span><span class="p">:</span> <span class="n">ArraySweepProcessInput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArraySweepProcessOutput</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Process a single sweep item in an isolated separate process.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    input_model : ArraySweepProcessInput</span>
-<span class="sd">        ArraySweepProcessInput containing all input parameters</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    ArraySweepProcessOutput</span>
-<span class="sd">        Results and metadata from the sweep item</span>
-<span class="sd">    """</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="c1"># Capture warnings in this process</span>
-        <span class="n">string_buffer</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
-        <span class="n">old_stdout</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">string_buffer</span>
-
-        <span class="c1"># Create a new Competition instance for this process</span>
-        <span class="n">comp</span> <span class="o">=</span> <span class="n">from_data</span><span class="p">(</span><span class="n">input_model</span><span class="o">.</span><span class="n">comp_data</span><span class="p">)</span>
-
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">comp</span><span class="o">.</span><span class="n">mycar</span><span class="o">.</span><span class="n">modify_params</span><span class="p">(</span><span class="n">input_model</span><span class="o">.</span><span class="n">var_name</span><span class="p">,</span> <span class="n">input_model</span><span class="o">.</span><span class="n">step</span><span class="p">)</span>
-            <span class="c1"># Plausibility checks now handled by Pydantic validators during model creation</span>
-            <span class="n">plausible</span> <span class="o">=</span> <span class="kc">True</span>
-
-            <span class="n">warnings</span> <span class="o">=</span> <span class="n">string_buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
-
-            <span class="n">comp_res</span> <span class="o">=</span> <span class="n">comp</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-
-            <span class="k">return</span> <span class="n">ArraySweepProcessOutput</span><span class="p">(</span>
-                <span class="n">var_idx</span><span class="o">=</span><span class="n">input_model</span><span class="o">.</span><span class="n">var_idx</span><span class="p">,</span>
-                <span class="n">step_idx</span><span class="o">=</span><span class="n">input_model</span><span class="o">.</span><span class="n">step_idx</span><span class="p">,</span>
-                <span class="n">plausible</span><span class="o">=</span><span class="n">plausible</span><span class="p">,</span>
-                <span class="n">accel_pts</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">comp_res</span><span class="o">.</span><span class="n">accel</span><span class="o">.</span><span class="n">points</span><span class="p">,</span> <span class="n">ROUNDING_PRECISION</span><span class="p">),</span>
-                <span class="n">skidpad_pts</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">comp_res</span><span class="o">.</span><span class="n">skidpad</span><span class="o">.</span><span class="n">points</span><span class="p">,</span> <span class="n">ROUNDING_PRECISION</span><span class="p">),</span>
-                <span class="n">autoX_pts</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">comp_res</span><span class="o">.</span><span class="n">autoX</span><span class="o">.</span><span class="n">points</span><span class="p">,</span> <span class="n">ROUNDING_PRECISION</span><span class="p">),</span>
-                <span class="n">endurance_pts</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">comp_res</span><span class="o">.</span><span class="n">endurance</span><span class="o">.</span><span class="n">points</span><span class="p">,</span> <span class="n">ROUNDING_PRECISION</span><span class="p">),</span>
-                <span class="n">efficiency_pts</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">comp_res</span><span class="o">.</span><span class="n">efficiency_points</span><span class="p">,</span> <span class="n">ROUNDING_PRECISION</span><span class="p">),</span>
-                <span class="n">accel_t</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">comp_res</span><span class="o">.</span><span class="n">accel</span><span class="o">.</span><span class="n">tyour</span><span class="p">,</span> <span class="n">ROUNDING_PRECISION</span><span class="p">),</span>
-                <span class="n">skidpad_t</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">comp_res</span><span class="o">.</span><span class="n">skidpad</span><span class="o">.</span><span class="n">tyour</span><span class="p">,</span> <span class="n">ROUNDING_PRECISION</span><span class="p">),</span>
-                <span class="n">autoX_t</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">comp_res</span><span class="o">.</span><span class="n">autoX</span><span class="o">.</span><span class="n">tyour</span><span class="p">,</span> <span class="n">ROUNDING_PRECISION</span><span class="p">),</span>
-                <span class="n">endurance_t</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">comp_res</span><span class="o">.</span><span class="n">endurance</span><span class="o">.</span><span class="n">tyour</span><span class="p">,</span> <span class="n">ROUNDING_PRECISION</span><span class="p">),</span>
-                <span class="n">warnings</span><span class="o">=</span><span class="n">warnings</span><span class="p">,</span>
-                <span class="n">error</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="p">)</span>
-
-        <span class="k">finally</span><span class="p">:</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">old_stdout</span>
-
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">ArraySweepProcessOutput</span><span class="p">(</span>
-            <span class="n">var_idx</span><span class="o">=</span><span class="n">input_model</span><span class="o">.</span><span class="n">var_idx</span><span class="p">,</span>
-            <span class="n">step_idx</span><span class="o">=</span><span class="n">input_model</span><span class="o">.</span><span class="n">step_idx</span><span class="p">,</span>
-            <span class="n">error</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Process error: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
-            <span class="n">plausible</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-            <span class="n">accel_pts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">skidpad_pts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">autoX_pts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">endurance_pts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">efficiency_pts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">accel_t</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">skidpad_t</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">autoX_t</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">endurance_t</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">warnings</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
-        <span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.multiprocessed_executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiprocessSweepExecutor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.sweep_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArraySweepData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.sweep_plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_array_sweep</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepMetric</span>
 
 
 <div class="viewcode-block" id="ArraySweeper">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.array_sweeper.html#suboptimumg.sweep.array_sweeper.ArraySweeper">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">ArraySweeper</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ArraySweeper</span><span class="p">(</span><span class="n">BaseSweeper</span><span class="p">[</span><span class="n">ArraySweepPlan</span><span class="p">,</span> <span class="n">ArraySweepData</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Sweeps a list of variables at a list of percent steps.</span>
+<span class="sd">    Sweeps each parameter on its own, across percent changes from its base value.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    comp_data : CompetitionData</span>
+<span class="sd">        Base competition. It is copied, so later edits to the original have no effect.</span>
+<span class="sd">    parameter_names : Sequence[str]</span>
+<span class="sd">        Numeric parameters to sweep, e.g. `["mass", "aero.cl"]`</span>
+<span class="sd">    percent_changes : Sequence[float], optional</span>
+<span class="sd">        Changes from each parameter's base value, as ascending fractions</span>
+<span class="sd">        (default is -10% to +10% in steps of 2%)</span>
+<span class="sd">    executor : SweepExecutor, optional</span>
+<span class="sd">        How simulations are run (default runs them in a process pool)</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    Each variable is swept independently. The percent steps are relative to the</span>
-<span class="sd">    default value of the variable. The 1D sweep calls this class with a single</span>
-<span class="sd">    variable and a list of percent steps.</span>
+<span class="sd">    Every parameter's simulations, plus one of the unmodified car for the baseline, run in a single batch.</span>
+<span class="sd">    `comp_data`, `parameter_names` and `percent_changes` can be edited after construction. `sweep()` only</span>
+<span class="sd">    reruns the simulations when the generated configurations have changed.</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">comp_data</span><span class="p">:</span> <span class="n">CompetitionData</span><span class="p">,</span>
-        <span class="n">var_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-        <span class="n">var_percent_step_list</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">SWEEP_VAR_PERCENT_STEP_LIST</span><span class="p">,</span>
+        <span class="n">parameter_names</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">percent_changes</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">DEFAULT_PERCENT_CHANGES</span><span class="p">,</span>
+        <span class="n">executor</span><span class="p">:</span> <span class="n">SweepExecutor</span> <span class="o">=</span> <span class="n">MultiprocessSweepExecutor</span><span class="p">(),</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">comp_data</span> <span class="o">=</span> <span class="n">comp_data</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">comp</span> <span class="o">=</span> <span class="n">from_data</span><span class="p">(</span><span class="n">comp_data</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var_percent_step_list</span> <span class="o">=</span> <span class="n">var_percent_step_list</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">comp_data</span><span class="p">,</span> <span class="n">executor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameter_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">parameter_names</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">percent_changes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">percent_changes</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">sweep_inputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ArraySweepVariableInput</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">sweep_outputs</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">var_list</span><span class="p">:</span>
-            <span class="n">base_value</span> <span class="o">=</span> <span class="n">comp_data</span><span class="o">.</span><span class="n">vehicle_model</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
-            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">base_value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)),</span> <span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2">' is not a numeric car parameter"</span>
-            <span class="n">sweep_values</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span>
-                <span class="n">base_value</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">var_percent_step_list</span><span class="p">),</span> <span class="mi">4</span>
-            <span class="p">)</span>
-
-            <span class="n">sweep_input_data</span> <span class="o">=</span> <span class="n">ArraySweepVariableInput</span><span class="p">(</span>
-                <span class="n">name</span><span class="o">=</span><span class="n">var</span><span class="p">,</span>
-                <span class="n">sweep_values</span><span class="o">=</span><span class="n">sweep_values</span><span class="p">,</span>
-            <span class="p">)</span>
-
-            <span class="c1"># Create strongly-typed SweepData1D</span>
-            <span class="n">sweep_output</span> <span class="o">=</span> <span class="n">SweepData1D</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">sweep_values</span><span class="p">)</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">sweep_inputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sweep_input_data</span><span class="p">)</span>
-            <span class="n">sweep_outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sweep_output</span><span class="p">)</span>
-
-        <span class="c1"># Store percent steps (shared across all variables)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sweep_outputs</span> <span class="o">=</span> <span class="n">ArraySweepData</span><span class="p">(</span>
-            <span class="n">percent_steps</span><span class="o">=</span><span class="n">var_percent_step_list</span><span class="p">,</span> <span class="n">sweep_outputs</span><span class="o">=</span><span class="n">sweep_outputs</span>
-        <span class="p">)</span>
-
-<div class="viewcode-block" id="ArraySweeper.sweep">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.array_sweeper.html#suboptimumg.sweep.array_sweeper.ArraySweeper.sweep">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">sweep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">num_processes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArraySweepResults</span><span class="p">:</span>
+<div class="viewcode-block" id="ArraySweeper.plot">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.array_sweeper.html#suboptimumg.sweep.array_sweeper.ArraySweeper.plot">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">metric</span><span class="p">:</span> <span class="n">SweepMetric</span> <span class="o">=</span> <span class="n">SweepMetric</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">y_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">plot_options</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        Run the sweep using multiprocessing.</span>
+<span class="sd">        Plot one metric of every swept parameter, colored by percent change.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        verbose : bool, optional</span>
-<span class="sd">            Whether to show detailed progress (default is False)</span>
-<span class="sd">        num_processes : int, optional</span>
-<span class="sd">            Number of processes to use. Defaults to CPU count.</span>
+<span class="sd">        metric : SweepMetric, optional</span>
+<span class="sd">            Metric to plot (default is SweepMetric.TOTAL_PTS)</span>
+<span class="sd">        title, y_label : str, optional</span>
+<span class="sd">            Text for the plot. Defaults are generated from the metric.</span>
+<span class="sd">        **plot_options : object</span>
+<span class="sd">            Passed to the plotting function, e.g. `theme="powertrain"`</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        ArraySweepResults</span>
-<span class="sd">            Results of the sweep operation</span>
+<span class="sd">        go.Figure</span>
+<span class="sd">            One column of points per parameter, with the unmodified car's value as a baseline</span>
 <span class="sd">        """</span>
-        <span class="k">if</span> <span class="n">num_processes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">num_processes</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">plot_array_sweep</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">y_label</span><span class="o">=</span><span class="n">y_label</span><span class="p">,</span> <span class="o">**</span><span class="n">plot_options</span>
+        <span class="p">)</span></div>
 
-        <span class="n">total_iterations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_inputs</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var_percent_step_list</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"Running Array Sweeper for </span><span class="si">{</span><span class="n">total_iterations</span><span class="si">}</span><span class="s2"> competition simulations using </span><span class="si">{</span><span class="n">num_processes</span><span class="si">}</span><span class="s2"> processes."</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArraySweepPlan</span><span class="p">:</span>
+        <span class="n">base_vehicle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">comp_data</span><span class="o">.</span><span class="n">vehicle_model</span>
+        <span class="k">return</span> <span class="n">ArraySweepPlan</span><span class="p">(</span>
+            <span class="n">percent_changes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">percent_changes</span><span class="p">,</span>
+            <span class="n">baseline</span><span class="o">=</span><span class="n">SweepPlan</span><span class="p">(</span>
+                <span class="n">axes</span><span class="o">=</span><span class="p">[],</span> <span class="n">configurations</span><span class="o">=</span><span class="p">[</span><span class="n">CarConfiguration</span><span class="p">(</span><span class="n">modifications</span><span class="o">=</span><span class="p">[])],</span> <span class="n">dependency_names</span><span class="o">=</span><span class="p">[]</span>
+            <span class="p">),</span>
+            <span class="n">parameter_plans</span><span class="o">=</span><span class="p">{</span>
+                <span class="n">name</span><span class="p">:</span> <span class="n">SweepConfigGenerator</span><span class="p">(</span>
+                    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">RelativeSweepInput</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">percent_changes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">percent_changes</span><span class="p">)]</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">generate_sweep_plan</span><span class="p">(</span><span class="n">base_vehicle</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_names</span>
+            <span class="p">},</span>
         <span class="p">)</span>
 
-        <span class="c1"># Create progress bar</span>
-        <span class="n">progress_bar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span>
-            <span class="n">total</span><span class="o">=</span><span class="n">total_iterations</span><span class="p">,</span>
-            <span class="n">desc</span><span class="o">=</span><span class="s2">"Running simulations"</span><span class="p">,</span>
-            <span class="n">unit</span><span class="o">=</span><span class="s2">"sim"</span><span class="p">,</span>
-            <span class="n">dynamic_ncols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">bar_format</span><span class="o">=</span><span class="s2">"</span><span class="si">{l_bar}{bar}</span><span class="s2">| </span><span class="si">{n_fmt}</span><span class="s2">/</span><span class="si">{total_fmt}</span><span class="s2"> [</span><span class="si">{elapsed}</span><span class="s2">&lt;</span><span class="si">{remaining}</span><span class="s2">, </span><span class="si">{rate_fmt}</span><span class="s2">]"</span><span class="p">,</span>
-        <span class="p">)</span>
-
-        <span class="c1"># Prepare arguments for multiprocessing - only pass necessary data</span>
-        <span class="n">flattened_sweep_inputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ArraySweepProcessInput</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">var_idx</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_inputs</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">step_idx</span><span class="p">,</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">sweep_values</span><span class="p">):</span>
-                <span class="n">flattened_sweep_inputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="n">ArraySweepProcessInput</span><span class="p">(</span>
-                        <span class="n">comp_data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">comp_data</span><span class="p">,</span>
-                        <span class="n">var_name</span><span class="o">=</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                        <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span>
-                        <span class="n">var_idx</span><span class="o">=</span><span class="n">var_idx</span><span class="p">,</span>
-                        <span class="n">step_idx</span><span class="o">=</span><span class="n">step_idx</span><span class="p">,</span>
-                    <span class="p">)</span>
-                <span class="p">)</span>
-
-        <span class="k">try</span><span class="p">:</span>
-            <span class="c1"># Create process pool and run simulations</span>
-            <span class="n">errors_log</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="n">num_processes</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">pool</span><span class="o">.</span><span class="n">imap_unordered</span><span class="p">(</span><span class="n">_process_sweep_item</span><span class="p">,</span> <span class="n">flattened_sweep_inputs</span><span class="p">):</span>
-                    <span class="c1"># Access the SweepOutputData for this variable</span>
-                    <span class="n">var_idx</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">var_idx</span>
-                    <span class="n">step_idx</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">step_idx</span>
-                    <span class="n">sweep_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sweep_outputs</span><span class="o">.</span><span class="n">sweep_outputs</span><span class="p">[</span><span class="n">var_idx</span><span class="p">]</span>
-
-                    <span class="c1"># Update results at specific indices to maintain order</span>
-                    <span class="n">sweep_output</span><span class="o">.</span><span class="n">plausible</span><span class="p">[</span><span class="n">step_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">plausible</span>
-
-                    <span class="n">sweep_output</span><span class="o">.</span><span class="n">accel_pts</span><span class="p">[</span><span class="n">step_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">accel_pts</span>
-                    <span class="n">sweep_output</span><span class="o">.</span><span class="n">skidpad_pts</span><span class="p">[</span><span class="n">step_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">skidpad_pts</span>
-                    <span class="n">sweep_output</span><span class="o">.</span><span class="n">autoX_pts</span><span class="p">[</span><span class="n">step_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">autoX_pts</span>
-                    <span class="n">sweep_output</span><span class="o">.</span><span class="n">endurance_pts</span><span class="p">[</span><span class="n">step_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">endurance_pts</span>
-                    <span class="n">sweep_output</span><span class="o">.</span><span class="n">efficiency_pts</span><span class="p">[</span><span class="n">step_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">efficiency_pts</span>
-                    <span class="n">sweep_output</span><span class="o">.</span><span class="n">accel_t</span><span class="p">[</span><span class="n">step_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">accel_t</span>
-                    <span class="n">sweep_output</span><span class="o">.</span><span class="n">skidpad_t</span><span class="p">[</span><span class="n">step_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">skidpad_t</span>
-                    <span class="n">sweep_output</span><span class="o">.</span><span class="n">autoX_t</span><span class="p">[</span><span class="n">step_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">autoX_t</span>
-                    <span class="n">sweep_output</span><span class="o">.</span><span class="n">endurance_t</span><span class="p">[</span><span class="n">step_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">endurance_t</span>
-
-                    <span class="c1"># Track errors separately</span>
-                    <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">error</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                        <span class="n">errors_log</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">var_idx</span><span class="p">,</span> <span class="n">step_idx</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">))</span>
-
-                    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">warnings</span><span class="p">:</span>
-                            <span class="n">progress_bar</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">warnings</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-
-                        <span class="n">progress_bar</span><span class="o">.</span><span class="n">set_postfix_str</span><span class="p">(</span>
-                            <span class="sa">f</span><span class="s2">"Variable: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_inputs</span><span class="p">[</span><span class="n">var_idx</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, Step: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_inputs</span><span class="p">[</span><span class="n">var_idx</span><span class="p">]</span><span class="o">.</span><span class="n">sweep_values</span><span class="p">[</span><span class="n">step_idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span>
-                        <span class="p">)</span>
-
-                    <span class="n">progress_bar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-
-            <span class="c1"># Report any errors that occurred</span>
-            <span class="k">for</span> <span class="n">var_idx</span><span class="p">,</span> <span class="n">step_idx</span><span class="p">,</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">errors_log</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">"Warning: Sim errored out for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_inputs</span><span class="p">[</span><span class="n">var_idx</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> "</span>
-                    <span class="sa">f</span><span class="s2">"at value </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_inputs</span><span class="p">[</span><span class="n">var_idx</span><span class="p">]</span><span class="o">.</span><span class="n">sweep_values</span><span class="p">[</span><span class="n">step_idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">"</span>
-                    <span class="sa">f</span><span class="s2">"Data is incorrect and graphing may produce unpredictable results."</span>
-                <span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">progress_bar</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sweep failed: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-            <span class="k">raise</span>
-
-        <span class="k">finally</span><span class="p">:</span>
-            <span class="n">progress_bar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="n">ArraySweepResults</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sweep_outputs</span><span class="p">)</span></div>
-</div>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_assemble_data</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">plan</span><span class="p">:</span> <span class="n">ArraySweepPlan</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ConfigurationResult</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArraySweepData</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ArraySweepData</span><span class="o">.</span><span class="n">from_results</span><span class="p">(</span><span class="n">plan</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span></div>
 
 </pre></div>
 

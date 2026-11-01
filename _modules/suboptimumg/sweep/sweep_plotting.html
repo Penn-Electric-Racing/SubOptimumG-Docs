@@ -340,6 +340,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.bar_chart</span><span class="w"> </span><span class="kn">import</span> <span class="n">BarChartSeries</span><span class="p">,</span> <span class="n">plot_bar_chart</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.color_themes</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT_THEME</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.grid_plot_2d</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_grid_2D</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.grid_plot_3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">PlotType</span><span class="p">,</span> <span class="n">plot_grid_3D</span>
@@ -349,15 +350,15 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.plot_3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot3D_contour</span><span class="p">,</span> <span class="n">plot3D_surface</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">STANDARD_GRID_PLOT</span><span class="p">,</span> <span class="n">TIME_GRID_PLOT</span><span class="p">,</span> <span class="n">TITLE_MAPPING</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CategoricalAxis</span><span class="p">,</span> <span class="n">NumericAxis</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.sweep_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepData</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepDatatype</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.sweep_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArraySweepData</span><span class="p">,</span> <span class="n">SweepData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepMetric</span>
 
 
 <div class="viewcode-block" id="plot_sweep">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.sweep_plotting.html#suboptimumg.sweep.sweep_plotting.plot_sweep">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_sweep</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SweepData</span><span class="p">,</span>
-    <span class="n">metric</span><span class="p">:</span> <span class="n">SweepDatatype</span> <span class="o">=</span> <span class="n">SweepDatatype</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
+    <span class="n">metric</span><span class="p">:</span> <span class="n">SweepMetric</span> <span class="o">=</span> <span class="n">SweepMetric</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
     <span class="n">plot_type</span><span class="p">:</span> <span class="n">PlotType</span> <span class="o">=</span> <span class="n">PlotType</span><span class="o">.</span><span class="n">CONTOUR</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">subtitle</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -374,8 +375,8 @@
 <span class="sd">    ----------</span>
 <span class="sd">    data : SweepData</span>
 <span class="sd">        Sweep data, with 1 or 2 numeric axes free, or 1 categorical and 1 numeric axis free</span>
-<span class="sd">    metric : SweepDatatype, optional</span>
-<span class="sd">        Metric to plot (default is SweepDatatype.TOTAL_PTS)</span>
+<span class="sd">    metric : SweepMetric, optional</span>
+<span class="sd">        Metric to plot (default is SweepMetric.TOTAL_PTS)</span>
 <span class="sd">    plot_type : PlotType, optional</span>
 <span class="sd">        Contour or surface, used only with 2 free numeric axes (default is PlotType.CONTOUR)</span>
 <span class="sd">    title, subtitle, x_label, y_label, z_label : str or None, optional</span>
@@ -607,6 +608,49 @@
         <span class="n">fixed</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">axis</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">axis</span><span class="o">.</span><span class="n">get_formatted_value</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">fixed_axes</span><span class="p">)</span>
         <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Fixed Params: </span><span class="si">{</span><span class="n">fixed</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="s2">" | "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="ow">or</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="plot_array_sweep">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.sweep_plotting.html#suboptimumg.sweep.sweep_plotting.plot_array_sweep">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_array_sweep</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">ArraySweepData</span><span class="p">,</span>
+    <span class="n">metric</span><span class="p">:</span> <span class="n">SweepMetric</span> <span class="o">=</span> <span class="n">SweepMetric</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">y_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">plot_options</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plot one metric of every parameter of an array sweep, colored by percent change.</span>
+<span class="sd">    Failed points are `NaN` and are not drawn; see each parameter's `SweepData.errors`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : ArraySweepData</span>
+<span class="sd">        Results of an array sweep</span>
+<span class="sd">    metric : SweepMetric, optional</span>
+<span class="sd">        Metric to plot (default is SweepMetric.TOTAL_PTS)</span>
+<span class="sd">    title, y_label : str or None, optional</span>
+<span class="sd">        Text for the plot. None (the default) generates text from the metric.</span>
+<span class="sd">    **plot_options : object</span>
+<span class="sd">        Passed to `plot_bar_chart`, e.g. `theme="powertrain"`</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    go.Figure</span>
+<span class="sd">        One column of points per parameter, with the unmodified car's value as a baseline</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">plot_bar_chart</span><span class="p">(</span>
+        <span class="n">data_by_variable</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">BarChartSeries</span><span class="p">(</span><span class="n">var_name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="n">parameter_data</span><span class="o">.</span><span class="n">metric_values</span><span class="p">(</span><span class="n">metric</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">parameter_data</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">parameter_data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">],</span>
+        <span class="n">percent_steps</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">percent_changes</span><span class="p">),</span>
+        <span class="n">baseline_value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">baseline</span><span class="o">.</span><span class="n">metric_values</span><span class="p">(</span><span class="n">metric</span><span class="p">)),</span>
+        <span class="n">title</span><span class="o">=</span><span class="n">title</span> <span class="ow">or</span> <span class="s2">"Independent Variable Sweep Results"</span><span class="p">,</span>
+        <span class="n">y_label</span><span class="o">=</span><span class="n">y_label</span> <span class="ow">or</span> <span class="n">TITLE_MAPPING</span><span class="p">[</span><span class="n">metric</span><span class="p">],</span>
+        <span class="o">**</span><span class="n">plot_options</span><span class="p">,</span>  <span class="c1"># type: ignore[arg-type]</span>
+    <span class="p">)</span></div>
+
 </pre></div>
 
                 </article>

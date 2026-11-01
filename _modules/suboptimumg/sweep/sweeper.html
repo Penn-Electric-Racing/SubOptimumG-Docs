@@ -338,8 +338,6 @@
   <h1>Source code for suboptimumg.sweep.sweeper</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Sequence</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
@@ -347,18 +345,19 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompetitionData</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.color_themes</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT_THEME</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.grid_plot_3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">PlotType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.base_sweeper</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseSweeper</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.config_generator</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepConfigGenerator</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepExecutor</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepInput</span><span class="p">,</span> <span class="n">SweepPlan</span><span class="p">,</span> <span class="n">VehicleDependency</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigurationResult</span><span class="p">,</span> <span class="n">SweepInput</span><span class="p">,</span> <span class="n">SweepPlan</span><span class="p">,</span> <span class="n">VehicleDependency</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.multiprocessed_executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiprocessSweepExecutor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.sweep_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepData</span><span class="p">,</span> <span class="n">SweepGradient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.sweep_plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">grid_plot_sweep</span><span class="p">,</span> <span class="n">plot_sweep</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepDatatype</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepMetric</span>
 
 
 <div class="viewcode-block" id="Sweeper">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.sweeper.html#suboptimumg.sweep.sweeper.Sweeper">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">Sweeper</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Sweeper</span><span class="p">(</span><span class="n">BaseSweeper</span><span class="p">[</span><span class="n">SweepPlan</span><span class="p">,</span> <span class="n">SweepData</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    N-dimensional parameter sweeper that owns its configuration and results.</span>
 
@@ -388,56 +387,14 @@
         <span class="n">dependencies</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">VehicleDependency</span><span class="p">]</span> <span class="o">=</span> <span class="p">(),</span>
         <span class="n">executor</span><span class="p">:</span> <span class="n">SweepExecutor</span> <span class="o">=</span> <span class="n">MultiprocessSweepExecutor</span><span class="p">(),</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">comp_data</span> <span class="o">=</span> <span class="n">comp_data</span><span class="o">.</span><span class="n">model_copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">comp_data</span><span class="p">,</span> <span class="n">executor</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">SweepConfigGenerator</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">inputs</span><span class="p">),</span> <span class="n">dependencies</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">dependencies</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">executor</span> <span class="o">=</span> <span class="n">executor</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span> <span class="n">SweepData</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_fingerprint</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-
-<div class="viewcode-block" id="Sweeper.sweep">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.sweeper.html#suboptimumg.sweep.sweeper.Sweeper.sweep">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">sweep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        Run every simulation of the sweep, unless the results are already up to date.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        force : bool, optional</span>
-<span class="sd">            Rerun even when the results are up to date (default is False)</span>
-<span class="sd">        """</span>
-        <span class="n">plan</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_plan</span><span class="p">()</span>
-        <span class="n">fingerprint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_plan_fingerprint</span><span class="p">(</span><span class="n">plan</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">force</span> <span class="ow">and</span> <span class="n">fingerprint</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fingerprint</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">"Sweep results are up to date; skipping the simulations."</span><span class="p">)</span>
-            <span class="k">return</span>
-
-        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">executor</span><span class="o">.</span><span class="n">simulate_configurations</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">comp_data</span><span class="p">,</span> <span class="n">plan</span><span class="o">.</span><span class="n">configurations</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">SweepData</span><span class="o">.</span><span class="n">from_results</span><span class="p">(</span><span class="n">plan</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_fingerprint</span> <span class="o">=</span> <span class="n">fingerprint</span></div>
-
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">is_stale</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Whether the configuration has changed since the last sweep, or none has run."""</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fingerprint</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_plan_fingerprint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_generate_plan</span><span class="p">())</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SweepData</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Results of the last sweep."""</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"No results yet. Call sweep() first."</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stale</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s2">"The sweep configuration has changed since the last sweep(). "</span>
-                <span class="s2">"These results are out of date; call sweep() to refresh them."</span>
-            <span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
 
 <div class="viewcode-block" id="Sweeper.plot">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.sweeper.html#suboptimumg.sweep.sweeper.Sweeper.plot">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">metric</span><span class="p">:</span> <span class="n">SweepDatatype</span> <span class="o">=</span> <span class="n">SweepDatatype</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
+        <span class="n">metric</span><span class="p">:</span> <span class="n">SweepMetric</span> <span class="o">=</span> <span class="n">SweepMetric</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
         <span class="n">plot_type</span><span class="p">:</span> <span class="n">PlotType</span> <span class="o">=</span> <span class="n">PlotType</span><span class="o">.</span><span class="n">CONTOUR</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
         <span class="n">fixed_params</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
@@ -454,8 +411,8 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        metric : SweepDatatype, optional</span>
-<span class="sd">            Metric to plot (default is SweepDatatype.TOTAL_PTS)</span>
+<span class="sd">        metric : SweepMetric, optional</span>
+<span class="sd">            Metric to plot (default is SweepMetric.TOTAL_PTS)</span>
 <span class="sd">        plot_type : PlotType, optional</span>
 <span class="sd">            Contour or surface, for 2 free parameters (default is PlotType.CONTOUR)</span>
 <span class="sd">        fixed_params : Mapping[str, float | str], optional</span>
@@ -550,7 +507,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_sweep_metric</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">fixed_params</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">],</span>
-        <span class="n">metric</span><span class="p">:</span> <span class="n">SweepDatatype</span> <span class="o">=</span> <span class="n">SweepDatatype</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
+        <span class="n">metric</span><span class="p">:</span> <span class="n">SweepMetric</span> <span class="o">=</span> <span class="n">SweepMetric</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Read a metric at one point, interpolating between grid points.</span>
@@ -559,8 +516,8 @@
 <span class="sd">        ----------</span>
 <span class="sd">        fixed_params : Mapping[str, float | str]</span>
 <span class="sd">            Value of every swept parameter, e.g. `{"mass": 250, "pwrtn.motor": "emrax208"}`</span>
-<span class="sd">        metric : SweepDatatype, optional</span>
-<span class="sd">            Metric to read (default is SweepDatatype.TOTAL_PTS)</span>
+<span class="sd">        metric : SweepMetric, optional</span>
+<span class="sd">            Metric to read (default is SweepMetric.TOTAL_PTS)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -575,7 +532,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_sweep_metric_gradient</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">fixed_params</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">],</span>
-        <span class="n">metric</span><span class="p">:</span> <span class="n">SweepDatatype</span> <span class="o">=</span> <span class="n">SweepDatatype</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
+        <span class="n">metric</span><span class="p">:</span> <span class="n">SweepMetric</span> <span class="o">=</span> <span class="n">SweepMetric</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SweepGradient</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Estimate the partial derivatives of a metric at one point.</span>
@@ -584,8 +541,8 @@
 <span class="sd">        ----------</span>
 <span class="sd">        fixed_params : Mapping[str, float | str]</span>
 <span class="sd">            Value of every swept parameter, e.g. `{"mass": 250, "pwrtn.motor": "emrax208"}`</span>
-<span class="sd">        metric : SweepDatatype, optional</span>
-<span class="sd">            Metric to differentiate (default is SweepDatatype.TOTAL_PTS)</span>
+<span class="sd">        metric : SweepMetric, optional</span>
+<span class="sd">            Metric to differentiate (default is SweepMetric.TOTAL_PTS)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -598,8 +555,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">_generate_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SweepPlan</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">generate_sweep_plan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">comp_data</span><span class="o">.</span><span class="n">vehicle_model</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_plan_fingerprint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plan</span><span class="p">:</span> <span class="n">SweepPlan</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">comp_data</span><span class="p">,</span> <span class="n">plan</span><span class="o">.</span><span class="n">configurations</span><span class="p">)))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span></div>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_assemble_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plan</span><span class="p">:</span> <span class="n">SweepPlan</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ConfigurationResult</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">SweepData</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SweepData</span><span class="o">.</span><span class="n">from_results</span><span class="p">(</span><span class="n">plan</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span></div>
 
 </pre></div>
 
