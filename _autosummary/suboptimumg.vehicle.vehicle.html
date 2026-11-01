@@ -359,15 +359,11 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.energy_grid_results.html">suboptimumg.sweep.energy_grid_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.executor.html">suboptimumg.sweep.executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.models.html">suboptimumg.sweep.models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep.html">suboptimumg.sweep.motor_sweep</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html">suboptimumg.sweep.motor_sweep_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.multiprocessed_executor.html">suboptimumg.sweep.multiprocessed_executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data.html">suboptimumg.sweep.sweep_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data_interpolation.html">suboptimumg.sweep.sweep_data_interpolation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_plotting.html">suboptimumg.sweep.sweep_plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_1var.html">suboptimumg.sweep.sweep_results_1var</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper.html">suboptimumg.sweep.sweeper</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_1d.html">suboptimumg.sweep.sweeper_1d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.types.html">suboptimumg.sweep.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.utils.html">suboptimumg.sweep.utils</a></li>
 </ul>
@@ -680,30 +676,6 @@ tire radius squared, summed across all rotating components.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.get_current_params">
-<span class="sig-name descname"><span class="pre">get_current_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.get_current_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.get_current_params" title="Link to this definition">#</a></dt>
-<dd><p>Retrieve the current value of a car parameter given its dotted name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>var_name</strong> (<em>str</em>) – The name of the parameter to retrieve (e.g., ‘pwrtn.motor.max_rpm’).</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The current value of the specified parameter.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>object</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>AttributeError</strong> – If <cite>var_name</cite> does not name a car parameter.</p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>Parameters hold values of many types, so the value is returned as-is.
-Callers that need a number are responsible for asserting that the
-value is numeric, which is application-specific.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.max_stable_speed">
 <span class="sig-name descname"><span class="pre">max_stable_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">converge_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.008</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stabilize_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.max_stable_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.max_stable_speed" title="Link to this definition">#</a></dt>
 <dd><p>Binary search for the maximum speed at which the car can safely navigate a corner.</p>
@@ -843,7 +815,6 @@ investigation of longitudinal weight transfer behavior).</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.check_all_tires_valid_lateral_force"><code class="docutils literal notranslate"><span class="pre">Car.check_all_tires_valid_lateral_force()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.coast_forwards_dx"><code class="docutils literal notranslate"><span class="pre">Car.coast_forwards_dx()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.convert_rotating_mass_to_linear_mass"><code class="docutils literal notranslate"><span class="pre">Car.convert_rotating_mass_to_linear_mass()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.get_current_params"><code class="docutils literal notranslate"><span class="pre">Car.get_current_params()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.max_stable_speed"><code class="docutils literal notranslate"><span class="pre">Car.max_stable_speed()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.modify_params"><code class="docutils literal notranslate"><span class="pre">Car.modify_params()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.sus"><code class="docutils literal notranslate"><span class="pre">Car.sus</span></code></a></li>

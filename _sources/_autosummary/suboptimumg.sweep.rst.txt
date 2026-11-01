@@ -22,14 +22,10 @@ suboptimumg.sweep
    energy_grid_results
    executor
    models
-   motor_sweep
-   motor_sweep_results
    multiprocessed_executor
    sweep_data
    sweep_data_interpolation
    sweep_plotting
-   sweep_results_1var
    sweeper
-   sweeper_1d
    types
    utils

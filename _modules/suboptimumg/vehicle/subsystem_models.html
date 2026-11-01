@@ -527,7 +527,9 @@
         <span class="n">le</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">"Alternative to product of individual efficiencies if efficiency_method is 'sys'"</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Motor mass (kg)"</span><span class="p">)</span>
+    <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Mass of every motor in the drive unit together, e.g. all 4 for AWD (kg)"</span>
+    <span class="p">)</span>
     <span class="n">ideal_gear_ratio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Ideal gear ratio (currently unused)"</span><span class="p">)</span>
     <span class="n">use_efficiency_lut</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">"Whether or not to initialize a more advanced motor efficiency solution"</span>

@@ -359,15 +359,11 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.energy_grid_results.html">suboptimumg.sweep.energy_grid_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.executor.html">suboptimumg.sweep.executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.models.html">suboptimumg.sweep.models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep.html">suboptimumg.sweep.motor_sweep</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html">suboptimumg.sweep.motor_sweep_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.multiprocessed_executor.html">suboptimumg.sweep.multiprocessed_executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data.html">suboptimumg.sweep.sweep_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data_interpolation.html">suboptimumg.sweep.sweep_data_interpolation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_plotting.html">suboptimumg.sweep.sweep_plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_1var.html">suboptimumg.sweep.sweep_results_1var</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper.html">suboptimumg.sweep.sweeper</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_1d.html">suboptimumg.sweep.sweeper_1d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.types.html">suboptimumg.sweep.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.utils.html">suboptimumg.sweep.utils</a></li>
 </ul>
@@ -505,7 +501,7 @@
 <td></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.sweep.config_generator.SweepConfigGenerator.inputs" title="suboptimumg.sweep.config_generator.SweepConfigGenerator.inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inputs</span></code></a></p></td>
-<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepParamConfig" title="suboptimumg.sweep.models.SweepParamConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SweepParamConfig</span></code></a>]</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepParamConfig" title="suboptimumg.sweep.models.SweepParamConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SweepParamConfig</span></code></a> | <a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.CategoricalSweepInput" title="suboptimumg.sweep.models.CategoricalSweepInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">CategoricalSweepInput</span></code></a>]</p></td>
 <td><p>Yes</p></td>
 <td></td>
 <td><p>min_length=1</p></td>
@@ -516,7 +512,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>inputs</strong> (<em>Annotated</em><em>[</em><em>list</em><em>[</em><a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepParamConfig" title="suboptimumg.sweep.models.SweepParamConfig"><em>SweepParamConfig</em></a><em>]</em><em>, </em><em>MinLen</em><em>(</em><em>min_length=1</em><em>)</em><em>]</em>)</p></li>
+<li><p><strong>inputs</strong> (<em>Annotated</em><em>[</em><em>Sequence</em><em>[</em><a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepParamConfig" title="suboptimumg.sweep.models.SweepParamConfig"><em>SweepParamConfig</em></a><em> | </em><a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.CategoricalSweepInput" title="suboptimumg.sweep.models.CategoricalSweepInput"><em>CategoricalSweepInput</em></a><em>]</em><em>, </em><em>MinLen</em><em>(</em><em>min_length=1</em><em>)</em><em>]</em>)</p></li>
 <li><p><strong>dependencies</strong> (<em>list</em><em>[</em><em>Callable</em><em>[</em><em>[</em><a class="reference internal" href="suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.VehicleModel" title="suboptimumg.vehicle.vehicle_models.VehicleModel"><em>VehicleModel</em></a><em>]</em><em>, </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>]</em><em>]</em>)</p></li>
 </ul>
 </dd>
@@ -533,7 +529,7 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>base_vehicle</strong> (<a class="reference internal" href="suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.VehicleModel" title="suboptimumg.vehicle.vehicle_models.VehicleModel"><em>VehicleModel</em></a>)</p></li>
-<li><p><strong>swept</strong> (<em>list</em><em>[</em><a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.ParameterModification" title="suboptimumg.sweep.models.ParameterModification"><em>ParameterModification</em></a><em>]</em>)</p></li>
+<li><p><strong>swept</strong> (<em>list</em><em>[</em><em>Annotated</em><em>[</em><a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.ParameterModification" title="suboptimumg.sweep.models.ParameterModification"><em>ParameterModification</em></a><em> | </em><a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.CategoricalModification" title="suboptimumg.sweep.models.CategoricalModification"><em>CategoricalModification</em></a><em>, </em><em>FieldInfo</em><em>(</em><em>annotation=NoneType</em><em>, </em><em>required=True</em><em>, </em><em>discriminator='kind'</em><em>)</em><em>]</em><em>]</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -555,13 +551,13 @@
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>At each point the swept values come first, in axis order, followed by each dependency’s changes, in dependency order.
+<p>At each point the categorical replacements come first, then the numeric values, in axis order, followed by each dependency’s changes, in dependency order.
 Each dependency receives its own deep copy of the vehicle, with the point’s swept values and the earlier dependencies’ changes applied.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="suboptimumg.sweep.config_generator.SweepConfigGenerator.inputs">
-<span class="sig-name descname"><span class="pre">inputs</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepParamConfig" title="suboptimumg.sweep.models.SweepParamConfig"><span class="pre">SweepParamConfig</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.config_generator.SweepConfigGenerator.inputs" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">inputs</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">SweepInput</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#suboptimumg.sweep.config_generator.SweepConfigGenerator.inputs" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

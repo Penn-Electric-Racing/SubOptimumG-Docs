@@ -345,9 +345,8 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.competition_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">from_data</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompetitionData</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepExecutor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepExecutor</span><span class="p">,</span> <span class="n">build_competition</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">CarConfiguration</span><span class="p">,</span>
     <span class="n">ConfigurationFailure</span><span class="p">,</span>
@@ -395,9 +394,7 @@
     <span class="n">old_stdout</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">string_buffer</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">competition</span> <span class="o">=</span> <span class="n">from_data</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">comp_data</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">modification</span> <span class="ow">in</span> <span class="n">task</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">modifications</span><span class="p">:</span>
-            <span class="n">modification</span><span class="o">.</span><span class="n">apply_to_car</span><span class="p">(</span><span class="n">competition</span><span class="o">.</span><span class="n">mycar</span><span class="p">)</span>
+        <span class="n">competition</span> <span class="o">=</span> <span class="n">build_competition</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">comp_data</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">configuration</span><span class="p">)</span>
         <span class="n">result</span><span class="p">:</span> <span class="n">ConfigurationResult</span> <span class="o">=</span> <span class="n">ConfigurationSuccess</span><span class="p">(</span>
             <span class="n">results</span><span class="o">=</span><span class="n">competition</span><span class="o">.</span><span class="n">run</span><span class="p">(),</span> <span class="n">warnings</span><span class="o">=</span><span class="n">string_buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
         <span class="p">)</span>

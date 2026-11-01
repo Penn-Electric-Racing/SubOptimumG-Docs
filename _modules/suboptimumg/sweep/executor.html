@@ -338,8 +338,35 @@
   <h1>Source code for suboptimumg.sweep.executor</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.competition</span><span class="w"> </span><span class="kn">import</span> <span class="n">Competition</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.competition_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">from_data</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompetitionData</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CarConfiguration</span><span class="p">,</span> <span class="n">ConfigurationResult</span>
+
+
+<div class="viewcode-block" id="build_competition">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.executor.html#suboptimumg.sweep.executor.build_competition">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_competition</span><span class="p">(</span><span class="n">base</span><span class="p">:</span> <span class="n">CompetitionData</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">CarConfiguration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Competition</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Build the competition for one configuration.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    base : CompetitionData</span>
+<span class="sd">        The competition the configuration starts from. It is not modified.</span>
+<span class="sd">    configuration : CarConfiguration</span>
+<span class="sd">        Changes to apply to the base vehicle, in order</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Competition</span>
+<span class="sd">        A competition whose car is built from the changed vehicle</span>
+<span class="sd">    """</span>
+    <span class="n">vehicle</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">vehicle_model</span><span class="o">.</span><span class="n">model_copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">modification</span> <span class="ow">in</span> <span class="n">configuration</span><span class="o">.</span><span class="n">modifications</span><span class="p">:</span>
+        <span class="n">modification</span><span class="o">.</span><span class="n">apply_to_vehicle</span><span class="p">(</span><span class="n">vehicle</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">from_data</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">model_copy</span><span class="p">(</span><span class="n">update</span><span class="o">=</span><span class="p">{</span><span class="s2">"vehicle_model"</span><span class="p">:</span> <span class="n">vehicle</span><span class="p">}))</span></div>
+
 
 
 <div class="viewcode-block" id="SweepExecutor">
@@ -370,6 +397,7 @@
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
+<span class="sd">        Each configuration is applied to a copy of `base.vehicle_model` before the car is built, using `build_competition`.</span>
 <span class="sd">        A configuration whose simulation raises is returned as a `ConfigurationFailure`. It never aborts the batch.</span>
 <span class="sd">        Only infrastructure failures, such as the process pool dying, raise.</span>
 <span class="sd">        """</span></div>

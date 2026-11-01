@@ -338,6 +338,7 @@
   <h1>Source code for suboptimumg.vehicle.vehicle_models</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">TypedDict</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -434,6 +435,11 @@
 
 
 
+<span class="n">NOT_A_PARAMETER_MESSAGE</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"</span><span class="si">{name}</span><span class="s2"> is not a car parameter. Example parameter name: 'pwrtn.motor.max_rpm'"</span>
+<span class="p">)</span>
+
+
 <div class="viewcode-block" id="VehicleModel">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.VehicleModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">VehicleModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -485,44 +491,89 @@
         <span class="k">return</span> <span class="n">v</span></div>
 
 
-<div class="viewcode-block" id="VehicleModel.set_parameter">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.VehicleModel.set_parameter">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">set_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="VehicleModel.get_parameter">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.VehicleModel.get_parameter">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">object</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        Set a parameter given its dotted name and new value.</span>
+<span class="sd">        Read a parameter given its dotted name.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        name : str</span>
-<span class="sd">            The name of the parameter to set (e.g., 'pwrtn.motor.max_rpm').</span>
+<span class="sd">            The name of the parameter to read (e.g., 'pwrtn.motor.max_rpm').</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        object</span>
+<span class="sd">            The current value, returned as-is. It can be a number, a flag, or a whole sub-model.</span>
+<span class="sd">        """</span>
+        <span class="n">value</span><span class="p">:</span> <span class="nb">object</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">NOT_A_PARAMETER_MESSAGE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="VehicleModel.set_parameter">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.VehicleModel.set_parameter">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Set a parameter given its dotted name and new value, then keep dependent parameters consistent.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            The name of the parameter to set (e.g., 'pwrtn.motor.max_rpm', or 'pwrtn.motor' for a whole motor).</span>
 <span class="sd">        value : object</span>
 <span class="sd">            The new value for the parameter.</span>
 
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        AttributeError</span>
+<span class="sd">            If `name` does not name a car parameter.</span>
+<span class="sd">        ValidationError</span>
+<span class="sd">            If the value, or a value changed by a hook, is rejected by its own validation.</span>
+
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
+<span class="sd">        After the assignment, every hook in `PARAMETER_HOOKS` runs in order, with a copy of the vehicle from before the change and the vehicle itself.</span>
 <span class="sd">        A `Car` built from this model caches derived values, so a live car must be changed through `Car.modify_params`.</span>
 <span class="sd">        """</span>
-        <span class="n">not_a_parameter</span> <span class="o">=</span> <span class="ne">AttributeError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is not a car parameter. Example parameter name: 'pwrtn.motor.max_rpm'"</span>
-        <span class="p">)</span>
-        <span class="n">attrs</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
-        <span class="n">obj</span><span class="p">:</span> <span class="nb">object</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="n">before</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">attributes</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
+        <span class="n">owner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="s2">"."</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">attributes</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="bp">self</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">attrs</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="n">obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="n">attributes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">not_a_parameter</span>
-
-        <span class="k">try</span><span class="p">:</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attrs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">not_a_parameter</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">NOT_A_PARAMETER_MESSAGE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
         <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">detail</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"no_such_attribute"</span> <span class="k">for</span> <span class="n">detail</span> <span class="ow">in</span> <span class="n">error</span><span class="o">.</span><span class="n">errors</span><span class="p">()):</span>
-                <span class="k">raise</span> <span class="n">not_a_parameter</span>
-            <span class="k">raise</span></div>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">NOT_A_PARAMETER_MESSAGE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+            <span class="k">raise</span>
+        <span class="k">for</span> <span class="n">hook</span> <span class="ow">in</span> <span class="n">PARAMETER_HOOKS</span><span class="p">:</span>
+            <span class="n">hook</span><span class="p">(</span><span class="n">before</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
 </div>
 
+
+
+<span class="n">ParameterHook</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">VehicleModel</span><span class="p">,</span> <span class="n">VehicleModel</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="total_mass_follows_motor_mass">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.total_mass_follows_motor_mass">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">total_mass_follows_motor_mass</span><span class="p">(</span><span class="n">before</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">,</span> <span class="n">after</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Change total vehicle mass by however much the motor mass changed."""</span>
+    <span class="n">motor_mass_change</span> <span class="o">=</span> <span class="n">after</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">mass</span> <span class="o">-</span> <span class="n">before</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">mass</span>
+    <span class="k">if</span> <span class="n">motor_mass_change</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">after</span><span class="o">.</span><span class="n">mass</span> <span class="o">+=</span> <span class="n">motor_mass_change</span></div>
+
+
+
+<span class="n">PARAMETER_HOOKS</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ParameterHook</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">total_mass_follows_motor_mass</span><span class="p">,</span>
+<span class="p">]</span>
 
 
 <div class="viewcode-block" id="AlignmentModel">

@@ -359,15 +359,11 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.energy_grid_results.html">suboptimumg.sweep.energy_grid_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.executor.html">suboptimumg.sweep.executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.models.html">suboptimumg.sweep.models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep.html">suboptimumg.sweep.motor_sweep</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html">suboptimumg.sweep.motor_sweep_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.multiprocessed_executor.html">suboptimumg.sweep.multiprocessed_executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data.html">suboptimumg.sweep.sweep_data</a></li>
 <li class="toctree-l3 current active"><a aria-current="page" class="current reference internal" href="#">suboptimumg.sweep.sweep_data_interpolation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_plotting.html">suboptimumg.sweep.sweep_plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_1var.html">suboptimumg.sweep.sweep_results_1var</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper.html">suboptimumg.sweep.sweeper</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_1d.html">suboptimumg.sweep.sweeper_1d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.types.html">suboptimumg.sweep.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.utils.html">suboptimumg.sweep.utils</a></li>
 </ul>
@@ -485,16 +481,16 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.sweep.sweep_data_interpolation.check_value_in_axis_range">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.sweep_data_interpolation.</span></span><span class="sig-name descname"><span class="pre">check_value_in_axis_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweep_data_interpolation.html#check_value_in_axis_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweep_data_interpolation.check_value_in_axis_range" title="Link to this definition">#</a></dt>
-<dd><p>Ensure a value lies within an axis’s range, allowing for rounding.</p>
+<dd><p>Ensure a value is a number within an axis’s range, allowing for rounding.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>axis</strong> (<a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.NumericAxis" title="suboptimumg.sweep.models.NumericAxis"><em>NumericAxis</em></a>)</p></li>
-<li><p><strong>value</strong> (<em>float</em>)</p></li>
+<li><p><strong>value</strong> (<em>float</em><em> | </em><em>str</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -526,13 +522,13 @@ The initial step is <code class="docutils literal notranslate"><span class="pre"
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.sweep.sweep_data_interpolation.interpolate_with_axis_fixed">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.sweep_data_interpolation.</span></span><span class="sig-name descname"><span class="pre">interpolate_with_axis_fixed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimension</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweep_data_interpolation.html#interpolate_with_axis_fixed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweep_data_interpolation.interpolate_with_axis_fixed" title="Link to this definition">#</a></dt>
-<dd><p>Interpolate gridded values with one axis fixed, over the grid of the remaining axes.</p>
+<dd><p>Interpolate gridded values with one numeric axis fixed, over the grid of the remaining axes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>axes</strong> (<em>list</em><em>[</em><a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.NumericAxis" title="suboptimumg.sweep.models.NumericAxis"><em>NumericAxis</em></a><em>]</em>) – Axes of the grid, in order of the array dimensions</p></li>
+<li><p><strong>axes</strong> (<em>list</em><em>[</em><a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.NumericAxis" title="suboptimumg.sweep.models.NumericAxis"><em>NumericAxis</em></a><em> | </em><a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.CategoricalAxis" title="suboptimumg.sweep.models.CategoricalAxis"><em>CategoricalAxis</em></a><em>]</em>) – Axes of the grid, in order of the array dimensions</p></li>
 <li><p><strong>values</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Values shaped like the grid</p></li>
-<li><p><strong>dimension</strong> (<em>int</em>) – Dimension of the fixed axis</p></li>
+<li><p><strong>dimension</strong> (<em>int</em>) – Dimension of the fixed axis, which must be numeric</p></li>
 <li><p><strong>value</strong> (<em>float</em>) – Value of the fixed axis</p></li>
 </ul>
 </dd>
@@ -543,6 +539,19 @@ The initial step is <code class="docutils literal notranslate"><span class="pre"
 <dd class="field-odd"><p>NDArray[np.float64]</p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>Values are never interpolated across a categorical axis. For a grid with C categorical and N numeric axes:</p>
+<ol class="arabic simple">
+<li><p>The categorical dimensions are moved to the front, so the array is shaped
+(categorical sizes…, numeric sizes…).</p></li>
+<li><p>Each combination of category indices selects one N-D numeric sub-grid. That sub-grid is interpolated on its
+own with <cite>RegularGridInterpolator</cite>, with the fixed axis set to <cite>value</cite>, giving an (N-1)-D result.</p></li>
+<li><p>The results are stacked into a (C + N - 1)-D array, shaped (categorical sizes…, free numeric sizes…).</p></li>
+<li><p>The categorical dimensions are moved back to their original order relative to the free numeric axes.</p></li>
+</ol>
+<p>For example, axes (mass, motor, ratio) shaped (5, 3, 31) with mass fixed: the array is reordered to (3, 5, 31),
+each motor’s (5, 31) grid is interpolated at the fixed mass to give 31 values, the stack is (3, 31), and the
+result keeps the order (motor, ratio).</p>
 </dd></dl>
 
 </section>

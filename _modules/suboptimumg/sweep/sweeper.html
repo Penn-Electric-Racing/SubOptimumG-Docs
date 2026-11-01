@@ -349,7 +349,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.grid_plot_3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">PlotType</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.config_generator</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepConfigGenerator</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepExecutor</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepParamConfig</span><span class="p">,</span> <span class="n">SweepPlan</span><span class="p">,</span> <span class="n">VehicleDependency</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepInput</span><span class="p">,</span> <span class="n">SweepPlan</span><span class="p">,</span> <span class="n">VehicleDependency</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.multiprocessed_executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiprocessSweepExecutor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.sweep_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepData</span><span class="p">,</span> <span class="n">SweepGradient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.sweep_plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">grid_plot_sweep</span><span class="p">,</span> <span class="n">plot_sweep</span>
@@ -366,8 +366,9 @@
 <span class="sd">    ----------</span>
 <span class="sd">    comp_data : CompetitionData</span>
 <span class="sd">        Base competition. It is copied, so later edits to the original have no effect.</span>
-<span class="sd">    inputs : Sequence[SweepParamConfig]</span>
-<span class="sd">        Swept parameters, one axis each, in this order</span>
+<span class="sd">    inputs : Sequence[SweepInput]</span>
+<span class="sd">        Swept parameters (`SweepParamConfig`) and labeled replacements</span>
+<span class="sd">        (`CategoricalSweepInput`, e.g. motors), one axis each, in this order</span>
 <span class="sd">    dependencies : Sequence[VehicleDependency], optional</span>
 <span class="sd">        Functions that take the vehicle model, with a point's swept values</span>
 <span class="sd">        applied, and return other parameters to change at that point</span>
@@ -383,7 +384,7 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">comp_data</span><span class="p">:</span> <span class="n">CompetitionData</span><span class="p">,</span>
-        <span class="n">inputs</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">SweepParamConfig</span><span class="p">],</span>
+        <span class="n">inputs</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">SweepInput</span><span class="p">],</span>
         <span class="n">dependencies</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">VehicleDependency</span><span class="p">]</span> <span class="o">=</span> <span class="p">(),</span>
         <span class="n">executor</span><span class="p">:</span> <span class="n">SweepExecutor</span> <span class="o">=</span> <span class="n">MultiprocessSweepExecutor</span><span class="p">(),</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -439,7 +440,7 @@
         <span class="n">metric</span><span class="p">:</span> <span class="n">SweepDatatype</span> <span class="o">=</span> <span class="n">SweepDatatype</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
         <span class="n">plot_type</span><span class="p">:</span> <span class="n">PlotType</span> <span class="o">=</span> <span class="n">PlotType</span><span class="o">.</span><span class="n">CONTOUR</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">fixed_params</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
+        <span class="n">fixed_params</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
         <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">subtitle</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">x_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -457,9 +458,10 @@
 <span class="sd">            Metric to plot (default is SweepDatatype.TOTAL_PTS)</span>
 <span class="sd">        plot_type : PlotType, optional</span>
 <span class="sd">            Contour or surface, for 2 free parameters (default is PlotType.CONTOUR)</span>
-<span class="sd">        fixed_params : Mapping[str, float], optional</span>
-<span class="sd">            Swept parameters to fix, e.g. `{"mass": 250}`, so that only 1 or 2</span>
-<span class="sd">            are left free. Values between grid points are interpolated.</span>
+<span class="sd">        fixed_params : Mapping[str, float | str], optional</span>
+<span class="sd">            Swept parameters to fix, e.g. `{"mass": 250, "pwrtn.motor": "emrax208"}`.</span>
+<span class="sd">            Numeric values between grid points are interpolated. Categorical axes</span>
+<span class="sd">            take one of their labels.</span>
 <span class="sd">        title, subtitle, x_label, y_label, z_label : str, optional</span>
 <span class="sd">            Text for the plot. Defaults are generated from the swept parameters.</span>
 <span class="sd">        theme : str, optional</span>
@@ -470,13 +472,8 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        go.Figure</span>
-<span class="sd">            A line plot for 1 free parameter, or a contour or surface for 2</span>
-
-<span class="sd">        Raises</span>
-<span class="sd">        ------</span>
-<span class="sd">        ValueError</span>
-<span class="sd">            If 0 or more than 2 swept parameters are left free, a fixed parameter</span>
-<span class="sd">            was not swept, or an option is not accepted by the plotting function</span>
+<span class="sd">            A line plot for 1 free numeric parameter, one line per label when a</span>
+<span class="sd">            categorical axis is also free, or a contour or surface for 2 numeric</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="n">plot_sweep</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">fix_params</span><span class="p">(</span><span class="n">fixed_params</span><span class="p">),</span>
@@ -499,7 +496,7 @@
         <span class="n">plot_type</span><span class="p">:</span> <span class="n">PlotType</span> <span class="o">=</span> <span class="n">PlotType</span><span class="o">.</span><span class="n">CONTOUR</span><span class="p">,</span>
         <span class="n">show_event_times</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">fixed_params</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
+        <span class="n">fixed_params</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
         <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">x_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">y_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -517,9 +514,9 @@
 <span class="sd">            Contour or surface, for 2 free parameters (default is PlotType.CONTOUR)</span>
 <span class="sd">        show_event_times : bool, optional</span>
 <span class="sd">            Show event times instead of event points (default is False)</span>
-<span class="sd">        fixed_params : Mapping[str, float], optional</span>
-<span class="sd">            Swept parameters to fix, e.g. `{"mass": 250}`, so that only 1 or 2</span>
-<span class="sd">            are left free</span>
+<span class="sd">        fixed_params : Mapping[str, float | str], optional</span>
+<span class="sd">            Swept parameters to fix, e.g. `{"mass": 250, "pwrtn.motor": "emrax208"}`.</span>
+<span class="sd">            Categorical axes take one of their labels.</span>
 <span class="sd">        title, x_label, y_label : str, optional</span>
 <span class="sd">            Text for the plot. Defaults are generated from the swept parameters.</span>
 <span class="sd">        rows, cols : int, optional</span>
@@ -527,18 +524,12 @@
 <span class="sd">        theme : str, optional</span>
 <span class="sd">            Color theme name</span>
 <span class="sd">        **plot_options : object</span>
-<span class="sd">            Passed to the plotting function, e.g. `fit_curve=True`</span>
+<span class="sd">            Passed to the plotting function, e.g. `fit_curve=True` or `show_legend=True`</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        go.Figure</span>
 <span class="sd">            A grid with one subplot per metric</span>
-
-<span class="sd">        Raises</span>
-<span class="sd">        ------</span>
-<span class="sd">        ValueError</span>
-<span class="sd">            If 0 or more than 2 swept parameters are left free, a fixed parameter</span>
-<span class="sd">            was not swept, or an option is not accepted by the plotting function</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="n">grid_plot_sweep</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">fix_params</span><span class="p">(</span><span class="n">fixed_params</span><span class="p">),</span>
@@ -557,15 +548,17 @@
 <div class="viewcode-block" id="Sweeper.evaluate_sweep_metric">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.sweeper.html#suboptimumg.sweep.sweeper.Sweeper.evaluate_sweep_metric">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_sweep_metric</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">fixed_params</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">metric</span><span class="p">:</span> <span class="n">SweepDatatype</span> <span class="o">=</span> <span class="n">SweepDatatype</span><span class="o">.</span><span class="n">TOTAL_PTS</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">fixed_params</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">metric</span><span class="p">:</span> <span class="n">SweepDatatype</span> <span class="o">=</span> <span class="n">SweepDatatype</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Read a metric at one point, interpolating between grid points.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        fixed_params : Mapping[str, float]</span>
-<span class="sd">            Value of every swept parameter, e.g. `{"mass": 250, "aero.cl": 3.4}`</span>
+<span class="sd">        fixed_params : Mapping[str, float | str]</span>
+<span class="sd">            Value of every swept parameter, e.g. `{"mass": 250, "pwrtn.motor": "emrax208"}`</span>
 <span class="sd">        metric : SweepDatatype, optional</span>
 <span class="sd">            Metric to read (default is SweepDatatype.TOTAL_PTS)</span>
 
@@ -580,22 +573,24 @@
 <div class="viewcode-block" id="Sweeper.evaluate_sweep_metric_gradient">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.sweeper.html#suboptimumg.sweep.sweeper.Sweeper.evaluate_sweep_metric_gradient">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_sweep_metric_gradient</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">fixed_params</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">metric</span><span class="p">:</span> <span class="n">SweepDatatype</span> <span class="o">=</span> <span class="n">SweepDatatype</span><span class="o">.</span><span class="n">TOTAL_PTS</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">fixed_params</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">metric</span><span class="p">:</span> <span class="n">SweepDatatype</span> <span class="o">=</span> <span class="n">SweepDatatype</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SweepGradient</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Estimate the partial derivatives of a metric at one point.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        fixed_params : Mapping[str, float]</span>
-<span class="sd">            Value of every swept parameter, e.g. `{"mass": 250, "aero.cl": 3.4}`</span>
+<span class="sd">        fixed_params : Mapping[str, float | str]</span>
+<span class="sd">            Value of every swept parameter, e.g. `{"mass": 250, "pwrtn.motor": "emrax208"}`</span>
 <span class="sd">        metric : SweepDatatype, optional</span>
 <span class="sd">            Metric to differentiate (default is SweepDatatype.TOTAL_PTS)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        SweepGradient</span>
-<span class="sd">            One partial derivative per swept parameter</span>
+<span class="sd">            One partial derivative per numeric swept parameter</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">estimate_metric_gradient</span><span class="p">(</span><span class="n">fixed_params</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span></div>
 

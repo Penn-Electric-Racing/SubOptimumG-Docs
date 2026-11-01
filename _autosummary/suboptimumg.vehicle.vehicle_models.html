@@ -359,15 +359,11 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.energy_grid_results.html">suboptimumg.sweep.energy_grid_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.executor.html">suboptimumg.sweep.executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.models.html">suboptimumg.sweep.models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep.html">suboptimumg.sweep.motor_sweep</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html">suboptimumg.sweep.motor_sweep_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.multiprocessed_executor.html">suboptimumg.sweep.multiprocessed_executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data.html">suboptimumg.sweep.sweep_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data_interpolation.html">suboptimumg.sweep.sweep_data_interpolation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_plotting.html">suboptimumg.sweep.sweep_plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_1var.html">suboptimumg.sweep.sweep_results_1var</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper.html">suboptimumg.sweep.sweeper</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_1d.html">suboptimumg.sweep.sweeper_1d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.types.html">suboptimumg.sweep.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.utils.html">suboptimumg.sweep.utils</a></li>
 </ul>
@@ -1363,6 +1359,23 @@ output and the order Horner’s method consumes directly.</p>
 <span class="sig-name descname"><span class="pre">front_track</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.vehicle.vehicle_models.VehicleModel.front_track" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle_models.VehicleModel.get_parameter">
+<span class="sig-name descname"><span class="pre">get_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle_models.html#VehicleModel.get_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle_models.VehicleModel.get_parameter" title="Link to this definition">#</a></dt>
+<dd><p>Read a parameter given its dotted name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – The name of the parameter to read (e.g., ‘pwrtn.motor.max_rpm’).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The current value, returned as-is. It can be a number, a flag, or a whole sub-model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle_models.VehicleModel.mass">
 <span class="sig-name descname"><span class="pre">mass</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.vehicle.vehicle_models.VehicleModel.mass" title="Link to this definition">#</a></dt>
@@ -1386,20 +1399,27 @@ output and the order Horner’s method consumes directly.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle_models.VehicleModel.set_parameter">
 <span class="sig-name descname"><span class="pre">set_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle_models.html#VehicleModel.set_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle_models.VehicleModel.set_parameter" title="Link to this definition">#</a></dt>
-<dd><p>Set a parameter given its dotted name and new value.</p>
+<dd><p>Set a parameter given its dotted name and new value, then keep dependent parameters consistent.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – The name of the parameter to set (e.g., ‘pwrtn.motor.max_rpm’).</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – The name of the parameter to set (e.g., ‘pwrtn.motor.max_rpm’, or ‘pwrtn.motor’ for a whole motor).</p></li>
 <li><p><strong>value</strong> (<em>object</em>) – The new value for the parameter.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>AttributeError</strong> – If <cite>name</cite> does not name a car parameter.</p></li>
+<li><p><strong>ValidationError</strong> – If the value, or a value changed by a hook, is rejected by its own validation.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>A <cite>Car</cite> built from this model caches derived values, so a live car must be changed through <cite>Car.modify_params</cite>.</p>
+<p>After the assignment, every hook in <cite>PARAMETER_HOOKS</cite> runs in order, with a copy of the vehicle from before the change and the vehicle itself.
+A <cite>Car</cite> built from this model caches derived values, so a live car must be changed through <cite>Car.modify_params</cite>.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -1450,6 +1470,23 @@ output and the order Horner’s method consumes directly.</p>
 <span class="sig-name descname"><span class="pre">wb</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.vehicle.vehicle_models.VehicleModel.wb" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle_models.total_mass_follows_motor_mass">
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.vehicle_models.</span></span><span class="sig-name descname"><span class="pre">total_mass_follows_motor_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">before</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">after</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle_models.html#total_mass_follows_motor_mass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle_models.total_mass_follows_motor_mass" title="Link to this definition">#</a></dt>
+<dd><p>Change total vehicle mass by however much the motor mass changed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>before</strong> (<a class="reference internal" href="#suboptimumg.vehicle.vehicle_models.VehicleModel" title="suboptimumg.vehicle.vehicle_models.VehicleModel"><em>VehicleModel</em></a>)</p></li>
+<li><p><strong>after</strong> (<a class="reference internal" href="#suboptimumg.vehicle.vehicle_models.VehicleModel" title="suboptimumg.vehicle.vehicle_models.VehicleModel"><em>VehicleModel</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -1566,6 +1603,7 @@ output and the order Horner’s method consumes directly.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle_models.VehicleModel.chass"><code class="docutils literal notranslate"><span class="pre">VehicleModel.chass</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle_models.VehicleModel.dri"><code class="docutils literal notranslate"><span class="pre">VehicleModel.dri</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle_models.VehicleModel.front_track"><code class="docutils literal notranslate"><span class="pre">VehicleModel.front_track</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle_models.VehicleModel.get_parameter"><code class="docutils literal notranslate"><span class="pre">VehicleModel.get_parameter()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle_models.VehicleModel.mass"><code class="docutils literal notranslate"><span class="pre">VehicleModel.mass</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle_models.VehicleModel.pwrtn"><code class="docutils literal notranslate"><span class="pre">VehicleModel.pwrtn</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle_models.VehicleModel.rear_track"><code class="docutils literal notranslate"><span class="pre">VehicleModel.rear_track</span></code></a></li>
@@ -1581,6 +1619,7 @@ output and the order Horner’s method consumes directly.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle_models.VehicleModel.wb"><code class="docutils literal notranslate"><span class="pre">VehicleModel.wb</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle_models.total_mass_follows_motor_mass"><code class="docutils literal notranslate"><span class="pre">total_mass_follows_motor_mass()</span></code></a></li>
 </ul>
   </nav></div>
 

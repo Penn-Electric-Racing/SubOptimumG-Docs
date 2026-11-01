@@ -336,8 +336,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.vehicle.powertrain.powertrain</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">..subsystem_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">MotorModel</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">VehicleModel</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">VehicleModel</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.motor</span><span class="w"> </span><span class="kn">import</span> <span class="n">Motor</span>
 
 
@@ -361,31 +360,7 @@
 <span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span> <span class="o">=</span> <span class="n">vehicle_model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">vehicle_model</span><span class="o">.</span><span class="n">pwrtn</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">motor</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">vehicle_model</span><span class="o">=</span><span class="n">vehicle_model</span><span class="p">)</span>
-
-<div class="viewcode-block" id="Powertrain.swap_motor">
-<a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.powertrain.powertrain.html#suboptimumg.vehicle.powertrain.powertrain.Powertrain.swap_motor">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">swap_motor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_motor</span><span class="p">:</span> <span class="n">MotorModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        Replace the motor, adjusting total vehicle mass by the mass difference.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        new_motor : MotorModel</span>
-<span class="sd">            Motor to install in place of the current one.</span>
-
-<span class="sd">        Notes</span>
-<span class="sd">        -----</span>
-<span class="sd">        Total vehicle mass is an independent parameter covering the whole car,</span>
-<span class="sd">        so swapping a component cannot re-derive it. Instead the difference</span>
-<span class="sd">        between the outgoing and incoming motor masses is applied to it,</span>
-<span class="sd">        leaving the rest of the car's mass untouched.</span>
-<span class="sd">        """</span>
-        <span class="n">mass_delta</span> <span class="o">=</span> <span class="n">new_motor</span><span class="o">.</span><span class="n">mass</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">mass</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">motor</span> <span class="o">=</span> <span class="n">new_motor</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span><span class="o">.</span><span class="n">mass</span> <span class="o">+=</span> <span class="n">mass_delta</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">motor</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">vehicle_model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vehicle_model</span><span class="p">)</span></div>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motor</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">vehicle_model</span><span class="o">=</span><span class="n">vehicle_model</span><span class="p">)</span></div>
 
 </pre></div>
 

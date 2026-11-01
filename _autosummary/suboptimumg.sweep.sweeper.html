@@ -49,8 +49,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="suboptimumg.sweep.sweeper_1d" href="suboptimumg.sweep.sweeper_1d.html" />
-    <link rel="prev" title="suboptimumg.sweep.sweep_results_1var" href="suboptimumg.sweep.sweep_results_1var.html" />
+    <link rel="next" title="suboptimumg.sweep.types" href="suboptimumg.sweep.types.html" />
+    <link rel="prev" title="suboptimumg.sweep.sweep_plotting" href="suboptimumg.sweep.sweep_plotting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
@@ -359,15 +359,11 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.energy_grid_results.html">suboptimumg.sweep.energy_grid_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.executor.html">suboptimumg.sweep.executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.models.html">suboptimumg.sweep.models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep.html">suboptimumg.sweep.motor_sweep</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html">suboptimumg.sweep.motor_sweep_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.multiprocessed_executor.html">suboptimumg.sweep.multiprocessed_executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data.html">suboptimumg.sweep.sweep_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data_interpolation.html">suboptimumg.sweep.sweep_data_interpolation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_plotting.html">suboptimumg.sweep.sweep_plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_1var.html">suboptimumg.sweep.sweep_results_1var</a></li>
 <li class="toctree-l3 current active"><a aria-current="page" class="current reference internal" href="#">suboptimumg.sweep.sweeper</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_1d.html">suboptimumg.sweep.sweeper_1d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.types.html">suboptimumg.sweep.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.utils.html">suboptimumg.sweep.utils</a></li>
 </ul>
@@ -491,7 +487,8 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>comp_data</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionData" title="suboptimumg.compsim.models.CompetitionData"><em>CompetitionData</em></a>) – Base competition. It is copied, so later edits to the original have no effect.</p></li>
-<li><p><strong>inputs</strong> (<em>Sequence</em><em>[</em><a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepParamConfig" title="suboptimumg.sweep.models.SweepParamConfig"><em>SweepParamConfig</em></a><em>]</em>) – Swept parameters, one axis each, in this order</p></li>
+<li><p><strong>inputs</strong> (<em>Sequence</em><em>[</em><em>SweepInput</em><em>]</em>) – Swept parameters (<cite>SweepParamConfig</cite>) and labeled replacements
+(<cite>CategoricalSweepInput</cite>, e.g. motors), one axis each, in this order</p></li>
 <li><p><strong>dependencies</strong> (<em>Sequence</em><em>[</em><em>VehicleDependency</em><em>]</em><em>, </em><em>optional</em>) – Functions that take the vehicle model, with a point’s swept values
 applied, and return other parameters to change at that point</p></li>
 <li><p><strong>executor</strong> (<a class="reference internal" href="suboptimumg.sweep.executor.html#suboptimumg.sweep.executor.SweepExecutor" title="suboptimumg.sweep.executor.SweepExecutor"><em>SweepExecutor</em></a><em>, </em><em>optional</em>) – How simulations are run (default runs them in a process pool)</p></li>
@@ -514,7 +511,7 @@ reruns the simulations when the generated configurations have changed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fixed_params</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em>) – Value of every swept parameter, e.g. <cite>{“mass”: 250, “aero.cl”: 3.4}</cite></p></li>
+<li><p><strong>fixed_params</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>float</em><em> | </em><em>str</em><em>]</em>) – Value of every swept parameter, e.g. <cite>{“mass”: 250, “pwrtn.motor”: “emrax208”}</cite></p></li>
 <li><p><strong>metric</strong> (<a class="reference internal" href="suboptimumg.sweep.types.html#suboptimumg.sweep.types.SweepDatatype" title="suboptimumg.sweep.types.SweepDatatype"><em>SweepDatatype</em></a><em>, </em><em>optional</em>) – Metric to read (default is SweepDatatype.TOTAL_PTS)</p></li>
 </ul>
 </dd>
@@ -534,12 +531,12 @@ reruns the simulations when the generated configurations have changed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fixed_params</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em>) – Value of every swept parameter, e.g. <cite>{“mass”: 250, “aero.cl”: 3.4}</cite></p></li>
+<li><p><strong>fixed_params</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>float</em><em> | </em><em>str</em><em>]</em>) – Value of every swept parameter, e.g. <cite>{“mass”: 250, “pwrtn.motor”: “emrax208”}</cite></p></li>
 <li><p><strong>metric</strong> (<a class="reference internal" href="suboptimumg.sweep.types.html#suboptimumg.sweep.types.SweepDatatype" title="suboptimumg.sweep.types.SweepDatatype"><em>SweepDatatype</em></a><em>, </em><em>optional</em>) – Metric to differentiate (default is SweepDatatype.TOTAL_PTS)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>One partial derivative per swept parameter</p>
+<dd class="field-even"><p>One partial derivative per numeric swept parameter</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="suboptimumg.sweep.sweep_data.html#suboptimumg.sweep.sweep_data.SweepGradient" title="suboptimumg.sweep.sweep_data.SweepGradient">SweepGradient</a></p>
@@ -556,15 +553,15 @@ reruns the simulations when the generated configurations have changed.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>plot_type</strong> (<a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html#suboptimumg.plotting.grid_plot_3d.PlotType" title="suboptimumg.plotting.grid_plot_3d.PlotType"><em>PlotType</em></a><em>, </em><em>optional</em>) – Contour or surface, for 2 free parameters (default is PlotType.CONTOUR)</p></li>
 <li><p><strong>show_event_times</strong> (<em>bool</em><em>, </em><em>optional</em>) – Show event times instead of event points (default is False)</p></li>
-<li><p><strong>fixed_params</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>, </em><em>optional</em>) – Swept parameters to fix, e.g. <cite>{“mass”: 250}</cite>, so that only 1 or 2
-are left free</p></li>
+<li><p><strong>fixed_params</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>float</em><em> | </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Swept parameters to fix, e.g. <cite>{“mass”: 250, “pwrtn.motor”: “emrax208”}</cite>.
+Categorical axes take one of their labels.</p></li>
 <li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Text for the plot. Defaults are generated from the swept parameters.</p></li>
 <li><p><strong>x_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Text for the plot. Defaults are generated from the swept parameters.</p></li>
 <li><p><strong>y_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Text for the plot. Defaults are generated from the swept parameters.</p></li>
 <li><p><strong>rows</strong> (<em>int</em><em>, </em><em>optional</em>) – Shape of the grid (default is 2 by 3)</p></li>
 <li><p><strong>cols</strong> (<em>int</em><em>, </em><em>optional</em>) – Shape of the grid (default is 2 by 3)</p></li>
 <li><p><strong>theme</strong> (<em>str</em><em>, </em><em>optional</em>) – Color theme name</p></li>
-<li><p><strong>**plot_options</strong> (<em>object</em>) – Passed to the plotting function, e.g. <cite>fit_curve=True</cite></p></li>
+<li><p><strong>**plot_options</strong> (<em>object</em>) – Passed to the plotting function, e.g. <cite>fit_curve=True</cite> or <cite>show_legend=True</cite></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -572,10 +569,6 @@ are left free</p></li>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>go.Figure</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If 0 or more than 2 swept parameters are left free, a fixed parameter
-    was not swept, or an option is not accepted by the plotting function</p>
 </dd>
 </dl>
 </dd></dl>
@@ -595,8 +588,9 @@ are left free</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>metric</strong> (<a class="reference internal" href="suboptimumg.sweep.types.html#suboptimumg.sweep.types.SweepDatatype" title="suboptimumg.sweep.types.SweepDatatype"><em>SweepDatatype</em></a><em>, </em><em>optional</em>) – Metric to plot (default is SweepDatatype.TOTAL_PTS)</p></li>
 <li><p><strong>plot_type</strong> (<a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html#suboptimumg.plotting.grid_plot_3d.PlotType" title="suboptimumg.plotting.grid_plot_3d.PlotType"><em>PlotType</em></a><em>, </em><em>optional</em>) – Contour or surface, for 2 free parameters (default is PlotType.CONTOUR)</p></li>
-<li><p><strong>fixed_params</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>, </em><em>optional</em>) – Swept parameters to fix, e.g. <cite>{“mass”: 250}</cite>, so that only 1 or 2
-are left free. Values between grid points are interpolated.</p></li>
+<li><p><strong>fixed_params</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>float</em><em> | </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Swept parameters to fix, e.g. <cite>{“mass”: 250, “pwrtn.motor”: “emrax208”}</cite>.
+Numeric values between grid points are interpolated. Categorical axes
+take one of their labels.</p></li>
 <li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Text for the plot. Defaults are generated from the swept parameters.</p></li>
 <li><p><strong>subtitle</strong> (<em>str</em><em>, </em><em>optional</em>) – Text for the plot. Defaults are generated from the swept parameters.</p></li>
 <li><p><strong>x_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Text for the plot. Defaults are generated from the swept parameters.</p></li>
@@ -607,14 +601,11 @@ are left free. Values between grid points are interpolated.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A line plot for 1 free parameter, or a contour or surface for 2</p>
+<dd class="field-even"><p>A line plot for 1 free numeric parameter, one line per label when a
+categorical axis is also free, or a contour or surface for 2 numeric</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>go.Figure</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If 0 or more than 2 swept parameters are left free, a fixed parameter
-    was not swept, or an option is not accepted by the plotting function</p>
 </dd>
 </dl>
 </dd></dl>
@@ -648,20 +639,20 @@ are left free. Values between grid points are interpolated.</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="suboptimumg.sweep.sweep_results_1var.html"
+       href="suboptimumg.sweep.sweep_plotting.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">suboptimumg.sweep.sweep_results_1var</p>
+        <p class="prev-next-title">suboptimumg.sweep.sweep_plotting</p>
       </div>
     </a>
     <a class="right-next"
-       href="suboptimumg.sweep.sweeper_1d.html"
+       href="suboptimumg.sweep.types.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">suboptimumg.sweep.sweeper_1d</p>
+        <p class="prev-next-title">suboptimumg.sweep.types</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

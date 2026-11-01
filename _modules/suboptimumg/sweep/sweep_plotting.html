@@ -336,13 +336,19 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.sweep.sweep_plotting</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.color_themes</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT_THEME</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.grid_plot_2d</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_grid_2D</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.grid_plot_3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">PlotType</span><span class="p">,</span> <span class="n">plot_grid_3D</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.overlay_grid_plot_2d</span><span class="w"> </span><span class="kn">import</span> <span class="n">overlay_grid_plot_2D</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.overlay_plot_2d</span><span class="w"> </span><span class="kn">import</span> <span class="n">overlay_plot2D</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.plot_2d</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot2D</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.plot_3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot3D_contour</span><span class="p">,</span> <span class="n">plot3D_surface</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">STANDARD_GRID_PLOT</span><span class="p">,</span> <span class="n">TIME_GRID_PLOT</span><span class="p">,</span> <span class="n">TITLE_MAPPING</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CategoricalAxis</span><span class="p">,</span> <span class="n">NumericAxis</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.sweep_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepData</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SweepDatatype</span>
 
@@ -351,57 +357,71 @@
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.sweep_plotting.html#suboptimumg.sweep.sweep_plotting.plot_sweep">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_sweep</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SweepData</span><span class="p">,</span>
-    <span class="n">metric</span><span class="p">:</span> <span class="n">SweepDatatype</span><span class="p">,</span>
-    <span class="n">plot_type</span><span class="p">:</span> <span class="n">PlotType</span><span class="p">,</span>
-    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">subtitle</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">x_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">y_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">z_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">metric</span><span class="p">:</span> <span class="n">SweepDatatype</span> <span class="o">=</span> <span class="n">SweepDatatype</span><span class="o">.</span><span class="n">TOTAL_PTS</span><span class="p">,</span>
+    <span class="n">plot_type</span><span class="p">:</span> <span class="n">PlotType</span> <span class="o">=</span> <span class="n">PlotType</span><span class="o">.</span><span class="n">CONTOUR</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">subtitle</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">x_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">y_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">z_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_THEME</span><span class="p">,</span>
     <span class="o">**</span><span class="n">plot_options</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Plot one metric of sweep data against the swept parameters left free.</span>
+<span class="sd">    Plot one metric of sweep data against the swept axes left free.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    data : SweepData</span>
-<span class="sd">        Sweep data, with all but 1 or 2 swept parameters fixed</span>
-<span class="sd">    metric : SweepDatatype</span>
-<span class="sd">        Metric to plot</span>
-<span class="sd">    plot_type : PlotType</span>
-<span class="sd">        Contour or surface, used only with 2 free parameters</span>
-<span class="sd">    title, subtitle, x_label, y_label, z_label : str or None</span>
-<span class="sd">        Text for the plot. None generates a default from the swept parameters.</span>
-<span class="sd">    theme : str</span>
-<span class="sd">        Color theme name</span>
+<span class="sd">        Sweep data, with 1 or 2 numeric axes free, or 1 categorical and 1 numeric axis free</span>
+<span class="sd">    metric : SweepDatatype, optional</span>
+<span class="sd">        Metric to plot (default is SweepDatatype.TOTAL_PTS)</span>
+<span class="sd">    plot_type : PlotType, optional</span>
+<span class="sd">        Contour or surface, used only with 2 free numeric axes (default is PlotType.CONTOUR)</span>
+<span class="sd">    title, subtitle, x_label, y_label, z_label : str or None, optional</span>
+<span class="sd">        Text for the plot. None (the default) generates text from the swept parameters.</span>
+<span class="sd">    theme : str, optional</span>
+<span class="sd">        Color theme name (default is DEFAULT_THEME)</span>
 <span class="sd">    **plot_options : object</span>
 <span class="sd">        Passed to the plotting function, e.g. `fit_curve=True`</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    go.Figure</span>
-<span class="sd">        A line plot for 1 free parameter, or a contour or surface for 2</span>
+<span class="sd">        A line plot for 1 free numeric axis, one line per label when a categorical axis is also free,</span>
+<span class="sd">        or a contour or surface for 2 free numeric axes</span>
 <span class="sd">    """</span>
-    <span class="n">_check_free_param_count</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">numeric_axes</span><span class="p">,</span> <span class="n">categorical_axes</span> <span class="o">=</span> <span class="n">_check_free_axes_are_plottable</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="n">final_title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="n">_build_default_title</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="n">final_subtitle</span> <span class="o">=</span> <span class="n">subtitle</span> <span class="ow">or</span> <span class="n">_build_default_subtitle</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="n">values</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">metric_values</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">plot2D</span><span class="p">(</span>
-            <span class="n">x_list</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
-            <span class="n">y_list</span><span class="o">=</span><span class="n">values</span><span class="p">,</span>
+    <span class="k">if</span> <span class="n">categorical_axes</span><span class="p">:</span>
+        <span class="n">x_axis</span> <span class="o">=</span> <span class="n">numeric_axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">overlay_plot2D</span><span class="p">(</span>
+            <span class="n">x_data_dict</span><span class="o">=</span><span class="p">{</span><span class="n">label</span><span class="p">:</span> <span class="n">x_axis</span><span class="o">.</span><span class="n">values</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">categorical_axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">labels</span><span class="p">},</span>
+            <span class="n">y_data_dict</span><span class="o">=</span><span class="n">_split_values_by_label</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">categorical_axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">values</span><span class="p">),</span>
             <span class="n">title</span><span class="o">=</span><span class="n">final_title</span><span class="p">,</span>
-            <span class="n">x_axis</span><span class="o">=</span><span class="n">x_label</span> <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">x_axis</span><span class="o">=</span><span class="n">x_label</span> <span class="ow">or</span> <span class="n">x_axis</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
             <span class="n">y_axis</span><span class="o">=</span><span class="n">y_label</span> <span class="ow">or</span> <span class="n">TITLE_MAPPING</span><span class="p">[</span><span class="n">metric</span><span class="p">],</span>
             <span class="n">subtitle</span><span class="o">=</span><span class="n">final_subtitle</span><span class="p">,</span>
             <span class="n">theme</span><span class="o">=</span><span class="n">theme</span><span class="p">,</span>
             <span class="o">**</span><span class="n">plot_options</span><span class="p">,</span>  <span class="c1"># type: ignore[arg-type]</span>
         <span class="p">)</span>
 
-    <span class="n">x_axis</span><span class="p">,</span> <span class="n">y_axis</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">axes</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">numeric_axes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">plot2D</span><span class="p">(</span>
+            <span class="n">x_list</span><span class="o">=</span><span class="n">numeric_axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+            <span class="n">y_list</span><span class="o">=</span><span class="n">values</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">final_title</span><span class="p">,</span>
+            <span class="n">x_axis</span><span class="o">=</span><span class="n">x_label</span> <span class="ow">or</span> <span class="n">numeric_axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">y_axis</span><span class="o">=</span><span class="n">y_label</span> <span class="ow">or</span> <span class="n">TITLE_MAPPING</span><span class="p">[</span><span class="n">metric</span><span class="p">],</span>
+            <span class="n">subtitle</span><span class="o">=</span><span class="n">final_subtitle</span><span class="p">,</span>
+            <span class="n">theme</span><span class="o">=</span><span class="n">theme</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">plot_options</span><span class="p">,</span>  <span class="c1"># type: ignore[arg-type]</span>
+        <span class="p">)</span>
+
+    <span class="n">x_axis</span><span class="p">,</span> <span class="n">y_axis</span> <span class="o">=</span> <span class="n">numeric_axes</span>
     <span class="n">plotter</span> <span class="o">=</span> <span class="n">plot3D_surface</span> <span class="k">if</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="n">PlotType</span><span class="o">.</span><span class="n">SURFACE</span> <span class="k">else</span> <span class="n">plot3D_contour</span>
     <span class="k">return</span> <span class="n">plotter</span><span class="p">(</span>
         <span class="n">x_list</span><span class="o">=</span><span class="n">x_axis</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
@@ -422,47 +442,43 @@
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.sweep_plotting.html#suboptimumg.sweep.sweep_plotting.grid_plot_sweep">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">grid_plot_sweep</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SweepData</span><span class="p">,</span>
-    <span class="n">plot_type</span><span class="p">:</span> <span class="n">PlotType</span><span class="p">,</span>
-    <span class="n">show_event_times</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">x_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">y_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">rows</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">cols</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">plot_type</span><span class="p">:</span> <span class="n">PlotType</span> <span class="o">=</span> <span class="n">PlotType</span><span class="o">.</span><span class="n">CONTOUR</span><span class="p">,</span>
+    <span class="n">show_event_times</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">x_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">y_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">cols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_THEME</span><span class="p">,</span>
     <span class="o">**</span><span class="n">plot_options</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Plot every event's metric of sweep data against the free swept parameters, in a grid.</span>
+<span class="sd">    Plot every event's metric of sweep data against the free swept axes, in a grid.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    data : SweepData</span>
-<span class="sd">        Sweep data, with all but 1 or 2 swept parameters fixed</span>
-<span class="sd">    plot_type : PlotType</span>
-<span class="sd">        Contour or surface, used only with 2 free parameters</span>
-<span class="sd">    show_event_times : bool</span>
-<span class="sd">        Show event times instead of event points</span>
-<span class="sd">    title, x_label, y_label : str or None</span>
-<span class="sd">        Text for the plot. None generates a default from the swept parameters.</span>
-<span class="sd">    rows, cols : int</span>
-<span class="sd">        Shape of the grid</span>
-<span class="sd">    theme : str</span>
-<span class="sd">        Color theme name</span>
+<span class="sd">        Sweep data, with 1 or 2 numeric axes free, or 1 categorical and 1 numeric axis free</span>
+<span class="sd">    plot_type : PlotType, optional</span>
+<span class="sd">        Contour or surface, used only with 2 free numeric axes (default is PlotType.CONTOUR)</span>
+<span class="sd">    show_event_times : bool, optional</span>
+<span class="sd">        Show event times instead of event points (default is False)</span>
+<span class="sd">    title, x_label, y_label : str or None, optional</span>
+<span class="sd">        Text for the plot. None (the default) generates text from the swept parameters.</span>
+<span class="sd">    rows, cols : int, optional</span>
+<span class="sd">        Shape of the grid (default is 2 by 3)</span>
+<span class="sd">    theme : str, optional</span>
+<span class="sd">        Color theme name (default is DEFAULT_THEME)</span>
 <span class="sd">    **plot_options : object</span>
-<span class="sd">        Passed to the plotting function, e.g. `fit_curve=True`</span>
+<span class="sd">        Passed to the plotting function, e.g. `fit_curve=True` or `show_legend=True`</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    go.Figure</span>
-<span class="sd">        A grid of line plots for 1 free parameter, or of contours or surfaces for 2</span>
-
-<span class="sd">    Raises</span>
-<span class="sd">    ------</span>
-<span class="sd">    ValueError</span>
-<span class="sd">        If 0 or more than 2 swept parameters are left free</span>
+<span class="sd">        A grid of line plots for 1 free numeric axis, with one line per label when a categorical axis is</span>
+<span class="sd">        also free, or of contours or surfaces for 2 free numeric axes</span>
 <span class="sd">    """</span>
-    <span class="n">_check_free_param_count</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">numeric_axes</span><span class="p">,</span> <span class="n">categorical_axes</span> <span class="o">=</span> <span class="n">_check_free_axes_are_plottable</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="n">metrics</span> <span class="o">=</span> <span class="n">TIME_GRID_PLOT</span> <span class="k">if</span> <span class="n">show_event_times</span> <span class="k">else</span> <span class="n">STANDARD_GRID_PLOT</span>
     <span class="n">subplot_titles</span> <span class="o">=</span> <span class="p">[</span><span class="n">TITLE_MAPPING</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span> <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">]</span>
     <span class="n">values_by_metric</span> <span class="o">=</span> <span class="p">{</span><span class="n">metric</span><span class="o">.</span><span class="n">value</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">metric_values</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span> <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">}</span>
@@ -472,13 +488,21 @@
     <span class="k">if</span> <span class="n">subtitle</span><span class="p">:</span>
         <span class="n">final_title</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"&lt;br&gt;&lt;span style='</span><span class="si">{</span><span class="s2">"font-size: 18px; color: #606060;"</span><span class="si">}</span><span class="s2">'&gt;</span><span class="si">{</span><span class="n">subtitle</span><span class="si">}</span><span class="s2">&lt;/span&gt;"</span>
 
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">plot_grid_2D</span><span class="p">(</span>
-            <span class="n">x_list</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
-            <span class="n">y_data_dict</span><span class="o">=</span><span class="n">values_by_metric</span><span class="p">,</span>
+    <span class="k">if</span> <span class="n">categorical_axes</span><span class="p">:</span>
+        <span class="n">x_axis</span> <span class="o">=</span> <span class="n">numeric_axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">categorical_axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">labels</span>
+        <span class="k">return</span> <span class="n">overlay_grid_plot_2D</span><span class="p">(</span>
+            <span class="n">x_data_dict</span><span class="o">=</span><span class="p">{</span>
+                <span class="n">metric_name</span><span class="p">:</span> <span class="p">{</span><span class="n">label</span><span class="p">:</span> <span class="n">x_axis</span><span class="o">.</span><span class="n">values</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">}</span>
+                <span class="k">for</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="n">values_by_metric</span>
+            <span class="p">},</span>
+            <span class="n">y_data_dict</span><span class="o">=</span><span class="p">{</span>
+                <span class="n">metric_name</span><span class="p">:</span> <span class="n">_split_values_by_label</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">categorical_axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">values</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">metric_name</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">values_by_metric</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">},</span>
             <span class="n">subplot_titles</span><span class="o">=</span><span class="n">subplot_titles</span><span class="p">,</span>
             <span class="n">title</span><span class="o">=</span><span class="n">final_title</span><span class="p">,</span>
-            <span class="n">x_label</span><span class="o">=</span><span class="n">x_label</span> <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">x_label</span><span class="o">=</span><span class="n">x_label</span> <span class="ow">or</span> <span class="n">x_axis</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
             <span class="n">y_label</span><span class="o">=</span><span class="n">y_label</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">,</span>
             <span class="n">rows</span><span class="o">=</span><span class="n">rows</span><span class="p">,</span>
             <span class="n">cols</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span>
@@ -486,7 +510,21 @@
             <span class="o">**</span><span class="n">plot_options</span><span class="p">,</span>  <span class="c1"># type: ignore[arg-type]</span>
         <span class="p">)</span>
 
-    <span class="n">x_axis</span><span class="p">,</span> <span class="n">y_axis</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">axes</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">numeric_axes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">plot_grid_2D</span><span class="p">(</span>
+            <span class="n">x_list</span><span class="o">=</span><span class="n">numeric_axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+            <span class="n">y_data_dict</span><span class="o">=</span><span class="n">values_by_metric</span><span class="p">,</span>
+            <span class="n">subplot_titles</span><span class="o">=</span><span class="n">subplot_titles</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">final_title</span><span class="p">,</span>
+            <span class="n">x_label</span><span class="o">=</span><span class="n">x_label</span> <span class="ow">or</span> <span class="n">numeric_axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">y_label</span><span class="o">=</span><span class="n">y_label</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="n">rows</span><span class="o">=</span><span class="n">rows</span><span class="p">,</span>
+            <span class="n">cols</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span>
+            <span class="n">theme</span><span class="o">=</span><span class="n">theme</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">plot_options</span><span class="p">,</span>  <span class="c1"># type: ignore[arg-type]</span>
+        <span class="p">)</span>
+
+    <span class="n">x_axis</span><span class="p">,</span> <span class="n">y_axis</span> <span class="o">=</span> <span class="n">numeric_axes</span>
     <span class="k">return</span> <span class="n">plot_grid_3D</span><span class="p">(</span>
         <span class="n">x_list</span><span class="o">=</span><span class="n">x_axis</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
         <span class="n">y_list</span><span class="o">=</span><span class="n">y_axis</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
@@ -505,19 +543,56 @@
 
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_check_free_param_count</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SweepData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">free_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"`</span><span class="si">{</span><span class="n">axis</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">`"</span> <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">axes</span><span class="p">]</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">free_names</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_split_values_by_label</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SweepData</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="n">CategoricalAxis</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">]]:</span>
+    <span class="n">dimension</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">position</span> <span class="k">for</span> <span class="n">position</span><span class="p">,</span> <span class="n">other</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span> <span class="k">if</span> <span class="n">other</span> <span class="ow">is</span> <span class="n">axis</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">label</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">dimension</span><span class="p">)</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axis</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+    <span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_free_axes_are_plottable</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SweepData</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">NumericAxis</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">CategoricalAxis</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Ensure the free axes fit one of the supported plots (1 numeric axis,</span>
+<span class="sd">    2 numeric axes, or 1 categorical and 1 numeric axis.)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : SweepData</span>
+<span class="sd">        Sweep data, after fixing parameters</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple[list[NumericAxis], list[CategoricalAxis]]</span>
+<span class="sd">        The free numeric axes and the free categorical axes, each in array order</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        Unplottable free axes configurations</span>
+<span class="sd">    """</span>
+    <span class="n">numeric_axes</span> <span class="o">=</span> <span class="p">[</span><span class="n">axis</span> <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">axes</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">NumericAxis</span><span class="p">)]</span>
+    <span class="n">categorical_axes</span> <span class="o">=</span> <span class="p">[</span><span class="n">axis</span> <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">axes</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">CategoricalAxis</span><span class="p">)]</span>
+    <span class="n">free_names</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"`</span><span class="si">{</span><span class="n">axis</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">`"</span> <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="s2">"Every swept parameter has been fixed. Remove one or two parameters from fixed_params"</span>
         <span class="p">)</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">free_names</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">example_axis</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">example_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">example_axis</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">example_axis</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">])</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">numeric_axes</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"Plots can show at most 2 dimensions, but </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">free_names</span><span class="p">)</span><span class="si">}</span><span class="s2"> are free. "</span>
-            <span class="sa">f</span><span class="s2">"Use fixed_params to reduce dimensionality (e.g. fixed_params=</span><span class="se">{{</span><span class="s2">'</span><span class="si">{</span><span class="n">example_axis</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">': </span><span class="si">{</span><span class="n">example_value</span><span class="si">:</span><span class="s2">.4g</span><span class="se">}}</span><span class="si">}</span><span class="s2">)."</span>
+            <span class="sa">f</span><span class="s2">"Only categorical axes (</span><span class="si">{</span><span class="n">free_names</span><span class="si">}</span><span class="s2">) are free, but plots need a numeric axis for x. "</span>
+            <span class="s2">"Leave one numeric parameter out of fixed_params"</span>
         <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">categorical_axes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"Plots can show at most 2 dimensions, with at most 1 categorical axis, "</span>
+            <span class="sa">f</span><span class="s2">"but </span><span class="si">{</span><span class="n">free_names</span><span class="si">}</span><span class="s2"> are free. Use fixed_params to reduce dimensionality"</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">numeric_axes</span><span class="p">,</span> <span class="n">categorical_axes</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_build_default_title</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SweepData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -529,7 +604,7 @@
     <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">dependency_names</span><span class="p">:</span>
         <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Dependent Params: </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">dependency_names</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">fixed_axes</span><span class="p">:</span>
-        <span class="n">fixed</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">axis</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">axis</span><span class="o">.</span><span class="n">value</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">fixed_axes</span><span class="p">)</span>
+        <span class="n">fixed</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">axis</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">axis</span><span class="o">.</span><span class="n">get_formatted_value</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">fixed_axes</span><span class="p">)</span>
         <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Fixed Params: </span><span class="si">{</span><span class="n">fixed</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="s2">" | "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="ow">or</span> <span class="kc">None</span>
 </pre></div>

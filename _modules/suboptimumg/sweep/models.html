@@ -338,9 +338,10 @@
   <h1>Source code for suboptimumg.sweep.models</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">Sequence</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">Literal</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -349,13 +350,13 @@
     <span class="n">BaseModel</span><span class="p">,</span>
     <span class="n">ConfigDict</span><span class="p">,</span>
     <span class="n">Field</span><span class="p">,</span>
+    <span class="n">SerializeAsAny</span><span class="p">,</span>
     <span class="n">ValidationError</span><span class="p">,</span>
     <span class="n">computed_field</span><span class="p">,</span>
     <span class="n">model_validator</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..compsim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompetitionData</span><span class="p">,</span> <span class="n">CompetitionResults</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle.vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">Car</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle.vehicle_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">VehicleModel</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_steps</span>
 
@@ -384,44 +385,33 @@
 
 
 
-<div class="viewcode-block" id="SweepProcessInput1D">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepProcessInput1D">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">SweepProcessInput1D</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Input model for 1D sweep process."""</span>
+<span class="n">CategoricalValue</span> <span class="o">=</span> <span class="n">SerializeAsAny</span><span class="p">[</span><span class="n">BaseModel</span><span class="p">]</span> <span class="o">|</span> <span class="nb">bool</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span>
 
-    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="n">comp_data</span><span class="p">:</span> <span class="n">CompetitionData</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Competition configuration data model"</span><span class="p">)</span>
-    <span class="n">var_1_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Name of the variable being swept"</span><span class="p">)</span>
-    <span class="n">var_1_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Value of the variable for this iteration"</span><span class="p">)</span>
-    <span class="n">dep_vals</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">"Dictionary of dependent parameter values"</span><span class="p">,</span>
-        <span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">,</span>
+<div class="viewcode-block" id="CategoricalSweepInput">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.CategoricalSweepInput">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CategoricalSweepInput</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Fields needed to sweep one car entry across labeled replacement values.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Each option replaces exactly one entry, the one at `name`. The entry can be a whole sub-model</span>
+<span class="sd">    (e.g. 'pwrtn.motor') or a single value (e.g. a flag).</span>
+<span class="sd">    """</span>
+
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="s2">"forbid"</span><span class="p">)</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Dotted name of the entry each option replaces, e.g. 'pwrtn.motor'"</span>
     <span class="p">)</span>
-    <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Index of this sweep iteration"</span><span class="p">)</span></div>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CategoricalValue</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Replacement value for the entry, keyed by label"</span>
+    <span class="p">)</span></div>
 
 
 
-<div class="viewcode-block" id="SweepProcessOutput1D">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepProcessOutput1D">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">SweepProcessOutput1D</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Output model for 1D sweep process."""</span>
-
-    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Index of this sweep iteration"</span><span class="p">)</span>
-    <span class="n">accel_pts</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Acceleration event points"</span><span class="p">)</span>
-    <span class="n">skidpad_pts</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Skidpad event points"</span><span class="p">)</span>
-    <span class="n">autoX_pts</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Autocross event points"</span><span class="p">)</span>
-    <span class="n">endurance_pts</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Endurance event points"</span><span class="p">)</span>
-    <span class="n">efficiency_pts</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Efficiency points"</span><span class="p">)</span>
-    <span class="n">accel_t</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Acceleration event time"</span><span class="p">)</span>
-    <span class="n">skidpad_t</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Skidpad event time"</span><span class="p">)</span>
-    <span class="n">autoX_t</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Autocross event time"</span><span class="p">)</span>
-    <span class="n">endurance_t</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Endurance event time"</span><span class="p">)</span>
-    <span class="n">warnings</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Warning messages from the simulation"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span>
-    <span class="n">error</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Error message if simulation failed"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></div>
-
+<span class="n">SweepInput</span> <span class="o">=</span> <span class="n">SweepParamConfig</span> <span class="o">|</span> <span class="n">CategoricalSweepInput</span>
 
 
 <div class="viewcode-block" id="ArraySweepVariableInput">
@@ -557,17 +547,6 @@
 
 
 
-<div class="viewcode-block" id="MotorSweepData">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.MotorSweepData">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">MotorSweepData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Strongly typed container for motor sweep data."""</span>
-
-    <span class="n">data_by_motor</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SweepData1D</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Motor name to sweep data map"</span><span class="p">)</span>
-
-    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
-
-
-
 <span class="n">VehicleDependency</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">VehicleModel</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span>
 
 
@@ -582,12 +561,37 @@
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Dotted parameter name, e.g. 'aero.cl'"</span><span class="p">)</span>
     <span class="n">value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"New value of the parameter"</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ParameterModification.apply_to_car">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.ParameterModification.apply_to_car">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply_to_car</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">car</span><span class="p">:</span> <span class="n">Car</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">car</span><span class="o">.</span><span class="n">modify_params</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div>
+<div class="viewcode-block" id="ParameterModification.apply_to_vehicle">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.ParameterModification.apply_to_vehicle">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_to_vehicle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">vehicle</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div>
 </div>
 
+
+
+<div class="viewcode-block" id="CategoricalModification">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.CategoricalModification">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CategoricalModification</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Replace one car entry with a labeled value."""</span>
+
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">kind</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"categorical"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"categorical"</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Dotted name of the entry replaced, e.g. 'pwrtn.motor'"</span><span class="p">)</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Label of the replacement value, e.g. 'emrax208'"</span><span class="p">)</span>
+    <span class="n">value</span><span class="p">:</span> <span class="n">CategoricalValue</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Replacement value"</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CategoricalModification.apply_to_vehicle">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.CategoricalModification.apply_to_vehicle">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_to_vehicle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">vehicle</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">))</span></div>
+</div>
+
+
+
+<span class="n">Modification</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span>
+    <span class="n">ParameterModification</span> <span class="o">|</span> <span class="n">CategoricalModification</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">discriminator</span><span class="o">=</span><span class="s2">"kind"</span><span class="p">)</span>
+<span class="p">]</span>
 
 
 <div class="viewcode-block" id="CarConfiguration">
@@ -597,7 +601,7 @@
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="n">modifications</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ParameterModification</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+    <span class="n">modifications</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Modification</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">"Changes to apply to the base car, in order"</span>
     <span class="p">)</span></div>
 
@@ -641,6 +645,7 @@
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
+    <span class="n">kind</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"numeric"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"numeric"</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Dotted parameter name, e.g. 'aero.cl'"</span><span class="p">)</span>
     <span class="n">values</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Values the parameter takes, ascending"</span><span class="p">)</span>
 
@@ -655,20 +660,58 @@
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">span</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 
-<div class="viewcode-block" id="NumericAxis.check_values_are_settable">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.NumericAxis.check_values_are_settable">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">check_values_are_settable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Ensure the name is a car parameter that accepts every value of the axis."""</span>
-        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">vehicle</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
-            <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">ValidationError</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Can't sweep `</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">` to </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">error</span></div>
+<div class="viewcode-block" id="NumericAxis.get_formatted_values_at_index">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.NumericAxis.get_formatted_values_at_index">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_formatted_values_at_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2">"</span></div>
+
+
+<div class="viewcode-block" id="NumericAxis.modifications_for_each_value">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.NumericAxis.modifications_for_each_value">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">modifications_for_each_value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Modification</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">ParameterModification</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">))</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">]</span></div>
 </div>
 
+
+
+<div class="viewcode-block" id="CategoricalAxis">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.CategoricalAxis">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CategoricalAxis</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""One swept entry and the labels of the values it takes."""</span>
+
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">kind</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"categorical"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"categorical"</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Dotted name of the entry replaced, e.g. 'pwrtn.motor'"</span><span class="p">)</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Labels of the values, in input order"</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CategoricalAxis.get_formatted_values_at_index">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.CategoricalAxis.get_formatted_values_at_index">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_formatted_values_at_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">[</span><span class="n">index</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="CategoricalAxis.try_get_index_of_label">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.CategoricalAxis.try_get_index_of_label">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">try_get_index_of_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="n">label</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"`</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">` is categorical, so it must be fixed at one of its labels "</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">label</span><span class="si">!r}</span><span class="s2">"</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">label</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="n">SweepAxis</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">NumericAxis</span> <span class="o">|</span> <span class="n">CategoricalAxis</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">discriminator</span><span class="o">=</span><span class="s2">"kind"</span><span class="p">)]</span>
 
 
 <div class="viewcode-block" id="SweepGrid">
@@ -678,13 +721,36 @@
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="n">axes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NumericAxis</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Swept axes, in input order"</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">SweepAxis</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Swept axes, in input order"</span><span class="p">)</span>
+    <span class="n">modifications_for_each_axis_value</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Modification</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"For each axis, the modification that sets each of its values, in the axis's order"</span>
+    <span class="p">)</span>
 
-<div class="viewcode-block" id="SweepGrid.from_sweep_params">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepGrid.from_sweep_params">[docs]</a>
+<div class="viewcode-block" id="SweepGrid.from_inputs">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepGrid.from_inputs">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_sweep_params</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">SweepParamConfig</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">SweepGrid</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="p">[</span><span class="n">NumericAxis</span><span class="o">.</span><span class="n">from_sweep_param</span><span class="p">(</span><span class="n">sweep_input</span><span class="p">)</span> <span class="k">for</span> <span class="n">sweep_input</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">])</span></div>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_inputs</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">SweepInput</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">SweepGrid</span><span class="p">:</span>
+        <span class="n">axes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NumericAxis</span> <span class="o">|</span> <span class="n">CategoricalAxis</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">modifications_for_each_axis_value</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Modification</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">sweep_input</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
+            <span class="k">match</span> <span class="n">sweep_input</span><span class="p">:</span>
+                <span class="k">case</span> <span class="n">SweepParamConfig</span><span class="p">():</span>
+                    <span class="n">numeric_axis</span> <span class="o">=</span> <span class="n">NumericAxis</span><span class="o">.</span><span class="n">from_sweep_param</span><span class="p">(</span><span class="n">sweep_input</span><span class="p">)</span>
+                    <span class="n">axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numeric_axis</span><span class="p">)</span>
+                    <span class="n">modifications_for_each_axis_value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="n">numeric_axis</span><span class="o">.</span><span class="n">modifications_for_each_value</span><span class="p">()</span>
+                    <span class="p">)</span>
+                <span class="k">case</span> <span class="n">CategoricalSweepInput</span><span class="p">():</span>
+                    <span class="n">axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="n">CategoricalAxis</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">sweep_input</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">sweep_input</span><span class="o">.</span><span class="n">options</span><span class="p">))</span>
+                    <span class="p">)</span>
+                    <span class="n">modifications_for_each_axis_value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="p">[</span>
+                            <span class="n">CategoricalModification</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">sweep_input</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">sweep_input</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                        <span class="p">]</span>
+                    <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="n">axes</span><span class="p">,</span> <span class="n">modifications_for_each_axis_value</span><span class="o">=</span><span class="n">modifications_for_each_axis_value</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="SweepGrid.check_unique_names">
@@ -715,20 +781,24 @@
 <span class="sd">        ValueError</span>
 <span class="sd">            If a name is not a parameter, or a value fails the parameter's validation</span>
 <span class="sd">        """</span>
-        <span class="n">vehicle</span> <span class="o">=</span> <span class="n">base_vehicle</span><span class="o">.</span><span class="n">model_copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
-            <span class="n">axis</span><span class="o">.</span><span class="n">check_values_are_settable</span><span class="p">(</span><span class="n">vehicle</span><span class="p">)</span></div>
+        <span class="k">for</span> <span class="n">axis_value_modifications</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modifications_for_each_axis_value</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">modification</span> <span class="ow">in</span> <span class="n">axis_value_modifications</span><span class="p">:</span>
+                <span class="n">vehicle</span> <span class="o">=</span> <span class="n">base_vehicle</span><span class="o">.</span><span class="n">model_copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">modification</span><span class="o">.</span><span class="n">apply_to_vehicle</span><span class="p">(</span><span class="n">vehicle</span><span class="p">)</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">ValidationError</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Can't sweep `</span><span class="si">{</span><span class="n">modification</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">`: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">error</span></div>
 
 
 <div class="viewcode-block" id="SweepGrid.iterate_grid_points">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepGrid.iterate_grid_points">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">iterate_grid_points</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">ParameterModification</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">"""Yield the swept values of each grid point"""</span>
-        <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">axis</span><span class="o">.</span><span class="n">values</span> <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">)):</span>
-            <span class="k">yield</span> <span class="p">[</span>
-                <span class="n">ParameterModification</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">axis</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
-                <span class="k">for</span> <span class="n">axis</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span>
-            <span class="p">]</span></div>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iterate_grid_points</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Modification</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Yield the swept modifications of each grid point. For each list of modifications,</span>
+<span class="sd">        categorical comes before numerical.</span>
+<span class="sd">        """</span>
+        <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">modifications_for_each_axis_value</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">modification</span><span class="p">:</span> <span class="n">modification</span><span class="o">.</span><span class="n">kind</span> <span class="o">!=</span> <span class="s2">"categorical"</span><span class="p">)</span></div>
 </div>
 
 
@@ -741,7 +811,13 @@
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Dotted parameter name, e.g. 'aero.cl'"</span><span class="p">)</span>
-    <span class="n">value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Value the axis was fixed at"</span><span class="p">)</span></div>
+    <span class="n">value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Value the axis was fixed at, or its label"</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FixedAxis.get_formatted_value">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.FixedAxis.get_formatted_value">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_formatted_value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2">"</span></div>
+</div>
 
 
 
@@ -752,7 +828,7 @@
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="n">axes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NumericAxis</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Swept axes, in input order"</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">SweepAxis</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Swept axes, in input order"</span><span class="p">)</span>
     <span class="n">configurations</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">CarConfiguration</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">"One configuration per grid point, flattened"</span>
     <span class="p">)</span>
@@ -765,7 +841,7 @@
     <span class="nd">@model_validator</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">"after"</span><span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">check_configuration_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SweepPlan</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""Ensure there is exactly one configuration per grid point."""</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">axis</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">axis</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configurations</span><span class="p">)</span> <span class="o">!=</span> <span class="n">expected</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">"Expected </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2"> configurations for the grid, got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configurations</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>

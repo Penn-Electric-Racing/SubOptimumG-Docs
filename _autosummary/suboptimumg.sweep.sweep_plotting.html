@@ -49,7 +49,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="suboptimumg.sweep.sweep_results_1var" href="suboptimumg.sweep.sweep_results_1var.html" />
+    <link rel="next" title="suboptimumg.sweep.sweeper" href="suboptimumg.sweep.sweeper.html" />
     <link rel="prev" title="suboptimumg.sweep.sweep_data_interpolation" href="suboptimumg.sweep.sweep_data_interpolation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
@@ -359,15 +359,11 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.energy_grid_results.html">suboptimumg.sweep.energy_grid_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.executor.html">suboptimumg.sweep.executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.models.html">suboptimumg.sweep.models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep.html">suboptimumg.sweep.motor_sweep</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html">suboptimumg.sweep.motor_sweep_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.multiprocessed_executor.html">suboptimumg.sweep.multiprocessed_executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data.html">suboptimumg.sweep.sweep_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data_interpolation.html">suboptimumg.sweep.sweep_data_interpolation</a></li>
 <li class="toctree-l3 current active"><a aria-current="page" class="current reference internal" href="#">suboptimumg.sweep.sweep_plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_1var.html">suboptimumg.sweep.sweep_results_1var</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper.html">suboptimumg.sweep.sweeper</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_1d.html">suboptimumg.sweep.sweeper_1d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.types.html">suboptimumg.sweep.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.utils.html">suboptimumg.sweep.utils</a></li>
 </ul>
@@ -484,56 +480,55 @@
 <span id="suboptimumg-sweep-sweep-plotting"></span><h1>suboptimumg.sweep.sweep_plotting<a class="headerlink" href="#module-suboptimumg.sweep.sweep_plotting" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.sweep.sweep_plotting.grid_plot_sweep">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.sweep_plotting.</span></span><span class="sig-name descname"><span class="pre">grid_plot_sweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_event_times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">plot_options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweep_plotting.html#grid_plot_sweep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweep_plotting.grid_plot_sweep" title="Link to this definition">#</a></dt>
-<dd><p>Plot every event’s metric of sweep data against the free swept parameters, in a grid.</p>
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.sweep_plotting.</span></span><span class="sig-name descname"><span class="pre">grid_plot_sweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">PlotType.CONTOUR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_event_times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cividis'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">plot_options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweep_plotting.html#grid_plot_sweep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweep_plotting.grid_plot_sweep" title="Link to this definition">#</a></dt>
+<dd><p>Plot every event’s metric of sweep data against the free swept axes, in a grid.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference internal" href="suboptimumg.sweep.sweep_data.html#suboptimumg.sweep.sweep_data.SweepData" title="suboptimumg.sweep.sweep_data.SweepData"><em>SweepData</em></a>) – Sweep data, with all but 1 or 2 swept parameters fixed</p></li>
-<li><p><strong>plot_type</strong> (<a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html#suboptimumg.plotting.grid_plot_3d.PlotType" title="suboptimumg.plotting.grid_plot_3d.PlotType"><em>PlotType</em></a>) – Contour or surface, used only with 2 free parameters</p></li>
-<li><p><strong>show_event_times</strong> (<em>bool</em>) – Show event times instead of event points</p></li>
-<li><p><strong>title</strong> (<em>str</em><em> or </em><em>None</em>) – Text for the plot. None generates a default from the swept parameters.</p></li>
-<li><p><strong>x_label</strong> (<em>str</em><em> or </em><em>None</em>) – Text for the plot. None generates a default from the swept parameters.</p></li>
-<li><p><strong>y_label</strong> (<em>str</em><em> or </em><em>None</em>) – Text for the plot. None generates a default from the swept parameters.</p></li>
-<li><p><strong>rows</strong> (<em>int</em>) – Shape of the grid</p></li>
-<li><p><strong>cols</strong> (<em>int</em>) – Shape of the grid</p></li>
-<li><p><strong>theme</strong> (<em>str</em>) – Color theme name</p></li>
-<li><p><strong>**plot_options</strong> (<em>object</em>) – Passed to the plotting function, e.g. <cite>fit_curve=True</cite></p></li>
+<li><p><strong>data</strong> (<a class="reference internal" href="suboptimumg.sweep.sweep_data.html#suboptimumg.sweep.sweep_data.SweepData" title="suboptimumg.sweep.sweep_data.SweepData"><em>SweepData</em></a>) – Sweep data, with 1 or 2 numeric axes free, or 1 categorical and 1 numeric axis free</p></li>
+<li><p><strong>plot_type</strong> (<a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html#suboptimumg.plotting.grid_plot_3d.PlotType" title="suboptimumg.plotting.grid_plot_3d.PlotType"><em>PlotType</em></a><em>, </em><em>optional</em>) – Contour or surface, used only with 2 free numeric axes (default is PlotType.CONTOUR)</p></li>
+<li><p><strong>show_event_times</strong> (<em>bool</em><em>, </em><em>optional</em>) – Show event times instead of event points (default is False)</p></li>
+<li><p><strong>title</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Text for the plot. None (the default) generates text from the swept parameters.</p></li>
+<li><p><strong>x_label</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Text for the plot. None (the default) generates text from the swept parameters.</p></li>
+<li><p><strong>y_label</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Text for the plot. None (the default) generates text from the swept parameters.</p></li>
+<li><p><strong>rows</strong> (<em>int</em><em>, </em><em>optional</em>) – Shape of the grid (default is 2 by 3)</p></li>
+<li><p><strong>cols</strong> (<em>int</em><em>, </em><em>optional</em>) – Shape of the grid (default is 2 by 3)</p></li>
+<li><p><strong>theme</strong> (<em>str</em><em>, </em><em>optional</em>) – Color theme name (default is DEFAULT_THEME)</p></li>
+<li><p><strong>**plot_options</strong> (<em>object</em>) – Passed to the plotting function, e.g. <cite>fit_curve=True</cite> or <cite>show_legend=True</cite></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A grid of line plots for 1 free parameter, or of contours or surfaces for 2</p>
+<dd class="field-even"><p>A grid of line plots for 1 free numeric axis, with one line per label when a categorical axis is
+also free, or of contours or surfaces for 2 free numeric axes</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>go.Figure</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If 0 or more than 2 swept parameters are left free</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.sweep.sweep_plotting.plot_sweep">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.sweep_plotting.</span></span><span class="sig-name descname"><span class="pre">plot_sweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subtitle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">plot_options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweep_plotting.html#plot_sweep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweep_plotting.plot_sweep" title="Link to this definition">#</a></dt>
-<dd><p>Plot one metric of sweep data against the swept parameters left free.</p>
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.sweep_plotting.</span></span><span class="sig-name descname"><span class="pre">plot_sweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SweepDatatype.TOTAL_PTS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">PlotType.CONTOUR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subtitle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cividis'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">plot_options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweep_plotting.html#plot_sweep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweep_plotting.plot_sweep" title="Link to this definition">#</a></dt>
+<dd><p>Plot one metric of sweep data against the swept axes left free.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference internal" href="suboptimumg.sweep.sweep_data.html#suboptimumg.sweep.sweep_data.SweepData" title="suboptimumg.sweep.sweep_data.SweepData"><em>SweepData</em></a>) – Sweep data, with all but 1 or 2 swept parameters fixed</p></li>
-<li><p><strong>metric</strong> (<a class="reference internal" href="suboptimumg.sweep.types.html#suboptimumg.sweep.types.SweepDatatype" title="suboptimumg.sweep.types.SweepDatatype"><em>SweepDatatype</em></a>) – Metric to plot</p></li>
-<li><p><strong>plot_type</strong> (<a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html#suboptimumg.plotting.grid_plot_3d.PlotType" title="suboptimumg.plotting.grid_plot_3d.PlotType"><em>PlotType</em></a>) – Contour or surface, used only with 2 free parameters</p></li>
-<li><p><strong>title</strong> (<em>str</em><em> or </em><em>None</em>) – Text for the plot. None generates a default from the swept parameters.</p></li>
-<li><p><strong>subtitle</strong> (<em>str</em><em> or </em><em>None</em>) – Text for the plot. None generates a default from the swept parameters.</p></li>
-<li><p><strong>x_label</strong> (<em>str</em><em> or </em><em>None</em>) – Text for the plot. None generates a default from the swept parameters.</p></li>
-<li><p><strong>y_label</strong> (<em>str</em><em> or </em><em>None</em>) – Text for the plot. None generates a default from the swept parameters.</p></li>
-<li><p><strong>z_label</strong> (<em>str</em><em> or </em><em>None</em>) – Text for the plot. None generates a default from the swept parameters.</p></li>
-<li><p><strong>theme</strong> (<em>str</em>) – Color theme name</p></li>
+<li><p><strong>data</strong> (<a class="reference internal" href="suboptimumg.sweep.sweep_data.html#suboptimumg.sweep.sweep_data.SweepData" title="suboptimumg.sweep.sweep_data.SweepData"><em>SweepData</em></a>) – Sweep data, with 1 or 2 numeric axes free, or 1 categorical and 1 numeric axis free</p></li>
+<li><p><strong>metric</strong> (<a class="reference internal" href="suboptimumg.sweep.types.html#suboptimumg.sweep.types.SweepDatatype" title="suboptimumg.sweep.types.SweepDatatype"><em>SweepDatatype</em></a><em>, </em><em>optional</em>) – Metric to plot (default is SweepDatatype.TOTAL_PTS)</p></li>
+<li><p><strong>plot_type</strong> (<a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html#suboptimumg.plotting.grid_plot_3d.PlotType" title="suboptimumg.plotting.grid_plot_3d.PlotType"><em>PlotType</em></a><em>, </em><em>optional</em>) – Contour or surface, used only with 2 free numeric axes (default is PlotType.CONTOUR)</p></li>
+<li><p><strong>title</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Text for the plot. None (the default) generates text from the swept parameters.</p></li>
+<li><p><strong>subtitle</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Text for the plot. None (the default) generates text from the swept parameters.</p></li>
+<li><p><strong>x_label</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Text for the plot. None (the default) generates text from the swept parameters.</p></li>
+<li><p><strong>y_label</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Text for the plot. None (the default) generates text from the swept parameters.</p></li>
+<li><p><strong>z_label</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Text for the plot. None (the default) generates text from the swept parameters.</p></li>
+<li><p><strong>theme</strong> (<em>str</em><em>, </em><em>optional</em>) – Color theme name (default is DEFAULT_THEME)</p></li>
 <li><p><strong>**plot_options</strong> (<em>object</em>) – Passed to the plotting function, e.g. <cite>fit_curve=True</cite></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A line plot for 1 free parameter, or a contour or surface for 2</p>
+<dd class="field-even"><p>A line plot for 1 free numeric axis, one line per label when a categorical axis is also free,
+or a contour or surface for 2 free numeric axes</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>go.Figure</p>
@@ -563,11 +558,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="suboptimumg.sweep.sweep_results_1var.html"
+       href="suboptimumg.sweep.sweeper.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">suboptimumg.sweep.sweep_results_1var</p>
+        <p class="prev-next-title">suboptimumg.sweep.sweeper</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

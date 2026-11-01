@@ -359,15 +359,11 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.energy_grid_results.html">suboptimumg.sweep.energy_grid_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.executor.html">suboptimumg.sweep.executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.models.html">suboptimumg.sweep.models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep.html">suboptimumg.sweep.motor_sweep</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html">suboptimumg.sweep.motor_sweep_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.multiprocessed_executor.html">suboptimumg.sweep.multiprocessed_executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data.html">suboptimumg.sweep.sweep_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data_interpolation.html">suboptimumg.sweep.sweep_data_interpolation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_plotting.html">suboptimumg.sweep.sweep_plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_1var.html">suboptimumg.sweep.sweep_results_1var</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper.html">suboptimumg.sweep.sweeper</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_1d.html">suboptimumg.sweep.sweeper_1d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.types.html">suboptimumg.sweep.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.utils.html">suboptimumg.sweep.utils</a></li>
 </ul>
@@ -495,25 +491,6 @@
 <dd class="field-odd"><p><strong>vehicle_model</strong> (<a class="reference internal" href="suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.VehicleModel" title="suboptimumg.vehicle.vehicle_models.VehicleModel"><em>VehicleModel</em></a>)</p>
 </dd>
 </dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.powertrain.Powertrain.swap_motor">
-<span class="sig-name descname"><span class="pre">swap_motor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_motor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/powertrain.html#Powertrain.swap_motor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.powertrain.Powertrain.swap_motor" title="Link to this definition">#</a></dt>
-<dd><p>Replace the motor, adjusting total vehicle mass by the mass difference.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>new_motor</strong> (<a class="reference internal" href="suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.MotorModel" title="suboptimumg.vehicle.subsystem_models.MotorModel"><em>MotorModel</em></a>) – Motor to install in place of the current one.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>Total vehicle mass is an independent parameter covering the whole car,
-so swapping a component cannot re-derive it. Instead the difference
-between the outgoing and incoming motor masses is applied to it,
-leaving the rest of the car’s mass untouched.</p>
-</dd></dl>
-
 </dd></dl>
 
 </section>
@@ -565,10 +542,7 @@ leaving the rest of the car’s mass untouched.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Powertrain"><code class="docutils literal notranslate"><span class="pre">Powertrain</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Powertrain.swap_motor"><code class="docutils literal notranslate"><span class="pre">Powertrain.swap_motor()</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.powertrain.powertrain.Powertrain"><code class="docutils literal notranslate"><span class="pre">Powertrain</span></code></a></li>
 </ul>
   </nav></div>
 

@@ -359,15 +359,11 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.energy_grid_results.html">suboptimumg.sweep.energy_grid_results</a></li>
 <li class="toctree-l3 current active"><a aria-current="page" class="current reference internal" href="#">suboptimumg.sweep.executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.models.html">suboptimumg.sweep.models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep.html">suboptimumg.sweep.motor_sweep</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html">suboptimumg.sweep.motor_sweep_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.multiprocessed_executor.html">suboptimumg.sweep.multiprocessed_executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data.html">suboptimumg.sweep.sweep_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data_interpolation.html">suboptimumg.sweep.sweep_data_interpolation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_plotting.html">suboptimumg.sweep.sweep_plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_1var.html">suboptimumg.sweep.sweep_results_1var</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper.html">suboptimumg.sweep.sweeper</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_1d.html">suboptimumg.sweep.sweeper_1d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.types.html">suboptimumg.sweep.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.utils.html">suboptimumg.sweep.utils</a></li>
 </ul>
@@ -506,10 +502,31 @@
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>A configuration whose simulation raises is returned as a <cite>ConfigurationFailure</cite>. It never aborts the batch.
+<p>Each configuration is applied to a copy of <cite>base.vehicle_model</cite> before the car is built, using <cite>build_competition</cite>.
+A configuration whose simulation raises is returned as a <cite>ConfigurationFailure</cite>. It never aborts the batch.
 Only infrastructure failures, such as the process pool dying, raise.</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="suboptimumg.sweep.executor.build_competition">
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.executor.</span></span><span class="sig-name descname"><span class="pre">build_competition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">configuration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/executor.html#build_competition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.executor.build_competition" title="Link to this definition">#</a></dt>
+<dd><p>Build the competition for one configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionData" title="suboptimumg.compsim.models.CompetitionData"><em>CompetitionData</em></a>) – The competition the configuration starts from. It is not modified.</p></li>
+<li><p><strong>configuration</strong> (<a class="reference internal" href="suboptimumg.sweep.models.html#suboptimumg.sweep.models.CarConfiguration" title="suboptimumg.sweep.models.CarConfiguration"><em>CarConfiguration</em></a>) – Changes to apply to the base vehicle, in order</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A competition whose car is built from the changed vehicle</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="suboptimumg.compsim.competition.html#suboptimumg.compsim.competition.Competition" title="suboptimumg.compsim.competition.Competition">Competition</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -565,6 +582,7 @@ Only infrastructure failures, such as the process pool dying, raise.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.executor.SweepExecutor.simulate_configurations"><code class="docutils literal notranslate"><span class="pre">SweepExecutor.simulate_configurations()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.sweep.executor.build_competition"><code class="docutils literal notranslate"><span class="pre">build_competition()</span></code></a></li>
 </ul>
   </nav></div>
 

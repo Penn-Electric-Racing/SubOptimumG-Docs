@@ -336,7 +336,10 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.plotting.color_themes</h1><div class="highlight"><pre>
-<span></span><span class="n">COLOR_THEMES</span> <span class="o">=</span> <span class="p">{</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">plotly.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_colorscale</span><span class="p">,</span> <span class="n">sample_colorscale</span>
+
+<span class="n">COLOR_THEMES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"aero"</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">"colorscale"</span><span class="p">:</span> <span class="s2">"Purples"</span><span class="p">,</span>
         <span class="s2">"dark"</span><span class="p">:</span> <span class="s2">"#4A148C"</span><span class="p">,</span>
@@ -438,6 +441,34 @@
         <span class="k">return</span> <span class="n">COLOR_THEMES</span><span class="p">[</span><span class="n">DEFAULT_THEME</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">COLOR_THEMES</span><span class="p">[</span><span class="n">theme_name</span><span class="p">]</span></div>
+
+
+
+<span class="c1"># Range of a theme's colorscale that trace colors are sampled from, avoiding the pale and white ends</span>
+<span class="n">TRACE_COLOR_RANGE</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_theme_trace_colors">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.color_themes.html#suboptimumg.plotting.color_themes.get_theme_trace_colors">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_theme_trace_colors</span><span class="p">(</span><span class="n">theme_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Pick one color per trace from a theme's colorscale, evenly spaced.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    theme_name : str</span>
+<span class="sd">        Name of the theme</span>
+<span class="sd">    count : int</span>
+<span class="sd">        Number of traces</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list[str]</span>
+<span class="sd">        `count` colors, as plotly color strings</span>
+<span class="sd">    """</span>
+    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">TRACE_COLOR_RANGE</span>
+    <span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">low</span><span class="p">]</span> <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">count</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">sample_colorscale</span><span class="p">(</span><span class="n">get_colorscale</span><span class="p">(</span><span class="n">get_theme</span><span class="p">(</span><span class="n">theme_name</span><span class="p">)[</span><span class="s2">"colorscale"</span><span class="p">]),</span> <span class="n">positions</span><span class="p">)</span></div>
 
 </pre></div>
 

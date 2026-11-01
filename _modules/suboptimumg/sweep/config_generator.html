@@ -338,14 +338,17 @@
   <h1>Source code for suboptimumg.sweep.config_generator</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">ConfigDict</span><span class="p">,</span> <span class="n">Field</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle.vehicle_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">VehicleModel</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">CarConfiguration</span><span class="p">,</span>
+    <span class="n">Modification</span><span class="p">,</span>
     <span class="n">ParameterModification</span><span class="p">,</span>
     <span class="n">SweepGrid</span><span class="p">,</span>
-    <span class="n">SweepParamConfig</span><span class="p">,</span>
+    <span class="n">SweepInput</span><span class="p">,</span>
     <span class="n">SweepPlan</span><span class="p">,</span>
     <span class="n">VehicleDependency</span><span class="p">,</span>
 <span class="p">)</span>
@@ -358,8 +361,8 @@
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="n">inputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">SweepParamConfig</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Swept parameters, one axis each, in this order"</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">SweepInput</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Swept parameters and entries, one axis each, in this order"</span>
     <span class="p">)</span>
     <span class="n">dependencies</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">VehicleDependency</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span>
@@ -383,10 +386,10 @@
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        At each point the swept values come first, in axis order, followed by each dependency's changes, in dependency order.</span>
+<span class="sd">        At each point the categorical replacements come first, then the numeric values, in axis order, followed by each dependency's changes, in dependency order.</span>
 <span class="sd">        Each dependency receives its own deep copy of the vehicle, with the point's swept values and the earlier dependencies' changes applied.</span>
 <span class="sd">        """</span>
-        <span class="n">grid</span> <span class="o">=</span> <span class="n">SweepGrid</span><span class="o">.</span><span class="n">from_sweep_params</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="n">SweepGrid</span><span class="o">.</span><span class="n">from_inputs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span>
         <span class="n">grid</span><span class="o">.</span><span class="n">check_values_are_settable</span><span class="p">(</span><span class="n">base_vehicle</span><span class="p">)</span>
 
         <span class="n">configurations</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">CarConfiguration</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -396,7 +399,7 @@
             <span class="k">for</span> <span class="n">modification</span> <span class="ow">in</span> <span class="n">dependent</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">modification</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dependency_names</span><span class="p">:</span>
                     <span class="n">dependency_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">modification</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-            <span class="n">configurations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">CarConfiguration</span><span class="p">(</span><span class="n">modifications</span><span class="o">=</span><span class="n">swept</span> <span class="o">+</span> <span class="n">dependent</span><span class="p">))</span>
+            <span class="n">configurations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">CarConfiguration</span><span class="p">(</span><span class="n">modifications</span><span class="o">=</span><span class="p">[</span><span class="o">*</span><span class="n">swept</span><span class="p">,</span> <span class="o">*</span><span class="n">dependent</span><span class="p">]))</span>
 
         <span class="k">return</span> <span class="n">SweepPlan</span><span class="p">(</span>
             <span class="n">axes</span><span class="o">=</span><span class="n">grid</span><span class="o">.</span><span class="n">axes</span><span class="p">,</span> <span class="n">configurations</span><span class="o">=</span><span class="n">configurations</span><span class="p">,</span> <span class="n">dependency_names</span><span class="o">=</span><span class="n">dependency_names</span>
@@ -406,22 +409,23 @@
 <div class="viewcode-block" id="SweepConfigGenerator.evaluate_dependencies">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.config_generator.html#suboptimumg.sweep.config_generator.SweepConfigGenerator.evaluate_dependencies">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_dependencies</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">base_vehicle</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">,</span> <span class="n">swept</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ParameterModification</span><span class="p">]</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">base_vehicle</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">,</span> <span class="n">swept</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Modification</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">ParameterModification</span><span class="p">]:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[]</span>
 
         <span class="n">vehicle</span> <span class="o">=</span> <span class="n">base_vehicle</span><span class="o">.</span><span class="n">model_copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">modification</span> <span class="ow">in</span> <span class="n">swept</span><span class="p">:</span>
-            <span class="n">vehicle</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="n">modification</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">modification</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">modification</span><span class="o">.</span><span class="n">apply_to_vehicle</span><span class="p">(</span><span class="n">vehicle</span><span class="p">)</span>
 
         <span class="n">dependent</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ParameterModification</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">dependency</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">:</span>
             <span class="n">changes</span> <span class="o">=</span> <span class="n">dependency</span><span class="p">(</span><span class="n">vehicle</span><span class="o">.</span><span class="n">model_copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 
             <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">changes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="n">vehicle</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-                <span class="n">dependent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ParameterModification</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span>
+                <span class="n">modification</span> <span class="o">=</span> <span class="n">ParameterModification</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">modification</span><span class="o">.</span><span class="n">apply_to_vehicle</span><span class="p">(</span><span class="n">vehicle</span><span class="p">)</span>
+                <span class="n">dependent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">modification</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">dependent</span></div>
 </div>

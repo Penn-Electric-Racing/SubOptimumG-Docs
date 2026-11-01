@@ -1284,44 +1284,6 @@
         <span class="c1"># Rebuild any dependent values after modifying parameters</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">moi_mass_equiv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_rotating_mass_to_linear_mass</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">rebuild_derived_data</span><span class="p">()</span></div>
-
-
-<div class="viewcode-block" id="Car.get_current_params">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle.html#suboptimumg.vehicle.vehicle.Car.get_current_params">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_current_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">object</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Retrieve the current value of a car parameter given its dotted name.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        var_name : str</span>
-<span class="sd">            The name of the parameter to retrieve (e.g., 'pwrtn.motor.max_rpm').</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        object</span>
-<span class="sd">            The current value of the specified parameter.</span>
-
-<span class="sd">        Raises</span>
-<span class="sd">        ------</span>
-<span class="sd">        AttributeError</span>
-<span class="sd">            If `var_name` does not name a car parameter.</span>
-
-<span class="sd">        Notes</span>
-<span class="sd">        -----</span>
-<span class="sd">        Parameters hold values of many types, so the value is returned as-is.</span>
-<span class="sd">        Callers that need a number are responsible for asserting that the</span>
-<span class="sd">        value is numeric, which is application-specific.</span>
-<span class="sd">        """</span>
-        <span class="n">attrs</span> <span class="o">=</span> <span class="n">var_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">obj</span><span class="p">:</span> <span class="nb">object</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span>
-            <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">attrs</span><span class="p">:</span>
-                <span class="n">obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">obj</span>
-        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">var_name</span><span class="si">}</span><span class="s2"> is not a car parameter. Example parameter name: 'pwrtn.motor.max_rpm'"</span>
-            <span class="p">)</span></div>
 </div>
 
 </pre></div>

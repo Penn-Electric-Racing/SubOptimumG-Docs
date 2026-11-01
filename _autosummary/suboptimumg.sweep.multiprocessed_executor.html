@@ -50,7 +50,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="suboptimumg.sweep.sweep_data" href="suboptimumg.sweep.sweep_data.html" />
-    <link rel="prev" title="suboptimumg.sweep.motor_sweep_results" href="suboptimumg.sweep.motor_sweep_results.html" />
+    <link rel="prev" title="suboptimumg.sweep.models" href="suboptimumg.sweep.models.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
@@ -359,15 +359,11 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.energy_grid_results.html">suboptimumg.sweep.energy_grid_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.executor.html">suboptimumg.sweep.executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.models.html">suboptimumg.sweep.models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep.html">suboptimumg.sweep.motor_sweep</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.motor_sweep_results.html">suboptimumg.sweep.motor_sweep_results</a></li>
 <li class="toctree-l3 current active"><a aria-current="page" class="current reference internal" href="#">suboptimumg.sweep.multiprocessed_executor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data.html">suboptimumg.sweep.sweep_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_data_interpolation.html">suboptimumg.sweep.sweep_data_interpolation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_plotting.html">suboptimumg.sweep.sweep_plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweep_results_1var.html">suboptimumg.sweep.sweep_results_1var</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper.html">suboptimumg.sweep.sweeper</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.sweeper_1d.html">suboptimumg.sweep.sweeper_1d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.types.html">suboptimumg.sweep.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.sweep.utils.html">suboptimumg.sweep.utils</a></li>
 </ul>
@@ -511,7 +507,8 @@
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>A configuration whose simulation raises is returned as a <cite>ConfigurationFailure</cite>. It never aborts the batch.
+<p>Each configuration is applied to a copy of <cite>base.vehicle_model</cite> before the car is built, using <cite>build_competition</cite>.
+A configuration whose simulation raises is returned as a <cite>ConfigurationFailure</cite>. It never aborts the batch.
 Only infrastructure failures, such as the process pool dying, raise.</p>
 </dd></dl>
 
@@ -635,12 +632,12 @@ Only infrastructure failures, such as the process pool dying, raise.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="suboptimumg.sweep.motor_sweep_results.html"
+       href="suboptimumg.sweep.models.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">suboptimumg.sweep.motor_sweep_results</p>
+        <p class="prev-next-title">suboptimumg.sweep.models</p>
       </div>
     </a>
     <a class="right-next"
