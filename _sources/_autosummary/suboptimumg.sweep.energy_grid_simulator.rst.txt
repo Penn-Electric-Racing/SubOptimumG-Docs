@@ -1,0 +1,8 @@
+suboptimumg.sweep.energy\_grid\_simulator
+=========================================
+
+.. automodule:: suboptimumg.sweep.energy_grid_simulator
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

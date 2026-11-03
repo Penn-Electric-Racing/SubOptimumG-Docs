@@ -1,7 +1,7 @@
-suboptimumg.sweep.energy\_grid\_results
+suboptimumg.sweep.energy\_grid\_sweeper
 =======================================
 
-.. automodule:: suboptimumg.sweep.energy_grid_results
+.. automodule:: suboptimumg.sweep.energy_grid_sweeper
    :members:
    :undoc-members:
    :show-inheritance:

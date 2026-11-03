@@ -17,12 +17,13 @@ suboptimumg.sweep
    base_sweeper
    config_generator
    constants
-   energy_grid
-   energy_grid_models
-   energy_grid_results
+   energy_grid_data
+   energy_grid_simulator
+   energy_grid_sweeper
    executor
    models
    multiprocessed_executor
+   simulator
    sweep_data
    sweep_data_interpolation
    sweep_plotting
