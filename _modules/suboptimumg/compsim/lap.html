@@ -337,7 +337,6 @@
                   
   <h1>Source code for suboptimumg.compsim.lap</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
@@ -345,15 +344,33 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">..models</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationState</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..track</span><span class="w"> </span><span class="kn">import</span> <span class="n">Track</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">Car</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle.vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">STRAIGHT_RADIUS_THRESHOLD</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">InternalData</span><span class="p">,</span> <span class="n">InternalDataSeedInfo</span><span class="p">,</span> <span class="n">LapsimResults</span>
 
+<span class="n">V_MAX_RADIUS_GRID_POINTS</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">150</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_calculate_v_max_profile</span><span class="p">(</span><span class="n">mycar</span><span class="p">:</span> <span class="n">Car</span><span class="p">,</span> <span class="n">r_full_track</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_exact_v_max</span><span class="p">(</span><span class="n">mycar</span><span class="p">:</span> <span class="n">Car</span><span class="p">,</span> <span class="n">radii</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+    <span class="n">unique_radii</span><span class="p">,</span> <span class="n">inverse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">radii</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">v_max_unique</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mycar</span><span class="o">.</span><span class="n">max_stable_speed</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="p">))</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">unique_radii</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">v_max_unique</span><span class="p">[</span><span class="n">inverse</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_interpolated_v_max</span><span class="p">(</span>
+    <span class="n">mycar</span><span class="p">:</span> <span class="n">Car</span><span class="p">,</span> <span class="n">radii</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">radius_grid_points</span><span class="p">:</span> <span class="nb">int</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+    <span class="n">radius_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">radii</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">radii</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">radius_grid_points</span><span class="p">)</span>
+    <span class="n">v_max_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mycar</span><span class="o">.</span><span class="n">max_stable_speed</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="p">))</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">radius_grid</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">radii</span><span class="p">,</span> <span class="n">radius_grid</span><span class="p">,</span> <span class="n">v_max_grid</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_calculate_v_max_profile</span><span class="p">(</span>
+    <span class="n">mycar</span><span class="p">:</span> <span class="n">Car</span><span class="p">,</span>
+    <span class="n">r_full_track</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+    <span class="n">radius_grid_points</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">V_MAX_RADIUS_GRID_POINTS</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Calculate the maximum velocity profile for the entire track.</span>
-
-<span class="sd">    Uses LRU caching to efficiently handle repeated radius values.</span>
-<span class="sd">    The cache is created per function call to be specific to the mycar instance.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -361,18 +378,31 @@
 <span class="sd">        The car object</span>
 <span class="sd">    r_full_track : NDArray[np.float64]</span>
 <span class="sd">        Array of radius values for each point on the track</span>
+<span class="sd">    radius_grid_points : int, optional</span>
+<span class="sd">        Number of radii to solve exactly when interpolating, by default</span>
+<span class="sd">        ``V_MAX_RADIUS_GRID_POINTS``. Tracks with at most this many unique</span>
+<span class="sd">        cornering radii are solved exactly at every unique radius instead.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    NDArray[np.float64]</span>
 <span class="sd">        Array of maximum velocities for each point on the track</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Solving many radii dominates runtime, more efficient to grid interpolate. Max</span>
+<span class="sd">    stable speed is solved on a geometric grid spanning the track's cornering radii and</span>
+<span class="sd">    linearly interpolated, which is accurate because it is monotonic and smooth in</span>
+<span class="sd">    radius. Radii beyond ``STRAIGHT_RADIUS_THRESHOLD`` are straights with no limit.</span>
 <span class="sd">    """</span>
+    <span class="n">is_corner</span> <span class="o">=</span> <span class="n">r_full_track</span> <span class="o">&lt;=</span> <span class="n">STRAIGHT_RADIUS_THRESHOLD</span>
+    <span class="n">corner_radii</span> <span class="o">=</span> <span class="n">r_full_track</span><span class="p">[</span><span class="n">is_corner</span><span class="p">]</span>
 
-    <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">cached_max_speed</span><span class="p">(</span><span class="n">radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">mycar</span><span class="o">.</span><span class="n">max_stable_speed</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
-
-    <span class="n">v_max_profile</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cached_max_speed</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">r_full_track</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">v_max_profile</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">r_full_track</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">corner_radii</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">radius_grid_points</span><span class="p">:</span>
+        <span class="n">v_max_profile</span><span class="p">[</span><span class="n">is_corner</span><span class="p">]</span> <span class="o">=</span> <span class="n">_exact_v_max</span><span class="p">(</span><span class="n">mycar</span><span class="p">,</span> <span class="n">corner_radii</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">v_max_profile</span><span class="p">[</span><span class="n">is_corner</span><span class="p">]</span> <span class="o">=</span> <span class="n">_interpolated_v_max</span><span class="p">(</span><span class="n">mycar</span><span class="p">,</span> <span class="n">corner_radii</span><span class="p">,</span> <span class="n">radius_grid_points</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">v_max_profile</span>
 

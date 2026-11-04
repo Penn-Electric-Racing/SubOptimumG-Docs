@@ -351,6 +351,8 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">.subsystem_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">DriveSetup</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.vehicle_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ComplexSuspensionModel</span><span class="p">,</span> <span class="n">SimpleSuspensionModel</span><span class="p">,</span> <span class="n">VehicleModel</span>
 
+<span class="n">STRAIGHT_RADIUS_THRESHOLD</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10000.0</span>
+
 
 <div class="viewcode-block" id="Car">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle.html#suboptimumg.vehicle.vehicle.Car">[docs]</a>
@@ -1217,7 +1219,7 @@
 <span class="sd">        The acceleration does not need to be near zero when converged (e.g.</span>
 <span class="sd">        for an understeery car).</span>
 <span class="sd">        """</span>
-        <span class="k">if</span> <span class="n">radius</span> <span class="o">&gt;</span> <span class="mi">10000</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">radius</span> <span class="o">&gt;</span> <span class="n">STRAIGHT_RADIUS_THRESHOLD</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span>
 
         <span class="n">v_min</span> <span class="o">=</span> <span class="mf">0.0</span>
