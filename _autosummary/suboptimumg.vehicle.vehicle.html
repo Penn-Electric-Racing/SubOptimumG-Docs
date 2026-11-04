@@ -550,6 +550,28 @@ front-left, front-right, rear-left, rear-right order.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.calculate_drive_force">
+<span class="sig-name descname"><span class="pre">calculate_drive_force</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">velocity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">long_forces</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.calculate_drive_force"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.calculate_drive_force" title="Link to this definition">#</a></dt>
+<dd><p>Steady-state tractive force available at the given speed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>velocity</strong> (<em>float</em>) – Vehicle speed (m/s).</p></li>
+<li><p><strong>long_forces</strong> (<em>list</em><em> of </em><em>float</em>) – Longitudinal grip budget of each tire (N), in front-left,
+front-right, rear-left, rear-right order.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Drive force limited by the motors, the tires, and the total power
+limit (N).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.calculate_tire_forces">
 <span class="sig-name descname"><span class="pre">calculate_tire_forces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">acc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_acc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roll</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backwards_pass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.calculate_tire_forces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.calculate_tire_forces" title="Link to this definition">#</a></dt>
 <dd><p>Compute the forces on each tire from weight transfer, aero lift and cornering.</p>
@@ -576,7 +598,7 @@ front-left, front-right, rear-left, rear-right order.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.calculate_top_speed">
 <span class="sig-name descname"><span class="pre">calculate_top_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_low</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_high</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.calculate_top_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.calculate_top_speed" title="Link to this definition">#</a></dt>
-<dd><p>Binary search for the highest speed at which max motor force still exceeds drag and rolling resistance.</p>
+<dd><p>Binary search for the highest speed at which the drive force still exceeds drag and rolling resistance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -593,9 +615,12 @@ front-left, front-right, rear-left, rear-right order.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>Motor torque drops to zero above <code class="docutils literal notranslate"><span class="pre">max_rpm</span></code>, so the result may be set by
-gearing and <code class="docutils literal notranslate"><span class="pre">max_rpm</span></code> rather than by aerodynamic drag. In that case the
-motor still has surplus force just below the returned speed. The bounds are
+<p>The drive force comes from <cite>calculate_drive_force</cite>, so it accounts for
+the drive setup (all four motors on AWD), the tires’ straight-line
+longitudinal grip, and the total power limit. Motor torque drops to
+zero above <code class="docutils literal notranslate"><span class="pre">max_rpm</span></code>, so the result may be set by gearing and
+<code class="docutils literal notranslate"><span class="pre">max_rpm</span></code> rather than by aerodynamic drag. In that case the motor
+still has surplus force just below the returned speed. The bounds are
 not checked: if the car can still accelerate at <code class="docutils literal notranslate"><span class="pre">v_high</span></code>, the result
 collapses onto <code class="docutils literal notranslate"><span class="pre">v_high</span></code>.</p>
 </dd></dl>
@@ -641,6 +666,33 @@ and rear-right tires.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.clip_drive_force_to_total_power_limit">
+<span class="sig-name descname"><span class="pre">clip_drive_force_to_total_power_limit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ground_force</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.clip_drive_force_to_total_power_limit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.clip_drive_force_to_total_power_limit" title="Link to this definition">#</a></dt>
+<dd><p>Reduce the drive force so the DC bus power stays under the total power limit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ground_force</strong> (<em>float</em>) – Total tractive force before the clip (N).</p></li>
+<li><p><strong>velocity</strong> (<em>float</em>) – Vehicle speed used for motor rpm and mechanical power (m/s).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Drive force after the clip (N).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Only AWD needs this clip. The per-motor power limit inside
+<cite>Motor.calculate_max_ground_force_and_motor_power</cite> already enforces
+the total for a single motor. The efficiency is evaluated once at the
+unclipped operating point and reused for the rescale, so the reported
+power can land slightly above the limit when the efficiency at the
+clipped torque differs.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.coast_forwards_dx">
 <span class="sig-name descname"><span class="pre">coast_forwards_dx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.coast_forwards_dx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.coast_forwards_dx" title="Link to this definition">#</a></dt>
 <dd><p>Lift off the throttle and coast (with regen) for one distance step.</p>
@@ -674,6 +726,52 @@ tire radius squared, summed across all rotating components.</p>
 <dd class="field-even"><p>float</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.dc_bus_power">
+<span class="sig-name descname"><span class="pre">dc_bus_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ground_force</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.dc_bus_power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.dc_bus_power" title="Link to this definition">#</a></dt>
+<dd><p>Battery power drawn to produce the given ground force at the given speed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ground_force</strong> (<em>float</em>) – Total tractive force at the contact patches (N).</p></li>
+<li><p><strong>velocity</strong> (<em>float</em>) – Vehicle speed used for motor rpm and mechanical power (m/s).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DC bus power (W).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.grip_limited_drive_force">
+<span class="sig-name descname"><span class="pre">grip_limited_drive_force</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">single_motor_force</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">long_forces</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.grip_limited_drive_force"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.grip_limited_drive_force" title="Link to this definition">#</a></dt>
+<dd><p>Total tractive force the drive setup can put on the ground.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>single_motor_force</strong> (<em>float</em>) – Ground force one motor can deliver through its gearing (N).</p></li>
+<li><p><strong>long_forces</strong> (<em>list</em><em> of </em><em>float</em>) – Longitudinal grip budget of each tire (N), in front-left,
+front-right, rear-left, rear-right order.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Grip-limited drive force summed over the driven tires (N).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>AWD assumes equal gear ratios and perfect torque vectoring: each
+motor’s force is clipped to its own tire’s grip, then summed. RWD
+approximates a differential as a weighted average of open and
+closed behavior, then clips to the single motor’s force.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -721,6 +819,33 @@ for an understeery car).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.motor_count">
+<span class="sig-name descname"><span class="pre">motor_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.motor_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.motor_count" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle.Car.per_motor_torque_from_ground_force">
+<span class="sig-name descname"><span class="pre">per_motor_torque_from_ground_force</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ground_force</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle.html#Car.per_motor_torque_from_ground_force"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle.Car.per_motor_torque_from_ground_force" title="Link to this definition">#</a></dt>
+<dd><p>Shaft torque of one motor given the total ground force, assuming an equal split.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ground_force</strong> (<em>float</em>) – Total tractive force at the contact patches (N).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Shaft torque of a single motor (Nm).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -810,14 +935,20 @@ investigation of longitudinal weight transfer behavior).</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.accelerate_forwards_dx"><code class="docutils literal notranslate"><span class="pre">Car.accelerate_forwards_dx()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.brake_backwards_dx"><code class="docutils literal notranslate"><span class="pre">Car.brake_backwards_dx()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.calculate_and_return_longitudinal_forces"><code class="docutils literal notranslate"><span class="pre">Car.calculate_and_return_longitudinal_forces()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.calculate_drive_force"><code class="docutils literal notranslate"><span class="pre">Car.calculate_drive_force()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.calculate_tire_forces"><code class="docutils literal notranslate"><span class="pre">Car.calculate_tire_forces()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.calculate_top_speed"><code class="docutils literal notranslate"><span class="pre">Car.calculate_top_speed()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.car_weight_distributor"><code class="docutils literal notranslate"><span class="pre">Car.car_weight_distributor()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.check_all_tires_valid_lateral_force"><code class="docutils literal notranslate"><span class="pre">Car.check_all_tires_valid_lateral_force()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.clip_drive_force_to_total_power_limit"><code class="docutils literal notranslate"><span class="pre">Car.clip_drive_force_to_total_power_limit()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.coast_forwards_dx"><code class="docutils literal notranslate"><span class="pre">Car.coast_forwards_dx()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.convert_rotating_mass_to_linear_mass"><code class="docutils literal notranslate"><span class="pre">Car.convert_rotating_mass_to_linear_mass()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.dc_bus_power"><code class="docutils literal notranslate"><span class="pre">Car.dc_bus_power()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.grip_limited_drive_force"><code class="docutils literal notranslate"><span class="pre">Car.grip_limited_drive_force()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.max_stable_speed"><code class="docutils literal notranslate"><span class="pre">Car.max_stable_speed()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.modify_params"><code class="docutils literal notranslate"><span class="pre">Car.modify_params()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.motor_count"><code class="docutils literal notranslate"><span class="pre">Car.motor_count()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.per_motor_torque_from_ground_force"><code class="docutils literal notranslate"><span class="pre">Car.per_motor_torque_from_ground_force()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.sus"><code class="docutils literal notranslate"><span class="pre">Car.sus</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle.Car.try_accelerate_forwards_for_max_speed_calc"><code class="docutils literal notranslate"><span class="pre">Car.try_accelerate_forwards_for_max_speed_calc()</span></code></a></li>
 </ul>

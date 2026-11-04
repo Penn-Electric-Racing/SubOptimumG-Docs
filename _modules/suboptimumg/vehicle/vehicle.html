@@ -395,7 +395,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">calculate_top_speed</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">max_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">v_low</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">v_high</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">50</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Binary search for the highest speed at which max motor force still exceeds drag and rolling resistance.</span>
+<span class="w">        </span><span class="sd">"""Binary search for the highest speed at which the drive force still exceeds drag and rolling resistance.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -413,9 +413,12 @@
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        Motor torque drops to zero above ``max_rpm``, so the result may be set by</span>
-<span class="sd">        gearing and ``max_rpm`` rather than by aerodynamic drag. In that case the</span>
-<span class="sd">        motor still has surplus force just below the returned speed. The bounds are</span>
+<span class="sd">        The drive force comes from `calculate_drive_force`, so it accounts for</span>
+<span class="sd">        the drive setup (all four motors on AWD), the tires' straight-line</span>
+<span class="sd">        longitudinal grip, and the total power limit. Motor torque drops to</span>
+<span class="sd">        zero above ``max_rpm``, so the result may be set by gearing and</span>
+<span class="sd">        ``max_rpm`` rather than by aerodynamic drag. In that case the motor</span>
+<span class="sd">        still has surplus force just below the returned speed. The bounds are</span>
 <span class="sd">        not checked: if the car can still accelerate at ``v_high``, the result</span>
 <span class="sd">        collapses onto ``v_high``.</span>
 <span class="sd">        """</span>
@@ -427,14 +430,13 @@
             <span class="n">forces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_tire_forces</span><span class="p">(</span><span class="n">acc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">lat_acc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">pitch</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vel</span><span class="o">=</span><span class="n">v_current</span><span class="p">)</span>
             <span class="n">rolling_resistance</span> <span class="o">=</span> <span class="n">forces</span><span class="o">.</span><span class="n">total_normal</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">rolling_coeff</span>
             <span class="n">drag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aero</span><span class="o">.</span><span class="n">get_drag</span><span class="p">(</span><span class="n">v_current</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-            <span class="n">motor_f</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">calculate_max_ground_force_and_motor_power</span><span class="p">(</span>
-                <span class="n">v_current</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">ratio</span>
-            <span class="p">)</span>
+            <span class="n">long_forces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_and_return_longitudinal_forces</span><span class="p">(</span><span class="n">forces</span><span class="p">)</span>
+            <span class="n">drive_force</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_drive_force</span><span class="p">(</span><span class="n">v_current</span><span class="p">,</span> <span class="n">long_forces</span><span class="p">)</span>
 
             <span class="n">total_resist</span> <span class="o">=</span> <span class="n">rolling_resistance</span> <span class="o">+</span> <span class="n">drag</span>
 
             <span class="c1"># Binary search adjustment</span>
-            <span class="k">if</span> <span class="n">motor_f</span> <span class="o">&gt;</span> <span class="n">total_resist</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">drive_force</span> <span class="o">&gt;</span> <span class="n">total_resist</span><span class="p">:</span>
                 <span class="n">v_low</span> <span class="o">=</span> <span class="n">v_current</span>  <span class="c1"># motor can overcome resistance, try higher speed</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">v_high</span> <span class="o">=</span> <span class="n">v_current</span>  <span class="c1"># resistance too high, try lower speed</span>
@@ -694,6 +696,159 @@
         <span class="p">]</span></div>
 
 
+<div class="viewcode-block" id="Car.motor_count">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle.html#suboptimumg.vehicle.vehicle.Car.motor_count">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">motor_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">4</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">setup</span> <span class="o">==</span> <span class="n">DriveSetup</span><span class="o">.</span><span class="n">FOUR_WHEEL_DRIVE</span> <span class="k">else</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="Car.grip_limited_drive_force">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle.html#suboptimumg.vehicle.vehicle.Car.grip_limited_drive_force">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">grip_limited_drive_force</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">single_motor_force</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">long_forces</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Total tractive force the drive setup can put on the ground.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        single_motor_force : float</span>
+<span class="sd">            Ground force one motor can deliver through its gearing (N).</span>
+<span class="sd">        long_forces : list of float</span>
+<span class="sd">            Longitudinal grip budget of each tire (N), in front-left,</span>
+<span class="sd">            front-right, rear-left, rear-right order.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Grip-limited drive force summed over the driven tires (N).</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        AWD assumes equal gear ratios and perfect torque vectoring: each</span>
+<span class="sd">        motor's force is clipped to its own tire's grip, then summed. RWD</span>
+<span class="sd">        approximates a differential as a weighted average of open and</span>
+<span class="sd">        closed behavior, then clips to the single motor's force.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">setup</span> <span class="o">==</span> <span class="n">DriveSetup</span><span class="o">.</span><span class="n">FOUR_WHEEL_DRIVE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">single_motor_force</span><span class="p">,</span> <span class="n">tire_force</span><span class="p">)</span> <span class="k">for</span> <span class="n">tire_force</span> <span class="ow">in</span> <span class="n">long_forces</span><span class="p">)</span>
+
+        <span class="n">rear_left</span><span class="p">,</span> <span class="n">rear_right</span> <span class="o">=</span> <span class="n">long_forces</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">long_forces</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">differential_force</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="mi">2</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="n">rear_left</span><span class="p">,</span> <span class="n">rear_right</span><span class="p">)</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">rear_left</span><span class="p">,</span> <span class="n">rear_right</span><span class="p">)</span>
+        <span class="p">)</span> <span class="o">*</span> <span class="mf">0.666666</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">single_motor_force</span><span class="p">,</span> <span class="n">differential_force</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Car.per_motor_torque_from_ground_force">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle.html#suboptimumg.vehicle.vehicle.Car.per_motor_torque_from_ground_force">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">per_motor_torque_from_ground_force</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ground_force</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Shaft torque of one motor given the total ground force, assuming an equal split.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ground_force : float</span>
+<span class="sd">            Total tractive force at the contact patches (N).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Shaft torque of a single motor (Nm).</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">ground_force</span>
+            <span class="o">*</span> <span class="n">in_to_m</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">tire_radius</span><span class="p">)</span>
+            <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">motor_count</span><span class="p">()</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">ratio</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">mechanical_efficiency</span><span class="p">())</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Car.dc_bus_power">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle.html#suboptimumg.vehicle.vehicle.Car.dc_bus_power">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dc_bus_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ground_force</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">velocity</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Battery power drawn to produce the given ground force at the given speed.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ground_force : float</span>
+<span class="sd">            Total tractive force at the contact patches (N).</span>
+<span class="sd">        velocity : float</span>
+<span class="sd">            Vehicle speed used for motor rpm and mechanical power (m/s).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            DC bus power (W).</span>
+<span class="sd">        """</span>
+        <span class="n">motor_rpm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">v_to_rpm</span><span class="p">(</span><span class="n">velocity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">ratio</span><span class="p">)</span>
+        <span class="n">per_motor_torque</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">per_motor_torque_from_ground_force</span><span class="p">(</span><span class="n">ground_force</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">ground_force</span> <span class="o">*</span> <span class="n">velocity</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">powertrain_efficiency</span><span class="p">(</span><span class="n">motor_rpm</span><span class="p">,</span> <span class="n">per_motor_torque</span><span class="p">)</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Car.clip_drive_force_to_total_power_limit">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle.html#suboptimumg.vehicle.vehicle.Car.clip_drive_force_to_total_power_limit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clip_drive_force_to_total_power_limit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ground_force</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">velocity</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Reduce the drive force so the DC bus power stays under the total power limit.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ground_force : float</span>
+<span class="sd">            Total tractive force before the clip (N).</span>
+<span class="sd">        velocity : float</span>
+<span class="sd">            Vehicle speed used for motor rpm and mechanical power (m/s).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Drive force after the clip (N).</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Only AWD needs this clip. The per-motor power limit inside</span>
+<span class="sd">        `Motor.calculate_max_ground_force_and_motor_power` already enforces</span>
+<span class="sd">        the total for a single motor. The efficiency is evaluated once at the</span>
+<span class="sd">        unclipped operating point and reused for the rescale, so the reported</span>
+<span class="sd">        power can land slightly above the limit when the efficiency at the</span>
+<span class="sd">        clipped torque differs.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">setup</span> <span class="o">!=</span> <span class="n">DriveSetup</span><span class="o">.</span><span class="n">FOUR_WHEEL_DRIVE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ground_force</span>
+
+        <span class="n">motor_rpm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">v_to_rpm</span><span class="p">(</span><span class="n">velocity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">ratio</span><span class="p">)</span>
+        <span class="n">per_motor_torque</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">per_motor_torque_from_ground_force</span><span class="p">(</span><span class="n">ground_force</span><span class="p">)</span>
+        <span class="n">powertrain_efficiency</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">powertrain_efficiency</span><span class="p">(</span><span class="n">motor_rpm</span><span class="p">,</span> <span class="n">per_motor_torque</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ground_force</span> <span class="o">*</span> <span class="n">velocity</span> <span class="o">/</span> <span class="n">powertrain_efficiency</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">accum</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">total_pow_lim</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">accum</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">total_pow_lim</span> <span class="o">*</span> <span class="n">powertrain_efficiency</span> <span class="o">/</span> <span class="n">velocity</span>
+        <span class="k">return</span> <span class="n">ground_force</span></div>
+
+
+<div class="viewcode-block" id="Car.calculate_drive_force">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle.html#suboptimumg.vehicle.vehicle.Car.calculate_drive_force">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_drive_force</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">velocity</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">long_forces</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Steady-state tractive force available at the given speed.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        velocity : float</span>
+<span class="sd">            Vehicle speed (m/s).</span>
+<span class="sd">        long_forces : list of float</span>
+<span class="sd">            Longitudinal grip budget of each tire (N), in front-left,</span>
+<span class="sd">            front-right, rear-left, rear-right order.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Drive force limited by the motors, the tires, and the total power</span>
+<span class="sd">            limit (N).</span>
+<span class="sd">        """</span>
+        <span class="n">single_motor_force</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">calculate_max_ground_force_and_motor_power</span><span class="p">(</span>
+            <span class="n">velocity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">ratio</span>
+        <span class="p">)</span>
+        <span class="n">grip_limited_force</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grip_limited_drive_force</span><span class="p">(</span><span class="n">single_motor_force</span><span class="p">,</span> <span class="n">long_forces</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clip_drive_force_to_total_power_limit</span><span class="p">(</span><span class="n">grip_limited_force</span><span class="p">,</span> <span class="n">velocity</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="Car.try_accelerate_forwards_for_max_speed_calc">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle.html#suboptimumg.vehicle.vehicle.Car.try_accelerate_forwards_for_max_speed_calc">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">try_accelerate_forwards_for_max_speed_calc</span><span class="p">(</span>
@@ -736,43 +891,7 @@
             <span class="c1"># Then, we check if the longitudinal force the tires provide exceeds the resistive force</span>
             <span class="n">long_forces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_and_return_longitudinal_forces</span><span class="p">(</span><span class="n">forces</span><span class="p">)</span>
 
-            <span class="c1"># Check for motor force</span>
-            <span class="n">motor_f</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">calculate_max_ground_force_and_motor_power</span><span class="p">(</span>
-                <span class="n">v_current</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">ratio</span>
-            <span class="p">)</span>
-
-            <span class="c1"># Calculate f_long_ptrain based on drive setup</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">setup</span> <span class="o">==</span> <span class="n">DriveSetup</span><span class="o">.</span><span class="n">FOUR_WHEEL_DRIVE</span><span class="p">:</span>
-                <span class="c1"># AWD logic: sum the minimum of motor force and each tire's</span>
-                <span class="c1"># force. ASSUME ALL GEAR RATIOS EQUAL.</span>
-                <span class="n">f_long_ptrain</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">motor_f</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">long_forces</span><span class="p">[:])</span>
-
-                <span class="c1"># LUT-aware powertrain efficiency at this operating point so</span>
-                <span class="c1"># the F-&gt;P-&gt;F clip is consistent with the LUT path used inside</span>
-                <span class="c1"># calculate_max_ground_force_and_motor_power. Steady-state</span>
-                <span class="c1"># corner check, so v_current is the right velocity here (no</span>
-                <span class="c1"># v_avg, unlike the dx-step accelerate function).</span>
-                <span class="c1"># Recover per-motor shaft torque from total ground force:</span>
-                <span class="c1">#   T_motor = (f_total / 4) * r / (ratio * eta_mech)</span>
-                <span class="n">motor_rpm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">v_to_rpm</span><span class="p">(</span><span class="n">v_current</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">ratio</span><span class="p">)</span>
-                <span class="n">tire_radius_m</span> <span class="o">=</span> <span class="n">in_to_m</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">tire_radius</span><span class="p">)</span>
-                <span class="n">eta_mech</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">mechanical_efficiency</span><span class="p">()</span>
-                <span class="n">per_motor_torque</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="n">f_long_ptrain</span> <span class="o">*</span> <span class="n">tire_radius_m</span> <span class="o">/</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">ratio</span> <span class="o">*</span> <span class="n">eta_mech</span><span class="p">)</span>
-                <span class="p">)</span>
-                <span class="n">eta_full</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">powertrain_efficiency</span><span class="p">(</span><span class="n">motor_rpm</span><span class="p">,</span> <span class="n">per_motor_torque</span><span class="p">)</span>
-
-                <span class="c1"># Clip total DC bus power</span>
-                <span class="n">p_predicted</span> <span class="o">=</span> <span class="n">f_long_ptrain</span> <span class="o">*</span> <span class="n">v_current</span> <span class="o">/</span> <span class="n">eta_full</span>
-                <span class="k">if</span> <span class="n">p_predicted</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">accum</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">total_pow_lim</span><span class="p">:</span>
-                    <span class="n">f_long_ptrain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">accum</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">total_pow_lim</span> <span class="o">*</span> <span class="n">eta_full</span> <span class="o">/</span> <span class="n">v_current</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># RWD logic: see accelerate_forwards_dx() for explanation</span>
-                <span class="c1"># TL;DR approximate an LSD</span>
-                <span class="n">f_long_net</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="mi">2</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="n">long_forces</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">long_forces</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">long_forces</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">long_forces</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-                <span class="p">)</span> <span class="o">*</span> <span class="mf">0.666666</span>
-                <span class="n">f_long_ptrain</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">motor_f</span><span class="p">,</span> <span class="n">f_long_net</span><span class="p">)</span>
+            <span class="n">f_long_ptrain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_drive_force</span><span class="p">(</span><span class="n">v_current</span><span class="p">,</span> <span class="n">long_forces</span><span class="p">)</span>
 
             <span class="n">rolling_resistance</span> <span class="o">=</span> <span class="n">forces</span><span class="o">.</span><span class="n">total_normal</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">rolling_coeff</span>
             <span class="n">drag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aero</span><span class="o">.</span><span class="n">get_drag</span><span class="p">(</span><span class="n">v_current</span><span class="p">,</span> <span class="n">lat_acc</span><span class="p">)</span>
@@ -823,59 +942,21 @@
         <span class="c1"># First, we check if each tire can actually satisfy its demands.</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_all_tires_valid_lateral_force</span><span class="p">(</span><span class="n">forces</span><span class="p">):</span>
             <span class="n">sliding</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="c1"># Set the force to be the least grippy tire's f_long times two (open diff)</span>
             <span class="n">long_forces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_and_return_longitudinal_forces</span><span class="p">(</span><span class="n">forces</span><span class="p">)</span>
-            <span class="c1"># in the case of rear wheel drive, it's very magic#-y to</span>
-            <span class="c1"># exactly model a diff. Instead, we will assume a weighted avg</span>
-            <span class="c1"># of open vs closed diff; still magic#-y but very simple.</span>
-            <span class="n">f_long_net</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="mi">2</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="n">long_forces</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">long_forces</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">long_forces</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">long_forces</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-            <span class="p">)</span> <span class="o">*</span> <span class="mf">0.666666</span>
-            <span class="c1"># f_long_net = 2 * min(long_forces[2], long_forces[3])</span>
-            <span class="c1"># Restrict the acceleration with the motor force limit at this speed</span>
             <span class="n">motor_f</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">calculate_max_ground_force_and_motor_power</span><span class="p">(</span>
                 <span class="n">v_current</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">ratio</span>
-            <span class="p">)</span>  <span class="c1"># in the case of awd, motor_f should be the max force a single motor can apply</span>
-            <span class="n">f_long_ptrain</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">motor_f</span><span class="p">,</span> <span class="n">f_long_net</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">f_long_ptrain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grip_limited_drive_force</span><span class="p">(</span><span class="n">motor_f</span><span class="p">,</span> <span class="n">long_forces</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">setup</span> <span class="o">==</span> <span class="n">DriveSetup</span><span class="o">.</span><span class="n">FOUR_WHEEL_DRIVE</span><span class="p">:</span>
-                <span class="c1"># ASSUME ALL GEAR RATIOS EQUAL AND PERFECT TV.</span>
-                <span class="c1"># Start grip-limited: each motor's force is clipped to that</span>
-                <span class="c1"># corner's available longitudinal grip, then summed.</span>
-                <span class="n">f_long_ptrain</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">motor_f</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">long_forces</span><span class="p">[:])</span>
-
-                <span class="c1"># Power is integrated over the step, so the 80 kW system</span>
-                <span class="c1"># constraint must be checked at v_avg, not state.v. Estimate</span>
-                <span class="c1"># v_avg from the grip-limited force, refine with one pass.</span>
-                <span class="n">acc_est</span> <span class="o">=</span> <span class="p">(</span><span class="n">f_long_ptrain</span> <span class="o">-</span> <span class="n">drag</span> <span class="o">-</span> <span class="n">rolling_resistance</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">mass</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">moi_mass_equiv</span>
-                <span class="p">)</span>
-                <span class="n">v_final_est_sq</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">v_current</span> <span class="o">*</span> <span class="n">v_current</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">acc_est</span> <span class="o">*</span> <span class="n">distance_step</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-                <span class="n">v_avg_est</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">v_current</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">v_final_est_sq</span><span class="p">))</span>
-
-                <span class="c1"># LUT-aware powertrain efficiency. The per-motor force calc</span>
-                <span class="c1"># above already used the LUT internally; the F-&gt;P-&gt;F clip must</span>
-                <span class="c1"># use the same eta to stay self-consistent. Recover per-motor</span>
-                <span class="c1"># shaft torque from total ground force assuming equal split:</span>
-                <span class="c1">#   f_ground = T_motor * ratio * eta_mech / r_tire   (per motor)</span>
-                <span class="c1"># so T_motor = (f_total / 4) * r / (ratio * eta_mech).</span>
-                <span class="c1"># TODO: per-wheel v differs in a corner (inner/outer); this</span>
-                <span class="c1"># still assumes all four wheels travel at vehicle speed.</span>
-                <span class="n">motor_rpm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">v_to_rpm</span><span class="p">(</span><span class="n">v_current</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">ratio</span><span class="p">)</span>
-                <span class="n">tire_radius_m</span> <span class="o">=</span> <span class="n">in_to_m</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">tire_radius</span><span class="p">)</span>
-                <span class="n">eta_mech</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">mechanical_efficiency</span><span class="p">()</span>
-                <span class="n">per_motor_torque</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="n">f_long_ptrain</span> <span class="o">*</span> <span class="n">tire_radius_m</span> <span class="o">/</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">ratio</span> <span class="o">*</span> <span class="n">eta_mech</span><span class="p">)</span>
-                <span class="p">)</span>
-                <span class="n">eta_full</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">powertrain_efficiency</span><span class="p">(</span><span class="n">motor_rpm</span><span class="p">,</span> <span class="n">per_motor_torque</span><span class="p">)</span>
-
-                <span class="c1"># Clip total DC bus power</span>
-                <span class="c1"># First-order rescale: shrinking f also shrinks per_motor_torque</span>
-                <span class="c1"># which slightly shifts eta_full, but the change is small over</span>
-                <span class="c1"># a single rescale so one pass converges in practice.</span>
-                <span class="n">p_predicted</span> <span class="o">=</span> <span class="n">f_long_ptrain</span> <span class="o">*</span> <span class="n">v_avg_est</span> <span class="o">/</span> <span class="n">eta_full</span>
-                <span class="k">if</span> <span class="n">p_predicted</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">accum</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">total_pow_lim</span><span class="p">:</span>
-                    <span class="n">f_long_ptrain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">accum</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">total_pow_lim</span> <span class="o">*</span> <span class="n">eta_full</span> <span class="o">/</span> <span class="n">v_avg_est</span>
+            <span class="c1"># Power is integrated over the step, so the total power limit is</span>
+            <span class="c1"># checked at the step's average speed, estimated from the</span>
+            <span class="c1"># grip-limited force.</span>
+            <span class="n">acc_est</span> <span class="o">=</span> <span class="p">(</span><span class="n">f_long_ptrain</span> <span class="o">-</span> <span class="n">drag</span> <span class="o">-</span> <span class="n">rolling_resistance</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">mass</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">moi_mass_equiv</span>
+            <span class="p">)</span>
+            <span class="n">v_final_est_sq</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">v_current</span> <span class="o">*</span> <span class="n">v_current</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">acc_est</span> <span class="o">*</span> <span class="n">distance_step</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+            <span class="n">v_avg_est</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">v_current</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">v_final_est_sq</span><span class="p">))</span>
+            <span class="n">f_long_ptrain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clip_drive_force_to_total_power_limit</span><span class="p">(</span><span class="n">f_long_ptrain</span><span class="p">,</span> <span class="n">v_avg_est</span><span class="p">)</span>
 
             <span class="n">acc_new</span> <span class="o">=</span> <span class="p">(</span><span class="n">f_long_ptrain</span> <span class="o">-</span> <span class="n">drag</span> <span class="o">-</span> <span class="n">rolling_resistance</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">mass</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">moi_mass_equiv</span>
@@ -902,23 +983,9 @@
         <span class="n">v_final</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">v_current</span> <span class="o">*</span> <span class="n">v_current</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">acc_new</span> <span class="o">*</span> <span class="n">distance_step</span><span class="p">)</span>
         <span class="n">v_avg</span> <span class="o">=</span> <span class="p">(</span><span class="n">v_current</span> <span class="o">+</span> <span class="n">v_final</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span>
 
-        <span class="c1"># LUT-aware DC bus power for lap_powers. RWD: all wheel torque flows</span>
-        <span class="c1"># through 1 motor. AWD: 4 motors split it (model assumption).</span>
-        <span class="n">motor_rpm_avg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">v_to_rpm</span><span class="p">(</span><span class="n">v_avg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">ratio</span><span class="p">)</span>
-        <span class="n">n_motors</span> <span class="o">=</span> <span class="mi">4</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">setup</span> <span class="o">==</span> <span class="n">DriveSetup</span><span class="o">.</span><span class="n">FOUR_WHEEL_DRIVE</span> <span class="k">else</span> <span class="mi">1</span>
-        <span class="n">per_motor_torque_avg</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">f_long_ptrain</span>
-            <span class="o">*</span> <span class="n">in_to_m</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">tire_radius</span><span class="p">)</span>
-            <span class="o">/</span> <span class="p">(</span><span class="n">n_motors</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">ratio</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">mechanical_efficiency</span><span class="p">())</span>
-        <span class="p">)</span>
-        <span class="n">p</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">f_long_ptrain</span>
-            <span class="o">*</span> <span class="n">v_avg</span>
-            <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">powertrain_efficiency</span><span class="p">(</span><span class="n">motor_rpm_avg</span><span class="p">,</span> <span class="n">per_motor_torque_avg</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="c1"># Per-motor shaft torque actually delivered (already setup-conditional</span>
-        <span class="c1"># via n_motors). Positive: motor is driving.</span>
-        <span class="n">motor_torque</span> <span class="o">=</span> <span class="n">per_motor_torque_avg</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dc_bus_power</span><span class="p">(</span><span class="n">f_long_ptrain</span><span class="p">,</span> <span class="n">v_avg</span><span class="p">)</span>
+        <span class="c1"># Per-motor shaft torque actually delivered. Positive: motor is driving.</span>
+        <span class="n">motor_torque</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">per_motor_torque_from_ground_force</span><span class="p">(</span><span class="n">f_long_ptrain</span><span class="p">)</span>
         <span class="n">dt</span> <span class="o">=</span> <span class="n">distance_step</span> <span class="o">/</span> <span class="n">v_avg</span>
 
         <span class="c1"># Update state variables</span>
