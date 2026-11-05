@@ -554,31 +554,28 @@
 <span class="n">ParameterHook</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">VehicleModel</span><span class="p">,</span> <span class="n">VehicleModel</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="total_mass_follows_motor_mass">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.total_mass_follows_motor_mass">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">total_mass_follows_motor_mass</span><span class="p">(</span><span class="n">before</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">,</span> <span class="n">after</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Change total vehicle mass by however much the motor mass changed."""</span>
-    <span class="n">motor_mass_change</span> <span class="o">=</span> <span class="n">after</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">mass</span> <span class="o">-</span> <span class="n">before</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">mass</span>
-    <span class="k">if</span> <span class="n">motor_mass_change</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">after</span><span class="o">.</span><span class="n">mass</span> <span class="o">+=</span> <span class="n">motor_mass_change</span></div>
+<span class="k">def</span><span class="w"> </span><span class="nf">_tracked_component_mass</span><span class="p">(</span><span class="n">vehicle</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">mass</span> <span class="o">+</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">accum</span><span class="o">.</span><span class="n">pack_weight</span>
+
+
+<div class="viewcode-block" id="total_mass_follows_component_masses">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.total_mass_follows_component_masses">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">total_mass_follows_component_masses</span><span class="p">(</span><span class="n">before</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">,</span> <span class="n">after</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Change total vehicle mass by however much the motor mass and pack weight changed.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Pack weight is derived from capacity, energy density and non-cell mass, so changing any of</span>
+<span class="sd">    those, or replacing the whole accumulator, moves total mass. Setting `mass` itself is literal.</span>
+<span class="sd">    """</span>
+    <span class="n">component_mass_change</span> <span class="o">=</span> <span class="n">_tracked_component_mass</span><span class="p">(</span><span class="n">after</span><span class="p">)</span> <span class="o">-</span> <span class="n">_tracked_component_mass</span><span class="p">(</span><span class="n">before</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">component_mass_change</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">after</span><span class="o">.</span><span class="n">mass</span> <span class="o">+=</span> <span class="n">component_mass_change</span></div>
 
 
 
-<div class="viewcode-block" id="mass_and_capacity_follow_pack_weight">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.mass_and_capacity_follow_pack_weight">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">mass_and_capacity_follow_pack_weight</span><span class="p">(</span><span class="n">before</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">,</span> <span class="n">after</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Change total mass and pack capacity by however much the pack weight changed."""</span>
-    <span class="n">pack_weight_change</span> <span class="o">=</span> <span class="n">after</span><span class="o">.</span><span class="n">accum</span><span class="o">.</span><span class="n">pack_weight</span> <span class="o">-</span> <span class="n">before</span><span class="o">.</span><span class="n">accum</span><span class="o">.</span><span class="n">pack_weight</span>
-    <span class="k">if</span> <span class="n">pack_weight_change</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">after</span><span class="o">.</span><span class="n">mass</span> <span class="o">+=</span> <span class="n">pack_weight_change</span>
-        <span class="n">after</span><span class="o">.</span><span class="n">accum</span><span class="o">.</span><span class="n">capacity</span> <span class="o">+=</span> <span class="n">pack_weight_change</span> <span class="o">*</span> <span class="n">after</span><span class="o">.</span><span class="n">accum</span><span class="o">.</span><span class="n">energy_density</span></div>
-
-
-
-<span class="n">PARAMETER_HOOKS</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ParameterHook</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">total_mass_follows_motor_mass</span><span class="p">,</span>
-    <span class="n">mass_and_capacity_follow_pack_weight</span><span class="p">,</span>
-<span class="p">]</span>
+<span class="n">PARAMETER_HOOKS</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ParameterHook</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">total_mass_follows_component_masses</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="AlignmentModel">

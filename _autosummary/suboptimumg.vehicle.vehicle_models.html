@@ -1468,26 +1468,12 @@ A <cite>Car</cite> built from this model caches derived values, so a live car mu
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle_models.mass_and_capacity_follow_pack_weight">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.vehicle_models.</span></span><span class="sig-name descname"><span class="pre">mass_and_capacity_follow_pack_weight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">before</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">after</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle_models.html#mass_and_capacity_follow_pack_weight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle_models.mass_and_capacity_follow_pack_weight" title="Link to this definition">#</a></dt>
-<dd><p>Change total mass and pack capacity by however much the pack weight changed.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>before</strong> (<a class="reference internal" href="#suboptimumg.vehicle.vehicle_models.VehicleModel" title="suboptimumg.vehicle.vehicle_models.VehicleModel"><em>VehicleModel</em></a>)</p></li>
-<li><p><strong>after</strong> (<a class="reference internal" href="#suboptimumg.vehicle.vehicle_models.VehicleModel" title="suboptimumg.vehicle.vehicle_models.VehicleModel"><em>VehicleModel</em></a>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle_models.total_mass_follows_motor_mass">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.vehicle_models.</span></span><span class="sig-name descname"><span class="pre">total_mass_follows_motor_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">before</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">after</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle_models.html#total_mass_follows_motor_mass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle_models.total_mass_follows_motor_mass" title="Link to this definition">#</a></dt>
-<dd><p>Change total vehicle mass by however much the motor mass changed.</p>
+<dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle_models.total_mass_follows_component_masses">
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.vehicle_models.</span></span><span class="sig-name descname"><span class="pre">total_mass_follows_component_masses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">before</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">after</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle_models.html#total_mass_follows_component_masses"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle_models.total_mass_follows_component_masses" title="Link to this definition">#</a></dt>
+<dd><p>Change total vehicle mass by however much the motor mass and pack weight changed.</p>
+<p class="rubric">Notes</p>
+<p>Pack weight is derived from capacity, energy density and non-cell mass, so changing any of
+those, or replacing the whole accumulator, moves total mass. Setting <cite>mass</cite> itself is literal.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1631,8 +1617,7 @@ A <cite>Car</cite> built from this model caches derived values, so a live car mu
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle_models.VehicleModel.wb"><code class="docutils literal notranslate"><span class="pre">VehicleModel.wb</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle_models.mass_and_capacity_follow_pack_weight"><code class="docutils literal notranslate"><span class="pre">mass_and_capacity_follow_pack_weight()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle_models.total_mass_follows_motor_mass"><code class="docutils literal notranslate"><span class="pre">total_mass_follows_motor_mass()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.vehicle_models.total_mass_follows_component_masses"><code class="docutils literal notranslate"><span class="pre">total_mass_follows_component_masses()</span></code></a></li>
 </ul>
   </nav></div>
 

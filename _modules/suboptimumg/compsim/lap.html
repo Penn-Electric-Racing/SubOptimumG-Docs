@@ -623,8 +623,8 @@
             <span class="k">if</span> <span class="n">use_coast</span> <span class="ow">and</span> <span class="n">is_coasting</span><span class="p">:</span>
                 <span class="c1"># Coast and regen</span>
                 <span class="n">new_state</span> <span class="o">=</span> <span class="n">mycar</span><span class="o">.</span><span class="n">coast_forwards_dx</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="n">lap_dxs</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">old_state</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">new_state</span><span class="o">.</span><span class="n">v</span> <span class="o">&lt;</span> <span class="n">mycar</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">coast_trigger</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span>
-                    <span class="n">mycar</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">coast_release_offset</span>
+                <span class="k">if</span> <span class="n">new_state</span><span class="o">.</span><span class="n">v</span> <span class="o">&lt;</span> <span class="p">(</span>
+                    <span class="n">mycar</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">coast_trigger</span> <span class="o">-</span> <span class="n">mycar</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pwrtn</span><span class="o">.</span><span class="n">coast_release_offset</span>
                 <span class="p">):</span>
                     <span class="n">is_coasting</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">else</span><span class="p">:</span>

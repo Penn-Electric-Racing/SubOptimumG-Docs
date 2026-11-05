@@ -377,14 +377,22 @@
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="n">pack_weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Battery pack weight (kg)"</span><span class="p">)</span>
     <span class="n">capacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Nominal battery capacity (kWh)"</span><span class="p">)</span>
-    <span class="n">energy_density</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Pack energy density (kWh/kg)"</span><span class="p">)</span>
+    <span class="n">energy_density</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Energy stored per kg of cells (kWh/kg)"</span><span class="p">)</span>
+    <span class="n">non_cell_mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Pack mass that does not scale with capacity, e.g. enclosure and BMS (kg)"</span>
+    <span class="p">)</span>
     <span class="n">energy_reserve</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">"Energy kept in the pack at the end of endurance, as a safety margin (kWh)"</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">total_pow_lim</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Total power limit, per FSAE rules (W)"</span><span class="p">)</span>
+
+    <span class="nd">@computed_field</span>  <span class="c1"># type: ignore[prop-decorator]</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pack_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Battery pack weight: cells for the capacity, plus the non-cell mass (kg)."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">non_cell_mass</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">energy_density</span>
 
     <span class="nd">@computed_field</span>  <span class="c1"># type: ignore[prop-decorator]</span>
     <span class="nd">@property</span>
@@ -684,8 +692,13 @@
     <span class="n">ratio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Gear ratio (wheel_rpm = motor_rpm / ratio)"</span><span class="p">)</span>
     <span class="n">regen_percent</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Regenerative braking percentage (0-1)"</span><span class="p">)</span>
     <span class="n">max_regen</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Maximum regenerative power (W)"</span><span class="p">)</span>
-    <span class="n">coast_trigger</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Coasting trigger threshold"</span><span class="p">)</span>
-    <span class="n">coast_release_offset</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Coasting release offset"</span><span class="p">)</span>
+    <span class="n">coast_trigger</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Speed above which the car starts coasting (m/s)"</span>
+    <span class="p">)</span>
+    <span class="n">coast_release_offset</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"How far below the coast trigger speed must drop for coasting to end (m/s)"</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">moi_gb</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"MOI (kg-m^2) of gearbox as seen by tire"</span><span class="p">)</span>
 
 <div class="viewcode-block" id="PowertrainModel.validate_ratio_plausible">
@@ -708,6 +721,26 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regen_percent</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_regen</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="s2">"WARNING: Regen percent is 1 but max regen is not specified. This will result in no regen braking"</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="PowertrainModel.validate_coasting_can_end">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_coasting_can_end">[docs]</a>
+    <span class="nd">@model_validator</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">"after"</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_coasting_can_end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowertrainModel</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Ensure the car can stop coasting.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Coasting ends once speed drops below `coast_trigger - coast_release_offset`. If that</span>
+<span class="sd">        speed is zero or less, the car coasts until it stops and the lap simulation fails.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">coast_trigger</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coast_release_offset</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Coast trigger </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">coast_trigger</span><span class="si">}</span><span class="s2"> m/s must be above the coast release offset of "</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">coast_release_offset</span><span class="si">}</span><span class="s2"> m/s, or the car never stops coasting"</span>
             <span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 </div>

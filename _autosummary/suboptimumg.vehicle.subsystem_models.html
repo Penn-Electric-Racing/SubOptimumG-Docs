@@ -513,11 +513,11 @@
 <td></td>
 <td><p>ge=0</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.AccumulatorModel.pack_weight" title="suboptimumg.vehicle.subsystem_models.AccumulatorModel.pack_weight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pack_weight</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.AccumulatorModel.non_cell_mass" title="suboptimumg.vehicle.subsystem_models.AccumulatorModel.non_cell_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">non_cell_mass</span></code></a></p></td>
 <td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
 <td><p>Yes</p></td>
 <td></td>
-<td><p>gt=0</p></td>
+<td><p>ge=0</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.AccumulatorModel.total_pow_lim" title="suboptimumg.vehicle.subsystem_models.AccumulatorModel.total_pow_lim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">total_pow_lim</span></code></a></p></td>
 <td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
@@ -531,9 +531,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pack_weight</strong> (<em>Annotated</em><em>[</em><em>float</em><em>, </em><em>Gt</em><em>(</em><em>gt=0</em><em>)</em><em>]</em>)</p></li>
 <li><p><strong>capacity</strong> (<em>Annotated</em><em>[</em><em>float</em><em>, </em><em>Gt</em><em>(</em><em>gt=0</em><em>)</em><em>]</em>)</p></li>
 <li><p><strong>energy_density</strong> (<em>Annotated</em><em>[</em><em>float</em><em>, </em><em>Gt</em><em>(</em><em>gt=0</em><em>)</em><em>]</em>)</p></li>
+<li><p><strong>non_cell_mass</strong> (<em>Annotated</em><em>[</em><em>float</em><em>, </em><em>Ge</em><em>(</em><em>ge=0</em><em>)</em><em>]</em>)</p></li>
 <li><p><strong>energy_reserve</strong> (<em>Annotated</em><em>[</em><em>float</em><em>, </em><em>Ge</em><em>(</em><em>ge=0</em><em>)</em><em>]</em>)</p></li>
 <li><p><strong>total_pow_lim</strong> (<em>Annotated</em><em>[</em><em>float</em><em>, </em><em>Gt</em><em>(</em><em>gt=0</em><em>)</em><em>]</em>)</p></li>
 </ul>
@@ -555,9 +555,20 @@
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.AccumulatorModel.pack_weight">
-<span class="sig-name descname"><span class="pre">pack_weight</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.AccumulatorModel.pack_weight" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.AccumulatorModel.non_cell_mass">
+<span class="sig-name descname"><span class="pre">non_cell_mass</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.AccumulatorModel.non_cell_mass" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.AccumulatorModel.pack_weight">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">pack_weight</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.AccumulatorModel.pack_weight" title="Link to this definition">#</a></dt>
+<dd><p>cells for the capacity, plus the non-cell mass (kg).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Battery pack weight</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.AccumulatorModel.total_pow_lim">
@@ -1515,13 +1526,13 @@
 <td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
 <td><p>Yes</p></td>
 <td></td>
-<td></td>
+<td><p>ge=0</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.coast_trigger" title="suboptimumg.vehicle.subsystem_models.PowertrainModel.coast_trigger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coast_trigger</span></code></a></p></td>
 <td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></td>
 <td><p>Yes</p></td>
 <td></td>
-<td></td>
+<td><p>gt=0</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.max_regen" title="suboptimumg.vehicle.subsystem_models.PowertrainModel.max_regen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_regen</span></code></a></p></td>
 <td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p></td>
@@ -1565,11 +1576,15 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_ratio_plausible" title="suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_ratio_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_ratio_plausible</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_coasting_can_end" title="suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_coasting_can_end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_coasting_can_end</span></code></a></p></td>
+<td><p>after</p></td>
+<td><p><em>model</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_ratio_plausible" title="suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_ratio_plausible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_ratio_plausible</span></code></a></p></td>
 <td><p>after</p></td>
 <td><p><a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.ratio" title="suboptimumg.vehicle.subsystem_models.PowertrainModel.ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ratio</span></code></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_regen_config" title="suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_regen_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_regen_config</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_regen_config" title="suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_regen_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_regen_config</span></code></a></p></td>
 <td><p>after</p></td>
 <td><p><em>model</em></p></td>
 </tr>
@@ -1583,8 +1598,8 @@
 <li><p><strong>ratio</strong> (<em>Annotated</em><em>[</em><em>float</em><em>, </em><em>Gt</em><em>(</em><em>gt=0</em><em>)</em><em>]</em>)</p></li>
 <li><p><strong>regen_percent</strong> (<em>Annotated</em><em>[</em><em>float</em><em>, </em><em>Ge</em><em>(</em><em>ge=0</em><em>)</em><em>, </em><em>Le</em><em>(</em><em>le=1.0</em><em>)</em><em>]</em>)</p></li>
 <li><p><strong>max_regen</strong> (<em>Annotated</em><em>[</em><em>int</em><em>, </em><em>Ge</em><em>(</em><em>ge=0</em><em>)</em><em>]</em>)</p></li>
-<li><p><strong>coast_trigger</strong> (<em>float</em>)</p></li>
-<li><p><strong>coast_release_offset</strong> (<em>float</em>)</p></li>
+<li><p><strong>coast_trigger</strong> (<em>Annotated</em><em>[</em><em>float</em><em>, </em><em>Gt</em><em>(</em><em>gt=0</em><em>)</em><em>]</em>)</p></li>
+<li><p><strong>coast_release_offset</strong> (<em>Annotated</em><em>[</em><em>float</em><em>, </em><em>Ge</em><em>(</em><em>ge=0</em><em>)</em><em>]</em>)</p></li>
 <li><p><strong>moi_gb</strong> (<em>float</em>)</p></li>
 </ul>
 </dd>
@@ -1623,6 +1638,20 @@
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.PowertrainModel.regen_percent">
 <span class="sig-name descname"><span class="pre">regen_percent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.regen_percent" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_coasting_can_end">
+<span class="sig-name descname"><span class="pre">validate_coasting_can_end</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/subsystem_models.html#PowertrainModel.validate_coasting_can_end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_coasting_can_end" title="Link to this definition">#</a></dt>
+<dd><p>Ensure the car can stop coasting.</p>
+<p class="rubric">Notes</p>
+<p>Coasting ends once speed drops below <cite>coast_trigger - coast_release_offset</cite>. If that
+speed is zero or less, the car coasts until it stops and the lap simulation fails.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel" title="suboptimumg.vehicle.subsystem_models.PowertrainModel"><em>PowertrainModel</em></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_ratio_plausible">
@@ -1936,6 +1965,7 @@ before comparing against the recommended 8-24 inch range.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.subsystem_models.AccumulatorModel.capacity"><code class="docutils literal notranslate"><span class="pre">AccumulatorModel.capacity</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.subsystem_models.AccumulatorModel.energy_density"><code class="docutils literal notranslate"><span class="pre">AccumulatorModel.energy_density</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.subsystem_models.AccumulatorModel.energy_reserve"><code class="docutils literal notranslate"><span class="pre">AccumulatorModel.energy_reserve</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.subsystem_models.AccumulatorModel.non_cell_mass"><code class="docutils literal notranslate"><span class="pre">AccumulatorModel.non_cell_mass</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.subsystem_models.AccumulatorModel.pack_weight"><code class="docutils literal notranslate"><span class="pre">AccumulatorModel.pack_weight</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.subsystem_models.AccumulatorModel.total_pow_lim"><code class="docutils literal notranslate"><span class="pre">AccumulatorModel.total_pow_lim</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.subsystem_models.AccumulatorModel.usable_energy"><code class="docutils literal notranslate"><span class="pre">AccumulatorModel.usable_energy</span></code></a></li>
@@ -2023,6 +2053,7 @@ before comparing against the recommended 8-24 inch range.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.motor"><code class="docutils literal notranslate"><span class="pre">PowertrainModel.motor</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.ratio"><code class="docutils literal notranslate"><span class="pre">PowertrainModel.ratio</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.regen_percent"><code class="docutils literal notranslate"><span class="pre">PowertrainModel.regen_percent</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_coasting_can_end"><code class="docutils literal notranslate"><span class="pre">PowertrainModel.validate_coasting_can_end()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_ratio_plausible"><code class="docutils literal notranslate"><span class="pre">PowertrainModel.validate_ratio_plausible()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.vehicle.subsystem_models.PowertrainModel.validate_regen_config"><code class="docutils literal notranslate"><span class="pre">PowertrainModel.validate_regen_config()</span></code></a></li>
 </ul>
