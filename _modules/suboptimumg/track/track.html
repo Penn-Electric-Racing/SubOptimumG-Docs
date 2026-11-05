@@ -501,10 +501,9 @@
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        The radius array is split into runs of equal consecutive values. A run is a local</span>
-<span class="sd">        minimum when it is smaller than the runs on both sides, with the track ends counting</span>
-<span class="sd">        as infinitely large. Each local-minimum run is seeded at its middle index, so a</span>
-<span class="sd">        constant-radius corner gets one seed, as does a track of a single constant radius.</span>
+<span class="sd">        The radius array is split into runs of equal consecutive values. A run is a local minimum when it is smaller</span>
+<span class="sd">        than the runs on both sides, with the track ends counting as infinitely large. Each local-minimum run is seeded</span>
+<span class="sd">        at its middle index, so a constant-radius corner gets one seed, as does a track of a single constant radius.</span>
 <span class="sd">        """</span>
         <span class="n">run_starts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">prepend</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">run_ends</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">run_starts</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
@@ -637,8 +636,8 @@
         <span class="n">scene_config</span><span class="p">:</span> <span class="n">SceneConfig</span> <span class="o">=</span> <span class="n">DEFAULT_SCENE_CONFIG</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        Maps a variable onto the z-axis of the track for 3D visualization using Plotly.</span>
-<span class="sd">        Creates a 3D stem plot with vertical lines extending from baseline to data points.</span>
+<span class="sd">        Maps a variable onto the z-axis of the track for 3D visualization using Plotly. Creates a 3D stem plot with</span>
+<span class="sd">        vertical lines extending from baseline to data points.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -648,7 +647,7 @@
 <span class="sd">            Plot title (default: None)</span>
 <span class="sd">        z_label : str, optional</span>
 <span class="sd">            Z-axis label (default: None)</span>
-<span class="sd">        theme: str, optional</span>
+<span class="sd">        theme : str, optional</span>
 <span class="sd">            The color theme to use (default: None)</span>
 <span class="sd">        font_config : FontConfig, optional</span>
 <span class="sd">            Font configuration object</span>

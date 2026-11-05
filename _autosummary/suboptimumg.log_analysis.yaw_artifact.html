@@ -484,8 +484,8 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_artifact.</span></span><span class="sig-name descname"><span class="pre">SegmentationConfig</span></span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_artifact.html#SegmentationConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_artifact.SegmentationConfig" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>A record of how one log was cut into sub-windows.</p>
-<p>Recorded alongside the sub-windows so a saved artifact answers “where did
-these come from” without re-reading the notebook that made it.</p>
+<p>Recorded alongside the sub-windows so a saved artifact answers “where did these come from” without re-reading the
+notebook that made it.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id1">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id1" title="Link to this table">#</a></caption>
 <thead>
@@ -611,12 +611,10 @@ these come from” without re-reading the notebook that made it.</p>
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_artifact.</span></span><span class="sig-name descname"><span class="pre">YawArtifact</span></span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_artifact.html#YawArtifact"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_artifact.YawArtifact" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>One log’s yaw-response work: its sub-windows, how they were made, and the fits.</p>
-<p>Bundles everything a later session needs to re-evaluate or compare against
-this log without re-running preparation. <code class="docutils literal notranslate"><span class="pre">save</span></code> / <code class="docutils literal notranslate"><span class="pre">load</span></code> round-trip it
-through pickle, because the PERDA <code class="docutils literal notranslate"><span class="pre">SingleRunData</span></code> sub-windows have no
-JSON form. Treat the file as a local cache, not an interchange format: it
-is tied to the installed PERDA/pydantic versions, and loading one executes
-arbitrary code, so only load artifacts you produced.</p>
+<p>Bundles everything a later session needs to re-evaluate or compare against this log without re-running preparation.
+<code class="docutils literal notranslate"><span class="pre">save</span></code> / <code class="docutils literal notranslate"><span class="pre">load</span></code> round-trip it through pickle, because the PERDA <code class="docutils literal notranslate"><span class="pre">SingleRunData</span></code> sub-windows have no JSON form.
+Treat the file as a local cache, not an interchange format: it is tied to the installed PERDA/pydantic versions, and
+loading one executes arbitrary code, so only load artifacts you produced.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id2">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id2" title="Link to this table">#</a></caption>
 <thead>

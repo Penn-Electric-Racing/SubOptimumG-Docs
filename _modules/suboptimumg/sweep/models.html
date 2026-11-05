@@ -395,8 +395,8 @@
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    Each option replaces exactly one entry, the one at `name`. The entry can be a whole sub-model</span>
-<span class="sd">    (e.g. 'pwrtn.motor') or a single value (e.g. a flag).</span>
+<span class="sd">    Each option replaces exactly one entry, the one at `name`. The entry can be a whole sub-model (e.g. 'pwrtn.motor')</span>
+<span class="sd">    or a single value (e.g. a flag).</span>
 <span class="sd">    """</span>
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="s2">"forbid"</span><span class="p">)</span>
@@ -744,8 +744,8 @@
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.models.html#suboptimumg.sweep.models.SweepGrid.iterate_grid_points">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">iterate_grid_points</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Modification</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        Yield the swept modifications of each grid point. For each list of modifications,</span>
-<span class="sd">        categorical comes before numerical.</span>
+<span class="sd">        Yield the swept modifications of each grid point. For each list of modifications, categorical comes</span>
+<span class="sd">        before numerical.</span>
 <span class="sd">        """</span>
         <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">modifications_for_each_axis_value</span><span class="p">):</span>
             <span class="k">yield</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">modification</span><span class="p">:</span> <span class="n">modification</span><span class="o">.</span><span class="n">kind</span> <span class="o">!=</span> <span class="s2">"categorical"</span><span class="p">)</span></div>

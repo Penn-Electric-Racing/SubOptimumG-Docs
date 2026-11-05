@@ -363,7 +363,8 @@
     <span class="n">V_grid</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
     <span class="n">f_grid</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">"""Evaluate the analytic Bode surface over a (speed, frequency) grid.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Evaluate the analytic Bode surface over a (speed, frequency) grid.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -410,7 +411,8 @@
     <span class="n">f_grid</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
     <span class="n">log_mag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Magnitude Bode surface of a fit over (speed, frequency).</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Magnitude Bode surface of a fit over (speed, frequency).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -449,10 +451,11 @@
     <span class="n">f_grid</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
     <span class="n">linear_scale</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Two-panel magnitude/phase Bode of one or more fits, at fixed speeds.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Two-panel magnitude/phase Bode of one or more fits, at fixed speeds.</span>
 
-<span class="sd">    Every (fit, speed) pair becomes its own series. Fits after the first are</span>
-<span class="sd">    drawn dashed, so a comparison model reads clearly against the headline one.</span>
+<span class="sd">    Every (fit, speed) pair becomes its own series. Fits after the first are drawn dashed, so a comparison model reads</span>
+<span class="sd">    clearly against the headline one.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -525,10 +528,10 @@
     <span class="n">error_ylim</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
     <span class="n">relative_time</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Measured vs simulated yaw rate per sub-window, residual on the second axis.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Measured vs simulated yaw rate per sub-window, residual on the second axis.</span>
 
-<span class="sd">    Works for a training fit (``fit.train``) or a held-out evaluation, since</span>
-<span class="sd">    both are a ``Prediction``.</span>
+<span class="sd">    Works for a training fit (``fit.train``) or a held-out evaluation, since both are a ``Prediction``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -636,11 +639,11 @@
     <span class="n">x_of</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"amplitude"</span><span class="p">,</span>
     <span class="n">n_bins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">24</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Residual structure against steering, steering amplitude, or speed.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Residual structure against steering, steering amplitude, or speed.</span>
 
-<span class="sd">    A flat binned mean means the model has extracted everything systematic.</span>
-<span class="sd">    Residual that grows with ``"amplitude"`` is the classic tire-saturation</span>
-<span class="sd">    signature, and the reason the Ca-decay scheduler exists.</span>
+<span class="sd">    A flat binned mean means the model has extracted everything systematic. Residual that grows with ``"amplitude"`` is</span>
+<span class="sd">    the classic tire-saturation signature, and the reason the Ca-decay scheduler exists.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -649,8 +652,7 @@
 <span class="sd">    prediction : Prediction</span>
 <span class="sd">        Supplies the residuals; must be aligned with ``window_arrays``.</span>
 <span class="sd">    x_of : {"input", "amplitude", "speed"}, optional</span>
-<span class="sd">        What to put on the x axis: signed steering (deg), absolute steering</span>
-<span class="sd">        (deg), or speed (m/s).</span>
+<span class="sd">        What to put on the x axis: signed steering (deg), absolute steering (deg), or speed (m/s).</span>
 <span class="sd">    n_bins : int, optional</span>
 <span class="sd">        Number of quantile bins for the mean/sigma overlay.</span>
 

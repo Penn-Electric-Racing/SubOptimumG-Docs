@@ -361,11 +361,11 @@
 <div class="viewcode-block" id="StationarityReport">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_segmentation_models.html#suboptimumg.log_analysis.yaw_segmentation_models.StationarityReport">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">StationarityReport</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Grid of ``StationarityCell`` from ``scan_speed_stationarity``.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Grid of ``StationarityCell`` from ``scan_speed_stationarity``.</span>
 
-<span class="sd">    ``fraction_passing`` near zero at every long window means the car never</span>
-<span class="sd">    holds a steady speed, so a nonparametric Welch FRF is not viable and the</span>
-<span class="sd">    parametric LPV output-error fit is the right path.</span>
+<span class="sd">    ``fraction_passing`` near zero at every long window means the car never holds a steady speed, so a nonparametric</span>
+<span class="sd">    Welch FRF is not viable and the parametric LPV output-error fit is the right path.</span>
 <span class="sd">    """</span>
 
     <span class="n">speed_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Speed channel the scan was run on"</span><span class="p">)</span>

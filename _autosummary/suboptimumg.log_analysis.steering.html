@@ -483,11 +483,9 @@
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.steering.add_bicycle_steer_angle">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.steering.</span></span><span class="sig-name descname"><span class="pre">add_bicycle_steer_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">irl_car</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sw_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ludwig.steeringWheel.angle'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/steering.html#add_bicycle_steer_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.steering.add_bicycle_steer_angle" title="Link to this definition">#</a></dt>
 <dd><p>Add front tire steer angles from the steering wheel sensor.</p>
-<p>Converts the steering wheel angle to individual left/right tire angles
-using the Ackermann polynomial in <code class="docutils literal notranslate"><span class="pre">irl_car</span></code>, then averages them for
-the bicycle-model front axle steer angle. Stores the results as
-‘front.steerAngle.left’, ‘front.steerAngle.right’, and ‘front.steerAngle.bicycle’.
-All outputs are in degrees.</p>
+<p>Converts the steering wheel angle to individual left/right tire angles using the Ackermann polynomial in
+<code class="docutils literal notranslate"><span class="pre">irl_car</span></code>, then averages them for the bicycle-model front axle steer angle. Stores the results as
+‘front.steerAngle.left’, ‘front.steerAngle.right’, and ‘front.steerAngle.bicycle’. All outputs are in degrees.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -505,11 +503,10 @@ All outputs are in degrees.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.steering.add_kinematic_steer_angle">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.steering.</span></span><span class="sig-name descname"><span class="pre">add_kinematic_steer_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/steering.html#add_kinematic_steer_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.steering.add_kinematic_steer_angle" title="Link to this definition">#</a></dt>
-<dd><p>Add the kinematic steer angle from curvature using the bicycle model.
-Expects curvature DataInstances to already be present, as added by <cite>add_curvature()</cite>.</p>
-<p>Computes <code class="docutils literal notranslate"><span class="pre">delta</span> <span class="pre">=</span> <span class="pre">degrees(arctan(wheelbase</span> <span class="pre">*</span> <span class="pre">curvature))</span></code> for both
-body and track frames and stores the results as <code class="docutils literal notranslate"><span class="pre">body.steerAngle</span></code> and
-<code class="docutils literal notranslate"><span class="pre">track.steerAngle</span></code>. All angles are in degrees.</p>
+<dd><p>Add the kinematic steer angle from curvature using the bicycle model. Expects curvature DataInstances to already
+be present, as added by <cite>add_curvature()</cite>.</p>
+<p>Computes <code class="docutils literal notranslate"><span class="pre">delta</span> <span class="pre">=</span> <span class="pre">degrees(arctan(wheelbase</span> <span class="pre">*</span> <span class="pre">curvature))</span></code> for both body and track frames and stores the results as
+<code class="docutils literal notranslate"><span class="pre">body.steerAngle</span></code> and <code class="docutils literal notranslate"><span class="pre">track.steerAngle</span></code>. All angles are in degrees.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

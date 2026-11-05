@@ -488,9 +488,8 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Models motor torque output, efficiency, and power limits.</p>
 <p class="rubric">Notes</p>
-<p>The efficiency map, rpm/torque normalization parameters, and the
-power-limit grids are caches at construction time. Call <code class="docutils literal notranslate"><span class="pre">rebuild_derived_data</span></code>
-if motor parameters are mutated.</p>
+<p>The efficiency map, rpm/torque normalization parameters, and the power-limit grids are caches at construction time.
+Call <code class="docutils literal notranslate"><span class="pre">rebuild_derived_data</span></code> if motor parameters are mutated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>vehicle_model</strong> (<a class="reference internal" href="suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.VehicleModel" title="suboptimumg.vehicle.vehicle_models.VehicleModel"><em>VehicleModel</em></a>)</p>
@@ -519,16 +518,13 @@ if motor parameters are mutated.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>The torque the motor can deliver is constrained by two things: the
-static torque curve tau_curve(rpm), and the DC-bus power limit
-pow_lim, via <code class="docutils literal notranslate"><span class="pre">tau</span> <span class="pre">*</span> <span class="pre">omega</span> <span class="pre">/</span> <span class="pre">eta_elec(rpm,</span> <span class="pre">tau)</span> <span class="pre">&lt;=</span> <span class="pre">pow_lim</span></code>, which
-is circular in tau because eta_elec depends on tau. When
-use_efficiency_lut is True this is resolved by an inverse lookup
-cached by <cite>rebuild_derived_data</cite>.</p>
-<p>Only chain/diff efficiencies sit between shaft and wheel, so the
-wheel torque uses <cite>mechanical_efficiency</cite> (not the full chain). The
-inverter and motor losses are upstream of the shaft and affect
-battery draw, not wheel torque.</p>
+<p>The torque the motor can deliver is constrained by two things: the static torque curve tau_curve(rpm), and the
+DC-bus power limit pow_lim, via <code class="docutils literal notranslate"><span class="pre">tau</span> <span class="pre">*</span> <span class="pre">omega</span> <span class="pre">/</span> <span class="pre">eta_elec(rpm,</span> <span class="pre">tau)</span> <span class="pre">&lt;=</span> <span class="pre">pow_lim</span></code>, which is circular in tau
+because eta_elec depends on tau. When use_efficiency_lut is True this is resolved by an inverse lookup cached by
+<cite>rebuild_derived_data</cite>.</p>
+<p>Only chain/diff efficiencies sit between shaft and wheel, so the wheel torque uses <cite>mechanical_efficiency</cite> (not
+the full chain). The inverter and motor losses are upstream of the shaft and affect battery draw, not wheel
+torque.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -550,10 +546,9 @@ battery draw, not wheel torque.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>Covers the inverter (moc_efficiency) and the motor itself. When an
-efficiency LUT is in use and both rpm and torque are supplied, the
-motor’s contribution is pulled from the (rpm, torque) map; otherwise
-the scalar motor_efficiency is used.</p>
+<p>Covers the inverter (moc_efficiency) and the motor itself. When an efficiency LUT is in use and both rpm and
+torque are supplied, the motor’s contribution is pulled from the (rpm, torque) map; otherwise the scalar
+motor_efficiency is used.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -575,10 +570,9 @@ the scalar motor_efficiency is used.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>Inputs outside the fitted rpm/torque range are clamped to the
-nearest in-range value before evaluating the polynomial, and the
-result is scaled down by an exponential penalty based on how far
-outside the range the original inputs were.</p>
+<p>Inputs outside the fitted rpm/torque range are clamped to the nearest in-range value before evaluating the
+polynomial, and the result is scaled down by an exponential penalty based on how far outside the range the
+original inputs were.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -616,16 +610,15 @@ outside the range the original inputs were.</p>
 </dl>
 <p class="rubric">Notes</p>
 <p>Only the components that physically sit downstream of the shaft act
-here: the chain/belt and the diff. The inverter and motor losses are
-electrical and do not reduce wheel torque; they show up as extra DC
-current draw and are accounted for in <cite>electrical_efficiency</cite>.</p>
+here: the chain/belt and the diff. The inverter and motor losses are electrical and do not reduce wheel torque;
+they show up as extra DC current draw and are accounted for in <cite>electrical_efficiency</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.powertrain.motor.Motor.powertrain_efficiency">
 <span class="sig-name descname"><span class="pre">powertrain_efficiency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rpm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">torque</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/powertrain/motor.html#Motor.powertrain_efficiency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.powertrain.motor.Motor.powertrain_efficiency" title="Link to this definition">#</a></dt>
-<dd><p>Full DC-bus-to-ground efficiency, used by callers converting between
-battery power and wheel power (or vice versa).</p>
+<dd><p>Full DC-bus-to-ground efficiency, used by callers converting between battery power and wheel power (or vice
+versa).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -641,9 +634,8 @@ battery power and wheel power (or vice versa).</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>Equals electrical_efficiency * mechanical_efficiency when in ‘indiv’
-mode. In ‘sys’ mode the lumped system_efficiency parameter is used
-directly. Diff efficiency is currently fixed at 100% (TODO).</p>
+<p>Equals electrical_efficiency * mechanical_efficiency when in ‘indiv’ mode. In ‘sys’ mode the lumped
+system_efficiency parameter is used directly. Diff efficiency is currently fixed at 100% (TODO).</p>
 </dd></dl>
 
 <dl class="py method">

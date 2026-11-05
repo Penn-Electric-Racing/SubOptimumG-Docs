@@ -356,8 +356,8 @@
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.energy_grid_sweeper.html#suboptimumg.sweep.energy_grid_sweeper.EnergyGridSweeper">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">EnergyGridSweeper</span><span class="p">(</span><span class="n">GridSweeper</span><span class="p">[</span><span class="n">EnergyGridData</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    N-dimensional sweeper that runs every point at the coast trigger that spends exactly the</span>
-<span class="sd">    usable pack energy over endurance.</span>
+<span class="sd">    N-dimensional sweeper that runs every point at the coast trigger that spends exactly the usable pack energy over</span>
+<span class="sd">    endurance.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -366,11 +366,11 @@
 <span class="sd">    inputs : Sequence[SweepInput]</span>
 <span class="sd">        Swept parameters and labeled replacements, one axis each, in this order</span>
 <span class="sd">    dependencies : Sequence[VehicleDependency], optional</span>
-<span class="sd">        Functions that take the vehicle model, with a point's swept values</span>
-<span class="sd">        applied, and return other parameters to change at that point</span>
+<span class="sd">        Functions that take the vehicle model, with a point's swept values applied, and return other parameters to</span>
+<span class="sd">        change at that point</span>
 <span class="sd">    executor : SweepExecutor, optional</span>
-<span class="sd">        How simulations are run. Its simulator must be an `EnergyGridSimulator` (default runs the default coast trigger search</span>
-<span class="sd">        in a process pool). To change the search configurations, pass or assign a new executor, e.g.</span>
+<span class="sd">        How simulations are run. Its simulator must be an `EnergyGridSimulator` (default runs the default coast trigger</span>
+<span class="sd">        search in a process pool). To change the search configurations, pass or assign a new executor, e.g.</span>
 <span class="sd">        `MultiprocessSweepExecutor(EnergyGridSimulator(CoastTriggerSearch(bounds=(12, 35))))`</span>
 <span class="sd">    mask_infeasible : bool, optional</span>
 <span class="sd">        Whether plots and point queries treat infeasible points as NaN (default is True). This flag can be changed after</span>

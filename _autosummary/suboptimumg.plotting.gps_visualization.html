@@ -494,8 +494,7 @@
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A VBox containing the FigureWidget and the range slider. Display
-it directly in a notebook cell.</p>
+<dd class="field-even"><p>A VBox containing the FigureWidget and the range slider. Display it directly in a notebook cell.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>widgets.VBox</p>
@@ -526,15 +525,13 @@ it directly in a notebook cell.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.plotting.gps_visualization.plot_time_delta_comparison_traces">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.gps_visualization.</span></span><span class="sig-name descname"><span class="pre">plot_time_delta_comparison_traces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laps</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Variable'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_lap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/gps_visualization.html#plot_time_delta_comparison_traces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.gps_visualization.plot_time_delta_comparison_traces" title="Link to this definition">#</a></dt>
-<dd><p>2-subplot comparison traces. Left subplot shows the change of
-a variable over distance along the track, and right subplots shows the cumulative time delta
-relative to a reference lap.</p>
+<dd><p>2-subplot comparison traces. Left subplot shows the change of a variable over distance along the track, and right
+subplots shows the cumulative time delta relative to a reference lap.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>laps</strong> (<em>dict</em><em>[</em><a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.label" title="suboptimumg.plotting.plotting_constants.ReferenceLineConfig.label"><em>label</em></a><em>, </em><em>(</em><em>distance</em><em>, </em><em>variable</em><em>, </em><em>velocity</em><em>)</em><em>]</em>) – Each entry maps a string label to a tuple of three equal-length
-float64 arrays: cumulative distance (m), the variable to plot,
-and velocity (m/s) used for time-delta computation.</p></li>
+<li><p><strong>laps</strong> (<em>dict</em><em>[</em><a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.label" title="suboptimumg.plotting.plotting_constants.ReferenceLineConfig.label"><em>label</em></a><em>, </em><em>(</em><em>distance</em><em>, </em><em>variable</em><em>, </em><em>velocity</em><em>)</em><em>]</em>) – Each entry maps a string label to a tuple of three equal-length float64 arrays: cumulative distance (m), the
+variable to plot, and velocity (m/s) used for time-delta computation.</p></li>
 <li><p><strong>variable_name</strong> (<em>str</em>) – Name of the plotted variable (axis label and title).</p></li>
 <li><p><strong>reference_lap</strong> (<em>str</em><em> or </em><em>None</em>) – Key from <em>laps</em> to use as the time-delta reference.  <code class="docutils literal notranslate"><span class="pre">None</span></code>
 selects the lap with the lowest estimated total time.  Ignored
@@ -580,10 +577,10 @@ when <em>baseline_dist/var/vel</em> are provided.</p></li>
 <dd><p>2D track heatmap, either single-series or 3-panel comparison.</p>
 <p>When called with only the baseline series (no comparison arguments), a
 single 1:1-aspect scatter plot is returned.  When comparison data is
-supplied, a 3-panel figure is returned: baseline, comparison projected
-onto the baseline spatial grid, and a signed delta panel.</p>
-<p>The comparison series is projected via nearest-neighbour lookup
-(scipy cKDTree) then linearly interpolated for sparse grid points.</p>
+supplied, a 3-panel figure is returned: baseline, comparison projected onto the baseline spatial grid, and a signed
+delta panel.</p>
+<p>The comparison series is projected via nearest-neighbour lookup (scipy cKDTree) then linearly interpolated for
+sparse grid points.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

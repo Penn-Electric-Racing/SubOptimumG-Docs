@@ -347,11 +347,11 @@
 <div class="viewcode-block" id="IrlCar">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.irl_vehicle.html#suboptimumg.vehicle.irl_vehicle.IrlCar">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">IrlCar</span><span class="p">(</span><span class="n">Car</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Car extended with real-world session setup parameters for log analysis.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Car extended with real-world session setup parameters for log analysis.</span>
 
-<span class="sd">    Accepts an :class:`ExtendedVehicleModel` which bundles both the simulation</span>
-<span class="sd">    car parameters (mass, geometry, aero, etc.) and the session-specific setup</span>
-<span class="sd">    (alignment, ackermann curve, suspension stiffness/motion ratios).</span>
+<span class="sd">    Accepts an :class:`ExtendedVehicleModel` which bundles both the simulation car parameters (mass, geometry, aero,</span>
+<span class="sd">    etc.) and the session-specific setup (alignment, ackermann curve, suspension stiffness/motion ratios).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -366,7 +366,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">right_tire_angle</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">sw_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""Right tire steer angle from the ackermann curve.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Right tire steer angle from the ackermann curve.</span>
 
 <span class="sd">        Positive sw_deg = right turn (right tire is inner, steers more).</span>
 <span class="sd">        """</span>
@@ -416,7 +417,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">lateral_weight_transfer</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">ay_g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">"""Lateral weight transfer per axle (elastic component only).</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Lateral weight transfer per axle (elastic component only).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -447,7 +449,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">longitudinal_weight_transfer</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">ax_g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""Longitudinal weight transfer on the front axle.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Longitudinal weight transfer on the front axle.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -457,8 +460,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float | NDArray[np.float64]</span>
-<span class="sd">            Change in front axle normal force (N). Negative under</span>
-<span class="sd">            acceleration, positive under braking.</span>
+<span class="sd">            Change in front axle normal force (N). Negative under acceleration, positive under braking.</span>
 <span class="sd">        """</span>
         <span class="n">ax_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ax_g</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">wt_total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">mass</span> <span class="o">*</span> <span class="n">ax_g</span> <span class="o">*</span> <span class="n">G</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">cg_h</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">wb</span>
@@ -470,7 +472,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">pot_to_heave</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">pot_mm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""Converts shock pot displacement (mm) to chassis heave displacement (m).</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Converts shock pot displacement (mm) to chassis heave displacement (m).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -499,7 +502,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">heave_to_force</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">heave_m</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""Converts Heave displacement (m) to vertical spring force (N).</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Converts Heave displacement (m) to vertical spring force (N).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -527,15 +531,15 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">pot_to_force</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">pot_mm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">axle</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""Converts shock pot displacement (mm) to vertical spring force (N).</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Converts shock pot displacement (mm) to vertical spring force (N).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        pot_mm : float | NDArray[np.float64]</span>
 <span class="sd">            Shock pot displacement in millimeters. Positive = compression.</span>
 <span class="sd">        axle : str</span>
-<span class="sd">            "front" or "rear", used to select the correct motion ratio and</span>
-<span class="sd">            heave stiffness.</span>
+<span class="sd">            "front" or "rear", used to select the correct motion ratio and heave stiffness.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -553,7 +557,8 @@
         <span class="n">rear_pot_delta_mm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
         <span class="n">ax_g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">"""Estimate front/rear aero downforce from shock pot deltas.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Estimate front/rear aero downforce from shock pot deltas.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -561,8 +566,7 @@
 <span class="sd">            Change in average axle pot displacement from a zero-aero</span>
 <span class="sd">            reference state (mm). Positive = compression.</span>
 <span class="sd">        ax_g</span>
-<span class="sd">            Longitudinal acceleration in g's. Used to subtract the</span>
-<span class="sd">            spring-borne portion of longitudinal weight transfer</span>
+<span class="sd">            Longitudinal acceleration in g's. Used to subtract the spring-borne portion of longitudinal weight transfer</span>
 <span class="sd">            (accounting for anti-dive/squat).</span>
 
 <span class="sd">        Returns</span>

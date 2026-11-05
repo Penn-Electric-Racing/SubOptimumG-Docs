@@ -493,8 +493,8 @@
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        The initial velocity is set to 1.0 m/s rather than 0, since the timer uses a transponder</span>
-<span class="sd">        at the back of the car, giving roughly one wheelbase of rollout before timing starts.</span>
+<span class="sd">        The initial velocity is set to 1.0 m/s rather than 0, since the timer uses a transponder at the back of the car,</span>
+<span class="sd">        giving roughly one wheelbase of rollout before timing starts.</span>
 <span class="sd">        """</span>
         <span class="n">lapsim_results</span> <span class="o">=</span> <span class="n">lapsim</span><span class="p">(</span>
             <span class="n">mycar</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mycar</span><span class="p">,</span>
@@ -637,7 +637,7 @@
 <div class="viewcode-block" id="Competition.energy_per_endurance_lap">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.competition.html#suboptimumg.compsim.competition.Competition.energy_per_endurance_lap">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">energy_per_endurance_lap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endurance_results</span><span class="p">:</span> <span class="n">EventResults</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="s2">"Energy consumed in a single dneurance lap (kWh)."</span>
+<span class="w">        </span><span class="sd">"""Energy consumed in a single dneurance lap (kWh)."""</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">net_energy</span> <span class="o">=</span> <span class="n">energy_data</span><span class="p">(</span>
             <span class="n">endurance_results</span><span class="o">.</span><span class="n">lapsim_results</span><span class="o">.</span><span class="n">lap_t</span><span class="p">,</span> <span class="n">endurance_results</span><span class="o">.</span><span class="n">lapsim_results</span><span class="o">.</span><span class="n">lap_powers</span>
         <span class="p">)</span>

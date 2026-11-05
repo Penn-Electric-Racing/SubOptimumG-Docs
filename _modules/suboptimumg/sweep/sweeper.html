@@ -372,16 +372,15 @@
 <span class="sd">    inputs : Sequence[SweepInput]</span>
 <span class="sd">        Swept parameters and labeled replacements, one axis each, in this order</span>
 <span class="sd">    dependencies : Sequence[VehicleDependency]</span>
-<span class="sd">        Functions that take the vehicle model, with a point's swept values</span>
-<span class="sd">        applied, and return other parameters to change at that point</span>
+<span class="sd">        Functions that take the vehicle model, with a point's swept values applied, and return other parameters to</span>
+<span class="sd">        change at that point</span>
 <span class="sd">    executor : SweepExecutor</span>
 <span class="sd">        How simulations are run</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    Subclasses say how results are arranged in `_assemble_data`. They can change which data the</span>
-<span class="sd">    plots and point queries read with `_queryable_data`, and which metrics `grid_plot` shows</span>
-<span class="sd">    with `_grid_plot_metrics`.</span>
+<span class="sd">    Subclasses say how results are arranged in `_assemble_data`. They can change which data the plots and point queries</span>
+<span class="sd">    read with `_queryable_data`, and which metrics `grid_plot` shows with `_grid_plot_metrics`.</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -421,9 +420,8 @@
 <span class="sd">        plot_type : PlotType, optional</span>
 <span class="sd">            Contour or surface, for 2 free parameters (default is PlotType.CONTOUR)</span>
 <span class="sd">        fixed_params : Mapping[str, float | str], optional</span>
-<span class="sd">            Swept parameters to fix, e.g. `{"mass": 250, "pwrtn.motor": "emrax208"}`.</span>
-<span class="sd">            Numeric values between grid points are interpolated. Categorical axes</span>
-<span class="sd">            take one of their labels.</span>
+<span class="sd">            Swept parameters to fix, e.g. `{"mass": 250, "pwrtn.motor": "emrax208"}`. Numeric values between grid points</span>
+<span class="sd">            are interpolated. Categorical axes take one of their labels.</span>
 <span class="sd">        hover_metric : Metric or None, optional</span>
 <span class="sd">            A second metric to show when hovering over a contour (default is None, no second metric)</span>
 <span class="sd">        title, subtitle, x_label, y_label, z_label : str, optional</span>
@@ -436,8 +434,8 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        go.Figure</span>
-<span class="sd">            A line plot for 1 free numeric parameter, one line per label when a</span>
-<span class="sd">            categorical axis is also free, or a contour or surface for 2 numeric</span>
+<span class="sd">            A line plot for 1 free numeric parameter, one line per label when a categorical axis is also free, or a</span>
+<span class="sd">            contour or surface for 2 numeric</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="n">plot_sweep</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_queryable_data</span><span class="p">()</span><span class="o">.</span><span class="n">fix_params</span><span class="p">(</span><span class="n">fixed_params</span><span class="p">),</span>
@@ -480,8 +478,8 @@
 <span class="sd">        show_event_times : bool, optional</span>
 <span class="sd">            Show event times instead of the default metrics (default is False)</span>
 <span class="sd">        fixed_params : Mapping[str, float | str], optional</span>
-<span class="sd">            Swept parameters to fix, e.g. `{"mass": 250, "pwrtn.motor": "emrax208"}`.</span>
-<span class="sd">            Categorical axes take one of their labels.</span>
+<span class="sd">            Swept parameters to fix, e.g. `{"mass": 250, "pwrtn.motor": "emrax208"}`. Categorical axes take one of their</span>
+<span class="sd">            labels.</span>
 <span class="sd">        title, x_label, y_label : str, optional</span>
 <span class="sd">            Text for the plot. Defaults are generated from the swept parameters.</span>
 <span class="sd">        rows, cols : int, optional</span>
@@ -575,25 +573,25 @@
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.sweep.sweeper.html#suboptimumg.sweep.sweeper.Sweeper">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Sweeper</span><span class="p">(</span><span class="n">GridSweeper</span><span class="p">[</span><span class="n">SweepData</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    N-dimensional parameter sweeper</span>
+<span class="sd">    N-dimensional parameter sweeper.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    comp_data : CompetitionData</span>
 <span class="sd">        Base competition. It is copied, so later edits to the original have no effect.</span>
 <span class="sd">    inputs : Sequence[SweepInput]</span>
-<span class="sd">        Swept parameters (`SweepParamConfig`) and labeled replacements</span>
-<span class="sd">        (`CategoricalSweepInput`, e.g. motors), one axis each, in this order</span>
+<span class="sd">        Swept parameters (`SweepParamConfig`) and labeled replacements (`CategoricalSweepInput`, e.g. motors), one axis</span>
+<span class="sd">        each, in this order</span>
 <span class="sd">    dependencies : Sequence[VehicleDependency], optional</span>
-<span class="sd">        Functions that take the vehicle model, with a point's swept values</span>
-<span class="sd">        applied, and return other parameters to change at that point</span>
+<span class="sd">        Functions that take the vehicle model, with a point's swept values applied, and return other parameters to</span>
+<span class="sd">        change at that point</span>
 <span class="sd">    executor : SweepExecutor, optional</span>
 <span class="sd">        How simulations are run (default runs them in a process pool)</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    `comp_data` and `config` can be edited after construction. `sweep()` only</span>
-<span class="sd">    reruns the simulations when the generated configurations have changed.</span>
+<span class="sd">    `comp_data` and `config` can be edited after construction. `sweep()` only reruns the simulations when the generated</span>
+<span class="sd">    configurations have changed.</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>

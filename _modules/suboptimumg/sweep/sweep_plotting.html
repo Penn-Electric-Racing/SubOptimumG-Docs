@@ -394,8 +394,8 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    go.Figure</span>
-<span class="sd">        A line plot for 1 free numeric axis, one line per label when a categorical axis is also free,</span>
-<span class="sd">        or a contour or surface for 2 free numeric axes</span>
+<span class="sd">        A line plot for 1 free numeric axis, one line per label when a categorical axis is also free, or a contour or</span>
+<span class="sd">        surface for 2 free numeric axes</span>
 <span class="sd">    """</span>
     <span class="n">numeric_axes</span><span class="p">,</span> <span class="n">categorical_axes</span> <span class="o">=</span> <span class="n">_check_free_axes_are_plottable</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="n">final_title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="n">_build_default_title</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -495,8 +495,8 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    go.Figure</span>
-<span class="sd">        A grid of line plots for 1 free numeric axis, with one line per label when a categorical axis is</span>
-<span class="sd">        also free, or of contours or surfaces for 2 free numeric axes</span>
+<span class="sd">        A grid of line plots for 1 free numeric axis, with one line per label when a categorical axis is also free, or</span>
+<span class="sd">        of contours or surfaces for 2 free numeric axes</span>
 <span class="sd">    """</span>
     <span class="n">numeric_axes</span><span class="p">,</span> <span class="n">categorical_axes</span> <span class="o">=</span> <span class="n">_check_free_axes_are_plottable</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="n">subplot_titles</span> <span class="o">=</span> <span class="p">[</span><span class="n">TITLE_MAPPING</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span> <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">]</span>
@@ -575,8 +575,8 @@
     <span class="n">data</span><span class="p">:</span> <span class="n">SweepData</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">NumericAxis</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">CategoricalAxis</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Ensure the free axes fit one of the supported plots (1 numeric axis,</span>
-<span class="sd">    2 numeric axes, or 1 categorical and 1 numeric axis.)</span>
+<span class="sd">    Ensure the free axes fit one of the supported plots (1 numeric axis, 2 numeric axes, or 1 categorical and 1</span>
+<span class="sd">    numeric axis).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -638,8 +638,8 @@
     <span class="o">**</span><span class="n">plot_options</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Plot one metric of every parameter of an array sweep, colored by percent change.</span>
-<span class="sd">    Failed points are `NaN` and are not drawn; see each parameter's `SweepData.errors`.</span>
+<span class="sd">    Plot one metric of every parameter of an array sweep, colored by percent change. Failed points are `NaN` and are</span>
+<span class="sd">    not drawn; see each parameter's `SweepData.errors`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>

@@ -362,10 +362,11 @@
 <div class="viewcode-block" id="UndersteerResult">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.understeer.html#suboptimumg.log_analysis.understeer.UndersteerResult">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">UndersteerResult</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Output of ``measure_understeer_gradient``.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Output of ``measure_understeer_gradient``.</span>
 
-<span class="sd">    Holds the fitted polynomial coefficients and goodness-of-fit statistics,</span>
-<span class="sd">    plus the raw filtered arrays needed to build a diagnostic plot.</span>
+<span class="sd">    Holds the fitted polynomial coefficients and goodness-of-fit statistics, plus the raw filtered arrays needed to</span>
+<span class="sd">    build a diagnostic plot.</span>
 <span class="sd">    """</span>
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -420,16 +421,15 @@
     <span class="n">force_zero_intercept</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">steering_wheel_angle</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ludwig.steeringWheel.angle"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UndersteerResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Measure the understeer gradient K from a steady-state test window.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Measure the understeer gradient K from a steady-state test window.</span>
 
-<span class="sd">    Computes ``understeer_angle = |delta_bicycle| - |delta_kinematic|``</span>
-<span class="sd">    and fits a polynomial of ``fit_degree`` against ``|a_y|`` in g's.</span>
-<span class="sd">    The degree-1 coefficient is the understeer gradient K (deg/g).</span>
+<span class="sd">    Computes ``understeer_angle = |delta_bicycle| - |delta_kinematic|`` and fits a polynomial of ``fit_degree`` against</span>
+<span class="sd">    ``|a_y|`` in g's. The degree-1 coefficient is the understeer gradient K (deg/g).</span>
 <span class="sd">    K &gt; 0 = understeer, K &lt; 0 = oversteer.</span>
 
-<span class="sd">    Requires ``add_groundspeed``, ``add_curvature``, ``add_accelerations``,</span>
-<span class="sd">    ``add_kinematic_steer_angle``, and ``add_bicycle_steer_angle`` to have</span>
-<span class="sd">    been run first.</span>
+<span class="sd">    Requires ``add_groundspeed``, ``add_curvature``, ``add_accelerations``, ``add_kinematic_steer_angle``, and</span>
+<span class="sd">    ``add_bicycle_steer_angle`` to have been run first.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -577,7 +577,8 @@
     <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
     <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Return (fit_fig, diagnostic_fig) for an UndersteerResult.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Return (fit_fig, diagnostic_fig) for an UndersteerResult.</span>
 
 <span class="sd">    fit_fig: scatter + polynomial fit of understeer angle vs lateral acceleration.</span>
 <span class="sd">    diagnostic_fig: time-series of the held-constant channel over the analysis window.</span>
@@ -586,8 +587,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    result : UndersteerResult</span>
 <span class="sd">    test_type : str</span>
-<span class="sd">        ``"constant_steer"`` or ``"constant_speed"``. Determines which channel</span>
-<span class="sd">        is shown in the diagnostic figure.</span>
+<span class="sd">        ``"constant_steer"`` or ``"constant_speed"``. Determines which channel is shown in the diagnostic figure.</span>
 <span class="sd">    font_config : FontConfig</span>
 <span class="sd">    layout_config : LayoutConfig</span>
 <span class="sd">    """</span>

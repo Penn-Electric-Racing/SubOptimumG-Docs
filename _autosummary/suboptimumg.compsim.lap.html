@@ -490,8 +490,7 @@
 <li><p><strong>track</strong> (<a class="reference internal" href="suboptimumg.track.track.html#suboptimumg.track.track.Track" title="suboptimumg.track.track.Track"><em>Track</em></a>) – Suboptimumg’s Track object representing the track to move around</p></li>
 <li><p><strong>multilap</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to simulate multiple laps, by default False</p></li>
 <li><p><strong>initial_velocity</strong> (<em>float</em><em>, </em><em>optional</em>) – The initial velocity to start the simulation with, by default -1</p></li>
-<li><p><strong>use_coast</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to allow the car to coast and regen instead of braking, by
-default False</p></li>
+<li><p><strong>use_coast</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to allow the car to coast and regen instead of braking, by default False</p></li>
 <li><p><strong>extract_internal_data</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to extract internal data during simulation, by default False</p></li>
 </ul>
 </dd>
@@ -504,10 +503,10 @@ default False</p></li>
 </dl>
 <p class="rubric">Notes</p>
 <p>Overview of Algorithm:
-Based on the track curvature, we find points of velocity minima (or middles of constant radius turns),
-and use those as seeds to simulate both forwards and backwards along the track.</p>
-<p>Then, we construct “proposals” from each seed. The velocity we choose is the lowest velocity simulation out
-of all the seeds. Acceleration, power, and force profiles correspond to the velocity profile chosen.</p>
+Based on the track curvature, we find points of velocity minima (or middles of constant radius turns), and use those
+as seeds to simulate both forwards and backwards along the track.</p>
+<p>Then, we construct “proposals” from each seed. The velocity we choose is the lowest velocity simulation out of all
+the seeds. Acceleration, power, and force profiles correspond to the velocity profile chosen.</p>
 </dd></dl>
 
 </section>

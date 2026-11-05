@@ -351,10 +351,11 @@
 <div class="viewcode-block" id="SegmentationConfig">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_artifact.html#suboptimumg.log_analysis.yaw_artifact.SegmentationConfig">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SegmentationConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""A record of how one log was cut into sub-windows.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    A record of how one log was cut into sub-windows.</span>
 
-<span class="sd">    Recorded alongside the sub-windows so a saved artifact answers "where did</span>
-<span class="sd">    these come from" without re-reading the notebook that made it.</span>
+<span class="sd">    Recorded alongside the sub-windows so a saved artifact answers "where did these come from" without re-reading the</span>
+<span class="sd">    notebook that made it.</span>
 <span class="sd">    """</span>
 
     <span class="n">logfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Source log file path"</span><span class="p">)</span>
@@ -385,14 +386,13 @@
 <div class="viewcode-block" id="YawArtifact">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_artifact.html#suboptimumg.log_analysis.yaw_artifact.YawArtifact">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">YawArtifact</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""One log's yaw-response work: its sub-windows, how they were made, and the fits.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    One log's yaw-response work: its sub-windows, how they were made, and the fits.</span>
 
-<span class="sd">    Bundles everything a later session needs to re-evaluate or compare against</span>
-<span class="sd">    this log without re-running preparation. ``save`` / ``load`` round-trip it</span>
-<span class="sd">    through pickle, because the PERDA ``SingleRunData`` sub-windows have no</span>
-<span class="sd">    JSON form. Treat the file as a local cache, not an interchange format: it</span>
-<span class="sd">    is tied to the installed PERDA/pydantic versions, and loading one executes</span>
-<span class="sd">    arbitrary code, so only load artifacts you produced.</span>
+<span class="sd">    Bundles everything a later session needs to re-evaluate or compare against this log without re-running preparation.</span>
+<span class="sd">    ``save`` / ``load`` round-trip it through pickle, because the PERDA ``SingleRunData`` sub-windows have no JSON form.</span>
+<span class="sd">    Treat the file as a local cache, not an interchange format: it is tied to the installed PERDA/pydantic versions, and</span>
+<span class="sd">    loading one executes arbitrary code, so only load artifacts you produced.</span>
 <span class="sd">    """</span>
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -414,7 +414,8 @@
 <div class="viewcode-block" id="YawArtifact.save">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_artifact.html#suboptimumg.log_analysis.yaw_artifact.YawArtifact.save">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Pickle this artifact to ``path``, creating parent directories.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Pickle this artifact to ``path``, creating parent directories.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -432,7 +433,8 @@
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_artifact.html#suboptimumg.log_analysis.yaw_artifact.YawArtifact.load">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">YawArtifact</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Inverse of ``save``. Only load artifacts you produced -- see the class docstring.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Inverse of ``save``. Only load artifacts you produced -- see the class docstring.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>

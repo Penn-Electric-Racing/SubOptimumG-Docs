@@ -426,11 +426,11 @@
     <span class="n">time_list</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">power_list</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Manually integrates power to determine energy consumption across a lap. Uses trapezoidal integration</span>
+<span class="sd">    Manually integrates power to determine energy consumption across a lap. Uses trapezoidal integration.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    time_list: NDArray[np.float64]</span>
+<span class="sd">    time_list : NDArray[np.float64]</span>
 <span class="sd">        Cumulative timestamps corresponding to power values (seconds)</span>
 <span class="sd">    power_list : NDArray[np.float64]</span>
 <span class="sd">        List of power values (Watts)</span>
@@ -446,9 +446,8 @@
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    Energy in each interval between consecutive samples is estimated with</span>
-<span class="sd">    the trapezoidal rule, then summed separately for positive (consumption)</span>
-<span class="sd">    and negative (regen) intervals.</span>
+<span class="sd">    Energy in each interval between consecutive samples is estimated with the trapezoidal rule, then summed separately</span>
+<span class="sd">    for positive (consumption) and negative (regen) intervals.</span>
 <span class="sd">    """</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">power_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -479,8 +478,8 @@
     <span class="n">efficiency_score</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Calculates consumed energy in kWh given competition configuration,</span>
-<span class="sd">    total endurance event time, and efficiency score.</span>
+<span class="sd">    Calculates consumed energy in kWh given competition configuration, total endurance event time, and efficiency</span>
+<span class="sd">    score.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>

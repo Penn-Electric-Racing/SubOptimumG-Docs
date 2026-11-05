@@ -336,15 +336,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for suboptimumg.plotting.plotting_constants</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""</span>
-<span class="sd">Configuration objects for plotting module.</span>
-
-<span class="sd">This module provides Plotly-style configuration objects to control various</span>
-<span class="sd">aspects of plots without cluttering function interfaces. All magic numbers</span>
-<span class="sd">are centralized here for easy customization.</span>
-<span class="sd">"""</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
 
@@ -385,7 +377,8 @@
 <div class="viewcode-block" id="FontConfig">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FontConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Font configuration for plot elements.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Font configuration for plot elements.</span>
 
 <span class="sd">    Simplified to three sizes that work across all plot types:</span>
 <span class="sd">    - Large: Titles</span>
@@ -402,10 +395,10 @@
 <div class="viewcode-block" id="LayoutConfig">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LayoutConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Layout configuration for plot dimensions and spacing.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Layout configuration for plot dimensions and spacing.</span>
 
-<span class="sd">    Unified dimensions that work across all plot types. Users can override</span>
-<span class="sd">    when creating custom plots if needed.</span>
+<span class="sd">    Unified dimensions that work across all plot types. Users can override when creating custom plots if needed.</span>
 <span class="sd">    """</span>
 
     <span class="c1"># Single width and height for all standard plots</span>
@@ -478,10 +471,11 @@
 <div class="viewcode-block" id="ReferenceLineConfig">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.ReferenceLineConfig">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ReferenceLineConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Configuration for reference lines (h_line, v_line).</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Configuration for reference lines (h_line, v_line).</span>
 
-<span class="sd">    This class combines the line value, label, and styling into a single object.</span>
-<span class="sd">    Pass instances of this class to plotting functions instead of separate parameters.</span>
+<span class="sd">    This class combines the line value, label, and styling into a single object. Pass instances of this class to</span>
+<span class="sd">    plotting functions instead of separate parameters.</span>
 <span class="sd">    """</span>
 
     <span class="c1"># Line value and label</span>

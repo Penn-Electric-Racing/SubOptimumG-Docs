@@ -359,11 +359,11 @@
     <span class="n">ins_lon_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"pcm.vnav.posLla.longitude"</span><span class="p">,</span>
     <span class="n">fix_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">"pcm.vnav.gpsFix"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Extract GPS position DataInstances and inject them into SingleRunData.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Extract GPS position DataInstances and inject them into SingleRunData.</span>
 
-<span class="sd">    Filters invalid samples (no GPS fix, zero lat/lon pairs), projects to</span>
-<span class="sd">    local East/North Cartesian coordinates, and stores the results as</span>
-<span class="sd">    ``gps.latitude``, ``gps.longitude``, ``posE``, and ``posN`` in ``data``.</span>
+<span class="sd">    Filters invalid samples (no GPS fix, zero lat/lon pairs), projects to local East/North Cartesian coordinates, and</span>
+<span class="sd">    stores the results as ``gps.latitude``, ``gps.longitude``, ``posE``, and ``posN`` in ``data``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -378,8 +378,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    SingleRunData</span>
-<span class="sd">        The same ``data`` object with ``gps.latitude``, ``gps.longitude``,</span>
-<span class="sd">        ``posN``, and ``posE`` added.</span>
+<span class="sd">        The same ``data`` object with ``gps.latitude``, ``gps.longitude``, ``posN``, and ``posE`` added.</span>
 <span class="sd">    """</span>
     <span class="n">lat_di</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">ins_lat_col</span><span class="p">]</span>
     <span class="n">lon_di</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">ins_lon_col</span><span class="p">]</span>

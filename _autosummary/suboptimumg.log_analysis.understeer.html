@@ -484,8 +484,8 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.understeer.</span></span><span class="sig-name descname"><span class="pre">UndersteerResult</span></span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/understeer.html#UndersteerResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.understeer.UndersteerResult" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Output of <code class="docutils literal notranslate"><span class="pre">measure_understeer_gradient</span></code>.</p>
-<p>Holds the fitted polynomial coefficients and goodness-of-fit statistics,
-plus the raw filtered arrays needed to build a diagnostic plot.</p>
+<p>Holds the fitted polynomial coefficients and goodness-of-fit statistics, plus the raw filtered arrays needed to
+build a diagnostic plot.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id1">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id1" title="Link to this table">#</a></caption>
 <thead>
@@ -632,13 +632,11 @@ plus the raw filtered arrays needed to build a diagnostic plot.</p>
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.understeer.measure_understeer_gradient">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.understeer.</span></span><span class="sig-name descname"><span class="pre">measure_understeer_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_lat_accel_g</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_zero_intercept</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steering_wheel_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ludwig.steeringWheel.angle'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/understeer.html#measure_understeer_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.understeer.measure_understeer_gradient" title="Link to this definition">#</a></dt>
 <dd><p>Measure the understeer gradient K from a steady-state test window.</p>
-<p>Computes <code class="docutils literal notranslate"><span class="pre">understeer_angle</span> <span class="pre">=</span> <span class="pre">|delta_bicycle|</span> <span class="pre">-</span> <span class="pre">|delta_kinematic|</span></code>
-and fits a polynomial of <code class="docutils literal notranslate"><span class="pre">fit_degree</span></code> against <code class="docutils literal notranslate"><span class="pre">|a_y|</span></code> in g’s.
-The degree-1 coefficient is the understeer gradient K (deg/g).
+<p>Computes <code class="docutils literal notranslate"><span class="pre">understeer_angle</span> <span class="pre">=</span> <span class="pre">|delta_bicycle|</span> <span class="pre">-</span> <span class="pre">|delta_kinematic|</span></code> and fits a polynomial of <code class="docutils literal notranslate"><span class="pre">fit_degree</span></code> against
+<code class="docutils literal notranslate"><span class="pre">|a_y|</span></code> in g’s. The degree-1 coefficient is the understeer gradient K (deg/g).
 K &gt; 0 = understeer, K &lt; 0 = oversteer.</p>
-<p>Requires <code class="docutils literal notranslate"><span class="pre">add_groundspeed</span></code>, <code class="docutils literal notranslate"><span class="pre">add_curvature</span></code>, <code class="docutils literal notranslate"><span class="pre">add_accelerations</span></code>,
-<code class="docutils literal notranslate"><span class="pre">add_kinematic_steer_angle</span></code>, and <code class="docutils literal notranslate"><span class="pre">add_bicycle_steer_angle</span></code> to have
-been run first.</p>
+<p>Requires <code class="docutils literal notranslate"><span class="pre">add_groundspeed</span></code>, <code class="docutils literal notranslate"><span class="pre">add_curvature</span></code>, <code class="docutils literal notranslate"><span class="pre">add_accelerations</span></code>, <code class="docutils literal notranslate"><span class="pre">add_kinematic_steer_angle</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">add_bicycle_steer_angle</span></code> to have been run first.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -668,8 +666,7 @@ diagnostic_fig: time-series of the held-constant channel over the analysis windo
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>result</strong> (<a class="reference internal" href="#suboptimumg.log_analysis.understeer.UndersteerResult" title="suboptimumg.log_analysis.understeer.UndersteerResult"><em>UndersteerResult</em></a>)</p></li>
-<li><p><strong>test_type</strong> (<em>str</em>) – <code class="docutils literal notranslate"><span class="pre">&quot;constant_steer&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;constant_speed&quot;</span></code>. Determines which channel
-is shown in the diagnostic figure.</p></li>
+<li><p><strong>test_type</strong> (<em>str</em>) – <code class="docutils literal notranslate"><span class="pre">&quot;constant_steer&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;constant_speed&quot;</span></code>. Determines which channel is shown in the diagnostic figure.</p></li>
 <li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a>)</p></li>
 <li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a>)</p></li>
 </ul>

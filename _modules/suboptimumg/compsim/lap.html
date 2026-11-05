@@ -379,9 +379,8 @@
 <span class="sd">    r_full_track : NDArray[np.float64]</span>
 <span class="sd">        Array of radius values for each point on the track</span>
 <span class="sd">    radius_grid_points : int, optional</span>
-<span class="sd">        Number of radii to solve exactly when interpolating, by default</span>
-<span class="sd">        ``V_MAX_RADIUS_GRID_POINTS``. Tracks with at most this many unique</span>
-<span class="sd">        cornering radii are solved exactly at every unique radius instead.</span>
+<span class="sd">        Number of radii to solve exactly when interpolating, by default ``V_MAX_RADIUS_GRID_POINTS``. Tracks with at</span>
+<span class="sd">        most this many unique cornering radii are solved exactly at every unique radius instead.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -390,10 +389,9 @@
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    Solving many radii dominates runtime, more efficient to grid interpolate. Max</span>
-<span class="sd">    stable speed is solved on a geometric grid spanning the track's cornering radii and</span>
-<span class="sd">    linearly interpolated, which is accurate because it is monotonic and smooth in</span>
-<span class="sd">    radius. Radii beyond ``STRAIGHT_RADIUS_THRESHOLD`` are straights with no limit.</span>
+<span class="sd">    Solving many radii dominates runtime, more efficient to grid interpolate. Max stable speed is solved on a geometric</span>
+<span class="sd">    grid spanning the track's cornering radii and linearly interpolated, which is accurate because it is monotonic and</span>
+<span class="sd">    smooth in radius. Radii beyond ``STRAIGHT_RADIUS_THRESHOLD`` are straights with no limit.</span>
 <span class="sd">    """</span>
     <span class="n">is_corner</span> <span class="o">=</span> <span class="n">r_full_track</span> <span class="o">&lt;=</span> <span class="n">STRAIGHT_RADIUS_THRESHOLD</span>
     <span class="n">corner_radii</span> <span class="o">=</span> <span class="n">r_full_track</span><span class="p">[</span><span class="n">is_corner</span><span class="p">]</span>
@@ -560,8 +558,7 @@
 <span class="sd">    initial_velocity : float, optional</span>
 <span class="sd">        The initial velocity to start the simulation with, by default -1</span>
 <span class="sd">    use_coast : bool, optional</span>
-<span class="sd">        Whether to allow the car to coast and regen instead of braking, by</span>
-<span class="sd">        default False</span>
+<span class="sd">        Whether to allow the car to coast and regen instead of braking, by default False</span>
 <span class="sd">    extract_internal_data : bool, optional</span>
 <span class="sd">        Whether to extract internal data during simulation, by default False</span>
 
@@ -573,11 +570,11 @@
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
 <span class="sd">    Overview of Algorithm:</span>
-<span class="sd">    Based on the track curvature, we find points of velocity minima (or middles of constant radius turns),</span>
-<span class="sd">    and use those as seeds to simulate both forwards and backwards along the track.</span>
+<span class="sd">    Based on the track curvature, we find points of velocity minima (or middles of constant radius turns), and use those</span>
+<span class="sd">    as seeds to simulate both forwards and backwards along the track.</span>
 
-<span class="sd">    Then, we construct "proposals" from each seed. The velocity we choose is the lowest velocity simulation out</span>
-<span class="sd">    of all the seeds. Acceleration, power, and force profiles correspond to the velocity profile chosen.</span>
+<span class="sd">    Then, we construct "proposals" from each seed. The velocity we choose is the lowest velocity simulation out of all</span>
+<span class="sd">    the seeds. Acceleration, power, and force profiles correspond to the velocity profile chosen.</span>
 <span class="sd">    """</span>
     <span class="c1"># Get track data directly from Track object</span>
     <span class="n">r_full_track</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">get_curvature_array</span><span class="p">()</span>

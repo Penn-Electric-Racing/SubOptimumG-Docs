@@ -762,8 +762,8 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Fields needed to sweep one car entry across labeled replacement values.</p>
 <p class="rubric">Notes</p>
-<p>Each option replaces exactly one entry, the one at <cite>name</cite>. The entry can be a whole sub-model
-(e.g. ‘pwrtn.motor’) or a single value (e.g. a flag).</p>
+<p>Each option replaces exactly one entry, the one at <cite>name</cite>. The entry can be a whole sub-model (e.g. ‘pwrtn.motor’)
+or a single value (e.g. a flag).</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id5">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id5" title="Link to this table">#</a></caption>
 <thead>
@@ -1544,8 +1544,8 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.sweep.models.SweepGrid.iterate_grid_points">
 <span class="sig-name descname"><span class="pre">iterate_grid_points</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/models.html#SweepGrid.iterate_grid_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.models.SweepGrid.iterate_grid_points" title="Link to this definition">#</a></dt>
-<dd><p>Yield the swept modifications of each grid point. For each list of modifications,
-categorical comes before numerical.</p>
+<dd><p>Yield the swept modifications of each grid point. For each list of modifications, categorical comes
+before numerical.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><em>Iterator</em>[list[<em>Annotated</em>[<a class="reference internal" href="#suboptimumg.sweep.models.ParameterModification" title="suboptimumg.sweep.models.ParameterModification"><em>ParameterModification</em></a> | <a class="reference internal" href="#suboptimumg.sweep.models.CategoricalModification" title="suboptimumg.sweep.models.CategoricalModification"><em>CategoricalModification</em></a>, FieldInfo(annotation=NoneType, required=True, discriminator=’kind’)]]]</p>

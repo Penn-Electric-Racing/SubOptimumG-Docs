@@ -463,13 +463,11 @@
 <span class="sd">    x_axis : Axis</span>
 <span class="sd">        Use distance or time for the x-axis</span>
 <span class="sd">    include_indices : list[int], optional</span>
-<span class="sd">        Specify which seeds to include. e.x. [0, 1] only includes first two seeds.</span>
-<span class="sd">        Defaults to all seeds found.</span>
+<span class="sd">        Specify which seeds to include. e.x. [0, 1] only includes first two seeds. Defaults to all seeds found.</span>
 <span class="sd">    include_power : bool, optional</span>
 <span class="sd">        Include power proposals (kW). True by default</span>
 <span class="sd">    include_seed_overview : bool, optional</span>
-<span class="sd">        Prepend a subplot showing v_max_profile with seed positions marked as red dots.</span>
-<span class="sd">        True by default.</span>
+<span class="sd">        Prepend a subplot showing v_max_profile with seed positions marked as red dots. True by default.</span>
 <span class="sd">    title : str, optional</span>
 <span class="sd">        Plot title</span>
 <span class="sd">    layout_config : LayoutConfig, optional</span>
@@ -652,8 +650,7 @@
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Plot final velocity, acceleration, and power traces on a single plot.</span>
 
-<span class="sd">    Allows overlaying traces across multiple lapsims for direct comparison</span>
-<span class="sd">    of different vehicle configurations.</span>
+<span class="sd">    Allows overlaying traces across multiple lapsims for direct comparison of different vehicle configurations.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -662,8 +659,7 @@
 <span class="sd">    x_axis : Axis</span>
 <span class="sd">        Axis to use for the x-axis (distance or time)</span>
 <span class="sd">    labels : list[str], optional</span>
-<span class="sd">        Labels for each result set (e.g., ["baseline", "new_config"]).</span>
-<span class="sd">        If not provided, defaults to "run_0", "run_1", etc.</span>
+<span class="sd">        Labels for results (e.g. ["baseline", "new_config"]). If not provided, defaults to "run_0", "run_1", etc.</span>
 <span class="sd">    metrics : list[Metric], optional</span>
 <span class="sd">        Metrics to plot. Defaults to all three (velocity, accel, power)</span>
 <span class="sd">    title : str, optional</span>
@@ -747,8 +743,7 @@
 <span class="sd">    x_axis : Axis</span>
 <span class="sd">        Axis to use for the x-axis (distance or time)</span>
 <span class="sd">    labels : list[str], optional</span>
-<span class="sd">        Labels for each competition (e.g., ["baseline", "new_config"]).</span>
-<span class="sd">        If not provided, defaults to "comp_0", "comp_1", etc.</span>
+<span class="sd">        Labels for competitions (e.g. ["baseline", "new_config"]). If not provided, defaults to "comp_[idx]" etc.</span>
 <span class="sd">    title : str, optional</span>
 <span class="sd">        Plot title</span>
 <span class="sd">    layout_config : LayoutConfig, optional</span>

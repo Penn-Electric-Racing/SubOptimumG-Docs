@@ -474,7 +474,8 @@
 <div class="viewcode-block" id="Aero.drs_is_active">
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.aerodynamics.aerodynamics.html#suboptimumg.vehicle.aerodynamics.aerodynamics.Aero.drs_is_active">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">drs_is_active</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Check whether DRS is currently active, honoring the disable override.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Check whether DRS is currently active, honoring the disable override.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -495,8 +496,7 @@
 <a class="viewcode-back" href="../../../../_autosummary/suboptimumg.vehicle.aerodynamics.aerodynamics.html#suboptimumg.vehicle.aerodynamics.aerodynamics.Aero.get_drag">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_drag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">drs_threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        Calculates the drag force based on the current velocity.</span>
-<span class="sd">        Varies the output based on the DRS active state.</span>
+<span class="sd">        Calculates the drag force based on the current velocity. Varies the output based on the DRS active state.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -533,8 +533,8 @@
         <span class="n">roll</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        Calculates the lift force on each tire based on the current velocity.</span>
-<span class="sd">        Varies the output based on the DRS active state.</span>
+<span class="sd">        Calculates the lift force on each tire based on the current velocity. Varies the output based on the DRS</span>
+<span class="sd">        active state.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>

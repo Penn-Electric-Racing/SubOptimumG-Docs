@@ -483,11 +483,9 @@
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.yaw_segmentation.add_ax_from_speed">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_segmentation.</span></span><span class="sig-name descname"><span class="pre">add_ax_from_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.velocityBody.x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ax.fromSpeed'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smooth_hz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_segmentation.html#add_ax_from_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_segmentation.add_ax_from_speed" title="Link to this definition">#</a></dt>
 <dd><p>Add longitudinal acceleration as the time derivative of speed.</p>
-<p>Differentiation amplifies high-frequency noise, so the derivative is
-lowpass-filtered at <code class="docutils literal notranslate"><span class="pre">smooth_hz</span></code> (zero-phase, so no group delay is
-introduced). Duplicate and out-of-order timestamps are repaired first –
-a single bad sample would otherwise poison the whole signal through the
-filter.</p>
+<p>Differentiation amplifies high-frequency noise, so the derivative is lowpass-filtered at <code class="docutils literal notranslate"><span class="pre">smooth_hz</span></code> (zero-phase,
+so no group delay is introduced). Duplicate and out-of-order timestamps are repaired first – a single bad sample
+would otherwise poison the whole signal through the filter.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -510,11 +508,10 @@ filter.</p>
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.yaw_segmentation.auto_segment">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_segmentation.</span></span><span class="sig-name descname"><span class="pre">auto_segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manual_windows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_speed_mps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_slip_deg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_window_s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.velocityBody.x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slip_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'body.slipAngle'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_segmentation.html#auto_segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_segmentation.auto_segment" title="Link to this definition">#</a></dt>
 <dd><p>Split each coarse window into clean sub-windows by masking.</p>
-<p>Within each window, samples below <code class="docutils literal notranslate"><span class="pre">min_speed_mps</span></code> (the car is not really
-driving, and every 1/V term blows up) or above <code class="docutils literal notranslate"><span class="pre">max_slip_deg</span></code> of body
-slip (the tires are past the linear region the bicycle model describes) are
-dropped. Surviving runs shorter than <code class="docutils literal notranslate"><span class="pre">min_window_s</span></code> carry too little
-low-frequency content to identify anything and are dropped too.</p>
+<p>Within each window, samples below <code class="docutils literal notranslate"><span class="pre">min_speed_mps</span></code> (the car is not really driving, and every 1/V term blows up) or
+above <code class="docutils literal notranslate"><span class="pre">max_slip_deg</span></code> of body slip (the tires are past the linear region the bicycle model describes) are dropped.
+Surviving runs shorter than <code class="docutils literal notranslate"><span class="pre">min_window_s</span></code> carry too little low-frequency content to identify anything and are
+dropped too.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -544,9 +541,8 @@ low-frequency content to identify anything and are dropped too.</p>
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.yaw_segmentation.resample_subwindows">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_segmentation.</span></span><span class="sig-name descname"><span class="pre">resample_subwindows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subwindows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_hz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">ResampleMethod.LINEAR</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_segmentation.html#resample_subwindows"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_segmentation.resample_subwindows" title="Link to this definition">#</a></dt>
 <dd><p>Put every sub-window channel on a common uniform grid at <code class="docutils literal notranslate"><span class="pre">target_hz</span></code>.</p>
-<p>Raw logs run near 1 kHz with dt jitter, but the yaw mode is only a few Hz
-wide, so 100 Hz is ample and roughly ten times cheaper to simulate. Landing
-every channel on the <em>same</em> grid also makes the later left-join a no-op.</p>
+<p>Raw logs run near 1 kHz with dt jitter, but the yaw mode is only a few Hz wide, so 100 Hz is ample and roughly ten
+times cheaper to simulate. Landing every channel on the <em>same</em> grid also makes the later left-join a no-op.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -556,9 +552,8 @@ every channel on the <em>same</em> grid also makes the later left-join a no-op.<
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>New sub-windows on the uniform grid. Channels with fewer than two
-samples are dropped, and a sub-window left with no channels at all is
-omitted.</p>
+<dd class="field-even"><p>New sub-windows on the uniform grid. Channels with fewer than two samples are dropped, and a sub-window left
+with no channels at all is omitted.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list of SingleRunData</p>
@@ -570,10 +565,9 @@ omitted.</p>
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.yaw_segmentation.scan_speed_stationarity">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_segmentation.</span></span><span class="sig-name descname"><span class="pre">scan_speed_stationarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win_lengths_s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(3.0,</span> <span class="pre">5.0,</span> <span class="pre">8.0,</span> <span class="pre">12.0,</span> <span class="pre">20.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol_pcts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(2.5,</span> <span class="pre">5.0,</span> <span class="pre">10.0,</span> <span class="pre">15.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.velocityBody.x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_segmentation.html#scan_speed_stationarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_segmentation.scan_speed_stationarity" title="Link to this definition">#</a></dt>
 <dd><p>Measure how often the car holds an approximately constant speed.</p>
-<p>For each <code class="docutils literal notranslate"><span class="pre">(window</span> <span class="pre">length,</span> <span class="pre">tolerance)</span></code> pair, count the fraction of sliding
-windows whose peak-to-peak speed stays within <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> percent of the
-window mean. Near-zero fractions at the long windows are the evidence that
-a nonparametric FRF will not work on this data.</p>
+<p>For each <code class="docutils literal notranslate"><span class="pre">(window</span> <span class="pre">length,</span> <span class="pre">tolerance)</span></code> pair, count the fraction of sliding windows whose peak-to-peak speed stays
+within <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> percent of the window mean. Near-zero fractions at the long windows are the evidence that a
+nonparametric FRF will not work on this data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -589,21 +583,18 @@ a nonparametric FRF will not work on this data.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>Lapping data is not a frequency-response test: the car is accelerating,
-braking, and occasionally sliding. This scan quantifies how rarely the
-speed is even approximately constant, and is the justification for
-identifying the yaw response with a parametric LPV output-error fit
-(<code class="docutils literal notranslate"><span class="pre">yaw_fit</span></code>) rather than a nonparametric Welch FRF, which would need
-long constant-speed holds this data does not contain.</p>
+<p>Lapping data is not a frequency-response test: the car is accelerating, braking, and occasionally sliding. This scan
+quantifies how rarely the speed is even approximately constant, and is the justification for identifying the yaw
+response with a parametric LPV output-error fit (<code class="docutils literal notranslate"><span class="pre">yaw_fit</span></code>) rather than a nonparametric Welch FRF, which would
+need long constant-speed holds this data does not contain.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.yaw_segmentation.summarize_subwindows">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_segmentation.</span></span><span class="sig-name descname"><span class="pre">summarize_subwindows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subwindows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ax.fromSpeed'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ludwig.steeringWheel.angle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.velocityBody.x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slip_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'body.slipAngle'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_segmentation.html#summarize_subwindows"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_segmentation.summarize_subwindows" title="Link to this definition">#</a></dt>
 <dd><p>Per-sub-window quality summary, for triaging windows before fitting.</p>
-<p>Duration and steering excitation say whether a window can identify
-anything; speed hold and <code class="docutils literal notranslate"><span class="pre">|a_x|</span></code> say how hard the LPV scheduling is
-working; slip RMS says how close to the linear region it stayed.</p>
+<p>Duration and steering excitation say whether a window can identify anything; speed hold and <code class="docutils literal notranslate"><span class="pre">|a_x|</span></code> say how hard
+the LPV scheduling is working; slip RMS says how close to the linear region it stayed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

@@ -368,23 +368,20 @@
     <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
     <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Generic stacked magnitude-over-phase (Bode-style) plot.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Generic stacked magnitude-over-phase (Bode-style) plot.</span>
 
-<span class="sd">    Two vertically stacked panels share a frequency x-axis: magnitude on</span>
-<span class="sd">    top, phase below. Each series is drawn in both panels and linked by a</span>
-<span class="sd">    single legend entry, so toggling a series hides both its magnitude and</span>
-<span class="sd">    phase curves.</span>
+<span class="sd">    Two vertically stacked panels share a frequency x-axis: magnitude on top, phase below. Each series is drawn in both</span>
+<span class="sd">    panels and linked by a single legend entry, so toggling a series hides both its magnitude and phase curves.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    freqs : NDArray[float64]</span>
 <span class="sd">        Shared frequency axis (Hz).</span>
 <span class="sd">    magnitude_by_series : dict[str, NDArray[float64]]</span>
-<span class="sd">        Magnitude curve per series label. Values are plotted verbatim, so</span>
-<span class="sd">        pass dB (or linear) already converted.</span>
+<span class="sd">        Magnitude curve per series label. Values are plotted verbatim, so pass dB (or linear) already converted.</span>
 <span class="sd">    phase_by_series : dict[str, NDArray[float64]]</span>
-<span class="sd">        Phase curve (deg) per series label; keys must match</span>
-<span class="sd">        ``magnitude_by_series``.</span>
+<span class="sd">        Phase curve (deg) per series label; keys must match ``magnitude_by_series``.</span>
 <span class="sd">    title : str, optional</span>
 <span class="sd">        Figure title.</span>
 <span class="sd">    magnitude_label : str, optional</span>

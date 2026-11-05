@@ -516,8 +516,8 @@
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>Each partial is a numerical derivative of the interpolated values along one axis, with the other axes held at <cite>point</cite>.
-The initial step is <code class="docutils literal notranslate"><span class="pre">DERIVATIVE_INITIAL_STEP_SIZE</span></code> of the axis’s span.</p>
+<p>Each partial is a numerical derivative of the interpolated values along one axis, with the other axes held at
+<cite>point</cite>. The initial step is <code class="docutils literal notranslate"><span class="pre">DERIVATIVE_INITIAL_STEP_SIZE</span></code> of the axis’s span.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -550,9 +550,9 @@ own with <cite>RegularGridInterpolator</cite>, with the fixed axis set to <cite>
 <li><p>The results are stacked into a (C + N - 1)-D array, shaped (categorical sizes…, free numeric sizes…).</p></li>
 <li><p>The categorical dimensions are moved back to their original order relative to the free numeric axes.</p></li>
 </ol>
-<p>For example, axes (mass, motor, ratio) shaped (5, 3, 31) with mass fixed: the array is reordered to (3, 5, 31),
-each motor’s (5, 31) grid is interpolated at the fixed mass to give 31 values, the stack is (3, 31), and the
-result keeps the order (motor, ratio).</p>
+<p>For example, axes (mass, motor, ratio) shaped (5, 3, 31) with mass fixed: the array is reordered to (3, 5, 31), each
+motor’s (5, 31) grid is interpolated at the fixed mass to give 31 values, the stack is (3, 31), and the result keeps
+the order (motor, ratio).</p>
 </dd></dl>
 
 </section>

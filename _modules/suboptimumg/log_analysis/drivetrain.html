@@ -355,11 +355,11 @@
     <span class="n">wheel_speed_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"pcm.moc.motor.wheelSpeed"</span><span class="p">,</span>
     <span class="n">low_speed_thresh</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Add the rear axle longitudinal slip ratio: ``(v_wheel - v_ground) / v_ground``.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Add the rear axle longitudinal slip ratio: ``(v_wheel - v_ground) / v_ground``.</span>
 
-<span class="sd">    Positive values mean driven wheels spinning faster than ground speed (traction loss).</span>
-<span class="sd">    Requires ``add_groundspeed`` and the ``correct_motor_data`` preprocessing step.</span>
-<span class="sd">    Stores ``rear.slipRatio``.</span>
+<span class="sd">    Positive values mean driven wheels spinning faster than ground speed (traction loss). Requires ``add_groundspeed``</span>
+<span class="sd">    and the ``correct_motor_data`` preprocessing step. Stores ``rear.slipRatio``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>

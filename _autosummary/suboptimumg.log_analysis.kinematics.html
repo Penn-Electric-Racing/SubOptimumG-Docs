@@ -482,9 +482,8 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.kinematics.add_accelerations">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.kinematics.</span></span><span class="sig-name descname"><span class="pre">add_accelerations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vel_body_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.velocityBody.x'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/kinematics.html#add_accelerations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.kinematics.add_accelerations" title="Link to this definition">#</a></dt>
-<dd><p>Add lateral acceleration as v^2 * curvature in body and track frames and
-stores results in <code class="docutils literal notranslate"><span class="pre">body.accLat</span></code> and <code class="docutils literal notranslate"><span class="pre">track.accLat</span></code>, accessible via the constants
-<code class="docutils literal notranslate"><span class="pre">BODY_LAT_ACC</span></code> and <code class="docutils literal notranslate"><span class="pre">TRACK_LAT_ACC</span></code>.</p>
+<dd><p>Add lateral acceleration as v^2 * curvature in body and track frames and stores results in <code class="docutils literal notranslate"><span class="pre">body.accLat</span></code> and
+<code class="docutils literal notranslate"><span class="pre">track.accLat</span></code>, accessible via the constants <code class="docutils literal notranslate"><span class="pre">BODY_LAT_ACC</span></code> and <code class="docutils literal notranslate"><span class="pre">TRACK_LAT_ACC</span></code>.</p>
 <p>Requires <code class="docutils literal notranslate"><span class="pre">add_curvature</span></code> and <code class="docutils literal notranslate"><span class="pre">add_track_frame_velocities</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -504,8 +503,7 @@ stores results in <code class="docutils literal notranslate"><span class="pre">b
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.kinematics.</span></span><span class="sig-name descname"><span class="pre">add_body_slip_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaw_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.yawPitchRoll.yaw'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vel_body_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.velocityBody.x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_speed_thresh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/kinematics.html#add_body_slip_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.kinematics.add_body_slip_angle" title="Link to this definition">#</a></dt>
 <dd><p>Add body slip angle (beta) using SAE convention: beta = track_heading - yaw
 and stores it in the variable <code class="docutils literal notranslate"><span class="pre">body.slipAngle</span></code>, accessible via the constant <code class="docutils literal notranslate"><span class="pre">BODY_SLIP_ANGLE</span></code>.</p>
-<p>Zeroed below <code class="docutils literal notranslate"><span class="pre">low_speed_thresh</span></code> where course heading is unreliable.
-Requires <code class="docutils literal notranslate"><span class="pre">add_track_frame_velocities</span></code>.</p>
+<p>Zeroed below <code class="docutils literal notranslate"><span class="pre">low_speed_thresh</span></code> where course heading is unreliable. Requires <code class="docutils literal notranslate"><span class="pre">add_track_frame_velocities</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -525,10 +523,8 @@ Requires <code class="docutils literal notranslate"><span class="pre">add_track_
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.kinematics.add_cumulative_distance">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.kinematics.</span></span><span class="sig-name descname"><span class="pre">add_cumulative_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/kinematics.html#add_cumulative_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.kinematics.add_cumulative_distance" title="Link to this definition">#</a></dt>
 <dd><p>Add cumulative arc-length distance to the data. Uses the same distance calculation as
-track_factory.from_perda_logs, to ensure consistency when comparing laps against a track
-generated from GPS data.</p>
-<p>Stores the cumulative distance in the variable <code class="docutils literal notranslate"><span class="pre">lapDist</span></code>, accessible via the constant
-<code class="docutils literal notranslate"><span class="pre">CUMULATIVE_DISTANCE</span></code>.</p>
+track_factory.from_perda_logs, to ensure consistency when comparing laps against a track generated from GPS data.</p>
+<p>Stores the cumulative distance in the variable <code class="docutils literal notranslate"><span class="pre">lapDist</span></code>, accessible via the constant <code class="docutils literal notranslate"><span class="pre">CUMULATIVE_DISTANCE</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>data</strong> (<em>SingleRunData</em>) – Input data containing position information.</p>
@@ -542,13 +538,11 @@ generated from GPS data.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.kinematics.add_curvature">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.kinematics.</span></span><span class="sig-name descname"><span class="pre">add_curvature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaw_rate_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.compensatedAngularRate.z'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vel_body_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.velocityBody.x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_speed_thresh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius_clip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/kinematics.html#add_curvature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.kinematics.add_curvature" title="Link to this definition">#</a></dt>
-<dd><p>Add path curvature and radius in body and track frames and stores results
-in <code class="docutils literal notranslate"><span class="pre">body.curvature</span></code>, <code class="docutils literal notranslate"><span class="pre">body.radius</span></code>, <code class="docutils literal notranslate"><span class="pre">track.curvature</span></code>, and <code class="docutils literal notranslate"><span class="pre">track.radius</span></code>,
-accessible via the constants <code class="docutils literal notranslate"><span class="pre">CURVATURE_BODY</span></code>, <code class="docutils literal notranslate"><span class="pre">RADIUS_BODY</span></code>, <code class="docutils literal notranslate"><span class="pre">CURVATURE_TRACK</span></code>,
-and <code class="docutils literal notranslate"><span class="pre">RADIUS_TRACK</span></code>.</p>
-<p>Body-frame curvature uses yaw rate / forward speed. Track-frame curvature
-differentiates the track heading. Both are smoothed with a rolling median.
-Requires <code class="docutils literal notranslate"><span class="pre">add_track_frame_velocities</span></code>.</p>
+<dd><p>Add path curvature and radius in body and track frames and stores results in <code class="docutils literal notranslate"><span class="pre">body.curvature</span></code>, <code class="docutils literal notranslate"><span class="pre">body.radius</span></code>,
+<code class="docutils literal notranslate"><span class="pre">track.curvature</span></code>, and <code class="docutils literal notranslate"><span class="pre">track.radius</span></code>, accessible via the constants <code class="docutils literal notranslate"><span class="pre">CURVATURE_BODY</span></code>, <code class="docutils literal notranslate"><span class="pre">RADIUS_BODY</span></code>,
+<code class="docutils literal notranslate"><span class="pre">CURVATURE_TRACK</span></code>, and <code class="docutils literal notranslate"><span class="pre">RADIUS_TRACK</span></code>.</p>
+<p>Body-frame curvature uses yaw rate / forward speed. Track-frame curvature differentiates the track heading. Both are
+smoothed with a rolling median. Requires <code class="docutils literal notranslate"><span class="pre">add_track_frame_velocities</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -569,10 +563,9 @@ Requires <code class="docutils literal notranslate"><span class="pre">add_track_
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.kinematics.add_groundspeed">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.kinematics.</span></span><span class="sig-name descname"><span class="pre">add_groundspeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fl_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.wheelSpeeds.frontLeft'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fr_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.wheelSpeeds.frontRight'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/kinematics.html#add_groundspeed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.kinematics.add_groundspeed" title="Link to this definition">#</a></dt>
-<dd><p>Add ground speed as the average of the two front (undriven) wheel speeds. Stores it
-in the variable <code class="docutils literal notranslate"><span class="pre">groundSpeed</span></code>, accessible via the constant <code class="docutils literal notranslate"><span class="pre">GROUND_SPEED</span></code>.</p>
-<p>Requires the <code class="docutils literal notranslate"><span class="pre">convert_wheelspeeds_to_m_per_s</span></code> preprocessing step.
-Stores <code class="docutils literal notranslate"><span class="pre">groundSpeed</span></code>.</p>
+<dd><p>Add ground speed as the average of the two front (undriven) wheel speeds. Stores it in the variable
+<code class="docutils literal notranslate"><span class="pre">groundSpeed</span></code>, accessible via the constant <code class="docutils literal notranslate"><span class="pre">GROUND_SPEED</span></code>.</p>
+<p>Requires the <code class="docutils literal notranslate"><span class="pre">convert_wheelspeeds_to_m_per_s</span></code> preprocessing step. Stores <code class="docutils literal notranslate"><span class="pre">groundSpeed</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -590,14 +583,14 @@ Stores <code class="docutils literal notranslate"><span class="pre">groundSpeed<
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.kinematics.add_ned_velocities">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.kinematics.</span></span><span class="sig-name descname"><span class="pre">add_ned_velocities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vel_x_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.velocityBody.x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vel_y_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.velocityBody.y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vel_z_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.velocityBody.z'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaw_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.yawPitchRoll.yaw'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/kinematics.html#add_ned_velocities"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.kinematics.add_ned_velocities" title="Link to this definition">#</a></dt>
-<dd><dl class="simple">
-<dt>Add NED velocity components by using body-frame velocity (FRD) and yaw rotation.</dt><dd><p>velN =  v_fwd * cos(yaw) - v_right * sin(yaw)
+<dd><p>Add NED velocity components by using body-frame velocity (FRD) and yaw rotation:</p>
+<blockquote>
+<div><p>velN =  v_fwd * cos(yaw) - v_right * sin(yaw)
 velE =  v_fwd * sin(yaw) + v_right * cos(yaw)
 velD =  v_down            (unchanged)</p>
-</dd>
-</dl>
-<p>Stores results in <code class="docutils literal notranslate"><span class="pre">velN</span></code>, <code class="docutils literal notranslate"><span class="pre">velE</span></code>, and <code class="docutils literal notranslate"><span class="pre">velD</span></code>, accessible via the constants
-<code class="docutils literal notranslate"><span class="pre">VEL_N</span></code>, <code class="docutils literal notranslate"><span class="pre">VEL_E</span></code>, and <code class="docutils literal notranslate"><span class="pre">VEL_D</span></code>.</p>
+</div></blockquote>
+<p>Stores results in <code class="docutils literal notranslate"><span class="pre">velN</span></code>, <code class="docutils literal notranslate"><span class="pre">velE</span></code>, and <code class="docutils literal notranslate"><span class="pre">velD</span></code>, accessible via the constants <code class="docutils literal notranslate"><span class="pre">VEL_N</span></code>, <code class="docutils literal notranslate"><span class="pre">VEL_E</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">VEL_D</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -613,10 +606,10 @@ velD =  v_down            (unchanged)</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>In older data, the VectorNav was configured such that velocityBody columns contained NED velocities.
-Such data can be patched with the <code class="docutils literal notranslate"><span class="pre">patch_ned_velocity</span></code> preprocessing step from PERDA. In that case,
-this function is unnecessary and roughly a no-op.
-This function intentionally follows PERDA’s naming convention of velN, velE, and velD for NED velocity components.</p>
+<p>In older data, the VectorNav was configured such that velocityBody columns contained NED velocities. Such data can
+be patched with the <code class="docutils literal notranslate"><span class="pre">patch_ned_velocity</span></code> preprocessing step from PERDA. In that case, this function is unnecessary
+and roughly a no-op. This function intentionally follows PERDA’s naming convention of velN, velE, and velD for NED
+velocity components.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -625,8 +618,8 @@ This function intentionally follows PERDA’s naming convention of velN, velE, a
 <dd><p>Add track-frame speed and course heading from NED velocity components.</p>
 <p>Track heading uses the direction of travel (0 = North, 90 = East, wraps +/-180°).
 Below <code class="docutils literal notranslate"><span class="pre">low_speed_thresh</span></code> heading falls back to INS yaw to avoid noise.</p>
-<p>Stores results in <code class="docutils literal notranslate"><span class="pre">track.velocity.x</span></code>, <code class="docutils literal notranslate"><span class="pre">track.velocity.y</span></code>, and <code class="docutils literal notranslate"><span class="pre">track.heading</span></code>,
-accesible via the constants <code class="docutils literal notranslate"><span class="pre">TRACK_VELOCITY_X</span></code>, <code class="docutils literal notranslate"><span class="pre">TRACK_VELOCITY_Y</span></code>, and <code class="docutils literal notranslate"><span class="pre">TRACK_HEADING</span></code>.</p>
+<p>Stores results in <code class="docutils literal notranslate"><span class="pre">track.velocity.x</span></code>, <code class="docutils literal notranslate"><span class="pre">track.velocity.y</span></code>, and <code class="docutils literal notranslate"><span class="pre">track.heading</span></code>, accesible via the constants
+<code class="docutils literal notranslate"><span class="pre">TRACK_VELOCITY_X</span></code>, <code class="docutils literal notranslate"><span class="pre">TRACK_VELOCITY_Y</span></code>, and <code class="docutils literal notranslate"><span class="pre">TRACK_HEADING</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

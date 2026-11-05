@@ -368,27 +368,26 @@
     <span class="n">ax_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"pcm.vnav.linearAccelBody.x"</span><span class="p">,</span>
     <span class="n">low_speed_thresh</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Add aerodynamic lift coefficient (CLA) and center of pressure (CoP).</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Add aerodynamic lift coefficient (CLA) and center of pressure (CoP).</span>
 
-<span class="sd">    Estimates per-axle downforce from shock pot compression relative to a</span>
-<span class="sd">    zero-aero reference window, subtracting longitudinal weight transfer.</span>
+<span class="sd">    Estimates per-axle downforce from shock pot compression relative to a zero-aero reference window, subtracting</span>
+<span class="sd">    longitudinal weight transfer.</span>
 
-<span class="sd">    Stores results in ``aero.cla`` and ``aero.cop``, accesible via the constants</span>
-<span class="sd">    ``CLA`` and ``COP``.</span>
+<span class="sd">    Stores results in ``aero.cla`` and ``aero.cop``, accesible via the constants ``CLA`` and ``COP``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    irl_car : IrlCar</span>
 <span class="sd">    ref_time_range : tuple[float, float]</span>
-<span class="sd">        ``(t_start, t_end)`` in seconds of a zero-aero reference window</span>
-<span class="sd">        (e.g. car stationary or slow).</span>
+<span class="sd">        ``(t_start, t_end)`` in seconds of a zero-aero reference window (e.g. car stationary or slow).</span>
 <span class="sd">    low_speed_thresh : float</span>
 <span class="sd">        Speed (m/s) below which CLA and CoP are zeroed / NaN.</span>
 <span class="sd">    """</span>
     <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="n">GROUND_SPEED</span><span class="p">,)</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"add_cla: missing variables(s) </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">"</span> <span class="sa">f</span><span class="s2">"Try running add_groundspeed first."</span>
+            <span class="sa">f</span><span class="s2">"add_cla: missing variables(s) </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">Try running add_groundspeed first."</span>
         <span class="p">)</span>
 
     <span class="n">pfl</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">pot_fl</span><span class="p">]</span>
@@ -446,17 +445,17 @@
     <span class="n">ax_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"pcm.vnav.linearAccelBody.x"</span><span class="p">,</span>
     <span class="n">low_speed_thresh</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Add aerodynamic drag coefficient (CDA) from coastdown deceleration.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Add aerodynamic drag coefficient (CDA) from coastdown deceleration.</span>
 
-<span class="sd">    Applies ``F_drag = -m·a_x - F_rolling``, then ``CDA = F_drag / (0.5·ρ·v²)``.</span>
-<span class="sd">    For meaningful results trim ``data`` to a coasting segment first (no throttle or brake).</span>
-<span class="sd">    Requires ``add_groundspeed``.</span>
+<span class="sd">    Applies ``F_drag = -m·a_x - F_rolling``, then ``CDA = F_drag / (0.5·ρ·v²)``. For meaningful results trim ``data`` to</span>
+<span class="sd">    a coasting segment first (no throttle or brake). Requires ``add_groundspeed``.</span>
 
 <span class="sd">    Stores results in ``aero.cda``, accessible via the constant ``CDA``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    data: SingleRunData</span>
+<span class="sd">    data : SingleRunData</span>
 <span class="sd">    irl_car : IrlCar</span>
 <span class="sd">    ax_col : str</span>
 <span class="sd">        Column name of longitudinal acceleration in body frame.</span>
@@ -466,7 +465,7 @@
     <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="n">GROUND_SPEED</span><span class="p">,</span> <span class="n">ax_col</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"add_cda: missing variables(s) </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">"</span> <span class="sa">f</span><span class="s2">"Try running add_groundspeed first."</span>
+            <span class="sa">f</span><span class="s2">"add_cda: missing variables(s) </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">Try running add_groundspeed first."</span>
         <span class="p">)</span>
 
     <span class="n">gs</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">GROUND_SPEED</span><span class="p">]</span>

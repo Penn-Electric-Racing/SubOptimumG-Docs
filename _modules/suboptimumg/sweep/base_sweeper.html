@@ -375,9 +375,9 @@
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    Subclasses say what to simulate in `_generate_plan`, and how to arrange the results in `_assemble_data`.</span>
-<span class="sd">    The plan is regenerated on every `sweep()`, so edits to `comp_data` or the subclass's configuration are picked up.</span>
-<span class="sd">    The executor's simulator is part of the fingerprint, so changing what one simulation means also reruns.</span>
+<span class="sd">    Subclasses say what to simulate in `_generate_plan`, and how to arrange the results in `_assemble_data`. The plan is</span>
+<span class="sd">    regenerated on every `sweep()`, so edits to `comp_data` or the subclass's configuration are picked up. The</span>
+<span class="sd">    executor's simulator is part of the fingerprint, so changing what one simulation means also reruns.</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_data</span><span class="p">:</span> <span class="n">CompetitionData</span><span class="p">,</span> <span class="n">executor</span><span class="p">:</span> <span class="n">SweepExecutor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>

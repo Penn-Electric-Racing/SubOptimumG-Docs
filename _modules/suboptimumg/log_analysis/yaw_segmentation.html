@@ -368,13 +368,12 @@
     <span class="n">out_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">AX_FROM_SPEED</span><span class="p">,</span>
     <span class="n">smooth_hz</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Add longitudinal acceleration as the time derivative of speed.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Add longitudinal acceleration as the time derivative of speed.</span>
 
-<span class="sd">    Differentiation amplifies high-frequency noise, so the derivative is</span>
-<span class="sd">    lowpass-filtered at ``smooth_hz`` (zero-phase, so no group delay is</span>
-<span class="sd">    introduced). Duplicate and out-of-order timestamps are repaired first --</span>
-<span class="sd">    a single bad sample would otherwise poison the whole signal through the</span>
-<span class="sd">    filter.</span>
+<span class="sd">    Differentiation amplifies high-frequency noise, so the derivative is lowpass-filtered at ``smooth_hz`` (zero-phase,</span>
+<span class="sd">    so no group delay is introduced). Duplicate and out-of-order timestamps are repaired first -- a single bad sample</span>
+<span class="sd">    would otherwise poison the whole signal through the filter.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -437,12 +436,12 @@
     <span class="n">speed_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"pcm.vnav.velocityBody.x"</span><span class="p">,</span>
     <span class="n">overlap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StationarityReport</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Measure how often the car holds an approximately constant speed.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Measure how often the car holds an approximately constant speed.</span>
 
-<span class="sd">    For each ``(window length, tolerance)`` pair, count the fraction of sliding</span>
-<span class="sd">    windows whose peak-to-peak speed stays within ``tolerance`` percent of the</span>
-<span class="sd">    window mean. Near-zero fractions at the long windows are the evidence that</span>
-<span class="sd">    a nonparametric FRF will not work on this data.</span>
+<span class="sd">    For each ``(window length, tolerance)`` pair, count the fraction of sliding windows whose peak-to-peak speed stays</span>
+<span class="sd">    within ``tolerance`` percent of the window mean. Near-zero fractions at the long windows are the evidence that a</span>
+<span class="sd">    nonparametric FRF will not work on this data.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -461,12 +460,10 @@
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    Lapping data is not a frequency-response test: the car is accelerating,</span>
-<span class="sd">    braking, and occasionally sliding. This scan quantifies how rarely the</span>
-<span class="sd">    speed is even approximately constant, and is the justification for</span>
-<span class="sd">    identifying the yaw response with a parametric LPV output-error fit</span>
-<span class="sd">    (``yaw_fit``) rather than a nonparametric Welch FRF, which would need</span>
-<span class="sd">    long constant-speed holds this data does not contain.</span>
+<span class="sd">    Lapping data is not a frequency-response test: the car is accelerating, braking, and occasionally sliding. This scan</span>
+<span class="sd">    quantifies how rarely the speed is even approximately constant, and is the justification for identifying the yaw</span>
+<span class="sd">    response with a parametric LPV output-error fit (``yaw_fit``) rather than a nonparametric Welch FRF, which would</span>
+<span class="sd">    need long constant-speed holds this data does not contain.</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">speed_col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"scan_speed_stationarity: missing variable '</span><span class="si">{</span><span class="n">speed_col</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
@@ -547,13 +544,13 @@
     <span class="n">speed_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"pcm.vnav.velocityBody.x"</span><span class="p">,</span>
     <span class="n">slip_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">BODY_SLIP_ANGLE</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">SingleRunData</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">MaskReport</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">"""Split each coarse window into clean sub-windows by masking.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Split each coarse window into clean sub-windows by masking.</span>
 
-<span class="sd">    Within each window, samples below ``min_speed_mps`` (the car is not really</span>
-<span class="sd">    driving, and every 1/V term blows up) or above ``max_slip_deg`` of body</span>
-<span class="sd">    slip (the tires are past the linear region the bicycle model describes) are</span>
-<span class="sd">    dropped. Surviving runs shorter than ``min_window_s`` carry too little</span>
-<span class="sd">    low-frequency content to identify anything and are dropped too.</span>
+<span class="sd">    Within each window, samples below ``min_speed_mps`` (the car is not really driving, and every 1/V term blows up) or</span>
+<span class="sd">    above ``max_slip_deg`` of body slip (the tires are past the linear region the bicycle model describes) are dropped.</span>
+<span class="sd">    Surviving runs shorter than ``min_window_s`` carry too little low-frequency content to identify anything and are</span>
+<span class="sd">    dropped too.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -650,11 +647,11 @@
     <span class="n">target_hz</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">100.0</span><span class="p">,</span>
     <span class="n">method</span><span class="p">:</span> <span class="n">ResampleMethod</span> <span class="o">=</span> <span class="n">ResampleMethod</span><span class="o">.</span><span class="n">LINEAR</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">SingleRunData</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Put every sub-window channel on a common uniform grid at ``target_hz``.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Put every sub-window channel on a common uniform grid at ``target_hz``.</span>
 
-<span class="sd">    Raw logs run near 1 kHz with dt jitter, but the yaw mode is only a few Hz</span>
-<span class="sd">    wide, so 100 Hz is ample and roughly ten times cheaper to simulate. Landing</span>
-<span class="sd">    every channel on the *same* grid also makes the later left-join a no-op.</span>
+<span class="sd">    Raw logs run near 1 kHz with dt jitter, but the yaw mode is only a few Hz wide, so 100 Hz is ample and roughly ten</span>
+<span class="sd">    times cheaper to simulate. Landing every channel on the *same* grid also makes the later left-join a no-op.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -666,9 +663,8 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    list of SingleRunData</span>
-<span class="sd">        New sub-windows on the uniform grid. Channels with fewer than two</span>
-<span class="sd">        samples are dropped, and a sub-window left with no channels at all is</span>
-<span class="sd">        omitted.</span>
+<span class="sd">        New sub-windows on the uniform grid. Channels with fewer than two samples are dropped, and a sub-window left</span>
+<span class="sd">        with no channels at all is omitted.</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">target_hz</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"target_hz must be &gt; 0, got </span><span class="si">{</span><span class="n">target_hz</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -708,11 +704,11 @@
     <span class="n">speed_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"pcm.vnav.velocityBody.x"</span><span class="p">,</span>
     <span class="n">slip_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">BODY_SLIP_ANGLE</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">SubwindowSummary</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Per-sub-window quality summary, for triaging windows before fitting.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Per-sub-window quality summary, for triaging windows before fitting.</span>
 
-<span class="sd">    Duration and steering excitation say whether a window can identify</span>
-<span class="sd">    anything; speed hold and ``|a_x|`` say how hard the LPV scheduling is</span>
-<span class="sd">    working; slip RMS says how close to the linear region it stayed.</span>
+<span class="sd">    Duration and steering excitation say whether a window can identify anything; speed hold and ``|a_x|`` say how hard</span>
+<span class="sd">    the LPV scheduling is working; slip RMS says how close to the linear region it stayed.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>

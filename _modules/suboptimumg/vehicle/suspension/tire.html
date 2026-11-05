@@ -380,8 +380,7 @@
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        Uses quadratic fit from TTC (Tire Test Consortium) data.</span>
-<span class="sd">        Returns (0, 0) if tire is lifted (normal force &lt;= 0).</span>
+<span class="sd">        Uses quadratic fit from TTC (Tire Test Consortium) data. Returns (0, 0) if tire is lifted (normal force &lt;= 0).</span>
 <span class="sd">        """</span>
         <span class="n">mu_lat</span> <span class="o">=</span> <span class="o">-</span><span class="mf">7.66113e-8</span> <span class="o">*</span> <span class="n">normal</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">2.82666e-4</span> <span class="o">*</span> <span class="n">normal</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">mu_lat_zero_load</span>
         <span class="n">mu_lat</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">mu_lat</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Clip if bad</span>

@@ -489,16 +489,15 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>comp_data</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionData" title="suboptimumg.compsim.models.CompetitionData"><em>CompetitionData</em></a>) – Base competition. It is copied, so later edits to the original have no effect.</p></li>
 <li><p><strong>parameter_names</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>) – Numeric parameters to sweep, e.g. <cite>[“mass”, “aero.cl”]</cite></p></li>
-<li><p><strong>percent_changes</strong> (<em>Sequence</em><em>[</em><em>float</em><em>]</em><em>, </em><em>optional</em>) – Changes from each parameter’s base value, as ascending fractions
-(default is -10% to +10% in steps of 2%)</p></li>
+<li><p><strong>percent_changes</strong> (<em>Sequence</em><em>[</em><em>float</em><em>]</em><em>, </em><em>optional</em>) – Changes from each parameter’s base value, as ascending fractions (default is -10% to +10% in steps of 2%)</p></li>
 <li><p><strong>executor</strong> (<a class="reference internal" href="suboptimumg.sweep.executor.html#suboptimumg.sweep.executor.SweepExecutor" title="suboptimumg.sweep.executor.SweepExecutor"><em>SweepExecutor</em></a><em>, </em><em>optional</em>) – How simulations are run (default runs them in a process pool)</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>Every parameter’s simulations, plus one of the unmodified car for the baseline, run in a single batch.
-<cite>comp_data</cite>, <cite>parameter_names</cite> and <cite>percent_changes</cite> can be edited after construction. <cite>sweep()</cite> only
-reruns the simulations when the generated configurations have changed.</p>
+<p>Every parameter’s simulations, plus one of the unmodified car for the baseline, run in a single batch. <cite>comp_data</cite>,
+<cite>parameter_names</cite> and <cite>percent_changes</cite> can be edited after construction. <cite>sweep()</cite> only reruns the simulations when
+the generated configurations have changed.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.sweep.array_sweeper.ArraySweeper.plot">
 <span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SweepMetric.TOTAL_PTS</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">plot_options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/array_sweeper.html#ArraySweeper.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.array_sweeper.ArraySweeper.plot" title="Link to this definition">#</a></dt>

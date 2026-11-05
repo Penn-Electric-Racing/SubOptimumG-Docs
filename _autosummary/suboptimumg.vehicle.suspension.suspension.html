@@ -554,9 +554,8 @@
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>This model was derived by Vedansh Goenka based on the paper referenced
-in the class docstring. Currently uses simplified model pending full
-implementation with pitch stiffness parameters.</p>
+<p>This model was derived by Vedansh Goenka based on the paper referenced in the class docstring. Currently uses
+simplified model pending full implementation with pitch stiffness parameters.</p>
 <p>Formula:</p>
 <div class="math notranslate nohighlight">
 \[\Delta F_{y,axle} = \frac{m \cdot h_{PC}}{L} \cdot a_z +
@@ -611,14 +610,11 @@ implementation with pitch stiffness parameters.</p>
 <p>Per-axle formula:</p>
 <div class="math notranslate nohighlight">
 \[|\Delta F_{y,axle}| = \frac{m_{axle} \cdot a_y \cdot h_{CG}}{t_{axle}}\]</div>
-<p>Each axle reacts its share of the chassis roll moment via a side-to-side
-couple at its track width. Summing the two axle results recovers the
-total chassis transfer m_total * a * h_cg / track (when t_front == t_rear).
-The earlier version used m_total here for each axle, which double-counted
-the transfer.</p>
-<p>TODO: Standardize naming to avoid x/y coordinates and use long/lat instead;
-x in general should be long and y should be lat. Also add plausibility
-checks to input values.</p>
+<p>Each axle reacts its share of the chassis roll moment via a side-to-side couple at its track width. Summing the
+two axle results recovers the total chassis transfer m_total * a * h_cg / track (when t_front == t_rear). The
+earlier version used m_total here for each axle, which double-counted the transfer.</p>
+<p>TODO: Standardize naming to avoid x/y coordinates and use long/lat instead; x in general should be long and y
+should be lat. Also add plausibility checks to input values.</p>
 </dd></dl>
 
 <dl class="py method">

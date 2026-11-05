@@ -489,16 +489,15 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>comp_data</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionData" title="suboptimumg.compsim.models.CompetitionData"><em>CompetitionData</em></a>) – Base competition. It is copied, so later edits to the original have no effect.</p></li>
 <li><p><strong>inputs</strong> (<em>Sequence</em><em>[</em><em>SweepInput</em><em>]</em>) – Swept parameters and labeled replacements, one axis each, in this order</p></li>
-<li><p><strong>dependencies</strong> (<em>Sequence</em><em>[</em><em>VehicleDependency</em><em>]</em>) – Functions that take the vehicle model, with a point’s swept values
-applied, and return other parameters to change at that point</p></li>
+<li><p><strong>dependencies</strong> (<em>Sequence</em><em>[</em><em>VehicleDependency</em><em>]</em>) – Functions that take the vehicle model, with a point’s swept values applied, and return other parameters to
+change at that point</p></li>
 <li><p><strong>executor</strong> (<a class="reference internal" href="suboptimumg.sweep.executor.html#suboptimumg.sweep.executor.SweepExecutor" title="suboptimumg.sweep.executor.SweepExecutor"><em>SweepExecutor</em></a>) – How simulations are run</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>Subclasses say how results are arranged in <cite>_assemble_data</cite>. They can change which data the
-plots and point queries read with <cite>_queryable_data</cite>, and which metrics <cite>grid_plot</cite> shows
-with <cite>_grid_plot_metrics</cite>.</p>
+<p>Subclasses say how results are arranged in <cite>_assemble_data</cite>. They can change which data the plots and point queries
+read with <cite>_queryable_data</cite>, and which metrics <cite>grid_plot</cite> shows with <cite>_grid_plot_metrics</cite>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.sweep.sweeper.GridSweeper.evaluate_sweep_metric">
 <span class="sig-name descname"><span class="pre">evaluate_sweep_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fixed_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SweepMetric.TOTAL_PTS</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweeper.html#GridSweeper.evaluate_sweep_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweeper.GridSweeper.evaluate_sweep_metric" title="Link to this definition">#</a></dt>
@@ -548,8 +547,8 @@ with <cite>_grid_plot_metrics</cite>.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>plot_type</strong> (<a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html#suboptimumg.plotting.grid_plot_3d.PlotType" title="suboptimumg.plotting.grid_plot_3d.PlotType"><em>PlotType</em></a><em>, </em><em>optional</em>) – Contour or surface, for 2 free parameters (default is PlotType.CONTOUR)</p></li>
 <li><p><strong>show_event_times</strong> (<em>bool</em><em>, </em><em>optional</em>) – Show event times instead of the default metrics (default is False)</p></li>
-<li><p><strong>fixed_params</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>float</em><em> | </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Swept parameters to fix, e.g. <cite>{“mass”: 250, “pwrtn.motor”: “emrax208”}</cite>.
-Categorical axes take one of their labels.</p></li>
+<li><p><strong>fixed_params</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>float</em><em> | </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Swept parameters to fix, e.g. <cite>{“mass”: 250, “pwrtn.motor”: “emrax208”}</cite>. Categorical axes take one of their
+labels.</p></li>
 <li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Text for the plot. Defaults are generated from the swept parameters.</p></li>
 <li><p><strong>x_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Text for the plot. Defaults are generated from the swept parameters.</p></li>
 <li><p><strong>y_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Text for the plot. Defaults are generated from the swept parameters.</p></li>
@@ -577,9 +576,8 @@ Categorical axes take one of their labels.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>metric</strong> (<a class="reference internal" href="suboptimumg.plotting.types.html#suboptimumg.plotting.types.Metric" title="suboptimumg.plotting.types.Metric"><em>Metric</em></a><em>, </em><em>optional</em>) – Metric to plot (default is SweepMetric.TOTAL_PTS)</p></li>
 <li><p><strong>plot_type</strong> (<a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html#suboptimumg.plotting.grid_plot_3d.PlotType" title="suboptimumg.plotting.grid_plot_3d.PlotType"><em>PlotType</em></a><em>, </em><em>optional</em>) – Contour or surface, for 2 free parameters (default is PlotType.CONTOUR)</p></li>
-<li><p><strong>fixed_params</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>float</em><em> | </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Swept parameters to fix, e.g. <cite>{“mass”: 250, “pwrtn.motor”: “emrax208”}</cite>.
-Numeric values between grid points are interpolated. Categorical axes
-take one of their labels.</p></li>
+<li><p><strong>fixed_params</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>float</em><em> | </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Swept parameters to fix, e.g. <cite>{“mass”: 250, “pwrtn.motor”: “emrax208”}</cite>. Numeric values between grid points
+are interpolated. Categorical axes take one of their labels.</p></li>
 <li><p><strong>hover_metric</strong> (<a class="reference internal" href="suboptimumg.plotting.types.html#suboptimumg.plotting.types.Metric" title="suboptimumg.plotting.types.Metric"><em>Metric</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – A second metric to show when hovering over a contour (default is None, no second metric)</p></li>
 <li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Text for the plot. Defaults are generated from the swept parameters.</p></li>
 <li><p><strong>subtitle</strong> (<em>str</em><em>, </em><em>optional</em>) – Text for the plot. Defaults are generated from the swept parameters.</p></li>
@@ -591,8 +589,8 @@ take one of their labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A line plot for 1 free numeric parameter, one line per label when a
-categorical axis is also free, or a contour or surface for 2 numeric</p>
+<dd class="field-even"><p>A line plot for 1 free numeric parameter, one line per label when a categorical axis is also free, or a
+contour or surface for 2 numeric</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>go.Figure</p>
@@ -606,22 +604,22 @@ categorical axis is also free, or a contour or surface for 2 numeric</p>
 <dt class="sig sig-object py" id="suboptimumg.sweep.sweeper.Sweeper">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.sweep.sweeper.</span></span><span class="sig-name descname"><span class="pre">Sweeper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comp_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependencies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">executor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;suboptimumg.sweep.multiprocessed_executor.MultiprocessSweepExecutor</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/sweeper.html#Sweeper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.sweeper.Sweeper" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#suboptimumg.sweep.sweeper.GridSweeper" title="suboptimumg.sweep.sweeper.GridSweeper"><code class="xref py py-class docutils literal notranslate"><span class="pre">GridSweeper</span></code></a>[<a class="reference internal" href="suboptimumg.sweep.sweep_data.html#suboptimumg.sweep.sweep_data.SweepData" title="suboptimumg.sweep.sweep_data.SweepData"><code class="xref py py-class docutils literal notranslate"><span class="pre">SweepData</span></code></a>]</p>
-<p>N-dimensional parameter sweeper</p>
+<p>N-dimensional parameter sweeper.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>comp_data</strong> (<a class="reference internal" href="suboptimumg.compsim.models.html#suboptimumg.compsim.models.CompetitionData" title="suboptimumg.compsim.models.CompetitionData"><em>CompetitionData</em></a>) – Base competition. It is copied, so later edits to the original have no effect.</p></li>
-<li><p><strong>inputs</strong> (<em>Sequence</em><em>[</em><em>SweepInput</em><em>]</em>) – Swept parameters (<cite>SweepParamConfig</cite>) and labeled replacements
-(<cite>CategoricalSweepInput</cite>, e.g. motors), one axis each, in this order</p></li>
-<li><p><strong>dependencies</strong> (<em>Sequence</em><em>[</em><em>VehicleDependency</em><em>]</em><em>, </em><em>optional</em>) – Functions that take the vehicle model, with a point’s swept values
-applied, and return other parameters to change at that point</p></li>
+<li><p><strong>inputs</strong> (<em>Sequence</em><em>[</em><em>SweepInput</em><em>]</em>) – Swept parameters (<cite>SweepParamConfig</cite>) and labeled replacements (<cite>CategoricalSweepInput</cite>, e.g. motors), one axis
+each, in this order</p></li>
+<li><p><strong>dependencies</strong> (<em>Sequence</em><em>[</em><em>VehicleDependency</em><em>]</em><em>, </em><em>optional</em>) – Functions that take the vehicle model, with a point’s swept values applied, and return other parameters to
+change at that point</p></li>
 <li><p><strong>executor</strong> (<a class="reference internal" href="suboptimumg.sweep.executor.html#suboptimumg.sweep.executor.SweepExecutor" title="suboptimumg.sweep.executor.SweepExecutor"><em>SweepExecutor</em></a><em>, </em><em>optional</em>) – How simulations are run (default runs them in a process pool)</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p><cite>comp_data</cite> and <cite>config</cite> can be edited after construction. <cite>sweep()</cite> only
-reruns the simulations when the generated configurations have changed.</p>
+<p><cite>comp_data</cite> and <cite>config</cite> can be edited after construction. <cite>sweep()</cite> only reruns the simulations when the generated
+configurations have changed.</p>
 </dd></dl>
 
 </section>

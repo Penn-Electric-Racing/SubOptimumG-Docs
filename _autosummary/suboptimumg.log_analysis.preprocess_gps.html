@@ -483,9 +483,8 @@
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.preprocess_gps.preprocess_gps_data_instances">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.preprocess_gps.</span></span><span class="sig-name descname"><span class="pre">preprocess_gps_data_instances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ins_lat_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.posLla.latitude'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ins_lon_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.posLla.longitude'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fix_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.gpsFix'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/preprocess_gps.html#preprocess_gps_data_instances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.preprocess_gps.preprocess_gps_data_instances" title="Link to this definition">#</a></dt>
 <dd><p>Extract GPS position DataInstances and inject them into SingleRunData.</p>
-<p>Filters invalid samples (no GPS fix, zero lat/lon pairs), projects to
-local East/North Cartesian coordinates, and stores the results as
-<code class="docutils literal notranslate"><span class="pre">gps.latitude</span></code>, <code class="docutils literal notranslate"><span class="pre">gps.longitude</span></code>, <code class="docutils literal notranslate"><span class="pre">posE</span></code>, and <code class="docutils literal notranslate"><span class="pre">posN</span></code> in <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
+<p>Filters invalid samples (no GPS fix, zero lat/lon pairs), projects to local East/North Cartesian coordinates, and
+stores the results as <code class="docutils literal notranslate"><span class="pre">gps.latitude</span></code>, <code class="docutils literal notranslate"><span class="pre">gps.longitude</span></code>, <code class="docutils literal notranslate"><span class="pre">posE</span></code>, and <code class="docutils literal notranslate"><span class="pre">posN</span></code> in <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -496,8 +495,7 @@ local East/North Cartesian coordinates, and stores the results as
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The same <code class="docutils literal notranslate"><span class="pre">data</span></code> object with <code class="docutils literal notranslate"><span class="pre">gps.latitude</span></code>, <code class="docutils literal notranslate"><span class="pre">gps.longitude</span></code>,
-<code class="docutils literal notranslate"><span class="pre">posN</span></code>, and <code class="docutils literal notranslate"><span class="pre">posE</span></code> added.</p>
+<dd class="field-even"><p>The same <code class="docutils literal notranslate"><span class="pre">data</span></code> object with <code class="docutils literal notranslate"><span class="pre">gps.latitude</span></code>, <code class="docutils literal notranslate"><span class="pre">gps.longitude</span></code>, <code class="docutils literal notranslate"><span class="pre">posN</span></code>, and <code class="docutils literal notranslate"><span class="pre">posE</span></code> added.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>SingleRunData</p>

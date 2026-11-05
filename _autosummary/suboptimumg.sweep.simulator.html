@@ -509,9 +509,8 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
 <p>What simulating one configuration means, independent of how configurations are distributed.</p>
 <p class="rubric">Notes</p>
-<p>Simulators are sent to worker processes, so they must be picklable. Everything that changes
-their results must be stored on the instance, because sweepers fingerprint the simulator to
-decide whether results are out of date.</p>
+<p>Simulators are sent to worker processes, so they must be picklable. Everything that changes their results must be
+stored on the instance, because sweepers fingerprint the simulator to decide whether results are out of date.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.sweep.simulator.ConfigurationSimulator.simulate">
 <span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">simulate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">configuration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/sweep/simulator.html#ConfigurationSimulator.simulate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.sweep.simulator.ConfigurationSimulator.simulate" title="Link to this definition">#</a></dt>

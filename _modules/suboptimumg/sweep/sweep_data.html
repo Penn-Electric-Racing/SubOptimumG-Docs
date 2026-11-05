@@ -507,8 +507,8 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        fixed_params : Mapping[str, float | str]</span>
-<span class="sd">            Value for each axis to fix, keyed by name, e.g. `{"aero.cl": 3.4, "pwrtn.motor": "emrax208"}`.</span>
-<span class="sd">            A numeric axis takes any number within its swept range. A categorical axis takes one of its labels.</span>
+<span class="sd">            Value for each axis to fix, keyed by name, e.g. `{"aero.cl": 3.4, "pwrtn.motor": "emrax208"}`. A numeric</span>
+<span class="sd">            axis takes any number within its swept range. A categorical axis takes one of its labels.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -517,8 +517,8 @@
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        Fixing a categorical axis selects its label's slice exactly.</span>
-<span class="sd">        Numeric values are linearly interpolated within each category. NaN's will affect adjacent cells</span>
+<span class="sd">        Fixing a categorical axis selects its label's slice exactly. Numeric values are linearly interpolated within</span>
+<span class="sd">        each category. NaN's will affect adjacent cells</span>
 <span class="sd">        """</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">fixed_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -576,8 +576,8 @@
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        Categorical axes are fixed first, exactly, and are not differentiated.</span>
-<span class="sd">        See `estimate_partial_derivatives` for how each numeric partial is computed.</span>
+<span class="sd">        Categorical axes are fixed first, exactly, and are not differentiated. See `estimate_partial_derivatives` for</span>
+<span class="sd">        how each numeric partial is computed.</span>
 <span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_every_param_fixed</span><span class="p">(</span><span class="n">fixed_params</span><span class="p">)</span>
         <span class="n">categorical_point</span> <span class="o">=</span> <span class="p">{</span>

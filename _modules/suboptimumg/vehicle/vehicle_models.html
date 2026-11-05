@@ -368,7 +368,8 @@
 <div class="viewcode-block" id="FittedCurve">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.FittedCurve">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FittedCurve</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Polynomial fit of tabulated [x, y] data with Horner evaluation.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Polynomial fit of tabulated [x, y] data with Horner evaluation.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -383,9 +384,8 @@
 <span class="sd">        Original input arrays.</span>
 <span class="sd">    poly_order : int</span>
 <span class="sd">    coeffs : NDArray[np.float64]</span>
-<span class="sd">        Polynomial coefficients in **descending** degree order</span>
-<span class="sd">        ``[c_n, c_{n-1}, ..., c_1, c_0]``, matching ``np.polyfit``</span>
-<span class="sd">        output and the order Horner's method consumes directly.</span>
+<span class="sd">        Polynomial coefficients in **descending** degree order ``[c_n, c_{n-1}, ..., c_1, c_0]``, matching</span>
+<span class="sd">        ``np.polyfit`` output and the order Horner's method consumes directly.</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="n">poly_order</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -395,7 +395,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_raw</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_raw</span><span class="p">,</span> <span class="n">poly_order</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""Evaluate the fitted polynomial (alias for `evaluate`).</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Evaluate the fitted polynomial (alias for `evaluate`).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -412,7 +413,8 @@
 <div class="viewcode-block" id="FittedCurve.evaluate">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.FittedCurve.evaluate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""Evaluate the fitted polynomial via Horner's method.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Evaluate the fitted polynomial via Horner's method.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -531,8 +533,9 @@
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        After the assignment, every hook in `PARAMETER_HOOKS` runs in order, with a copy of the vehicle from before the change and the vehicle itself.</span>
-<span class="sd">        A `Car` built from this model caches derived values, so a live car must be changed through `Car.modify_params`.</span>
+<span class="sd">        After the assignment, every hook in `PARAMETER_HOOKS` runs in order, with a copy of the vehicle from before the</span>
+<span class="sd">        change and the vehicle itself. A `Car` built from this model caches derived values, so a live car must be</span>
+<span class="sd">        changed through `Car.modify_params`.</span>
 <span class="sd">        """</span>
         <span class="n">before</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">attributes</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
@@ -654,7 +657,8 @@
 <div class="viewcode-block" id="DynamicsPriorBoundsModel">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.DynamicsPriorBoundsModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DynamicsPriorBoundsModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Soft +/- percentage bounds for the yaw-response bicycle priors.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Soft +/- percentage bounds for the yaw-response bicycle priors.</span>
 
 <span class="sd">    Used by an LPV output-error fit to build the optimizer's parameter box around ``Ca_front``, ``Ca_rear`` and ``Izz``.</span>
 <span class="sd">    """</span>
@@ -671,7 +675,7 @@
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.DynamicsSetupModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DynamicsSetupModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Linear-region bicycle-model parameters used as soft priors for a LPV yaw-response output-error fit</span>
+<span class="sd">    Linear-region bicycle-model parameters, used as soft priors for a LPV yaw-response output-error fit.</span>
 
 <span class="sd">    Backsolve from four cornering operating points (skidpad / steady turns) using SAE bicycle algebra:</span>
 <span class="sd">        delta_tire = L/R + (m/L)(l_r/Ca_f - l_f/Ca_r) V^2/R</span>
@@ -699,11 +703,11 @@
 <div class="viewcode-block" id="ExtendedVehicleModel">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.ExtendedVehicleModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ExtendedVehicleModel</span><span class="p">(</span><span class="n">VehicleModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""VehicleModel extended with real-world session setup parameters.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    VehicleModel extended with real-world session setup parameters.</span>
 
-<span class="sd">    Set ``type: irl_setup`` in the YAML to trigger this model.</span>
-<span class="sd">    Includes alignment, steering ackermann, suspension setup, and yaw-response dynamics priors on top of the base car</span>
-<span class="sd">    parameters.</span>
+<span class="sd">    Set ``type: irl_setup`` in the YAML to trigger this model. Includes alignment, steering ackermann, suspension setup,</span>
+<span class="sd">    and yaw-response dynamics priors on top of the base car parameters.</span>
 <span class="sd">    """</span>
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

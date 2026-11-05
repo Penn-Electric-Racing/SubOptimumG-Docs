@@ -373,16 +373,15 @@
 <span class="sd">    parameter_names : Sequence[str]</span>
 <span class="sd">        Numeric parameters to sweep, e.g. `["mass", "aero.cl"]`</span>
 <span class="sd">    percent_changes : Sequence[float], optional</span>
-<span class="sd">        Changes from each parameter's base value, as ascending fractions</span>
-<span class="sd">        (default is -10% to +10% in steps of 2%)</span>
+<span class="sd">        Changes from each parameter's base value, as ascending fractions (default is -10% to +10% in steps of 2%)</span>
 <span class="sd">    executor : SweepExecutor, optional</span>
 <span class="sd">        How simulations are run (default runs them in a process pool)</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    Every parameter's simulations, plus one of the unmodified car for the baseline, run in a single batch.</span>
-<span class="sd">    `comp_data`, `parameter_names` and `percent_changes` can be edited after construction. `sweep()` only</span>
-<span class="sd">    reruns the simulations when the generated configurations have changed.</span>
+<span class="sd">    Every parameter's simulations, plus one of the unmodified car for the baseline, run in a single batch. `comp_data`,</span>
+<span class="sd">    `parameter_names` and `percent_changes` can be edited after construction. `sweep()` only reruns the simulations when</span>
+<span class="sd">    the generated configurations have changed.</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>

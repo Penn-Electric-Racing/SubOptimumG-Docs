@@ -806,12 +806,13 @@
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.subsystem_models.html#suboptimumg.vehicle.subsystem_models.TireModel.validate_tire_radius_plausible">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">"tire_radius"</span><span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">validate_tire_radius_plausible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Check tire diameter (converted from inches) against a plausible range.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Check tire diameter (converted from inches) against a plausible range.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        ``tire_radius`` is in inches; the diameter is converted to meters</span>
-<span class="sd">        before comparing against the recommended 8-24 inch range.</span>
+<span class="sd">        ``tire_radius`` is in inches; the diameter is converted to meters before comparing against the recommended 8-24</span>
+<span class="sd">        inch range.</span>
 <span class="sd">        """</span>
         <span class="n">diameter_m</span> <span class="o">=</span> <span class="n">in_to_m</span><span class="p">(</span><span class="n">v</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
         <span class="n">min_diam_m</span> <span class="o">=</span> <span class="n">in_to_m</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>

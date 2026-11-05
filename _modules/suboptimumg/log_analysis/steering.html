@@ -356,12 +356,12 @@
     <span class="n">data</span><span class="p">:</span> <span class="n">SingleRunData</span><span class="p">,</span>
     <span class="n">wb</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Add the kinematic steer angle from curvature using the bicycle model.</span>
-<span class="sd">    Expects curvature DataInstances to already be present, as added by `add_curvature()`.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Add the kinematic steer angle from curvature using the bicycle model. Expects curvature DataInstances to already</span>
+<span class="sd">    be present, as added by `add_curvature()`.</span>
 
-<span class="sd">    Computes ``delta = degrees(arctan(wheelbase * curvature))`` for both</span>
-<span class="sd">    body and track frames and stores the results as ``body.steerAngle`` and</span>
-<span class="sd">    ``track.steerAngle``. All angles are in degrees.</span>
+<span class="sd">    Computes ``delta = degrees(arctan(wheelbase * curvature))`` for both body and track frames and stores the results as</span>
+<span class="sd">    ``body.steerAngle`` and ``track.steerAngle``. All angles are in degrees.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -406,13 +406,12 @@
     <span class="n">irl_car</span><span class="p">:</span> <span class="n">IrlCar</span><span class="p">,</span>
     <span class="n">sw_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ludwig.steeringWheel.angle"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Add front tire steer angles from the steering wheel sensor.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Add front tire steer angles from the steering wheel sensor.</span>
 
-<span class="sd">    Converts the steering wheel angle to individual left/right tire angles</span>
-<span class="sd">    using the Ackermann polynomial in ``irl_car``, then averages them for</span>
-<span class="sd">    the bicycle-model front axle steer angle. Stores the results as</span>
-<span class="sd">    'front.steerAngle.left', 'front.steerAngle.right', and 'front.steerAngle.bicycle'.</span>
-<span class="sd">    All outputs are in degrees.</span>
+<span class="sd">    Converts the steering wheel angle to individual left/right tire angles using the Ackermann polynomial in</span>
+<span class="sd">    ``irl_car``, then averages them for the bicycle-model front axle steer angle. Stores the results as</span>
+<span class="sd">    'front.steerAngle.left', 'front.steerAngle.right', and 'front.steerAngle.bicycle'. All outputs are in degrees.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>

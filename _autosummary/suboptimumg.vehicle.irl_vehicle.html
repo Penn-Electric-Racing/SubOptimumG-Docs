@@ -484,9 +484,8 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.irl_vehicle.</span></span><span class="sig-name descname"><span class="pre">IrlCar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vehicle_model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/vehicle/irl_vehicle.html#IrlCar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.irl_vehicle.IrlCar" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="suboptimumg.vehicle.vehicle.html#suboptimumg.vehicle.vehicle.Car" title="suboptimumg.vehicle.vehicle.Car"><code class="xref py py-class docutils literal notranslate"><span class="pre">Car</span></code></a></p>
 <p>Car extended with real-world session setup parameters for log analysis.</p>
-<p>Accepts an <code class="xref py py-class docutils literal notranslate"><span class="pre">ExtendedVehicleModel</span></code> which bundles both the simulation
-car parameters (mass, geometry, aero, etc.) and the session-specific setup
-(alignment, ackermann curve, suspension stiffness/motion ratios).</p>
+<p>Accepts an <code class="xref py py-class docutils literal notranslate"><span class="pre">ExtendedVehicleModel</span></code> which bundles both the simulation car parameters (mass, geometry, aero,
+etc.) and the session-specific setup (alignment, ackermann curve, suspension stiffness/motion ratios).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>vehicle_model</strong> (<a class="reference internal" href="suboptimumg.vehicle.vehicle_models.html#suboptimumg.vehicle.vehicle_models.ExtendedVehicleModel" title="suboptimumg.vehicle.vehicle_models.ExtendedVehicleModel"><em>ExtendedVehicleModel</em></a>) – Unified model containing both car.yaml and vehicle_setup.yaml data.</p>
@@ -503,8 +502,7 @@ car parameters (mass, geometry, aero, etc.) and the session-specific setup
 reference state (mm). Positive = compression.</p></li>
 <li><p><strong>rear_pot_delta_mm</strong> (<em>float</em><em> | </em><em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Change in average axle pot displacement from a zero-aero
 reference state (mm). Positive = compression.</p></li>
-<li><p><strong>ax_g</strong> (<em>float</em><em> | </em><em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Longitudinal acceleration in g’s. Used to subtract the
-spring-borne portion of longitudinal weight transfer
+<li><p><strong>ax_g</strong> (<em>float</em><em> | </em><em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Longitudinal acceleration in g’s. Used to subtract the spring-borne portion of longitudinal weight transfer
 (accounting for anti-dive/squat).</p></li>
 </ul>
 </dd>
@@ -578,8 +576,7 @@ Positive = load transfer to the outside wheel.</p>
 <dd class="field-odd"><p><strong>ax_g</strong> (<em>float</em><em> | </em><em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Longitudinal acceleration in g’s (positive = forward accel).</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Change in front axle normal force (N). Negative under
-acceleration, positive under braking.</p>
+<dd class="field-even"><p>Change in front axle normal force (N). Negative under acceleration, positive under braking.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float | NDArray[np.float64]</p>
@@ -600,8 +597,7 @@ acceleration, positive under braking.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pot_mm</strong> (<em>float</em><em> | </em><em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Shock pot displacement in millimeters. Positive = compression.</p></li>
-<li><p><strong>axle</strong> (<em>str</em>) – “front” or “rear”, used to select the correct motion ratio and
-heave stiffness.</p></li>
+<li><p><strong>axle</strong> (<em>str</em>) – “front” or “rear”, used to select the correct motion ratio and heave stiffness.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

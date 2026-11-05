@@ -360,7 +360,8 @@
 <span class="w">    </span><span class="sd">"""Composes all vehicle subsystems and simulates the car moving through a corner."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle_model</span><span class="p">:</span> <span class="n">VehicleModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Build all vehicle subsystems from a validated vehicle model.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Build all vehicle subsystems from a validated vehicle model.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -395,7 +396,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">calculate_top_speed</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">max_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">v_low</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">v_high</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">50</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Binary search for the highest speed at which the drive force still exceeds drag and rolling resistance.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Binary search for the highest speed at which the drive force still exceeds drag and rolling resistance.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -413,14 +415,11 @@
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        The drive force comes from `calculate_drive_force`, so it accounts for</span>
-<span class="sd">        the drive setup (all four motors on AWD), the tires' straight-line</span>
-<span class="sd">        longitudinal grip, and the total power limit. Motor torque drops to</span>
-<span class="sd">        zero above ``max_rpm``, so the result may be set by gearing and</span>
-<span class="sd">        ``max_rpm`` rather than by aerodynamic drag. In that case the motor</span>
-<span class="sd">        still has surplus force just below the returned speed. The bounds are</span>
-<span class="sd">        not checked: if the car can still accelerate at ``v_high``, the result</span>
-<span class="sd">        collapses onto ``v_high``.</span>
+<span class="sd">        The drive force comes from `calculate_drive_force`, so it accounts for the drive setup (all four motors on</span>
+<span class="sd">        AWD), the tires' straight-line longitudinal grip, and the total power limit. Motor torque drops to zero above</span>
+<span class="sd">        ``max_rpm``, so the result may be set by gearing and ``max_rpm`` rather than by aerodynamic drag. In that case</span>
+<span class="sd">        the motor still has surplus force just below the returned speed. The bounds are not checked: if the car can</span>
+<span class="sd">        still accelerate at ``v_high``, the result collapses onto ``v_high``.</span>
 <span class="sd">        """</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_steps</span><span class="p">):</span>
             <span class="c1"># Midpoint velocity</span>
@@ -447,13 +446,14 @@
 <div class="viewcode-block" id="Car.convert_rotating_mass_to_linear_mass">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle.html#suboptimumg.vehicle.vehicle.Car.convert_rotating_mass_to_linear_mass">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">convert_rotating_mass_to_linear_mass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Compute the linear-mass equivalent of all rotating inertia (tires, rims, motor, gearbox).</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Compute the linear-mass equivalent of all rotating inertia (tires, rims, motor, gearbox).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">            Equivalent linear mass (kg), i.e. rotating inertia J divided by</span>
-<span class="sd">            tire radius squared, summed across all rotating components.</span>
+<span class="sd">            Equivalent linear mass (kg), i.e. rotating inertia J divided by tire radius squared, summed across all</span>
+<span class="sd">            rotating components.</span>
 <span class="sd">        """</span>
         <span class="n">r2</span> <span class="o">=</span> <span class="n">in_to_m</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">tire_radius</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
 
@@ -486,13 +486,14 @@
         <span class="n">acc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">lat_acc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""Compute weight transfer and return each tire's normal force.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Compute weight transfer and return each tire's normal force.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        backwards_pass : bool</span>
-<span class="sd">            Whether this is a backwards (braking) integration pass; flips the</span>
-<span class="sd">            sign of the longitudinal acceleration used for weight transfer.</span>
+<span class="sd">            Whether this is a backwards (braking) integration pass; flips the sign of the longitudinal acceleration used</span>
+<span class="sd">            for weight transfer.</span>
 <span class="sd">        acc : float</span>
 <span class="sd">            Longitudinal acceleration (m/s^2).</span>
 <span class="sd">        lat_acc : float</span>
@@ -501,8 +502,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        tuple of float</span>
-<span class="sd">            Normal forces (N) for the front-left, front-right, rear-left,</span>
-<span class="sd">            and rear-right tires.</span>
+<span class="sd">            Normal forces (N) for the front-left, front-right, rear-left, and rear-right tires.</span>
 <span class="sd">        """</span>
         <span class="n">long_weight_f_delta</span><span class="p">,</span> <span class="n">long_weight_r_delta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sus</span><span class="o">.</span><span class="n">longitudinal_weight_transfer</span><span class="p">(</span>
             <span class="n">wheelbase</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">wb</span><span class="p">,</span>
@@ -557,7 +557,8 @@
         <span class="n">vel</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">backwards_pass</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TireForces</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Compute the forces on each tire from weight transfer, aero lift and cornering.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Compute the forces on each tire from weight transfer, aero lift and cornering.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -617,7 +618,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">_share_axle_lateral_force</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">normal_left</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">normal_right</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">axle_demand</span><span class="p">:</span> <span class="nb">float</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""Split one axle's lateral force demand between its two tires by available grip.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Split one axle's lateral force demand between its two tires by available grip.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -637,8 +639,8 @@
 <span class="sd">        -----</span>
 <span class="sd">        Each axle must exert enough lateral force that net yaw acceleration is</span>
 <span class="sd">        zero, i.e. F_y = m_axle * a = F_c * w_distr_axle. Each tire's share</span>
-<span class="sd">        matches the ratio of its own maximum available force to the axle's</span>
-<span class="sd">        total, so a completely unloaded axle produces 0 on both tires.</span>
+<span class="sd">        matches the ratio of its own maximum available force to the axle's total, so a completely unloaded axle produces</span>
+<span class="sd">        0 on both tires.</span>
 <span class="sd">        """</span>
         <span class="n">max_left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">calc_mu</span><span class="p">(</span><span class="n">normal_left</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">normal_left</span>
         <span class="n">max_right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">calc_mu</span><span class="p">(</span><span class="n">normal_right</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">normal_right</span>
@@ -652,7 +654,8 @@
 <div class="viewcode-block" id="Car.check_all_tires_valid_lateral_force">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle.html#suboptimumg.vehicle.vehicle.Car.check_all_tires_valid_lateral_force">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">check_all_tires_valid_lateral_force</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">forces</span><span class="p">:</span> <span class="n">TireForces</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Check whether every tire's lateral force is within its friction limit.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Check whether every tire's lateral force is within its friction limit.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -675,7 +678,8 @@
 <div class="viewcode-block" id="Car.calculate_and_return_longitudinal_forces">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle.html#suboptimumg.vehicle.vehicle.Car.calculate_and_return_longitudinal_forces">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">calculate_and_return_longitudinal_forces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">forces</span><span class="p">:</span> <span class="n">TireForces</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""Compute the remaining longitudinal force budget for each tire.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Compute the remaining longitudinal force budget for each tire.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -685,8 +689,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        list of float</span>
-<span class="sd">            Longitudinal force budget (N) for each tire, in</span>
-<span class="sd">            front-left, front-right, rear-left, rear-right order.</span>
+<span class="sd">            Longitudinal force budget (N) for each tire, in front-left, front-right, rear-left, rear-right order.</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="p">[</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tires</span><span class="o">.</span><span class="n">long_remain</span><span class="p">(</span><span class="n">forces</span><span class="o">.</span><span class="n">front_left</span><span class="p">),</span>
@@ -854,7 +857,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">try_accelerate_forwards_for_max_speed_calc</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">SimulationState</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Check whether the car can hold the given speed through a corner of the given radius.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Check whether the car can hold the given speed through a corner of the given radius.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -866,14 +870,12 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        bool</span>
-<span class="sd">            True if the powertrain and tires can sustain this speed through</span>
-<span class="sd">            the corner.</span>
+<span class="sd">            True if the powertrain and tires can sustain this speed through the corner.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        Approximates a steady-state weight transfer by zeroing longitudinal</span>
-<span class="sd">        acceleration for this check (a simplification pending further</span>
-<span class="sd">        investigation of longitudinal weight transfer behavior).</span>
+<span class="sd">        Approximates a steady-state weight transfer by zeroing longitudinal acceleration for this check (a</span>
+<span class="sd">        simplification pending further investigation of longitudinal weight transfer behavior).</span>
 <span class="sd">        """</span>
         <span class="n">v_current</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">v</span>
 
@@ -906,7 +908,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">accelerate_forwards_dx</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">distance_step</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">SimulationState</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SimulationState</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Advance the car forward by one distance step while accelerating.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Advance the car forward by one distance step while accelerating.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1018,7 +1021,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">brake_backwards_dx</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">distance_step</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">SimulationState</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SimulationState</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Integrate the car backward by one distance step while braking.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Integrate the car backward by one distance step while braking.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1147,7 +1151,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">coast_forwards_dx</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">distance_step</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">SimulationState</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SimulationState</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Lift off the throttle and coast (with regen) for one distance step.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Lift off the throttle and coast (with regen) for one distance step.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1262,7 +1267,8 @@
         <span class="n">resolution</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.008</span><span class="p">,</span>
         <span class="n">stabilize_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Binary search for the maximum speed at which the car can safely navigate a corner.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Binary search for the maximum speed at which the car can safely navigate a corner.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1273,8 +1279,8 @@
 <span class="sd">        resolution : float</span>
 <span class="sd">            Tolerance of the final velocity solution (m/s).</span>
 <span class="sd">        stabilize_steps : int</span>
-<span class="sd">            How many times to iterate each velocity check. Needed for</span>
-<span class="sd">            roll/pitch/etc. sensitivity (should be &gt;1, ideally &gt;5, when used).</span>
+<span class="sd">            How many times to iterate each velocity check. Needed for roll/pitch/etc. sensitivity (should be &gt;1, ideally</span>
+<span class="sd">            &gt;5, when used).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1283,8 +1289,7 @@
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        The acceleration does not need to be near zero when converged (e.g.</span>
-<span class="sd">        for an understeery car).</span>
+<span class="sd">        The acceleration does not need to be near zero when converged (e.g. for an understeery car).</span>
 <span class="sd">        """</span>
         <span class="k">if</span> <span class="n">radius</span> <span class="o">&gt;</span> <span class="n">STRAIGHT_RADIUS_THRESHOLD</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span>
@@ -1332,7 +1337,8 @@
 <div class="viewcode-block" id="Car.modify_params">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.vehicle.vehicle.html#suboptimumg.vehicle.vehicle.Car.modify_params">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">modify_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">new_var_value</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Modify a car parameter given its dotted name and new value.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Modify a car parameter given its dotted name and new value.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>

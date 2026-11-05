@@ -358,12 +358,12 @@
 <div class="viewcode-block" id="WindowArrays">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.WindowArrays">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">WindowArrays</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Aligned numpy arrays for one sub-window, as the optimizer sees it.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Aligned numpy arrays for one sub-window, as the optimizer sees it.</span>
 
-<span class="sd">    Built once per sub-window by ``FitContext.arrays``; every array shares the</span>
-<span class="sd">    yaw-rate timestamp grid. ``u_rad`` is the steering input already converted</span>
-<span class="sd">    to radians. ``body_slip_rad`` and ``bicycle_steer_rad`` are ``None`` when</span>
-<span class="sd">    the corresponding channel is absent from the sub-window.</span>
+<span class="sd">    Built once per sub-window by ``FitContext.arrays``; every array shares the yaw-rate timestamp grid. ``u_rad`` is the</span>
+<span class="sd">    steering input already converted to radians. ``body_slip_rad`` and ``bicycle_steer_rad`` are ``None`` when the</span>
+<span class="sd">    corresponding channel is absent from the sub-window.</span>
 <span class="sd">    """</span>
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -390,10 +390,11 @@
 <div class="viewcode-block" id="FitContext">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.FitContext">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FitContext</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Channel names, units, and the car geometry shared by every fit.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Channel names, units, and the car geometry shared by every fit.</span>
 
-<span class="sd">    Built once per notebook run. Holds everything the predictor and optimizer</span>
-<span class="sd">    need that depends on neither the fit spec nor the parameter vector.</span>
+<span class="sd">    Built once per notebook run. Holds everything the predictor and optimizer need that depends on neither the fit spec</span>
+<span class="sd">    nor the parameter vector.</span>
 <span class="sd">    """</span>
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -425,10 +426,11 @@
 <div class="viewcode-block" id="FitSpec">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.FitSpec">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FitSpec</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Selects the Ca-decay scheduler and the tire-relaxation flavor.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Selects the Ca-decay scheduler and the tire-relaxation flavor.</span>
 
-<span class="sd">    Together with a ``ParamLayout`` (which decides which scalars are free)</span>
-<span class="sd">    this fully determines the prediction pipeline.</span>
+<span class="sd">    Together with a ``ParamLayout`` (which decides which scalars are free) this fully determines the prediction</span>
+<span class="sd">    pipeline.</span>
 <span class="sd">    """</span>
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -444,10 +446,10 @@
 <div class="viewcode-block" id="Param">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.Param">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Param</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""One entry of the optimizer's parameter vector.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    One entry of the optimizer's parameter vector.</span>
 
-<span class="sd">    A ``pinned`` param is held at ``init`` and never handed to the optimizer,</span>
-<span class="sd">    so it carries no bounds.</span>
+<span class="sd">    A ``pinned`` param is held at ``init`` and never handed to the optimizer, so it carries no bounds.</span>
 <span class="sd">    """</span>
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -473,10 +475,11 @@
 <div class="viewcode-block" id="ParamLayout">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.ParamLayout">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ParamLayout</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""The ordered parameter vector for a fit: what is free, and within what box.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    The ordered parameter vector for a fit: what is free, and within what box.</span>
 
-<span class="sd">    Free params appear in the optimizer's ``x`` in ``free`` order; pinned</span>
-<span class="sd">    params are held at their initial value and never reach the optimizer.</span>
+<span class="sd">    Free params appear in the optimizer's ``x`` in ``free`` order; pinned params are held at their initial value and</span>
+<span class="sd">    never reach the optimizer.</span>
 <span class="sd">    """</span>
 
     <span class="n">params</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Param</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Every parameter of this fit, free and pinned"</span><span class="p">)</span>
@@ -519,7 +522,8 @@
 <div class="viewcode-block" id="ParamLayout.get">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.ParamLayout.get">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Value of ``name`` given the optimizer's current ``x``.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Value of ``name`` given the optimizer's current ``x``.</span>
 
 <span class="sd">        Pinned parameters ignore ``x`` and return their held value.</span>
 <span class="sd">        """</span>
@@ -556,7 +560,8 @@
 <div class="viewcode-block" id="ChassisParams">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.ChassisParams">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ChassisParams</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""The three free chassis scalars of the linear bicycle model.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    The three free chassis scalars of the linear bicycle model.</span>
 
 <span class="sd">    Transfer-function form: ``H(s; V) = K wn^2 (1 + T_z s) /</span>
 <span class="sd">    (s^2 + 2 zeta wn s + wn^2)``, evaluated by ``bicycle_coeffs``.</span>
@@ -573,10 +578,10 @@
 <div class="viewcode-block" id="BicycleCoeffs">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.BicycleCoeffs">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BicycleCoeffs</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""LPV coefficients of the yaw-rate-to-front-tire-steer transfer function.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    LPV coefficients of the yaw-rate-to-front-tire-steer transfer function.</span>
 
-<span class="sd">    Evaluated at one or more speeds by ``bicycle_coeffs``; every field is</span>
-<span class="sd">    shaped like the input speed(s).</span>
+<span class="sd">    Evaluated at one or more speeds by ``bicycle_coeffs``; every field is shaped like the input speed(s).</span>
 <span class="sd">    """</span>
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -610,10 +615,11 @@
 <div class="viewcode-block" id="WindowMetrics">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.WindowMetrics">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">WindowMetrics</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Residual diagnostics for one sub-window.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Residual diagnostics for one sub-window.</span>
 
-<span class="sd">    ``ac`` metrics have the per-window DC offset removed, isolating how well</span>
-<span class="sd">    the *dynamics* are captured from any steady-state bias.</span>
+<span class="sd">    ``ac`` metrics have the per-window DC offset removed, isolating how well the *dynamics* are captured from any</span>
+<span class="sd">    steady-state bias.</span>
 <span class="sd">    """</span>
 
     <span class="n">subwindow_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"sw_id of the sub-window these metrics describe"</span><span class="p">)</span>
@@ -687,10 +693,10 @@
 <div class="viewcode-block" id="Prediction">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.Prediction">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Prediction</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Per-sub-window predictions and residual diagnostics.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Per-sub-window predictions and residual diagnostics.</span>
 
-<span class="sd">    Shared by a training fit and a held-out evaluation, which differ only in</span>
-<span class="sd">    which sub-windows they were computed over.</span>
+<span class="sd">    Shared by a training fit and a held-out evaluation, which differ only in which sub-windows they were computed over.</span>
 <span class="sd">    """</span>
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -720,11 +726,11 @@
 <div class="viewcode-block" id="YawFit">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.yaw_fit_models.html#suboptimumg.log_analysis.yaw_fit_models.YawFit">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">YawFit</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""A fitted yaw-response model: the spec, the parameters, and how well it did.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    A fitted yaw-response model: the spec, the parameters, and how well it did.</span>
 
-<span class="sd">    Carries everything needed to evaluate the model on new data</span>
-<span class="sd">    (``spec`` / ``layout`` / ``ctx`` / ``x_hat``) and everything needed to</span>
-<span class="sd">    report on the fit that produced it (``train``).</span>
+<span class="sd">    Carries everything needed to evaluate the model on new data (``spec`` / ``layout`` / ``ctx`` / ``x_hat``) and</span>
+<span class="sd">    everything needed to report on the fit that produced it (``train``).</span>
 <span class="sd">    """</span>
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

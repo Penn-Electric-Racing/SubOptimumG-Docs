@@ -354,8 +354,9 @@
 <div class="viewcode-block" id="safe_gradient">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.utils.html#suboptimumg.log_analysis.utils.safe_gradient">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">safe_gradient</span><span class="p">(</span><span class="n">signal</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">dt</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Compute a time derivative that is robust to zero-width time steps,</span>
-<span class="sd">    so that duplicate timestamps do not produce inf or NaN values.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Compute a time derivative that is robust to zero-width time steps, so that duplicate timestamps do not produce</span>
+<span class="sd">    inf or NaN values.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -367,8 +368,8 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    NDArray[np.float64]</span>
-<span class="sd">        ``d(signal)/dt`` with NaNs from zero-width steps filled by</span>
-<span class="sd">        linear interpolation between the nearest valid neighbours.</span>
+<span class="sd">        ``d(signal)/dt`` with NaNs from zero-width steps filled by linear interpolation between the nearest valid</span>
+<span class="sd">        neighbours.</span>
 <span class="sd">    """</span>
     <span class="c1"># Compute the raw gradient, masking out any points where dt == 0</span>
     <span class="c1"># to avoid division-by-zero producing inf or incorrect values.</span>

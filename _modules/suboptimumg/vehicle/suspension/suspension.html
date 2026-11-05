@@ -484,15 +484,12 @@
 
 <span class="sd">            |\\Delta F_{y,axle}| = \\frac{m_{axle} \\cdot a_y \\cdot h_{CG}}{t_{axle}}</span>
 
-<span class="sd">        Each axle reacts its share of the chassis roll moment via a side-to-side</span>
-<span class="sd">        couple at its track width. Summing the two axle results recovers the</span>
-<span class="sd">        total chassis transfer m_total * a * h_cg / track (when t_front == t_rear).</span>
-<span class="sd">        The earlier version used m_total here for each axle, which double-counted</span>
-<span class="sd">        the transfer.</span>
+<span class="sd">        Each axle reacts its share of the chassis roll moment via a side-to-side couple at its track width. Summing the</span>
+<span class="sd">        two axle results recovers the total chassis transfer m_total * a * h_cg / track (when t_front == t_rear). The</span>
+<span class="sd">        earlier version used m_total here for each axle, which double-counted the transfer.</span>
 
-<span class="sd">        TODO: Standardize naming to avoid x/y coordinates and use long/lat instead;</span>
-<span class="sd">        x in general should be long and y should be lat. Also add plausibility</span>
-<span class="sd">        checks to input values.</span>
+<span class="sd">        TODO: Standardize naming to avoid x/y coordinates and use long/lat instead; x in general should be long and y</span>
+<span class="sd">        should be lat. Also add plausibility checks to input values.</span>
 <span class="sd">        """</span>
         <span class="k">if</span> <span class="n">axle</span> <span class="o">==</span> <span class="s2">"front"</span><span class="p">:</span>
             <span class="n">m_axle</span> <span class="o">=</span> <span class="n">m_front</span>
@@ -569,8 +566,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        vehicle_model : VehicleModel</span>
-<span class="sd">            Vehicle model whose suspension parameters must be a</span>
-<span class="sd">            ``ComplexSuspensionModel``.</span>
+<span class="sd">            Vehicle model whose suspension parameters must be a ``ComplexSuspensionModel``.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
@@ -582,9 +578,8 @@
 <span class="sd">        - Corner spring/torsion bar stiffness (spring rate, motion ratio, etc.)</span>
 <span class="sd">        - Anti-roll bar stiffness (ARB setting, motion ratio, etc.)</span>
 
-<span class="sd">        Complex longitudinal weight transfer (front/rear pitch stiffness and</span>
-<span class="sd">        pitch center height) is not yet implemented; see</span>
-<span class="sd">        ``longitudinal_weight_transfer`` below.</span>
+<span class="sd">        Complex longitudinal weight transfer (front/rear pitch stiffness and pitch center height) is not yet</span>
+<span class="sd">        implemented; see ``longitudinal_weight_transfer`` below.</span>
 <span class="sd">        """</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">vehicle_model</span><span class="o">=</span><span class="n">vehicle_model</span><span class="p">)</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
@@ -724,9 +719,8 @@
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        This model was derived by Vedansh Goenka based on the paper referenced</span>
-<span class="sd">        in the class docstring. Currently uses simplified model pending full</span>
-<span class="sd">        implementation with pitch stiffness parameters.</span>
+<span class="sd">        This model was derived by Vedansh Goenka based on the paper referenced in the class docstring. Currently uses</span>
+<span class="sd">        simplified model pending full implementation with pitch stiffness parameters.</span>
 
 <span class="sd">        Formula:</span>
 

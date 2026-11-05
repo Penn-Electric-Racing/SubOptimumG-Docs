@@ -617,7 +617,7 @@
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle_models.DynamicsSetupModel">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.vehicle_models.</span></span><span class="sig-name descname"><span class="pre">DynamicsSetupModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle_models.html#DynamicsSetupModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle_models.DynamicsSetupModel" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
-<p>Linear-region bicycle-model parameters used as soft priors for a LPV yaw-response output-error fit</p>
+<p>Linear-region bicycle-model parameters, used as soft priors for a LPV yaw-response output-error fit.</p>
 <dl class="simple">
 <dt>Backsolve from four cornering operating points (skidpad / steady turns) using SAE bicycle algebra:</dt><dd><p>delta_tire = L/R + (m/L)(l_r/Ca_f - l_f/Ca_r) V^2/R
 beta       = l_r/R - (m a_y l_f) / (L Ca_r)</p>
@@ -700,9 +700,8 @@ saturate above ~1g, biasing fits low). Izz should be an FSAE rule-of-thumb (~0.7
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.vehicle.vehicle_models.</span></span><span class="sig-name descname"><span class="pre">ExtendedVehicleModel</span></span><a class="reference internal" href="../_modules/suboptimumg/vehicle/vehicle_models.html#ExtendedVehicleModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.vehicle.vehicle_models.ExtendedVehicleModel" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#suboptimumg.vehicle.vehicle_models.VehicleModel" title="suboptimumg.vehicle.vehicle_models.VehicleModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">VehicleModel</span></code></a></p>
 <p>VehicleModel extended with real-world session setup parameters.</p>
-<p>Set <code class="docutils literal notranslate"><span class="pre">type:</span> <span class="pre">irl_setup</span></code> in the YAML to trigger this model.
-Includes alignment, steering ackermann, suspension setup, and yaw-response dynamics priors on top of the base car
-parameters.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">type:</span> <span class="pre">irl_setup</span></code> in the YAML to trigger this model. Includes alignment, steering ackermann, suspension setup,
+and yaw-response dynamics priors on top of the base car parameters.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id4">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id4" title="Link to this table">#</a></caption>
 <thead>
@@ -936,9 +935,8 @@ parameters.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="suboptimumg.vehicle.vehicle_models.FittedCurve.coeffs">
 <span class="sig-name descname"><span class="pre">coeffs</span></span><a class="headerlink" href="#suboptimumg.vehicle.vehicle_models.FittedCurve.coeffs" title="Link to this definition">#</a></dt>
-<dd><p>Polynomial coefficients in <strong>descending</strong> degree order
-<code class="docutils literal notranslate"><span class="pre">[c_n,</span> <span class="pre">c_{n-1},</span> <span class="pre">...,</span> <span class="pre">c_1,</span> <span class="pre">c_0]</span></code>, matching <code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code>
-output and the order Horner’s method consumes directly.</p>
+<dd><p>Polynomial coefficients in <strong>descending</strong> degree order <code class="docutils literal notranslate"><span class="pre">[c_n,</span> <span class="pre">c_{n-1},</span> <span class="pre">...,</span> <span class="pre">c_1,</span> <span class="pre">c_0]</span></code>, matching
+<code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code> output and the order Horner’s method consumes directly.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>NDArray[np.float64]</p>
@@ -1413,8 +1411,9 @@ output and the order Horner’s method consumes directly.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>After the assignment, every hook in <cite>PARAMETER_HOOKS</cite> runs in order, with a copy of the vehicle from before the change and the vehicle itself.
-A <cite>Car</cite> built from this model caches derived values, so a live car must be changed through <cite>Car.modify_params</cite>.</p>
+<p>After the assignment, every hook in <cite>PARAMETER_HOOKS</cite> runs in order, with a copy of the vehicle from before the
+change and the vehicle itself. A <cite>Car</cite> built from this model caches derived values, so a live car must be
+changed through <cite>Car.modify_params</cite>.</p>
 </dd></dl>
 
 <dl class="py attribute">

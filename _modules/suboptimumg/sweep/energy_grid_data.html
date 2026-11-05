@@ -363,9 +363,9 @@
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    `feasible` is 1.0 where endurance fits in the usable energy, and NaN where it does not or</span>
-<span class="sd">    the simulation failed. Interpolating it with `fix_params` therefore gives 1.0 only when every</span>
-<span class="sd">    surrounding grid point used is feasible, and NaN otherwise.</span>
+<span class="sd">    `feasible` is 1.0 where endurance fits in the usable energy, and NaN where it does not or the simulation failed.</span>
+<span class="sd">    Interpolating it with `fix_params` therefore gives 1.0 only when every surrounding grid point used is feasible, and</span>
+<span class="sd">    NaN otherwise.</span>
 <span class="sd">    """</span>
 
     <span class="n">solved_coast_trigger</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>

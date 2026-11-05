@@ -380,9 +380,7 @@
 <div class="viewcode-block" id="CustomRun">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.custom_run.html#suboptimumg.compsim.custom_run.CustomRun">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">CustomRun</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Runs and visualizes a simulated lap along an arbitrary (non-competition) track.</span>
-<span class="sd">    """</span>
+<span class="w">    </span><span class="sd">"""Runs and visualizes a simulated lap along an arbitrary (non-competition) track."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -445,9 +443,7 @@
 <div class="viewcode-block" id="CustomRun.print_results_summary">
 <a class="viewcode-back" href="../../../_autosummary/suboptimumg.compsim.custom_run.html#suboptimumg.compsim.custom_run.CustomRun.print_results_summary">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">print_results_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        Print a summary of the custom run results.</span>
-<span class="sd">        """</span>
+<span class="w">        </span><span class="sd">"""Print a summary of the custom run results."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_no_coast</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_results_coast</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">sim_results_no_coast</span><span class="p">,</span> <span class="n">sim_results_coast</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>

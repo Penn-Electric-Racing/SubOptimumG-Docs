@@ -563,8 +563,7 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_fit_models.</span></span><span class="sig-name descname"><span class="pre">BicycleCoeffs</span></span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_fit_models.html#BicycleCoeffs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_fit_models.BicycleCoeffs" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>LPV coefficients of the yaw-rate-to-front-tire-steer transfer function.</p>
-<p>Evaluated at one or more speeds by <code class="docutils literal notranslate"><span class="pre">bicycle_coeffs</span></code>; every field is
-shaped like the input speed(s).</p>
+<p>Evaluated at one or more speeds by <code class="docutils literal notranslate"><span class="pre">bicycle_coeffs</span></code>; every field is shaped like the input speed(s).</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id2">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id2" title="Link to this table">#</a></caption>
 <thead>
@@ -1023,8 +1022,8 @@ shaped like the input speed(s).</p>
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_fit_models.</span></span><span class="sig-name descname"><span class="pre">FitContext</span></span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_fit_models.html#FitContext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_fit_models.FitContext" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Channel names, units, and the car geometry shared by every fit.</p>
-<p>Built once per notebook run. Holds everything the predictor and optimizer
-need that depends on neither the fit spec nor the parameter vector.</p>
+<p>Built once per notebook run. Holds everything the predictor and optimizer need that depends on neither the fit spec
+nor the parameter vector.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id7">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id7" title="Link to this table">#</a></caption>
 <thead>
@@ -1150,8 +1149,8 @@ need that depends on neither the fit spec nor the parameter vector.</p>
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_fit_models.</span></span><span class="sig-name descname"><span class="pre">FitSpec</span></span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_fit_models.html#FitSpec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_fit_models.FitSpec" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Selects the Ca-decay scheduler and the tire-relaxation flavor.</p>
-<p>Together with a <code class="docutils literal notranslate"><span class="pre">ParamLayout</span></code> (which decides which scalars are free)
-this fully determines the prediction pipeline.</p>
+<p>Together with a <code class="docutils literal notranslate"><span class="pre">ParamLayout</span></code> (which decides which scalars are free) this fully determines the prediction
+pipeline.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id8">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id8" title="Link to this table">#</a></caption>
 <thead>
@@ -1211,8 +1210,7 @@ this fully determines the prediction pipeline.</p>
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_fit_models.</span></span><span class="sig-name descname"><span class="pre">Param</span></span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_fit_models.html#Param"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_fit_models.Param" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>One entry of the optimizer’s parameter vector.</p>
-<p>A <code class="docutils literal notranslate"><span class="pre">pinned</span></code> param is held at <code class="docutils literal notranslate"><span class="pre">init</span></code> and never handed to the optimizer,
-so it carries no bounds.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">pinned</span></code> param is held at <code class="docutils literal notranslate"><span class="pre">init</span></code> and never handed to the optimizer, so it carries no bounds.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id9">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id9" title="Link to this table">#</a></caption>
 <thead>
@@ -1319,8 +1317,8 @@ so it carries no bounds.</p>
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_fit_models.</span></span><span class="sig-name descname"><span class="pre">ParamLayout</span></span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_fit_models.html#ParamLayout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_fit_models.ParamLayout" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>The ordered parameter vector for a fit: what is free, and within what box.</p>
-<p>Free params appear in the optimizer’s <code class="docutils literal notranslate"><span class="pre">x</span></code> in <code class="docutils literal notranslate"><span class="pre">free</span></code> order; pinned
-params are held at their initial value and never reach the optimizer.</p>
+<p>Free params appear in the optimizer’s <code class="docutils literal notranslate"><span class="pre">x</span></code> in <code class="docutils literal notranslate"><span class="pre">free</span></code> order; pinned params are held at their initial value and
+never reach the optimizer.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id10">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id10" title="Link to this table">#</a></caption>
 <thead>
@@ -1432,8 +1430,7 @@ params are held at their initial value and never reach the optimizer.</p>
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_fit_models.</span></span><span class="sig-name descname"><span class="pre">Prediction</span></span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_fit_models.html#Prediction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_fit_models.Prediction" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Per-sub-window predictions and residual diagnostics.</p>
-<p>Shared by a training fit and a held-out evaluation, which differ only in
-which sub-windows they were computed over.</p>
+<p>Shared by a training fit and a held-out evaluation, which differ only in which sub-windows they were computed over.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id11">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id11" title="Link to this table">#</a></caption>
 <thead>
@@ -1537,10 +1534,9 @@ which sub-windows they were computed over.</p>
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_fit_models.</span></span><span class="sig-name descname"><span class="pre">WindowArrays</span></span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_fit_models.html#WindowArrays"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_fit_models.WindowArrays" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Aligned numpy arrays for one sub-window, as the optimizer sees it.</p>
-<p>Built once per sub-window by <code class="docutils literal notranslate"><span class="pre">FitContext.arrays</span></code>; every array shares the
-yaw-rate timestamp grid. <code class="docutils literal notranslate"><span class="pre">u_rad</span></code> is the steering input already converted
-to radians. <code class="docutils literal notranslate"><span class="pre">body_slip_rad</span></code> and <code class="docutils literal notranslate"><span class="pre">bicycle_steer_rad</span></code> are <code class="docutils literal notranslate"><span class="pre">None</span></code> when
-the corresponding channel is absent from the sub-window.</p>
+<p>Built once per sub-window by <code class="docutils literal notranslate"><span class="pre">FitContext.arrays</span></code>; every array shares the yaw-rate timestamp grid. <code class="docutils literal notranslate"><span class="pre">u_rad</span></code> is the
+steering input already converted to radians. <code class="docutils literal notranslate"><span class="pre">body_slip_rad</span></code> and <code class="docutils literal notranslate"><span class="pre">bicycle_steer_rad</span></code> are <code class="docutils literal notranslate"><span class="pre">None</span></code> when the
+corresponding channel is absent from the sub-window.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id12">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id12" title="Link to this table">#</a></caption>
 <thead>
@@ -1650,8 +1646,8 @@ the corresponding channel is absent from the sub-window.</p>
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_fit_models.</span></span><span class="sig-name descname"><span class="pre">WindowMetrics</span></span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_fit_models.html#WindowMetrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_fit_models.WindowMetrics" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Residual diagnostics for one sub-window.</p>
-<p><code class="docutils literal notranslate"><span class="pre">ac</span></code> metrics have the per-window DC offset removed, isolating how well
-the <em>dynamics</em> are captured from any steady-state bias.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ac</span></code> metrics have the per-window DC offset removed, isolating how well the <em>dynamics</em> are captured from any
+steady-state bias.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id13">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id13" title="Link to this table">#</a></caption>
 <thead>
@@ -1772,9 +1768,8 @@ the <em>dynamics</em> are captured from any steady-state bias.</p>
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.yaw_fit_models.</span></span><span class="sig-name descname"><span class="pre">YawFit</span></span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/yaw_fit_models.html#YawFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.yaw_fit_models.YawFit" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>A fitted yaw-response model: the spec, the parameters, and how well it did.</p>
-<p>Carries everything needed to evaluate the model on new data
-(<code class="docutils literal notranslate"><span class="pre">spec</span></code> / <code class="docutils literal notranslate"><span class="pre">layout</span></code> / <code class="docutils literal notranslate"><span class="pre">ctx</span></code> / <code class="docutils literal notranslate"><span class="pre">x_hat</span></code>) and everything needed to
-report on the fit that produced it (<code class="docutils literal notranslate"><span class="pre">train</span></code>).</p>
+<p>Carries everything needed to evaluate the model on new data (<code class="docutils literal notranslate"><span class="pre">spec</span></code> / <code class="docutils literal notranslate"><span class="pre">layout</span></code> / <code class="docutils literal notranslate"><span class="pre">ctx</span></code> / <code class="docutils literal notranslate"><span class="pre">x_hat</span></code>) and
+everything needed to report on the fit that produced it (<code class="docutils literal notranslate"><span class="pre">train</span></code>).</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id14">
 <caption><span class="caption-text">Fields</span><a class="headerlink" href="#id14" title="Link to this table">#</a></caption>
 <thead>
