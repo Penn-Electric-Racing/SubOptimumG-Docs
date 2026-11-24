@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../../../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -43,7 +43,7 @@
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../../../_static/design-tabs.js?v=fcb327ea"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/sweep/sweeper';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -429,13 +429,47 @@
 <span class="sd">        theme : str, optional</span>
 <span class="sd">            Color theme name</span>
 <span class="sd">        **plot_options : object</span>
-<span class="sd">            Passed to the plotting function, e.g. `fit_curve=True` or `scene_config=...`</span>
+<span class="sd">            Extra keyword options for the underlying plotting function. Which ones apply depends on what is left free; passing one that doesn't apply raises a TypeError. See the Notes section for the full list.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        go.Figure</span>
 <span class="sd">            A line plot for 1 free numeric parameter, one line per label when a categorical axis is also free, or a</span>
-<span class="sd">            contour or surface for 2 numeric</span>
+<span class="sd">            contour or surface for 2 numeric. Customize anything else with `fig.update_layout(...)` before showing.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Available `plot_options`, by plot type:</span>
+
+<span class="sd">        Every plot type:</span>
+
+<span class="sd">        - `width`, `height` (int): figure size in pixels. Default 1000 x 700.</span>
+<span class="sd">        - `interp_factor` (int): resample to this many times more points so lines and surfaces look smoother. 1 disables. Default 5.</span>
+<span class="sd">        - `smoothing_sigma` (float): Gaussian smoothing strength, in resampled points. 0 disables. Default 0.</span>
+<span class="sd">        - `interp_method` ("linear", "nearest", "slinear" or "cubic"): how points are resampled. Default "linear".</span>
+
+<span class="sd">        Line plot (1 free numeric parameter, plus optionally 1 free categorical parameter giving one line per label):</span>
+
+<span class="sd">        - `fit_curve` (bool): draw a resampled, optionally smoothed curve through the points. The three resampling options above only apply when this is True. Default False.</span>
+<span class="sd">        - `show_points` (bool): mark the swept points on the line. Default False.</span>
+<span class="sd">        - `log_x`, `log_y` (bool): logarithmic axes. Default False.</span>
+<span class="sd">        - `h_line`, `v_line` (float): y or x value of a dashed reference line. Default None (no line).</span>
+<span class="sd">        - `h_line_label`, `v_line_label` (str): legend text for the reference lines. Default None.</span>
+<span class="sd">        - `data_label` (str): legend text for the line. Only without a free categorical parameter. Default None.</span>
+
+<span class="sd">        Contour (2 free numeric parameters, `plot_type=PlotType.CONTOUR`):</span>
+
+<span class="sd">        - `log_x`, `log_y` (bool): logarithmic axes. Default False.</span>
+
+<span class="sd">        Surface (2 free numeric parameters, `plot_type=PlotType.SURFACE`):</span>
+
+<span class="sd">        - `view_angle_deg` (float): camera angle around the vertical axis, in degrees. Default -60.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; sweeper.plot(fit_curve=True, show_points=True, h_line=520.0, h_line_label="Last year")</span>
+<span class="sd">        &gt;&gt;&gt; sweeper.plot(plot_type=PlotType.SURFACE, view_angle_deg=120, smoothing_sigma=1.0)</span>
+<span class="sd">        &gt;&gt;&gt; sweeper.plot(fixed_params={"mass": 250}, log_y=True, width=1400)</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="n">plot_sweep</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_queryable_data</span><span class="p">()</span><span class="o">.</span><span class="n">fix_params</span><span class="p">(</span><span class="n">fixed_params</span><span class="p">),</span>
@@ -487,12 +521,37 @@
 <span class="sd">        theme : str, optional</span>
 <span class="sd">            Color theme name</span>
 <span class="sd">        **plot_options : object</span>
-<span class="sd">            Passed to the plotting function, e.g. `fit_curve=True` or `show_legend=True`</span>
+<span class="sd">            Extra keyword options for the underlying grid plotting function. Which ones apply depends on what is left free; passing one that doesn't apply raises a TypeError. See the Notes section for the full list.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        go.Figure</span>
-<span class="sd">            A grid with one subplot per metric</span>
+<span class="sd">            A grid with one subplot per metric. Customize anything else with `fig.update_layout(...)` before showing.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Available `plot_options`, by plot type:</span>
+
+<span class="sd">        Every plot type:</span>
+
+<span class="sd">        - `width`, `height` (int): figure size in pixels. Default None, which sizes the figure from the grid shape (at least 1000 x 700).</span>
+<span class="sd">        - `horizontal_spacing`, `vertical_spacing` (float): gap between subplots as a fraction of the figure. Default 0.08 and 0.12.</span>
+<span class="sd">        - `interp_factor` (int): resample to this many times more points so lines and surfaces look smoother. 1 disables. Default 5.</span>
+<span class="sd">        - `smoothing_sigma` (float): Gaussian smoothing strength, in resampled points. 0 disables. Default 0.</span>
+<span class="sd">        - `interp_method` ("linear", "nearest", "slinear" or "cubic"): how points are resampled. Default "linear".</span>
+<span class="sd">        - `log_x`, `log_y` (bool): logarithmic axes on every subplot. Ignored for surfaces. Default False.</span>
+
+<span class="sd">        Line plots (1 free numeric parameter, plus optionally 1 free categorical parameter giving one line per label):</span>
+
+<span class="sd">        - `fit_curve` (bool): draw each line as a spline instead of straight segments. Default False.</span>
+<span class="sd">        - `show_points` (bool): mark the swept points. Only with a free categorical parameter. Default False.</span>
+<span class="sd">        - `show_legend` (bool): show the legend of labels. Only with a free categorical parameter. Default False.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; sweeper.grid_plot(fit_curve=True, interp_factor=1)</span>
+<span class="sd">        &gt;&gt;&gt; sweeper.grid_plot(rows=3, cols=2, width=1200, vertical_spacing=0.08)</span>
+<span class="sd">        &gt;&gt;&gt; sweeper.grid_plot(fixed_params={"pwrtn.motor": "emrax208"}, show_points=True, show_legend=True)</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="n">grid_plot_sweep</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_queryable_data</span><span class="p">()</span><span class="o">.</span><span class="n">fix_params</span><span class="p">(</span><span class="n">fixed_params</span><span class="p">),</span>

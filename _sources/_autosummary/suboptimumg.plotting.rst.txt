@@ -15,19 +15,18 @@ suboptimumg.plotting
 
    bar_chart
    binned_scatter
+   bode_plot
    color_themes
+   defaults
    gps_visualization
    grid_plot_2d
    grid_plot_3d
-   heatmap
    internal_data_plots
    overlay_grid_plot_2d
    overlay_plot_2d
    plot_2d
    plot_3d
    plot_polynomial_fit
-   plotting_constants
    stem_plot
-   two_panel_spectrum
    types
    utils

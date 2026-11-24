@@ -31,7 +31,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -44,12 +44,12 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.plotting.binned_scatter';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="suboptimumg.plotting.color_themes" href="suboptimumg.plotting.color_themes.html" />
+    <link rel="next" title="suboptimumg.plotting.bode_plot" href="suboptimumg.plotting.bode_plot.html" />
     <link rel="prev" title="suboptimumg.plotting.bar_chart" href="suboptimumg.plotting.bar_chart.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
@@ -331,20 +331,19 @@
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.plotting.html">suboptimumg.plotting</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bar_chart.html">suboptimumg.plotting.bar_chart</a></li>
 <li class="toctree-l3 current active"><a aria-current="page" class="current reference internal" href="#">suboptimumg.plotting.binned_scatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bode_plot.html">suboptimumg.plotting.bode_plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.color_themes.html">suboptimumg.plotting.color_themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.defaults.html">suboptimumg.plotting.defaults</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.gps_visualization.html">suboptimumg.plotting.gps_visualization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_2d.html">suboptimumg.plotting.grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html">suboptimumg.plotting.grid_plot_3d</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.heatmap.html">suboptimumg.plotting.heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_grid_plot_2d.html">suboptimumg.plotting.overlay_grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plot_2d.html">suboptimumg.plotting.overlay_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_2d.html">suboptimumg.plotting.plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_3d.html">suboptimumg.plotting.plot_3d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_polynomial_fit.html">suboptimumg.plotting.plot_polynomial_fit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plotting_constants.html">suboptimumg.plotting.plotting_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.stem_plot.html">suboptimumg.plotting.stem_plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.two_panel_spectrum.html">suboptimumg.plotting.two_panel_spectrum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.types.html">suboptimumg.plotting.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.utils.html">suboptimumg.plotting.utils</a></li>
 </ul>
@@ -481,29 +480,39 @@
 <span id="suboptimumg-plotting-binned-scatter"></span><h1>suboptimumg.plotting.binned_scatter<a class="headerlink" href="#module-suboptimumg.plotting.binned_scatter" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.plotting.binned_scatter.plot_binned_scatter">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.binned_scatter.</span></span><span class="sig-name descname"><span class="pre">plot_binned_scatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'group'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">24</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_per_bin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/binned_scatter.html#plot_binned_scatter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.binned_scatter.plot_binned_scatter" title="Link to this definition">#</a></dt>
-<dd><p>Scatter plot of (x, y) points, grouped into quantiles on x. Displays mean and +/- 1 std of y for each bin.</p>
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.binned_scatter.</span></span><span class="sig-name descname"><span class="pre">plot_binned_scatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'group'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">24</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_per_bin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">700</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/binned_scatter.html#plot_binned_scatter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.binned_scatter.plot_binned_scatter" title="Link to this definition">#</a></dt>
+<dd><p>Scatter plot of (x, y) samples with a binned trend overlay: x is split into equal-count (quantile) bins, and each
+bin’s mean y and +/- 1 standard deviation band are drawn on top.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
-<li><p><strong>y</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>)</p></li>
-<li><p><strong>color_values</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em><em>, </em><em>optional</em>) – Per-point values used to color the scatter (e.g. a group id). Defaults to None (single color).</p></li>
-<li><p><strong>color_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Colorbar title when <code class="docutils literal notranslate"><span class="pre">color_values</span></code> is given.</p></li>
-<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Figure title and axis labels.</p></li>
-<li><p><strong>x_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Figure title and axis labels.</p></li>
-<li><p><strong>y_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Figure title and axis labels.</p></li>
-<li><p><strong>n_bins</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of x-bins for the mean/sigma overlay. Default is 24.</p></li>
-<li><p><strong>min_per_bin</strong> (<em>int</em><em>, </em><em>optional</em>) – Minimum points a bin needs to be shown. Default is 5.</p></li>
-<li><p><strong>reference_y</strong> (<em>float</em><em>, </em><em>optional</em>) – Y value for a dashed horizontal reference line. Default is 0.0; pass None to omit it.</p></li>
-<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a><em>, </em><em>optional</em>)</p></li>
-<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>x</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – X value of each sample.</p></li>
+<li><p><strong>y</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Y value of each sample. Must be the same length as <cite>x</cite>.</p></li>
+<li><p><strong>color_values</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – Per-sample values used to color the scatter points on a Viridis colorscale (e.g. a run or group id). None draws all points in one color. Default is None.</p></li>
+<li><p><strong>color_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Colorbar title, only shown when <cite>color_values</cite> is given. Default is “group”.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Plot title shown at the top of the figure. Default is “”.</p></li>
+<li><p><strong>x_label</strong> (<em>str</em><em>, </em><em>optional</em>) – X-axis title. Default is “”.</p></li>
+<li><p><strong>y_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Y-axis title. Default is “”.</p></li>
+<li><p><strong>n_bins</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of quantile bins along x used for the mean / sigma overlay. More bins show finer trends but are noisier. Default is 24.</p></li>
+<li><p><strong>min_per_bin</strong> (<em>int</em><em>, </em><em>optional</em>) – Bins with fewer samples than this are left out of the overlay. Default is 5.</p></li>
+<li><p><strong>reference_y</strong> (<em>float</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Y value at which to draw a dashed horizontal reference line. None draws no line. Default is 0.0.</p></li>
+<li><p><strong>log_x</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, use a logarithmic x-axis. All x values must be positive. Default is False.</p></li>
+<li><p><strong>log_y</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, use a logarithmic y-axis. All y values must be positive. Default is False.</p></li>
+<li><p><strong>width</strong> (<em>int</em><em>, </em><em>optional</em>) – Figure width in pixels. Default is PLOT_WIDTH (1000).</p></li>
+<li><p><strong>height</strong> (<em>int</em><em>, </em><em>optional</em>) – Figure height in pixels. Default is PLOT_HEIGHT (700).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>go.Figure</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plotly figure. Customize anything not exposed here (fonts, colors, margins, etc.) with <cite>fig.update_layout(…)</cite> or <cite>fig.update_traces(…)</cite> before calling <cite>fig.show()</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>go.Figure</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plot_binned_scatter</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">yaw_gain_error</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Yaw Gain Error"</span><span class="p">,</span> <span class="n">x_label</span><span class="o">=</span><span class="s2">"Speed (m/s)"</span><span class="p">,</span> <span class="n">y_label</span><span class="o">=</span><span class="s2">"Error"</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
@@ -528,11 +537,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="suboptimumg.plotting.color_themes.html"
+       href="suboptimumg.plotting.bode_plot.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">suboptimumg.plotting.color_themes</p>
+        <p class="prev-next-title">suboptimumg.plotting.bode_plot</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

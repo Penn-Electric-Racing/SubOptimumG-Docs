@@ -1,0 +1,8 @@
+suboptimumg.plotting.defaults
+=============================
+
+.. automodule:: suboptimumg.plotting.defaults
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

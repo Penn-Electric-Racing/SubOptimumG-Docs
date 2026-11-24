@@ -31,7 +31,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -44,7 +44,7 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.compsim.custom_run';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -331,20 +331,19 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.plotting.html">suboptimumg.plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bar_chart.html">suboptimumg.plotting.bar_chart</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.binned_scatter.html">suboptimumg.plotting.binned_scatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bode_plot.html">suboptimumg.plotting.bode_plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.color_themes.html">suboptimumg.plotting.color_themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.defaults.html">suboptimumg.plotting.defaults</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.gps_visualization.html">suboptimumg.plotting.gps_visualization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_2d.html">suboptimumg.plotting.grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html">suboptimumg.plotting.grid_plot_3d</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.heatmap.html">suboptimumg.plotting.heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_grid_plot_2d.html">suboptimumg.plotting.overlay_grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plot_2d.html">suboptimumg.plotting.overlay_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_2d.html">suboptimumg.plotting.plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_3d.html">suboptimumg.plotting.plot_3d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_polynomial_fit.html">suboptimumg.plotting.plot_polynomial_fit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plotting_constants.html">suboptimumg.plotting.plotting_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.stem_plot.html">suboptimumg.plotting.stem_plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.two_panel_spectrum.html">suboptimumg.plotting.two_panel_spectrum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.types.html">suboptimumg.plotting.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.utils.html">suboptimumg.plotting.utils</a></li>
 </ul>
@@ -494,41 +493,50 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.compsim.custom_run.CustomRun.plot_real_lap_comparison">
-<span class="sig-name descname"><span class="pre">plot_real_lap_comparison</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">real_lap_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">real_data_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qss_var</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">ColorbarConfig(thickness=15,</span> <span class="pre">length=0.7)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/custom_run.html#CustomRun.plot_real_lap_comparison"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.custom_run.CustomRun.plot_real_lap_comparison" title="Link to this definition">#</a></dt>
-<dd><p>Prints a comparison of the simulated lap with a real lap(s) from PERDA.</p>
+<span class="sig-name descname"><span class="pre">plot_real_lap_comparison</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">real_lap_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">real_data_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qss_var</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">700</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/custom_run.html#CustomRun.plot_real_lap_comparison"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.custom_run.CustomRun.plot_real_lap_comparison" title="Link to this definition">#</a></dt>
+<dd><p>Plot a 3-panel track heatmap comparing a simulated quantity with real lap data from PERDA: simulated, real
+(projected onto the simulated track), and their difference.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>real_lap_data</strong> (<em>SingleRunData</em>) – SingleRunData representing a single real lap to compare against.</p></li>
-<li><p><strong>real_data_key</strong> (<em>str</em>) – The key for the real lap data to use for comparison.</p></li>
-<li><p><strong>qss_var</strong> (<a class="reference internal" href="#suboptimumg.compsim.custom_run.OverlayOptions" title="suboptimumg.compsim.custom_run.OverlayOptions"><em>OverlayOptions</em></a>) – The QSS variable to overlay on the plot.</p></li>
-<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a><em>, </em><em>optional</em>)</p></li>
-<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a><em>, </em><em>optional</em>)</p></li>
-<li><p><strong>colorbar_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.ColorbarConfig" title="suboptimumg.plotting.plotting_constants.ColorbarConfig"><em>ColorbarConfig</em></a><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>real_lap_data</strong> (<em>SingleRunData</em>) – One real lap from PERDA. Must contain POS_X and POS_Y (run <cite>preprocess_gps_data_instances</cite> first).</p></li>
+<li><p><strong>real_data_key</strong> (<em>str</em>) – Name of the variable in <cite>real_lap_data</cite> to compare, e.g. a ground speed variable.</p></li>
+<li><p><strong>qss_var</strong> (<a class="reference internal" href="#suboptimumg.compsim.custom_run.OverlayOptions" title="suboptimumg.compsim.custom_run.OverlayOptions"><em>OverlayOptions</em></a>) – Simulated (QSS) quantity to compare against <cite>real_data_key</cite>.</p></li>
+<li><p><strong>width</strong> (<em>int</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Total figure width in pixels. None uses SUBPLOT_WIDTH (400) per panel. Default is None.</p></li>
+<li><p><strong>height</strong> (<em>int</em><em>, </em><em>optional</em>) – Figure height in pixels. Default is PLOT_HEIGHT (700).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>Figure</em></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plotly figure. Customize anything not exposed here with <cite>fig.update_layout(…)</cite> / <cite>fig.update_traces(…)</cite> before calling <cite>fig.show()</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>go.Figure</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.compsim.custom_run.CustomRun.plot_real_lap_time_delta_traces">
-<span class="sig-name descname"><span class="pre">plot_real_lap_time_delta_traces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">real_laps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">real_data_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qss_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/custom_run.html#CustomRun.plot_real_lap_time_delta_traces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.custom_run.CustomRun.plot_real_lap_time_delta_traces" title="Link to this definition">#</a></dt>
-<dd><p>Plots comparisons of the simulated lap with multiple real laps from PERDA.</p>
+<span class="sig-name descname"><span class="pre">plot_real_lap_time_delta_traces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">real_laps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">real_data_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qss_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/compsim/custom_run.html#CustomRun.plot_real_lap_time_delta_traces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.compsim.custom_run.CustomRun.plot_real_lap_time_delta_traces" title="Link to this definition">#</a></dt>
+<dd><p>Plot a variable over distance for the simulated lap and several real laps from PERDA, plus each real lap’s
+cumulative time delta relative to the simulated (QSS) lap.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>real_laps</strong> (<em>list</em><em>[</em><em>SingleRunData</em><em>]</em>) – List of SingleRunData representing real laps to compare against.</p></li>
-<li><p><strong>real_data_key</strong> (<em>str</em>) – The key for the real lap data to use for comparison.</p></li>
-<li><p><strong>qss_var</strong> (<a class="reference internal" href="#suboptimumg.compsim.custom_run.OverlayOptions" title="suboptimumg.compsim.custom_run.OverlayOptions"><em>OverlayOptions</em></a>) – The QSS variable to overlay on the plot.</p></li>
-<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a><em>, </em><em>optional</em>)</p></li>
-<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>real_laps</strong> (<em>list</em><em>[</em><em>SingleRunData</em><em>]</em>) – Real laps from PERDA to compare against. Each must contain GROUND_SPEED (run <cite>add_groundspeed</cite> first).</p></li>
+<li><p><strong>real_data_key</strong> (<em>str</em>) – Name of the variable in each real lap to plot, e.g. a ground speed variable.</p></li>
+<li><p><strong>qss_var</strong> (<a class="reference internal" href="#suboptimumg.compsim.custom_run.OverlayOptions" title="suboptimumg.compsim.custom_run.OverlayOptions"><em>OverlayOptions</em></a>) – Simulated (QSS) quantity plotted alongside <cite>real_data_key</cite>.</p></li>
+<li><p><strong>log_x</strong> (<em>bool</em><em>, </em><em>optional</em>) – Use a logarithmic distance (x) axis. Default is False.</p></li>
+<li><p><strong>log_y</strong> (<em>bool</em><em>, </em><em>optional</em>) – Use logarithmic y-axes on both subplots. Default is False.</p></li>
+<li><p><strong>width</strong> (<em>int</em><em>, </em><em>optional</em>) – Figure width in pixels. Default is PLOT_WIDTH (1000).</p></li>
+<li><p><strong>height</strong> (<em>int</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Total figure height in pixels. None uses SUBPLOT_HEIGHT (350) per subplot. Default is None.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>Figure</em></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plotly figure. Customize anything not exposed here with <cite>fig.update_layout(…)</cite> / <cite>fig.update_traces(…)</cite> before calling <cite>fig.show()</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>go.Figure</p>
 </dd>
 </dl>
 </dd></dl>

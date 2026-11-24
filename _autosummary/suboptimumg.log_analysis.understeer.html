@@ -31,7 +31,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -44,7 +44,7 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.log_analysis.understeer';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -331,20 +331,19 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.plotting.html">suboptimumg.plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bar_chart.html">suboptimumg.plotting.bar_chart</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.binned_scatter.html">suboptimumg.plotting.binned_scatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bode_plot.html">suboptimumg.plotting.bode_plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.color_themes.html">suboptimumg.plotting.color_themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.defaults.html">suboptimumg.plotting.defaults</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.gps_visualization.html">suboptimumg.plotting.gps_visualization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_2d.html">suboptimumg.plotting.grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html">suboptimumg.plotting.grid_plot_3d</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.heatmap.html">suboptimumg.plotting.heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_grid_plot_2d.html">suboptimumg.plotting.overlay_grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plot_2d.html">suboptimumg.plotting.overlay_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_2d.html">suboptimumg.plotting.plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_3d.html">suboptimumg.plotting.plot_3d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_polynomial_fit.html">suboptimumg.plotting.plot_polynomial_fit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plotting_constants.html">suboptimumg.plotting.plotting_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.stem_plot.html">suboptimumg.plotting.stem_plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.two_panel_spectrum.html">suboptimumg.plotting.two_panel_spectrum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.types.html">suboptimumg.plotting.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.utils.html">suboptimumg.plotting.utils</a></li>
 </ul>
@@ -658,21 +657,22 @@ K &gt; 0 = understeer, K &lt; 0 = oversteer.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.understeer.plot_understeer">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.understeer.</span></span><span class="sig-name descname"><span class="pre">plot_understeer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'constant_steer'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/understeer.html#plot_understeer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.understeer.plot_understeer" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.understeer.</span></span><span class="sig-name descname"><span class="pre">plot_understeer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'constant_steer'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/understeer.html#plot_understeer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.understeer.plot_understeer" title="Link to this definition">#</a></dt>
 <dd><p>Return (fit_fig, diagnostic_fig) for an UndersteerResult.</p>
 <p>fit_fig: scatter + polynomial fit of understeer angle vs lateral acceleration.
 diagnostic_fig: time-series of the held-constant channel over the analysis window.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>result</strong> (<a class="reference internal" href="#suboptimumg.log_analysis.understeer.UndersteerResult" title="suboptimumg.log_analysis.understeer.UndersteerResult"><em>UndersteerResult</em></a>)</p></li>
-<li><p><strong>test_type</strong> (<em>str</em>) – <code class="docutils literal notranslate"><span class="pre">&quot;constant_steer&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;constant_speed&quot;</span></code>. Determines which channel is shown in the diagnostic figure.</p></li>
-<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a>)</p></li>
-<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a>)</p></li>
+<li><p><strong>result</strong> (<a class="reference internal" href="#suboptimumg.log_analysis.understeer.UndersteerResult" title="suboptimumg.log_analysis.understeer.UndersteerResult"><em>UndersteerResult</em></a>) – Output of <cite>measure_understeer_gradient</cite> to plot.</p></li>
+<li><p><strong>test_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Which quantity was held constant during the test: “constant_steer” shows steering wheel angle in the diagnostic figure, “constant_speed” shows ground speed. Default is “constant_steer”.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tuple[<em>Figure</em>, <em>Figure</em>]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(fit_fig, diagnostic_fig). Customize either with <cite>fig.update_layout(…)</cite> before calling <cite>fig.show()</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[go.Figure, go.Figure]</p>
 </dd>
 </dl>
 </dd></dl>

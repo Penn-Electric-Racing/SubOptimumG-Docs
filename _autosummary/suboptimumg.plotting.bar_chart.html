@@ -31,7 +31,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -44,7 +44,7 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.plotting.bar_chart';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -331,20 +331,19 @@
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.plotting.html">suboptimumg.plotting</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3 current active"><a aria-current="page" class="current reference internal" href="#">suboptimumg.plotting.bar_chart</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.binned_scatter.html">suboptimumg.plotting.binned_scatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bode_plot.html">suboptimumg.plotting.bode_plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.color_themes.html">suboptimumg.plotting.color_themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.defaults.html">suboptimumg.plotting.defaults</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.gps_visualization.html">suboptimumg.plotting.gps_visualization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_2d.html">suboptimumg.plotting.grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html">suboptimumg.plotting.grid_plot_3d</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.heatmap.html">suboptimumg.plotting.heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_grid_plot_2d.html">suboptimumg.plotting.overlay_grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plot_2d.html">suboptimumg.plotting.overlay_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_2d.html">suboptimumg.plotting.plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_3d.html">suboptimumg.plotting.plot_3d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_polynomial_fit.html">suboptimumg.plotting.plot_polynomial_fit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plotting_constants.html">suboptimumg.plotting.plotting_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.stem_plot.html">suboptimumg.plotting.stem_plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.two_panel_spectrum.html">suboptimumg.plotting.two_panel_spectrum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.types.html">suboptimumg.plotting.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.utils.html">suboptimumg.plotting.utils</a></li>
 </ul>
@@ -529,23 +528,25 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.plotting.bar_chart.plot_bar_chart">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.bar_chart.</span></span><span class="sig-name descname"><span class="pre">plot_bar_chart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_by_variable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'chart_default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/bar_chart.html#plot_bar_chart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.bar_chart.plot_bar_chart" title="Link to this definition">#</a></dt>
-<dd><p>Generic bar chart plotting utility for showing multiple data series.</p>
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.bar_chart.</span></span><span class="sig-name descname"><span class="pre">plot_bar_chart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_by_variable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'chart_default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">800</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/bar_chart.html#plot_bar_chart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.bar_chart.plot_bar_chart" title="Link to this definition">#</a></dt>
+<dd><p>Plot how a metric responds to sweeping several variables: one column per variable, one dot per sweep step colored
+by its percent change, plus a dashed baseline.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data_by_variable</strong> (<em>list</em><em>[</em><a class="reference internal" href="#suboptimumg.plotting.bar_chart.BarChartSeries" title="suboptimumg.plotting.bar_chart.BarChartSeries"><em>BarChartSeries</em></a><em>]</em>) – One series per variable to show along the x-axis</p></li>
-<li><p><strong>percent_steps</strong> (<em>numpy.ndarray</em>) – Array of percent step values used in the sweep</p></li>
-<li><p><strong>baseline_value</strong> (<em>float</em>) – Float value to draw as a horizontal baseline</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Plot title</p></li>
-<li><p><strong>y_label</strong> (<em>str</em>) – Y-axis label</p></li>
-<li><p><strong>theme</strong> (<em>str</em><em>, </em><em>optional</em>) – Color theme name for the gradient</p></li>
-<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a><em>, </em><em>optional</em>) – Font sizes for the chart</p></li>
-<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a><em>, </em><em>optional</em>) – Layout dimensions for the chart</p></li>
+<li><p><strong>data_by_variable</strong> (<em>list</em><em>[</em><a class="reference internal" href="#suboptimumg.plotting.bar_chart.BarChartSeries" title="suboptimumg.plotting.bar_chart.BarChartSeries"><em>BarChartSeries</em></a><em>]</em>) – One series per swept variable. Each becomes a category on the x-axis, with one point per sweep step.</p></li>
+<li><p><strong>percent_steps</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Fractional change applied at each sweep step, e.g. [-0.1, 0.0, 0.1] for -10%, 0%, +10%. Must match the length of the <cite>points</cite> of every series. Used to color the dots.</p></li>
+<li><p><strong>baseline_value</strong> (<em>float</em>) – Metric value of the unmodified baseline, drawn as a horizontal dashed line.</p></li>
+<li><p><strong>title</strong> (<em>str</em>) – Plot title shown at the top of the figure.</p></li>
+<li><p><strong>y_label</strong> (<em>str</em>) – Y-axis title, e.g. “Points”.</p></li>
+<li><p><strong>theme</strong> (<em>str</em><em>, </em><em>optional</em>) – Color theme name from <cite>plotting.color_themes</cite> whose colorscale colors the dots. Default is “chart_default”.</p></li>
+<li><p><strong>log_y</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, use a logarithmic y-axis. All values must be positive. The x-axis is categorical, so it has no log option. Default is False.</p></li>
+<li><p><strong>width</strong> (<em>int</em><em>, </em><em>optional</em>) – Figure width in pixels. Default is PLOT_WIDTH (1000).</p></li>
+<li><p><strong>height</strong> (<em>int</em><em>, </em><em>optional</em>) – Figure height in pixels. Default is BAR_CHART_HEIGHT (800), taller than standard plots to fit rotated variable names.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Plotly figure object</p>
+<dd class="field-even"><p>Plotly figure. Customize anything not exposed here (fonts, colors, margins, etc.) with <cite>fig.update_layout(…)</cite> or <cite>fig.update_traces(…)</cite> before calling <cite>fig.show()</cite>.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>go.Figure</p>

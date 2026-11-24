@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../../../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -43,7 +43,7 @@
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../../../_static/design-tabs.js?v=fcb327ea"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/track/track';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -342,17 +342,8 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="kn">import</span> <span class="n">interp1d</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.color_themes</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_theme</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.defaults</span><span class="w"> </span><span class="kn">import</span> <span class="n">PLOT_HEIGHT</span><span class="p">,</span> <span class="n">PLOT_WIDTH</span><span class="p">,</span> <span class="n">VIEW_ANGLE_DEG</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.gps_visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_track_heatmap</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.plotting_constants</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">DEFAULT_COLORBAR_CONFIG</span><span class="p">,</span>
-    <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
-    <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
-    <span class="n">DEFAULT_SCENE_CONFIG</span><span class="p">,</span>
-    <span class="n">ColorbarConfig</span><span class="p">,</span>
-    <span class="n">FontConfig</span><span class="p">,</span>
-    <span class="n">LayoutConfig</span><span class="p">,</span>
-    <span class="n">SceneConfig</span><span class="p">,</span>
-<span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.stem_plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_3d_stem</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">TrackData</span>
 
@@ -562,9 +553,8 @@
         <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">rotate_by_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
         <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">"suspension"</span><span class="p">,</span>
-        <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
-        <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
-        <span class="n">colorbar_config</span><span class="p">:</span> <span class="n">ColorbarConfig</span> <span class="o">=</span> <span class="n">DEFAULT_COLORBAR_CONFIG</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">PLOT_WIDTH</span><span class="p">,</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">PLOT_HEIGHT</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Visualizes the track, optionally coloured by a scalar variable.</span>
@@ -575,25 +565,25 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        variable : NDArray[float64] or None</span>
-<span class="sd">            Per-point scalar values to map as colours.  ``None`` uses radius</span>
-<span class="sd">            of curvature.</span>
-<span class="sd">        title : str, optional</span>
-<span class="sd">            Plot title.</span>
-<span class="sd">        label : str, optional</span>
-<span class="sd">            Colorbar label.  Defaults to ``"Radius (m)"`` when *variable* is</span>
-<span class="sd">            ``None``.</span>
+<span class="sd">        variable : NDArray[float64] | None, optional</span>
+<span class="sd">            Value at each track point, shown as the color of the track. Must be the same length as the track arrays. Default is None, which colors the track by radius of curvature.</span>
+<span class="sd">        title : str | None, optional</span>
+<span class="sd">            Title shown at the top of the figure. Default is None (no title).</span>
+<span class="sd">        label : str | None, optional</span>
+<span class="sd">            Colorbar title. Default is None, which uses "Radius (m)" when variable is None and no title otherwise.</span>
 <span class="sd">        rotate_by_deg : float, optional</span>
-<span class="sd">            Rotation angle in degrees counterclockwise around the first point.</span>
-<span class="sd">        theme : str, optional</span>
-<span class="sd">            Colour theme name (default: ``"suspension"``).</span>
-<span class="sd">        font_config : FontConfig, optional</span>
-<span class="sd">        layout_config : LayoutConfig, optional</span>
-<span class="sd">        colorbar_config : ColorbarConfig, optional</span>
+<span class="sd">            Rotate the drawn track counterclockwise around its first point by this many degrees, e.g. to match a map's orientation. Default is 0.0.</span>
+<span class="sd">        theme : str | None, optional</span>
+<span class="sd">            Name of a color theme from `plotting.color_themes`, which picks the colorscale. Default is "suspension".</span>
+<span class="sd">        width : int, optional</span>
+<span class="sd">            Figure width in pixels. Default is PLOT_WIDTH (1000).</span>
+<span class="sd">        height : int, optional</span>
+<span class="sd">            Figure height in pixels. Default is PLOT_HEIGHT (700).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        go.Figure</span>
+<span class="sd">            Plotly figure. Customize anything not exposed here (fonts, colors, colorbar) with fig.update_layout or fig.update_traces before calling fig.show().</span>
 <span class="sd">        """</span>
         <span class="n">theme_colors</span> <span class="o">=</span> <span class="n">get_theme</span><span class="p">(</span><span class="n">theme</span><span class="p">)</span>
 
@@ -617,9 +607,8 @@
             <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
             <span class="n">data_label</span><span class="o">=</span><span class="n">data_label</span><span class="p">,</span>
             <span class="n">colorscale</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="s2">"colorscale"</span><span class="p">],</span>
-            <span class="n">colorbar_config</span><span class="o">=</span><span class="n">colorbar_config</span><span class="p">,</span>
-            <span class="n">font_config</span><span class="o">=</span><span class="n">font_config</span><span class="p">,</span>
-            <span class="n">layout_config</span><span class="o">=</span><span class="n">layout_config</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+            <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
@@ -631,9 +620,9 @@
         <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">z_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
-        <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
-        <span class="n">scene_config</span><span class="p">:</span> <span class="n">SceneConfig</span> <span class="o">=</span> <span class="n">DEFAULT_SCENE_CONFIG</span><span class="p">,</span>
+        <span class="n">view_angle_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">VIEW_ANGLE_DEG</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">PLOT_WIDTH</span><span class="p">,</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">PLOT_HEIGHT</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Maps a variable onto the z-axis of the track for 3D visualization using Plotly. Creates a 3D stem plot with</span>
@@ -642,24 +631,24 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        variable : NDArray[float64]</span>
-<span class="sd">            Array of values to map to z-axis (e.g., velocity, power)</span>
-<span class="sd">        title : str, optional</span>
-<span class="sd">            Plot title (default: None)</span>
-<span class="sd">        z_label : str, optional</span>
-<span class="sd">            Z-axis label (default: None)</span>
-<span class="sd">        theme : str, optional</span>
-<span class="sd">            The color theme to use (default: None)</span>
-<span class="sd">        font_config : FontConfig, optional</span>
-<span class="sd">            Font configuration object</span>
-<span class="sd">        layout_config : LayoutConfig, optional</span>
-<span class="sd">            Layout configuration object</span>
-<span class="sd">        scene_config : SceneConfig, optional</span>
-<span class="sd">            Scene configuration object for the 3D view</span>
+<span class="sd">            Values to show as height above the track, e.g. velocity or power. If its length differs from the track's, it is linearly resampled to the track points.</span>
+<span class="sd">        title : str | None, optional</span>
+<span class="sd">            Title shown at the top of the figure. Default is None (no title).</span>
+<span class="sd">        z_label : str | None, optional</span>
+<span class="sd">            Z-axis label, also used in hover text. Default is None, which labels the axis "Value".</span>
+<span class="sd">        theme : str | None, optional</span>
+<span class="sd">            Name of a color theme from `plotting.color_themes`, which picks the marker color. Default is None (default theme).</span>
+<span class="sd">        view_angle_deg : float, optional</span>
+<span class="sd">            Initial camera angle in degrees, measured around the vertical z-axis from the +x direction. Default is VIEW_ANGLE_DEG (-60).</span>
+<span class="sd">        width : int, optional</span>
+<span class="sd">            Figure width in pixels. Default is PLOT_WIDTH (1000).</span>
+<span class="sd">        height : int, optional</span>
+<span class="sd">            Figure height in pixels. Default is PLOT_HEIGHT (700).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        go.Figure</span>
-<span class="sd">            Plotly figure object</span>
+<span class="sd">            Plotly figure. Customize anything not exposed here (fonts, colors, camera distance) with fig.update_layout, fig.update_traces, or fig.update_scenes before calling fig.show().</span>
 <span class="sd">        """</span>
         <span class="n">variable</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
 
@@ -681,9 +670,9 @@
             <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
             <span class="n">z_label</span><span class="o">=</span><span class="n">z_label</span><span class="p">,</span>
             <span class="n">theme</span><span class="o">=</span><span class="n">theme</span><span class="p">,</span>
-            <span class="n">font_config</span><span class="o">=</span><span class="n">font_config</span><span class="p">,</span>
-            <span class="n">layout_config</span><span class="o">=</span><span class="n">layout_config</span><span class="p">,</span>
-            <span class="n">scene_config</span><span class="o">=</span><span class="n">scene_config</span><span class="p">,</span>
+            <span class="n">view_angle_deg</span><span class="o">=</span><span class="n">view_angle_deg</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+            <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
         <span class="p">)</span></div>
 </div>
 

@@ -31,7 +31,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -44,7 +44,7 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.track.track';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -331,20 +331,19 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.plotting.html">suboptimumg.plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bar_chart.html">suboptimumg.plotting.bar_chart</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.binned_scatter.html">suboptimumg.plotting.binned_scatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bode_plot.html">suboptimumg.plotting.bode_plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.color_themes.html">suboptimumg.plotting.color_themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.defaults.html">suboptimumg.plotting.defaults</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.gps_visualization.html">suboptimumg.plotting.gps_visualization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_2d.html">suboptimumg.plotting.grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html">suboptimumg.plotting.grid_plot_3d</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.heatmap.html">suboptimumg.plotting.heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_grid_plot_2d.html">suboptimumg.plotting.overlay_grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plot_2d.html">suboptimumg.plotting.overlay_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_2d.html">suboptimumg.plotting.plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_3d.html">suboptimumg.plotting.plot_3d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_polynomial_fit.html">suboptimumg.plotting.plot_polynomial_fit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plotting_constants.html">suboptimumg.plotting.plotting_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.stem_plot.html">suboptimumg.plotting.stem_plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.two_panel_spectrum.html">suboptimumg.plotting.two_panel_spectrum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.types.html">suboptimumg.plotting.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.utils.html">suboptimumg.plotting.utils</a></li>
 </ul>
@@ -553,7 +552,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.track.track.Track.plot">
-<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotate_by_deg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'suspension'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">ColorbarConfig(thickness=15,</span> <span class="pre">length=0.7)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/track/track.html#Track.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.track.track.Track.plot" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotate_by_deg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'suspension'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">700</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/track/track.html#Track.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.track.track.Track.plot" title="Link to this definition">#</a></dt>
 <dd><p>Visualizes the track, optionally coloured by a scalar variable.</p>
 <p>When <em>variable</em> is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the track is coloured by radius of
 curvature.  Otherwise, <em>variable</em> is mapped to the colour axis and
@@ -561,43 +560,43 @@ must have the same length as the track arrays.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>variable</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>] or </em><em>None</em>) – Per-point scalar values to map as colours.  <code class="docutils literal notranslate"><span class="pre">None</span></code> uses radius
-of curvature.</p></li>
-<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Plot title.</p></li>
-<li><p><strong>label</strong> (<em>str</em><em>, </em><em>optional</em>) – Colorbar label.  Defaults to <code class="docutils literal notranslate"><span class="pre">&quot;Radius</span> <span class="pre">(m)&quot;</span></code> when <em>variable</em> is
-<code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
-<li><p><strong>rotate_by_deg</strong> (<em>float</em><em>, </em><em>optional</em>) – Rotation angle in degrees counterclockwise around the first point.</p></li>
-<li><p><strong>theme</strong> (<em>str</em><em>, </em><em>optional</em>) – Colour theme name (default: <code class="docutils literal notranslate"><span class="pre">&quot;suspension&quot;</span></code>).</p></li>
-<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a><em>, </em><em>optional</em>)</p></li>
-<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a><em>, </em><em>optional</em>)</p></li>
-<li><p><strong>colorbar_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.ColorbarConfig" title="suboptimumg.plotting.plotting_constants.ColorbarConfig"><em>ColorbarConfig</em></a><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>variable</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – Value at each track point, shown as the color of the track. Must be the same length as the track arrays. Default is None, which colors the track by radius of curvature.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Title shown at the top of the figure. Default is None (no title).</p></li>
+<li><p><strong>label</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Colorbar title. Default is None, which uses “Radius (m)” when variable is None and no title otherwise.</p></li>
+<li><p><strong>rotate_by_deg</strong> (<em>float</em><em>, </em><em>optional</em>) – Rotate the drawn track counterclockwise around its first point by this many degrees, e.g. to match a map’s orientation. Default is 0.0.</p></li>
+<li><p><strong>theme</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Name of a color theme from <cite>plotting.color_themes</cite>, which picks the colorscale. Default is “suspension”.</p></li>
+<li><p><strong>width</strong> (<em>int</em><em>, </em><em>optional</em>) – Figure width in pixels. Default is PLOT_WIDTH (1000).</p></li>
+<li><p><strong>height</strong> (<em>int</em><em>, </em><em>optional</em>) – Figure height in pixels. Default is PLOT_HEIGHT (700).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>go.Figure</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plotly figure. Customize anything not exposed here (fonts, colors, colorbar) with fig.update_layout or fig.update_traces before calling fig.show().</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>go.Figure</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="suboptimumg.track.track.Track.plot_3d">
-<span class="sig-name descname"><span class="pre">plot_3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scene_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SceneConfig(aspect_ratio_x=1.0,</span> <span class="pre">aspect_ratio_y=1.0,</span> <span class="pre">aspect_ratio_z=0.8,</span> <span class="pre">camera_distance=2.0,</span> <span class="pre">camera_z=0.8,</span> <span class="pre">default_view_angle=-60,</span> <span class="pre">camera_up_x=0,</span> <span class="pre">camera_up_y=0,</span> <span class="pre">camera_up_z=1)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/track/track.html#Track.plot_3d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.track.track.Track.plot_3d" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">plot_3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_angle_deg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-60.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">700</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/track/track.html#Track.plot_3d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.track.track.Track.plot_3d" title="Link to this definition">#</a></dt>
 <dd><p>Maps a variable onto the z-axis of the track for 3D visualization using Plotly. Creates a 3D stem plot with
 vertical lines extending from baseline to data points.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>variable</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Array of values to map to z-axis (e.g., velocity, power)</p></li>
-<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Plot title (default: None)</p></li>
-<li><p><strong>z_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Z-axis label (default: None)</p></li>
-<li><p><strong>theme</strong> (<em>str</em><em>, </em><em>optional</em>) – The color theme to use (default: None)</p></li>
-<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a><em>, </em><em>optional</em>) – Font configuration object</p></li>
-<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a><em>, </em><em>optional</em>) – Layout configuration object</p></li>
-<li><p><strong>scene_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.SceneConfig" title="suboptimumg.plotting.plotting_constants.SceneConfig"><em>SceneConfig</em></a><em>, </em><em>optional</em>) – Scene configuration object for the 3D view</p></li>
+<li><p><strong>variable</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Values to show as height above the track, e.g. velocity or power. If its length differs from the track’s, it is linearly resampled to the track points.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Title shown at the top of the figure. Default is None (no title).</p></li>
+<li><p><strong>z_label</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Z-axis label, also used in hover text. Default is None, which labels the axis “Value”.</p></li>
+<li><p><strong>theme</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Name of a color theme from <cite>plotting.color_themes</cite>, which picks the marker color. Default is None (default theme).</p></li>
+<li><p><strong>view_angle_deg</strong> (<em>float</em><em>, </em><em>optional</em>) – Initial camera angle in degrees, measured around the vertical z-axis from the +x direction. Default is VIEW_ANGLE_DEG (-60).</p></li>
+<li><p><strong>width</strong> (<em>int</em><em>, </em><em>optional</em>) – Figure width in pixels. Default is PLOT_WIDTH (1000).</p></li>
+<li><p><strong>height</strong> (<em>int</em><em>, </em><em>optional</em>) – Figure height in pixels. Default is PLOT_HEIGHT (700).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Plotly figure object</p>
+<dd class="field-even"><p>Plotly figure. Customize anything not exposed here (fonts, colors, camera distance) with fig.update_layout, fig.update_traces, or fig.update_scenes before calling fig.show().</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>go.Figure</p>

@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../../../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -43,7 +43,7 @@
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../../../_static/design-tabs.js?v=fcb327ea"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/plotting/grid_plot_2d';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -343,21 +343,32 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.color_themes</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_theme</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.plotting_constants</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
-    <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
-    <span class="n">DEFAULT_SMOOTHING_CONFIG</span><span class="p">,</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.defaults</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">FLOAT_PRECISION</span><span class="p">,</span>
+    <span class="n">FONT_SIZE_LARGE</span><span class="p">,</span>
+    <span class="n">FONT_SIZE_MEDIUM</span><span class="p">,</span>
+    <span class="n">FONT_SIZE_SMALL</span><span class="p">,</span>
     <span class="n">GRID_COLOR</span><span class="p">,</span>
     <span class="n">GRID_WIDTH</span><span class="p">,</span>
+    <span class="n">INTERP_FACTOR</span><span class="p">,</span>
+    <span class="n">INTERP_METHOD</span><span class="p">,</span>
     <span class="n">LINE_WIDTH</span><span class="p">,</span>
+    <span class="n">MARGIN</span><span class="p">,</span>
     <span class="n">MARKER_SIZE</span><span class="p">,</span>
+    <span class="n">PLOT_BGCOLOR</span><span class="p">,</span>
+    <span class="n">PLOT_HEIGHT</span><span class="p">,</span>
+    <span class="n">PLOT_WIDTH</span><span class="p">,</span>
+    <span class="n">SMOOTHING_SIGMA</span><span class="p">,</span>
+    <span class="n">SUBPLOT_HEIGHT</span><span class="p">,</span>
+    <span class="n">SUBPLOT_HORIZONTAL_SPACING</span><span class="p">,</span>
+    <span class="n">SUBPLOT_VERTICAL_SPACING</span><span class="p">,</span>
+    <span class="n">SUBPLOT_WIDTH</span><span class="p">,</span>
     <span class="n">TEXT_COLOR_DARK</span><span class="p">,</span>
+    <span class="n">TITLE_X</span><span class="p">,</span>
+    <span class="n">TITLE_XANCHOR</span><span class="p">,</span>
     <span class="n">ZEROLINE_COLOR</span><span class="p">,</span>
     <span class="n">ZEROLINE_WIDTH</span><span class="p">,</span>
-    <span class="n">FontConfig</span><span class="p">,</span>
-    <span class="n">LayoutConfig</span><span class="p">,</span>
-    <span class="n">SmoothingConfig</span><span class="p">,</span>
+    <span class="n">InterpMethod</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">prepare_smooth_data_2D</span>
 
@@ -379,54 +390,76 @@
     <span class="o">*</span><span class="p">,</span>
     <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">fit_curve</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
-    <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
-    <span class="n">smoothing_config</span><span class="p">:</span> <span class="n">SmoothingConfig</span> <span class="o">=</span> <span class="n">DEFAULT_SMOOTHING_CONFIG</span><span class="p">,</span>
+    <span class="n">log_x</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">log_y</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">horizontal_spacing</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">SUBPLOT_HORIZONTAL_SPACING</span><span class="p">,</span>
+    <span class="n">vertical_spacing</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">SUBPLOT_VERTICAL_SPACING</span><span class="p">,</span>
+    <span class="n">interp_factor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">INTERP_FACTOR</span><span class="p">,</span>
+    <span class="n">smoothing_sigma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">SMOOTHING_SIGMA</span><span class="p">,</span>
+    <span class="n">interp_method</span><span class="p">:</span> <span class="n">InterpMethod</span> <span class="o">=</span> <span class="n">INTERP_METHOD</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Generic 2D grid plotting utility.</span>
+<span class="sd">    Plot a grid of subplots, each showing one y series against a shared set of x values.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    x_list : numpy.ndarray</span>
-<span class="sd">        Numpy array of x coordinates (shared across all subplots)</span>
-<span class="sd">    y_data_dict : dict[str, np.ndarray]</span>
-<span class="sd">        Dictionary mapping event keys to y-data arrays</span>
+<span class="sd">    x_list : NDArray[np.float64]</span>
+<span class="sd">        X values shared by every subplot.</span>
+<span class="sd">    y_data_dict : dict[str, NDArray[np.float64]]</span>
+<span class="sd">        Maps a key to the y values for one subplot. Subplots are filled left-to-right, top-to-bottom in dictionary order.</span>
 <span class="sd">    subplot_titles : list[str]</span>
-<span class="sd">        List of subplot titles in order</span>
+<span class="sd">        Title of each subplot, in the same order as `y_data_dict`.</span>
 <span class="sd">    title : str</span>
-<span class="sd">        Overall grid title</span>
+<span class="sd">        Overall figure title.</span>
 <span class="sd">    x_label : str</span>
-<span class="sd">        X-axis label for all subplots</span>
+<span class="sd">        X-axis title used on every subplot.</span>
 <span class="sd">    y_label : str</span>
-<span class="sd">        Y-axis label for all subplots</span>
+<span class="sd">        Y-axis title used on every subplot.</span>
 <span class="sd">    rows : int</span>
-<span class="sd">        Number of rows in the grid</span>
+<span class="sd">        Number of subplot rows in the grid.</span>
 <span class="sd">    cols : int</span>
-<span class="sd">        Number of columns in the grid</span>
-<span class="sd">    theme : str, optional</span>
-<span class="sd">        Color theme name</span>
+<span class="sd">        Number of subplot columns in the grid.</span>
+<span class="sd">    theme : str | None, optional</span>
+<span class="sd">        Color theme name from `plotting.color_themes`, e.g. "aero". None uses the default theme. Default is None.</span>
 <span class="sd">    fit_curve : bool, optional</span>
-<span class="sd">        Whether to fit curves to data</span>
-<span class="sd">    font_config : FontConfig, optional</span>
-<span class="sd">        FontConfig object for font settings</span>
-<span class="sd">    layout_config : LayoutConfig, optional</span>
-<span class="sd">        LayoutConfig object for layout settings</span>
-<span class="sd">    smoothing_config : SmoothingConfig, optional</span>
-<span class="sd">        SmoothingConfig object for smoothing settings</span>
+<span class="sd">        If True, draw the line through the points as a spline instead of straight segments. Default is False.</span>
+<span class="sd">    log_x : bool, optional</span>
+<span class="sd">        If True, use logarithmic x-axes on all subplots. All x values must be positive. Default is False.</span>
+<span class="sd">    log_y : bool, optional</span>
+<span class="sd">        If True, use logarithmic y-axes on all subplots. All y values must be positive. Default is False.</span>
+<span class="sd">    width : int | None, optional</span>
+<span class="sd">        Figure width in pixels. None sizes it automatically as max(PLOT_WIDTH, SUBPLOT_WIDTH * cols), i.e. max(1000, 400 * cols). Default is None.</span>
+<span class="sd">    height : int | None, optional</span>
+<span class="sd">        Figure height in pixels. None sizes it automatically as max(PLOT_HEIGHT, SUBPLOT_HEIGHT * rows), i.e. max(700, 350 * rows). Default is None.</span>
+<span class="sd">    horizontal_spacing : float, optional</span>
+<span class="sd">        Gap between subplot columns, as a fraction of the figure width (0 to 1). Increase if y-axis titles overlap neighbouring subplots. Default is SUBPLOT_HORIZONTAL_SPACING (0.08).</span>
+<span class="sd">    vertical_spacing : float, optional</span>
+<span class="sd">        Gap between subplot rows, as a fraction of the figure height (0 to 1). Increase if x-axis titles overlap subplot titles below. Default is SUBPLOT_VERTICAL_SPACING (0.12).</span>
+<span class="sd">    interp_factor : int, optional</span>
+<span class="sd">        Each line is resampled to this many times more points. 1 disables interpolation. Default is INTERP_FACTOR (5).</span>
+<span class="sd">    smoothing_sigma : float, optional</span>
+<span class="sd">        Gaussian smoothing strength applied to each line, in interpolated samples. 0 disables smoothing. Default is SMOOTHING_SIGMA (0).</span>
+<span class="sd">    interp_method : {"linear", "nearest", "slinear", "cubic"}, optional</span>
+<span class="sd">        Interpolation method used when resampling each line. Default is INTERP_METHOD ("linear").</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    go.Figure</span>
-<span class="sd">        Plotly figure object</span>
+<span class="sd">        Plotly figure. Customize anything not exposed here (fonts, colors, margins, etc.) with `fig.update_layout(...)` or `fig.update_traces(...)` before calling `fig.show()`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; fig = plot_grid_2D(masses, {"accel": t_accel, "skidpad": t_skid}, ["Accel", "Skidpad"], "Event Times", "Mass (kg)", "Time (s)", rows=1, cols=2)</span>
 <span class="sd">    """</span>
     <span class="c1"># Create figure</span>
     <span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span>
         <span class="n">rows</span><span class="o">=</span><span class="n">rows</span><span class="p">,</span>
         <span class="n">cols</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span>
         <span class="n">subplot_titles</span><span class="o">=</span><span class="n">subplot_titles</span><span class="p">,</span>
-        <span class="n">horizontal_spacing</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">grid_horizontal_spacing</span><span class="p">,</span>
-        <span class="n">vertical_spacing</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">grid_vertical_spacing</span><span class="p">,</span>
+        <span class="n">horizontal_spacing</span><span class="o">=</span><span class="n">horizontal_spacing</span><span class="p">,</span>
+        <span class="n">vertical_spacing</span><span class="o">=</span><span class="n">vertical_spacing</span><span class="p">,</span>
         <span class="n">shared_xaxes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">shared_yaxes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span>
@@ -441,7 +474,13 @@
 
         <span class="n">y_list</span> <span class="o">=</span> <span class="n">y_data_dict</span><span class="p">[</span><span class="n">event_key</span><span class="p">]</span>
 
-        <span class="n">x_dense</span><span class="p">,</span> <span class="n">y_dense</span> <span class="o">=</span> <span class="n">prepare_smooth_data_2D</span><span class="p">(</span><span class="n">x_list</span><span class="p">,</span> <span class="n">y_list</span><span class="p">,</span> <span class="n">smoothing_config</span><span class="o">=</span><span class="n">smoothing_config</span><span class="p">)</span>
+        <span class="n">x_dense</span><span class="p">,</span> <span class="n">y_dense</span> <span class="o">=</span> <span class="n">prepare_smooth_data_2D</span><span class="p">(</span>
+            <span class="n">x_list</span><span class="p">,</span>
+            <span class="n">y_list</span><span class="p">,</span>
+            <span class="n">interp_factor</span><span class="o">=</span><span class="n">interp_factor</span><span class="p">,</span>
+            <span class="n">smoothing_sigma</span><span class="o">=</span><span class="n">smoothing_sigma</span><span class="p">,</span>
+            <span class="n">interp_method</span><span class="o">=</span><span class="n">interp_method</span><span class="p">,</span>
+        <span class="p">)</span>
 
         <span class="c1"># Add interpolated line</span>
         <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
@@ -478,31 +517,32 @@
         <span class="c1"># Set axis titles for this subplot</span>
         <span class="n">yaxis_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"yaxis</span><span class="si">{</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">"yaxis"</span>
         <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
-            <span class="p">{</span><span class="n">yaxis_name</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"text"</span><span class="p">:</span> <span class="n">y_label</span><span class="p">,</span> <span class="s2">"font"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"size"</span><span class="p">:</span> <span class="n">font_config</span><span class="o">.</span><span class="n">medium</span><span class="p">}}}}</span>
+            <span class="p">{</span><span class="n">yaxis_name</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"text"</span><span class="p">:</span> <span class="n">y_label</span><span class="p">,</span> <span class="s2">"font"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"size"</span><span class="p">:</span> <span class="n">FONT_SIZE_MEDIUM</span><span class="p">}}}}</span>
         <span class="p">)</span>
 
         <span class="n">xaxis_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"xaxis</span><span class="si">{</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">"xaxis"</span>
         <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
-            <span class="p">{</span><span class="n">xaxis_name</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"text"</span><span class="p">:</span> <span class="n">x_label</span><span class="p">,</span> <span class="s2">"font"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"size"</span><span class="p">:</span> <span class="n">font_config</span><span class="o">.</span><span class="n">medium</span><span class="p">}}}}</span>
+            <span class="p">{</span><span class="n">xaxis_name</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"text"</span><span class="p">:</span> <span class="n">x_label</span><span class="p">,</span> <span class="s2">"font"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"size"</span><span class="p">:</span> <span class="n">FONT_SIZE_MEDIUM</span><span class="p">}}}}</span>
         <span class="p">)</span>
 
     <span class="c1"># Configure overall layout</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
         <span class="n">title</span><span class="o">=</span><span class="p">{</span>
             <span class="s2">"text"</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
-            <span class="s2">"font"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">large</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
-            <span class="s2">"x"</span><span class="p">:</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">title_x</span><span class="p">,</span>
-            <span class="s2">"xanchor"</span><span class="p">:</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">title_xanchor</span><span class="p">,</span>
+            <span class="s2">"font"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">FONT_SIZE_LARGE</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
+            <span class="s2">"x"</span><span class="p">:</span> <span class="n">TITLE_X</span><span class="p">,</span>
+            <span class="s2">"xanchor"</span><span class="p">:</span> <span class="n">TITLE_XANCHOR</span><span class="p">,</span>
         <span class="p">},</span>
-        <span class="n">width</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">layout_config</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">grid_width_per_col</span> <span class="o">*</span> <span class="n">cols</span><span class="p">),</span>
-        <span class="n">height</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">layout_config</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">grid_height_per_row</span> <span class="o">*</span> <span class="n">rows</span><span class="p">),</span>
-        <span class="n">plot_bgcolor</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">plot_bgcolor</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">width</span> <span class="k">if</span> <span class="n">width</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">max</span><span class="p">(</span><span class="n">PLOT_WIDTH</span><span class="p">,</span> <span class="n">SUBPLOT_WIDTH</span> <span class="o">*</span> <span class="n">cols</span><span class="p">),</span>
+        <span class="n">height</span><span class="o">=</span><span class="n">height</span> <span class="k">if</span> <span class="n">height</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">max</span><span class="p">(</span><span class="n">PLOT_HEIGHT</span><span class="p">,</span> <span class="n">SUBPLOT_HEIGHT</span> <span class="o">*</span> <span class="n">rows</span><span class="p">),</span>
+        <span class="n">plot_bgcolor</span><span class="o">=</span><span class="n">PLOT_BGCOLOR</span><span class="p">,</span>
         <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">margin</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">margin</span><span class="p">,</span>
+        <span class="n">margin</span><span class="o">=</span><span class="n">MARGIN</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># Add gridlines and format tick labels</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">"log"</span> <span class="k">if</span> <span class="n">log_x</span> <span class="k">else</span> <span class="s2">"linear"</span><span class="p">,</span>
         <span class="n">showgrid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">gridwidth</span><span class="o">=</span><span class="n">GRID_WIDTH</span><span class="p">,</span>
         <span class="n">gridcolor</span><span class="o">=</span><span class="n">GRID_COLOR</span><span class="p">,</span>
@@ -510,9 +550,10 @@
         <span class="n">zerolinewidth</span><span class="o">=</span><span class="n">ZEROLINE_WIDTH</span><span class="p">,</span>
         <span class="n">zerolinecolor</span><span class="o">=</span><span class="n">ZEROLINE_COLOR</span><span class="p">,</span>
         <span class="n">tickformat</span><span class="o">=</span><span class="n">FLOAT_PRECISION</span><span class="p">,</span>
-        <span class="n">tickfont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">small</span><span class="p">),</span>
+        <span class="n">tickfont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">FONT_SIZE_SMALL</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">"log"</span> <span class="k">if</span> <span class="n">log_y</span> <span class="k">else</span> <span class="s2">"linear"</span><span class="p">,</span>
         <span class="n">showgrid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">gridwidth</span><span class="o">=</span><span class="n">GRID_WIDTH</span><span class="p">,</span>
         <span class="n">gridcolor</span><span class="o">=</span><span class="n">GRID_COLOR</span><span class="p">,</span>
@@ -520,7 +561,7 @@
         <span class="n">zerolinewidth</span><span class="o">=</span><span class="n">ZEROLINE_WIDTH</span><span class="p">,</span>
         <span class="n">zerolinecolor</span><span class="o">=</span><span class="n">ZEROLINE_COLOR</span><span class="p">,</span>
         <span class="n">tickformat</span><span class="o">=</span><span class="n">FLOAT_PRECISION</span><span class="p">,</span>
-        <span class="n">tickfont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">small</span><span class="p">),</span>
+        <span class="n">tickfont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">FONT_SIZE_SMALL</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">fig</span></div>

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>suboptimumg.plotting.two_panel_spectrum &#8212; SubOptimumG</title>
+    <title>suboptimumg.plotting.bode_plot &#8212; SubOptimumG</title>
   
   
   
@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../../../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -43,8 +43,8 @@
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/plotting/two_panel_spectrum';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../../../_static/design-tabs.js?v=fcb327ea"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/plotting/bode_plot';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -318,7 +318,7 @@
     
     <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.plotting.two_panel_spectrum</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.plotting.bode_plot</span></li>
   </ul>
 </nav>
 </div>
@@ -335,26 +335,31 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <h1>Source code for suboptimumg.plotting.two_panel_spectrum</h1><div class="highlight"><pre>
+  <h1>Source code for suboptimumg.plotting.bode_plot</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.colors</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pc</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">.plotting_constants</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
-    <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.defaults</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FONT_SIZE_LARGE</span><span class="p">,</span>
+    <span class="n">FONT_SIZE_SMALL</span><span class="p">,</span>
     <span class="n">LINE_WIDTH</span><span class="p">,</span>
+    <span class="n">MARGIN</span><span class="p">,</span>
+    <span class="n">PLOT_BGCOLOR</span><span class="p">,</span>
+    <span class="n">PLOT_HEIGHT</span><span class="p">,</span>
+    <span class="n">PLOT_WIDTH</span><span class="p">,</span>
+    <span class="n">SUBPLOT_VERTICAL_SPACING</span><span class="p">,</span>
     <span class="n">TEXT_COLOR_DARK</span><span class="p">,</span>
-    <span class="n">FontConfig</span><span class="p">,</span>
-    <span class="n">LayoutConfig</span><span class="p">,</span>
+    <span class="n">TITLE_X</span><span class="p">,</span>
+    <span class="n">TITLE_XANCHOR</span><span class="p">,</span>
 <span class="p">)</span>
 
 
-<div class="viewcode-block" id="plot_two_panel_spectrum">
-<a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.two_panel_spectrum.html#suboptimumg.plotting.two_panel_spectrum.plot_two_panel_spectrum">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">plot_two_panel_spectrum</span><span class="p">(</span>
+<div class="viewcode-block" id="plot_phase_and_magnitude">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.plotting.bode_plot.html#suboptimumg.plotting.bode_plot.plot_phase_and_magnitude">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_phase_and_magnitude</span><span class="p">(</span>
     <span class="n">freqs</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
     <span class="n">magnitude_by_series</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]],</span>
     <span class="n">phase_by_series</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]],</span>
@@ -363,43 +368,55 @@
     <span class="n">magnitude_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"|H| (dB)"</span><span class="p">,</span>
     <span class="n">phase_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"phase (deg)"</span><span class="p">,</span>
     <span class="n">freq_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"frequency (Hz)"</span><span class="p">,</span>
-    <span class="n">log_freq</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">log_x</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">dashed_series</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
-    <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
+    <span class="n">log_y</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">PLOT_WIDTH</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">PLOT_HEIGHT</span><span class="p">,</span>
+    <span class="n">vertical_spacing</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">SUBPLOT_VERTICAL_SPACING</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Generic stacked magnitude-over-phase (Bode-style) plot.</span>
+<span class="sd">    Stacked magnitude-over-phase (Bode-style) frequency response plot.</span>
 
-<span class="sd">    Two vertically stacked panels share a frequency x-axis: magnitude on top, phase below. Each series is drawn in both</span>
-<span class="sd">    panels and linked by a single legend entry, so toggling a series hides both its magnitude and phase curves.</span>
+<span class="sd">    Two vertically stacked panels share a frequency x-axis: magnitude on top, phase below. Each series is drawn in both panels and linked by a single legend entry, so clicking a series in the legend hides both its magnitude and phase curves.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    freqs : NDArray[float64]</span>
-<span class="sd">        Shared frequency axis (Hz).</span>
-<span class="sd">    magnitude_by_series : dict[str, NDArray[float64]]</span>
-<span class="sd">        Magnitude curve per series label. Values are plotted verbatim, so pass dB (or linear) already converted.</span>
-<span class="sd">    phase_by_series : dict[str, NDArray[float64]]</span>
-<span class="sd">        Phase curve (deg) per series label; keys must match ``magnitude_by_series``.</span>
+<span class="sd">    freqs : NDArray[np.float64]</span>
+<span class="sd">        Frequency values in Hz, shared by every series.</span>
+<span class="sd">    magnitude_by_series : dict[str, NDArray[np.float64]]</span>
+<span class="sd">        Maps each series label (shown in the legend) to its magnitude curve. Values are plotted as given, so convert to dB beforehand if wanted.</span>
+<span class="sd">    phase_by_series : dict[str, NDArray[np.float64]]</span>
+<span class="sd">        Maps each series label to its phase curve in degrees. Must have the same keys as `magnitude_by_series`.</span>
 <span class="sd">    title : str, optional</span>
-<span class="sd">        Figure title.</span>
+<span class="sd">        Figure title. Default is "Frequency response".</span>
 <span class="sd">    magnitude_label : str, optional</span>
-<span class="sd">        Y-axis label for the magnitude panel.</span>
+<span class="sd">        Title and y-axis title of the magnitude panel. Default is "|H| (dB)".</span>
 <span class="sd">    phase_label : str, optional</span>
-<span class="sd">        Y-axis label for the phase panel.</span>
+<span class="sd">        Title and y-axis title of the phase panel. Default is "phase (deg)".</span>
 <span class="sd">    freq_label : str, optional</span>
-<span class="sd">        Shared x-axis label.</span>
-<span class="sd">    log_freq : bool, optional</span>
-<span class="sd">        Use a logarithmic frequency axis. Default is True.</span>
-<span class="sd">    dashed_series : set[str], optional</span>
-<span class="sd">        Series labels to render dashed (e.g. a comparison model). Default is None (all solid).</span>
-<span class="sd">    font_config : FontConfig, optional</span>
-<span class="sd">    layout_config : LayoutConfig, optional</span>
+<span class="sd">        Shared x-axis title. Default is "frequency (Hz)".</span>
+<span class="sd">    log_x : bool, optional</span>
+<span class="sd">        If True, use a logarithmic frequency axis on both panels. Frequencies must be positive. Default is True.</span>
+<span class="sd">    dashed_series : set[str] | None, optional</span>
+<span class="sd">        Series labels to draw dashed instead of solid, e.g. a comparison model. None draws every series solid. Default is None.</span>
+<span class="sd">    log_y : bool, optional</span>
+<span class="sd">        If True, use a logarithmic y-axis on the magnitude panel only (the phase panel stays linear). Use this for linear-magnitude data, not dB. Default is False.</span>
+<span class="sd">    width : int, optional</span>
+<span class="sd">        Figure width in pixels. Default is PLOT_WIDTH (1000).</span>
+<span class="sd">    height : int, optional</span>
+<span class="sd">        Figure height in pixels, covering both panels. Default is PLOT_HEIGHT (700).</span>
+<span class="sd">    vertical_spacing : float, optional</span>
+<span class="sd">        Gap between the two panels, as a fraction of the figure height (0 to 1). Default is SUBPLOT_VERTICAL_SPACING (0.12).</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    go.Figure</span>
+<span class="sd">        Plotly figure. Customize anything not exposed here (fonts, colors, margins, etc.) with `fig.update_layout(...)` or `fig.update_traces(...)` before calling `fig.show()`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; fig = plot_phase_and_magnitude(f, {"measured": mag_db}, {"measured": phase_deg}, log_x=True)</span>
 <span class="sd">    """</span>
     <span class="n">dashed_series</span> <span class="o">=</span> <span class="n">dashed_series</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">palette</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">qualitative</span><span class="o">.</span><span class="n">Plotly</span>
@@ -409,7 +426,7 @@
         <span class="n">cols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">shared_xaxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">subplot_titles</span><span class="o">=</span><span class="p">(</span><span class="n">magnitude_label</span><span class="p">,</span> <span class="n">phase_label</span><span class="p">),</span>
-        <span class="n">vertical_spacing</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">grid_vertical_spacing</span><span class="p">,</span>
+        <span class="n">vertical_spacing</span><span class="o">=</span><span class="n">vertical_spacing</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">mag</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">magnitude_by_series</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
@@ -442,23 +459,23 @@
             <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="p">)</span>
 
-    <span class="n">axis_type</span> <span class="o">=</span> <span class="s2">"log"</span> <span class="k">if</span> <span class="n">log_freq</span> <span class="k">else</span> <span class="s2">"linear"</span>
+    <span class="n">axis_type</span> <span class="o">=</span> <span class="s2">"log"</span> <span class="k">if</span> <span class="n">log_x</span> <span class="k">else</span> <span class="s2">"linear"</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">axis_type</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">axis_type</span><span class="p">,</span> <span class="n">title_text</span><span class="o">=</span><span class="n">freq_label</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="n">magnitude_label</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="n">magnitude_label</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"log"</span> <span class="k">if</span> <span class="n">log_y</span> <span class="k">else</span> <span class="s2">"linear"</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="n">phase_label</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
         <span class="n">title</span><span class="o">=</span><span class="p">{</span>
             <span class="s2">"text"</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
-            <span class="s2">"font"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">large</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
-            <span class="s2">"x"</span><span class="p">:</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">title_x</span><span class="p">,</span>
-            <span class="s2">"xanchor"</span><span class="p">:</span> <span class="n">layout_config</span><span class="o">.</span><span class="n">title_xanchor</span><span class="p">,</span>
+            <span class="s2">"font"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">FONT_SIZE_LARGE</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEXT_COLOR_DARK</span><span class="p">),</span>
+            <span class="s2">"x"</span><span class="p">:</span> <span class="n">TITLE_X</span><span class="p">,</span>
+            <span class="s2">"xanchor"</span><span class="p">:</span> <span class="n">TITLE_XANCHOR</span><span class="p">,</span>
         <span class="p">},</span>
-        <span class="n">height</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>
-        <span class="n">width</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">width</span><span class="p">,</span>
-        <span class="n">margin</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">margin</span><span class="p">,</span>
-        <span class="n">plot_bgcolor</span><span class="o">=</span><span class="n">layout_config</span><span class="o">.</span><span class="n">plot_bgcolor</span><span class="p">,</span>
-        <span class="n">legend</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">font_config</span><span class="o">.</span><span class="n">small</span><span class="p">)),</span>
+        <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">margin</span><span class="o">=</span><span class="n">MARGIN</span><span class="p">,</span>
+        <span class="n">plot_bgcolor</span><span class="o">=</span><span class="n">PLOT_BGCOLOR</span><span class="p">,</span>
+        <span class="n">legend</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">FONT_SIZE_SMALL</span><span class="p">)),</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">fig</span></div>
 

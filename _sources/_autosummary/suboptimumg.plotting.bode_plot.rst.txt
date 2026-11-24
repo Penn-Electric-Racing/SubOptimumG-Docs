@@ -1,0 +1,8 @@
+suboptimumg.plotting.bode\_plot
+===============================
+
+.. automodule:: suboptimumg.plotting.bode_plot
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

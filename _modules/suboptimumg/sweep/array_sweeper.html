@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../../../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -43,7 +43,7 @@
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../../../_static/design-tabs.js?v=fcb327ea"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/sweep/array_sweeper';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -415,12 +415,25 @@
 <span class="sd">        title, y_label : str, optional</span>
 <span class="sd">            Text for the plot. Defaults are generated from the metric.</span>
 <span class="sd">        **plot_options : object</span>
-<span class="sd">            Passed to the plotting function, e.g. `theme="powertrain"`</span>
+<span class="sd">            Extra keyword options for the underlying bar chart. Passing any other name raises a TypeError. See the Notes section for the full list.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        go.Figure</span>
-<span class="sd">            One column of points per parameter, with the unmodified car's value as a baseline</span>
+<span class="sd">            One column of points per parameter, with the unmodified car's value as a baseline. Customize anything else with `fig.update_layout(...)` before showing.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Available `plot_options`:</span>
+
+<span class="sd">        - `theme` (str): color theme name from `plotting.color_themes` used to color the points by percent change, e.g. "powertrain". Default "chart_default".</span>
+<span class="sd">        - `log_y` (bool): logarithmic metric (y) axis. Default False.</span>
+<span class="sd">        - `width`, `height` (int): figure size in pixels. Default 1000 x 800.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; sweeper.plot(theme="powertrain", height=600)</span>
+<span class="sd">        &gt;&gt;&gt; sweeper.plot(metric=SweepMetric.ENDURANCE_PTS, log_y=True)</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="n">plot_array_sweep</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">y_label</span><span class="o">=</span><span class="n">y_label</span><span class="p">,</span> <span class="o">**</span><span class="n">plot_options</span>

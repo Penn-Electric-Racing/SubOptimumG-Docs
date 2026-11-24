@@ -31,7 +31,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -44,7 +44,7 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.plotting.utils';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -331,20 +331,19 @@
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.plotting.html">suboptimumg.plotting</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bar_chart.html">suboptimumg.plotting.bar_chart</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.binned_scatter.html">suboptimumg.plotting.binned_scatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bode_plot.html">suboptimumg.plotting.bode_plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.color_themes.html">suboptimumg.plotting.color_themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.defaults.html">suboptimumg.plotting.defaults</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.gps_visualization.html">suboptimumg.plotting.gps_visualization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_2d.html">suboptimumg.plotting.grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html">suboptimumg.plotting.grid_plot_3d</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.heatmap.html">suboptimumg.plotting.heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_grid_plot_2d.html">suboptimumg.plotting.overlay_grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plot_2d.html">suboptimumg.plotting.overlay_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_2d.html">suboptimumg.plotting.plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_3d.html">suboptimumg.plotting.plot_3d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_polynomial_fit.html">suboptimumg.plotting.plot_polynomial_fit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plotting_constants.html">suboptimumg.plotting.plotting_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.stem_plot.html">suboptimumg.plotting.stem_plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.two_panel_spectrum.html">suboptimumg.plotting.two_panel_spectrum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.types.html">suboptimumg.plotting.types</a></li>
 <li class="toctree-l3 current active"><a aria-current="page" class="current reference internal" href="#">suboptimumg.plotting.utils</a></li>
 </ul>
@@ -498,14 +497,16 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.plotting.utils.prepare_smooth_data_2D">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.utils.</span></span><span class="sig-name descname"><span class="pre">prepare_smooth_data_2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothing_config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/utils.html#prepare_smooth_data_2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.utils.prepare_smooth_data_2D" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.utils.</span></span><span class="sig-name descname"><span class="pre">prepare_smooth_data_2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothing_sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/utils.html#prepare_smooth_data_2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.utils.prepare_smooth_data_2D" title="Link to this definition">#</a></dt>
 <dd><p>Interpolate and smooth (x, y) data for 2D plots.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x_list</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – X coordinates</p></li>
 <li><p><strong>y_list</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Y coordinates</p></li>
-<li><p><strong>smoothing_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.SmoothingConfig" title="suboptimumg.plotting.plotting_constants.SmoothingConfig"><em>SmoothingConfig</em></a>) – Smoothing and interpolation settings</p></li>
+<li><p><strong>interp_factor</strong> (<em>int</em><em>, </em><em>optional</em>) – Resample to this many times more points before plotting. 1 disables interpolation. Default is INTERP_FACTOR (5).</p></li>
+<li><p><strong>smoothing_sigma</strong> (<em>float</em><em>, </em><em>optional</em>) – Gaussian smoothing strength, in units of interpolated samples. 0 disables smoothing. Default is SMOOTHING_SIGMA (0).</p></li>
+<li><p><strong>interp_method</strong> (<em>{&quot;linear&quot;</em><em>, </em><em>&quot;nearest&quot;</em><em>, </em><em>&quot;slinear&quot;</em><em>, </em><em>&quot;cubic&quot;}</em><em>, </em><em>optional</em>) – Interpolation method used when resampling. Default is INTERP_METHOD (“linear”).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -523,7 +524,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.plotting.utils.prepare_smooth_data_3D">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.utils.</span></span><span class="sig-name descname"><span class="pre">prepare_smooth_data_3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothing_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SmoothingConfig(interp_factor=5,</span> <span class="pre">smoothing_sigma=0,</span> <span class="pre">interp_method='linear')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/utils.html#prepare_smooth_data_3D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.utils.prepare_smooth_data_3D" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.utils.</span></span><span class="sig-name descname"><span class="pre">prepare_smooth_data_3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothing_sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/utils.html#prepare_smooth_data_3D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.utils.prepare_smooth_data_3D" title="Link to this definition">#</a></dt>
 <dd><p>Interpolate and smooth grid-based data for 3D plots.</p>
 <p>Requires grid-based input data.</p>
 <dl class="field-list simple">
@@ -532,7 +533,9 @@
 <li><p><strong>x_list</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – 1D array of x coordinates defining the grid x-axis</p></li>
 <li><p><strong>y_list</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – 1D array of y coordinates defining the grid y-axis</p></li>
 <li><p><strong>z_list</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – 2D array of z values with shape (len(x_list), len(y_list))</p></li>
-<li><p><strong>smoothing_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.SmoothingConfig" title="suboptimumg.plotting.plotting_constants.SmoothingConfig"><em>SmoothingConfig</em></a><em>, </em><em>optional</em>) – Smoothing and interpolation settings</p></li>
+<li><p><strong>interp_factor</strong> (<em>int</em><em>, </em><em>optional</em>) – Resample to this many times more points before plotting. 1 disables interpolation. Default is INTERP_FACTOR (5).</p></li>
+<li><p><strong>smoothing_sigma</strong> (<em>float</em><em>, </em><em>optional</em>) – Gaussian smoothing strength, in units of interpolated samples. 0 disables smoothing. Default is SMOOTHING_SIGMA (0).</p></li>
+<li><p><strong>interp_method</strong> (<em>{&quot;linear&quot;</em><em>, </em><em>&quot;nearest&quot;</em><em>, </em><em>&quot;slinear&quot;</em><em>, </em><em>&quot;cubic&quot;}</em><em>, </em><em>optional</em>) – Interpolation method used when resampling. Default is INTERP_METHOD (“linear”).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -551,7 +554,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.plotting.utils.prepare_smooth_data_3D_scatter">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.utils.</span></span><span class="sig-name descname"><span class="pre">prepare_smooth_data_3D_scatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothing_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SmoothingConfig(interp_factor=5,</span> <span class="pre">smoothing_sigma=0,</span> <span class="pre">interp_method='linear')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/utils.html#prepare_smooth_data_3D_scatter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.utils.prepare_smooth_data_3D_scatter" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.utils.</span></span><span class="sig-name descname"><span class="pre">prepare_smooth_data_3D_scatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothing_sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/utils.html#prepare_smooth_data_3D_scatter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.utils.prepare_smooth_data_3D_scatter" title="Link to this definition">#</a></dt>
 <dd><p>Interpolate scattered 3D data onto a regular grid.</p>
 <p>Requires scatter-based input data (1D x, y, z arrays).</p>
 <dl class="field-list simple">
@@ -560,7 +563,9 @@
 <li><p><strong>x_list</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – 1D array of x coordinates</p></li>
 <li><p><strong>y_list</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – 1D array of y coordinates</p></li>
 <li><p><strong>z_list</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – 1D array of z values</p></li>
-<li><p><strong>smoothing_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.SmoothingConfig" title="suboptimumg.plotting.plotting_constants.SmoothingConfig"><em>SmoothingConfig</em></a><em>, </em><em>optional</em>) – Smoothing and interpolation settings</p></li>
+<li><p><strong>interp_factor</strong> (<em>int</em><em>, </em><em>optional</em>) – Resample to this many times more points before plotting. 1 disables interpolation. Default is INTERP_FACTOR (5).</p></li>
+<li><p><strong>smoothing_sigma</strong> (<em>float</em><em>, </em><em>optional</em>) – Gaussian smoothing strength, in units of interpolated samples. 0 disables smoothing. Default is SMOOTHING_SIGMA (0).</p></li>
+<li><p><strong>interp_method</strong> (<em>{&quot;linear&quot;</em><em>, </em><em>&quot;nearest&quot;</em><em>, </em><em>&quot;slinear&quot;</em><em>, </em><em>&quot;cubic&quot;}</em><em>, </em><em>optional</em>) – Interpolation method used when resampling. Default is INTERP_METHOD (“linear”).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

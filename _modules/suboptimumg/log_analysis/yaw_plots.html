@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../../../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -43,7 +43,7 @@
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../../../_static/design-tabs.js?v=fcb327ea"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/log_analysis/yaw_plots';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -342,8 +342,8 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.binned_scatter</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_binned_scatter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.bode_plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_phase_and_magnitude</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.plot_3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot3D_surface</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.two_panel_spectrum</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_two_panel_spectrum</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle.irl_vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">IrlCar</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.yaw_fit</span><span class="w"> </span><span class="kn">import</span> <span class="n">bicycle_coeffs</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.yaw_fit_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChassisParams</span><span class="p">,</span> <span class="n">Prediction</span><span class="p">,</span> <span class="n">WindowArrays</span><span class="p">,</span> <span class="n">YawFit</span>
@@ -487,7 +487,7 @@
             <span class="k">if</span> <span class="n">fit_idx</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">dashed</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">plot_two_panel_spectrum</span><span class="p">(</span>
+    <span class="k">return</span> <span class="n">plot_phase_and_magnitude</span><span class="p">(</span>
         <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">f_grid</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span>
         <span class="n">mag_by</span><span class="p">,</span>
         <span class="n">phase_by</span><span class="p">,</span>

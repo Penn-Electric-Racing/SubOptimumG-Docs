@@ -31,7 +31,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -44,13 +44,13 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.plotting.gps_visualization';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="suboptimumg.plotting.grid_plot_2d" href="suboptimumg.plotting.grid_plot_2d.html" />
-    <link rel="prev" title="suboptimumg.plotting.color_themes" href="suboptimumg.plotting.color_themes.html" />
+    <link rel="prev" title="suboptimumg.plotting.defaults" href="suboptimumg.plotting.defaults.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
@@ -331,20 +331,19 @@
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="suboptimumg.plotting.html">suboptimumg.plotting</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bar_chart.html">suboptimumg.plotting.bar_chart</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.binned_scatter.html">suboptimumg.plotting.binned_scatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bode_plot.html">suboptimumg.plotting.bode_plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.color_themes.html">suboptimumg.plotting.color_themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.defaults.html">suboptimumg.plotting.defaults</a></li>
 <li class="toctree-l3 current active"><a aria-current="page" class="current reference internal" href="#">suboptimumg.plotting.gps_visualization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_2d.html">suboptimumg.plotting.grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html">suboptimumg.plotting.grid_plot_3d</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.heatmap.html">suboptimumg.plotting.heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_grid_plot_2d.html">suboptimumg.plotting.overlay_grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plot_2d.html">suboptimumg.plotting.overlay_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_2d.html">suboptimumg.plotting.plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_3d.html">suboptimumg.plotting.plot_3d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_polynomial_fit.html">suboptimumg.plotting.plot_polynomial_fit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plotting_constants.html">suboptimumg.plotting.plotting_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.stem_plot.html">suboptimumg.plotting.stem_plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.two_panel_spectrum.html">suboptimumg.plotting.two_panel_spectrum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.types.html">suboptimumg.plotting.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.utils.html">suboptimumg.plotting.utils</a></li>
 </ul>
@@ -480,100 +479,88 @@
   <section id="module-suboptimumg.plotting.gps_visualization">
 <span id="suboptimumg-plotting-gps-visualization"></span><h1>suboptimumg.plotting.gps_visualization<a class="headerlink" href="#module-suboptimumg.plotting.gps_visualization" title="Link to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="suboptimumg.plotting.gps_visualization.plot_gps_trajectory">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.gps_visualization.</span></span><span class="sig-name descname"><span class="pre">plot_gps_trajectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_s</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/gps_visualization.html#plot_gps_trajectory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.gps_visualization.plot_gps_trajectory" title="Link to this definition">#</a></dt>
-<dd><p>Interactive 2D GPS trajectory plot with a two-handled time trim slider.</p>
+<dt class="sig sig-object py" id="suboptimumg.plotting.gps_visualization.plot_lap_overlay">
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.gps_visualization.</span></span><span class="sig-name descname"><span class="pre">plot_lap_overlay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_idx</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">sf_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">700</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/gps_visualization.html#plot_lap_overlay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.gps_visualization.plot_lap_overlay" title="Link to this definition">#</a></dt>
+<dd><p>Overlay the GPS trajectories of multiple laps on one XY plot with equal axis scaling.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – X and Y coordinates.</p></li>
-<li><p><strong>y</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – X and Y coordinates.</p></li>
-<li><p><strong>time_s</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Elapsed time in seconds (same length as x/y).</p></li>
-<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a>)</p></li>
-<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a>)</p></li>
+<li><p><strong>laps</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>NDArray</em><em>[</em><em>float64</em><em>]</em><em>, </em><em>NDArray</em><em>[</em><em>float64</em><em>]</em><em>]</em><em>]</em>) – One <cite>(pos_x, pos_y)</cite> tuple per lap, giving local X/East and Y/North coordinates in meters. Laps are labeled “Lap 1”, “Lap 2”, … in list order.</p></li>
+<li><p><strong>baseline_idx</strong> (<em>int</em>) – Index into <cite>laps</cite> of the lap to highlight with larger markers.</p></li>
+<li><p><strong>sf_line</strong> (<a class="reference internal" href="suboptimumg.log_analysis.gps_laps.html#suboptimumg.log_analysis.gps_laps.LineSegment" title="suboptimumg.log_analysis.gps_laps.LineSegment"><em>LineSegment</em></a><em> | </em><em>None</em><em>, </em><em>optional</em>) – Start/finish line drawn on top, as <cite>((x1, y1), (x2, y2))</cite> in the same local meters as the laps. None draws no line. Default is None.</p></li>
+<li><p><strong>width</strong> (<em>int</em><em>, </em><em>optional</em>) – Figure width in pixels. Default is PLOT_WIDTH (1000).</p></li>
+<li><p><strong>height</strong> (<em>int</em><em>, </em><em>optional</em>) – Figure height in pixels. Default is PLOT_HEIGHT (700).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A VBox containing the FigureWidget and the range slider. Display it directly in a notebook cell.</p>
+<dd class="field-even"><p>Plotly figure. Customize anything not exposed here with <cite>fig.update_layout(…)</cite> / <cite>fig.update_traces(…)</cite> before calling <cite>fig.show()</cite>.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>widgets.VBox</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="suboptimumg.plotting.gps_visualization.plot_lap_overlay">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.gps_visualization.</span></span><span class="sig-name descname"><span class="pre">plot_lap_overlay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_idx</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">sf_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/gps_visualization.html#plot_lap_overlay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.gps_visualization.plot_lap_overlay" title="Link to this definition">#</a></dt>
-<dd><p>Overlay GPS trajectories for multiple laps on a 2-D scatter plot.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>laps</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>NDArray</em><em>[</em><em>np.float64</em><em>]</em><em>, </em><em>NDArray</em><em>[</em><em>np.float64</em><em>]</em><em>]</em><em>]</em><em>,</em>) – List of tuples containing Y (m) and X (m) local cartesian coordinates for each lap</p></li>
-<li><p><strong>baseline_idx</strong> (<em>int</em>) – Index of the baseline lap to be highlighted.</p></li>
-<li><p><strong>sf_line</strong> (<a class="reference internal" href="suboptimumg.log_analysis.gps_laps.html#suboptimumg.log_analysis.gps_laps.LineSegment" title="suboptimumg.log_analysis.gps_laps.LineSegment"><em>LineSegment</em></a><em> or </em><em>None</em>) – Start/finish line endpoints as ((x1, y1), (x2, y2)) in local X/Y metres.</p></li>
-<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a>)</p></li>
-<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>go.Figure</p>
+<dd class="field-odd"><p>go.Figure</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.plotting.gps_visualization.plot_time_delta_comparison_traces">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.gps_visualization.</span></span><span class="sig-name descname"><span class="pre">plot_time_delta_comparison_traces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laps</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Variable'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_lap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/gps_visualization.html#plot_time_delta_comparison_traces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.gps_visualization.plot_time_delta_comparison_traces" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.gps_visualization.</span></span><span class="sig-name descname"><span class="pre">plot_time_delta_comparison_traces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laps</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Variable'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_lap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_spacing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.12</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/gps_visualization.html#plot_time_delta_comparison_traces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.gps_visualization.plot_time_delta_comparison_traces" title="Link to this definition">#</a></dt>
 <dd><p>2-subplot comparison traces. Left subplot shows the change of a variable over distance along the track, and right
 subplots shows the cumulative time delta relative to a reference lap.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>laps</strong> (<em>dict</em><em>[</em><a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.ReferenceLineConfig.label" title="suboptimumg.plotting.plotting_constants.ReferenceLineConfig.label"><em>label</em></a><em>, </em><em>(</em><em>distance</em><em>, </em><em>variable</em><em>, </em><em>velocity</em><em>)</em><em>]</em>) – Each entry maps a string label to a tuple of three equal-length float64 arrays: cumulative distance (m), the
-variable to plot, and velocity (m/s) used for time-delta computation.</p></li>
-<li><p><strong>variable_name</strong> (<em>str</em>) – Name of the plotted variable (axis label and title).</p></li>
-<li><p><strong>reference_lap</strong> (<em>str</em><em> or </em><em>None</em>) – Key from <em>laps</em> to use as the time-delta reference.  <code class="docutils literal notranslate"><span class="pre">None</span></code>
-selects the lap with the lowest estimated total time.  Ignored
-when <em>baseline_dist/var/vel</em> are provided.</p></li>
-<li><p><strong>data_label</strong> (<em>str</em>) – Label used in hover templates.</p></li>
-<li><p><strong>dx</strong> (<em>float</em>) – Resampling step for the common distance grid (m).</p></li>
-<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a>)</p></li>
-<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a>)</p></li>
+<li><p><strong>laps</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>tuple</em><em>[</em><em>NDArray</em><em>[</em><em>float64</em><em>]</em><em>, </em><em>NDArray</em><em>[</em><em>float64</em><em>]</em><em>, </em><em>NDArray</em><em>[</em><em>float64</em><em>]</em><em>]</em><em>]</em>) – Maps each lap label to <cite>(distance, variable, velocity)</cite>: three equal-length arrays of cumulative distance (m), the variable to plot, and velocity (m/s) used to compute time deltas.</p></li>
+<li><p><strong>variable_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the plotted variable, used in the title and top y-axis label. Default is “Variable”.</p></li>
+<li><p><strong>reference_lap</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Key from <cite>laps</cite> to measure time deltas against. None picks the lap with the lowest estimated total time. Default is None.</p></li>
+<li><p><strong>data_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Text appended to values in hover text, typically units such as “ m/s”. Default is “”.</p></li>
+<li><p><strong>dx</strong> (<em>float</em><em>, </em><em>optional</em>) – Step of the common distance grid that all laps are resampled onto, in meters. Default is 0.1.</p></li>
+<li><p><strong>log_x</strong> (<em>bool</em><em>, </em><em>optional</em>) – Use a logarithmic distance (x) axis. Default is False.</p></li>
+<li><p><strong>log_y</strong> (<em>bool</em><em>, </em><em>optional</em>) – Use logarithmic y-axes on both subplots. Default is False.</p></li>
+<li><p><strong>width</strong> (<em>int</em><em>, </em><em>optional</em>) – Figure width in pixels. Default is PLOT_WIDTH (1000).</p></li>
+<li><p><strong>height</strong> (<em>int</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Total figure height in pixels. None uses SUBPLOT_HEIGHT (350) per subplot, i.e. 700. Default is None.</p></li>
+<li><p><strong>vertical_spacing</strong> (<em>float</em><em>, </em><em>optional</em>) – Gap between the two subplots, as a fraction of the figure height (0 to 1). Default is SUBPLOT_VERTICAL_SPACING (0.12).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>go.Figure</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plotly figure. Customize anything not exposed here with <cite>fig.update_layout(…)</cite> / <cite>fig.update_traces(…)</cite> before calling <cite>fig.show()</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>go.Figure</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.plotting.gps_visualization.plot_track_build_verification">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.gps_visualization.</span></span><span class="sig-name descname"><span class="pre">plot_track_build_verification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curv_raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curv_filt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius_filt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_m</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/gps_visualization.html#plot_track_build_verification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.gps_visualization.plot_track_build_verification" title="Link to this definition">#</a></dt>
-<dd><p>XY track shape and curvature/radius before and after spatial filter.</p>
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.gps_visualization.</span></span><span class="sig-name descname"><span class="pre">plot_track_build_verification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curv_raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curv_filt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius_filt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_m</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">700</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">horizontal_spacing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/gps_visualization.html#plot_track_build_verification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.gps_visualization.plot_track_build_verification" title="Link to this definition">#</a></dt>
+<dd><p>Side-by-side check of a track built from GPS: the XY track shape (left) and its curvature/radius before and after
+spatial filtering (right).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>distance</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Uniform distance grid (m).</p></li>
-<li><p><strong>curv_raw</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Raw curvature (1/m).</p></li>
-<li><p><strong>curv_filt</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Filtered curvature (1/m).</p></li>
-<li><p><strong>radius_filt</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Filtered radius of curvature (m).</p></li>
-<li><p><strong>x_m</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – East coordinates (m) same axis as longitude/x.</p></li>
-<li><p><strong>y_m</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – North coordinates (m) same axis as latitude/y.</p></li>
-<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a>)</p></li>
-<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a>)</p></li>
+<li><p><strong>distance</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Distance along the track for each curvature sample, in meters, on a uniform grid. Same length as <cite>curv_raw</cite>, <cite>curv_filt</cite>, and <cite>radius_filt</cite>.</p></li>
+<li><p><strong>curv_raw</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Curvature before filtering, in 1/m. Drawn faded on the left y-axis of the right panel.</p></li>
+<li><p><strong>curv_filt</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Curvature after filtering, in 1/m. Drawn on the left y-axis of the right panel.</p></li>
+<li><p><strong>radius_filt</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Radius of curvature after filtering, in meters. Drawn on the right y-axis of the right panel.</p></li>
+<li><p><strong>x_m</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – East (X) coordinates of the track centerline, in meters. Plotted against <cite>y_m</cite> with equal axis scaling.</p></li>
+<li><p><strong>y_m</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – North (Y) coordinates of the track centerline, in meters. Same length as <cite>x_m</cite>.</p></li>
+<li><p><strong>width</strong> (<em>int</em><em>, </em><em>optional</em>) – Total figure width in pixels. Default is PLOT_WIDTH (1000).</p></li>
+<li><p><strong>height</strong> (<em>int</em><em>, </em><em>optional</em>) – Total figure height in pixels. Default is PLOT_HEIGHT (700).</p></li>
+<li><p><strong>horizontal_spacing</strong> (<em>float</em><em>, </em><em>optional</em>) – Gap between the two panels, as a fraction of the figure width (0 to 1). Default is SUBPLOT_HORIZONTAL_SPACING (0.08).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>go.Figure</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plotly figure. Customize anything not exposed here with <cite>fig.update_layout(…)</cite> / <cite>fig.update_traces(…)</cite> before calling <cite>fig.show()</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>go.Figure</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.plotting.gps_visualization.plot_track_heatmap">
-<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.gps_visualization.</span></span><span class="sig-name descname"><span class="pre">plot_track_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">baseline_pos_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_pos_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_pos_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_pos_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Variable'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Baseline'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Comparison'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Viridis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LayoutConfig(width=1000,</span> <span class="pre">height=700,</span> <span class="pre">grid_width_per_col=400,</span> <span class="pre">grid_height_per_row=350,</span> <span class="pre">grid_horizontal_spacing=0.08,</span> <span class="pre">grid_vertical_spacing=0.12,</span> <span class="pre">margin={'l':</span> <span class="pre">70,</span> <span class="pre">'r':</span> <span class="pre">50,</span> <span class="pre">'t':</span> <span class="pre">90,</span> <span class="pre">'b':</span> <span class="pre">70},</span> <span class="pre">plot_bgcolor='white',</span> <span class="pre">scene_bgcolor='rgba(240,</span> <span class="pre">240,</span> <span class="pre">240,</span> <span class="pre">0.8)',</span> <span class="pre">title_x=0.5,</span> <span class="pre">title_xanchor='center',</span> <span class="pre">title_yanchor='top')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FontConfig(large=24,</span> <span class="pre">medium=16,</span> <span class="pre">small=12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">ColorbarConfig(thickness=15,</span> <span class="pre">length=0.7)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/gps_visualization.html#plot_track_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.gps_visualization.plot_track_heatmap" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.plotting.gps_visualization.</span></span><span class="sig-name descname"><span class="pre">plot_track_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">baseline_pos_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_pos_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_pos_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_pos_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Variable'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Baseline'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparison_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Comparison'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Viridis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">700</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">horizontal_spacing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/plotting/gps_visualization.html#plot_track_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.plotting.gps_visualization.plot_track_heatmap" title="Link to this definition">#</a></dt>
 <dd><p>2D track heatmap, either single-series or 3-panel comparison.</p>
 <p>When called with only the baseline series (no comparison arguments), a
 single 1:1-aspect scatter plot is returned.  When comparison data is
@@ -584,27 +571,28 @@ sparse grid points.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>baseline_pos_x</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – X and Y positions of the baseline series (m).</p></li>
-<li><p><strong>baseline_pos_y</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – X and Y positions of the baseline series (m).</p></li>
-<li><p><strong>baseline_var</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Variable values for the baseline series.</p></li>
-<li><p><strong>comparison_pos_x</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>] or </em><em>None</em>) – X and Y positions of the comparison series (m).  All three
-comparison arguments must be provided together or not at all.</p></li>
-<li><p><strong>comparison_pos_y</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>] or </em><em>None</em>) – X and Y positions of the comparison series (m).  All three
-comparison arguments must be provided together or not at all.</p></li>
-<li><p><strong>comparison_var</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>] or </em><em>None</em>) – Variable values for the comparison series.</p></li>
-<li><p><strong>variable_name</strong> (<em>str</em>) – Name of the variable (used in titles and colorbars).</p></li>
-<li><p><strong>baseline_label</strong> (<em>str</em>) – Panel labels (comparison mode only).</p></li>
-<li><p><strong>comparison_label</strong> (<em>str</em>) – Panel labels (comparison mode only).</p></li>
-<li><p><strong>data_label</strong> (<em>str</em>) – Label appended to hover and colorbar values.</p></li>
-<li><p><strong>colorscale</strong> (<em>str</em>) – Any Plotly named colorscale string (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;Viridis&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Plasma&quot;</span></code>).</p></li>
-<li><p><strong>title</strong> (<em>str</em><em> or </em><em>None</em>) – Plot title override.  <code class="docutils literal notranslate"><span class="pre">None</span></code> uses a generated default.</p></li>
-<li><p><strong>layout_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.LayoutConfig" title="suboptimumg.plotting.plotting_constants.LayoutConfig"><em>LayoutConfig</em></a>)</p></li>
-<li><p><strong>font_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.FontConfig" title="suboptimumg.plotting.plotting_constants.FontConfig"><em>FontConfig</em></a>)</p></li>
-<li><p><strong>colorbar_config</strong> (<a class="reference internal" href="suboptimumg.plotting.plotting_constants.html#suboptimumg.plotting.plotting_constants.ColorbarConfig" title="suboptimumg.plotting.plotting_constants.ColorbarConfig"><em>ColorbarConfig</em></a>)</p></li>
+<li><p><strong>baseline_pos_x</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – X/East positions of the baseline series, in meters. These positions also define the spatial grid that the comparison is projected onto.</p></li>
+<li><p><strong>baseline_pos_y</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Y/North positions of the baseline series, in meters. Same length as <cite>baseline_pos_x</cite>.</p></li>
+<li><p><strong>baseline_var</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>]</em>) – Value of the variable at each baseline position; sets the marker color. Same length as <cite>baseline_pos_x</cite>.</p></li>
+<li><p><strong>comparison_pos_x</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – X/East positions of the comparison series, in meters. Provide all three comparison arrays to get the 3-panel comparison, or none of them for a single panel. Default is None.</p></li>
+<li><p><strong>comparison_pos_y</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – Y/North positions of the comparison series, in meters. Default is None.</p></li>
+<li><p><strong>comparison_var</strong> (<em>NDArray</em><em>[</em><em>float64</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – Value of the variable at each comparison position. Default is None.</p></li>
+<li><p><strong>variable_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the plotted variable. Default is “Variable”.</p></li>
+<li><p><strong>baseline_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Title of the baseline panel and name used in hover text. Default is “Baseline”.</p></li>
+<li><p><strong>comparison_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Title of the comparison panel and name used in hover text (comparison mode only). Default is “Comparison”.</p></li>
+<li><p><strong>data_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Text appended to values in hover text and used as the colorbar title, typically units such as “ m/s”. Default is “”.</p></li>
+<li><p><strong>colorscale</strong> (<em>str</em><em>, </em><em>optional</em>) – Any Plotly named colorscale, e.g. “Viridis”, “Plasma”, “RdBu”. Default is “Viridis”.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Figure title. None shows no title. Default is None.</p></li>
+<li><p><strong>width</strong> (<em>int</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Total figure width in pixels. None picks PLOT_WIDTH (1000) for a single panel, or SUBPLOT_WIDTH (400) per panel in comparison mode. Default is None.</p></li>
+<li><p><strong>height</strong> (<em>int</em><em>, </em><em>optional</em>) – Total figure height in pixels. Default is PLOT_HEIGHT (700).</p></li>
+<li><p><strong>horizontal_spacing</strong> (<em>float</em><em>, </em><em>optional</em>) – Gap between panels, as a fraction of the figure width (0 to 1). Only matters in comparison mode. Default is SUBPLOT_HORIZONTAL_SPACING (0.08).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>go.Figure</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plotly figure. Customize anything not exposed here with <cite>fig.update_layout(…)</cite> / <cite>fig.update_traces(…)</cite> before calling <cite>fig.show()</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>go.Figure</p>
 </dd>
 </dl>
 </dd></dl>
@@ -622,12 +610,12 @@ comparison arguments must be provided together or not at all.</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="suboptimumg.plotting.color_themes.html"
+       href="suboptimumg.plotting.defaults.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">suboptimumg.plotting.color_themes</p>
+        <p class="prev-next-title">suboptimumg.plotting.defaults</p>
       </div>
     </a>
     <a class="right-next"
@@ -658,7 +646,6 @@ comparison arguments must be provided together or not at all.</p></li>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.gps_visualization.plot_gps_trajectory"><code class="docutils literal notranslate"><span class="pre">plot_gps_trajectory()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.gps_visualization.plot_lap_overlay"><code class="docutils literal notranslate"><span class="pre">plot_lap_overlay()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.gps_visualization.plot_time_delta_comparison_traces"><code class="docutils literal notranslate"><span class="pre">plot_time_delta_comparison_traces()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.plotting.gps_visualization.plot_track_build_verification"><code class="docutils literal notranslate"><span class="pre">plot_track_build_verification()</span></code></a></li>

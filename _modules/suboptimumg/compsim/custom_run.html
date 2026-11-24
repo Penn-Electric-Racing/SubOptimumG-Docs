@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../../../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -43,7 +43,7 @@
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../../../_static/design-tabs.js?v=fcb327ea"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/compsim/custom_run';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -348,17 +348,10 @@
     <span class="n">POS_Y</span><span class="p">,</span>
     <span class="n">add_cumulative_distance</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.defaults</span><span class="w"> </span><span class="kn">import</span> <span class="n">PLOT_HEIGHT</span><span class="p">,</span> <span class="n">PLOT_WIDTH</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.gps_visualization</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">plot_time_delta_comparison_traces</span><span class="p">,</span>
     <span class="n">plot_track_heatmap</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">..plotting.plotting_constants</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">DEFAULT_COLORBAR_CONFIG</span><span class="p">,</span>
-    <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
-    <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
-    <span class="n">ColorbarConfig</span><span class="p">,</span>
-    <span class="n">FontConfig</span><span class="p">,</span>
-    <span class="n">LayoutConfig</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..track</span><span class="w"> </span><span class="kn">import</span> <span class="n">Track</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">Car</span>
@@ -482,24 +475,30 @@
         <span class="n">real_data_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">qss_var</span><span class="p">:</span> <span class="n">OverlayOptions</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
-        <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
-        <span class="n">colorbar_config</span><span class="p">:</span> <span class="n">ColorbarConfig</span> <span class="o">=</span> <span class="n">DEFAULT_COLORBAR_CONFIG</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">PLOT_HEIGHT</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        Prints a comparison of the simulated lap with a real lap(s) from PERDA.</span>
+<span class="sd">        Plot a 3-panel track heatmap comparing a simulated quantity with real lap data from PERDA: simulated, real</span>
+<span class="sd">        (projected onto the simulated track), and their difference.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        real_lap_data : SingleRunData</span>
-<span class="sd">            SingleRunData representing a single real lap to compare against.</span>
+<span class="sd">            One real lap from PERDA. Must contain POS_X and POS_Y (run `preprocess_gps_data_instances` first).</span>
 <span class="sd">        real_data_key : str</span>
-<span class="sd">            The key for the real lap data to use for comparison.</span>
+<span class="sd">            Name of the variable in `real_lap_data` to compare, e.g. a ground speed variable.</span>
 <span class="sd">        qss_var : OverlayOptions</span>
-<span class="sd">            The QSS variable to overlay on the plot.</span>
-<span class="sd">        layout_config : LayoutConfig, optional</span>
-<span class="sd">        font_config : FontConfig, optional</span>
-<span class="sd">        colorbar_config : ColorbarConfig, optional</span>
+<span class="sd">            Simulated (QSS) quantity to compare against `real_data_key`.</span>
+<span class="sd">        width : int | None, optional</span>
+<span class="sd">            Total figure width in pixels. None uses SUBPLOT_WIDTH (400) per panel. Default is None.</span>
+<span class="sd">        height : int, optional</span>
+<span class="sd">            Figure height in pixels. Default is PLOT_HEIGHT (700).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        go.Figure</span>
+<span class="sd">            Plotly figure. Customize anything not exposed here with `fig.update_layout(...)` / `fig.update_traces(...)` before calling `fig.show()`.</span>
 <span class="sd">        """</span>
         <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="n">POS_X</span><span class="p">,</span> <span class="n">POS_Y</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">real_lap_data</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
@@ -528,9 +527,8 @@
             <span class="n">baseline_label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">qss_var</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> (QSS)"</span><span class="p">,</span>
             <span class="n">comparison_label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">real_data_key</span><span class="si">}</span><span class="s2"> (Real Data)"</span><span class="p">,</span>
             <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Simulated </span><span class="si">{</span><span class="n">qss_var</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> vs Real Lap Data"</span><span class="p">,</span>
-            <span class="n">layout_config</span><span class="o">=</span><span class="n">layout_config</span><span class="p">,</span>
-            <span class="n">font_config</span><span class="o">=</span><span class="n">font_config</span><span class="p">,</span>
-            <span class="n">colorbar_config</span><span class="o">=</span><span class="n">colorbar_config</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+            <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
@@ -541,22 +539,36 @@
         <span class="n">real_laps</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">SingleRunData</span><span class="p">],</span>
         <span class="n">real_data_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">qss_var</span><span class="p">:</span> <span class="n">OverlayOptions</span><span class="p">,</span>
-        <span class="n">layout_config</span><span class="p">:</span> <span class="n">LayoutConfig</span> <span class="o">=</span> <span class="n">DEFAULT_LAYOUT_CONFIG</span><span class="p">,</span>
-        <span class="n">font_config</span><span class="p">:</span> <span class="n">FontConfig</span> <span class="o">=</span> <span class="n">DEFAULT_FONT_CONFIG</span><span class="p">,</span>
+        <span class="n">log_x</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">log_y</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">PLOT_WIDTH</span><span class="p">,</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        Plots comparisons of the simulated lap with multiple real laps from PERDA.</span>
+<span class="sd">        Plot a variable over distance for the simulated lap and several real laps from PERDA, plus each real lap's</span>
+<span class="sd">        cumulative time delta relative to the simulated (QSS) lap.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        real_laps : list[SingleRunData]</span>
-<span class="sd">            List of SingleRunData representing real laps to compare against.</span>
+<span class="sd">            Real laps from PERDA to compare against. Each must contain GROUND_SPEED (run `add_groundspeed` first).</span>
 <span class="sd">        real_data_key : str</span>
-<span class="sd">            The key for the real lap data to use for comparison.</span>
+<span class="sd">            Name of the variable in each real lap to plot, e.g. a ground speed variable.</span>
 <span class="sd">        qss_var : OverlayOptions</span>
-<span class="sd">            The QSS variable to overlay on the plot.</span>
-<span class="sd">        layout_config : LayoutConfig, optional</span>
-<span class="sd">        font_config : FontConfig, optional</span>
+<span class="sd">            Simulated (QSS) quantity plotted alongside `real_data_key`.</span>
+<span class="sd">        log_x : bool, optional</span>
+<span class="sd">            Use a logarithmic distance (x) axis. Default is False.</span>
+<span class="sd">        log_y : bool, optional</span>
+<span class="sd">            Use logarithmic y-axes on both subplots. Default is False.</span>
+<span class="sd">        width : int, optional</span>
+<span class="sd">            Figure width in pixels. Default is PLOT_WIDTH (1000).</span>
+<span class="sd">        height : int | None, optional</span>
+<span class="sd">            Total figure height in pixels. None uses SUBPLOT_HEIGHT (350) per subplot. Default is None.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        go.Figure</span>
+<span class="sd">            Plotly figure. Customize anything not exposed here with `fig.update_layout(...)` / `fig.update_traces(...)` before calling `fig.show()`.</span>
 <span class="sd">        """</span>
         <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">lap</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">real_laps</span><span class="p">)</span> <span class="k">if</span> <span class="n">GROUND_SPEED</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lap</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
@@ -595,8 +607,10 @@
             <span class="n">laps</span><span class="o">=</span><span class="n">laps</span><span class="p">,</span>
             <span class="n">variable_name</span><span class="o">=</span><span class="n">real_data_key</span><span class="p">,</span>
             <span class="n">reference_lap</span><span class="o">=</span><span class="s2">"QSS"</span><span class="p">,</span>
-            <span class="n">layout_config</span><span class="o">=</span><span class="n">layout_config</span><span class="p">,</span>
-            <span class="n">font_config</span><span class="o">=</span><span class="n">font_config</span><span class="p">,</span>
+            <span class="n">log_x</span><span class="o">=</span><span class="n">log_x</span><span class="p">,</span>
+            <span class="n">log_y</span><span class="o">=</span><span class="n">log_y</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+            <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
         <span class="p">)</span></div>
 </div>
 

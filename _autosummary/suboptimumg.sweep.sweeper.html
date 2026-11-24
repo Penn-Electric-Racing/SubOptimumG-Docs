@@ -31,7 +31,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -44,7 +44,7 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/suboptimumg.sweep.sweeper';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -331,20 +331,19 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="suboptimumg.plotting.html">suboptimumg.plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bar_chart.html">suboptimumg.plotting.bar_chart</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.binned_scatter.html">suboptimumg.plotting.binned_scatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.bode_plot.html">suboptimumg.plotting.bode_plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.color_themes.html">suboptimumg.plotting.color_themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.defaults.html">suboptimumg.plotting.defaults</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.gps_visualization.html">suboptimumg.plotting.gps_visualization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_2d.html">suboptimumg.plotting.grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.grid_plot_3d.html">suboptimumg.plotting.grid_plot_3d</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.heatmap.html">suboptimumg.plotting.heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.internal_data_plots.html">suboptimumg.plotting.internal_data_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_grid_plot_2d.html">suboptimumg.plotting.overlay_grid_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.overlay_plot_2d.html">suboptimumg.plotting.overlay_plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_2d.html">suboptimumg.plotting.plot_2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_3d.html">suboptimumg.plotting.plot_3d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plot_polynomial_fit.html">suboptimumg.plotting.plot_polynomial_fit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.plotting_constants.html">suboptimumg.plotting.plotting_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.stem_plot.html">suboptimumg.plotting.stem_plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.two_panel_spectrum.html">suboptimumg.plotting.two_panel_spectrum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.types.html">suboptimumg.plotting.types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.plotting.utils.html">suboptimumg.plotting.utils</a></li>
 </ul>
@@ -555,16 +554,39 @@ labels.</p></li>
 <li><p><strong>rows</strong> (<em>int</em><em>, </em><em>optional</em>) – Shape of the grid (default is 2 by 3)</p></li>
 <li><p><strong>cols</strong> (<em>int</em><em>, </em><em>optional</em>) – Shape of the grid (default is 2 by 3)</p></li>
 <li><p><strong>theme</strong> (<em>str</em><em>, </em><em>optional</em>) – Color theme name</p></li>
-<li><p><strong>**plot_options</strong> (<em>object</em>) – Passed to the plotting function, e.g. <cite>fit_curve=True</cite> or <cite>show_legend=True</cite></p></li>
+<li><p><strong>**plot_options</strong> (<em>object</em>) – Extra keyword options for the underlying grid plotting function. Which ones apply depends on what is left free; passing one that doesn’t apply raises a TypeError. See the Notes section for the full list.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A grid with one subplot per metric</p>
+<dd class="field-even"><p>A grid with one subplot per metric. Customize anything else with <cite>fig.update_layout(…)</cite> before showing.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>go.Figure</p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>Available <cite>plot_options</cite>, by plot type:</p>
+<p>Every plot type:</p>
+<ul class="simple">
+<li><p><cite>width</cite>, <cite>height</cite> (int): figure size in pixels. Default None, which sizes the figure from the grid shape (at least 1000 x 700).</p></li>
+<li><p><cite>horizontal_spacing</cite>, <cite>vertical_spacing</cite> (float): gap between subplots as a fraction of the figure. Default 0.08 and 0.12.</p></li>
+<li><p><cite>interp_factor</cite> (int): resample to this many times more points so lines and surfaces look smoother. 1 disables. Default 5.</p></li>
+<li><p><cite>smoothing_sigma</cite> (float): Gaussian smoothing strength, in resampled points. 0 disables. Default 0.</p></li>
+<li><p><cite>interp_method</cite> (“linear”, “nearest”, “slinear” or “cubic”): how points are resampled. Default “linear”.</p></li>
+<li><p><cite>log_x</cite>, <cite>log_y</cite> (bool): logarithmic axes on every subplot. Ignored for surfaces. Default False.</p></li>
+</ul>
+<p>Line plots (1 free numeric parameter, plus optionally 1 free categorical parameter giving one line per label):</p>
+<ul class="simple">
+<li><p><cite>fit_curve</cite> (bool): draw each line as a spline instead of straight segments. Default False.</p></li>
+<li><p><cite>show_points</cite> (bool): mark the swept points. Only with a free categorical parameter. Default False.</p></li>
+<li><p><cite>show_legend</cite> (bool): show the legend of labels. Only with a free categorical parameter. Default False.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sweeper</span><span class="o">.</span><span class="n">grid_plot</span><span class="p">(</span><span class="n">fit_curve</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">interp_factor</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sweeper</span><span class="o">.</span><span class="n">grid_plot</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span> <span class="n">vertical_spacing</span><span class="o">=</span><span class="mf">0.08</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sweeper</span><span class="o">.</span><span class="n">grid_plot</span><span class="p">(</span><span class="n">fixed_params</span><span class="o">=</span><span class="p">{</span><span class="s2">"pwrtn.motor"</span><span class="p">:</span> <span class="s2">"emrax208"</span><span class="p">},</span> <span class="n">show_points</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -585,17 +607,49 @@ are interpolated. Categorical axes take one of their labels.</p></li>
 <li><p><strong>y_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Text for the plot. Defaults are generated from the swept parameters.</p></li>
 <li><p><strong>z_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Text for the plot. Defaults are generated from the swept parameters.</p></li>
 <li><p><strong>theme</strong> (<em>str</em><em>, </em><em>optional</em>) – Color theme name</p></li>
-<li><p><strong>**plot_options</strong> (<em>object</em>) – Passed to the plotting function, e.g. <cite>fit_curve=True</cite> or <cite>scene_config=…</cite></p></li>
+<li><p><strong>**plot_options</strong> (<em>object</em>) – Extra keyword options for the underlying plotting function. Which ones apply depends on what is left free; passing one that doesn’t apply raises a TypeError. See the Notes section for the full list.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A line plot for 1 free numeric parameter, one line per label when a categorical axis is also free, or a
-contour or surface for 2 numeric</p>
+contour or surface for 2 numeric. Customize anything else with <cite>fig.update_layout(…)</cite> before showing.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>go.Figure</p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>Available <cite>plot_options</cite>, by plot type:</p>
+<p>Every plot type:</p>
+<ul class="simple">
+<li><p><cite>width</cite>, <cite>height</cite> (int): figure size in pixels. Default 1000 x 700.</p></li>
+<li><p><cite>interp_factor</cite> (int): resample to this many times more points so lines and surfaces look smoother. 1 disables. Default 5.</p></li>
+<li><p><cite>smoothing_sigma</cite> (float): Gaussian smoothing strength, in resampled points. 0 disables. Default 0.</p></li>
+<li><p><cite>interp_method</cite> (“linear”, “nearest”, “slinear” or “cubic”): how points are resampled. Default “linear”.</p></li>
+</ul>
+<p>Line plot (1 free numeric parameter, plus optionally 1 free categorical parameter giving one line per label):</p>
+<ul class="simple">
+<li><p><cite>fit_curve</cite> (bool): draw a resampled, optionally smoothed curve through the points. The three resampling options above only apply when this is True. Default False.</p></li>
+<li><p><cite>show_points</cite> (bool): mark the swept points on the line. Default False.</p></li>
+<li><p><cite>log_x</cite>, <cite>log_y</cite> (bool): logarithmic axes. Default False.</p></li>
+<li><p><cite>h_line</cite>, <cite>v_line</cite> (float): y or x value of a dashed reference line. Default None (no line).</p></li>
+<li><p><cite>h_line_label</cite>, <cite>v_line_label</cite> (str): legend text for the reference lines. Default None.</p></li>
+<li><p><cite>data_label</cite> (str): legend text for the line. Only without a free categorical parameter. Default None.</p></li>
+</ul>
+<p>Contour (2 free numeric parameters, <cite>plot_type=PlotType.CONTOUR</cite>):</p>
+<ul class="simple">
+<li><p><cite>log_x</cite>, <cite>log_y</cite> (bool): logarithmic axes. Default False.</p></li>
+</ul>
+<p>Surface (2 free numeric parameters, <cite>plot_type=PlotType.SURFACE</cite>):</p>
+<ul class="simple">
+<li><p><cite>view_angle_deg</cite> (float): camera angle around the vertical axis, in degrees. Default -60.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sweeper</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fit_curve</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_points</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">h_line</span><span class="o">=</span><span class="mf">520.0</span><span class="p">,</span> <span class="n">h_line_label</span><span class="o">=</span><span class="s2">"Last year"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sweeper</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_type</span><span class="o">=</span><span class="n">PlotType</span><span class="o">.</span><span class="n">SURFACE</span><span class="p">,</span> <span class="n">view_angle_deg</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">smoothing_sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sweeper</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fixed_params</span><span class="o">=</span><span class="p">{</span><span class="s2">"mass"</span><span class="p">:</span> <span class="mi">250</span><span class="p">},</span> <span class="n">log_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1400</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>
