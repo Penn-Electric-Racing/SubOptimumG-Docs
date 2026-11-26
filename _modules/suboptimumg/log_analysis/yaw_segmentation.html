@@ -343,7 +343,6 @@
     <span class="n">ResampleMethod</span><span class="p">,</span>
     <span class="n">SingleRunData</span><span class="p">,</span>
     <span class="n">left_join_data_instances</span><span class="p">,</span>
-    <span class="n">trim_single_run_data</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">perda.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">from_seconds</span><span class="p">,</span> <span class="n">to_seconds</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">perda.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">lowpass_filter</span>
@@ -575,7 +574,7 @@
                 <span class="s2">"add_track_frame_velocities / add_body_slip_angle first."</span>
             <span class="p">)</span>
 
-    <span class="n">speed_di</span><span class="p">,</span> <span class="n">slip_di</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">speed_col</span><span class="p">],</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">slip_col</span><span class="p">]])</span>
+    <span class="n">speed_di</span><span class="p">,</span> <span class="n">slip_di</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="n">speed_col</span><span class="p">,</span> <span class="n">slip_col</span><span class="p">])</span>
     <span class="n">t_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span>
         <span class="n">to_seconds</span><span class="p">(</span><span class="n">speed_di</span><span class="o">.</span><span class="n">timestamp_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">),</span>
         <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
@@ -616,8 +615,7 @@
                 <span class="n">rejected</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">t_start</span><span class="p">,</span> <span class="n">t_end</span><span class="p">))</span>
                 <span class="k">continue</span>
             <span class="n">subwindows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="n">trim_single_run_data</span><span class="p">(</span>
-                    <span class="n">data</span><span class="p">,</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span>
                     <span class="nb">float</span><span class="p">(</span><span class="n">from_seconds</span><span class="p">(</span><span class="n">t_start</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">)),</span>
                     <span class="nb">float</span><span class="p">(</span><span class="n">from_seconds</span><span class="p">(</span><span class="n">t_end</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">)),</span>
                 <span class="p">)</span>

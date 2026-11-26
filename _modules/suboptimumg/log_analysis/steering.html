@@ -434,23 +434,15 @@
     <span class="n">right_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">right_vals_raw</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">avg_vals</span> <span class="o">=</span> <span class="p">(</span><span class="n">left_vals</span> <span class="o">+</span> <span class="n">right_vals</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
 
-    <span class="n">data</span><span class="p">[</span><span class="n">FRONT_LEFT_TIRE_STEERING_ANGLE</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">sw</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">left_vals</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"Left Tire Steer Angle (deg)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">FRONT_LEFT_TIRE_STEERING_ANGLE</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">data</span><span class="p">[</span><span class="n">FRONT_RIGHT_TIRE_STEERING_ANGLE</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">sw</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">right_vals</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"Right Tire Steer Angle (deg)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">FRONT_RIGHT_TIRE_STEERING_ANGLE</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">data</span><span class="p">[</span><span class="n">FRONT_BICYCLE_MODEL_STEER_ANGLE</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">sw</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">avg_vals</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"Bicycle Model Steer Angle (deg)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">FRONT_BICYCLE_MODEL_STEER_ANGLE</span><span class="p">,</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">sw</span><span class="o">.</span><span class="n">timestamp_np</span>
+    <span class="n">data</span><span class="p">[</span>
+        <span class="n">FRONT_LEFT_TIRE_STEERING_ANGLE</span><span class="p">,</span>
+        <span class="n">FRONT_RIGHT_TIRE_STEERING_ANGLE</span><span class="p">,</span>
+        <span class="n">FRONT_BICYCLE_MODEL_STEER_ANGLE</span><span class="p">,</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">left_vals</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Left Tire Steer Angle (deg)"</span><span class="p">),</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">right_vals</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Right Tire Steer Angle (deg)"</span><span class="p">),</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">avg_vals</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Bicycle Model Steer Angle (deg)"</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">data</span></div>
 

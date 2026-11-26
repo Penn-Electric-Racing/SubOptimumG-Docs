@@ -375,9 +375,7 @@
     <span class="n">dx</span> <span class="o">=</span> <span class="n">log_input</span><span class="o">.</span><span class="n">distance_step</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">log_input</span><span class="o">.</span><span class="n">data</span>
 
-    <span class="n">pos_x_di</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">POS_X</span><span class="p">]</span>
-    <span class="n">pos_y_di</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">POS_Y</span><span class="p">]</span>
-    <span class="n">curv_di</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">CURVATURE_BODY</span><span class="p">]</span>
+    <span class="n">pos_x_di</span><span class="p">,</span> <span class="n">pos_y_di</span><span class="p">,</span> <span class="n">curv_di</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">POS_X</span><span class="p">,</span> <span class="n">POS_Y</span><span class="p">,</span> <span class="n">CURVATURE_BODY</span><span class="p">]</span>
 
     <span class="c1"># 1. Align curvature and posY onto posX timestamp grid</span>
     <span class="n">pos_x_ref</span><span class="p">,</span> <span class="n">pos_y_aligned</span><span class="p">,</span> <span class="n">curv_aligned</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">pos_x_di</span><span class="p">,</span> <span class="p">[</span><span class="n">pos_y_di</span><span class="p">,</span> <span class="n">curv_di</span><span class="p">])</span>

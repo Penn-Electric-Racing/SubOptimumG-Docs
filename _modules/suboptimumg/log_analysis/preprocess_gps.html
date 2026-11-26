@@ -362,7 +362,7 @@
 <span class="sd">    Extract GPS position DataInstances and inject them into SingleRunData.</span>
 
 <span class="sd">    Filters invalid samples (no GPS fix, zero lat/lon pairs), projects to local East/North Cartesian coordinates, and</span>
-<span class="sd">    stores the results as ``gps.latitude``, ``gps.longitude``, ``posE``, and ``posN`` in ``data``.</span>
+<span class="sd">    stores the results as ``latitudeFiltered``, ``longitudeFiltered``, ``posX`` (East), and ``posY`` (North) in ``data``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -377,10 +377,9 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    SingleRunData</span>
-<span class="sd">        The same ``data`` object with ``gps.latitude``, ``gps.longitude``, ``posN``, and ``posE`` added.</span>
+<span class="sd">        The same ``data`` object with ``latitudeFiltered``, ``longitudeFiltered``, ``posX``, and ``posY`` added.</span>
 <span class="sd">    """</span>
-    <span class="n">lat_di</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">ins_lat_col</span><span class="p">]</span>
-    <span class="n">lon_di</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">ins_lon_col</span><span class="p">]</span>
+    <span class="n">lat_di</span><span class="p">,</span> <span class="n">lon_di</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">ins_lat_col</span><span class="p">,</span> <span class="n">ins_lon_col</span><span class="p">]</span>
 
     <span class="c1"># Join lon (and optionally fix) onto the lat timestamp grid</span>
     <span class="n">deps</span> <span class="o">=</span> <span class="p">[</span><span class="n">lon_di</span><span class="p">]</span>
@@ -417,29 +416,11 @@
 
     <span class="n">x_m</span><span class="p">,</span> <span class="n">y_m</span> <span class="o">=</span> <span class="n">gps_to_enu</span><span class="p">(</span><span class="n">lat_filtered</span><span class="p">,</span> <span class="n">lon_filtered</span><span class="p">)</span>
 
-    <span class="n">data</span><span class="p">[</span><span class="n">GPS_LATITUDE</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_filtered</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">lat_filtered</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"GPS Latitude (deg)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">GPS_LATITUDE</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">data</span><span class="p">[</span><span class="n">GPS_LONGITUDE</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_filtered</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">lon_filtered</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"GPS Longitude (deg)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">GPS_LONGITUDE</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">data</span><span class="p">[</span><span class="n">POS_X</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_filtered</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">x_m</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"X-axis/East Position (m)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">POS_X</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">data</span><span class="p">[</span><span class="n">POS_Y</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_filtered</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">y_m</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"Y-axis/North Position (m)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">POS_Y</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">GPS_LATITUDE</span><span class="p">,</span> <span class="n">GPS_LONGITUDE</span><span class="p">,</span> <span class="n">POS_X</span><span class="p">,</span> <span class="n">POS_Y</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_filtered</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">lat_filtered</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"GPS Latitude (deg)"</span><span class="p">),</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_filtered</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">lon_filtered</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"GPS Longitude (deg)"</span><span class="p">),</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_filtered</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">x_m</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"X-axis/East Position (m)"</span><span class="p">),</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_filtered</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">y_m</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Y-axis/North Position (m)"</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">data</span></div>
 

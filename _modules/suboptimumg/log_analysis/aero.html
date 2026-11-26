@@ -390,11 +390,8 @@
             <span class="sa">f</span><span class="s2">"add_cla: missing variables(s) </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">Try running add_groundspeed first."</span>
         <span class="p">)</span>
 
-    <span class="n">pfl</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">pot_fl</span><span class="p">]</span>
-    <span class="n">pfl</span><span class="p">,</span> <span class="n">pfr_aln</span><span class="p">,</span> <span class="n">prl_aln</span><span class="p">,</span> <span class="n">prr_aln</span><span class="p">,</span> <span class="n">ax_aln</span><span class="p">,</span> <span class="n">vel_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span>
-        <span class="n">pfl</span><span class="p">,</span>
-        <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">pot_fr</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">pot_rl</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">pot_rr</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">ax_col</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">GROUND_SPEED</span><span class="p">]],</span>
-    <span class="p">)</span>
+    <span class="n">pfl</span><span class="p">,</span> <span class="o">*</span><span class="n">others</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">pot_fl</span><span class="p">,</span> <span class="n">pot_fr</span><span class="p">,</span> <span class="n">pot_rl</span><span class="p">,</span> <span class="n">pot_rr</span><span class="p">,</span> <span class="n">ax_col</span><span class="p">,</span> <span class="n">GROUND_SPEED</span><span class="p">]</span>
+    <span class="n">pfl</span><span class="p">,</span> <span class="n">pfr_aln</span><span class="p">,</span> <span class="n">prl_aln</span><span class="p">,</span> <span class="n">prr_aln</span><span class="p">,</span> <span class="n">ax_aln</span><span class="p">,</span> <span class="n">vel_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">pfl</span><span class="p">,</span> <span class="n">others</span><span class="p">)</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">pfl</span><span class="o">.</span><span class="n">timestamp_np</span>
 
     <span class="n">front_avg</span> <span class="o">=</span> <span class="p">(</span><span class="n">pfl</span><span class="o">.</span><span class="n">value_np</span> <span class="o">+</span> <span class="n">pfr_aln</span><span class="o">.</span><span class="n">value_np</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
@@ -421,17 +418,11 @@
     <span class="n">cop_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f_total</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1.0</span>
     <span class="n">cop</span><span class="p">[</span><span class="n">cop_mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">f_front</span><span class="p">[</span><span class="n">cop_mask</span><span class="p">]</span> <span class="o">/</span> <span class="n">f_total</span><span class="p">[</span><span class="n">cop_mask</span><span class="p">]</span>
 
-    <span class="n">data</span><span class="p">[</span><span class="n">CLA</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">cla</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"Aerodynamic CLA"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">CLA</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">data</span><span class="p">[</span><span class="n">COP</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">cop</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"Aerodynamic Center of Pressure (front fraction)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">COP</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">CLA</span><span class="p">,</span> <span class="n">COP</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">cla</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Aerodynamic CLA"</span><span class="p">),</span>
+        <span class="n">DataInstance</span><span class="p">(</span>
+            <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">cop</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Aerodynamic Center of Pressure (front fraction)"</span>
+        <span class="p">),</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">data</span></div>
 

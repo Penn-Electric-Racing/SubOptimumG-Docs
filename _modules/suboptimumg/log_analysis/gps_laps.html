@@ -338,12 +338,7 @@
   <h1>Source code for suboptimumg.log_analysis.gps_laps</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">DataInstance</span><span class="p">,</span>
-    <span class="n">SingleRunData</span><span class="p">,</span>
-    <span class="n">left_join_data_instances</span><span class="p">,</span>
-    <span class="n">split_single_run_data</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleRunData</span><span class="p">,</span> <span class="n">left_join_data_instances</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial</span><span class="w"> </span><span class="kn">import</span> <span class="n">cKDTree</span>
 
@@ -464,17 +459,15 @@
             <span class="sa">f</span><span class="s2">"Try running run preprocess_gps_data_instances first."</span>
         <span class="p">)</span>
 
-    <span class="n">pos_x_di</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">POS_X</span><span class="p">]</span>
-    <span class="n">ts</span> <span class="o">=</span> <span class="n">pos_x_di</span><span class="o">.</span><span class="n">timestamp_np</span>
-    <span class="n">pos_x_vals</span> <span class="o">=</span> <span class="n">pos_x_di</span><span class="o">.</span><span class="n">value_np</span>
-    <span class="n">pos_y_vals</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">POS_Y</span><span class="p">]</span><span class="o">.</span><span class="n">value_np</span>
-
-    <span class="n">crossings</span> <span class="o">=</span> <span class="n">detect_lap_crossings</span><span class="p">(</span><span class="n">pos_x_vals</span><span class="p">,</span> <span class="n">pos_y_vals</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">sf_line</span><span class="p">,</span> <span class="n">min_lap_time</span><span class="o">=</span><span class="n">min_lap_time</span><span class="p">)</span>
+    <span class="n">pos_x</span><span class="p">,</span> <span class="n">pos_y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">POS_X</span><span class="p">,</span> <span class="n">POS_Y</span><span class="p">]</span>
+    <span class="n">crossings</span> <span class="o">=</span> <span class="n">detect_lap_crossings</span><span class="p">(</span>
+        <span class="n">pos_x</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span> <span class="n">pos_y</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span> <span class="n">pos_x</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span> <span class="n">sf_line</span><span class="p">,</span> <span class="n">min_lap_time</span><span class="o">=</span><span class="n">min_lap_time</span>
+    <span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">crossings</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Fewer than 2 crossings detected (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">crossings</span><span class="p">)</span><span class="si">}</span><span class="s2">), cannot split laps."</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">split_single_run_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">crossings</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">crossings</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 
 
@@ -525,9 +518,8 @@
         <span class="n">baseline_lap</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">lap_times</span><span class="p">))</span>
 
     <span class="c1"># Construct cKDTree for baseline lap</span>
-    <span class="n">bl_lap</span> <span class="o">=</span> <span class="n">laps</span><span class="p">[</span><span class="n">baseline_lap</span><span class="p">]</span>
-    <span class="n">bl_x</span> <span class="o">=</span> <span class="n">bl_lap</span><span class="p">[</span><span class="n">POS_X</span><span class="p">]</span>
-    <span class="n">bl_y_aligned</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">bl_x</span><span class="p">,</span> <span class="p">[</span><span class="n">bl_lap</span><span class="p">[</span><span class="n">POS_Y</span><span class="p">]])[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">bl_x</span><span class="p">,</span> <span class="n">bl_y</span> <span class="o">=</span> <span class="n">laps</span><span class="p">[</span><span class="n">baseline_lap</span><span class="p">][</span><span class="n">POS_X</span><span class="p">,</span> <span class="n">POS_Y</span><span class="p">]</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">bl_y_aligned</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">bl_x</span><span class="p">,</span> <span class="n">bl_y</span><span class="p">)</span>
     <span class="n">bl_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">bl_x</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span> <span class="n">bl_y_aligned</span><span class="o">.</span><span class="n">value_np</span><span class="p">])</span>
     <span class="n">bl_binned</span> <span class="o">=</span> <span class="n">_bin_xy</span><span class="p">(</span><span class="n">bl_xy</span><span class="p">)</span>
     <span class="n">bl_tree</span> <span class="o">=</span> <span class="n">cKDTree</span><span class="p">(</span><span class="n">bl_binned</span><span class="p">)</span>
@@ -548,8 +540,8 @@
         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">baseline_lap</span><span class="p">:</span>
             <span class="k">continue</span>
 
-        <span class="n">pos_x_di</span> <span class="o">=</span> <span class="n">lap</span><span class="p">[</span><span class="n">POS_X</span><span class="p">]</span>
-        <span class="n">pos_y_aligned</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">pos_x_di</span><span class="p">,</span> <span class="p">[</span><span class="n">lap</span><span class="p">[</span><span class="n">POS_Y</span><span class="p">]])[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">pos_x_di</span><span class="p">,</span> <span class="n">pos_y_di</span> <span class="o">=</span> <span class="n">lap</span><span class="p">[</span><span class="n">POS_X</span><span class="p">,</span> <span class="n">POS_Y</span><span class="p">]</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">pos_y_aligned</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">pos_x_di</span><span class="p">,</span> <span class="n">pos_y_di</span><span class="p">)</span>
         <span class="n">lap_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">pos_x_di</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span> <span class="n">pos_y_aligned</span><span class="o">.</span><span class="n">value_np</span><span class="p">])</span>
         <span class="n">lap_binned</span> <span class="o">=</span> <span class="n">_bin_xy</span><span class="p">(</span><span class="n">lap_xy</span><span class="p">)</span>
         <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span>
@@ -561,18 +553,7 @@
         <span class="p">)</span>
         <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
 
-        <span class="n">lap</span><span class="p">[</span><span class="n">POS_X</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-            <span class="n">timestamp_np</span><span class="o">=</span><span class="n">pos_x_di</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
-            <span class="n">value_np</span><span class="o">=</span><span class="n">pos_x_di</span><span class="o">.</span><span class="n">value_np</span> <span class="o">+</span> <span class="n">dx</span><span class="p">,</span>
-            <span class="n">label</span><span class="o">=</span><span class="n">pos_x_di</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
-            <span class="n">cpp_name</span><span class="o">=</span><span class="n">POS_X</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">lap</span><span class="p">[</span><span class="n">POS_Y</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-            <span class="n">timestamp_np</span><span class="o">=</span><span class="n">pos_y_aligned</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
-            <span class="n">value_np</span><span class="o">=</span><span class="n">pos_y_aligned</span><span class="o">.</span><span class="n">value_np</span> <span class="o">+</span> <span class="n">dy</span><span class="p">,</span>
-            <span class="n">label</span><span class="o">=</span><span class="n">pos_y_aligned</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
-            <span class="n">cpp_name</span><span class="o">=</span><span class="n">POS_Y</span><span class="p">,</span>
-        <span class="p">)</span>
+        <span class="n">lap</span><span class="p">[</span><span class="n">POS_X</span><span class="p">,</span> <span class="n">POS_Y</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos_x_di</span> <span class="o">+</span> <span class="n">dx</span><span class="p">,</span> <span class="n">pos_y_aligned</span> <span class="o">+</span> <span class="n">dy</span>
 
     <span class="k">return</span> <span class="n">baseline_lap</span></div>
 

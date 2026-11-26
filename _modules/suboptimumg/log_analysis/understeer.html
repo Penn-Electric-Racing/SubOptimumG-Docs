@@ -465,7 +465,16 @@
     <span class="n">ts0</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">from_seconds</span><span class="p">(</span><span class="n">time_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">))</span>
     <span class="n">ts1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">from_seconds</span><span class="p">(</span><span class="n">time_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">))</span>
 
-    <span class="n">bicycle_di</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">FRONT_BICYCLE_MODEL_STEER_ANGLE</span><span class="p">]</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span><span class="n">ts0</span><span class="p">,</span> <span class="n">ts1</span><span class="p">)</span>
+    <span class="n">bicycle_di</span><span class="p">,</span> <span class="o">*</span><span class="n">other_channels</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">di</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span><span class="n">ts0</span><span class="p">,</span> <span class="n">ts1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">di</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span>
+            <span class="n">FRONT_BICYCLE_MODEL_STEER_ANGLE</span><span class="p">,</span>
+            <span class="n">BODY_FRAME_STEER_ANGLE</span><span class="p">,</span>
+            <span class="n">BODY_LAT_ACC</span><span class="p">,</span>
+            <span class="n">steering_wheel_angle</span><span class="p">,</span>
+            <span class="n">GROUND_SPEED</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bicycle_di</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">"No data in time_range=(</span><span class="si">{</span><span class="n">time_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">time_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">) s. "</span>
@@ -479,15 +488,7 @@
         <span class="n">body_frame_lat_accel</span><span class="p">,</span>
         <span class="n">steering_wheel_angles</span><span class="p">,</span>
         <span class="n">groundspeeds</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span>
-        <span class="n">bicycle_di</span><span class="p">,</span>
-        <span class="p">[</span>
-            <span class="n">data</span><span class="p">[</span><span class="n">BODY_FRAME_STEER_ANGLE</span><span class="p">]</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span><span class="n">ts0</span><span class="p">,</span> <span class="n">ts1</span><span class="p">),</span>
-            <span class="n">data</span><span class="p">[</span><span class="n">BODY_LAT_ACC</span><span class="p">]</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span><span class="n">ts0</span><span class="p">,</span> <span class="n">ts1</span><span class="p">),</span>
-            <span class="n">data</span><span class="p">[</span><span class="n">steering_wheel_angle</span><span class="p">]</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span><span class="n">ts0</span><span class="p">,</span> <span class="n">ts1</span><span class="p">),</span>
-            <span class="n">data</span><span class="p">[</span><span class="n">GROUND_SPEED</span><span class="p">]</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span><span class="n">ts0</span><span class="p">,</span> <span class="n">ts1</span><span class="p">),</span>
-        <span class="p">],</span>
-    <span class="p">)</span>
+    <span class="p">)</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">bicycle_di</span><span class="p">,</span> <span class="n">other_channels</span><span class="p">)</span>
 
     <span class="c1"># Compute understeer angle and lateral acceleration</span>
     <span class="n">understeer_deg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">bicycle_di</span><span class="o">.</span><span class="n">value_np</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">body_frame_steer_angle</span><span class="o">.</span><span class="n">value_np</span><span class="p">)</span>

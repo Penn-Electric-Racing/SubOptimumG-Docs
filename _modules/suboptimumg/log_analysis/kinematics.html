@@ -478,9 +478,8 @@
 <span class="sd">    and roughly a no-op. This function intentionally follows PERDA's naming convention of velN, velE, and velD for NED</span>
 <span class="sd">    velocity components.</span>
 <span class="sd">    """</span>
-    <span class="n">v_fwd</span><span class="p">,</span> <span class="n">v_right</span><span class="p">,</span> <span class="n">v_down</span><span class="p">,</span> <span class="n">yaw</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span>
-        <span class="n">data</span><span class="p">[</span><span class="n">vel_x_col</span><span class="p">],</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">vel_y_col</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">vel_z_col</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">yaw_col</span><span class="p">]]</span>
-    <span class="p">)</span>
+    <span class="n">v_fwd</span><span class="p">,</span> <span class="n">v_right</span><span class="p">,</span> <span class="n">v_down</span><span class="p">,</span> <span class="n">yaw</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">vel_x_col</span><span class="p">,</span> <span class="n">vel_y_col</span><span class="p">,</span> <span class="n">vel_z_col</span><span class="p">,</span> <span class="n">yaw_col</span><span class="p">]</span>
+    <span class="n">v_fwd</span><span class="p">,</span> <span class="n">v_right</span><span class="p">,</span> <span class="n">v_down</span><span class="p">,</span> <span class="n">yaw</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">v_fwd</span><span class="p">,</span> <span class="p">[</span><span class="n">v_right</span><span class="p">,</span> <span class="n">v_down</span><span class="p">,</span> <span class="n">yaw</span><span class="p">])</span>
 
     <span class="n">yaw_rad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">yaw</span><span class="o">.</span><span class="n">value_np</span><span class="p">)</span>
     <span class="n">cos_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">yaw_rad</span><span class="p">)</span>
@@ -490,23 +489,11 @@
     <span class="n">vel_e</span> <span class="o">=</span> <span class="n">v_fwd</span><span class="o">.</span><span class="n">value_np</span> <span class="o">*</span> <span class="n">sin_y</span> <span class="o">+</span> <span class="n">v_right</span><span class="o">.</span><span class="n">value_np</span> <span class="o">*</span> <span class="n">cos_y</span>
     <span class="n">vel_d</span> <span class="o">=</span> <span class="n">v_down</span><span class="o">.</span><span class="n">value_np</span>
 
-    <span class="n">data</span><span class="p">[</span><span class="n">VEL_N</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">v_fwd</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">vel_n</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"North Velocity (m/s)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">VEL_N</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">data</span><span class="p">[</span><span class="n">VEL_E</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">v_fwd</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">vel_e</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"East Velocity (m/s)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">VEL_E</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">data</span><span class="p">[</span><span class="n">VEL_D</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">v_fwd</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">vel_d</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"Down Velocity (m/s)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">VEL_D</span><span class="p">,</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">v_fwd</span><span class="o">.</span><span class="n">timestamp_np</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">VEL_N</span><span class="p">,</span> <span class="n">VEL_E</span><span class="p">,</span> <span class="n">VEL_D</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">vel_n</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"North Velocity (m/s)"</span><span class="p">),</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">vel_e</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"East Velocity (m/s)"</span><span class="p">),</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">vel_d</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Down Velocity (m/s)"</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">data</span></div>
@@ -543,8 +530,8 @@
             <span class="sa">f</span><span class="s2">"Try running add_ned_velocities first"</span>
         <span class="p">)</span>
 
-    <span class="n">vel_n</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">vel_n_col</span><span class="p">]</span>
-    <span class="n">vel_n</span><span class="p">,</span> <span class="n">vel_e_aln</span><span class="p">,</span> <span class="n">yaw_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">vel_n</span><span class="p">,</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">vel_e_col</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">yaw_col</span><span class="p">]])</span>
+    <span class="n">vel_n</span><span class="p">,</span> <span class="n">vel_e</span><span class="p">,</span> <span class="n">yaw</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">vel_n_col</span><span class="p">,</span> <span class="n">vel_e_col</span><span class="p">,</span> <span class="n">yaw_col</span><span class="p">]</span>
+    <span class="n">vel_n</span><span class="p">,</span> <span class="n">vel_e_aln</span><span class="p">,</span> <span class="n">yaw_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">vel_n</span><span class="p">,</span> <span class="p">[</span><span class="n">vel_e</span><span class="p">,</span> <span class="n">yaw</span><span class="p">])</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">vel_n</span><span class="o">.</span><span class="n">timestamp_np</span>
     <span class="n">vn</span><span class="p">,</span> <span class="n">ve</span> <span class="o">=</span> <span class="n">vel_n</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span> <span class="n">vel_e_aln</span><span class="o">.</span><span class="n">value_np</span>
 
@@ -552,23 +539,12 @@
     <span class="n">heading</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">ve</span><span class="p">,</span> <span class="n">vn</span><span class="p">))</span>
     <span class="n">heading</span><span class="p">[</span><span class="n">speed</span> <span class="o">&lt;</span> <span class="n">low_speed_thresh</span><span class="p">]</span> <span class="o">=</span> <span class="n">yaw_aln</span><span class="o">.</span><span class="n">value_np</span><span class="p">[</span><span class="n">speed</span> <span class="o">&lt;</span> <span class="n">low_speed_thresh</span><span class="p">]</span>
 
-    <span class="n">data</span><span class="p">[</span><span class="n">TRACK_VELOCITY_X</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">speed</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"Track Frame Speed (m/s)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">TRACK_VELOCITY_X</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">data</span><span class="p">[</span><span class="n">TRACK_VELOCITY_Y</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">speed</span><span class="p">),</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"Track Frame Lateral Speed (m/s)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">TRACK_VELOCITY_Y</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">data</span><span class="p">[</span><span class="n">TRACK_HEADING</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">heading</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"Track Heading (deg)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">TRACK_HEADING</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">TRACK_VELOCITY_X</span><span class="p">,</span> <span class="n">TRACK_VELOCITY_Y</span><span class="p">,</span> <span class="n">TRACK_HEADING</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">speed</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Track Frame Speed (m/s)"</span><span class="p">),</span>
+        <span class="n">DataInstance</span><span class="p">(</span>
+            <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">speed</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Track Frame Lateral Speed (m/s)"</span>
+        <span class="p">),</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">heading</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Track Heading (deg)"</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">data</span></div>
 
@@ -600,8 +576,8 @@
             <span class="sa">f</span><span class="s2">"Try running add_track_frame_velocities first."</span>
         <span class="p">)</span>
 
-    <span class="n">th</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">TRACK_HEADING</span><span class="p">]</span>
-    <span class="n">th</span><span class="p">,</span> <span class="n">yaw_aln</span><span class="p">,</span> <span class="n">vbx_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">th</span><span class="p">,</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">yaw_col</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">vel_body_col</span><span class="p">]])</span>
+    <span class="n">th</span><span class="p">,</span> <span class="n">yaw</span><span class="p">,</span> <span class="n">vbx</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">TRACK_HEADING</span><span class="p">,</span> <span class="n">yaw_col</span><span class="p">,</span> <span class="n">vel_body_col</span><span class="p">]</span>
+    <span class="n">th</span><span class="p">,</span> <span class="n">yaw_aln</span><span class="p">,</span> <span class="n">vbx_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">th</span><span class="p">,</span> <span class="p">[</span><span class="n">yaw</span><span class="p">,</span> <span class="n">vbx</span><span class="p">])</span>
 
     <span class="n">slip</span> <span class="o">=</span> <span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">value_np</span> <span class="o">-</span> <span class="n">yaw_aln</span><span class="o">.</span><span class="n">value_np</span> <span class="o">+</span> <span class="mf">180.0</span><span class="p">)</span> <span class="o">%</span> <span class="mf">360.0</span> <span class="o">-</span> <span class="mf">180.0</span>
     <span class="n">slip</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">vbx_aln</span><span class="o">.</span><span class="n">value_np</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">low_speed_thresh</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
@@ -650,8 +626,7 @@
         <span class="p">)</span>
 
     <span class="c1"># Body frame: curvature = yaw_rate / v_body</span>
-    <span class="n">yr</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">yaw_rate_col</span><span class="p">]</span>
-    <span class="n">yr</span><span class="p">,</span> <span class="n">vbx_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">yr</span><span class="p">,</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">vel_body_col</span><span class="p">]])</span>
+    <span class="n">yr</span><span class="p">,</span> <span class="n">vbx_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="n">yaw_rate_col</span><span class="p">,</span> <span class="n">vel_body_col</span><span class="p">])</span>
     <span class="n">ts_body</span> <span class="o">=</span> <span class="n">yr</span><span class="o">.</span><span class="n">timestamp_np</span>
     <span class="n">speed_body</span> <span class="o">=</span> <span class="n">vbx_aln</span><span class="o">.</span><span class="n">value_np</span>
 
@@ -670,22 +645,13 @@
     <span class="n">r_body</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">curv_body</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
     <span class="n">r_body</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">r_body</span><span class="p">,</span> <span class="o">-</span><span class="n">radius_clip</span><span class="p">,</span> <span class="n">radius_clip</span><span class="p">)</span>
 
-    <span class="n">data</span><span class="p">[</span><span class="n">CURVATURE_BODY</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_body</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">curv_body</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"Body Frame Curvature (1/m)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">CURVATURE_BODY</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">data</span><span class="p">[</span><span class="n">RADIUS_BODY</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_body</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">r_body</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"Body Frame Radius (m)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">RADIUS_BODY</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">CURVATURE_BODY</span><span class="p">,</span> <span class="n">RADIUS_BODY</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_body</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">curv_body</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Body Frame Curvature (1/m)"</span><span class="p">),</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_body</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">r_body</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Body Frame Radius (m)"</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="c1"># Track frame: curvature = d(heading)/dt / v_track</span>
-    <span class="n">th</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">TRACK_HEADING</span><span class="p">]</span>
-    <span class="n">th</span><span class="p">,</span> <span class="n">vtx_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="n">th</span><span class="p">,</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">TRACK_VELOCITY_X</span><span class="p">]])</span>
+    <span class="n">th</span><span class="p">,</span> <span class="n">vtx_aln</span> <span class="o">=</span> <span class="n">left_join_data_instances</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="n">TRACK_HEADING</span><span class="p">,</span> <span class="n">TRACK_VELOCITY_X</span><span class="p">])</span>
     <span class="n">ts_track</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">timestamp_np</span>
     <span class="n">t_s</span> <span class="o">=</span> <span class="n">to_seconds</span><span class="p">(</span><span class="n">ts_track</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">)</span>
 
@@ -706,17 +672,11 @@
     <span class="n">r_track</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">curv_track</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
     <span class="n">r_track</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">r_track</span><span class="p">,</span> <span class="o">-</span><span class="n">radius_clip</span><span class="p">,</span> <span class="n">radius_clip</span><span class="p">)</span>
 
-    <span class="n">data</span><span class="p">[</span><span class="n">CURVATURE_TRACK</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_track</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">curv_track</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"Track Frame Curvature (1/m)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">CURVATURE_TRACK</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">data</span><span class="p">[</span><span class="n">RADIUS_TRACK</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
-        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_track</span><span class="p">,</span>
-        <span class="n">value_np</span><span class="o">=</span><span class="n">r_track</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">"Track Frame Radius (m)"</span><span class="p">,</span>
-        <span class="n">cpp_name</span><span class="o">=</span><span class="n">RADIUS_TRACK</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">CURVATURE_TRACK</span><span class="p">,</span> <span class="n">RADIUS_TRACK</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">DataInstance</span><span class="p">(</span>
+            <span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_track</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">curv_track</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Track Frame Curvature (1/m)"</span>
+        <span class="p">),</span>
+        <span class="n">DataInstance</span><span class="p">(</span><span class="n">timestamp_np</span><span class="o">=</span><span class="n">ts_track</span><span class="p">,</span> <span class="n">value_np</span><span class="o">=</span><span class="n">r_track</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Track Frame Radius (m)"</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">data</span></div>
 
