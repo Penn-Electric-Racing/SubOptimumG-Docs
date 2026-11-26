@@ -339,6 +339,7 @@
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">perda.core_data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleRunData</span><span class="p">,</span> <span class="n">left_join_data_instances</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">perda.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">from_seconds</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial</span><span class="w"> </span><span class="kn">import</span> <span class="n">cKDTree</span>
 
@@ -346,6 +347,8 @@
 
 <span class="nb">type</span> <span class="n">Point</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>  <span class="c1"># (East/x/lon, North/y/lat)</span>
 <span class="nb">type</span> <span class="n">LineSegment</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Point</span><span class="p">,</span> <span class="n">Point</span><span class="p">]</span>
+
+<span class="n">MIN_LAP_TIME_S</span> <span class="o">=</span> <span class="mf">10.0</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_is_crossing_line</span><span class="p">(</span>
@@ -387,7 +390,7 @@
     <span class="n">pos_y</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
     <span class="n">timestamps</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
     <span class="n">sf_line</span><span class="p">:</span> <span class="n">LineSegment</span><span class="p">,</span>
-    <span class="n">min_lap_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">min_lap_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Detect start/finish line crossings and return their timestamps. Crossings separated by less than ``min_lap_time``</span>
@@ -434,7 +437,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">split_laps_from_gps</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SingleRunData</span><span class="p">,</span>
     <span class="n">sf_line</span><span class="p">:</span> <span class="n">LineSegment</span><span class="p">,</span>
-    <span class="n">min_lap_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">min_lap_time_s</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">MIN_LAP_TIME_S</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">SingleRunData</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Detect laps via GPS and split SingleRunData into per-lap segments.</span>
@@ -445,8 +448,8 @@
 <span class="sd">        Must contain ``posX`` and ``posY``.</span>
 <span class="sd">    sf_line : ((x1, y1), (x2, y2))</span>
 <span class="sd">        Start/finish line endpoints in local X/Y meters.</span>
-<span class="sd">    min_lap_time : float</span>
-<span class="sd">        Minimum elapsed time between crossings (same unit as data timestamps).</span>
+<span class="sd">    min_lap_time_s : float</span>
+<span class="sd">        Minimum elapsed time between crossings, in seconds.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -461,7 +464,11 @@
 
     <span class="n">pos_x</span><span class="p">,</span> <span class="n">pos_y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">POS_X</span><span class="p">,</span> <span class="n">POS_Y</span><span class="p">]</span>
     <span class="n">crossings</span> <span class="o">=</span> <span class="n">detect_lap_crossings</span><span class="p">(</span>
-        <span class="n">pos_x</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span> <span class="n">pos_y</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span> <span class="n">pos_x</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span> <span class="n">sf_line</span><span class="p">,</span> <span class="n">min_lap_time</span><span class="o">=</span><span class="n">min_lap_time</span>
+        <span class="n">pos_x</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span>
+        <span class="n">pos_y</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span>
+        <span class="n">pos_x</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
+        <span class="n">sf_line</span><span class="p">,</span>
+        <span class="n">min_lap_time</span><span class="o">=</span><span class="n">from_seconds</span><span class="p">(</span><span class="n">min_lap_time_s</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp_unit</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">crossings</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
