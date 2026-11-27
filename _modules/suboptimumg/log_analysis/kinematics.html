@@ -343,9 +343,10 @@
     <span class="n">left_join_data_instances</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">perda.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_seconds</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">perda.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">lowpass_filter</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.preprocess_gps</span><span class="w"> </span><span class="kn">import</span> <span class="n">POS_X</span><span class="p">,</span> <span class="n">POS_Y</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_gradient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_gradient</span><span class="p">,</span> <span class="n">timestamps_s</span>
 
 <span class="n">GROUND_SPEED</span> <span class="o">=</span> <span class="s2">"groundSpeed"</span>
 <span class="n">CUMULATIVE_DISTANCE</span> <span class="o">=</span> <span class="s2">"lapDist"</span>
@@ -362,6 +363,7 @@
 <span class="n">RADIUS_TRACK</span> <span class="o">=</span> <span class="s2">"track.radius"</span>
 <span class="n">BODY_LAT_ACC</span> <span class="o">=</span> <span class="s2">"body.accLat"</span>
 <span class="n">TRACK_LAT_ACC</span> <span class="o">=</span> <span class="s2">"track.accLat"</span>
+<span class="n">BODY_LON_ACC</span> <span class="o">=</span> <span class="s2">"body.accLon"</span>
 
 
 <div class="viewcode-block" id="add_groundspeed">
@@ -721,6 +723,60 @@
         <span class="n">value_np</span><span class="o">=</span><span class="n">vtx_aln</span><span class="o">.</span><span class="n">value_np</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">curv_track</span><span class="o">.</span><span class="n">value_np</span><span class="p">,</span>
         <span class="n">label</span><span class="o">=</span><span class="s2">"Track Lateral Acceleration (m/s²)"</span><span class="p">,</span>
         <span class="n">cpp_name</span><span class="o">=</span><span class="n">TRACK_LAT_ACC</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+
+<div class="viewcode-block" id="add_longitudinal_acceleration">
+<a class="viewcode-back" href="../../../_autosummary/suboptimumg.log_analysis.kinematics.html#suboptimumg.log_analysis.kinematics.add_longitudinal_acceleration">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_longitudinal_acceleration</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SingleRunData</span><span class="p">,</span>
+    <span class="n">vel_body_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"pcm.vnav.velocityBody.x"</span><span class="p">,</span>
+    <span class="n">smooth_hz</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="n">grid_hz</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">100.0</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRunData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Add body longitudinal acceleration as the lowpassed time derivative of forward speed, stored in ``body.accLon``</span>
+<span class="sd">    and accessible via the constant ``BODY_LON_ACC``.</span>
+
+<span class="sd">    Preferred over the IMU's ``linearAccelBody.x`` and over differentiated wheelspeed, both of which are too</span>
+<span class="sd">    noisy. Speed is differentiated on a uniform ``grid_hz`` grid, since near-duplicate log timestamps would otherwise</span>
+<span class="sd">    blow up the finite difference.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : SingleRunData</span>
+<span class="sd">        Log to add the channel to.</span>
+<span class="sd">    vel_body_col : str</span>
+<span class="sd">        Forward body velocity channel (m/s).</span>
+<span class="sd">    smooth_hz : float</span>
+<span class="sd">        Zero-phase lowpass cutoff (Hz). 0 disables smoothing.</span>
+<span class="sd">    grid_hz : float</span>
+<span class="sd">        Uniform grid the derivative is taken on (Hz).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    SingleRunData</span>
+<span class="sd">        ``data`` with ``body.accLon`` added.</span>
+<span class="sd">    """</span>
+    <span class="n">unit</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">timestamp_unit</span>
+    <span class="n">di</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">vel_body_col</span><span class="p">]</span>
+    <span class="n">uniform</span> <span class="o">=</span> <span class="n">di</span><span class="o">.</span><span class="n">resample_to_freq</span><span class="p">(</span><span class="n">grid_hz</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">uniform</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">uniform</span><span class="o">.</span><span class="n">value_np</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">grid_hz</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">smooth_hz</span><span class="p">:</span>
+        <span class="n">smoothed</span> <span class="o">=</span> <span class="n">lowpass_filter</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">cutoff_hz</span><span class="o">=</span><span class="n">smooth_hz</span><span class="p">,</span> <span class="n">source_time_unit</span><span class="o">=</span><span class="n">unit</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">smoothed</span><span class="p">,</span> <span class="n">DataInstance</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">smoothed</span>
+
+    <span class="n">data</span><span class="p">[</span><span class="n">BODY_LON_ACC</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataInstance</span><span class="p">(</span>
+        <span class="n">timestamp_np</span><span class="o">=</span><span class="n">di</span><span class="o">.</span><span class="n">timestamp_np</span><span class="p">,</span>
+        <span class="n">value_np</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">timestamps_s</span><span class="p">(</span><span class="n">di</span><span class="p">,</span> <span class="n">unit</span><span class="p">),</span> <span class="n">timestamps_s</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">unit</span><span class="p">),</span> <span class="n">ax</span><span class="o">.</span><span class="n">value_np</span><span class="p">),</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">"Body Longitudinal Acceleration (m/s²)"</span><span class="p">,</span>
+        <span class="n">cpp_name</span><span class="o">=</span><span class="n">BODY_LON_ACC</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">data</span></div>
 

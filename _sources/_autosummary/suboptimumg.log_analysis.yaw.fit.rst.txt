@@ -1,0 +1,18 @@
+suboptimumg.log\_analysis.yaw.fit
+=================================
+
+.. automodule:: suboptimumg.log_analysis.yaw.fit
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   inputs
+   optimize
+   plots

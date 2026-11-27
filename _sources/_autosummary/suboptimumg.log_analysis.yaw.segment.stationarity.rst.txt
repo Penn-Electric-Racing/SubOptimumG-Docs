@@ -1,0 +1,8 @@
+suboptimumg.log\_analysis.yaw.segment.stationarity
+==================================================
+
+.. automodule:: suboptimumg.log_analysis.yaw.segment.stationarity
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

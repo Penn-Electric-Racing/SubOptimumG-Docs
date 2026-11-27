@@ -486,8 +486,8 @@
     <span class="c1"># Add surface plot</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
         <span class="n">go</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span>
-            <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x_dense</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_dense</span><span class="p">)),</span>
-            <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">y_dense</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_dense</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">x_dense</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">y_dense</span><span class="p">,</span>
             <span class="n">z</span><span class="o">=</span><span class="n">z_dense</span><span class="p">,</span>
             <span class="n">colorscale</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="s2">"colorscale"</span><span class="p">],</span>
             <span class="n">contours</span><span class="o">=</span><span class="p">{</span>

@@ -1,0 +1,17 @@
+suboptimumg.log\_analysis.yaw.report
+====================================
+
+.. automodule:: suboptimumg.log_analysis.yaw.report
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   bode
+   summary

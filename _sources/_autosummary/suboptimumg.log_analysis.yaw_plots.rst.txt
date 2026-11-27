@@ -1,8 +1,0 @@
-suboptimumg.log\_analysis.yaw\_plots
-====================================
-
-.. automodule:: suboptimumg.log_analysis.yaw_plots
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

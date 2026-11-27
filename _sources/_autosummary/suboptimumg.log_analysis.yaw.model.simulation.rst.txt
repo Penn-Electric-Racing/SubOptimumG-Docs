@@ -1,0 +1,8 @@
+suboptimumg.log\_analysis.yaw.model.simulation
+==============================================
+
+.. automodule:: suboptimumg.log_analysis.yaw.model.simulation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

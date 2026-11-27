@@ -319,12 +319,14 @@
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.steering.html">suboptimumg.log_analysis.steering</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.understeer.html">suboptimumg.log_analysis.understeer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.utils.html">suboptimumg.log_analysis.utils</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_artifact.html">suboptimumg.log_analysis.yaw_artifact</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_fit.html">suboptimumg.log_analysis.yaw_fit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_fit_models.html">suboptimumg.log_analysis.yaw_fit_models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_plots.html">suboptimumg.log_analysis.yaw_plots</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation.html">suboptimumg.log_analysis.yaw_segmentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="suboptimumg.log_analysis.yaw_segmentation_models.html">suboptimumg.log_analysis.yaw_segmentation_models</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="suboptimumg.log_analysis.yaw.html">suboptimumg.log_analysis.yaw</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.log_analysis.yaw.artifact.html">suboptimumg.log_analysis.yaw.artifact</a></li>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.log_analysis.yaw.fit.html">suboptimumg.log_analysis.yaw.fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.log_analysis.yaw.model.html">suboptimumg.log_analysis.yaw.model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.log_analysis.yaw.report.html">suboptimumg.log_analysis.yaw.report</a></li>
+<li class="toctree-l4"><a class="reference internal" href="suboptimumg.log_analysis.yaw.segment.html">suboptimumg.log_analysis.yaw.segment</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="suboptimumg.models.html">suboptimumg.models</a></li>
@@ -580,6 +582,32 @@ smoothed with a rolling median. Requires <code class="docutils literal notransla
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="suboptimumg.log_analysis.kinematics.add_longitudinal_acceleration">
+<span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.kinematics.</span></span><span class="sig-name descname"><span class="pre">add_longitudinal_acceleration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vel_body_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.velocityBody.x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smooth_hz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_hz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/kinematics.html#add_longitudinal_acceleration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.kinematics.add_longitudinal_acceleration" title="Link to this definition">#</a></dt>
+<dd><p>Add body longitudinal acceleration as the lowpassed time derivative of forward speed, stored in <code class="docutils literal notranslate"><span class="pre">body.accLon</span></code>
+and accessible via the constant <code class="docutils literal notranslate"><span class="pre">BODY_LON_ACC</span></code>.</p>
+<p>Preferred over the IMU’s <code class="docutils literal notranslate"><span class="pre">linearAccelBody.x</span></code> and over differentiated wheelspeed, both of which are too
+noisy. Speed is differentiated on a uniform <code class="docutils literal notranslate"><span class="pre">grid_hz</span></code> grid, since near-duplicate log timestamps would otherwise
+blow up the finite difference.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>SingleRunData</em>) – Log to add the channel to.</p></li>
+<li><p><strong>vel_body_col</strong> (<em>str</em>) – Forward body velocity channel (m/s).</p></li>
+<li><p><strong>smooth_hz</strong> (<em>float</em>) – Zero-phase lowpass cutoff (Hz). 0 disables smoothing.</p></li>
+<li><p><strong>grid_hz</strong> (<em>float</em>) – Uniform grid the derivative is taken on (Hz).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">data</span></code> with <code class="docutils literal notranslate"><span class="pre">body.accLon</span></code> added.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>SingleRunData</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="suboptimumg.log_analysis.kinematics.add_ned_velocities">
 <span class="sig-prename descclassname"><span class="pre">suboptimumg.log_analysis.kinematics.</span></span><span class="sig-name descname"><span class="pre">add_ned_velocities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vel_x_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.velocityBody.x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vel_y_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.velocityBody.y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vel_z_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.velocityBody.z'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaw_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pcm.vnav.yawPitchRoll.yaw'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/suboptimumg/log_analysis/kinematics.html#add_ned_velocities"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#suboptimumg.log_analysis.kinematics.add_ned_velocities" title="Link to this definition">#</a></dt>
 <dd><p>Add NED velocity components by using body-frame velocity (FRD) and yaw rotation:</p>
@@ -689,6 +717,7 @@ Below <code class="docutils literal notranslate"><span class="pre">low_speed_thr
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.log_analysis.kinematics.add_cumulative_distance"><code class="docutils literal notranslate"><span class="pre">add_cumulative_distance()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.log_analysis.kinematics.add_curvature"><code class="docutils literal notranslate"><span class="pre">add_curvature()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.log_analysis.kinematics.add_groundspeed"><code class="docutils literal notranslate"><span class="pre">add_groundspeed()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.log_analysis.kinematics.add_longitudinal_acceleration"><code class="docutils literal notranslate"><span class="pre">add_longitudinal_acceleration()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.log_analysis.kinematics.add_ned_velocities"><code class="docutils literal notranslate"><span class="pre">add_ned_velocities()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suboptimumg.log_analysis.kinematics.add_track_frame_velocities"><code class="docutils literal notranslate"><span class="pre">add_track_frame_velocities()</span></code></a></li>
 </ul>

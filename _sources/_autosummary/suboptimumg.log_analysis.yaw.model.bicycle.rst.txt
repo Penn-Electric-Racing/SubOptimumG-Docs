@@ -1,0 +1,8 @@
+suboptimumg.log\_analysis.yaw.model.bicycle
+===========================================
+
+.. automodule:: suboptimumg.log_analysis.yaw.model.bicycle
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

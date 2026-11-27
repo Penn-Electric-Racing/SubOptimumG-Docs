@@ -1,0 +1,18 @@
+suboptimumg.log\_analysis.yaw.segment
+=====================================
+
+.. automodule:: suboptimumg.log_analysis.yaw.segment
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   plots
+   stationarity
+   windows

@@ -1,0 +1,8 @@
+suboptimumg.log\_analysis.yaw.segment.windows
+=============================================
+
+.. automodule:: suboptimumg.log_analysis.yaw.segment.windows
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

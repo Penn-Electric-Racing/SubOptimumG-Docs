@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>suboptimumg.log_analysis.yaw.report.summary &#8212; SubOptimumG</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-design.min.css?v=6a604523" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
+
+    <script src="../../../../../_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="../../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../../../../../_static/design-tabs.js?v=fcb327ea"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/suboptimumg/log_analysis/yaw/report/summary';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../../_static/searchtools.js"></script>
+    <script src="../../../../../_static/language_data.js"></script>
+    <script src="../../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" aria-expanded="false" aria-controls="pst-primary-sidebar-modal">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SubOptimumG</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal" tabindex="-1"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../references/index.html">
+    References
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../api/index.html">
+    Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-house"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">suboptimumg.log_analysis.yaw.report.summary</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for suboptimumg.log_analysis.yaw.report.summary</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">ConfigDict</span><span class="p">,</span> <span class="n">Field</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">....constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">G</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">....vehicle.irl_vehicle</span><span class="w"> </span><span class="kn">import</span> <span class="n">IrlCar</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..fit.inputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">WindowArrays</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..fit.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">Prediction</span><span class="p">,</span> <span class="n">YawFit</span><span class="p">,</span> <span class="n">band_vaf_pct</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..model.bicycle</span><span class="w"> </span><span class="kn">import</span> <span class="n">BicyclePoint</span><span class="p">,</span> <span class="n">ChassisParams</span><span class="p">,</span> <span class="n">bicycle_points</span><span class="p">,</span> <span class="n">cg_split</span>
+
+<span class="n">STIFFNESS_DROP_PCTS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="FitQuality">
+<a class="viewcode-back" href="../../../../../_autosummary/suboptimumg.log_analysis.yaw.report.summary.html#suboptimumg.log_analysis.yaw.report.summary.FitQuality">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FitQuality</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""How well a fit tracks one set of sub-windows, broadband and in the yaw-mode band."""</span>
+
+    <span class="n">rmse_raw_deg_s</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Pooled raw RMSE (deg/s)"</span><span class="p">)</span>
+    <span class="n">rmse_ac_deg_s</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Pooled mean-removed RMSE (deg/s)"</span><span class="p">)</span>
+    <span class="n">vaf_ac_pct</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Mean broadband mean-removed VAF (%)"</span><span class="p">)</span>
+    <span class="n">vaf_band_pct</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Mean band-limited VAF (%)"</span><span class="p">)</span>
+    <span class="n">band_hz</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Passband of vaf_band_pct (Hz)"</span><span class="p">)</span>
+    <span class="n">aic</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Akaike information criterion"</span><span class="p">)</span>
+    <span class="n">bic</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Bayesian information criterion"</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="UndersteerSummary">
+<a class="viewcode-back" href="../../../../../_autosummary/suboptimumg.log_analysis.yaw.report.summary.html#suboptimumg.log_analysis.yaw.report.summary.UndersteerSummary">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">UndersteerSummary</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Linear-region steady-state balance implied by the fitted stiffnesses."""</span>
+
+    <span class="n">gradient_deg_per_g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Understeer gradient (deg/g); positive is understeer"</span>
+    <span class="p">)</span>
+    <span class="n">moment_balance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Ca_r lr / (Ca_f lf); above 1 is understeer"</span><span class="p">)</span>
+    <span class="n">critical_speed_mps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Characteristic speed if understeer, critical speed if oversteer (m/s)"</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">understeer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient_deg_per_g</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">speed_name</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">"characteristic speed V* (peak yaw gain)"</span>
+            <span class="k">if</span> <span class="n">understeer</span>
+            <span class="k">else</span> <span class="s2">"critical speed (linear yaw gain diverges)"</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"  K_us = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">gradient_deg_per_g</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2"> deg/g (</span><span class="si">{</span><span class="s1">'understeer'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">understeer</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'oversteer'</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"  moment balance Ca_r lr / Ca_f lf = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">moment_balance</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> (&gt;1 understeer)</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">speed_name</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">critical_speed_mps</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> m/s (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">critical_speed_mps</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">3.6</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> km/h)"</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="AxleSaturation">
+<a class="viewcode-back" href="../../../../../_autosummary/suboptimumg.log_analysis.yaw.report.summary.html#suboptimumg.log_analysis.yaw.report.summary.AxleSaturation">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AxleSaturation</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Where one axle's decayed stiffness drops off and where its modelled lateral force peaks."""</span>
+
+    <span class="n">drop_slip_deg</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Slip angle (deg) at which stiffness has dropped by each percentage"</span>
+    <span class="p">)</span>
+    <span class="n">peak_slip_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Slip angle of peak lateral force (deg); NaN when there is no peak"</span>
+    <span class="p">)</span>
+    <span class="n">peak_force_kn</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Peak lateral force per axle (kN); NaN when there is no peak"</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="SaturationSummary">
+<a class="viewcode-back" href="../../../../../_autosummary/suboptimumg.log_analysis.yaw.report.summary.html#suboptimumg.log_analysis.yaw.report.summary.SaturationSummary">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SaturationSummary</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Tire saturation implied by the fitted Ca decay law ``Ca0 / (1 + alpha |slip|^p)``."""</span>
+
+    <span class="n">alpha_f</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Front decay rate (rad^-p)"</span><span class="p">)</span>
+    <span class="n">alpha_r</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Rear decay rate (rad^-p)"</span><span class="p">)</span>
+    <span class="n">p</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Shared decay exponent"</span><span class="p">)</span>
+    <span class="n">front</span><span class="p">:</span> <span class="n">AxleSaturation</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Front axle saturation"</span><span class="p">)</span>
+    <span class="n">rear</span><span class="p">:</span> <span class="n">AxleSaturation</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Rear axle saturation"</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s2">"  alpha_f = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha_f</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, alpha_r = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha_r</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, p = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="s1">'stiffness drop'</span><span class="si">:</span><span class="s2">&gt;14s</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">'front slip (deg)'</span><span class="si">:</span><span class="s2">&gt;16s</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">'rear slip (deg)'</span><span class="si">:</span><span class="s2">&gt;15s</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="n">lines</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">pct</span><span class="si">:</span><span class="s2">&gt;13d</span><span class="si">}</span><span class="s2">%  </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">front</span><span class="o">.</span><span class="n">drop_slip_deg</span><span class="p">[</span><span class="n">pct</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;16.4g</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">rear</span><span class="o">.</span><span class="n">drop_slip_deg</span><span class="p">[</span><span class="n">pct</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;15.4g</span><span class="si">}</span><span class="s2">"</span>
+            <span class="k">for</span> <span class="n">pct</span> <span class="ow">in</span> <span class="n">STIFFNESS_DROP_PCTS</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">lines</span> <span class="o">+=</span> <span class="p">[</span>
+                <span class="sa">f</span><span class="s2">"  peak force: front </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">front</span><span class="o">.</span><span class="n">peak_force_kn</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> kN at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">front</span><span class="o">.</span><span class="n">peak_slip_deg</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> deg, "</span>
+                <span class="sa">f</span><span class="s2">"rear </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">rear</span><span class="o">.</span><span class="n">peak_force_kn</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> kN at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">rear</span><span class="o">.</span><span class="n">peak_slip_deg</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> deg (extrapolated, indicative only)"</span>
+            <span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"  p &lt;= 1: modelled lateral force rises monotonically, no peak"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="FitReport">
+<a class="viewcode-back" href="../../../../../_autosummary/suboptimumg.log_analysis.yaw.report.summary.html#suboptimumg.log_analysis.yaw.report.summary.FitReport">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FitReport</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Everything worth printing about a fit: quality, converged parameters and the vehicle conclusions they imply."""</span>
+
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">fit</span><span class="p">:</span> <span class="n">YawFit</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"The fit being reported"</span><span class="p">)</span>
+    <span class="n">train</span><span class="p">:</span> <span class="n">FitQuality</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Quality on the training sub-windows"</span><span class="p">)</span>
+    <span class="n">validation</span><span class="p">:</span> <span class="n">FitQuality</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Quality on held-out sub-windows, or None if not validated"</span>
+    <span class="p">)</span>
+    <span class="n">understeer</span><span class="p">:</span> <span class="n">UndersteerSummary</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Linear-region balance"</span><span class="p">)</span>
+    <span class="n">saturation</span><span class="p">:</span> <span class="n">SaturationSummary</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Tire saturation, or None when the fit has no Ca decay"</span>
+    <span class="p">)</span>
+    <span class="n">bicycle</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">BicyclePoint</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Linear-region bicycle coefficients at sample speeds"</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_quality_table</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Train (and validation) quality metrics side by side."""</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"train"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">train</span><span class="p">)]</span> <span class="o">+</span> <span class="p">([(</span><span class="s2">"val"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span><span class="p">)]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span> <span class="k">else</span> <span class="p">[])</span>
+        <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">band_hz</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">"raw RMSE (deg/s)"</span><span class="p">,</span> <span class="s2">"rmse_raw_deg_s"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"AC RMSE (deg/s)"</span><span class="p">,</span> <span class="s2">"rmse_ac_deg_s"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"broadband VAF (%)"</span><span class="p">,</span> <span class="s2">"vaf_ac_pct"</span><span class="p">),</span>
+            <span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">lo</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">hi</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2"> Hz VAF (%)"</span><span class="p">,</span> <span class="s2">"vaf_band_pct"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"AIC"</span><span class="p">,</span> <span class="s2">"aic"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"BIC"</span><span class="p">,</span> <span class="s2">"bic"</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"  "</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">''</span><span class="si">:</span><span class="s2">&lt;22s</span><span class="si">}</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&gt;12s</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="s2">"  "</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">label</span><span class="si">:</span><span class="s2">&lt;22s</span><span class="si">}</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">getattr</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">attr</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;12.2f</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">lines</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">sections</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">"Converged parameters"</span><span class="p">,</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">)]),</span>
+            <span class="p">(</span><span class="s2">"Fit quality"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quality_table</span><span class="p">()),</span>
+            <span class="p">(</span><span class="s2">"Understeer (linear region)"</span><span class="p">,</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">understeer</span><span class="p">)]),</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">saturation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"Tire saturation"</span><span class="p">,</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">saturation</span><span class="p">)]))</span>
+        <span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">(</span><span class="s2">"Linear-region bicycle coefficients (Ca decay = 0)"</span><span class="p">,</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bicycle</span><span class="p">])</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"== </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2"> ==</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">body</span><span class="p">)</span> <span class="k">for</span> <span class="n">title</span><span class="p">,</span> <span class="n">body</span> <span class="ow">in</span> <span class="n">sections</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="fit_quality">
+<a class="viewcode-back" href="../../../../../_autosummary/suboptimumg.log_analysis.yaw.report.summary.html#suboptimumg.log_analysis.yaw.report.summary.fit_quality">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fit_quality</span><span class="p">(</span>
+    <span class="n">window_arrays</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">WindowArrays</span><span class="p">],</span>
+    <span class="n">prediction</span><span class="p">:</span> <span class="n">Prediction</span><span class="p">,</span>
+    <span class="n">band_hz</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FitQuality</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Pool a prediction's residual metrics and add a band-limited VAF.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    window_arrays : list[WindowArrays]</span>
+<span class="sd">        Sub-windows the prediction was made on.</span>
+<span class="sd">    prediction : Prediction</span>
+<span class="sd">        Training or validation prediction.</span>
+<span class="sd">    band_hz : tuple[float, float]</span>
+<span class="sd">        Passband for the band-limited VAF (Hz).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    FitQuality</span>
+<span class="sd">        Pooled quality metrics.</span>
+<span class="sd">    """</span>
+    <span class="n">agg</span> <span class="o">=</span> <span class="n">prediction</span><span class="o">.</span><span class="n">aggregate</span><span class="p">()</span>
+    <span class="n">band</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">band_vaf_pct</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">band_hz</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">y_hat</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">window_arrays</span><span class="p">,</span> <span class="n">prediction</span><span class="o">.</span><span class="n">y_hat_per_window</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="n">FitQuality</span><span class="p">(</span>
+        <span class="n">rmse_raw_deg_s</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">agg</span><span class="o">.</span><span class="n">rmse_raw_rad_s</span><span class="p">)),</span>
+        <span class="n">rmse_ac_deg_s</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">agg</span><span class="o">.</span><span class="n">rmse_ac_rad_s</span><span class="p">)),</span>
+        <span class="n">vaf_ac_pct</span><span class="o">=</span><span class="n">agg</span><span class="o">.</span><span class="n">vaf_ac_pct</span><span class="p">,</span>
+        <span class="n">vaf_band_pct</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">band</span><span class="p">)),</span>
+        <span class="n">band_hz</span><span class="o">=</span><span class="n">band_hz</span><span class="p">,</span>
+        <span class="n">aic</span><span class="o">=</span><span class="n">prediction</span><span class="o">.</span><span class="n">aic</span><span class="p">,</span>
+        <span class="n">bic</span><span class="o">=</span><span class="n">prediction</span><span class="o">.</span><span class="n">bic</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="understeer_summary">
+<a class="viewcode-back" href="../../../../../_autosummary/suboptimumg.log_analysis.yaw.report.summary.html#suboptimumg.log_analysis.yaw.report.summary.understeer_summary">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">understeer_summary</span><span class="p">(</span><span class="n">chassis</span><span class="p">:</span> <span class="n">ChassisParams</span><span class="p">,</span> <span class="n">irl_car</span><span class="p">:</span> <span class="n">IrlCar</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UndersteerSummary</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Linear-region understeer gradient, moment balance and characteristic or critical speed."""</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="n">irl_car</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> <span class="n">irl_car</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">wb</span>
+    <span class="n">lf</span><span class="p">,</span> <span class="n">lr</span> <span class="o">=</span> <span class="n">cg_split</span><span class="p">(</span><span class="n">irl_car</span><span class="p">)</span>
+    <span class="n">k_us</span> <span class="o">=</span> <span class="n">m</span> <span class="o">/</span> <span class="n">L</span> <span class="o">*</span> <span class="p">(</span><span class="n">lr</span> <span class="o">/</span> <span class="n">chassis</span><span class="o">.</span><span class="n">Ca_f</span> <span class="o">-</span> <span class="n">lf</span> <span class="o">/</span> <span class="n">chassis</span><span class="o">.</span><span class="n">Ca_r</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">UndersteerSummary</span><span class="p">(</span>
+        <span class="n">gradient_deg_per_g</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">k_us</span> <span class="o">*</span> <span class="n">G</span><span class="p">)),</span>
+        <span class="n">moment_balance</span><span class="o">=</span><span class="p">(</span><span class="n">chassis</span><span class="o">.</span><span class="n">Ca_r</span> <span class="o">*</span> <span class="n">lr</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">chassis</span><span class="o">.</span><span class="n">Ca_f</span> <span class="o">*</span> <span class="n">lf</span><span class="p">),</span>
+        <span class="n">critical_speed_mps</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">k_us</span><span class="p">))),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="axle_saturation">
+<a class="viewcode-back" href="../../../../../_autosummary/suboptimumg.log_analysis.yaw.report.summary.html#suboptimumg.log_analysis.yaw.report.summary.axle_saturation">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">axle_saturation</span><span class="p">(</span><span class="n">Ca0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AxleSaturation</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Saturation angles of one axle's stiffness decay law.</span>
+
+<span class="sd">    Stiffness drops by fraction d where ``alpha slip^p = d / (1 - d)``;</span>
+<span class="sd">    lateral force ``Ca0 slip / (1 + alpha slip^p)`` peaks at ``slip^p = 1 / (alpha (p - 1))`` when p &gt; 1.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Ca0 : float</span>
+<span class="sd">        Linear-region stiffness (N/rad).</span>
+<span class="sd">    alpha : float</span>
+<span class="sd">        Decay rate (rad^-p).</span>
+<span class="sd">    p : float</span>
+<span class="sd">        Decay exponent.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    AxleSaturation</span>
+<span class="sd">        Drop angles and force peak.</span>
+<span class="sd">    """</span>
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
+        <span class="n">inv_alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">alpha</span>
+    <span class="n">drops</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">pct</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">((</span><span class="n">pct</span> <span class="o">/</span> <span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="n">pct</span><span class="p">)</span> <span class="o">*</span> <span class="n">inv_alpha</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">p</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">pct</span> <span class="ow">in</span> <span class="n">STIFFNESS_DROP_PCTS</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">alpha</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">AxleSaturation</span><span class="p">(</span>
+            <span class="n">drop_slip_deg</span><span class="o">=</span><span class="n">drops</span><span class="p">,</span> <span class="n">peak_slip_deg</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">),</span> <span class="n">peak_force_kn</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="n">peak</span> <span class="o">=</span> <span class="p">(</span><span class="n">inv_alpha</span> <span class="o">/</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">AxleSaturation</span><span class="p">(</span>
+        <span class="n">drop_slip_deg</span><span class="o">=</span><span class="n">drops</span><span class="p">,</span>
+        <span class="n">peak_slip_deg</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">peak</span><span class="p">)),</span>
+        <span class="n">peak_force_kn</span><span class="o">=</span><span class="n">Ca0</span> <span class="o">*</span> <span class="n">peak</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">peak</span><span class="o">**</span><span class="n">p</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="build_fit_report">
+<a class="viewcode-back" href="../../../../../_autosummary/suboptimumg.log_analysis.yaw.report.summary.html#suboptimumg.log_analysis.yaw.report.summary.build_fit_report">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_fit_report</span><span class="p">(</span>
+    <span class="n">fit</span><span class="p">:</span> <span class="n">YawFit</span><span class="p">,</span>
+    <span class="n">window_arrays</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">WindowArrays</span><span class="p">],</span>
+    <span class="n">validation</span><span class="p">:</span> <span class="n">FitQuality</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">band_hz</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">),</span>
+    <span class="n">speeds</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">16.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FitReport</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Assemble the full console report for a fit.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fit : YawFit</span>
+<span class="sd">        Fit to report on.</span>
+<span class="sd">    window_arrays : list[WindowArrays]</span>
+<span class="sd">        The fit's training sub-windows.</span>
+<span class="sd">    validation : FitQuality | None</span>
+<span class="sd">        Held-out quality from ``fit_quality(val_arrays, validate_fit(val_arrays, fit))``, or None to skip.</span>
+<span class="sd">    band_hz : tuple[float, float]</span>
+<span class="sd">        Passband for the band-limited training VAF (Hz).</span>
+<span class="sd">    speeds : tuple[float, ...]</span>
+<span class="sd">        Speeds to tabulate the linear bicycle at (m/s).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    FitReport</span>
+<span class="sd">        Print it for the full summary.</span>
+<span class="sd">    """</span>
+    <span class="n">chassis</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">chassis</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">x_hat</span><span class="p">)</span>
+    <span class="n">irl_car</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">irl_car</span>
+    <span class="n">saturation</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">fit</span><span class="o">.</span><span class="n">model_configuration</span><span class="o">.</span><span class="n">ca_scheduler</span> <span class="o">==</span> <span class="s2">"abs_alpha_per_axle"</span><span class="p">:</span>
+        <span class="n">alpha_f</span><span class="p">,</span> <span class="n">alpha_r</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s2">"alpha_f"</span><span class="p">],</span> <span class="n">fit</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s2">"alpha_r"</span><span class="p">],</span> <span class="n">fit</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s2">"p"</span><span class="p">]</span>
+        <span class="n">saturation</span> <span class="o">=</span> <span class="n">SaturationSummary</span><span class="p">(</span>
+            <span class="n">alpha_f</span><span class="o">=</span><span class="n">alpha_f</span><span class="p">,</span>
+            <span class="n">alpha_r</span><span class="o">=</span><span class="n">alpha_r</span><span class="p">,</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span>
+            <span class="n">front</span><span class="o">=</span><span class="n">axle_saturation</span><span class="p">(</span><span class="n">chassis</span><span class="o">.</span><span class="n">Ca_f</span><span class="p">,</span> <span class="n">alpha_f</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span>
+            <span class="n">rear</span><span class="o">=</span><span class="n">axle_saturation</span><span class="p">(</span><span class="n">chassis</span><span class="o">.</span><span class="n">Ca_r</span><span class="p">,</span> <span class="n">alpha_r</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">FitReport</span><span class="p">(</span>
+        <span class="n">fit</span><span class="o">=</span><span class="n">fit</span><span class="p">,</span>
+        <span class="n">train</span><span class="o">=</span><span class="n">fit_quality</span><span class="p">(</span><span class="n">window_arrays</span><span class="p">,</span> <span class="n">fit</span><span class="o">.</span><span class="n">train</span><span class="p">,</span> <span class="n">band_hz</span><span class="p">),</span>
+        <span class="n">validation</span><span class="o">=</span><span class="n">validation</span><span class="p">,</span>
+        <span class="n">understeer</span><span class="o">=</span><span class="n">understeer_summary</span><span class="p">(</span><span class="n">chassis</span><span class="p">,</span> <span class="n">irl_car</span><span class="p">),</span>
+        <span class="n">saturation</span><span class="o">=</span><span class="n">saturation</span><span class="p">,</span>
+        <span class="n">bicycle</span><span class="o">=</span><span class="n">bicycle_points</span><span class="p">(</span><span class="n">chassis</span><span class="p">,</span> <span class="n">irl_car</span><span class="p">,</span> <span class="n">speeds</span><span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="FitComparisonRow">
+<a class="viewcode-back" href="../../../../../_autosummary/suboptimumg.log_analysis.yaw.report.summary.html#suboptimumg.log_analysis.yaw.report.summary.FitComparisonRow">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FitComparisonRow</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""One fit's row in a ``FitComparison``."""</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Display name of the fit"</span><span class="p">)</span>
+    <span class="n">n_params</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Number of free parameters"</span><span class="p">)</span>
+    <span class="n">final_cost</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"least_squares final cost"</span><span class="p">)</span>
+    <span class="n">rmse_ac_deg_s</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Pooled mean-removed RMSE (deg/s)"</span><span class="p">)</span>
+    <span class="n">vaf_ac_pct</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Mean mean-removed VAF (%)"</span><span class="p">)</span>
+    <span class="n">aic</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Akaike information criterion"</span><span class="p">)</span>
+    <span class="n">bic</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Bayesian information criterion"</span><span class="p">)</span>
+    <span class="n">Ca_f</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Fitted front cornering stiffness (N/rad)"</span><span class="p">)</span>
+    <span class="n">Ca_r</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Fitted rear cornering stiffness (N/rad)"</span><span class="p">)</span>
+    <span class="n">Izz</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Fitted yaw inertia (kg.m^2)"</span><span class="p">)</span>
+    <span class="n">L_f</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Fitted front relaxation length (m); NaN if not modelled"</span><span class="p">)</span>
+    <span class="n">u_off_deg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Fitted steering offset (deg)"</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FitComparisonRow.from_fit">
+<a class="viewcode-back" href="../../../../../_autosummary/suboptimumg.log_analysis.yaw.report.summary.html#suboptimumg.log_analysis.yaw.report.summary.FitComparisonRow.from_fit">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_fit</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fit</span><span class="p">:</span> <span class="n">YawFit</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FitComparisonRow</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Summarize one fit into a comparison row."""</span>
+        <span class="n">agg</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">aggregate</span><span class="p">()</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">values</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">n_params</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">params</span><span class="p">),</span>
+            <span class="n">final_cost</span><span class="o">=</span><span class="n">fit</span><span class="o">.</span><span class="n">final_cost</span><span class="p">,</span>
+            <span class="n">rmse_ac_deg_s</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">agg</span><span class="o">.</span><span class="n">rmse_ac_rad_s</span><span class="p">)),</span>
+            <span class="n">vaf_ac_pct</span><span class="o">=</span><span class="n">agg</span><span class="o">.</span><span class="n">vaf_ac_pct</span><span class="p">,</span>
+            <span class="n">aic</span><span class="o">=</span><span class="n">fit</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">aic</span><span class="p">,</span>
+            <span class="n">bic</span><span class="o">=</span><span class="n">fit</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">bic</span><span class="p">,</span>
+            <span class="n">Ca_f</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="s2">"Ca_f"</span><span class="p">],</span>
+            <span class="n">Ca_r</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="s2">"Ca_r"</span><span class="p">],</span>
+            <span class="n">Izz</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="s2">"Izz"</span><span class="p">],</span>
+            <span class="n">L_f</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"L_f"</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">)),</span>
+            <span class="n">u_off_deg</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">"u_off"</span><span class="p">])),</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="FitComparison">
+<a class="viewcode-back" href="../../../../../_autosummary/suboptimumg.log_analysis.yaw.report.summary.html#suboptimumg.log_analysis.yaw.report.summary.FitComparison">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FitComparison</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Side-by-side table of several fits, one row each."""</span>
+
+    <span class="n">rows</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">FitComparisonRow</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"One row per fit"</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'model'</span><span class="si">:</span><span class="s2">&gt;10s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'n_p'</span><span class="si">:</span><span class="s2">&gt;4s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'cost'</span><span class="si">:</span><span class="s2">&gt;8s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'RMSE(ac)'</span><span class="si">:</span><span class="s2">&gt;9s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'VAF%'</span><span class="si">:</span><span class="s2">&gt;6s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'AIC'</span><span class="si">:</span><span class="s2">&gt;9s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'BIC'</span><span class="si">:</span><span class="s2">&gt;9s</span><span class="si">}</span><span class="s2"> "</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'Ca_f'</span><span class="si">:</span><span class="s2">&gt;9s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'Ca_r'</span><span class="si">:</span><span class="s2">&gt;9s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'Izz'</span><span class="si">:</span><span class="s2">&gt;7s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'L_f'</span><span class="si">:</span><span class="s2">&gt;6s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'u_off'</span><span class="si">:</span><span class="s2">&gt;7s</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">header</span><span class="p">,</span> <span class="s2">"-"</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">header</span><span class="p">)]</span>
+        <span class="n">lines</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">name</span><span class="si">:</span><span class="s2">&gt;10s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">n_params</span><span class="si">:</span><span class="s2">&gt;4d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">final_cost</span><span class="si">:</span><span class="s2">&gt;8.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">rmse_ac_deg_s</span><span class="si">:</span><span class="s2">&gt;9.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">vaf_ac_pct</span><span class="si">:</span><span class="s2">&gt;6.1f</span><span class="si">}</span><span class="s2"> "</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">aic</span><span class="si">:</span><span class="s2">&gt;9.1f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">bic</span><span class="si">:</span><span class="s2">&gt;9.1f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">Ca_f</span><span class="si">:</span><span class="s2">&gt;9.0f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">Ca_r</span><span class="si">:</span><span class="s2">&gt;9.0f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">Izz</span><span class="si">:</span><span class="s2">&gt;7.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">L_f</span><span class="si">:</span><span class="s2">&gt;6.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">u_off_deg</span><span class="si">:</span><span class="s2">&gt;+7.3f</span><span class="si">}</span><span class="s2">"</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="compare_fits">
+<a class="viewcode-back" href="../../../../../_autosummary/suboptimumg.log_analysis.yaw.report.summary.html#suboptimumg.log_analysis.yaw.report.summary.compare_fits">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compare_fits</span><span class="p">(</span><span class="n">fits</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YawFit</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">FitComparison</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Comparison table of several fits, keyed by display name."""</span>
+    <span class="k">return</span> <span class="n">FitComparison</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="p">[</span><span class="n">FitComparisonRow</span><span class="o">.</span><span class="n">from_fit</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fit</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">fit</span> <span class="ow">in</span> <span class="n">fits</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8"></script>
+<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Penn Electric Racing.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.2.0.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.24.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

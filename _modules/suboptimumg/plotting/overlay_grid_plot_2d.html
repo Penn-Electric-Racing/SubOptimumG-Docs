@@ -378,6 +378,8 @@
     <span class="n">rows</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">cols</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
+    <span class="n">secondary_y_axis_traces</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(),</span>
+    <span class="n">secondary_y_axis_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
     <span class="n">show_points</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">show_legend</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">fit_curve</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -414,12 +416,16 @@
 <span class="sd">        Number of subplot rows in the grid.</span>
 <span class="sd">    cols : int</span>
 <span class="sd">        Number of subplot columns in the grid.</span>
+<span class="sd">    secondary_y_axis_traces : set[str], optional</span>
+<span class="sd">        Trace labels drawn against a second y-axis on the right of each subplot, for series with a different scale. Set its range afterwards with `fig.update_yaxes(range=..., secondary_y=True)`. Default is set() (no secondary axis).</span>
+<span class="sd">    secondary_y_axis_label : str, optional</span>
+<span class="sd">        Title of the secondary y-axis. Only used when `secondary_y_axis_traces` is non-empty. Default is "".</span>
 <span class="sd">    show_points : bool, optional</span>
 <span class="sd">        If True, draw markers at the original data points. Default is False.</span>
 <span class="sd">    show_legend : bool, optional</span>
 <span class="sd">        If True, show a legend with one entry per trace label (clicking an entry toggles that trace in every subplot). Default is False.</span>
 <span class="sd">    fit_curve : bool, optional</span>
-<span class="sd">        If True, draw each line as a spline instead of straight segments. Default is False.</span>
+<span class="sd">        If True, draw each line as a spline instead of straight segments. Splines need SVG rendering, so this switches traces from WebGL (`go.Scattergl`) to `go.Scatter`, which is slower for long series. Default is False.</span>
 <span class="sd">    theme : str | None, optional</span>
 <span class="sd">        Color theme name from `plotting.color_themes`, e.g. "aero". None uses Plotly's qualitative palette. Default is None.</span>
 <span class="sd">    log_x : bool, optional</span>
@@ -459,7 +465,9 @@
         <span class="n">vertical_spacing</span><span class="o">=</span><span class="n">vertical_spacing</span><span class="p">,</span>
         <span class="n">shared_xaxes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">shared_yaxes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">specs</span><span class="o">=</span><span class="p">[[{</span><span class="s2">"secondary_y"</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">secondary_y_axis_traces</span><span class="p">)}]</span> <span class="o">*</span> <span class="n">cols</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">)],</span>
     <span class="p">)</span>
+    <span class="n">scatter</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span> <span class="k">if</span> <span class="n">fit_curve</span> <span class="k">else</span> <span class="n">go</span><span class="o">.</span><span class="n">Scattergl</span>
 
     <span class="n">subplot_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">y_data_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
@@ -498,8 +506,9 @@
             <span class="p">)</span>
 
             <span class="c1"># Interpolated line</span>
+            <span class="n">on_secondary</span> <span class="o">=</span> <span class="n">trace_label</span> <span class="ow">in</span> <span class="n">secondary_y_axis_traces</span>
             <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
-                <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                <span class="n">scatter</span><span class="p">(</span>
                     <span class="n">x</span><span class="o">=</span><span class="n">x_dense</span><span class="p">,</span>
                     <span class="n">y</span><span class="o">=</span><span class="n">y_dense</span><span class="p">,</span>
                     <span class="n">mode</span><span class="o">=</span><span class="s2">"lines"</span><span class="p">,</span>
@@ -514,12 +523,13 @@
                 <span class="p">),</span>
                 <span class="n">row</span><span class="o">=</span><span class="n">r</span><span class="p">,</span>
                 <span class="n">col</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+                <span class="n">secondary_y</span><span class="o">=</span><span class="n">on_secondary</span><span class="p">,</span>
             <span class="p">)</span>
 
             <span class="c1"># Original points</span>
             <span class="k">if</span> <span class="n">show_points</span><span class="p">:</span>
                 <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
-                    <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                    <span class="n">scatter</span><span class="p">(</span>
                         <span class="n">x</span><span class="o">=</span><span class="n">x_vals</span><span class="p">,</span>
                         <span class="n">y</span><span class="o">=</span><span class="n">y_vals</span><span class="p">,</span>
                         <span class="n">mode</span><span class="o">=</span><span class="s2">"markers"</span><span class="p">,</span>
@@ -530,17 +540,22 @@
                     <span class="p">),</span>
                     <span class="n">row</span><span class="o">=</span><span class="n">r</span><span class="p">,</span>
                     <span class="n">col</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+                    <span class="n">secondary_y</span><span class="o">=</span><span class="n">on_secondary</span><span class="p">,</span>
                 <span class="p">)</span>
 
         <span class="c1"># Axis titles for each subplot</span>
-        <span class="n">yaxis_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"yaxis</span><span class="si">{</span><span class="n">subplot_idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="n">subplot_idx</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">"yaxis"</span>
-        <span class="n">xaxis_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"xaxis</span><span class="si">{</span><span class="n">subplot_idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="n">subplot_idx</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">"xaxis"</span>
-        <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
-            <span class="p">{</span><span class="n">yaxis_name</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"text"</span><span class="p">:</span> <span class="n">y_label</span><span class="p">,</span> <span class="s2">"font"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"size"</span><span class="p">:</span> <span class="n">FONT_SIZE_MEDIUM</span><span class="p">}}}}</span>
+        <span class="n">axis_font</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"size"</span><span class="p">:</span> <span class="n">FONT_SIZE_MEDIUM</span><span class="p">}</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="p">{</span><span class="s2">"text"</span><span class="p">:</span> <span class="n">x_label</span><span class="p">,</span> <span class="s2">"font"</span><span class="p">:</span> <span class="n">axis_font</span><span class="p">},</span> <span class="n">row</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="p">{</span><span class="s2">"text"</span><span class="p">:</span> <span class="n">y_label</span><span class="p">,</span> <span class="s2">"font"</span><span class="p">:</span> <span class="n">axis_font</span><span class="p">},</span> <span class="n">row</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">secondary_y</span><span class="o">=</span><span class="kc">False</span>
         <span class="p">)</span>
-        <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
-            <span class="p">{</span><span class="n">xaxis_name</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"text"</span><span class="p">:</span> <span class="n">x_label</span><span class="p">,</span> <span class="s2">"font"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"size"</span><span class="p">:</span> <span class="n">FONT_SIZE_MEDIUM</span><span class="p">}}}}</span>
-        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">secondary_y_axis_traces</span><span class="p">:</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span>
+                <span class="n">title</span><span class="o">=</span><span class="p">{</span><span class="s2">"text"</span><span class="p">:</span> <span class="n">secondary_y_axis_label</span><span class="p">,</span> <span class="s2">"font"</span><span class="p">:</span> <span class="n">axis_font</span><span class="p">},</span>
+                <span class="n">row</span><span class="o">=</span><span class="n">r</span><span class="p">,</span>
+                <span class="n">col</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+                <span class="n">secondary_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
 
     <span class="c1"># Layout and styling</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
@@ -581,6 +596,9 @@
         <span class="n">zerolinewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">zerolinecolor</span><span class="o">=</span><span class="s2">"rgba(211, 211, 211, 0.8)"</span><span class="p">,</span>
     <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">secondary_y_axis_traces</span><span class="p">:</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="n">showgrid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">zeroline</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">secondary_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">fig</span></div>
 

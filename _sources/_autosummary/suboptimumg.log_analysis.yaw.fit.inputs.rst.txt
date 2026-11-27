@@ -1,0 +1,8 @@
+suboptimumg.log\_analysis.yaw.fit.inputs
+========================================
+
+.. automodule:: suboptimumg.log_analysis.yaw.fit.inputs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
